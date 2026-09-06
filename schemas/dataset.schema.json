@@ -1,0 +1,714 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json",
+  "title": "Atlas versioned presentation dataset",
+  "definitions": {
+    "position": {
+      "type": "array",
+      "items": [
+        {
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180
+        },
+        {
+          "type": "number",
+          "minimum": -90,
+          "maximum": 90
+        }
+      ],
+      "minItems": 2,
+      "maxItems": 2,
+      "additionalItems": false
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "dataset_id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+        },
+        "dataset_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dataset_version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https://"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "license": {
+          "type": "string",
+          "minLength": 1
+        },
+        "license_url": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "uri",
+              "pattern": "^https://"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "attribution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observation_date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "publication_date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retrieval_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "processing_date": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "processing_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "spatial_resolution": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "value": {
+              "anyOf": [
+                {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "unit": {
+              "enum": [
+                "m",
+                "degree",
+                null
+              ]
+            }
+          },
+          "required": [
+            "value",
+            "unit"
+          ]
+        },
+        "temporal_resolution": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "spatial_coverage": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "description": {
+              "type": "string",
+              "minLength": 1
+            },
+            "bbox": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              },
+              "minItems": 4,
+              "maxItems": 4
+            }
+          },
+          "required": [
+            "description",
+            "bbox"
+          ]
+        },
+        "temporal_coverage": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "start": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "end": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "start",
+            "end"
+          ]
+        },
+        "crs": {
+          "const": "OGC:CRS84"
+        },
+        "status": {
+          "enum": [
+            "VERIFIED_SOURCE",
+            "SATELLITE_DERIVED",
+            "ATLAS_DERIVED",
+            "ESTIMATED",
+            "MODELLED",
+            "HISTORICAL",
+            "UNKNOWN"
+          ]
+        },
+        "evidence_type": {
+          "enum": [
+            "observed",
+            "derived",
+            "estimated",
+            "modelled",
+            "historical",
+            "unknown"
+          ]
+        },
+        "is_fixture": {
+          "type": "boolean"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "uncertainty": {
+          "type": "string",
+          "minLength": 1
+        },
+        "update_frequency": {
+          "enum": [
+            "static",
+            "periodic",
+            "operational"
+          ]
+        },
+        "stale_after": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "artifact": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "pattern": "^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/features\\.geojson$"
+            },
+            "format": {
+              "const": "GeoJSON"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "byte_size": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "path",
+            "format",
+            "sha256",
+            "byte_size"
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "dataset_id",
+        "dataset_name",
+        "dataset_version",
+        "source",
+        "source_url",
+        "license",
+        "license_url",
+        "attribution",
+        "observation_date",
+        "publication_date",
+        "retrieval_date",
+        "processing_date",
+        "processing_version",
+        "method",
+        "spatial_resolution",
+        "temporal_resolution",
+        "spatial_coverage",
+        "temporal_coverage",
+        "crs",
+        "status",
+        "evidence_type",
+        "is_fixture",
+        "limitations",
+        "uncertainty",
+        "update_frequency",
+        "stale_after",
+        "artifact"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "VERIFIED_SOURCE"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_type": {
+                "const": "observed"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "SATELLITE_DERIVED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_type": {
+                "const": "derived"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "ATLAS_DERIVED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_type": {
+                "const": "derived"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "ESTIMATED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_type": {
+                "const": "estimated"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "MODELLED"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_type": {
+                "const": "modelled"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "HISTORICAL"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_type": {
+                "const": "historical"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "UNKNOWN"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "evidence_type": {
+                "const": "unknown"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "is_fixture": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "source_url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://"
+              },
+              "license_url": {
+                "type": "string",
+                "format": "uri",
+                "pattern": "^https://"
+              }
+            },
+            "anyOf": [
+              {
+                "properties": {
+                  "observation_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "publication_date": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "collection": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "const": "FeatureCollection"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "type": {
+                "const": "Feature"
+              },
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+              },
+              "properties": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "dataset_id": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+                  },
+                  "dataset_version": {
+                    "type": "string",
+                    "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+                  },
+                  "name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "is_fixture": {
+                    "type": "boolean"
+                  },
+                  "value": {
+                    "type": [
+                      "number",
+                      "null"
+                    ]
+                  },
+                  "unit": {
+                    "enum": [
+                      "m",
+                      "m2",
+                      "m3",
+                      "m3/s",
+                      "mm",
+                      "degC",
+                      "person",
+                      null
+                    ]
+                  }
+                },
+                "required": [
+                  "dataset_id",
+                  "dataset_version",
+                  "name",
+                  "is_fixture",
+                  "value",
+                  "unit"
+                ]
+              },
+              "geometry": {
+                "oneOf": [
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": {
+                        "const": "Point"
+                      },
+                      "coordinates": {
+                        "$ref": "#/definitions/position"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "coordinates"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": {
+                        "const": "MultiPoint"
+                      },
+                      "coordinates": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/position"
+                        },
+                        "minItems": 1
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "coordinates"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": {
+                        "const": "LineString"
+                      },
+                      "coordinates": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/definitions/position"
+                        },
+                        "minItems": 2
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "coordinates"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": {
+                        "const": "MultiLineString"
+                      },
+                      "coordinates": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/position"
+                          },
+                          "minItems": 2
+                        },
+                        "minItems": 1
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "coordinates"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": {
+                        "const": "Polygon"
+                      },
+                      "coordinates": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/position"
+                          },
+                          "minItems": 4
+                        },
+                        "minItems": 1
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "coordinates"
+                    ]
+                  },
+                  {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": {
+                        "const": "MultiPolygon"
+                      },
+                      "coordinates": {
+                        "type": "array",
+                        "items": {
+                          "type": "array",
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "$ref": "#/definitions/position"
+                            },
+                            "minItems": 4
+                          },
+                          "minItems": 1
+                        },
+                        "minItems": 1
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "coordinates"
+                    ]
+                  }
+                ]
+              }
+            },
+            "required": [
+              "type",
+              "id",
+              "properties",
+              "geometry"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "features"
+      ]
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "metadata": {
+      "$ref": "#/definitions/metadata"
+    },
+    "collection": {
+      "$ref": "#/definitions/collection"
+    }
+  },
+  "required": [
+    "metadata",
+    "collection"
+  ]
+}

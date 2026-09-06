@@ -1,0 +1,13 @@
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import 'maplibre-gl/dist/maplibre-gl.css';
+import './globals.css';
+export const metadata: Metadata = { title: { default: 'Himalayan Disaster Atlas', template: '%s | Himalayan Disaster Atlas' }, description: 'An evidence-traceable, Nepal-focused geospatial atlas. Foundation preview with synthetic sample data.' };
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return <html lang="en"><body>
+    <a className="skip-link" href="#main">Skip to content</a>
+    <header className="site-header"><Link className="brand" href="/"><span aria-hidden="true">△</span> Himalayan Disaster Atlas</Link><nav aria-label="Primary"><Link href="/atlas/">Atlas</Link><Link href="/data-catalog/">Data catalog</Link><Link href="/methodology/">Methodology</Link><Link href="/sources/">Sources</Link></nav></header>
+    <main id="main">{children}</main>
+    <footer>Foundation preview · Synthetic sample data only · No warnings or forecasts</footer>
+  </body></html>;
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "dataset_id": "foundation-sample",
+  "dataset_name": "Foundation synthetic points",
+  "dataset_version": "1.0.0",
+  "source": "Atlas development fixture; hand-authored coordinates",
+  "source_url": null,
+  "license": "CC0-1.0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "attribution": "Himalayan Disaster Atlas \u2014 synthetic development fixture",
+  "observation_date": null,
+  "publication_date": null,
+  "retrieval_date": "2026-09-06T00:00:00Z",
+  "processing_date": "2026-09-06T00:00:00Z",
+  "processing_version": "sample-pipeline-1.0.0",
+  "method": "Local CSV acquisition (SHA-256 fc86a11a3563c8423040e4ee1b05d73dd4da75ad48cf0291dd2d1b1b6d7b5b73); whitespace cleaning; numeric normalization; CRS84 validation; static GeoJSON export. No real-world observations.",
+  "spatial_resolution": {
+    "value": null,
+    "unit": null
+  },
+  "temporal_resolution": null,
+  "spatial_coverage": {
+    "description": "Synthetic test extent in the Nepal-focused viewport; not a boundary dataset",
+    "bbox": [
+      85.5,
+      27.5,
+      86.5,
+      28.5
+    ]
+  },
+  "temporal_coverage": {
+    "start": null,
+    "end": null
+  },
+  "crs": "OGC:CRS84",
+  "status": "UNKNOWN",
+  "evidence_type": "unknown",
+  "is_fixture": true,
+  "limitations": [
+    "All positions and labels are synthetic. They do not identify real geographic features.",
+    "No terrain, hazard, monitoring, exposure, or simulation data is included."
+  ],
+  "uncertainty": "Not applicable to synthetic fixtures; no scientific measurements are supplied.",
+  "update_frequency": "static",
+  "stale_after": null,
+  "artifact": {
+    "path": "/data/foundation-sample/1.0.0/features.geojson",
+    "format": "GeoJSON",
+    "sha256": "ee68a1a1d1ac55f54af90a5fb7017f526e4b7c8a59d2e69303b7d33a9a3adf2f",
+    "byte_size": 1269
+  }
+}

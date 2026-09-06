@@ -1,0 +1,42 @@
+{
+  "name": "himalayan-disaster-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/web"
+  ],
+  "engines": {
+    "node": ">=22.13.0 <23"
+  },
+  "scripts": {
+    "dev": "node scripts/prepare-map-worker.mjs && npm run dev --workspace @atlas/web",
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest run",
+    "test:python": ".venv/bin/python -m unittest discover -s tests/python -v",
+    "test:e2e": "playwright test",
+    "data:sample": ".venv/bin/python -m pipelines.atlas_pipeline.sample",
+    "data:validate": ".venv/bin/python -m pipelines.atlas_pipeline.validate",
+    "security:check": "node scripts/check-security.mjs",
+    "check": "npm run data:sample && npm run data:validate && npm run test:python && npm run test && npm run typecheck && npm run lint && npm run lint:python && npm run build",
+    "lint:python": ".venv/bin/ruff check pipelines tests/python",
+    "test:hydration": "playwright test --config playwright.hydration.config.ts"
+  },
+  "dependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@playwright/test": "^1.58.0",
+    "@types/geojson": "^7946.0.16",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "16.3.4",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  }
+}
