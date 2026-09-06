@@ -1,0 +1,62 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "sample-point-a",
+      "properties": {
+        "dataset_id": "foundation-sample",
+        "dataset_version": "1.0.0",
+        "name": "Synthetic point A",
+        "is_fixture": true,
+        "value": null,
+        "unit": "m"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          85.8,
+          28.1
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sample-point-b",
+      "properties": {
+        "dataset_id": "foundation-sample",
+        "dataset_version": "1.0.0",
+        "name": "Synthetic point B",
+        "is_fixture": true,
+        "value": null,
+        "unit": "m"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          86.1,
+          27.9
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "sample-point-c",
+      "properties": {
+        "dataset_id": "foundation-sample",
+        "dataset_version": "1.0.0",
+        "name": "Synthetic point C",
+        "is_fixture": true,
+        "value": null,
+        "unit": "m"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          86.3,
+          27.7
+        ]
+      }
+    }
+  ]
+}

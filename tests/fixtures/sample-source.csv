@@ -1,0 +1,4 @@
+id,name,longitude,latitude,value,unit
+sample-point-a,Synthetic point A,85.8,28.1,,m
+sample-point-b,Synthetic point B,86.1,27.9,,m
+sample-point-c,Synthetic point C,86.3,27.7,,m
