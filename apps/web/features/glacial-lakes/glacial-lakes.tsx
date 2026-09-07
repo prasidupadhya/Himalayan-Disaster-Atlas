@@ -114,6 +114,7 @@ export function GlacialLakes({ map }: { map: Map | null }) {
         <dt>Expansion significance</dt><dd>{feature.properties.expansion_significant === null ? 'UNKNOWN' : feature.properties.expansion_significant ? 'TRUE (source statistical flag)' : 'FALSE (source statistical flag)'}</dd>
         <dt>Specific glacier</dt><dd>UNKNOWN — not identified by this source layer</dd>
         <dt>Specific river</dt><dd>UNKNOWN — basin only; no river ID supplied</dd>
+        <dt>Downstream trace</dt><dd>Unavailable from this lake: a verified outlet-to-river link is required. <a href="#downstream-trace">Trace a separately selected river reach</a>.</dd>
         <dt>Hazard status</dt><dd>NOT ASSESSED — glacial-lake presence or expansion is not a GLOF hazard classification</dd>
       </dl>
     </> : <p>Select a GLO record to inspect mapped extent, source connectivity, basin, elevation and change statistics without implying hazard status.</p>}</div>

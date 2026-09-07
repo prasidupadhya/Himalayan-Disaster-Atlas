@@ -75,3 +75,8 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 
 .map .maplibregl-ctrl-attrib.maplibregl-compact-show { width: min(22rem, calc(100vw - 4rem)); }
 .map .maplibregl-ctrl-attrib-inner { max-height: 8rem; overflow: auto; white-space: normal; overflow-wrap: anywhere; }
+.trace-controls { margin-top: 1.5rem; border-top: 1px solid var(--border, #c4cdd3); padding-top: 1rem; }
+.trace-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin: .75rem 0; }
+.trace-hash { overflow-wrap: anywhere; font-size: .8rem; }
+.trace-controls ol { padding-left: 1.6rem; }
+.trace-controls li { margin-bottom: .5rem; }
