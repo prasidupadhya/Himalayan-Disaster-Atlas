@@ -316,6 +316,35 @@ export function mountDisasterEventDataset(map: Map, dataset: Dataset) {
   };
 }
 
+/** Mount USGS ComCat epicenters. Radius is a monotonic display transform of magnitude, not a damage footprint. */
+export function mountEarthquakeDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'earthquake')) throw new Error('Earthquake dataset contains a non-earthquake feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-points`;
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 4.5, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 15,
+      ['interpolate', ['exponential', 1.45], ['get', 'magnitude'], 2.5, 3, 4, 4.5, 5, 6.2, 6, 8.8, 7, 12.2, 8, 16]],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#ef8354'],
+    'circle-opacity': 0.78, 'circle-stroke-color': '#402218', 'circle-stroke-width': 1.1,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  return {
+    source, layers: [points], interactiveLayers: [points],
+    setVisible(visible: boolean) { map.setLayoutProperty(points, 'visibility', visible ? 'visible' : 'none'); },
+    setFilter(minMagnitude: number, start: string, end: string) {
+      const clauses: FilterSpecification[] = [['>=', ['get', 'magnitude'], minMagnitude]];
+      if (start) clauses.push(['>=', ['get', 'event_time'], `${start}T00:00:00Z`]);
+      if (end) clauses.push(['<=', ['get', 'event_time'], `${end}T23:59:59Z`]);
+      map.setFilter(points, ['all', ...clauses] as FilterSpecification);
+    },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { if (map.getLayer(points)) map.removeLayer(points); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
 /** MapLibre attribution accepts HTML; metadata is treated as plain text. */
 export function escapeAttribution(value: string): string {
   return value.replace(/[&<>\"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', "'": '&#39;' })[char]!);

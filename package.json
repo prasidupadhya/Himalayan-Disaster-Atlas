@@ -31,7 +31,8 @@
     "data:glacial-lakes": ".venv/bin/python -m pipelines.atlas_pipeline.glacial_lakes",
     "data:hydrology": ".venv/bin/python -m pipelines.atlas_pipeline.hydrology",
     "data:rainfall": ".venv/bin/python -m pipelines.atlas_pipeline.rainfall",
-    "data:disaster-events": ".venv/bin/python -m pipelines.atlas_pipeline.disaster_events"
+    "data:disaster-events": ".venv/bin/python -m pipelines.atlas_pipeline.disaster_events",
+    "data:earthquakes": ".venv/bin/python -m pipelines.atlas_pipeline.earthquakes"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

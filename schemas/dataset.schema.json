@@ -603,7 +603,8 @@
                       "glacial_lake",
                       "hydrology_station",
                       "rainfall_station",
-                      "disaster_event"
+                      "disaster_event",
+                      "earthquake"
                     ]
                   },
                   "source_id": {
@@ -827,6 +828,15 @@
                   "estimated_loss_npr": { "type": ["number", "null"], "minimum": 0 },
                   "street_address": { "type": ["string", "null"] },
                   "event_description": { "type": ["string", "null"] }
+                  ,
+                  "magnitude": { "type": "number" },
+                  "depth_km": { "type": "number", "minimum": -100, "maximum": 1000 },
+                  "place_name": { "type": ["string", "null"] },
+                  "magnitude_type": { "type": ["string", "null"] },
+                  "network": { "type": "string", "minLength": 1 },
+                  "significance": { "type": "integer", "minimum": 0 },
+                  "event_status": { "type": "string", "minLength": 1 },
+                  "epicenter_only": { "type": "boolean" }
                 },
                 "required": [
                   "dataset_id",
