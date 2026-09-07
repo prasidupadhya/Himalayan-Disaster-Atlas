@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "workspaces": [
-    "apps/web"
+    "apps/web",
+    "packages/contracts"
   ],
   "engines": {
-    "node": ">=22.13.0 <23"
+    "node": "22.x"
   },
   "scripts": {
     "dev": "node scripts/prepare-map-worker.mjs && npm run dev --workspace @atlas/web",
@@ -24,10 +25,6 @@
     "lint:python": ".venv/bin/ruff check pipelines tests/python",
     "test:hydration": "playwright test --config playwright.hydration.config.ts",
     "data:terrain": ".venv/bin/python -m pipelines.atlas_pipeline.terrain"
-  },
-  "dependencies": {
-    "ajv": "8.20.0",
-    "ajv-formats": "3.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
