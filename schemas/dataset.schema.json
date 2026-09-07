@@ -594,6 +594,168 @@
                   "source_version": {
                     "type": "string",
                     "minLength": 1
+                  },
+                  "entity_type": {
+                    "enum": [
+                      "mountain",
+                      "river",
+                      "glacier",
+                      "glacial_lake"
+                    ]
+                  },
+                  "source_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "search_terms": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                  },
+                  "feature_code": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "source_modified": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "elevation_reference": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "river_name": {
+                    "type": ["string", "null"]
+                  },
+                  "downstream_id": {
+                    "type": ["string", "null"]
+                  },
+                  "downstream_in_release": {
+                    "type": "boolean"
+                  },
+                  "main_river_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "flow_order": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "length_km": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "distance_downstream_km": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "distance_upstream_km": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "catchment_area_km2": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "upstream_area_km2": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "average_discharge_m3s": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "flow_regime": {
+                    "enum": ["perennial", "intermittent", "unknown"]
+                  },
+                  "hydrobasin_level12_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "glacier_name": {
+                    "type": ["string", "null"]
+                  },
+                  "glims_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "outline_date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "area_km2": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "centroid_longitude": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180
+                  },
+                  "centroid_latitude": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90
+                  },
+                  "elevation_min_m": {
+                    "type": "number"
+                  },
+                  "elevation_max_m": {
+                    "type": "number"
+                  },
+                  "elevation_mean_m": {
+                    "type": "number"
+                  },
+                  "dem_source": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "inventory_region": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "display_geometry_repaired": {
+                    "type": "boolean"
+                  },
+                  "lake_name": {
+                    "type": ["string", "null"]
+                  },
+                  "country": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "basin": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "connectivity": {
+                    "enum": ["Glacier-fed", "Non Glacier-fed"]
+                  },
+                  "data_source": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "inventory_period": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "perimeter_km": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "expansion_rate_km2_per_year": {
+                    "type": ["number", "null"]
+                  },
+                  "expansion_uncertainty_km2_per_year": {
+                    "type": ["number", "null"],
+                    "minimum": 0
+                  },
+                  "expansion_significant": {
+                    "type": ["boolean", "null"]
                   }
                 },
                 "required": [

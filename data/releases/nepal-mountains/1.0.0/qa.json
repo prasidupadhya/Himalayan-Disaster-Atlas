@@ -1,0 +1,13 @@
+{
+  "source_sha256": "91c9846e94a9bb37c54aae983bb203635566bbd4e353958653a7b2dfaea04262",
+  "source_snapshot": "2026-09-07",
+  "features": 747,
+  "known_elevations": 74,
+  "minimum_known_elevation_m": 2700,
+  "maximum_known_elevation_m": 8848,
+  "duplicate_name_coordinate_keys": 0,
+  "supported_feature_codes": [
+    "MT",
+    "PK"
+  ]
+}

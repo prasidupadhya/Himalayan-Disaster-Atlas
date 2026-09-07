@@ -1,0 +1,19 @@
+{
+  "source_version": "GLO v1.02",
+  "source_sha256": {
+    "centroids": "e8a5116224d86358234c55ffc0319b7ba14d139c0b2f20f2763acf2b63621b6e",
+    "unique": "e5f30a066a5b465525bade9ade002c6202a67a82517088a62fc9929e034a12e8"
+  },
+  "features": 4150,
+  "countries": {
+    "China": 1745,
+    "India": 58,
+    "Nepal": 2347
+  },
+  "glacier_fed": 2535,
+  "non_glacier_fed": 1615,
+  "expansion_rate_available": 4144,
+  "expansion_significant_true": 367,
+  "area_min_km2": 0.0010760929595739581,
+  "area_max_km2": 5.532029401494631
+}

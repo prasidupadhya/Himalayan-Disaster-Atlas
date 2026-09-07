@@ -1,0 +1,22 @@
+{
+  "features": 18299,
+  "unique_hyriv_ids": 18299,
+  "internal_downstream_links": 18110,
+  "boundary_exit_links": 189,
+  "source_outlets": 0,
+  "self_links": 0,
+  "flow_order_counts": {
+    "3": 86,
+    "4": 1023,
+    "5": 1742,
+    "6": 4674,
+    "7": 10770,
+    "8": 4
+  },
+  "source_sha256": "5c54a6f58516e24b944da0e5bb268448ef9d401aed6e0b404943e5a210081129",
+  "source_edition": "2026",
+  "presentation_partitions": {
+    "nepal-rivers-primary": 7525,
+    "nepal-rivers-headwaters": 10774
+  }
+}

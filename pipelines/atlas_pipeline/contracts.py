@@ -99,6 +99,79 @@ def validate_dataset(metadata, collection):
             label = Point(properties['label_longitude'], properties['label_latitude'])
             if not geom.covers(label):
                 raise ValueError('Administrative label is outside its geometry')
+        if properties.get('entity_type') == 'mountain':
+            required = {
+                'source_id', 'search_terms', 'feature_code', 'source_modified',
+                'elevation_reference', 'aliases',
+            }
+            if not required.issubset(properties):
+                raise ValueError('Mountain features require complete catalogue metadata')
+            if geometry['type'] != 'Point':
+                raise ValueError('Mountain features must use Point geometry')
+            if properties['feature_code'] not in {'PK', 'MT'}:
+                raise ValueError('Unsupported mountain feature code')
+            if properties['name'] not in properties['search_terms']:
+                raise ValueError('Mountain search terms must include the canonical name')
+            if properties['value'] is not None:
+                if properties['unit'] != 'm' or not 0 <= properties['value'] <= 9000:
+                    raise ValueError('Mountain elevation is implausible')
+        if properties.get('entity_type') == 'river':
+            required = {
+                'source_id', 'search_terms', 'river_name', 'downstream_id',
+                'downstream_in_release', 'main_river_id', 'flow_order', 'length_km',
+                'distance_downstream_km', 'distance_upstream_km', 'catchment_area_km2',
+                'upstream_area_km2', 'average_discharge_m3s', 'flow_regime',
+                'hydrobasin_level12_id',
+            }
+            if not required.issubset(properties):
+                raise ValueError('River features require complete network metadata')
+            if geometry['type'] not in {'LineString', 'MultiLineString'}:
+                raise ValueError('River features require line geometry')
+            if properties['downstream_id'] == properties['source_id']:
+                raise ValueError('River reach cannot flow to itself')
+            if properties['value'] != properties['average_discharge_m3s'] or properties['unit'] != 'm3/s':
+                raise ValueError('River measurement must be average discharge')
+        if properties.get('entity_type') == 'glacier':
+            required = {
+                'source_id', 'search_terms', 'glacier_name', 'glims_id', 'outline_date',
+                'area_km2', 'centroid_longitude', 'centroid_latitude', 'elevation_min_m',
+                'elevation_max_m', 'elevation_mean_m', 'dem_source', 'inventory_region',
+                'display_geometry_repaired',
+            }
+            if not required.issubset(properties):
+                raise ValueError('Glacier features require complete inventory metadata')
+            if geometry['type'] not in {'Polygon', 'MultiPolygon'}:
+                raise ValueError('Glacier features require polygon geometry')
+            if properties['value'] != properties['area_km2'] or properties['unit'] != 'km2' or properties['area_km2'] <= 0:
+                raise ValueError('Glacier measurement must be positive source area')
+            if not properties['elevation_min_m'] <= properties['elevation_mean_m'] <= properties['elevation_max_m']:
+                raise ValueError('Glacier elevation statistics are inconsistent')
+        if properties.get('entity_type') == 'glacial_lake':
+            required = {
+                'source_id', 'search_terms', 'lake_name', 'country', 'basin', 'connectivity',
+                'data_source', 'inventory_period', 'area_km2', 'perimeter_km',
+                'centroid_longitude', 'centroid_latitude', 'elevation_min_m', 'elevation_mean_m',
+                'expansion_rate_km2_per_year', 'expansion_uncertainty_km2_per_year',
+                'expansion_significant',
+            }
+            if not required.issubset(properties):
+                raise ValueError('Glacial lake features require complete inventory metadata')
+            if geometry['type'] != 'Point':
+                raise ValueError('Glacial lake presentation features require Point geometry')
+            if properties['connectivity'] not in {'Glacier-fed', 'Non Glacier-fed'}:
+                raise ValueError('Unsupported glacial lake connectivity classification')
+            if properties['value'] != properties['area_km2'] or properties['unit'] != 'km2':
+                raise ValueError('Glacial lake measurement must be mapped area')
+            if properties['area_km2'] <= 0 or properties['perimeter_km'] <= 0:
+                raise ValueError('Glacial lake area/perimeter must be positive')
+            if properties['elevation_min_m'] > properties['elevation_mean_m'] + 1:
+                raise ValueError('Glacial lake elevation statistics are inconsistent')
+            if properties['source_id'] not in properties['search_terms']:
+                raise ValueError('Glacial lake search terms must include GLO ID')
+            rate = properties['expansion_rate_km2_per_year']
+            uncertainty = properties['expansion_uncertainty_km2_per_year']
+            if (rate is None) != (uncertainty is None):
+                raise ValueError('Glacial lake expansion rate and uncertainty must be known together')
         for lon, lat in positions(geometry['coordinates']):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError('Geometry outside declared spatial coverage')
