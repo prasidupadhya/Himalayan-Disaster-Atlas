@@ -1,5 +1,5 @@
 import type { Metadata } from '../../../packages/contracts';
-export function Evidence({ metadata: m }: { metadata: Metadata }) {
+export function Evidence({ metadata: m }: { metadata: Omit<Metadata, 'schema_version' | 'artifact'> }) {
   return <section className="evidence" aria-label="Dataset evidence">
     <div className="badges">{m.is_fixture && <span className="badge fixture">Synthetic fixture</span>}<span className="badge">{m.status}</span></div>
     <h3>Evidence & provenance</h3>

@@ -11,7 +11,7 @@ export const MAX_GEOJSON_BYTES = 2_097_152;
 export const MAX_DECODED_GEOJSON_BYTES = 8_388_608;
 export class UnavailableError extends Error {}
 
-async function readBounded(response: Response, limit: number): Promise<Uint8Array<ArrayBuffer>> {
+export async function readBounded(response: Response, limit: number): Promise<Uint8Array<ArrayBuffer>> {
   if (!response.ok) {
     if (response.status === 404 || response.status === 503) throw new UnavailableError('This dataset is currently unavailable.');
     throw new Error(`Dataset request failed (${response.status}).`);
