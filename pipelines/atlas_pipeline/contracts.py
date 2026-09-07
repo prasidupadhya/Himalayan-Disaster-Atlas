@@ -353,6 +353,26 @@ def validate_dataset(metadata, collection):
                 or properties["unit"] is not None
             ):
                 raise ValueError("Earthquake presentation semantics are inconsistent")
+        if properties.get("entity_type") == "flood_event":
+            required = {
+                "source_id",
+                "search_terms",
+                "hazard_name",
+                "event_time",
+                "evidence_status",
+                "hazard_footprint",
+                "flood_class",
+            }
+            if not required.issubset(properties) or geometry["type"] != "Point":
+                raise ValueError("Flood events require complete Point metadata")
+            if (
+                properties["hazard_name"] != "Flood"
+                or properties["evidence_status"] != "reported"
+                or properties["hazard_footprint"] is not False
+            ):
+                raise ValueError("Flood evidence semantics are inconsistent")
+            if properties["value"] is not None or properties["unit"] is not None:
+                raise ValueError("Reported flood point is not a measurement")
         for lon, lat in positions(geometry["coordinates"]):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError("Geometry outside declared spatial coverage")

@@ -345,6 +345,34 @@ export function mountEarthquakeDataset(map: Map, dataset: Dataset) {
   };
 }
 
+/** Mount reported BIPAD flood incident points; symbols never represent inundation extent. */
+export function mountFloodDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'flood_event')) throw new Error('Flood dataset contains a non-flood feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-reported-points`;
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 6, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 8, 4],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#3182ce'],
+    'circle-opacity': 0.82, 'circle-stroke-color': '#102a43', 'circle-stroke-width': 1,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  return {
+    source, layers: [points], interactiveLayers: [points],
+    setVisible(visible: boolean) { map.setLayoutProperty(points, 'visibility', visible ? 'visible' : 'none'); },
+    setFilter(start: string, end: string) {
+      const clauses: FilterSpecification[] = [];
+      if (start) clauses.push(['>=', ['get', 'event_time'], `${start}T00:00:00Z`]);
+      if (end) clauses.push(['<=', ['get', 'event_time'], `${end}T23:59:59Z`]);
+      map.setFilter(points, clauses.length ? ['all', ...clauses] as FilterSpecification : null);
+    },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { if (map.getLayer(points)) map.removeLayer(points); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
 /** MapLibre attribution accepts HTML; metadata is treated as plain text. */
 export function escapeAttribution(value: string): string {
   return value.replace(/[&<>\"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', "'": '&#39;' })[char]!);

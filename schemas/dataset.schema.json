@@ -604,7 +604,8 @@
                       "hydrology_station",
                       "rainfall_station",
                       "disaster_event",
-                      "earthquake"
+                      "earthquake",
+                      "flood_event"
                     ]
                   },
                   "source_id": {
@@ -837,6 +838,10 @@
                   "significance": { "type": "integer", "minimum": 0 },
                   "event_status": { "type": "string", "minLength": 1 },
                   "epicenter_only": { "type": "boolean" }
+                  ,
+                  "evidence_status": { "enum": ["observed", "reported", "derived", "modelled"] },
+                  "hazard_footprint": { "type": "boolean" },
+                  "flood_class": { "type": "string", "minLength": 1 }
                 },
                 "required": [
                   "dataset_id",
