@@ -24,8 +24,8 @@ for (const target of ['body', 'h1'] as const) {
     }, target);
     await page.goto('/atlas/');
     await expect(page.locator('[data-map-ready="true"]')).toBeVisible();
-    await page.getByRole('button', { name: 'Synthetic point A' }).click();
-    await expect(page.getByText('Measurement: UNKNOWN')).toBeVisible();
+    await page.locator('.record-picker select').selectOption('np01');
+    await expect(page.getByRole('heading', { name: 'Koshi' })).toBeVisible();
     const hydrationErrors = errors.filter(message => /hydrated|hydration|didn't match/i.test(message));
     if (target === 'body') {
       await expect(page.locator('body')).toHaveAttribute('data-gr-ext-installed', '');

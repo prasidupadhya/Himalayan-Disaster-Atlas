@@ -10,6 +10,8 @@ Unknown dates, resolutions and measurements use JSON `null`; never an empty stri
 
 Timestamps use RFC3339 with timezone. Feature IDs are stable lowercase kebab-case, unique within a release; global identity is `(dataset_id, dataset_version, feature_id)`. Versions are immutable `major.minor.patch` values. Names may be human-readable Unicode. Feature measurements use the central unit vocabulary and `null` for missing values. Extend the vocabulary through contract review; never silently convert units.
 
+Administrative features add level, category, P-code, parent P-code/name, aliases, validated label coordinates, validity dates, and source version. Level 0 has null parent fields; levels 1–3 require a parent. Level 3 explicitly distinguishes local-government units from protected or special-area pieces. Source-reported area uses `km2`; it remains null when absent and is never inferred from display geometry.
+
 | Status | Evidence type |
 | --- | --- |
 | VERIFIED_SOURCE | observed |

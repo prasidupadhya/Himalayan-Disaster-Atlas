@@ -3,9 +3,10 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { loadDataset, SAMPLE_MANIFEST, UnavailableError, MAX_GEOJSON_BYTES } from '../../apps/web/lib/datasets';
 import metadata from '../../data/releases/foundation-sample/1.0.0/manifest.json';
+import provinceMetadata from '../../data/releases/nepal-admin-provinces/2.0.0/manifest.json';
 const raw = readFileSync('data/releases/foundation-sample/1.0.0/features.geojson', 'utf8');
 afterEach(() => vi.unstubAllGlobals());
-function mock(manifest = metadata, artifact = raw) {
+function mock(manifest: unknown = metadata, artifact: BodyInit = raw) {
   const fetcher = vi.fn().mockResolvedValueOnce(new Response(JSON.stringify(manifest))).mockResolvedValueOnce(new Response(artifact));
   vi.stubGlobal('fetch', fetcher);
   return fetcher;
@@ -14,6 +15,14 @@ it('loads only local pinned data and checks its checksum', async () => {
   const fetcher = mock();
   expect((await loadDataset(SAMPLE_MANIFEST)).collection.features).toHaveLength(3);
   expect(fetcher.mock.calls[1][0]).toBe(metadata.artifact.path);
+});
+it('verifies and decompresses a bounded administrative release', async () => {
+  const compressed = readFileSync('data/releases/nepal-admin-provinces/2.0.0/features.geojson.gz');
+  const fetcher = mock(provinceMetadata, compressed);
+  const dataset = await loadDataset('/data/nepal-admin-provinces/2.0.0/manifest.json');
+  expect(dataset.collection.features).toHaveLength(7);
+  expect(dataset.collection.features.find(feature => feature.id === 'np01')?.properties.name).toBe('Koshi');
+  expect(fetcher.mock.calls[1][0]).toBe(provinceMetadata.artifact.path);
 });
 it('rejects tampering even if the size matches', async () => {
   mock(metadata, raw.replace('point A', 'point X'));

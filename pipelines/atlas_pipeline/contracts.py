@@ -1,11 +1,12 @@
 """The JSON schema is authoritative; this module adds spatial/release invariants."""
+import gzip
 import hashlib
 import json
 from datetime import datetime
 from pathlib import Path
 
 from jsonschema import Draft7Validator, FormatChecker
-from shapely.geometry import shape
+from shapely.geometry import Point, shape
 from shapely.validation import explain_validity
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -46,7 +47,8 @@ def validate_dataset(metadata, collection):
         raise ValueError('Updating datasets require a stale_after timestamp')
     if metadata['stale_after'] and timestamp(metadata['stale_after']) < timestamp(metadata['retrieval_date']):
         raise ValueError('Stale deadline precedes retrieval')
-    expected_path = f"/data/{metadata['dataset_id']}/{metadata['dataset_version']}/features.geojson"
+    suffix = '.gz' if metadata['artifact']['format'] == 'GeoJSON+gzip' else ''
+    expected_path = f"/data/{metadata['dataset_id']}/{metadata['dataset_version']}/features.geojson{suffix}"
     if metadata['artifact']['path'] != expected_path:
         raise ValueError('Artifact path must match dataset identity and version')
     identifiers = set()
@@ -60,6 +62,28 @@ def validate_dataset(metadata, collection):
                 raise ValueError(f'Feature disagrees with manifest: {key}')
         if properties['value'] is not None and properties['unit'] is None:
             raise ValueError('Known measurements require a unit')
+        if 'admin_level' in properties:
+            required = {
+                'admin_category', 'pcode', 'parent_pcode', 'parent_name', 'aliases',
+                'label_longitude', 'label_latitude', 'valid_from', 'valid_to', 'source_version',
+            }
+            if not required.issubset(properties):
+                raise ValueError('Administrative features require complete hierarchy metadata')
+            level = properties['admin_level']
+            if level == 0:
+                if properties['parent_pcode'] is not None or properties['parent_name'] is not None:
+                    raise ValueError('Country feature cannot have a parent')
+            elif not properties['parent_pcode'] or not properties['parent_name']:
+                raise ValueError('Administrative child requires a parent')
+            category = properties['admin_category']
+            if level < 3 and category != ('country', 'province', 'district')[level]:
+                raise ValueError('Administrative category is inconsistent with its level')
+            if level == 3 and category not in {'local_level', 'special_area'}:
+                raise ValueError('Level 3 category is inconsistent')
+            if properties['valid_to'] and timestamp(properties['valid_from']) > timestamp(
+                properties['valid_to']
+            ):
+                raise ValueError('Administrative validity interval is reversed')
         geometry = feature['geometry']
         rings = []
         if geometry['type'] == 'Polygon':
@@ -71,6 +95,10 @@ def validate_dataset(metadata, collection):
         geom = shape(geometry)
         if geom.is_empty or not geom.is_valid:
             raise ValueError(f'Invalid geometry: {explain_validity(geom)}')
+        if 'admin_level' in properties:
+            label = Point(properties['label_longitude'], properties['label_latitude'])
+            if not geom.covers(label):
+                raise ValueError('Administrative label is outside its geometry')
         for lon, lat in positions(geometry['coordinates']):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError('Geometry outside declared spatial coverage')
@@ -82,4 +110,5 @@ def verify_artifact(metadata, content):
         raise ValueError('Artifact size mismatch')
     if hashlib.sha256(content).hexdigest() != metadata['artifact']['sha256']:
         raise ValueError('Artifact checksum mismatch')
-    return validate_dataset(metadata, json.loads(content))
+    decoded = gzip.decompress(content) if metadata['artifact']['format'] == 'GeoJSON+gzip' else content
+    return validate_dataset(metadata, json.loads(decoded))

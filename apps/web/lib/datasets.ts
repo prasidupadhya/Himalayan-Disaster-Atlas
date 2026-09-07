@@ -1,7 +1,14 @@
 import { parseDataset, type Dataset } from '../../../packages/contracts';
 
 export const SAMPLE_MANIFEST = '/data/foundation-sample/1.0.0/manifest.json';
-export const MAX_GEOJSON_BYTES = 1_048_576;
+export const ADMIN_MANIFESTS = [
+  '/data/nepal-admin-country/2.0.0/manifest.json',
+  '/data/nepal-admin-provinces/2.0.0/manifest.json',
+  '/data/nepal-admin-districts/2.0.0/manifest.json',
+  '/data/nepal-admin-local-levels/2.0.0/manifest.json',
+] as const;
+export const MAX_GEOJSON_BYTES = 2_097_152;
+export const MAX_DECODED_GEOJSON_BYTES = 8_388_608;
 export class UnavailableError extends Error {}
 
 async function readBounded(response: Response, limit: number): Promise<Uint8Array<ArrayBuffer>> {
@@ -33,11 +40,14 @@ export async function loadDataset(manifestPath: string, signal?: AbortSignal): P
   const manifestBytes = await readBounded(await fetch(manifestPath, { signal }), 65_536);
   const metadata: unknown = JSON.parse(new TextDecoder().decode(manifestBytes));
   const validated = parseDataset({ metadata, collection: { type: 'FeatureCollection', features: [] } }).metadata;
-  if (manifestPath !== validated.artifact.path.replace('features.geojson', 'manifest.json')) throw new Error('Manifest identity mismatch.');
+  if (manifestPath !== validated.artifact.path.replace(/features\.geojson(?:\.gz)?$/, 'manifest.json')) throw new Error('Manifest identity mismatch.');
   const bytes = await readBounded(await fetch(validated.artifact.path, { signal }), MAX_GEOJSON_BYTES);
   if (bytes.length !== validated.artifact.byte_size) throw new Error('Dataset size does not match its manifest.');
   const hash = await crypto.subtle.digest('SHA-256', bytes);
   const digest = Array.from(new Uint8Array(hash), n => n.toString(16).padStart(2, '0')).join('');
   if (digest !== validated.artifact.sha256) throw new Error('Dataset checksum failed.');
-  return parseDataset({ metadata: validated, collection: JSON.parse(new TextDecoder().decode(bytes)) });
+  const decoded = validated.artifact.format === 'GeoJSON+gzip'
+    ? await readBounded(new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))), MAX_DECODED_GEOJSON_BYTES)
+    : bytes;
+  return parseDataset({ metadata: validated, collection: JSON.parse(new TextDecoder().decode(decoded)) });
 }

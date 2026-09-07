@@ -1,4 +1,4 @@
-import type { Map } from 'maplibre-gl';
+import type { ExpressionSpecification, Map } from 'maplibre-gl';
 import type { Dataset } from '../../../packages/contracts';
 
 /** One source per immutable dataset version. Dispose layers before the source. */
@@ -18,6 +18,58 @@ export function mountDataset(map: Map, dataset: Dataset) {
     layers,
     setVisible(visible: boolean) { for (const layer of layers) map.setLayoutProperty(layer, 'visibility', visible ? 'visible' : 'none'); },
     dispose() { for (const layer of [...layers].reverse()) if (map.getLayer(layer)) map.removeLayer(layer); if (map.getSource(id)) map.removeSource(id); }
+  };
+}
+
+const ADMIN_STYLE = {
+  0: { color: '#f5f8fa', opacity: 0, width: 2.5, minzoom: 0 },
+  1: { color: '#35b6a5', opacity: 0.22, width: 1.4, minzoom: 0 },
+  2: { color: '#8fd8cf', opacity: 0.05, width: 0.9, minzoom: 6 },
+  3: { color: '#c8eee9', opacity: 0.04, width: 0.65, minzoom: 8 },
+} as const;
+
+/** Mount one administrative level with zoom-aware polygons and selection state. */
+export function mountAdministrativeDataset(map: Map, dataset: Dataset) {
+  const first = dataset.collection.features[0]?.properties;
+  if (first?.admin_level === undefined) throw new Error('Administrative dataset has no level');
+  const level = first.admin_level;
+  const style = ADMIN_STYLE[level];
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({
+    ...feature, properties: { ...feature.properties, __atlas_id: feature.id },
+  })) };
+  const featureIds = new Set(dataset.collection.features.map(feature => String(feature.id)));
+  let selected: string | null = null;
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const fill = `${source}-fill`;
+  const line = `${source}-line`;
+  const specialColor: ExpressionSpecification = ['case', ['==', ['get', 'admin_category'], 'special_area'], '#f0ad4e', style.color];
+  map.addLayer({ id: fill, source, type: 'fill', minzoom: style.minzoom, paint: {
+    'fill-color': specialColor,
+    'fill-opacity': ['case', ['boolean', ['feature-state', 'selected'], false], Math.max(style.opacity, 0.42), style.opacity],
+  } });
+  map.addLayer({ id: line, source, type: 'line', minzoom: style.minzoom, paint: {
+    'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', specialColor],
+    'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 3, style.width],
+  } });
+  return {
+    source,
+    level,
+    layers: [fill, line],
+    interactiveLayers: [fill],
+    setVisible(visible: boolean) {
+      for (const layer of [fill, line]) map.setLayoutProperty(layer, 'visibility', visible ? 'visible' : 'none');
+    },
+    setSelected(id: string | null) {
+      if (selected && featureIds.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false });
+      selected = id && featureIds.has(id) ? id : null;
+      if (selected) map.setFeatureState({ source, id: selected }, { selected: true });
+    },
+    dispose() {
+      for (const layer of [line, fill]) if (map.getLayer(layer)) map.removeLayer(layer);
+      if (map.getSource(source)) map.removeSource(source);
+    },
   };
 }
 
