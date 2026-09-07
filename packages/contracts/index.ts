@@ -23,7 +23,7 @@ export interface FeatureProperties {
   admin_category?: 'country' | 'province' | 'district' | 'local_level' | 'special_area';
   pcode?: string; parent_pcode?: string | null; parent_name?: string | null; aliases?: string[];
   label_longitude?: number; label_latitude?: number; valid_from?: string; valid_to?: string | null; source_version?: string;
-  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake'; source_id?: string; search_terms?: string[]; feature_code?: string;
+  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake' | 'hydrology_station'; source_id?: string; search_terms?: string[]; feature_code?: string;
   source_modified?: string; elevation_reference?: string;
   river_name?: string | null; downstream_id?: string | null; downstream_in_release?: boolean; main_river_id?: string;
   flow_order?: number; length_km?: number; distance_downstream_km?: number; distance_upstream_km?: number;
@@ -32,9 +32,12 @@ export interface FeatureProperties {
   glacier_name?: string | null; glims_id?: string; outline_date?: string; area_km2?: number;
   centroid_longitude?: number; centroid_latitude?: number; elevation_min_m?: number; elevation_max_m?: number;
   elevation_mean_m?: number; dem_source?: string; inventory_region?: string; display_geometry_repaired?: boolean;
-  lake_name?: string | null; country?: string; basin?: string; connectivity?: 'Glacier-fed' | 'Non Glacier-fed';
+  lake_name?: string | null; country?: string; basin?: string | null; connectivity?: 'Glacier-fed' | 'Non Glacier-fed';
   data_source?: string; inventory_period?: string; perimeter_km?: number; expansion_rate_km2_per_year?: number | null;
   expansion_uncertainty_km2_per_year?: number | null; expansion_significant?: boolean | null;
+  station_name?: string; observation_time?: string | null; water_level_m?: number | null; warning_level_m?: number | null;
+  danger_level_m?: number | null; threshold_order_valid?: boolean; station_status?: string; trend?: string | null; station_series_id?: string; provider?: string;
+  elevation_m?: number | null; coordinate_order_repaired?: boolean;
 }
 export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'GeometryCollection' }>, FeatureProperties>;
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
@@ -102,6 +105,12 @@ export function parseDataset(input: unknown): Dataset {
       if (p.elevation_min_m > p.elevation_mean_m + 1) throw new Error('Glacial lake elevation statistics are inconsistent');
       if (!p.search_terms.includes(p.source_id)) throw new Error('Glacial lake search terms must include GLO ID');
       if (p.expansion_rate_km2_per_year === null !== (p.expansion_uncertainty_km2_per_year === null)) throw new Error('Glacial lake expansion rate and uncertainty must be known together');
+    }
+    if (f.properties.entity_type === 'hydrology_station') {
+      const p = f.properties;
+      if (f.geometry.type !== 'Point' || !p.source_id || !p.search_terms?.length || !p.station_name || !p.station_series_id || !p.provider || !p.station_status || p.water_level_m === undefined || p.warning_level_m === undefined || p.danger_level_m === undefined || p.threshold_order_valid === undefined || p.observation_time === undefined || p.trend === undefined || p.elevation_m === undefined || p.coordinate_order_repaired === undefined) throw new Error('Hydrology stations require complete station metadata');
+      if (p.value !== p.water_level_m || (p.water_level_m === null ? p.unit !== null : p.unit !== 'm')) throw new Error('Hydrology station measurement must be water level in metres');
+      if (p.threshold_order_valid !== !(p.warning_level_m !== null && p.danger_level_m !== null && p.warning_level_m > p.danger_level_m)) throw new Error('Hydrology threshold consistency flag is incorrect');
     }
     if (coordinates(f.geometry.coordinates).some(([lon, lat]) => lon < west || lon > east || lat < south || lat > north)) throw new Error('Geometry outside coverage');
     const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flat() : [];
