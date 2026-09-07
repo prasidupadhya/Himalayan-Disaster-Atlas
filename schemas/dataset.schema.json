@@ -602,7 +602,8 @@
                       "glacier",
                       "glacial_lake",
                       "hydrology_station",
-                      "rainfall_station"
+                      "rainfall_station",
+                      "disaster_event"
                     ]
                   },
                   "source_id": {
@@ -806,6 +807,26 @@
                   "rainfall_12h_mm": { "type": ["number", "null"], "minimum": 0 },
                   "rainfall_24h_mm": { "type": ["number", "null"], "minimum": 0 },
                   "rainfall_quality_warning": { "type": "boolean" }
+                  ,
+                  "hazard_id": { "type": "string", "minLength": 1 },
+                  "hazard_name": { "type": "string", "minLength": 1 },
+                  "hazard_type": { "enum": ["natural", "non natural"] },
+                  "event_time": { "type": "string", "format": "date-time" },
+                  "event_year": { "type": "integer", "minimum": 1900, "maximum": 2200 },
+                  "event_local_date": { "type": "string", "format": "date" },
+                  "reported_time": { "type": ["string", "null"], "format": "date-time" },
+                  "verified": { "type": "boolean" },
+                  "approved": { "type": "boolean" },
+                  "source_label": { "type": ["string", "null"] },
+                  "data_source_name": { "type": ["string", "null"] },
+                  "loss_reference_id": { "type": ["string", "null"] },
+                  "reported_deaths": { "type": ["integer", "null"], "minimum": 0 },
+                  "reported_injured": { "type": ["integer", "null"], "minimum": 0 },
+                  "reported_missing": { "type": ["integer", "null"], "minimum": 0 },
+                  "reported_affected": { "type": ["integer", "null"], "minimum": 0 },
+                  "estimated_loss_npr": { "type": ["number", "null"], "minimum": 0 },
+                  "street_address": { "type": ["string", "null"] },
+                  "event_description": { "type": ["string", "null"] }
                 },
                 "required": [
                   "dataset_id",

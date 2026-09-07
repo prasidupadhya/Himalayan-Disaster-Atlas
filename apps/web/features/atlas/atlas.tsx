@@ -14,6 +14,7 @@ import { Glaciers } from '../glaciers/glaciers';
 import { GlacialLakes } from '../glacial-lakes/glacial-lakes';
 import { Hydrology } from '../hydrology/hydrology';
 import { Rainfall } from '../rainfall/rainfall';
+import { DisasterEvents } from '../disaster-events/disaster-events';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -186,6 +187,7 @@ export function Atlas() {
       <GlacialLakes key={`glacial-lakes-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Hydrology key={`hydrology-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Rainfall key={`rainfall-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <DisasterEvents key={`disaster-events-${attempt}`} map={mapReady ? mapRef.current : null} />
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">

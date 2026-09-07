@@ -213,6 +213,19 @@ def validate_dataset(metadata, collection):
             values = [properties[f'rainfall_{hours}h_mm'] for hours in (1, 3, 6, 12, 24)]
             if any(value is not None and value < 0 for value in values):
                 raise ValueError('Rainfall cannot be negative')
+        if properties.get('entity_type') == 'disaster_event':
+            required = {
+                'source_id', 'search_terms', 'hazard_id', 'hazard_name', 'hazard_type', 'event_time', 'event_year', 'event_local_date',
+                'reported_time', 'verified', 'approved', 'source_label', 'data_source_name',
+                'loss_reference_id', 'reported_deaths', 'reported_injured', 'reported_missing',
+                'reported_affected', 'estimated_loss_npr', 'street_address', 'event_description',
+            }
+            if not required.issubset(properties) or geometry['type'] != 'Point':
+                raise ValueError('Disaster events require complete Point metadata')
+            if properties['value'] is not None or properties['unit'] is not None:
+                raise ValueError('Disaster event point is not a measurement')
+            if properties['hazard_type'] not in {'natural', 'non natural'}:
+                raise ValueError('Unsupported disaster hazard type')
         for lon, lat in positions(geometry['coordinates']):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError('Geometry outside declared spatial coverage')

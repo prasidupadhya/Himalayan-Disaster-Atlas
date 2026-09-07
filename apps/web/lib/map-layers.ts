@@ -1,4 +1,4 @@
-import type { ExpressionSpecification, Map } from 'maplibre-gl';
+import type { ExpressionSpecification, FilterSpecification, Map } from 'maplibre-gl';
 import type { Dataset } from '../../../packages/contracts';
 
 /** One source per immutable dataset version. Dispose layers before the source. */
@@ -281,6 +281,39 @@ export function mountRainfallDataset(map: Map, dataset: Dataset) {
   } });
   const ids = new Set(dataset.collection.features.map(f => String(f.id))); let selected: string | null = null;
   return { source, layers:[points], interactiveLayers:[points], setVisible(v:boolean){map.setLayoutProperty(points,'visibility',v?'visible':'none');}, setSelected(id:string|null){if(selected&&ids.has(selected))map.setFeatureState({source,id:selected},{selected:false}); selected=id&&ids.has(id)?id:null; if(selected)map.setFeatureState({source,id:selected},{selected:true});}, dispose(){if(map.getLayer(points))map.removeLayer(points); if(map.getSource(source))map.removeSource(source);} };
+}
+
+/** Mount one historical BIPAD incident partition. Colors distinguish hazard categories, not severity. */
+export function mountDisasterEventDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'disaster_event')) throw new Error('Disaster archive contains a non-event feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-points`;
+  const categoryColor: ExpressionSpecification = ['match', ['get', 'hazard_name'],
+    'Flood', '#3b82f6', 'Landslide', '#a16207', 'Earthquake', '#f97316', 'Heavy Rainfall', '#60a5fa',
+    'Fire', '#dc2626', 'Forest Fire', '#b91c1c', 'Thunderbolt', '#eab308', '#8b9aaa'];
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 6.5, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 7, 3.2],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', categoryColor],
+    'circle-opacity': 0.8, 'circle-stroke-color': '#132b3a', 'circle-stroke-width': 0.7,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  return {
+    source, layers: [points], interactiveLayers: [points],
+    setVisible(visible: boolean) { map.setLayoutProperty(points, 'visibility', visible ? 'visible' : 'none'); },
+    setArchiveFilter(hazard: string, start: string, end: string) {
+      const clauses: FilterSpecification[] = [];
+      if (hazard) clauses.push(['==', ['get', 'hazard_name'], hazard]);
+      if (start) clauses.push(['>=', ['get', 'event_time'], `${start}T00:00:00Z`]);
+      if (end) clauses.push(['<=', ['get', 'event_time'], `${end}T23:59:59Z`]);
+      const filter = clauses.length === 0 ? null : clauses.length === 1 ? clauses[0] : ['all', ...clauses] as FilterSpecification;
+      map.setFilter(points, filter);
+    },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { if (map.getLayer(points)) map.removeLayer(points); if (map.getSource(source)) map.removeSource(source); },
+  };
 }
 
 /** MapLibre attribution accepts HTML; metadata is treated as plain text. */

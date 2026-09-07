@@ -1,0 +1,47 @@
+{
+  "source_sha256": {
+    "incidents": [
+      "c5103ef1598a451b80f52a237528c197aa3a622391938b1e59939ec6d1cb6672",
+      "d8b69a7253074f2dad1c77a2beaf3cfe6582fc205d22217aac5156a688ef2b93"
+    ],
+    "losses": [
+      "c625969646e16569a887a33ba540b272fbce3f0bbe8dea8f97d0415e280d91e3",
+      "c6b5260be4f64d73ca9309c12500d76852a064150878184b7a9481d94392f0cd"
+    ],
+    "hazards": "19db3fb17584d721065112d4899f27535832362155d6f9451e8c0eee94fe5352"
+  },
+  "features": 57216,
+  "partitions": {
+    "nepal-disaster-events-2015-2016": 3420,
+    "nepal-disaster-events-2017-2018": 6814,
+    "nepal-disaster-events-2019-2020": 8307,
+    "nepal-disaster-events-2021-2022": 8144,
+    "nepal-disaster-events-2023": 5852,
+    "nepal-disaster-events-2024": 8462,
+    "nepal-disaster-events-2025": 8353,
+    "nepal-disaster-events-2026": 7864
+  },
+  "hazards": {
+    "Fire": 31010,
+    "Thunderbolt": 3385,
+    "Avalanche": 37,
+    "Storm": 4,
+    "Drowning": 492,
+    "Others (Non-Natural)": 336,
+    "Landslide": 5742,
+    "Epidemic": 32,
+    "Earthquake": 323,
+    "Wind Storm": 2221,
+    "Heavy Rainfall": 3017,
+    "Flood": 2407,
+    "High Altitude": 481,
+    "Boat Capsize": 33,
+    "Cold Wave": 49,
+    "Snow Storm": 10,
+    "Animal Incidents": 2981,
+    "Snake Bite": 2146,
+    "Forest Fire": 2510
+  },
+  "start": "2014-12-31T18:15:00Z",
+  "end": "2026-09-06T18:15:00Z"
+}
