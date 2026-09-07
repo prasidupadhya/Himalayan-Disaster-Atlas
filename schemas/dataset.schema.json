@@ -601,7 +601,8 @@
                       "river",
                       "glacier",
                       "glacial_lake",
-                      "hydrology_station"
+                      "hydrology_station",
+                      "rainfall_station"
                     ]
                   },
                   "source_id": {
@@ -798,7 +799,13 @@
                   },
                   "coordinate_order_repaired": {
                     "type": "boolean"
-                  }
+                  },
+                  "rainfall_1h_mm": { "type": ["number", "null"], "minimum": 0 },
+                  "rainfall_3h_mm": { "type": ["number", "null"], "minimum": 0 },
+                  "rainfall_6h_mm": { "type": ["number", "null"], "minimum": 0 },
+                  "rainfall_12h_mm": { "type": ["number", "null"], "minimum": 0 },
+                  "rainfall_24h_mm": { "type": ["number", "null"], "minimum": 0 },
+                  "rainfall_quality_warning": { "type": "boolean" }
                 },
                 "required": [
                   "dataset_id",

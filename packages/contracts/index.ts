@@ -23,7 +23,7 @@ export interface FeatureProperties {
   admin_category?: 'country' | 'province' | 'district' | 'local_level' | 'special_area';
   pcode?: string; parent_pcode?: string | null; parent_name?: string | null; aliases?: string[];
   label_longitude?: number; label_latitude?: number; valid_from?: string; valid_to?: string | null; source_version?: string;
-  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake' | 'hydrology_station'; source_id?: string; search_terms?: string[]; feature_code?: string;
+  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake' | 'hydrology_station' | 'rainfall_station'; source_id?: string; search_terms?: string[]; feature_code?: string;
   source_modified?: string; elevation_reference?: string;
   river_name?: string | null; downstream_id?: string | null; downstream_in_release?: boolean; main_river_id?: string;
   flow_order?: number; length_km?: number; distance_downstream_km?: number; distance_upstream_km?: number;
@@ -38,6 +38,8 @@ export interface FeatureProperties {
   station_name?: string; observation_time?: string | null; water_level_m?: number | null; warning_level_m?: number | null;
   danger_level_m?: number | null; threshold_order_valid?: boolean; station_status?: string; trend?: string | null; station_series_id?: string; provider?: string;
   elevation_m?: number | null; coordinate_order_repaired?: boolean;
+  rainfall_1h_mm?: number | null; rainfall_3h_mm?: number | null; rainfall_6h_mm?: number | null; rainfall_12h_mm?: number | null;
+  rainfall_24h_mm?: number | null; rainfall_quality_warning?: boolean;
 }
 export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'GeometryCollection' }>, FeatureProperties>;
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
@@ -111,6 +113,12 @@ export function parseDataset(input: unknown): Dataset {
       if (f.geometry.type !== 'Point' || !p.source_id || !p.search_terms?.length || !p.station_name || !p.station_series_id || !p.provider || !p.station_status || p.water_level_m === undefined || p.warning_level_m === undefined || p.danger_level_m === undefined || p.threshold_order_valid === undefined || p.observation_time === undefined || p.trend === undefined || p.elevation_m === undefined || p.coordinate_order_repaired === undefined) throw new Error('Hydrology stations require complete station metadata');
       if (p.value !== p.water_level_m || (p.water_level_m === null ? p.unit !== null : p.unit !== 'm')) throw new Error('Hydrology station measurement must be water level in metres');
       if (p.threshold_order_valid !== !(p.warning_level_m !== null && p.danger_level_m !== null && p.warning_level_m > p.danger_level_m)) throw new Error('Hydrology threshold consistency flag is incorrect');
+    }
+    if (f.properties.entity_type === 'rainfall_station') {
+      const p = f.properties;
+      if (f.geometry.type !== 'Point' || !p.source_id || !p.search_terms?.length || !p.station_name || !p.station_series_id || !p.provider || !p.station_status || p.observation_time === undefined || p.elevation_m === undefined || p.coordinate_order_repaired === undefined || p.rainfall_1h_mm === undefined || p.rainfall_3h_mm === undefined || p.rainfall_6h_mm === undefined || p.rainfall_12h_mm === undefined || p.rainfall_24h_mm === undefined || p.rainfall_quality_warning === undefined) throw new Error('Rainfall stations require complete station metadata');
+      if (p.value !== p.rainfall_24h_mm || (p.rainfall_24h_mm === null ? p.unit !== null : p.unit !== 'mm')) throw new Error('Rainfall station measurement must be 24-hour rainfall in millimetres');
+      for (const value of [p.rainfall_1h_mm, p.rainfall_3h_mm, p.rainfall_6h_mm, p.rainfall_12h_mm, p.rainfall_24h_mm]) if (value !== null && value < 0) throw new Error('Rainfall cannot be negative');
     }
     if (coordinates(f.geometry.coordinates).some(([lon, lat]) => lon < west || lon > east || lat < south || lat > north)) throw new Error('Geometry outside coverage');
     const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flat() : [];

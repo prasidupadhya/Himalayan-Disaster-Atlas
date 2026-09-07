@@ -29,7 +29,8 @@
     "data:rivers": ".venv/bin/python -m pipelines.atlas_pipeline.rivers",
     "data:glaciers": ".venv/bin/python -m pipelines.atlas_pipeline.glaciers",
     "data:glacial-lakes": ".venv/bin/python -m pipelines.atlas_pipeline.glacial_lakes",
-    "data:hydrology": ".venv/bin/python -m pipelines.atlas_pipeline.hydrology"
+    "data:hydrology": ".venv/bin/python -m pipelines.atlas_pipeline.hydrology",
+    "data:rainfall": ".venv/bin/python -m pipelines.atlas_pipeline.rainfall"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
