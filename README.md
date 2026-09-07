@@ -1,8 +1,8 @@
 # Himalayan Disaster Atlas
 
-A public, read-only, Nepal-focused geospatial atlas. This repository currently implements **Foundation**, owned by Astra on `feat/foundation`.
+A public, read-only, Nepal-focused geospatial atlas. Foundation is complete; **Administrative Boundaries** is owned by Sol on `feat/admin-boundaries`.
 
-The foundation includes a static Next.js application, a MapLibre sample map, shared machine-checked data contracts, and an offline Python acquisition-to-release pipeline. **All sample points are synthetic. No geographic inventory, hazard analysis, simulation, or operational warning is provided.**
+The application includes a static Next.js atlas, Nepal COD-AB v02 province/district/local-level boundaries, shared machine-checked data contracts, and offline acquisition-to-release pipelines. **No hazard analysis, simulation, or operational warning is provided.**
 
 ## Run locally
 
@@ -13,10 +13,11 @@ npm ci
 python3.12 -m venv .venv
 .venv/bin/python -m pip install -r requirements.lock
 npm run data:sample
+npm run data:admin
 npm run dev
 ```
 
-Open http://127.0.0.1:3000. `/atlas/` contains the map; `/data-catalog/`, `/methodology/`, and `/sources/` expose the foundation's evidence conventions.
+Open http://127.0.0.1:3000. `/atlas/` contains the boundary map; `/data-catalog/`, `/methodology/`, and `/sources/` expose its evidence and preparation details.
 
 ```sh
 npm run check
@@ -24,7 +25,7 @@ npx playwright install chromium
 npm run test:e2e
 ```
 
-`check` runs the sample pipeline, release validation, Python and TypeScript tests, type checking, both linters, the production static export, and source/output credential checks. Browser tests serve the exported output on port 4173 and exercise desktop/mobile map interactions and failure states. On Linux, Playwright may require `npx playwright install --with-deps chromium`.
+`check` validates all checked-in releases, runs Python and TypeScript tests, type checking, both linters, the production static export, and source/output credential checks. `data:admin` can reacquire the pinned 60 MB public source when the content-addressed raw archive is absent. Browser tests serve the exported output on port 4173 and exercise desktop/mobile map interactions and failure states. On Linux, Playwright may require `npx playwright install --with-deps chromium`.
 
 To inspect the production output:
 
@@ -39,7 +40,7 @@ Deploy only `apps/web/out/` when the production feature is ready. No deployment 
 | Directory | Responsibility |
 | --- | --- |
 | `apps/web/app` | Routes and static application shell |
-| `apps/web/features` | Feature-owned interaction code; currently Atlas sample |
+| `apps/web/features` | Feature-owned interaction code; currently administrative Atlas exploration |
 | `apps/web/lib`, `components` | Shared loading, layer lifecycle, state and evidence presentation |
 | `packages/contracts`, `schemas` | TypeScript boundary and authoritative JSON schema |
 | `pipelines/atlas_pipeline` | Offline acquisition, normalization, validation and publication |
@@ -50,6 +51,6 @@ Deploy only `apps/web/out/` when the production feature is ready. No deployment 
 | `tests` | Shared adversarial fixtures, Python, TypeScript and browser checks |
 | `docs` | Architecture, data notes, assumptions, licensing and delivery checklist |
 
-Start with [architecture](docs/architecture/README.md), [data contract](docs/architecture/data-contract.md), [development workflow](docs/architecture/development.md), and the [foundation handoff](docs/foundation.md).
+Start with [architecture](docs/architecture/README.md), [data contract](docs/architecture/data-contract.md), [administrative dataset notes](docs/datasets/nepal-admin-boundaries.md), and the [feature handoff](docs/admin-boundaries.md).
 
 The product specification is user-supplied. Its original attachment includes credentials and is deliberately not copied into Git. This repository records the relevant foundation requirements without those values. Project code has no redistribution license selected yet; see [licensing](docs/licensing/README.md).

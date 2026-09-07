@@ -270,10 +270,10 @@
           "properties": {
             "path": {
               "type": "string",
-              "pattern": "^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/features\\.geojson$"
+              "pattern": "^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/features\\.geojson(?:\\.gz)?$"
             },
             "format": {
-              "const": "GeoJSON"
+              "enum": ["GeoJSON", "GeoJSON+gzip"]
             },
             "sha256": {
               "type": "string",
@@ -527,6 +527,7 @@
                     "enum": [
                       "m",
                       "m2",
+                      "km2",
                       "m3",
                       "m3/s",
                       "mm",
@@ -534,6 +535,65 @@
                       "person",
                       null
                     ]
+                  },
+                  "admin_level": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 3
+                  },
+                  "admin_category": {
+                    "enum": [
+                      "country",
+                      "province",
+                      "district",
+                      "local_level",
+                      "special_area"
+                    ]
+                  },
+                  "pcode": {
+                    "type": "string",
+                    "pattern": "^NP[0-9]{0,7}$"
+                  },
+                  "parent_pcode": {
+                    "anyOf": [
+                      { "type": "string", "pattern": "^NP[0-9]{0,4}$" },
+                      { "type": "null" }
+                    ]
+                  },
+                  "parent_name": {
+                    "anyOf": [
+                      { "type": "string", "minLength": 1 },
+                      { "type": "null" }
+                    ]
+                  },
+                  "aliases": {
+                    "type": "array",
+                    "items": { "type": "string", "minLength": 1 },
+                    "uniqueItems": true
+                  },
+                  "label_longitude": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180
+                  },
+                  "label_latitude": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90
+                  },
+                  "valid_from": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "valid_to": {
+                    "anyOf": [
+                      { "type": "string", "format": "date-time" },
+                      { "type": "null" }
+                    ]
+                  },
+                  "source_version": {
+                    "type": "string",
+                    "minLength": 1
                   }
                 },
                 "required": [

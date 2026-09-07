@@ -5,7 +5,7 @@ import schema from '../../schemas/dataset.schema.json';
 
 export type DataStatus = 'VERIFIED_SOURCE' | 'SATELLITE_DERIVED' | 'ATLAS_DERIVED' | 'ESTIMATED' | 'MODELLED' | 'HISTORICAL' | 'UNKNOWN';
 export type EvidenceType = 'observed' | 'derived' | 'estimated' | 'modelled' | 'historical' | 'unknown';
-export type Unit = 'm' | 'm2' | 'm3' | 'm3/s' | 'mm' | 'degC' | 'person';
+export type Unit = 'm' | 'm2' | 'km2' | 'm3' | 'm3/s' | 'mm' | 'degC' | 'person';
 export interface Metadata {
   schema_version: '1.0.0'; dataset_id: string; dataset_name: string; dataset_version: string;
   source: string; source_url: string | null; license: string; license_url: string | null; attribution: string;
@@ -15,10 +15,14 @@ export interface Metadata {
   temporal_coverage: { start: string | null; end: string | null }; crs: 'OGC:CRS84'; status: DataStatus;
   evidence_type: EvidenceType; is_fixture: boolean; limitations: string[]; uncertainty: string;
   update_frequency: 'static' | 'periodic' | 'operational'; stale_after: string | null;
-  artifact: { path: string; format: 'GeoJSON'; sha256: string; byte_size: number };
+  artifact: { path: string; format: 'GeoJSON' | 'GeoJSON+gzip'; sha256: string; byte_size: number };
 }
 export interface FeatureProperties {
   dataset_id: string; dataset_version: string; name: string; is_fixture: boolean; value: number | null; unit: Unit | null;
+  admin_level?: 0 | 1 | 2 | 3;
+  admin_category?: 'country' | 'province' | 'district' | 'local_level' | 'special_area';
+  pcode?: string; parent_pcode?: string | null; parent_name?: string | null; aliases?: string[];
+  label_longitude?: number; label_latitude?: number; valid_from?: string; valid_to?: string | null; source_version?: string;
 }
 export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'GeometryCollection' }>, FeatureProperties>;
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
@@ -43,13 +47,23 @@ export function parseDataset(input: unknown): Dataset {
   if ((m.spatial_resolution.value === null) !== (m.spatial_resolution.unit === null)) throw new Error('Resolution needs value and unit');
   if (m.update_frequency !== 'static' && !m.stale_after) throw new Error('Updating datasets need a stale deadline');
   if (m.stale_after && Date.parse(m.stale_after) < Date.parse(m.retrieval_date)) throw new Error('Stale deadline precedes retrieval');
-  if (m.artifact.path !== `/data/${m.dataset_id}/${m.dataset_version}/features.geojson`) throw new Error('Artifact identity mismatch');
+  const suffix = m.artifact.format === 'GeoJSON+gzip' ? '.gz' : '';
+  if (m.artifact.path !== `/data/${m.dataset_id}/${m.dataset_version}/features.geojson${suffix}`) throw new Error('Artifact identity mismatch');
   const ids = new Set();
   for (const f of collection.features) {
     if (ids.has(f.id)) throw new Error('Duplicate feature identifier');
     ids.add(f.id);
     if (f.properties.dataset_id !== m.dataset_id || f.properties.dataset_version !== m.dataset_version || f.properties.is_fixture !== m.is_fixture) throw new Error('Feature identity mismatch');
     if (f.properties.value !== null && f.properties.unit === null) throw new Error('Measurements require units');
+    if (f.properties.admin_level !== undefined) {
+      const p = f.properties;
+      if (p.pcode === undefined || p.admin_category === undefined || p.aliases === undefined || p.label_longitude === undefined || p.label_latitude === undefined || p.valid_from === undefined || p.source_version === undefined) throw new Error('Administrative features require complete hierarchy metadata');
+      if (p.admin_level === 0 ? p.parent_pcode !== null || p.parent_name !== null : !p.parent_pcode || !p.parent_name) throw new Error('Administrative parent metadata is inconsistent');
+      const wrongCategory = (p.admin_level === 0 && p.admin_category !== 'country') || (p.admin_level === 1 && p.admin_category !== 'province') || (p.admin_level === 2 && p.admin_category !== 'district');
+      if (wrongCategory) throw new Error('Administrative category is inconsistent with its level');
+      if (p.admin_level === 3 && !['local_level', 'special_area'].includes(p.admin_category)) throw new Error('Level 3 category is inconsistent');
+      if (p.label_longitude < west || p.label_longitude > east || p.label_latitude < south || p.label_latitude > north) throw new Error('Administrative label is outside coverage');
+    }
     if (coordinates(f.geometry.coordinates).some(([lon, lat]) => lon < west || lon > east || lat < south || lat > north)) throw new Error('Geometry outside coverage');
     const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flat() : [];
     if (rings.some(r => r[0][0] !== r.at(-1)![0] || r[0][1] !== r.at(-1)![1])) throw new Error('Unclosed polygon');

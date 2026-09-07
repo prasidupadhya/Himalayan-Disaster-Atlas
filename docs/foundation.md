@@ -41,3 +41,5 @@ Verified on 2026-09-06 with Node 22.13.1, Python 3.12.8 and Chromium 153 (Playwr
 The initial shared Playwright cache stalled, so browser debugging used an isolated install. The shared cache was subsequently restored and the standard `npm run test:e2e` command was verified. No custom browser path is required.
 
 Map integration fixes verified by browser tests: explicit locally hosted ES module worker; canonical string feature IDs promoted through the rendering adapter; readiness after data rendering; reset/attribution separation on mobile.
+
+The root layout also tolerates extension-injected `<body>` attributes during hydration. A development-mode regression test simulates Grammarly's attributes and separately confirms that application-content mismatches still produce diagnostics.

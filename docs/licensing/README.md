@@ -1,6 +1,8 @@
 # Licensing and attribution
 
-The synthetic fixture in `tests/fixtures/sample-source.csv`, its generated `foundation-sample` releases and corresponding public copies are dedicated under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). No external geographic datasets or basemaps are bundled.
+The synthetic fixture in `tests/fixtures/sample-source.csv`, its generated `foundation-sample` releases and corresponding public copies are dedicated under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+
+Nepal COD-AB v02 boundary releases are redistributed under [Creative Commons Attribution 3.0 IGO](https://creativecommons.org/licenses/by/3.0/igo/legalcode). Attribution: Survey Department of Nepal; UN Resident Coordinator's Office in Nepal; OCHA Field Information Services; Humanitarian Data Exchange. The source page and terms remain linked in every manifest.
 
 A license for the project's original application code has **not** been selected. Do not assume this fixture dedication licenses the whole repository or choose a project-wide license incidentally during Foundation.
 

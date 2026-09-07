@@ -1,5 +1,6 @@
 """Verify every registered release and its exact public copy."""
 import json
+from pathlib import Path
 
 from .contracts import ROOT, verify_artifact
 
@@ -10,7 +11,8 @@ def main():
         raise ValueError('No release manifests found')
     for path in releases:
         metadata = json.loads(path.read_text())
-        content = path.with_name('features.geojson').read_bytes()
+        artifact_name = Path(metadata['artifact']['path']).name
+        content = path.with_name(artifact_name).read_bytes()
         verify_artifact(metadata, content)
         public = ROOT / 'apps/web/public' / metadata['artifact']['path'].lstrip('/')
         if public.read_bytes() != content or public.with_name('manifest.json').read_bytes() != path.read_bytes():
