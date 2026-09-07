@@ -71,3 +71,7 @@ Future simulation engines must be model-agnostic and return separate scenario in
 ## Downstream trace extension
 
 `features/downstream-trace` consumes the Rivers component's already validated datasets and selected source ID, with no duplicate acquisition. `packages/contracts/downstream.ts` validates the combined directed graph and returns a deterministic, versioned derived result. Both partitions must be available before tracing; a coverage exit is distinct from a source outlet. The independent overlay uses source geometry and a per-reach reveal index, and is disposed with its selection session. No source artifact/schema is modified. See [downstream handoff](../downstream-trace.md) for algorithm, scientific scope and failure cases.
+
+## Exposure engine extension
+
+`processing/exposure/engine.py` performs native-raster fractional-cell and indexed vector overlays offline. `pipelines/atlas_pipeline/exposure.py` verifies source inputs and publishes immutable request/result/spatial artifacts with schema 4.0.0; `exposure_contracts.py` integrates with the root data validation gate. `features/exposure-engine` only loads registered, validated results and mounts an independent disposable map overlay. National population processing never runs in the browser. See [exposure handoff](../exposure-engine.md) for supported footprints, numerical and deduplication rules, administrative accounting, uncertainty and benchmarks.

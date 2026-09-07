@@ -36,7 +36,7 @@ test('static navigation, WebGL, boundary controls and accessible identification'
   await map.click({ position: { x: (await map.boundingBox())!.width / 2, y: (await map.boundingBox())!.height / 2 } });
   await expect(page.locator('.record-picker select')).toHaveValue(/^np/);
   await page.getByRole('button', { name: 'Reset view' }).click();
-  await page.screenshot({ path: 'test-results/admin-boundaries-desktop.png', fullPage: true });
+  await page.locator('.map-shell').screenshot({ path: 'test-results/admin-boundaries-desktop.png' });
 
   for (const [name, path] of [['Data catalog', '/data-catalog/'], ['Methodology', '/methodology/'], ['Sources', '/sources/']]) {
     await page.getByRole('navigation').getByRole('link', { name, exact: true }).click();
@@ -54,7 +54,7 @@ test('mobile boundary map and records fit the viewport', async ({ page }) => {
   await page.locator('.record-picker select').selectOption('np0101301');
   await expect(page.getByRole('heading', { name: 'Phungling' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  await page.screenshot({ path: 'test-results/admin-boundaries-mobile.png', fullPage: true });
+  await page.locator('.map-shell').screenshot({ path: 'test-results/admin-boundaries-mobile.png' });
 });
 
 test('unavailable boundary data can be retried', async ({ page }) => {

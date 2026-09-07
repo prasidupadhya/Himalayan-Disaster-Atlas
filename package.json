@@ -22,7 +22,7 @@
     "data:validate": ".venv/bin/python -m pipelines.atlas_pipeline.validate",
     "security:check": "node scripts/check-security.mjs",
     "check": "npm run data:sample && npm run data:validate && npm run test:python && npm run test && npm run typecheck && npm run lint && npm run lint:python && npm run build",
-    "lint:python": ".venv/bin/ruff check pipelines tests/python",
+    "lint:python": ".venv/bin/ruff check pipelines processing tests/python",
     "test:hydration": "playwright test --config playwright.hydration.config.ts",
     "data:terrain": ".venv/bin/python -m pipelines.atlas_pipeline.terrain",
     "data:mountains": ".venv/bin/python -m pipelines.atlas_pipeline.mountains",
@@ -32,12 +32,13 @@
     "data:hydrology": ".venv/bin/python -m pipelines.atlas_pipeline.hydrology",
     "data:rainfall": ".venv/bin/python -m pipelines.atlas_pipeline.rainfall",
     "data:disaster-events": ".venv/bin/python -m pipelines.atlas_pipeline.disaster_events",
-    "data:earthquakes": ".venv/bin/python -m pipelines.atlas_pipeline.earthquakes"
-    ,"data:floods": ".venv/bin/python -m pipelines.atlas_pipeline.floods"
-    ,"data:landslides": ".venv/bin/python -m pipelines.atlas_pipeline.landslides"
-    ,"data:hydropower": ".venv/bin/python -m pipelines.atlas_pipeline.hydropower"
-    ,"data:infrastructure": ".venv/bin/python -m pipelines.atlas_pipeline.infrastructure --snapshot data/raw/osm/nepal-infrastructure-2026-09-07.json --roads-dir data/raw/osm/infrastructure"
-    ,"data:population": ".venv/bin/python -m pipelines.atlas_pipeline.population --source data/raw/population/npl_pop_2025_CN_100m_R2025A_v1.tif"
+    "data:earthquakes": ".venv/bin/python -m pipelines.atlas_pipeline.earthquakes",
+    "data:floods": ".venv/bin/python -m pipelines.atlas_pipeline.floods",
+    "data:landslides": ".venv/bin/python -m pipelines.atlas_pipeline.landslides",
+    "data:hydropower": ".venv/bin/python -m pipelines.atlas_pipeline.hydropower",
+    "data:infrastructure": ".venv/bin/python -m pipelines.atlas_pipeline.infrastructure --snapshot data/raw/osm/nepal-infrastructure-2026-09-07.json --roads-dir data/raw/osm/infrastructure",
+    "data:population": ".venv/bin/python -m pipelines.atlas_pipeline.population --source data/raw/population/npl_pop_2025_CN_100m_R2025A_v1.tif",
+    "data:exposure": ".venv/bin/python -m pipelines.atlas_pipeline.exposure"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
