@@ -25,7 +25,8 @@
     "lint:python": ".venv/bin/ruff check pipelines tests/python",
     "test:hydration": "playwright test --config playwright.hydration.config.ts",
     "data:terrain": ".venv/bin/python -m pipelines.atlas_pipeline.terrain",
-    "data:mountains": ".venv/bin/python -m pipelines.atlas_pipeline.mountains"
+    "data:mountains": ".venv/bin/python -m pipelines.atlas_pipeline.mountains",
+    "data:rivers": ".venv/bin/python -m pipelines.atlas_pipeline.rivers"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

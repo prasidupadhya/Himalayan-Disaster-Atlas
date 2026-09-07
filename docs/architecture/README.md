@@ -43,6 +43,8 @@ Checked-in fixture release metadata includes a fixed acquisition/processing time
 
 GeoJSON and deterministic gzip-wrapped GeoJSON are implemented. The browser verifies compressed bytes before bounded decompression and schema validation. Extend the schema with a new version and a delivery adapter before using other formats. Large originals/intermediates stay outside Git. Future artifact hosting must provide CORS where needed, correct MIME types, byte-range requests, size limits, immutable version URLs, and checksums. A manifest references one artifact in v1; multi-artifact releases require an explicit contract extension.
 
+The river feature keeps the v1 one-artifact contract by publishing two independently versioned dataset partitions. Each stays below both GeoJSON budgets, while stable `HYRIV_ID` / `NEXT_DOWN` values preserve the logical network across the delivery boundary. This is a presentation partition, not a topological cut or analytical simplification.
+
 ## User-visible states
 
 `Resource<T>` separates loading, ready, empty, unavailable, error and stale. Missing files (404/503) are unavailable; invalid schema/checksum is an error and is not rendered. Loading is announced, retry is available after failure, and empty means no records rather than zero measured values. Updating datasets require an explicit stale deadline; a stale snapshot stays inspectable with a notice. Static inventories do not acquire a false live/stale claim from age alone. The current UI evaluates freshness on load; operational features must add deadline-driven refresh/stale transitions.

@@ -9,6 +9,7 @@ import { mountAdministrativeDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
 import { Terrain } from '../terrain/terrain';
 import { Mountains } from '../mountains/mountains';
+import { Rivers } from '../rivers/rivers';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -176,6 +177,7 @@ export function Atlas() {
       </section>
       <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
       <Mountains key={`mountains-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Rivers key={`rivers-${attempt}`} map={mapReady ? mapRef.current : null} />
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">

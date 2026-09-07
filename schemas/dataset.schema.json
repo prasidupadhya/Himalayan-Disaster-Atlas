@@ -597,7 +597,8 @@
                   },
                   "entity_type": {
                     "enum": [
-                      "mountain"
+                      "mountain",
+                      "river"
                     ]
                   },
                   "source_id": {
@@ -622,6 +623,54 @@
                     "format": "date"
                   },
                   "elevation_reference": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "river_name": {
+                    "type": ["string", "null"]
+                  },
+                  "downstream_id": {
+                    "type": ["string", "null"]
+                  },
+                  "downstream_in_release": {
+                    "type": "boolean"
+                  },
+                  "main_river_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "flow_order": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "length_km": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "distance_downstream_km": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "distance_upstream_km": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "catchment_area_km2": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "upstream_area_km2": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "average_discharge_m3s": {
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "flow_regime": {
+                    "enum": ["perennial", "intermittent", "unknown"]
+                  },
+                  "hydrobasin_level12_id": {
                     "type": "string",
                     "minLength": 1
                   }

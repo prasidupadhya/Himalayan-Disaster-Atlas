@@ -115,6 +115,22 @@ def validate_dataset(metadata, collection):
             if properties['value'] is not None:
                 if properties['unit'] != 'm' or not 0 <= properties['value'] <= 9000:
                     raise ValueError('Mountain elevation is implausible')
+        if properties.get('entity_type') == 'river':
+            required = {
+                'source_id', 'search_terms', 'river_name', 'downstream_id',
+                'downstream_in_release', 'main_river_id', 'flow_order', 'length_km',
+                'distance_downstream_km', 'distance_upstream_km', 'catchment_area_km2',
+                'upstream_area_km2', 'average_discharge_m3s', 'flow_regime',
+                'hydrobasin_level12_id',
+            }
+            if not required.issubset(properties):
+                raise ValueError('River features require complete network metadata')
+            if geometry['type'] not in {'LineString', 'MultiLineString'}:
+                raise ValueError('River features require line geometry')
+            if properties['downstream_id'] == properties['source_id']:
+                raise ValueError('River reach cannot flow to itself')
+            if properties['value'] != properties['average_discharge_m3s'] or properties['unit'] != 'm3/s':
+                raise ValueError('River measurement must be average discharge')
         for lon, lat in positions(geometry['coordinates']):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError('Geometry outside declared spatial coverage')

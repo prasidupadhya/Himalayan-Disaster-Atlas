@@ -125,6 +125,42 @@ export function mountMountainDataset(map: Map, dataset: Dataset) {
   };
 }
 
+/** Mount one immutable river-network partition while preserving stable reach selection IDs. */
+export function mountRiverDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'river')) throw new Error('River dataset contains a non-river feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({
+    ...feature, properties: { ...feature.properties, __atlas_id: feature.id },
+  })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const line = `${source}-line`;
+  const minzoom = dataset.metadata.dataset_id.endsWith('headwaters') ? 6.5 : 4.5;
+  const width: ExpressionSpecification = ['interpolate', ['linear'], ['get', 'flow_order'], 3, 4.2, 4, 3.2, 5, 2.1, 6, 1.4, 7, 0.9, 8, 0.6];
+  map.addLayer({ id: line, source, type: 'line', minzoom, paint: {
+    'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#4aa9d8'],
+    'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 5, width],
+    'line-opacity': ['case', ['boolean', ['feature-state', 'selected'], false], 1, 0.82],
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id)));
+  let selected: string | null = null;
+  return {
+    source,
+    layers: [line],
+    interactiveLayers: [line],
+    setVisible(visible: boolean) { map.setLayoutProperty(line, 'visibility', visible ? 'visible' : 'none'); },
+    setSelected(id: string | null) {
+      if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false });
+      selected = id && ids.has(id) ? id : null;
+      if (selected) map.setFeatureState({ source, id: selected }, { selected: true });
+    },
+    dispose() {
+      if (map.getLayer(line)) map.removeLayer(line);
+      if (map.getSource(source)) map.removeSource(source);
+    },
+  };
+}
+
 /** MapLibre attribution accepts HTML; metadata is treated as plain text. */
 export function escapeAttribution(value: string): string {
   return value.replace(/[&<>\"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', "'": '&#39;' })[char]!);
