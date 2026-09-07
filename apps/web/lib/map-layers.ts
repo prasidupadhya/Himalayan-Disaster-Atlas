@@ -373,6 +373,35 @@ export function mountFloodDataset(map: Map, dataset: Dataset) {
   };
 }
 
+/** Mount reported BIPAD landslide points; this is not a susceptibility surface. */
+export function mountLandslideDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'landslide_event')) throw new Error('Landslide dataset contains a non-landslide feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-reported-points`;
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 6, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 8, 4],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#a16207'],
+    'circle-opacity': 0.82, 'circle-stroke-color': '#3f2d13', 'circle-stroke-width': 1,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  return {
+    source, layers: [points], interactiveLayers: [points],
+    setVisible(visible: boolean) { map.setLayoutProperty(points, 'visibility', visible ? 'visible' : 'none'); },
+    setFilter(start: string, end: string, verifiedOnly: boolean) {
+      const clauses: FilterSpecification[] = [];
+      if (start) clauses.push(['>=', ['get', 'event_time'], `${start}T00:00:00Z`]);
+      if (end) clauses.push(['<=', ['get', 'event_time'], `${end}T23:59:59Z`]);
+      if (verifiedOnly) clauses.push(['==', ['get', 'verified'], true]);
+      map.setFilter(points, clauses.length ? ['all', ...clauses] as FilterSpecification : null);
+    },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { if (map.getLayer(points)) map.removeLayer(points); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
 /** MapLibre attribution accepts HTML; metadata is treated as plain text. */
 export function escapeAttribution(value: string): string {
   return value.replace(/[&<>\"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', "'": '&#39;' })[char]!);

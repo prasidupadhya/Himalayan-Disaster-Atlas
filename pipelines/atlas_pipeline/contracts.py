@@ -373,6 +373,35 @@ def validate_dataset(metadata, collection):
                 raise ValueError("Flood evidence semantics are inconsistent")
             if properties["value"] is not None or properties["unit"] is not None:
                 raise ValueError("Reported flood point is not a measurement")
+        if properties.get("entity_type") == "landslide_event":
+            required = {
+                "source_id",
+                "search_terms",
+                "hazard_name",
+                "event_time",
+                "evidence_status",
+                "hazard_footprint",
+                "landslide_category",
+                "confidence",
+                "confidence_basis",
+                "susceptibility_output",
+            }
+            if not required.issubset(properties) or geometry["type"] != "Point":
+                raise ValueError("Landslide events require complete Point metadata")
+            if (
+                properties["hazard_name"] != "Landslide"
+                or properties["evidence_status"] != "reported"
+            ):
+                raise ValueError("Landslide evidence semantics are inconsistent")
+            if (
+                properties["hazard_footprint"] is not False
+                or properties["susceptibility_output"] is not False
+            ):
+                raise ValueError(
+                    "Reported landslide cannot be a footprint or susceptibility output"
+                )
+            if properties["value"] is not None or properties["unit"] is not None:
+                raise ValueError("Reported landslide point is not a measurement")
         for lon, lat in positions(geometry["coordinates"]):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError("Geometry outside declared spatial coverage")
