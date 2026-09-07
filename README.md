@@ -1,8 +1,8 @@
 # Himalayan Disaster Atlas
 
-A public, read-only, Nepal-focused geospatial atlas. Foundation is complete; **Administrative Boundaries** is owned by Sol on `feat/admin-boundaries`.
+A public, read-only, Nepal-focused geospatial atlas. Foundation and Administrative Boundaries are complete; **Terrain** is owned by Astra on `feat/terrain`.
 
-The application includes a static Next.js atlas, Nepal COD-AB v02 province/district/local-level boundaries, shared machine-checked data contracts, and offline acquisition-to-release pipelines. **No hazard analysis, simulation, or operational warning is provided.**
+The application includes a static Next.js atlas, Nepal COD-AB v02 province/district/local-level boundaries, locally tiled Copernicus GLO-90 terrain, shared machine-checked data contracts, and offline acquisition-to-release pipelines. **No hazard analysis, simulation, or operational warning is provided.**
 
 ## Run locally
 
@@ -17,7 +17,7 @@ npm run data:admin
 npm run dev
 ```
 
-Open http://127.0.0.1:3000. `/atlas/` contains the boundary map; `/data-catalog/`, `/methodology/`, and `/sources/` expose its evidence and preparation details.
+Open http://127.0.0.1:3000. `/atlas/` contains boundaries, hillshade, 3D terrain and elevation inspection; `/data-catalog/`, `/methodology/`, and `/sources/` expose its evidence and preparation details.
 
 ```sh
 npm run check
@@ -54,3 +54,5 @@ Deploy only `apps/web/out/` when the production feature is ready. No deployment 
 Start with [architecture](docs/architecture/README.md), [data contract](docs/architecture/data-contract.md), [administrative dataset notes](docs/datasets/nepal-admin-boundaries.md), and the [feature handoff](docs/admin-boundaries.md).
 
 The product specification is user-supplied. Its original attachment includes credentials and is deliberately not copied into Git. This repository records the relevant foundation requirements without those values. Project code has no redistribution license selected yet; see [licensing](docs/licensing/README.md).
+
+Terrain display tiles are checked in. `npm run data:terrain` reconstructs the pinned native source/analysis rasters when needed (approximately 666 MiB of downloads); it is not needed to preview the app. See [terrain handoff](docs/terrain.md).
