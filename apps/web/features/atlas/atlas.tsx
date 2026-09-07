@@ -18,6 +18,7 @@ import { DisasterEvents } from '../disaster-events/disaster-events';
 import { Earthquakes } from '../earthquakes/earthquakes';
 import { Floods } from '../floods/floods';
 import { Landslides } from '../landslides/landslides';
+import { Hydropower } from '../hydropower/hydropower';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -194,6 +195,7 @@ export function Atlas() {
       <Earthquakes key={`earthquakes-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Floods key={`floods-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Landslides key={`landslides-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Hydropower key={`hydropower-${attempt}`} map={mapReady ? mapRef.current : null} />
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">

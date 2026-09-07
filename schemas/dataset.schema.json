@@ -533,6 +533,7 @@
                       "mm",
                       "degC",
                       "person",
+                      "MW",
                       null
                     ]
                   },
@@ -606,7 +607,8 @@
                       "disaster_event",
                       "earthquake",
                       "flood_event",
-                      "landslide_event"
+                      "landslide_event",
+                      "hydropower_facility"
                     ]
                   },
                   "source_id": {
@@ -848,6 +850,16 @@
                   "confidence": { "type": ["string", "null"] },
                   "confidence_basis": { "type": "string", "minLength": 1 },
                   "susceptibility_output": { "type": "boolean" }
+                  ,
+                  "facility_name": { "type": ["string", "null"] },
+                  "facility_status": { "type": "string", "minLength": 1 },
+                  "facility_type": { "type": "string", "minLength": 1 },
+                  "capacity_mw": { "type": ["number", "null"], "minimum": 0 },
+                  "plant_method": { "type": ["string", "null"] },
+                  "operator_name": { "type": ["string", "null"] },
+                  "osm_element_type": { "enum": ["node", "way", "relation"] },
+                  "osm_element_id": { "type": "string", "minLength": 1 },
+                  "osm_source_timestamp": { "type": "string", "format": "date-time" }
                 },
                 "required": [
                   "dataset_id",
