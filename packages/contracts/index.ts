@@ -23,7 +23,7 @@ export interface FeatureProperties {
   admin_category?: 'country' | 'province' | 'district' | 'local_level' | 'special_area';
   pcode?: string; parent_pcode?: string | null; parent_name?: string | null; aliases?: string[];
   label_longitude?: number; label_latitude?: number; valid_from?: string; valid_to?: string | null; source_version?: string;
-  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake' | 'hydrology_station' | 'rainfall_station' | 'disaster_event'; source_id?: string; search_terms?: string[]; feature_code?: string;
+  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake' | 'hydrology_station' | 'rainfall_station' | 'disaster_event' | 'earthquake'; source_id?: string; search_terms?: string[]; feature_code?: string;
   source_modified?: string; elevation_reference?: string;
   river_name?: string | null; downstream_id?: string | null; downstream_in_release?: boolean; main_river_id?: string;
   flow_order?: number; length_km?: number; distance_downstream_km?: number; distance_upstream_km?: number;
@@ -44,6 +44,8 @@ export interface FeatureProperties {
   verified?: boolean; approved?: boolean; source_label?: string | null; data_source_name?: string | null; loss_reference_id?: string | null;
   reported_deaths?: number | null; reported_injured?: number | null; reported_missing?: number | null; reported_affected?: number | null;
   estimated_loss_npr?: number | null; street_address?: string | null; event_description?: string | null;
+  magnitude?: number; depth_km?: number; place_name?: string | null; magnitude_type?: string | null; network?: string;
+  significance?: number; event_status?: string; epicenter_only?: boolean;
 }
 export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'GeometryCollection' }>, FeatureProperties>;
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
@@ -128,6 +130,11 @@ export function parseDataset(input: unknown): Dataset {
       const p = f.properties;
       if (f.geometry.type !== 'Point' || !p.source_id || !p.search_terms?.length || !p.hazard_id || !p.hazard_name || !p.hazard_type || !p.event_time || p.event_year === undefined || !p.event_local_date || p.verified === undefined || p.approved === undefined || p.reported_time === undefined || p.source_label === undefined || p.data_source_name === undefined || p.loss_reference_id === undefined || p.reported_deaths === undefined || p.reported_injured === undefined || p.reported_missing === undefined || p.reported_affected === undefined || p.estimated_loss_npr === undefined || p.street_address === undefined || p.event_description === undefined) throw new Error('Disaster events require complete archive metadata');
       if (p.value !== null || p.unit !== null) throw new Error('Disaster event point is not a measurement');
+    }
+    if (f.properties.entity_type === 'earthquake') {
+      const p=f.properties;
+      if(f.geometry.type!=='Point'||!p.source_id||!p.search_terms?.length||p.magnitude===undefined||p.depth_km===undefined||p.place_name===undefined||p.magnitude_type===undefined||!p.network||p.significance===undefined||!p.event_status||p.epicenter_only!==true||!p.event_time) throw new Error('Earthquakes require complete ComCat metadata');
+      if(p.value!==null||p.unit!==null) throw new Error('Earthquake point is not a linear measurement');
     }
     if (coordinates(f.geometry.coordinates).some(([lon, lat]) => lon < west || lon > east || lat < south || lat > north)) throw new Error('Geometry outside coverage');
     const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flat() : [];
