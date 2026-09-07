@@ -429,6 +429,29 @@ def validate_dataset(metadata, collection):
                     raise ValueError("Unknown hydropower capacity must have null unit")
             elif properties["unit"] != "MW":
                 raise ValueError("Known hydropower capacity must use MW")
+        if properties.get("entity_type") == "infrastructure_asset":
+            required = {
+                "source_id",
+                "search_terms",
+                "infrastructure_class",
+                "asset_name",
+                "asset_subtype",
+                "osm_element_type",
+                "osm_element_id",
+                "osm_source_timestamp",
+                "position_basis",
+                "display_geometry_simplified",
+            }
+            if not required.issubset(properties):
+                raise ValueError("Infrastructure assets require complete OSM metadata")
+            klass = properties["infrastructure_class"]
+            if klass not in {"road", "bridge", "school", "health", "emergency", "settlement"}:
+                raise ValueError("Unsupported infrastructure class")
+            valid_geometry = geometry["type"] in {"LineString", "MultiLineString"} if klass == "road" else geometry["type"] == "Point"
+            if not valid_geometry:
+                raise ValueError("Infrastructure geometry does not match its class")
+            if properties["value"] is not None or properties["unit"] is not None:
+                raise ValueError("Infrastructure inventory features are not measurements")
         for lon, lat in positions(geometry["coordinates"]):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError("Geometry outside declared spatial coverage")

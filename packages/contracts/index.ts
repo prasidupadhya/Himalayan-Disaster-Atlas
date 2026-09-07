@@ -23,7 +23,7 @@ export interface FeatureProperties {
   admin_category?: 'country' | 'province' | 'district' | 'local_level' | 'special_area';
   pcode?: string; parent_pcode?: string | null; parent_name?: string | null; aliases?: string[];
   label_longitude?: number; label_latitude?: number; valid_from?: string; valid_to?: string | null; source_version?: string;
-  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake' | 'hydrology_station' | 'rainfall_station' | 'disaster_event' | 'earthquake' | 'flood_event' | 'landslide_event' | 'hydropower_facility'; source_id?: string; search_terms?: string[]; feature_code?: string;
+  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake' | 'hydrology_station' | 'rainfall_station' | 'disaster_event' | 'earthquake' | 'flood_event' | 'landslide_event' | 'hydropower_facility' | 'infrastructure_asset'; source_id?: string; search_terms?: string[]; feature_code?: string;
   source_modified?: string; elevation_reference?: string;
   river_name?: string | null; downstream_id?: string | null; downstream_in_release?: boolean; main_river_id?: string;
   flow_order?: number; length_km?: number; distance_downstream_km?: number; distance_upstream_km?: number;
@@ -50,6 +50,8 @@ export interface FeatureProperties {
   landslide_category?: string; confidence?: string | null; confidence_basis?: string; susceptibility_output?: boolean;
   facility_name?: string | null; facility_status?: string; facility_type?: string; capacity_mw?: number | null; plant_method?: string | null;
   operator_name?: string | null; osm_element_type?: 'node' | 'way' | 'relation'; osm_element_id?: string; osm_source_timestamp?: string;
+  infrastructure_class?: 'road' | 'bridge' | 'school' | 'health' | 'emergency' | 'settlement'; asset_name?: string | null;
+  asset_subtype?: string; position_basis?: string; display_geometry_simplified?: boolean; asset_ref?: string | null; surface?: string | null;
 }
 export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'GeometryCollection' }>, FeatureProperties>;
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
@@ -155,6 +157,12 @@ export function parseDataset(input: unknown): Dataset {
       if (f.geometry.type !== 'Point' || !p.source_id || !p.search_terms?.length || p.facility_name === undefined || !p.facility_status || !p.facility_type || p.capacity_mw === undefined || p.plant_method === undefined || p.operator_name === undefined || !p.osm_element_type || !p.osm_element_id || !p.osm_source_timestamp) throw new Error('Hydropower facilities require complete OSM metadata');
       if (p.value !== p.capacity_mw || (p.capacity_mw === null ? p.unit !== null : p.unit !== 'MW')) throw new Error('Hydropower measurement must be capacity in MW');
       if (p.capacity_mw !== null && p.capacity_mw < 0) throw new Error('Hydropower capacity cannot be negative');
+    }
+    if (f.properties.entity_type === 'infrastructure_asset') {
+      const p = f.properties;
+      if (!p.source_id || !p.search_terms?.length || !p.infrastructure_class || p.asset_name === undefined || !p.asset_subtype || !p.osm_element_type || !p.osm_element_id || !p.osm_source_timestamp || !p.position_basis || p.display_geometry_simplified === undefined) throw new Error('Infrastructure assets require complete OSM traceability metadata');
+      if (p.infrastructure_class === 'road' ? !['LineString', 'MultiLineString'].includes(f.geometry.type) : f.geometry.type !== 'Point') throw new Error('Infrastructure geometry does not match its class');
+      if (p.value !== null || p.unit !== null) throw new Error('Infrastructure inventory features are not measurements');
     }
     if (coordinates(f.geometry.coordinates).some(([lon, lat]) => lon < west || lon > east || lat < south || lat > north)) throw new Error('Geometry outside coverage');
     const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flat() : [];

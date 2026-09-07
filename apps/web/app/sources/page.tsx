@@ -26,6 +26,10 @@ export default function SourcesPage() {
     <h2>Mountains and peaks</h2>
     <p>The mountain catalogue uses the <a href="https://www.geonames.org/export/">GeoNames Nepal country dump</a> snapshot downloaded on 2026-09-07 under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Only PK and MT terrain records are published; ranges are excluded. GeoNames IDs remain canonical and missing source elevations are not replaced with DEM estimates.</p>
 
+    <h2>Infrastructure</h2>
+    <p>The infrastructure layer uses build-time <a href="https://www.openstreetmap.org/">OpenStreetMap</a> extracts retrieved through Overpass and distributed under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL 1.0</a>. Visitors never query Overpass. Stable node/way/relation IDs and source timestamps are retained, and all published records are filtered or clipped against the pinned Nepal COD-AB v02 country polygon because the acquisition bounding box includes neighboring territory.</p>
+    <p>Roads are restricted to motorway, trunk, primary and corresponding link classes; bridges are restricted to bridge-tagged motorway through tertiary roads. Schools, health facilities, emergency facilities and settlements use source node positions or Overpass-provided way/relation centres. OpenStreetMap completeness varies, so absence from the inventory is not evidence that an asset is absent on the ground.</p>
+
     <h2>Nepal administrative boundaries</h2>
     <p>The atlas uses <a href="https://data.humdata.org/dataset/cod-ab-npl">Nepal COD-AB v02</a>, sourced from the Survey Department of Nepal and the UN Resident Coordinator’s Office in Nepal, with quality assurance by OCHA Field Information Services and publication through the Humanitarian Data Exchange.</p>
     <dl><dt>Source release</dt><dd>COD-AB v02</dd><dt>Created by source</dt><dd>2024-01-01</dd><dt>Valid for humanitarian use</dt><dd>2024-03-14</dd><dt>Atlas retrieval</dt><dd>2026-09-07</dd><dt>License</dt><dd><a href="https://creativecommons.org/licenses/by/3.0/igo/legalcode">CC BY 3.0 IGO</a></dd></dl>

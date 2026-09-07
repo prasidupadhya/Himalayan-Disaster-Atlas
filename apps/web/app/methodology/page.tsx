@@ -30,6 +30,10 @@ export default function MethodologyPage() {
     <h2>Mountain catalogue preparation</h2>
     <p>The atlas pins the GeoNames Nepal country dump by SHA-256, selects only terrain feature codes PK and MT, retains stable GeoNames IDs, source coordinates, explicit source elevations, names and bounded aliases, and rejects duplicate IDs or implausible coordinates/elevations. The GeoNames DEM fallback is deliberately not substituted for a missing summit elevation.</p>
 
+    <h2>Infrastructure preparation</h2>
+    <p>The Atlas pins one build-time OpenStreetMap snapshot for bridge/facility/settlement positions and five smaller major-road geometry slices by SHA-256. The road slices are merged by stable OSM way ID; repeated slice occurrences are removed without geographic/name heuristics. Every retained point is inside the unsimplified Nepal COD-AB v02 country polygon, and road ways are intersected with that polygon before browser simplification.</p>
+    <p>Major roads retain source way geometry but use a topology-preserving 0.0002° display simplification. School, health, emergency and bridge ways/relations are represented by source-provided Overpass centres for browser exploration; those points do not replace source OSM geometry for future precise analysis. Buildings are deliberately omitted because uneven national OSM completeness would make exposure counts misleading. Inventory presence is not an exposure, vulnerability, damage or risk result.</p>
+
     <h2>Administrative boundary preparation</h2>
     <p>The atlas pins the Nepal COD-AB v02 source archive by SHA-256. The offline pipeline checks the expected 1 country, 7 provinces, 77 districts, and 775 level-3 pieces; unique P-codes; closed and valid Polygon or MultiPolygon geometry; parent containment; neighboring units; and complete Nepal coverage without unexplained gaps or overlaps.</p>
     <p>Level 3 includes 753 local-government units and 22 protected or special-area pieces. The atlas retains both categories because together they cover Nepal. Ward boundaries are unavailable in this release.</p>
