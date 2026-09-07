@@ -5,6 +5,11 @@ export default function MethodologyPage() {
     <p className="eyebrow">Methodology</p><h1>Evidence before interpretation.</h1>
     <p>Every published dataset carries its source, version, dates, license, processing method, coverage, limitations, and uncertainty. Missing measurements remain UNKNOWN.</p>
 
+    <h2>Population preparation</h2>
+    <p>The Atlas pins the WorldPop Nepal 2025 R2025A v1 constrained Float32 GeoTIFF by SHA-256 and validates its EPSG:4326 CRS, 9,773 × 4,921 dimensions, 3 arc-second cell spacing, <code>-99999</code> NoData value, finite non-negative valid cells, and source raster bounds. Valid zero population cells remain distinct from NoData.</p>
+    <p>The native source raster remains the numerical analysis input. A separate EPSG:3857 zoom 5–10 PNG pyramid is generated only for visualization using bilinear reprojection and a log-scaled intensity transform. Display pixels therefore cannot be sampled or summed as population counts. The national source-cell sum is retained as an integrity check, not presented as a census total or an administrative validation target.</p>
+    <p>Future exposure calculations must use the pinned native people-per-grid-cell raster and explicitly define raster/vector alignment, NoData handling and partial-cell weighting. The current layer performs no hazard exposure estimate.</p>
+
     <h2 id="downstream-method">Downstream trace</h2>
     <p>The Atlas combines both verified Nepal river partitions and follows HYRIV_ID / NEXT_DOWN pointers from a selected whole reach. Duplicate IDs, inconsistent internal links, invalid lengths and cycles prevent tracing. Each retained reach is counted once, and LENGTH_KM values are summed in kilometres. The first downstream ID outside this release ends the trace with a coverage-boundary notice; an absent source connection is labelled a source outlet.</p>
     <p>Results are ATLAS DERIVED network analyses. Gold lines and playback show reach order, not a flood footprint, flow velocity or travel time. The selected reach is included in full, irrespective of where it was clicked. Source geometry is unchanged, with no inferred connections across gaps. The downloaded JSON records method version, ordered reach IDs, termination, source versions, hashes and limitations.</p>

@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 from .contracts import ROOT, verify_artifact
+from .population_contracts import verify_population
 from .terrain_contracts import verify_context, verify_terrain
 
 
@@ -12,6 +13,10 @@ def main():
         raise ValueError('No release manifests found')
     for path in releases:
         metadata = json.loads(path.read_text())
+        if metadata.get('metadata', {}).get('dataset_id') == 'nepal-population':
+            manifest = verify_population(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
+            print(f"Valid: {manifest['metadata']['dataset_id']}@{manifest['metadata']['dataset_version']}")
+            continue
         if 'raster' in metadata:
             verifier = verify_context if metadata['metadata']['dataset_id'] == 'asia-terrain-context' else verify_terrain
             manifest = verifier(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
