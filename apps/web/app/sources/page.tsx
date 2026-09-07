@@ -4,6 +4,13 @@ export default function SourcesPage() {
   return <article className="page prose">
     <p className="eyebrow">Sources</p><h1>Trace every layer.</h1>
 
+    <h2>Population</h2>
+    <p>The population layer uses <a href="https://hub.worldpop.org/geodata/summary?id=74559">WorldPop Global 2015–2030 R2025A v1</a>, Nepal model year 2025, constrained population counts at 3 arc-second resolution in EPSG:4326. The exact source GeoTIFF is pinned by SHA-256 and identified by DOI <a href="https://doi.org/10.5258/SOTON/WP00839">10.5258/SOTON/WP00839</a>.</p>
+    <p>The source raster declares CC BY 4.0. WorldPop also publishes an ODbL derived-data clause for some building-derived products, so that licensing nuance is retained in the release metadata for review. The 2025 values are modelled estimates rather than a census observed at each grid cell.</p>
+
+    <h2>Exposure calculations</h2>
+    <p>Exposure results combine the existing WorldPop 2025 R2025A v1 native population grid, OpenStreetMap infrastructure and hydropower inventories, and COD-AB v02 district boundaries. Prepared footprint requests document their hypothetical buffer assumptions and the exact HydroRIVERS release hashes. They are derived estimates, not an additional observed hazard dataset. Input source/licence notices remain applicable, including WorldPop’s documented licensing nuance and OSM ODbL requirements.</p>
+
     <h2>Downstream connectivity</h2>
     <p>Downstream trace reuses both pinned FAO Rivers 2026 / HydroRIVERS Nepal partitions, version 1.0.0. It introduces no new geographic source. <a href="https://data.hydrosheds.org/file/technical-documentation/HydroRIVERS_TechDoc_v10.pdf">HydroRIVERS technical documentation</a> defines NEXT_DOWN and LENGTH_KM. Per-result input hashes identify the exact releases; the source river evidence and licensing remain applicable.</p>
 
@@ -21,6 +28,10 @@ export default function SourcesPage() {
 
     <h2>Mountains and peaks</h2>
     <p>The mountain catalogue uses the <a href="https://www.geonames.org/export/">GeoNames Nepal country dump</a> snapshot downloaded on 2026-09-07 under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Only PK and MT terrain records are published; ranges are excluded. GeoNames IDs remain canonical and missing source elevations are not replaced with DEM estimates.</p>
+
+    <h2>Infrastructure</h2>
+    <p>The infrastructure layer uses build-time <a href="https://www.openstreetmap.org/">OpenStreetMap</a> extracts retrieved through Overpass and distributed under the <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL 1.0</a>. Visitors never query Overpass. Stable node/way/relation IDs and source timestamps are retained, and all published records are filtered or clipped against the pinned Nepal COD-AB v02 country polygon because the acquisition bounding box includes neighboring territory.</p>
+    <p>Roads are restricted to motorway, trunk, primary and corresponding link classes; bridges are restricted to bridge-tagged motorway through tertiary roads. Schools, health facilities, emergency facilities and settlements use source node positions or Overpass-provided way/relation centres. OpenStreetMap completeness varies, so absence from the inventory is not evidence that an asset is absent on the ground.</p>
 
     <h2>Nepal administrative boundaries</h2>
     <p>The atlas uses <a href="https://data.humdata.org/dataset/cod-ab-npl">Nepal COD-AB v02</a>, sourced from the Survey Department of Nepal and the UN Resident Coordinator’s Office in Nepal, with quality assurance by OCHA Field Information Services and publication through the Humanitarian Data Exchange.</p>

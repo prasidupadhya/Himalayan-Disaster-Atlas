@@ -1,4 +1,4 @@
-import type { ExpressionSpecification, Map } from 'maplibre-gl';
+import type { ExpressionSpecification, FilterSpecification, Map } from 'maplibre-gl';
 import type { Dataset } from '../../../packages/contracts';
 
 /** One source per immutable dataset version. Dispose layers before the source. */
@@ -235,6 +235,246 @@ export function mountGlacialLakeDataset(map: Map, dataset: Dataset) {
       if (map.getLayer(points)) map.removeLayer(points);
       if (map.getSource(source)) map.removeSource(source);
     },
+  };
+}
+
+/** Mount BIPAD/DHM hydrology stations; source status colors describe only the station reading. */
+export function mountHydrologyDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'hydrology_station')) throw new Error('Hydrology dataset contains a non-station feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-points`;
+  const statusColor: ExpressionSpecification = ['match', ['get', 'station_status'], 'ABOVE DANGER LEVEL', '#d1495b', 'ABOVE WARNING LEVEL', '#f4a261', '#2a9d8f'];
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 5, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 9, 5.5],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', statusColor],
+    'circle-stroke-color': '#102a3a', 'circle-stroke-width': 1.3, 'circle-opacity': 0.9,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id)));
+  let selected: string | null = null;
+  return {
+    source, layers: [points], interactiveLayers: [points],
+    setVisible(visible: boolean) { map.setLayoutProperty(points, 'visibility', visible ? 'visible' : 'none'); },
+    setSelected(id: string | null) {
+      if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false });
+      selected = id && ids.has(id) ? id : null;
+      if (selected) map.setFeatureState({ source, id: selected }, { selected: true });
+    },
+    dispose() { if (map.getLayer(points)) map.removeLayer(points); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
+export function mountRainfallDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'rainfall_station')) throw new Error('Rainfall dataset contains a non-station feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-points`;
+  const statusColor: ExpressionSpecification = ['match', ['get', 'station_status'], 'ABOVE WARNING LEVEL', '#f4a261', '#457b9d'];
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 5, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 9, 5],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', statusColor],
+    'circle-stroke-color': '#102a3a', 'circle-stroke-width': 1.2, 'circle-opacity': 0.88,
+  } });
+  const ids = new Set(dataset.collection.features.map(f => String(f.id))); let selected: string | null = null;
+  return { source, layers:[points], interactiveLayers:[points], setVisible(v:boolean){map.setLayoutProperty(points,'visibility',v?'visible':'none');}, setSelected(id:string|null){if(selected&&ids.has(selected))map.setFeatureState({source,id:selected},{selected:false}); selected=id&&ids.has(id)?id:null; if(selected)map.setFeatureState({source,id:selected},{selected:true});}, dispose(){if(map.getLayer(points))map.removeLayer(points); if(map.getSource(source))map.removeSource(source);} };
+}
+
+/** Mount one historical BIPAD incident partition. Colors distinguish hazard categories, not severity. */
+export function mountDisasterEventDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'disaster_event')) throw new Error('Disaster archive contains a non-event feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-points`;
+  const categoryColor: ExpressionSpecification = ['match', ['get', 'hazard_name'],
+    'Flood', '#3b82f6', 'Landslide', '#a16207', 'Earthquake', '#f97316', 'Heavy Rainfall', '#60a5fa',
+    'Fire', '#dc2626', 'Forest Fire', '#b91c1c', 'Thunderbolt', '#eab308', '#8b9aaa'];
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 6.5, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 7, 3.2],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', categoryColor],
+    'circle-opacity': 0.8, 'circle-stroke-color': '#132b3a', 'circle-stroke-width': 0.7,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  return {
+    source, layers: [points], interactiveLayers: [points],
+    setVisible(visible: boolean) { map.setLayoutProperty(points, 'visibility', visible ? 'visible' : 'none'); },
+    setArchiveFilter(hazard: string, start: string, end: string) {
+      const clauses: FilterSpecification[] = [];
+      if (hazard) clauses.push(['==', ['get', 'hazard_name'], hazard]);
+      if (start) clauses.push(['>=', ['get', 'event_time'], `${start}T00:00:00Z`]);
+      if (end) clauses.push(['<=', ['get', 'event_time'], `${end}T23:59:59Z`]);
+      const filter = clauses.length === 0 ? null : clauses.length === 1 ? clauses[0] : ['all', ...clauses] as FilterSpecification;
+      map.setFilter(points, filter);
+    },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { if (map.getLayer(points)) map.removeLayer(points); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
+/** Mount USGS ComCat epicenters. Radius is a monotonic display transform of magnitude, not a damage footprint. */
+export function mountEarthquakeDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'earthquake')) throw new Error('Earthquake dataset contains a non-earthquake feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-points`;
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 4.5, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 15,
+      ['interpolate', ['exponential', 1.45], ['get', 'magnitude'], 2.5, 3, 4, 4.5, 5, 6.2, 6, 8.8, 7, 12.2, 8, 16]],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#ef8354'],
+    'circle-opacity': 0.78, 'circle-stroke-color': '#402218', 'circle-stroke-width': 1.1,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  return {
+    source, layers: [points], interactiveLayers: [points],
+    setVisible(visible: boolean) { map.setLayoutProperty(points, 'visibility', visible ? 'visible' : 'none'); },
+    setFilter(minMagnitude: number, start: string, end: string) {
+      const clauses: FilterSpecification[] = [['>=', ['get', 'magnitude'], minMagnitude]];
+      if (start) clauses.push(['>=', ['get', 'event_time'], `${start}T00:00:00Z`]);
+      if (end) clauses.push(['<=', ['get', 'event_time'], `${end}T23:59:59Z`]);
+      map.setFilter(points, ['all', ...clauses] as FilterSpecification);
+    },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { if (map.getLayer(points)) map.removeLayer(points); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
+/** Mount reported BIPAD flood incident points; symbols never represent inundation extent. */
+export function mountFloodDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'flood_event')) throw new Error('Flood dataset contains a non-flood feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-reported-points`;
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 6, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 8, 4],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#3182ce'],
+    'circle-opacity': 0.82, 'circle-stroke-color': '#102a43', 'circle-stroke-width': 1,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  return {
+    source, layers: [points], interactiveLayers: [points],
+    setVisible(visible: boolean) { map.setLayoutProperty(points, 'visibility', visible ? 'visible' : 'none'); },
+    setFilter(start: string, end: string) {
+      const clauses: FilterSpecification[] = [];
+      if (start) clauses.push(['>=', ['get', 'event_time'], `${start}T00:00:00Z`]);
+      if (end) clauses.push(['<=', ['get', 'event_time'], `${end}T23:59:59Z`]);
+      map.setFilter(points, clauses.length ? ['all', ...clauses] as FilterSpecification : null);
+    },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { if (map.getLayer(points)) map.removeLayer(points); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
+/** Mount reported BIPAD landslide points; this is not a susceptibility surface. */
+export function mountLandslideDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'landslide_event')) throw new Error('Landslide dataset contains a non-landslide feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-reported-points`;
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 6, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 8, 4],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#a16207'],
+    'circle-opacity': 0.82, 'circle-stroke-color': '#3f2d13', 'circle-stroke-width': 1,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  return {
+    source, layers: [points], interactiveLayers: [points],
+    setVisible(visible: boolean) { map.setLayoutProperty(points, 'visibility', visible ? 'visible' : 'none'); },
+    setFilter(start: string, end: string, verifiedOnly: boolean) {
+      const clauses: FilterSpecification[] = [];
+      if (start) clauses.push(['>=', ['get', 'event_time'], `${start}T00:00:00Z`]);
+      if (end) clauses.push(['<=', ['get', 'event_time'], `${end}T23:59:59Z`]);
+      if (verifiedOnly) clauses.push(['==', ['get', 'verified'], true]);
+      map.setFilter(points, clauses.length ? ['all', ...clauses] as FilterSpecification : null);
+    },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { if (map.getLayer(points)) map.removeLayer(points); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
+/** Mount OSM hydropower facilities with display clustering; no proximity-based risk semantics. */
+export function mountHydropowerDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'hydropower_facility')) throw new Error('Hydropower dataset contains a non-facility feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', cluster: true, clusterRadius: 42, clusterMaxZoom: 8, attribution: escapeAttribution(dataset.metadata.attribution) });
+  const clusters = `${source}-clusters`; const points = `${source}-points`;
+  map.addLayer({ id: clusters, source, type: 'circle', filter: ['has', 'point_count'], paint: {
+    'circle-radius': ['interpolate', ['linear'], ['get', 'point_count'], 2, 11, 10, 17, 30, 23],
+    'circle-color': '#2f855a', 'circle-opacity': 0.78, 'circle-stroke-color': '#d9f99d', 'circle-stroke-width': 1.5,
+  } });
+  map.addLayer({ id: points, source, type: 'circle', filter: ['!', ['has', 'point_count']], paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 10,
+      ['interpolate', ['linear'], ['coalesce', ['get', 'capacity_mw'], 0], 0, 5, 10, 6, 100, 8, 500, 11]],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#65a30d'],
+    'circle-stroke-color': '#26410e', 'circle-stroke-width': 1.2, 'circle-opacity': 0.9,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  return {
+    source, layers: [clusters, points], interactiveLayers: [points],
+    setVisible(visible: boolean) { for (const layer of [clusters, points]) map.setLayoutProperty(layer, 'visibility', visible ? 'visible' : 'none'); },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { for (const layer of [points, clusters]) if (map.getLayer(layer)) map.removeLayer(layer); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
+/** Mount one OSM infrastructure delivery partition without implying exposure or risk. */
+export function mountInfrastructureDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'infrastructure_asset')) throw new Error('Infrastructure dataset contains a non-infrastructure feature');
+  const klass = dataset.collection.features[0]?.properties.infrastructure_class;
+  if (!klass) throw new Error('Infrastructure dataset has no class');
+  if (dataset.collection.features.some(feature => feature.properties.infrastructure_class !== klass)) throw new Error('Infrastructure delivery partition mixes classes');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  const pointClass = klass !== 'road';
+  map.addSource(source, {
+    type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution),
+    ...(pointClass ? { cluster: true, clusterRadius: 38, clusterMaxZoom: 9 } : {}),
+  });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  const color: Record<string, string> = { road: '#f3c969', bridge: '#d7a65a', school: '#8cc7e8', health: '#62c59b', emergency: '#d88d8d', settlement: '#c3a4df' };
+  if (klass === 'road') {
+    const line = `${source}-line`;
+    map.addLayer({ id: line, source, type: 'line', minzoom: 5, paint: {
+      'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', color.road],
+      'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 5,
+        ['match', ['get', 'asset_subtype'], 'motorway', 3.2, 'trunk', 2.7, 'primary', 2.2, 1.5]],
+      'line-opacity': 0.88,
+    } });
+    return {
+      source, klass, layers: [line], interactiveLayers: [line],
+      setVisible(visible: boolean) { map.setLayoutProperty(line, 'visibility', visible ? 'visible' : 'none'); },
+      setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+      dispose() { if (map.getLayer(line)) map.removeLayer(line); if (map.getSource(source)) map.removeSource(source); },
+    };
+  }
+  const clusters = `${source}-clusters`; const points = `${source}-points`;
+  map.addLayer({ id: clusters, source, type: 'circle', filter: ['has', 'point_count'], minzoom: 5, paint: {
+    'circle-radius': ['interpolate', ['linear'], ['get', 'point_count'], 2, 9, 25, 15, 250, 22],
+    'circle-color': color[klass], 'circle-opacity': 0.72, 'circle-stroke-color': '#152a36', 'circle-stroke-width': 1,
+  } });
+  map.addLayer({ id: points, source, type: 'circle', filter: ['!', ['has', 'point_count']], minzoom: 5, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 9, klass === 'settlement' ? 4.5 : 5.5],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', color[klass]],
+    'circle-stroke-color': '#152a36', 'circle-stroke-width': 1, 'circle-opacity': 0.9,
+  } });
+  return {
+    source, klass, layers: [clusters, points], interactiveLayers: [points],
+    setVisible(visible: boolean) { for (const layer of [clusters, points]) map.setLayoutProperty(layer, 'visibility', visible ? 'visible' : 'none'); },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { for (const layer of [points, clusters]) if (map.getLayer(layer)) map.removeLayer(layer); if (map.getSource(source)) map.removeSource(source); },
   };
 }
 

@@ -1,0 +1,126 @@
+{
+  "boundary_clipped_roads": 32,
+  "classes": {
+    "bridge": {
+      "artifact_bytes": 137389,
+      "dataset_id": "nepal-osm-major-bridges",
+      "decoded_bytes": 2240943,
+      "features": 3004,
+      "named": 1171
+    },
+    "emergency": {
+      "artifact_bytes": 52242,
+      "dataset_id": "nepal-osm-emergency-facilities",
+      "decoded_bytes": 725119,
+      "features": 923,
+      "named": 792
+    },
+    "health": {
+      "artifact_bytes": 258773,
+      "dataset_id": "nepal-osm-health-facilities",
+      "decoded_bytes": 3710680,
+      "features": 4654,
+      "named": 4453
+    },
+    "road_central": {
+      "artifact_bytes": 217002,
+      "dataset_id": "nepal-osm-major-roads-central",
+      "decoded_bytes": 2375672,
+      "features": 2617,
+      "named": 1814
+    },
+    "road_east": {
+      "artifact_bytes": 129317,
+      "dataset_id": "nepal-osm-major-roads-east",
+      "decoded_bytes": 1236808,
+      "features": 1271,
+      "named": 577
+    },
+    "road_west": {
+      "artifact_bytes": 150345,
+      "dataset_id": "nepal-osm-major-roads-west",
+      "decoded_bytes": 1416508,
+      "features": 1423,
+      "named": 833
+    },
+    "school_central-east": {
+      "artifact_bytes": 478066,
+      "dataset_id": "nepal-osm-schools-central-east",
+      "decoded_bytes": 7040978,
+      "features": 9043,
+      "named": 8857
+    },
+    "school_central-west": {
+      "artifact_bytes": 263381,
+      "dataset_id": "nepal-osm-schools-central-west",
+      "decoded_bytes": 4023950,
+      "features": 5013,
+      "named": 4814
+    },
+    "school_east": {
+      "artifact_bytes": 197113,
+      "dataset_id": "nepal-osm-schools-east",
+      "decoded_bytes": 2912021,
+      "features": 3813,
+      "named": 3699
+    },
+    "school_west": {
+      "artifact_bytes": 425642,
+      "dataset_id": "nepal-osm-schools-west",
+      "decoded_bytes": 6440286,
+      "features": 7805,
+      "named": 7329
+    },
+    "settlement": {
+      "artifact_bytes": 196074,
+      "dataset_id": "nepal-osm-settlements",
+      "decoded_bytes": 2973285,
+      "features": 4045,
+      "named": 3509
+    }
+  },
+  "country_boundary_source": "Nepal COD-AB v02 SHA-256 9f6713c41d65396f611ddce5879faecf8e2d494edbd1d6611612445ad46b6707",
+  "point_exclusions": {
+    "bridge_outside_codab": 11541,
+    "emergency_outside_codab": 212,
+    "health_outside_codab": 2037,
+    "school_outside_codab": 781,
+    "settlement_outside_codab": 6717
+  },
+  "repeated_road_way_occurrences_removed": 61,
+  "road_exclusions": {
+    "outside_codab": 14565
+  },
+  "road_sources": [
+    {
+      "file": "roads-central1.json",
+      "sha256": "7f595c6d50d4f726e261fae9ac74ba5d2908442436c5d8d5df626ba4563341e1",
+      "timestamp": "2026-09-07T21:02:00Z"
+    },
+    {
+      "file": "roads-central2.json",
+      "sha256": "09ae9994914b6741a7a8d546e8084c657d4ea9688e1b9e9186e6f4dca922828a",
+      "timestamp": "2026-09-07T21:03:01Z"
+    },
+    {
+      "file": "roads-east1.json",
+      "sha256": "bdd5bf0b501d8a6996d854c9975c66d359e473a867babc10a1cfd87f20a2d99d",
+      "timestamp": "2026-09-07T21:05:06Z"
+    },
+    {
+      "file": "roads-east2.json",
+      "sha256": "236c6c4fa566cbe135987f7162ed73b0cedbef71d99b526cdbf48ff60f1855d1",
+      "timestamp": "2026-09-07T21:05:06Z"
+    },
+    {
+      "file": "roads-west.json",
+      "sha256": "475689d6238f49920dfd8c2fda34568694b2854cba7f557353aeaf1d2e7c2de5",
+      "timestamp": "2026-09-07T21:02:00Z"
+    }
+  ],
+  "source_snapshot": {
+    "file": "nepal-infrastructure-2026-09-07.json",
+    "sha256": "b663bf66858b92942656d5c76c7284db63df6be07326b33f50bb2cc8a67a712c",
+    "timestamp": "2026-09-07T20:09:03Z"
+  }
+}

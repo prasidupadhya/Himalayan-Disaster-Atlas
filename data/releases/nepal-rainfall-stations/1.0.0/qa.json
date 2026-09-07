@@ -1,0 +1,8 @@
+{
+  "source_sha256": "2c6376995aeaf48eb7f0c3e1c4a5156b8241e18a867a74ef73a469229e76eff3",
+  "features": 657,
+  "rainfall_24h_known": 453,
+  "quality_warning": 2,
+  "observation_time_min": "2020-07-14T18:15:18.233341Z",
+  "observation_time_max": "2026-09-07T19:15:17.681311Z"
+}

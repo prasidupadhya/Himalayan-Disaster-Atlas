@@ -1,0 +1,109 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.local/schemas/exposure-request.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "version",
+    "name",
+    "kind",
+    "crs",
+    "inputs",
+    "assumptions",
+    "geometry"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^exposure-[a-z0-9-]+$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "hypothetical_corridor",
+        "modelled_scenario",
+        "observed_footprint"
+      ]
+    },
+    "crs": {
+      "const": "OGC:CRS84"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dataset_id",
+          "dataset_version",
+          "sha256",
+          "source",
+          "license"
+        ],
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "dataset_version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "assumptions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "geometry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "properties": {
+        "type": {
+          "enum": [
+            "Polygon",
+            "MultiPolygon"
+          ]
+        },
+        "coordinates": {
+          "type": "array",
+          "minItems": 1
+        }
+      }
+    }
+  }
+}

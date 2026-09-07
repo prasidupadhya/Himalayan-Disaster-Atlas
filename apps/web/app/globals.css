@@ -72,6 +72,10 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .thematic-controls > label { display: flex; gap: .65rem; align-items: center; margin: .55rem 0; }
 .thematic-controls > .thematic-picker { display: grid; align-items: stretch; gap: .35rem; font-weight: 700; }
 .thematic-controls details > .evidence { border-top: 0; margin-top: .5rem; padding-top: 0; }
+.population-opacity { display: grid !important; gap: .35rem !important; align-items: stretch !important; }
+.population-opacity input { width: 100%; }
+.population-legend { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .5rem; font-size: .8rem; color: var(--muted); margin: .75rem 0; }
+.population-gradient { height: .65rem; border-radius: 999px; background: linear-gradient(90deg, rgba(35,185,215,.2), rgba(215,90,160,.95)); border: 1px solid #a4b4bd; }
 
 .map .maplibregl-ctrl-attrib.maplibregl-compact-show { width: min(22rem, calc(100vw - 4rem)); }
 .map .maplibregl-ctrl-attrib-inner { max-height: 8rem; overflow: auto; white-space: normal; overflow-wrap: anywhere; }

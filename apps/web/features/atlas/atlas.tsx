@@ -12,6 +12,16 @@ import { Mountains } from '../mountains/mountains';
 import { Rivers } from '../rivers/rivers';
 import { Glaciers } from '../glaciers/glaciers';
 import { GlacialLakes } from '../glacial-lakes/glacial-lakes';
+import { Hydrology } from '../hydrology/hydrology';
+import { Rainfall } from '../rainfall/rainfall';
+import { DisasterEvents } from '../disaster-events/disaster-events';
+import { Earthquakes } from '../earthquakes/earthquakes';
+import { Floods } from '../floods/floods';
+import { Landslides } from '../landslides/landslides';
+import { Hydropower } from '../hydropower/hydropower';
+import { Infrastructure } from '../infrastructure/infrastructure';
+import { Population } from '../population/population';
+import { ExposureEngine } from '../exposure-engine/exposure-engine';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -180,8 +190,18 @@ export function Atlas() {
       <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
       <Mountains key={`mountains-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Rivers key={`rivers-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <ExposureEngine key={`exposure-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Glaciers key={`glaciers-${attempt}`} map={mapReady ? mapRef.current : null} />
       <GlacialLakes key={`glacial-lakes-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Hydrology key={`hydrology-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Rainfall key={`rainfall-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <DisasterEvents key={`disaster-events-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Earthquakes key={`earthquakes-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Floods key={`floods-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Landslides key={`landslides-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Hydropower key={`hydropower-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Population key={`population-${attempt}`} map={mapReady ? mapRef.current : null} />
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">

@@ -29,7 +29,7 @@ test('terrain renders locally, toggles and inspects elevation independently of e
   await terrain.getByLabel('Longitude', { exact: true }).fill('0');
   await terrain.getByRole('button', { name: 'Inspect elevation' }).click();
   await expect(terrain.getByText('Elevation: UNKNOWN — outside terrain coverage.')).toBeVisible();
-  await page.screenshot({ path: 'test-results/terrain-desktop.png', fullPage: true });
+  await page.locator('.map-shell').screenshot({ path: 'test-results/terrain-desktop.png' });
   await page.getByRole('navigation').getByRole('link', { name: 'Sources', exact: true }).click();
   expect(errors).toEqual([]);
   expect(external).toEqual([]);
@@ -70,7 +70,7 @@ test('Asia zoom-out stays bounded with terrain throughout the viewport', async (
   }
   await expect(zoomOut).toBeDisabled();
   await expect(page.locator('[data-terrain-state]')).toHaveAttribute('data-terrain-state', 'ready');
-  await page.screenshot({ path: 'test-results/terrain-asia.png', fullPage: true });
+  await page.locator('.map-shell').screenshot({ path: 'test-results/terrain-asia.png' });
   expect(failedTiles).toEqual([]);
   await page.getByRole('button', { name: 'Reset view' }).click();
   await expect(zoomOut).toBeEnabled();

@@ -533,6 +533,7 @@
                       "mm",
                       "degC",
                       "person",
+                      "MW",
                       null
                     ]
                   },
@@ -600,7 +601,15 @@
                       "mountain",
                       "river",
                       "glacier",
-                      "glacial_lake"
+                      "glacial_lake",
+                      "hydrology_station",
+                      "rainfall_station",
+                      "disaster_event",
+                      "earthquake",
+                      "flood_event",
+                      "landslide_event",
+                      "hydropower_facility",
+                      "infrastructure_asset"
                     ]
                   },
                   "source_id": {
@@ -729,7 +738,7 @@
                     "minLength": 1
                   },
                   "basin": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "minLength": 1
                   },
                   "connectivity": {
@@ -756,7 +765,109 @@
                   },
                   "expansion_significant": {
                     "type": ["boolean", "null"]
-                  }
+                  },
+                  "station_name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "observation_time": {
+                    "type": ["string", "null"],
+                    "format": "date-time"
+                  },
+                  "water_level_m": {
+                    "type": ["number", "null"]
+                  },
+                  "warning_level_m": {
+                    "type": ["number", "null"]
+                  },
+                  "danger_level_m": {
+                    "type": ["number", "null"]
+                  },
+                  "threshold_order_valid": {
+                    "type": "boolean"
+                  },
+                  "station_status": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "trend": {
+                    "type": ["string", "null"]
+                  },
+                  "station_series_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "provider": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "elevation_m": {
+                    "type": ["number", "null"]
+                  },
+                  "coordinate_order_repaired": {
+                    "type": "boolean"
+                  },
+                  "rainfall_1h_mm": { "type": ["number", "null"], "minimum": 0 },
+                  "rainfall_3h_mm": { "type": ["number", "null"], "minimum": 0 },
+                  "rainfall_6h_mm": { "type": ["number", "null"], "minimum": 0 },
+                  "rainfall_12h_mm": { "type": ["number", "null"], "minimum": 0 },
+                  "rainfall_24h_mm": { "type": ["number", "null"], "minimum": 0 },
+                  "rainfall_quality_warning": { "type": "boolean" }
+                  ,
+                  "hazard_id": { "type": "string", "minLength": 1 },
+                  "hazard_name": { "type": "string", "minLength": 1 },
+                  "hazard_type": { "enum": ["natural", "non natural"] },
+                  "event_time": { "type": "string", "format": "date-time" },
+                  "event_year": { "type": "integer", "minimum": 1900, "maximum": 2200 },
+                  "event_local_date": { "type": "string", "format": "date" },
+                  "reported_time": { "type": ["string", "null"], "format": "date-time" },
+                  "verified": { "type": "boolean" },
+                  "approved": { "type": "boolean" },
+                  "source_label": { "type": ["string", "null"] },
+                  "data_source_name": { "type": ["string", "null"] },
+                  "loss_reference_id": { "type": ["string", "null"] },
+                  "reported_deaths": { "type": ["integer", "null"], "minimum": 0 },
+                  "reported_injured": { "type": ["integer", "null"], "minimum": 0 },
+                  "reported_missing": { "type": ["integer", "null"], "minimum": 0 },
+                  "reported_affected": { "type": ["integer", "null"], "minimum": 0 },
+                  "estimated_loss_npr": { "type": ["number", "null"], "minimum": 0 },
+                  "street_address": { "type": ["string", "null"] },
+                  "event_description": { "type": ["string", "null"] }
+                  ,
+                  "magnitude": { "type": "number" },
+                  "depth_km": { "type": "number", "minimum": -100, "maximum": 1000 },
+                  "place_name": { "type": ["string", "null"] },
+                  "magnitude_type": { "type": ["string", "null"] },
+                  "network": { "type": "string", "minLength": 1 },
+                  "significance": { "type": "integer", "minimum": 0 },
+                  "event_status": { "type": "string", "minLength": 1 },
+                  "epicenter_only": { "type": "boolean" }
+                  ,
+                  "evidence_status": { "enum": ["observed", "reported", "derived", "modelled"] },
+                  "hazard_footprint": { "type": "boolean" },
+                  "flood_class": { "type": "string", "minLength": 1 }
+                  ,
+                  "landslide_category": { "type": "string", "minLength": 1 },
+                  "confidence": { "type": ["string", "null"] },
+                  "confidence_basis": { "type": "string", "minLength": 1 },
+                  "susceptibility_output": { "type": "boolean" }
+                  ,
+                  "facility_name": { "type": ["string", "null"] },
+                  "facility_status": { "type": "string", "minLength": 1 },
+                  "facility_type": { "type": "string", "minLength": 1 },
+                  "capacity_mw": { "type": ["number", "null"], "minimum": 0 },
+                  "plant_method": { "type": ["string", "null"] },
+                  "operator_name": { "type": ["string", "null"] },
+                  "osm_element_type": { "enum": ["node", "way", "relation"] },
+                  "osm_element_id": { "type": "string", "minLength": 1 },
+                  "osm_source_timestamp": { "type": "string", "format": "date-time" },
+                  "infrastructure_class": { "enum": ["road", "bridge", "school", "health", "emergency", "settlement"] },
+                  "asset_name": { "type": ["string", "null"] },
+                  "asset_subtype": { "type": "string", "minLength": 1 },
+                  "position_basis": { "type": "string", "minLength": 1 },
+                  "display_geometry_simplified": { "type": "boolean" },
+                  "asset_ref": { "type": ["string", "null"] },
+                  "surface": { "type": ["string", "null"] }
                 },
                 "required": [
                   "dataset_id",

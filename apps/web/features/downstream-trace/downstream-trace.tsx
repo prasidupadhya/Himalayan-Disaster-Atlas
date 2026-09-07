@@ -83,6 +83,7 @@ export function DownstreamTrace({ map, datasets, start }: { map: Map | null; dat
         <button onClick={() => { setPlaying(false); setResult(null); setProgress(0); }}>Clear trace</button>
         <button onClick={() => { if (map) fitTrace(map, network, result.reach_ids); }} disabled={!map}>Fit trace</button>
         <button onClick={download}>Download trace JSON</button>
+        <a href="#exposure-engine">Explore prepared exposure scenarios</a>
       </div>
       <div className="selection" aria-live="polite">
         <p className="eyebrow">ATLAS DERIVED · network analysis</p>

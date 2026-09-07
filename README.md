@@ -131,6 +131,13 @@ Its core principles are:
 - Keep lake/glacier outlet connections and future exposure intersections UNKNOWN until evidence-backed inputs exist.
 - See [downstream trace methodology and handoff](docs/downstream-trace.md). This is network connectivity analysis, not a flood footprint or forecast.
 
+### Exposure engine
+
+- Offline, versioned polygon exposure analysis using the native WorldPop grid and OSM inventories.
+- Equal-area partial-cell weighting, explicit NoData coverage, deduplicated assets and exclusive district summaries.
+- Map viewer for two hypothetical trace corridors, with matched assets, provenance and downloadable inputs/results.
+- [Exposure methodology, commands and benchmark](docs/exposure-engine.md). Estimates are potentially intersecting population/infrastructure, not confirmed damage or risk.
+
 ## Evidence, provenance, and data integrity
 
 Every published dataset carries machine-readable metadata describing its source, version, licence, attribution, retrieval date, processing date, spatial and temporal coverage, evidence type, limitations, uncertainty, and update policy.

@@ -1,0 +1,3 @@
+Source GeoTIFF tag: CC-BY-4.0
+https://creativecommons.org/licenses/by/4.0/
+WorldPop Hub derived-data licensing note must also be reviewed before redistribution.

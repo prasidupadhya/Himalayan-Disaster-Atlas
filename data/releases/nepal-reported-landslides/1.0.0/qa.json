@@ -1,0 +1,17 @@
+{
+  "features": 5742,
+  "source_releases": [
+    "nepal-disaster-events-2015-2016@1.0.0:97b8c78ee8d4e599f3b637e02933b6e9f7e854ac1bc36d3e1b91809309ade88e",
+    "nepal-disaster-events-2017-2018@1.0.0:0279247239cba9a80010f25ac097e5497a6eb2b14add54d9e45073ddc63ece71",
+    "nepal-disaster-events-2019-2020@1.0.0:96c6d5bb5721528b97750673581fc3568c9bf000a061ebe60ae44862ee69b607",
+    "nepal-disaster-events-2021-2022@1.0.0:b04e5dcd9823668bbd4f6c5c407dd7678a7af0bb86c0f2996a481fde962b199a",
+    "nepal-disaster-events-2023@1.0.0:b9e3232e835474a9ba01102079af40a4640d0e3e58eed0bce80ff6a55c35e3de",
+    "nepal-disaster-events-2024@1.0.0:4fdc2b4d9dab9d0fc806af17a89bf368bcf6894e11a0de8865f0724b71962239",
+    "nepal-disaster-events-2025@1.0.0:1d74560385d1280639b9b9c0ef5b540115b5649429e6d2bcac4bffced8a223a7",
+    "nepal-disaster-events-2026@1.0.0:ef6085e768afc471b0a34c53610fd2383449518286d2b1952c63b2166677fd33"
+  ],
+  "start": "2015-03-02T18:15:00Z",
+  "end": "2026-09-06T18:15:00Z",
+  "confidence_known": 0,
+  "susceptibility_outputs": 0
+}

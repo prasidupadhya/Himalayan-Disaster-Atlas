@@ -18,6 +18,35 @@ export const GLACIER_MANIFESTS = [
   '/data/nepal-glaciers-east/1.0.0/manifest.json',
 ] as const;
 export const GLACIAL_LAKES_MANIFEST = '/data/nepal-transboundary-glacial-lakes/1.0.0/manifest.json';
+export const HYDROLOGY_MANIFEST = '/data/nepal-hydrology-stations/1.0.0/manifest.json';
+export const RAINFALL_MANIFEST = '/data/nepal-rainfall-stations/1.0.0/manifest.json';
+export const DISASTER_EVENT_MANIFESTS = [
+  '/data/nepal-disaster-events-2015-2016/1.0.0/manifest.json',
+  '/data/nepal-disaster-events-2017-2018/1.0.0/manifest.json',
+  '/data/nepal-disaster-events-2019-2020/1.0.0/manifest.json',
+  '/data/nepal-disaster-events-2021-2022/1.0.0/manifest.json',
+  '/data/nepal-disaster-events-2023/1.0.0/manifest.json',
+  '/data/nepal-disaster-events-2024/1.0.0/manifest.json',
+  '/data/nepal-disaster-events-2025/1.0.0/manifest.json',
+  '/data/nepal-disaster-events-2026/1.0.0/manifest.json',
+] as const;
+export const EARTHQUAKES_MANIFEST = '/data/nepal-region-earthquakes/1.0.0/manifest.json';
+export const FLOODS_MANIFEST = '/data/nepal-reported-floods/1.0.0/manifest.json';
+export const LANDSLIDES_MANIFEST = '/data/nepal-reported-landslides/1.0.0/manifest.json';
+export const HYDROPOWER_MANIFEST = '/data/nepal-osm-hydropower/1.0.0/manifest.json';
+export const INFRASTRUCTURE_MANIFESTS = [
+  '/data/nepal-osm-major-roads-west/1.0.0/manifest.json',
+  '/data/nepal-osm-major-roads-central/1.0.0/manifest.json',
+  '/data/nepal-osm-major-roads-east/1.0.0/manifest.json',
+  '/data/nepal-osm-major-bridges/1.0.0/manifest.json',
+  '/data/nepal-osm-schools-west/1.0.0/manifest.json',
+  '/data/nepal-osm-schools-central-west/1.0.0/manifest.json',
+  '/data/nepal-osm-schools-central-east/1.0.0/manifest.json',
+  '/data/nepal-osm-schools-east/1.0.0/manifest.json',
+  '/data/nepal-osm-health-facilities/1.0.0/manifest.json',
+  '/data/nepal-osm-emergency-facilities/1.0.0/manifest.json',
+  '/data/nepal-osm-settlements/1.0.0/manifest.json',
+] as const;
 export const MAX_GEOJSON_BYTES = 2_097_152;
 export const MAX_DECODED_GEOJSON_BYTES = 8_388_608;
 export class UnavailableError extends Error {}
