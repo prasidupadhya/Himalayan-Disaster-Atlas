@@ -13,7 +13,7 @@ Branch: `feat/admin-boundaries`. Owner: Sol. Scope: master brief §173.2. Founda
 | CRS and display processing | Source and web OGC:CRS84; topology-preserving display simplification; pinned unsimplified archive reserved for analysis |
 | Map use | Four toggles, district/local zoom thresholds, province labels, special-area styling, map click selection, keyboard-accessible grouped record list |
 | Evidence and limits | Dataset catalog, methodology, sources, downloadable manifests/artifacts, uncertainty and boundary-version notes |
-| Delivery | Manifest-first hash verification, bounded gzip decompression, 54–849 KB artifacts, static read-only application |
+| Delivery | Manifest-first hash verification, bounded gzip decompression, immutable 2.0.1 patch release, static read-only application |
 
 The feature adds no hazard facts, causal relationships, forecasts, exposure calculations, or inferred boundary measurements. The source-reported area is displayed as an attribute. The browser geometry is not an analysis or cadastral product.
 

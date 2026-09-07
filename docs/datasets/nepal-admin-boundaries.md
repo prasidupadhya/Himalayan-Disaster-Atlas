@@ -2,7 +2,7 @@
 
 ## Source and release
 
-- Atlas release: `2.0.0`; source release: Nepal COD-AB `v02`.
+- Atlas release: `2.0.1`; source release: Nepal COD-AB `v02`. Release `2.0.0` remains immutable.
 - Source: Survey Department of Nepal and UN Resident Coordinator's Office in Nepal; quality assurance by OCHA Field Information Services and HDX.
 - Source page: <https://data.humdata.org/dataset/cod-ab-npl>
 - Source archive SHA-256: `9f6713c41d65396f611ddce5879faecf8e2d494edbd1d6611612445ad46b6707`.
@@ -13,6 +13,8 @@
 ## Hierarchy and identity
 
 The source provides 1 country, 7 provinces, 77 districts, and 775 level-3 pieces. Level 3 comprises 753 local-government units and 22 protected or special-area pieces. All pieces are retained because together they cover Nepal. Ward boundaries are not supplied. Source P-codes are canonical stable identifiers; feature IDs are their lowercase form. Each record retains its readable source name, parent P-code/name, available aliases, source-reported area, validity fields, and source version.
+
+Selected district display labels follow the [Wikipedia district list](https://en.wikipedia.org/wiki/List_of_districts_of_Nepal); original COD-AB spellings remain searchable as aliases.
 
 ## Processing and validation
 

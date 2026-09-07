@@ -5,7 +5,7 @@ import { gunzipSync } from 'node:zlib';
 import { escapeAttribution, mountAdministrativeDataset, mountDataset } from '../../apps/web/lib/map-layers';
 import { parseDataset } from '../../packages/contracts';
 import metadata from '../../data/releases/foundation-sample/1.0.0/manifest.json';
-import provinceMetadata from '../../data/releases/nepal-admin-provinces/2.0.0/manifest.json';
+import provinceMetadata from '../../data/releases/nepal-admin-provinces/2.0.1/manifest.json';
 it('isolates dataset sources and removes layers before their source', () => {
   const source = new Set<string>(); const layers = new Set<string>(); const removed: string[] = [];
   const map = {
@@ -36,7 +36,7 @@ it('mounts administrative levels with visibility and stable selection state', ()
     removeLayer: (id: string) => layers.delete(id), removeSource: (id: string) => sources.delete(id),
     setLayoutProperty: vi.fn(), setFeatureState: vi.fn(),
   };
-  const collection = JSON.parse(gunzipSync(readFileSync('data/releases/nepal-admin-provinces/2.0.0/features.geojson.gz')).toString());
+  const collection = JSON.parse(gunzipSync(readFileSync('data/releases/nepal-admin-provinces/2.0.1/features.geojson.gz')).toString());
   const dataset = parseDataset({ metadata: provinceMetadata, collection });
   const mounted = mountAdministrativeDataset(map as unknown as Map, dataset);
   expect(mounted.level).toBe(1);

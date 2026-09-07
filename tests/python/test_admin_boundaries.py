@@ -8,7 +8,7 @@ from pipelines.atlas_pipeline.contracts import ROOT, validate_dataset
 
 class AdministrativeBoundariesTest(unittest.TestCase):
     def load(self, dataset_id):
-        directory = ROOT / f'data/releases/{dataset_id}/2.0.0'
+        directory = ROOT / f'data/releases/{dataset_id}/2.0.1'
         metadata = json.loads((directory / 'manifest.json').read_text())
         collection = json.loads(gzip.decompress((directory / 'features.geojson.gz').read_bytes()))
         validate_dataset(metadata, collection)
@@ -38,9 +38,14 @@ class AdministrativeBoundariesTest(unittest.TestCase):
         categories = [feature['properties']['admin_category'] for feature in releases[3]['features']]
         self.assertEqual(753, categories.count('local_level'))
         self.assertEqual(22, categories.count('special_area'))
+        districts = {feature['properties']['pcode']: feature['properties'] for feature in releases[2]['features']}
+        self.assertEqual('Chitwan', districts['NP0335']['name'])
+        self.assertIn('Chitawan', districts['NP0335']['aliases'])
+        self.assertEqual('Dhanusha', districts['NP0217']['name'])
+        self.assertEqual('Nawalpur', districts['NP0447']['name'])
 
     def test_qa_report_records_coverage_and_neighbors(self):
-        report = json.loads((ROOT / 'data/releases/nepal-admin-boundaries/2.0.0/qa.json').read_text())
+        report = json.loads((ROOT / 'data/releases/nepal-admin-boundaries/2.0.1/qa.json').read_text())
         for level in ('0', '1', '2', '3'):
             self.assertTrue(report['levels'][level]['coverage_valid'])
         self.assertLess(report['levels']['3']['country_symmetric_difference_ratio'], 1e-8)

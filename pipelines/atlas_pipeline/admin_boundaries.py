@@ -28,7 +28,8 @@ SOURCE_URL = (
 SOURCE_PAGE = "https://data.humdata.org/dataset/cod-ab-npl"
 SOURCE_SHA256 = "9f6713c41d65396f611ddce5879faecf8e2d494edbd1d6611612445ad46b6707"
 SOURCE_VERSION = "v02"
-VERSION = "2.0.0"
+VERSION = "2.0.1"
+NAME_NORMALIZATION_SOURCE = "https://en.wikipedia.org/wiki/List_of_districts_of_Nepal"
 RETRIEVAL_DATE = "2026-09-07T00:00:00Z"
 PROCESSING_DATE = "2026-09-07T00:00:00Z"
 OBSERVATION_DATE = "2024-01-01T00:00:00Z"
@@ -44,6 +45,18 @@ DATASET_IDS = {
 }
 LEVEL_NAMES = {0: "country", 1: "province", 2: "district", 3: "local level"}
 SIMPLIFICATION_TOLERANCE = 0.002
+
+# P-codes remain canonical. These labels follow the referenced district list;
+# original COD-AB spellings are retained as aliases for traceability.
+DISPLAY_NAME_OVERRIDES = {
+    "NP0108": "Tehrathum",
+    "NP0217": "Dhanusha",
+    "NP0335": "Chitwan",
+    "NP0440": "Tanahun",
+    "NP0447": "Nawalpur",
+    "NP0547": "Nawalparasi (West of Bardaghat Susta)",
+    "NP0549": "Kapilvastu",
+}
 
 
 def encode(value):
@@ -189,9 +202,12 @@ def validate_source(levels):
 
 
 def feature_properties(level, source, dataset_id):
-    name = source[f"adm{level}_name"]
+    source_name = source[f"adm{level}_name"]
     pcode = source[f"adm{level}_pcode"]
+    name = DISPLAY_NAME_OVERRIDES.get(pcode, source_name)
     aliases = []
+    if source_name != name:
+        aliases.append(source_name)
     for key in (f"adm{level}_name1", f"adm{level}_name2", f"adm{level}_name3"):
         alias = source.get(key)
         if alias and alias != name and alias not in aliases:
@@ -200,7 +216,7 @@ def feature_properties(level, source, dataset_id):
         parent_pcode = parent_name = None
     else:
         parent_pcode = source[f"adm{level - 1}_pcode"]
-        parent_name = source[f"adm{level - 1}_name"]
+        parent_name = DISPLAY_NAME_OVERRIDES.get(parent_pcode, source[f"adm{level - 1}_name"])
     valid_to = source.get("valid_to")
     return {
         "dataset_id": dataset_id,
@@ -263,11 +279,12 @@ def build_release(root, level, source_features, source_geometries):
         "publication_date": PUBLICATION_DATE,
         "retrieval_date": RETRIEVAL_DATE,
         "processing_date": PROCESSING_DATE,
-        "processing_version": "admin-boundaries-pipeline-1.0.0",
+        "processing_version": "admin-boundaries-pipeline-1.0.1",
         "method": (
             f"Acquired pinned HDX COD-AB GeoJSON archive (SHA-256 {SOURCE_SHA256}); "
             "validated hierarchy, P-codes, polygon topology, parent containment, full-country coverage, "
             f"and label points; simplified the web display as a topology-preserving coverage at {SIMPLIFICATION_TOLERANCE} degree tolerance; "
+            f"normalized selected district display names against {NAME_NORMALIZATION_SOURCE}; "
             "serialized deterministic CRS84 GeoJSON and gzip. Unsimplified source geometry is retained in the content-addressed raw acquisition for analysis."
         ),
         "spatial_resolution": {"value": None, "unit": None},
@@ -283,6 +300,7 @@ def build_release(root, level, source_features, source_geometries):
             "Level 3 contains 753 local-government units plus 22 protected or special-area pieces encoded by the source; the interface distinguishes these categories.",
             "Ward boundaries are not included in this source release.",
             "English names are supplied; alternate-name fields are currently empty in the source.",
+            f"Selected district display names follow the public reference list ({NAME_NORMALIZATION_SOURCE}); original COD-AB spellings remain in aliases.",
             "Web geometry is topology-preserving display simplification and must not be used for cadastral, legal, distance, area, exposure, or aggregation calculations.",
             "International-boundary representation follows this source and does not resolve disputed boundary claims.",
         ],

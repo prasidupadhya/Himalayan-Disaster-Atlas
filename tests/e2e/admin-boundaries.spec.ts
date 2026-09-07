@@ -2,11 +2,11 @@ import { test, expect } from '@playwright/test';
 import { createHash } from 'node:crypto';
 import { gzipSync, gunzipSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
-import provinceManifest from '../../data/releases/nepal-admin-provinces/2.0.0/manifest.json';
+import provinceManifest from '../../data/releases/nepal-admin-provinces/2.0.1/manifest.json';
 
-const provinceManifestURL = '**/data/nepal-admin-provinces/2.0.0/manifest.json';
-const provinceArtifactURL = '**/data/nepal-admin-provinces/2.0.0/features.geojson.gz';
-const provinceBytes = readFileSync('data/releases/nepal-admin-provinces/2.0.0/features.geojson.gz');
+const provinceManifestURL = '**/data/nepal-admin-provinces/2.0.1/manifest.json';
+const provinceArtifactURL = '**/data/nepal-admin-provinces/2.0.1/features.geojson.gz';
+const provinceBytes = readFileSync('data/releases/nepal-admin-provinces/2.0.1/features.geojson.gz');
 
 test('static navigation, WebGL, boundary controls and accessible identification', async ({ page }) => {
   const errors: string[] = [];
