@@ -1,0 +1,78 @@
+import { expect, test } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
+
+test('traces a selected reach with playback, provenance, download and cleanup', async ({ page }) => {
+  const errors: string[] = [], artifacts: string[] = [];
+  page.on('pageerror', error => errors.push(error.message));
+  page.on('request', request => { if (/nepal-rivers-.*features\.geojson\.gz/.test(request.url())) artifacts.push(request.url()); });
+  await page.goto('/atlas/');
+  const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
+  const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
+  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready');
+  await expect(trace.getByRole('button', { name: 'Trace downstream', exact: true })).toBeDisabled();
+  await rivers.getByLabel('Find a reach').fill('40669746');
+  await rivers.getByLabel('River reach').selectOption('hyriv-40669746');
+  await trace.getByRole('button', { name: 'Trace downstream', exact: true }).click();
+  await expect(trace).toHaveAttribute('data-trace-state', 'ready');
+  await expect(trace.getByText('180', { exact: true })).toBeVisible();
+  await expect(trace.getByText(/Coverage boundary — next HYRIV 40768704/)).toBeVisible();
+  await trace.getByRole('button', { name: 'Pause trace animation' }).click();
+  const paused = await trace.locator('[data-trace-progress]').getAttribute('data-trace-progress');
+  await expect(trace.getByRole('button', { name: 'Resume trace animation' })).toBeVisible();
+  await expect(trace.locator('[data-trace-progress]')).toHaveAttribute('data-trace-progress', paused!);
+  await trace.getByRole('button', { name: 'Show entire trace' }).click();
+  await expect(trace.locator('[data-trace-progress]')).toHaveAttribute('data-trace-progress', '180');
+  await rivers.getByRole('checkbox', { name: 'Show river network' }).uncheck();
+  await expect(trace).toHaveAttribute('data-trace-state', 'ready');
+  await trace.getByText('Ordered downstream reaches (180)', { exact: true }).click();
+  await expect(trace.getByRole('listitem')).toHaveCount(50);
+  await trace.getByRole('button', { name: 'Next reaches' }).click();
+  await expect(trace.locator('ol')).toHaveAttribute('start', '51');
+  const downloaded = page.waitForEvent('download');
+  await trace.getByRole('button', { name: 'Download trace JSON' }).click();
+  const download = await downloaded;
+  const result = JSON.parse(await readFile((await download.path())!, 'utf8'));
+  expect(result.method).toBe('hydrorivers-next-down/1.0.0');
+  expect(result.reach_ids).toHaveLength(180);
+  expect(result.inputs).toHaveLength(2);
+  expect(result.inputs.every((input: { artifact_sha256: string }) => /^[a-f0-9]{64}$/.test(input.artifact_sha256))).toBe(true);
+  await trace.getByRole('button', { name: 'Fit trace', exact: true }).click();
+  await page.locator('.map-shell').screenshot({ path: 'test-results/downstream-trace-map.png' });
+  await trace.getByRole('button', { name: 'Clear trace', exact: true }).click();
+  await expect(trace).toHaveAttribute('data-trace-state', 'idle');
+  await trace.getByRole('button', { name: 'Trace downstream', exact: true }).click();
+  await expect(trace).toHaveAttribute('data-trace-state', 'ready');
+  await rivers.getByLabel('Find a reach').fill('40670088');
+  await rivers.getByLabel('River reach').selectOption('hyriv-40670088');
+  await expect(trace).toHaveAttribute('data-trace-state', 'idle');
+  expect(artifacts).toHaveLength(2);
+  expect(errors).toEqual([]);
+});
+
+test('requires the full network and supports retry after a missing partition', async ({ page }) => {
+  await page.route('**/nepal-rivers-headwaters/1.0.0/manifest.json', route => route.fulfill({ status: 503, body: '' }), { times: 1 });
+  await page.goto('/atlas/');
+  const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
+  const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
+  await expect(rivers).toHaveAttribute('data-rivers-state', 'unavailable');
+  await expect(trace.getByRole('button', { name: 'Trace downstream', exact: true })).toBeDisabled();
+  await rivers.getByRole('button', { name: 'Try again' }).click();
+  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready');
+  await expect(trace).toHaveAttribute('data-trace-state', 'idle');
+});
+
+test('supports reduced motion and narrow screens without overflow', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/atlas/');
+  const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
+  const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
+  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready');
+  await rivers.getByLabel('Find a reach').fill('40669746');
+  await rivers.getByLabel('River reach').selectOption('hyriv-40669746');
+  await trace.getByRole('button', { name: 'Trace downstream', exact: true }).click();
+  await expect(trace.locator('[data-trace-progress]')).toHaveAttribute('data-trace-progress', '180');
+  await trace.getByText('Trace method, inputs & limitations', { exact: true }).click();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+  await trace.screenshot({ path: 'test-results/downstream-trace-mobile.png' });
+});

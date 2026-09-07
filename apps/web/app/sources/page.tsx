@@ -4,6 +4,9 @@ export default function SourcesPage() {
   return <article className="page prose">
     <p className="eyebrow">Sources</p><h1>Trace every layer.</h1>
 
+    <h2>Downstream connectivity</h2>
+    <p>Downstream trace reuses both pinned FAO Rivers 2026 / HydroRIVERS Nepal partitions, version 1.0.0. It introduces no new geographic source. <a href="https://data.hydrosheds.org/file/technical-documentation/HydroRIVERS_TechDoc_v10.pdf">HydroRIVERS technical documentation</a> defines NEXT_DOWN and LENGTH_KM. Per-result input hashes identify the exact releases; the source river evidence and licensing remain applicable.</p>
+
     <h2>Glacial lakes</h2>
     <p>The glacial-lake layer uses <a href="https://doi.org/10.5281/zenodo.19370146">Glacial Lake Observatory v1.02</a>, a Sentinel-2-derived inventory of glacial lakes in Nepal and transboundary catchments for 2017–2024, released under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.</p>
     <p>The Atlas joins the source unique-lake centroid and polygon-attribute tables by stable GLO_ID. Published centroid points are rendered directly; source dissolved area/perimeter and expansion statistics are retained without reprojecting or fabricating polygons. GLO glacier-fed/non-glacier-fed connectivity does not identify a specific RGI glacier, and no hazard class is inferred.</p>
