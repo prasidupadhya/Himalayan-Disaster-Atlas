@@ -238,6 +238,34 @@ export function mountGlacialLakeDataset(map: Map, dataset: Dataset) {
   };
 }
 
+/** Mount BIPAD/DHM hydrology stations; source status colors describe only the station reading. */
+export function mountHydrologyDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'hydrology_station')) throw new Error('Hydrology dataset contains a non-station feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const points = `${source}-points`;
+  const statusColor: ExpressionSpecification = ['match', ['get', 'station_status'], 'ABOVE DANGER LEVEL', '#d1495b', 'ABOVE WARNING LEVEL', '#f4a261', '#2a9d8f'];
+  map.addLayer({ id: points, source, type: 'circle', minzoom: 5, paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 9, 5.5],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', statusColor],
+    'circle-stroke-color': '#102a3a', 'circle-stroke-width': 1.3, 'circle-opacity': 0.9,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id)));
+  let selected: string | null = null;
+  return {
+    source, layers: [points], interactiveLayers: [points],
+    setVisible(visible: boolean) { map.setLayoutProperty(points, 'visibility', visible ? 'visible' : 'none'); },
+    setSelected(id: string | null) {
+      if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false });
+      selected = id && ids.has(id) ? id : null;
+      if (selected) map.setFeatureState({ source, id: selected }, { selected: true });
+    },
+    dispose() { if (map.getLayer(points)) map.removeLayer(points); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
 /** MapLibre attribution accepts HTML; metadata is treated as plain text. */
 export function escapeAttribution(value: string): string {
   return value.replace(/[&<>\"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', "'": '&#39;' })[char]!);

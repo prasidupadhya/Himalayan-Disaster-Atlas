@@ -600,7 +600,8 @@
                       "mountain",
                       "river",
                       "glacier",
-                      "glacial_lake"
+                      "glacial_lake",
+                      "hydrology_station"
                     ]
                   },
                   "source_id": {
@@ -729,7 +730,7 @@
                     "minLength": 1
                   },
                   "basin": {
-                    "type": "string",
+                    "type": ["string", "null"],
                     "minLength": 1
                   },
                   "connectivity": {
@@ -756,6 +757,47 @@
                   },
                   "expansion_significant": {
                     "type": ["boolean", "null"]
+                  },
+                  "station_name": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "observation_time": {
+                    "type": ["string", "null"],
+                    "format": "date-time"
+                  },
+                  "water_level_m": {
+                    "type": ["number", "null"]
+                  },
+                  "warning_level_m": {
+                    "type": ["number", "null"]
+                  },
+                  "danger_level_m": {
+                    "type": ["number", "null"]
+                  },
+                  "threshold_order_valid": {
+                    "type": "boolean"
+                  },
+                  "station_status": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "trend": {
+                    "type": ["string", "null"]
+                  },
+                  "station_series_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "provider": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "elevation_m": {
+                    "type": ["number", "null"]
+                  },
+                  "coordinate_order_repaired": {
+                    "type": "boolean"
                   }
                 },
                 "required": [

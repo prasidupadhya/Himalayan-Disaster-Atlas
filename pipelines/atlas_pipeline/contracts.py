@@ -172,6 +172,28 @@ def validate_dataset(metadata, collection):
             uncertainty = properties['expansion_uncertainty_km2_per_year']
             if (rate is None) != (uncertainty is None):
                 raise ValueError('Glacial lake expansion rate and uncertainty must be known together')
+        if properties.get('entity_type') == 'hydrology_station':
+            required = {
+                'source_id', 'search_terms', 'station_name', 'basin', 'observation_time',
+                'water_level_m', 'warning_level_m', 'danger_level_m', 'threshold_order_valid', 'station_status', 'trend',
+                'station_series_id', 'provider', 'elevation_m', 'coordinate_order_repaired',
+            }
+            if not required.issubset(properties):
+                raise ValueError('Hydrology stations require complete station metadata')
+            if geometry['type'] != 'Point':
+                raise ValueError('Hydrology stations require Point geometry')
+            if properties['value'] != properties['water_level_m']:
+                raise ValueError('Hydrology value must equal water level')
+            if properties['water_level_m'] is None:
+                if properties['unit'] is not None:
+                    raise ValueError('Unknown hydrology measurement cannot carry a unit')
+            elif properties['unit'] != 'm':
+                raise ValueError('Hydrology water level must use metres')
+            warning = properties['warning_level_m']
+            danger = properties['danger_level_m']
+            order_valid = not (warning is not None and danger is not None and warning > danger)
+            if properties['threshold_order_valid'] != order_valid:
+                raise ValueError('Hydrology threshold consistency flag is incorrect')
         for lon, lat in positions(geometry['coordinates']):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError('Geometry outside declared spatial coverage')

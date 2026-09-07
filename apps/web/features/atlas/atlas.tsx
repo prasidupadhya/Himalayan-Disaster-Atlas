@@ -12,6 +12,7 @@ import { Mountains } from '../mountains/mountains';
 import { Rivers } from '../rivers/rivers';
 import { Glaciers } from '../glaciers/glaciers';
 import { GlacialLakes } from '../glacial-lakes/glacial-lakes';
+import { Hydrology } from '../hydrology/hydrology';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -182,6 +183,7 @@ export function Atlas() {
       <Rivers key={`rivers-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Glaciers key={`glaciers-${attempt}`} map={mapReady ? mapRef.current : null} />
       <GlacialLakes key={`glacial-lakes-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Hydrology key={`hydrology-${attempt}`} map={mapReady ? mapRef.current : null} />
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">
