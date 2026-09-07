@@ -31,6 +31,7 @@ export const DISASTER_EVENT_MANIFESTS = [
   '/data/nepal-disaster-events-2026/1.0.0/manifest.json',
 ] as const;
 export const EARTHQUAKES_MANIFEST = '/data/nepal-region-earthquakes/1.0.0/manifest.json';
+export const FLOODS_MANIFEST = '/data/nepal-reported-floods/1.0.0/manifest.json';
 export const MAX_GEOJSON_BYTES = 2_097_152;
 export const MAX_DECODED_GEOJSON_BYTES = 8_388_608;
 export class UnavailableError extends Error {}

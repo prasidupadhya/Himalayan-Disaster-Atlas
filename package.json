@@ -33,6 +33,7 @@
     "data:rainfall": ".venv/bin/python -m pipelines.atlas_pipeline.rainfall",
     "data:disaster-events": ".venv/bin/python -m pipelines.atlas_pipeline.disaster_events",
     "data:earthquakes": ".venv/bin/python -m pipelines.atlas_pipeline.earthquakes"
+    ,"data:floods": ".venv/bin/python -m pipelines.atlas_pipeline.floods"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
