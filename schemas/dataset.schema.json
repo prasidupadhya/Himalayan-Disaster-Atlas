@@ -608,7 +608,8 @@
                       "earthquake",
                       "flood_event",
                       "landslide_event",
-                      "hydropower_facility"
+                      "hydropower_facility",
+                      "infrastructure_asset"
                     ]
                   },
                   "source_id": {
@@ -859,7 +860,14 @@
                   "operator_name": { "type": ["string", "null"] },
                   "osm_element_type": { "enum": ["node", "way", "relation"] },
                   "osm_element_id": { "type": "string", "minLength": 1 },
-                  "osm_source_timestamp": { "type": "string", "format": "date-time" }
+                  "osm_source_timestamp": { "type": "string", "format": "date-time" },
+                  "infrastructure_class": { "enum": ["road", "bridge", "school", "health", "emergency", "settlement"] },
+                  "asset_name": { "type": ["string", "null"] },
+                  "asset_subtype": { "type": "string", "minLength": 1 },
+                  "position_basis": { "type": "string", "minLength": 1 },
+                  "display_geometry_simplified": { "type": "boolean" },
+                  "asset_ref": { "type": ["string", "null"] },
+                  "surface": { "type": ["string", "null"] }
                 },
                 "required": [
                   "dataset_id",

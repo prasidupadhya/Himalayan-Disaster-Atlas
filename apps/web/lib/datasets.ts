@@ -34,6 +34,19 @@ export const EARTHQUAKES_MANIFEST = '/data/nepal-region-earthquakes/1.0.0/manife
 export const FLOODS_MANIFEST = '/data/nepal-reported-floods/1.0.0/manifest.json';
 export const LANDSLIDES_MANIFEST = '/data/nepal-reported-landslides/1.0.0/manifest.json';
 export const HYDROPOWER_MANIFEST = '/data/nepal-osm-hydropower/1.0.0/manifest.json';
+export const INFRASTRUCTURE_MANIFESTS = [
+  '/data/nepal-osm-major-roads-west/1.0.0/manifest.json',
+  '/data/nepal-osm-major-roads-central/1.0.0/manifest.json',
+  '/data/nepal-osm-major-roads-east/1.0.0/manifest.json',
+  '/data/nepal-osm-major-bridges/1.0.0/manifest.json',
+  '/data/nepal-osm-schools-west/1.0.0/manifest.json',
+  '/data/nepal-osm-schools-central-west/1.0.0/manifest.json',
+  '/data/nepal-osm-schools-central-east/1.0.0/manifest.json',
+  '/data/nepal-osm-schools-east/1.0.0/manifest.json',
+  '/data/nepal-osm-health-facilities/1.0.0/manifest.json',
+  '/data/nepal-osm-emergency-facilities/1.0.0/manifest.json',
+  '/data/nepal-osm-settlements/1.0.0/manifest.json',
+] as const;
 export const MAX_GEOJSON_BYTES = 2_097_152;
 export const MAX_DECODED_GEOJSON_BYTES = 8_388_608;
 export class UnavailableError extends Error {}
