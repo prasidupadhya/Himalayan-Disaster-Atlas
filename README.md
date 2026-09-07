@@ -2,7 +2,7 @@
 
 A public, read-only, Nepal-focused geospatial atlas. Foundation and Administrative Boundaries are complete; **Terrain** is owned by Astra on `feat/terrain`.
 
-The application includes a static Next.js atlas, Nepal COD-AB v02 province/district/local-level boundaries, locally tiled Copernicus GLO-90 terrain, a searchable GeoNames mountain catalogue, a connected FAO/HydroRIVERS river network, source-dated RGI 7.0 glacier outlines, shared machine-checked data contracts, and offline acquisition-to-release pipelines. **No hazard analysis, simulation, or operational warning is provided.**
+The application includes a static Next.js atlas, Nepal COD-AB v02 province/district/local-level boundaries, locally tiled Copernicus GLO-90 terrain, a searchable GeoNames mountain catalogue, a connected FAO/HydroRIVERS river network, source-dated RGI 7.0 glacier outlines, and GLO v1.02 glacial-lake records for Nepal/transboundary catchments. Shared machine-checked data contracts and offline acquisition-to-release pipelines keep source evidence explicit. **No hazard analysis, simulation, or operational warning is provided.**
 
 ## Run locally
 

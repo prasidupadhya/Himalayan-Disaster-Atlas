@@ -146,6 +146,32 @@ def validate_dataset(metadata, collection):
                 raise ValueError('Glacier measurement must be positive source area')
             if not properties['elevation_min_m'] <= properties['elevation_mean_m'] <= properties['elevation_max_m']:
                 raise ValueError('Glacier elevation statistics are inconsistent')
+        if properties.get('entity_type') == 'glacial_lake':
+            required = {
+                'source_id', 'search_terms', 'lake_name', 'country', 'basin', 'connectivity',
+                'data_source', 'inventory_period', 'area_km2', 'perimeter_km',
+                'centroid_longitude', 'centroid_latitude', 'elevation_min_m', 'elevation_mean_m',
+                'expansion_rate_km2_per_year', 'expansion_uncertainty_km2_per_year',
+                'expansion_significant',
+            }
+            if not required.issubset(properties):
+                raise ValueError('Glacial lake features require complete inventory metadata')
+            if geometry['type'] != 'Point':
+                raise ValueError('Glacial lake presentation features require Point geometry')
+            if properties['connectivity'] not in {'Glacier-fed', 'Non Glacier-fed'}:
+                raise ValueError('Unsupported glacial lake connectivity classification')
+            if properties['value'] != properties['area_km2'] or properties['unit'] != 'km2':
+                raise ValueError('Glacial lake measurement must be mapped area')
+            if properties['area_km2'] <= 0 or properties['perimeter_km'] <= 0:
+                raise ValueError('Glacial lake area/perimeter must be positive')
+            if properties['elevation_min_m'] > properties['elevation_mean_m'] + 1:
+                raise ValueError('Glacial lake elevation statistics are inconsistent')
+            if properties['source_id'] not in properties['search_terms']:
+                raise ValueError('Glacial lake search terms must include GLO ID')
+            rate = properties['expansion_rate_km2_per_year']
+            uncertainty = properties['expansion_uncertainty_km2_per_year']
+            if (rate is None) != (uncertainty is None):
+                raise ValueError('Glacial lake expansion rate and uncertainty must be known together')
         for lon, lat in positions(geometry['coordinates']):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError('Geometry outside declared spatial coverage')

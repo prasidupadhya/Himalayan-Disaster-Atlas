@@ -17,6 +17,7 @@ export const GLACIER_MANIFESTS = [
   '/data/nepal-glaciers-central/1.0.0/manifest.json',
   '/data/nepal-glaciers-east/1.0.0/manifest.json',
 ] as const;
+export const GLACIAL_LAKES_MANIFEST = '/data/nepal-transboundary-glacial-lakes/1.0.0/manifest.json';
 export const MAX_GEOJSON_BYTES = 2_097_152;
 export const MAX_DECODED_GEOJSON_BYTES = 8_388_608;
 export class UnavailableError extends Error {}

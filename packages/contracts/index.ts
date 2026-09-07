@@ -23,7 +23,7 @@ export interface FeatureProperties {
   admin_category?: 'country' | 'province' | 'district' | 'local_level' | 'special_area';
   pcode?: string; parent_pcode?: string | null; parent_name?: string | null; aliases?: string[];
   label_longitude?: number; label_latitude?: number; valid_from?: string; valid_to?: string | null; source_version?: string;
-  entity_type?: 'mountain' | 'river' | 'glacier'; source_id?: string; search_terms?: string[]; feature_code?: string;
+  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake'; source_id?: string; search_terms?: string[]; feature_code?: string;
   source_modified?: string; elevation_reference?: string;
   river_name?: string | null; downstream_id?: string | null; downstream_in_release?: boolean; main_river_id?: string;
   flow_order?: number; length_km?: number; distance_downstream_km?: number; distance_upstream_km?: number;
@@ -32,6 +32,9 @@ export interface FeatureProperties {
   glacier_name?: string | null; glims_id?: string; outline_date?: string; area_km2?: number;
   centroid_longitude?: number; centroid_latitude?: number; elevation_min_m?: number; elevation_max_m?: number;
   elevation_mean_m?: number; dem_source?: string; inventory_region?: string; display_geometry_repaired?: boolean;
+  lake_name?: string | null; country?: string; basin?: string; connectivity?: 'Glacier-fed' | 'Non Glacier-fed';
+  data_source?: string; inventory_period?: string; perimeter_km?: number; expansion_rate_km2_per_year?: number | null;
+  expansion_uncertainty_km2_per_year?: number | null; expansion_significant?: boolean | null;
 }
 export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'GeometryCollection' }>, FeatureProperties>;
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
@@ -91,6 +94,14 @@ export function parseDataset(input: unknown): Dataset {
       if (!['Polygon', 'MultiPolygon'].includes(f.geometry.type) || !p.source_id || !p.glims_id || !p.outline_date || p.area_km2 === undefined || p.centroid_longitude === undefined || p.centroid_latitude === undefined || p.elevation_min_m === undefined || p.elevation_max_m === undefined || p.elevation_mean_m === undefined || !p.dem_source || !p.inventory_region || p.display_geometry_repaired === undefined || !p.search_terms?.length) throw new Error('Glacier features require complete inventory metadata');
       if (p.value !== p.area_km2 || p.unit !== 'km2' || p.area_km2 <= 0) throw new Error('Glacier measurement must be positive source area');
       if (p.elevation_min_m > p.elevation_mean_m || p.elevation_mean_m > p.elevation_max_m) throw new Error('Glacier elevation statistics are inconsistent');
+    }
+    if (f.properties.entity_type === 'glacial_lake') {
+      const p = f.properties;
+      if (f.geometry.type !== 'Point' || !p.source_id || !p.search_terms?.length || !p.country || !p.basin || !p.connectivity || !p.data_source || !p.inventory_period || p.area_km2 === undefined || p.perimeter_km === undefined || p.centroid_longitude === undefined || p.centroid_latitude === undefined || p.elevation_min_m === undefined || p.elevation_mean_m === undefined || p.expansion_rate_km2_per_year === undefined || p.expansion_uncertainty_km2_per_year === undefined || p.expansion_significant === undefined) throw new Error('Glacial lake features require complete inventory metadata');
+      if (p.value !== p.area_km2 || p.unit !== 'km2' || p.area_km2 <= 0 || p.perimeter_km <= 0) throw new Error('Glacial lake measurement must be positive mapped extent');
+      if (p.elevation_min_m > p.elevation_mean_m + 1) throw new Error('Glacial lake elevation statistics are inconsistent');
+      if (!p.search_terms.includes(p.source_id)) throw new Error('Glacial lake search terms must include GLO ID');
+      if (p.expansion_rate_km2_per_year === null !== (p.expansion_uncertainty_km2_per_year === null)) throw new Error('Glacial lake expansion rate and uncertainty must be known together');
     }
     if (coordinates(f.geometry.coordinates).some(([lon, lat]) => lon < west || lon > east || lat < south || lat > north)) throw new Error('Geometry outside coverage');
     const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flat() : [];

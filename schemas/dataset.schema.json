@@ -599,7 +599,8 @@
                     "enum": [
                       "mountain",
                       "river",
-                      "glacier"
+                      "glacier",
+                      "glacial_lake"
                     ]
                   },
                   "source_id": {
@@ -719,6 +720,42 @@
                   },
                   "display_geometry_repaired": {
                     "type": "boolean"
+                  },
+                  "lake_name": {
+                    "type": ["string", "null"]
+                  },
+                  "country": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "basin": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "connectivity": {
+                    "enum": ["Glacier-fed", "Non Glacier-fed"]
+                  },
+                  "data_source": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "inventory_period": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "perimeter_km": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "expansion_rate_km2_per_year": {
+                    "type": ["number", "null"]
+                  },
+                  "expansion_uncertainty_km2_per_year": {
+                    "type": ["number", "null"],
+                    "minimum": 0
+                  },
+                  "expansion_significant": {
+                    "type": ["boolean", "null"]
                   }
                 },
                 "required": [
