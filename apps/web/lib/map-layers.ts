@@ -402,6 +402,33 @@ export function mountLandslideDataset(map: Map, dataset: Dataset) {
   };
 }
 
+/** Mount OSM hydropower facilities with display clustering; no proximity-based risk semantics. */
+export function mountHydropowerDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'hydropower_facility')) throw new Error('Hydropower dataset contains a non-facility feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', cluster: true, clusterRadius: 42, clusterMaxZoom: 8, attribution: escapeAttribution(dataset.metadata.attribution) });
+  const clusters = `${source}-clusters`; const points = `${source}-points`;
+  map.addLayer({ id: clusters, source, type: 'circle', filter: ['has', 'point_count'], paint: {
+    'circle-radius': ['interpolate', ['linear'], ['get', 'point_count'], 2, 11, 10, 17, 30, 23],
+    'circle-color': '#2f855a', 'circle-opacity': 0.78, 'circle-stroke-color': '#d9f99d', 'circle-stroke-width': 1.5,
+  } });
+  map.addLayer({ id: points, source, type: 'circle', filter: ['!', ['has', 'point_count']], paint: {
+    'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 10,
+      ['interpolate', ['linear'], ['coalesce', ['get', 'capacity_mw'], 0], 0, 5, 10, 6, 100, 8, 500, 11]],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#65a30d'],
+    'circle-stroke-color': '#26410e', 'circle-stroke-width': 1.2, 'circle-opacity': 0.9,
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
+  return {
+    source, layers: [clusters, points], interactiveLayers: [points],
+    setVisible(visible: boolean) { for (const layer of [clusters, points]) map.setLayoutProperty(layer, 'visibility', visible ? 'visible' : 'none'); },
+    setSelected(id: string | null) { if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false }); selected = id && ids.has(id) ? id : null; if (selected) map.setFeatureState({ source, id: selected }, { selected: true }); },
+    dispose() { for (const layer of [points, clusters]) if (map.getLayer(layer)) map.removeLayer(layer); if (map.getSource(source)) map.removeSource(source); },
+  };
+}
+
 /** MapLibre attribution accepts HTML; metadata is treated as plain text. */
 export function escapeAttribution(value: string): string {
   return value.replace(/[&<>\"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', "'": '&#39;' })[char]!);

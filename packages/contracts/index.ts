@@ -5,7 +5,7 @@ import schema from '../../schemas/dataset.schema.json';
 
 export type DataStatus = 'VERIFIED_SOURCE' | 'SATELLITE_DERIVED' | 'ATLAS_DERIVED' | 'ESTIMATED' | 'MODELLED' | 'HISTORICAL' | 'UNKNOWN';
 export type EvidenceType = 'observed' | 'derived' | 'estimated' | 'modelled' | 'historical' | 'unknown';
-export type Unit = 'm' | 'm2' | 'km2' | 'm3' | 'm3/s' | 'mm' | 'degC' | 'person';
+export type Unit = 'm' | 'm2' | 'km2' | 'm3' | 'm3/s' | 'mm' | 'degC' | 'person' | 'MW';
 export interface Metadata {
   schema_version: '1.0.0'; dataset_id: string; dataset_name: string; dataset_version: string;
   source: string; source_url: string | null; license: string; license_url: string | null; attribution: string;
@@ -23,7 +23,7 @@ export interface FeatureProperties {
   admin_category?: 'country' | 'province' | 'district' | 'local_level' | 'special_area';
   pcode?: string; parent_pcode?: string | null; parent_name?: string | null; aliases?: string[];
   label_longitude?: number; label_latitude?: number; valid_from?: string; valid_to?: string | null; source_version?: string;
-  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake' | 'hydrology_station' | 'rainfall_station' | 'disaster_event' | 'earthquake' | 'flood_event' | 'landslide_event'; source_id?: string; search_terms?: string[]; feature_code?: string;
+  entity_type?: 'mountain' | 'river' | 'glacier' | 'glacial_lake' | 'hydrology_station' | 'rainfall_station' | 'disaster_event' | 'earthquake' | 'flood_event' | 'landslide_event' | 'hydropower_facility'; source_id?: string; search_terms?: string[]; feature_code?: string;
   source_modified?: string; elevation_reference?: string;
   river_name?: string | null; downstream_id?: string | null; downstream_in_release?: boolean; main_river_id?: string;
   flow_order?: number; length_km?: number; distance_downstream_km?: number; distance_upstream_km?: number;
@@ -48,6 +48,8 @@ export interface FeatureProperties {
   significance?: number; event_status?: string; epicenter_only?: boolean;
   evidence_status?: 'observed' | 'reported' | 'derived' | 'modelled'; hazard_footprint?: boolean; flood_class?: string;
   landslide_category?: string; confidence?: string | null; confidence_basis?: string; susceptibility_output?: boolean;
+  facility_name?: string | null; facility_status?: string; facility_type?: string; capacity_mw?: number | null; plant_method?: string | null;
+  operator_name?: string | null; osm_element_type?: 'node' | 'way' | 'relation'; osm_element_id?: string; osm_source_timestamp?: string;
 }
 export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'GeometryCollection' }>, FeatureProperties>;
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
@@ -147,6 +149,12 @@ export function parseDataset(input: unknown): Dataset {
       const p = f.properties;
       if (f.geometry.type !== 'Point' || !p.source_id || !p.search_terms?.length || p.hazard_name !== 'Landslide' || p.evidence_status !== 'reported' || p.hazard_footprint !== false || !p.landslide_category || p.confidence === undefined || !p.confidence_basis || p.susceptibility_output !== false || !p.event_time) throw new Error('Landslide events require reported-event semantics');
       if (p.value !== null || p.unit !== null) throw new Error('Reported landslide point is not a measurement');
+    }
+    if (f.properties.entity_type === 'hydropower_facility') {
+      const p = f.properties;
+      if (f.geometry.type !== 'Point' || !p.source_id || !p.search_terms?.length || p.facility_name === undefined || !p.facility_status || !p.facility_type || p.capacity_mw === undefined || p.plant_method === undefined || p.operator_name === undefined || !p.osm_element_type || !p.osm_element_id || !p.osm_source_timestamp) throw new Error('Hydropower facilities require complete OSM metadata');
+      if (p.value !== p.capacity_mw || (p.capacity_mw === null ? p.unit !== null : p.unit !== 'MW')) throw new Error('Hydropower measurement must be capacity in MW');
+      if (p.capacity_mw !== null && p.capacity_mw < 0) throw new Error('Hydropower capacity cannot be negative');
     }
     if (coordinates(f.geometry.coordinates).some(([lon, lat]) => lon < west || lon > east || lat < south || lat > north)) throw new Error('Geometry outside coverage');
     const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flat() : [];

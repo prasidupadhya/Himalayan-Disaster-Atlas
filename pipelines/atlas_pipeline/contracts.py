@@ -402,6 +402,33 @@ def validate_dataset(metadata, collection):
                 )
             if properties["value"] is not None or properties["unit"] is not None:
                 raise ValueError("Reported landslide point is not a measurement")
+        if properties.get("entity_type") == "hydropower_facility":
+            required = {
+                "source_id",
+                "search_terms",
+                "facility_name",
+                "facility_status",
+                "facility_type",
+                "capacity_mw",
+                "plant_method",
+                "operator_name",
+                "osm_element_type",
+                "osm_element_id",
+                "osm_source_timestamp",
+            }
+            if not required.issubset(properties) or geometry["type"] != "Point":
+                raise ValueError("Hydropower facilities require complete OSM Point metadata")
+            if properties["osm_element_type"] not in {"node", "way", "relation"}:
+                raise ValueError("Unsupported OSM hydropower element type")
+            if properties["capacity_mw"] is not None and properties["capacity_mw"] < 0:
+                raise ValueError("Hydropower capacity cannot be negative")
+            if properties["value"] != properties["capacity_mw"]:
+                raise ValueError("Hydropower value must equal capacity_mw")
+            if properties["capacity_mw"] is None:
+                if properties["unit"] is not None:
+                    raise ValueError("Unknown hydropower capacity must have null unit")
+            elif properties["unit"] != "MW":
+                raise ValueError("Known hydropower capacity must use MW")
         for lon, lat in positions(geometry["coordinates"]):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError("Geometry outside declared spatial coverage")
