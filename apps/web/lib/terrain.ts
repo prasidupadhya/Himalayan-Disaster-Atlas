@@ -2,6 +2,7 @@ import { parseTerrainIndex, parseTerrainManifest, terrainPixel, type TerrainInde
 import { readBounded } from './datasets';
 
 export const TERRAIN_MANIFEST = '/data/nepal-terrain/1.0.0/manifest.json';
+export const CONTEXT_MANIFEST = '/data/asia-terrain-context/1.0.0/manifest.json';
 export interface TerrainDataset { manifest: TerrainManifest; index: TerrainIndex }
 
 async function verified(path: string, expected: { byte_size: number; sha256: string }, signal?: AbortSignal) {
@@ -11,10 +12,11 @@ async function verified(path: string, expected: { byte_size: number; sha256: str
   return bytes;
 }
 
-export async function loadTerrain(signal?: AbortSignal): Promise<TerrainDataset> {
-  const bytes = await readBounded(await fetch(TERRAIN_MANIFEST, { signal }), 65536);
+export async function loadTerrain(signal?: AbortSignal, path = TERRAIN_MANIFEST): Promise<TerrainDataset> {
+  if (![TERRAIN_MANIFEST, CONTEXT_MANIFEST].includes(path)) throw new Error('Unregistered terrain manifest');
+  const bytes = await readBounded(await fetch(path, { signal }), 65536);
   const manifest = parseTerrainManifest(JSON.parse(new TextDecoder().decode(bytes)));
-  if (manifest.metadata.artifact.path.replace('tiles.json', 'manifest.json') !== TERRAIN_MANIFEST) throw new Error('Terrain manifest identity mismatch');
+  if (manifest.metadata.artifact.path.replace('tiles.json', 'manifest.json') !== path) throw new Error('Terrain manifest identity mismatch');
   const indexBytes = await verified(manifest.metadata.artifact.path, manifest.metadata.artifact, signal);
   return { manifest, index: parseTerrainIndex(JSON.parse(new TextDecoder().decode(indexBytes)), manifest) };
 }

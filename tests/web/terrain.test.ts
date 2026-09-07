@@ -33,3 +33,20 @@ describe('terrain contract', () => {
     expect(terrainPixel(NaN, 28)).toBeNull();
   });
 });
+
+import { contextTile, detailWeight } from '../../apps/web/lib/terrain-display';
+
+describe('Asia display coverage', () => {
+  it('resolves regional fallback tiles and rejects paths outside coverage', () => {
+    expect(contextTile('9/400/200.png')).toMatchObject({ key: '5/25/12.png', scale: 16 });
+    expect(contextTile('2/2/1.png').key).toBe('2/2/1.png');
+    expect(() => contextTile('9/0/0.png')).toThrow();
+    expect(() => contextTile('../manifest.json')).toThrow();
+  });
+  it('preserves detailed terrain across Nepal and feathers only in the outer context buffer', () => {
+    expect(detailWeight(80.1, 30.45)).toBe(1);
+    expect(detailWeight(88.2, 26.4)).toBe(1);
+    expect(detailWeight(90, 28)).toBe(0);
+    expect(detailWeight(89.5, 28)).toBe(0.5);
+  });
+});

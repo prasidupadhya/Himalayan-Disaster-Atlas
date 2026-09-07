@@ -40,7 +40,7 @@ input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--accent); }
 .map-caption { position: absolute; left: 1rem; top: 1rem; right: 4rem; width: fit-content; pointer-events: none; color: #e5f2f5; background: #122b3dee; padding: .4rem .75rem; font-size: .85rem; }
 .dot { display: inline-block; width: 8px; height: 8px; background: #5eead4; border-radius: 50%; margin-right: .4rem; }
 .boundary-key { display: inline-block; width: 13px; height: 9px; background: #35b6a555; border: 1px solid #8fd8cf; margin-right: .45rem; }
-.admin-map-label { color: white; background: #122b3dcc; border-radius: 3px; padding: .1rem .35rem; font-size: .68rem; font-weight: 700; white-space: nowrap; pointer-events: none; text-shadow: 0 1px 1px #000; }
+.admin-map-label, .country-overview-label { color: white; background: #122b3dcc; border-radius: 3px; padding: .1rem .35rem; font-size: .68rem; font-weight: 700; white-space: nowrap; pointer-events: none; text-shadow: 0 1px 1px #000; }
 .reset-map { position: absolute; left: 1rem; bottom: 2rem; }
 .map-message { position: absolute; top: 5rem; left: 1rem; right: 1rem; padding: 1rem; background: white; }
 .feature-list { padding: 1.5rem 2rem; }
@@ -68,3 +68,6 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .terrain-controls input[type="number"] { padding: .45rem; border: 1px solid #8ba0ab; border-radius: .25rem; }
 .terrain-controls form button { margin-top: .5rem; }
 .terrain-controls [role="status"] { overflow-wrap: anywhere; }
+
+.map .maplibregl-ctrl-attrib.maplibregl-compact-show { width: min(22rem, calc(100vw - 4rem)); }
+.map .maplibregl-ctrl-attrib-inner { max-height: 8rem; overflow: auto; white-space: normal; overflow-wrap: anywhere; }

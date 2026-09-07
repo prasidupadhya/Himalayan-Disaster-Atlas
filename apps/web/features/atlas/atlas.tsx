@@ -50,13 +50,24 @@ export function Atlas() {
           map = new MapLibre({
             container: container.current,
             style: { version: 8, sources: {}, layers: [{ id: 'background', type: 'background', paint: { 'background-color': '#152737' } }] },
-            center: [84.1, 28.4], zoom: 4.5, minZoom: 3.5, maxZoom: 13,
+            center: [84.1, 28.4], zoom: 4.5, minZoom: 2, maxZoom: 13,
             attributionControl: false,
-            // Tight maxBounds imposes an implicit minimum zoom that can defeat
-            // fitBounds on narrow screens. Frame Nepal without that constraint.
+            // Broad Asia bounds cap zoom-out/panning without squeezing the Nepal view.
+            maxBounds: [[30, -15], [165, 65]],
             renderWorldCopies: false,
           });
           mapRef.current = map;
+          const limitAsiaView = () => {
+            if (!map) return;
+            const { clientWidth: width, clientHeight: height } = map.getContainer();
+            const mercatorY = (latitude: number) => (1 - Math.asinh(Math.tan(latitude * Math.PI / 180)) / Math.PI) / 2;
+            const zoom = Math.max(2, Math.log2(width * 360 / (512 * 135)), Math.log2(height / (512 * (mercatorY(-15) - mercatorY(65)))));
+            // Match the geographic constraint with an explicit zoom floor so
+            // the minus control disables at the actual overview limit.
+            map.setMinZoom(Math.ceil(zoom * 100) / 100);
+          };
+          limitAsiaView();
+          map.on('resize', limitAsiaView);
           map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
           const attributionControl = new AttributionControl({ compact: true });
           map.addControl(attributionControl, 'bottom-right');
@@ -86,6 +97,19 @@ export function Atlas() {
                 feature.properties.label_longitude!, feature.properties.label_latitude!,
               ]).addTo(map));
             }
+            const countryLabel = document.createElement('span');
+            countryLabel.className = 'country-overview-label';
+            countryLabel.textContent = 'Nepal';
+            const country = datasets[0].collection.features[0].properties;
+            const overviewMarker = new MapMarker({ element: countryLabel }).setLngLat([country.label_longitude!, country.label_latitude!]).addTo(map);
+            const updateLabels = () => {
+              const overview = map!.getZoom() < 4.5;
+              for (const marker of markers) marker.getElement().style.display = overview ? 'none' : '';
+              countryLabel.style.display = overview ? '' : 'none';
+            };
+            map.on('zoom', updateLabels);
+            map.once('remove', () => overviewMarker.remove());
+            updateLabels();
             frameNepal(map, datasets[0].metadata.spatial_coverage.bbox);
             map.once('idle', () => {
               if (controller.signal.aborted) return;

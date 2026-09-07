@@ -5,7 +5,8 @@ import { DataState } from '../../components/data-state';
 import { Evidence } from '../../components/evidence';
 import { UnavailableError } from '../../lib/datasets';
 import { escapeAttribution } from '../../lib/map-layers';
-import { loadTerrain, loadTerrainTile, sampleTerrain, type TerrainDataset } from '../../lib/terrain';
+import { CONTEXT_MANIFEST, loadTerrain, sampleTerrain, type TerrainDataset } from '../../lib/terrain';
+import { createTerrainDisplay } from '../../lib/terrain-display';
 import type { Resource } from '../../lib/resource';
 
 let protocolId = 0;
@@ -29,7 +30,8 @@ export function Terrain({ map }: { map: Map | null }) {
     let dispose: (() => void) | undefined;
     void (async () => {
       try {
-        const data = await loadTerrain(controller.signal);
+        const [data, context] = await Promise.all([loadTerrain(controller.signal), loadTerrain(controller.signal, CONTEXT_MANIFEST)]);
+        const displayTile = createTerrainDisplay(data, context);
         const { addProtocol, removeProtocol } = await import('maplibre-gl');
         if (controller.signal.aborted) return;
         const id = `nepal-terrain@${data.manifest.metadata.dataset_version}`;
@@ -37,7 +39,7 @@ export function Terrain({ map }: { map: Map | null }) {
         addProtocol(protocol, async (request, abort) => {
           try {
             const key = request.url.slice(`${protocol}://`.length);
-            return { data: await loadTerrainTile(data, key, abort.signal) };
+            return { data: await displayTile(key, abort.signal) };
           } catch (error) {
             if (!abort.signal.aborted && !controller.signal.aborted) {
               setResource({ status: error instanceof UnavailableError ? 'unavailable' : 'error', message: 'Terrain tiles could not be verified. Retry to reload this layer.' });
@@ -49,8 +51,8 @@ export function Terrain({ map }: { map: Map | null }) {
           }
         });
         map.addSource(id, { type: 'raster-dem', tiles: [`${protocol}://{z}/{x}/{y}.png`],
-          tileSize: 256, minzoom: 5, maxzoom: 9, encoding: 'mapbox',
-          bounds: data.manifest.metadata.spatial_coverage.bbox, attribution: escapeAttribution(data.manifest.metadata.attribution) });
+          tileSize: 256, minzoom: 1, maxzoom: 9, encoding: 'mapbox',
+          bounds: context.manifest.metadata.spatial_coverage.bbox, attribution: escapeAttribution(data.manifest.metadata.attribution + ' | ' + context.manifest.metadata.attribution) });
         map.addLayer({ id: `${id}-hillshade`, type: 'hillshade', source: id, paint: {
           'hillshade-shadow-color': '#172a30', 'hillshade-highlight-color': '#e4e8d3',
           'hillshade-accent-color': '#78917b', 'hillshade-exaggeration': 0.65,
@@ -106,6 +108,7 @@ export function Terrain({ map }: { map: Map | null }) {
   return <section className="terrain-controls" aria-label="Terrain" data-terrain-state={resource.status}>
     <h2>Terrain</h2>
     <p>Copernicus GLO-90 · surface elevation</p>
+    <p className="muted">Asia overview: Mapzen terrain. Nepal elevation inspection: Copernicus GLO-90. Zoom out to explore the surrounding region.</p>
     {map ? <DataState state={resource} retry={() => {
       setResource({ status: 'loading' }); setHillshade(true); setThreeD(false); setExaggeration(1);
       setAttempt(value => value + 1);
