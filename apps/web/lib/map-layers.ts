@@ -23,10 +23,18 @@ export function mountDataset(map: Map, dataset: Dataset) {
 
 const ADMIN_STYLE = {
   0: { color: '#f5f8fa', opacity: 0, width: 2.5, minzoom: 0 },
-  1: { color: '#35b6a5', opacity: 0.22, width: 1.4, minzoom: 0 },
-  2: { color: '#8fd8cf', opacity: 0.05, width: 0.9, minzoom: 6 },
-  3: { color: '#c8eee9', opacity: 0.04, width: 0.65, minzoom: 8 },
+  1: { color: '#35b6a5', opacity: 0.34, width: 2.2, minzoom: 0 },
+  2: { color: '#8fd8cf', opacity: 0, width: 0.85, minzoom: 6 },
+  3: { color: '#c8eee9', opacity: 0.02, width: 0.55, minzoom: 8 },
 } as const;
+
+// Display-only palette: the colors distinguish provinces without encoding a
+// measurement, status, or hazard classification.
+const PROVINCE_COLORS: ExpressionSpecification = ['match', ['get', 'pcode'],
+  'NP01', '#2f8f9d', 'NP02', '#c9825b', 'NP03', '#6f9ec8',
+  'NP04', '#8b74b8', 'NP05', '#b58a4a', 'NP06', '#5f9c78',
+  'NP07', '#b56576', '#35b6a5',
+];
 
 /** Mount one administrative level with zoom-aware polygons and selection state. */
 export function mountAdministrativeDataset(map: Map, dataset: Dataset) {
@@ -45,12 +53,14 @@ export function mountAdministrativeDataset(map: Map, dataset: Dataset) {
   const fill = `${source}-fill`;
   const line = `${source}-line`;
   const specialColor: ExpressionSpecification = ['case', ['==', ['get', 'admin_category'], 'special_area'], '#f0ad4e', style.color];
+  const fillColor = level === 1 ? PROVINCE_COLORS : specialColor;
+  const lineColor = level === 1 ? '#e4faf6' : specialColor;
   map.addLayer({ id: fill, source, type: 'fill', minzoom: style.minzoom, paint: {
-    'fill-color': specialColor,
+    'fill-color': fillColor,
     'fill-opacity': ['case', ['boolean', ['feature-state', 'selected'], false], Math.max(style.opacity, 0.42), style.opacity],
   } });
   map.addLayer({ id: line, source, type: 'line', minzoom: style.minzoom, paint: {
-    'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', specialColor],
+    'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', lineColor],
     'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 3, style.width],
   } });
   return {

@@ -65,7 +65,7 @@ export function Atlas() {
               ]).addTo(map));
             }
             const [west, south, east, north] = datasets[0].metadata.spatial_coverage.bbox;
-            map.fitBounds([[west, south], [east, north]], { padding: 50, duration: 0 });
+            map.fitBounds([[west, south], [east, north]], { padding: 95, maxZoom: 5.05, duration: 0 });
             map.once('idle', () => { if (!controller.signal.aborted) setMapReady(true); });
           });
         } catch {
@@ -128,7 +128,7 @@ export function Atlas() {
         <button className="reset-map" disabled={!mapReady} onClick={() => {
           if (datasets) {
             const [west, south, east, north] = datasets[0].metadata.spatial_coverage.bbox;
-            mapRef.current?.fitBounds([[west, south], [east, north]], { padding: 50, duration: 0 });
+            mapRef.current?.fitBounds([[west, south], [east, north]], { padding: 95, maxZoom: 5.05, duration: 0 });
           }
         }}>Reset view</button>
       </div>
