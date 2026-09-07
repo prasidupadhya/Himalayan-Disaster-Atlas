@@ -194,6 +194,25 @@ def validate_dataset(metadata, collection):
             order_valid = not (warning is not None and danger is not None and warning > danger)
             if properties['threshold_order_valid'] != order_valid:
                 raise ValueError('Hydrology threshold consistency flag is incorrect')
+        if properties.get('entity_type') == 'rainfall_station':
+            required = {
+                'source_id', 'search_terms', 'station_name', 'basin', 'observation_time', 'station_status',
+                'station_series_id', 'provider', 'elevation_m', 'coordinate_order_repaired',
+                'rainfall_1h_mm', 'rainfall_3h_mm', 'rainfall_6h_mm', 'rainfall_12h_mm', 'rainfall_24h_mm',
+                'rainfall_quality_warning',
+            }
+            if not required.issubset(properties) or geometry['type'] != 'Point':
+                raise ValueError('Rainfall stations require complete Point metadata')
+            if properties['value'] != properties['rainfall_24h_mm']:
+                raise ValueError('Rainfall value must equal source 24-hour accumulation')
+            if properties['rainfall_24h_mm'] is None:
+                if properties['unit'] is not None:
+                    raise ValueError('Unknown rainfall cannot carry a unit')
+            elif properties['unit'] != 'mm':
+                raise ValueError('Rainfall must use millimetres')
+            values = [properties[f'rainfall_{hours}h_mm'] for hours in (1, 3, 6, 12, 24)]
+            if any(value is not None and value < 0 for value in values):
+                raise ValueError('Rainfall cannot be negative')
         for lon, lat in positions(geometry['coordinates']):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError('Geometry outside declared spatial coverage')
