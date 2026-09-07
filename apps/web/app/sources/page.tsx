@@ -8,6 +8,9 @@ export default function SourcesPage() {
     <p>The population layer uses <a href="https://hub.worldpop.org/geodata/summary?id=74559">WorldPop Global 2015–2030 R2025A v1</a>, Nepal model year 2025, constrained population counts at 3 arc-second resolution in EPSG:4326. The exact source GeoTIFF is pinned by SHA-256 and identified by DOI <a href="https://doi.org/10.5258/SOTON/WP00839">10.5258/SOTON/WP00839</a>.</p>
     <p>The source raster declares CC BY 4.0. WorldPop also publishes an ODbL derived-data clause for some building-derived products, so that licensing nuance is retained in the release metadata for review. The 2025 values are modelled estimates rather than a census observed at each grid cell.</p>
 
+    <h2>Exposure calculations</h2>
+    <p>Exposure results combine the existing WorldPop 2025 R2025A v1 native population grid, OpenStreetMap infrastructure and hydropower inventories, and COD-AB v02 district boundaries. Prepared footprint requests document their hypothetical buffer assumptions and the exact HydroRIVERS release hashes. They are derived estimates, not an additional observed hazard dataset. Input source/licence notices remain applicable, including WorldPop’s documented licensing nuance and OSM ODbL requirements.</p>
+
     <h2>Downstream connectivity</h2>
     <p>Downstream trace reuses both pinned FAO Rivers 2026 / HydroRIVERS Nepal partitions, version 1.0.0. It introduces no new geographic source. <a href="https://data.hydrosheds.org/file/technical-documentation/HydroRIVERS_TechDoc_v10.pdf">HydroRIVERS technical documentation</a> defines NEXT_DOWN and LENGTH_KM. Per-result input hashes identify the exact releases; the source river evidence and licensing remain applicable.</p>
 

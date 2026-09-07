@@ -21,6 +21,7 @@ import { Landslides } from '../landslides/landslides';
 import { Hydropower } from '../hydropower/hydropower';
 import { Infrastructure } from '../infrastructure/infrastructure';
 import { Population } from '../population/population';
+import { ExposureEngine } from '../exposure-engine/exposure-engine';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -189,6 +190,7 @@ export function Atlas() {
       <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
       <Mountains key={`mountains-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Rivers key={`rivers-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <ExposureEngine key={`exposure-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Glaciers key={`glaciers-${attempt}`} map={mapReady ? mapRef.current : null} />
       <GlacialLakes key={`glacial-lakes-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Hydrology key={`hydrology-${attempt}`} map={mapReady ? mapRef.current : null} />
