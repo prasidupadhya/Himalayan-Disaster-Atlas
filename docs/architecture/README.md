@@ -6,6 +6,8 @@ Use React + TypeScript + Next.js App Router with `output: 'export'` and trailing
 
 `app/` composes routes. `features/<feature>/` owns domain UI; shared `components/` implements evidence and resource-state patterns. `packages/contracts` owns browser validation. Components cannot import acquisition code, raw data, processed data or Node APIs. ESLint enforces that boundary. Heavy map code is dynamically imported only on the Atlas route.
 
+The root `<body>` suppresses hydration attribute warnings one level deep because browser extensions such as Grammarly add attributes before React hydrates. This is covered by a development-mode regression test. Mismatches inside application content remain visible and must be fixed rather than suppressed.
+
 MapLibre GL JS is the primary map engine. Foundation uses a local background style and synthetic GeoJSON, so no external basemap or tile service is needed. Map layers mount only after both validation and style load. Each source ID includes dataset ID and version. The renderer promotes a private copy of each canonical string ID so tile encoding cannot discard selection identity. Public feature properties are unchanged. The shared layer controller sets visibility and disposes layers before sources; unmount aborts pending requests and removes the map. New style-switching features must explicitly dispose and remount managed layers after style changes.
 
 MapLibre 6 uses an external ES module worker. Root dev/build scripts copy the pinned worker, shared module and BSD notice into an ignored, versioned public vendor directory and configure its local URL explicitly; Next bundling must not infer the worker URL. Readiness waits for the map to become idle after source processing.
