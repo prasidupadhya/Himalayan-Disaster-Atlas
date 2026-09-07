@@ -23,12 +23,15 @@ export interface FeatureProperties {
   admin_category?: 'country' | 'province' | 'district' | 'local_level' | 'special_area';
   pcode?: string; parent_pcode?: string | null; parent_name?: string | null; aliases?: string[];
   label_longitude?: number; label_latitude?: number; valid_from?: string; valid_to?: string | null; source_version?: string;
-  entity_type?: 'mountain' | 'river'; source_id?: string; search_terms?: string[]; feature_code?: string;
+  entity_type?: 'mountain' | 'river' | 'glacier'; source_id?: string; search_terms?: string[]; feature_code?: string;
   source_modified?: string; elevation_reference?: string;
   river_name?: string | null; downstream_id?: string | null; downstream_in_release?: boolean; main_river_id?: string;
   flow_order?: number; length_km?: number; distance_downstream_km?: number; distance_upstream_km?: number;
   catchment_area_km2?: number; upstream_area_km2?: number; average_discharge_m3s?: number;
   flow_regime?: 'perennial' | 'intermittent' | 'unknown'; hydrobasin_level12_id?: string;
+  glacier_name?: string | null; glims_id?: string; outline_date?: string; area_km2?: number;
+  centroid_longitude?: number; centroid_latitude?: number; elevation_min_m?: number; elevation_max_m?: number;
+  elevation_mean_m?: number; dem_source?: string; inventory_region?: string; display_geometry_repaired?: boolean;
 }
 export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'GeometryCollection' }>, FeatureProperties>;
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
@@ -82,6 +85,12 @@ export function parseDataset(input: unknown): Dataset {
       if (!['LineString', 'MultiLineString'].includes(f.geometry.type) || !p.source_id || !p.search_terms?.length || !p.main_river_id || p.flow_order === undefined || p.length_km === undefined || p.distance_downstream_km === undefined || p.distance_upstream_km === undefined || p.catchment_area_km2 === undefined || p.upstream_area_km2 === undefined || p.average_discharge_m3s === undefined || p.downstream_in_release === undefined || !p.flow_regime || !p.hydrobasin_level12_id) throw new Error('River features require complete network metadata');
       if (p.downstream_id === p.source_id) throw new Error('River reach cannot flow to itself');
       if (p.value !== p.average_discharge_m3s || p.unit !== 'm3/s') throw new Error('River measurement must be average discharge');
+    }
+    if (f.properties.entity_type === 'glacier') {
+      const p = f.properties;
+      if (!['Polygon', 'MultiPolygon'].includes(f.geometry.type) || !p.source_id || !p.glims_id || !p.outline_date || p.area_km2 === undefined || p.centroid_longitude === undefined || p.centroid_latitude === undefined || p.elevation_min_m === undefined || p.elevation_max_m === undefined || p.elevation_mean_m === undefined || !p.dem_source || !p.inventory_region || p.display_geometry_repaired === undefined || !p.search_terms?.length) throw new Error('Glacier features require complete inventory metadata');
+      if (p.value !== p.area_km2 || p.unit !== 'km2' || p.area_km2 <= 0) throw new Error('Glacier measurement must be positive source area');
+      if (p.elevation_min_m > p.elevation_mean_m || p.elevation_mean_m > p.elevation_max_m) throw new Error('Glacier elevation statistics are inconsistent');
     }
     if (coordinates(f.geometry.coordinates).some(([lon, lat]) => lon < west || lon > east || lat < south || lat > north)) throw new Error('Geometry outside coverage');
     const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flat() : [];

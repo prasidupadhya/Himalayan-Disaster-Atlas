@@ -161,6 +161,45 @@ export function mountRiverDataset(map: Map, dataset: Dataset) {
   };
 }
 
+/** Mount one RGI glacier partition with dated-inventory styling and stable selection IDs. */
+export function mountGlacierDataset(map: Map, dataset: Dataset) {
+  if (dataset.collection.features.some(feature => feature.properties.entity_type !== 'glacier')) throw new Error('Glacier dataset contains a non-glacier feature');
+  const source = `${dataset.metadata.dataset_id}@${dataset.metadata.dataset_version}`;
+  if (map.getSource(source)) throw new Error(`Dataset already mounted: ${source}`);
+  const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({
+    ...feature, properties: { ...feature.properties, __atlas_id: feature.id },
+  })) };
+  map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
+  const fill = `${source}-fill`;
+  const line = `${source}-line`;
+  map.addLayer({ id: fill, source, type: 'fill', minzoom: 5.5, paint: {
+    'fill-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#9dd9ef'],
+    'fill-opacity': ['case', ['boolean', ['feature-state', 'selected'], false], 0.72, 0.42],
+  } });
+  map.addLayer({ id: line, source, type: 'line', minzoom: 5.5, paint: {
+    'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#d8f2fb'],
+    'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.8, 0.9],
+  } });
+  const ids = new Set(dataset.collection.features.map(feature => String(feature.id)));
+  let selected: string | null = null;
+  const layers = [fill, line];
+  return {
+    source,
+    layers,
+    interactiveLayers: [fill],
+    setVisible(visible: boolean) { for (const layer of layers) map.setLayoutProperty(layer, 'visibility', visible ? 'visible' : 'none'); },
+    setSelected(id: string | null) {
+      if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false });
+      selected = id && ids.has(id) ? id : null;
+      if (selected) map.setFeatureState({ source, id: selected }, { selected: true });
+    },
+    dispose() {
+      for (const layer of [...layers].reverse()) if (map.getLayer(layer)) map.removeLayer(layer);
+      if (map.getSource(source)) map.removeSource(source);
+    },
+  };
+}
+
 /** MapLibre attribution accepts HTML; metadata is treated as plain text. */
 export function escapeAttribution(value: string): string {
   return value.replace(/[&<>\"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '\"': '&quot;', "'": '&#39;' })[char]!);

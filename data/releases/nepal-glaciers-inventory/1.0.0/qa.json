@@ -1,0 +1,19 @@
+{
+  "source_version": "RGI 7.0",
+  "source_sha256": {
+    "14": "89984645af2960a675e2b84c15d91de5058487e6ba15c8203eb41b597d4744b8",
+    "15": "f1b982d989b5647e50dd3fe7dd6891c6152da0b2a8aad8f089d29dd23fbf8be9"
+  },
+  "features": 4593,
+  "named_glaciers": 95,
+  "display_geometries_repaired": 287,
+  "total_source_area_km2": 5225.327899808428,
+  "outline_date_min": "1992-09-22",
+  "outline_date_max": "2010-06-10",
+  "presentation_partitions": {
+    "nepal-glaciers-west": 2786,
+    "nepal-glaciers-central": 815,
+    "nepal-glaciers-east": 992
+  },
+  "display_simplification_tolerance_degrees": 0.0001
+}

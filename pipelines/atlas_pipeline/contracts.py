@@ -131,6 +131,21 @@ def validate_dataset(metadata, collection):
                 raise ValueError('River reach cannot flow to itself')
             if properties['value'] != properties['average_discharge_m3s'] or properties['unit'] != 'm3/s':
                 raise ValueError('River measurement must be average discharge')
+        if properties.get('entity_type') == 'glacier':
+            required = {
+                'source_id', 'search_terms', 'glacier_name', 'glims_id', 'outline_date',
+                'area_km2', 'centroid_longitude', 'centroid_latitude', 'elevation_min_m',
+                'elevation_max_m', 'elevation_mean_m', 'dem_source', 'inventory_region',
+                'display_geometry_repaired',
+            }
+            if not required.issubset(properties):
+                raise ValueError('Glacier features require complete inventory metadata')
+            if geometry['type'] not in {'Polygon', 'MultiPolygon'}:
+                raise ValueError('Glacier features require polygon geometry')
+            if properties['value'] != properties['area_km2'] or properties['unit'] != 'km2' or properties['area_km2'] <= 0:
+                raise ValueError('Glacier measurement must be positive source area')
+            if not properties['elevation_min_m'] <= properties['elevation_mean_m'] <= properties['elevation_max_m']:
+                raise ValueError('Glacier elevation statistics are inconsistent')
         for lon, lat in positions(geometry['coordinates']):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError('Geometry outside declared spatial coverage')

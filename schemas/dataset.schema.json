@@ -598,7 +598,8 @@
                   "entity_type": {
                     "enum": [
                       "mountain",
-                      "river"
+                      "river",
+                      "glacier"
                     ]
                   },
                   "source_id": {
@@ -673,6 +674,51 @@
                   "hydrobasin_level12_id": {
                     "type": "string",
                     "minLength": 1
+                  },
+                  "glacier_name": {
+                    "type": ["string", "null"]
+                  },
+                  "glims_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "outline_date": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "area_km2": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "centroid_longitude": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180
+                  },
+                  "centroid_latitude": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90
+                  },
+                  "elevation_min_m": {
+                    "type": "number"
+                  },
+                  "elevation_max_m": {
+                    "type": "number"
+                  },
+                  "elevation_mean_m": {
+                    "type": "number"
+                  },
+                  "dem_source": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "inventory_region": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "display_geometry_repaired": {
+                    "type": "boolean"
                   }
                 },
                 "required": [
