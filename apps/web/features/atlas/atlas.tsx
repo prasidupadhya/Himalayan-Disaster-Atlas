@@ -35,17 +35,25 @@ export function Atlas() {
           data: datasets,
         });
         try {
-          const { Map: MapLibre, Marker: MapMarker, NavigationControl, setWorkerUrl, getVersion } = await import('maplibre-gl');
+          const { AttributionControl, Map: MapLibre, Marker: MapMarker, NavigationControl, setWorkerUrl, getVersion } = await import('maplibre-gl');
           if (controller.signal.aborted || !container.current) return;
           setWorkerUrl(`/vendor/maplibre-gl/${getVersion()}/maplibre-gl-worker.mjs`);
           map = new MapLibre({
             container: container.current,
             style: { version: 8, sources: {}, layers: [{ id: 'background', type: 'background', paint: { 'background-color': '#152737' } }] },
-            center: [84.1, 28.4], zoom: 5.4, minZoom: 5, maxZoom: 13,
+            center: [84.1, 28.4], zoom: 4.5, minZoom: 3.5, maxZoom: 13,
+            attributionControl: false,
             maxBounds: [[79, 25], [90, 32]], renderWorldCopies: false,
           });
           mapRef.current = map;
           map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
+          const attributionControl = new AttributionControl({ compact: true });
+          map.addControl(attributionControl, 'bottom-right');
+          const attribution = container.current?.querySelector<HTMLElement>('.maplibregl-ctrl-attrib');
+          const collapseAttribution = () => attribution?.classList.remove('maplibregl-compact-show');
+          let attributionOpened = false;
+          attribution?.querySelector('.maplibregl-ctrl-attrib-button')?.addEventListener('click', () => { attributionOpened = true; }, { once: true });
+          collapseAttribution();
           map.on('error', () => { if (!controller.signal.aborted) setMapError('The map could not render. You can still inspect the boundary records below.'); });
           map.on('load', () => {
             if (controller.signal.aborted || !map) return;
@@ -65,8 +73,19 @@ export function Atlas() {
               ]).addTo(map));
             }
             const [west, south, east, north] = datasets[0].metadata.spatial_coverage.bbox;
-            map.fitBounds([[west, south], [east, north]], { padding: 95, maxZoom: 5.05, duration: 0 });
-            map.once('idle', () => { if (!controller.signal.aborted) setMapReady(true); });
+            map.fitBounds([[west, south], [east, north]], { padding: { top: 120, right: 80, bottom: 120, left: 80 }, maxZoom: 4.8, duration: 0 });
+            map.once('idle', () => {
+              if (controller.signal.aborted) return;
+              // Attribution can refresh while source metadata settles. Keep it
+              // collapsed during that initial refresh, while leaving the native
+              // toggle interactive once the user opens it.
+              const collapseTimer = window.setInterval(() => {
+                if (attributionOpened) window.clearInterval(collapseTimer);
+                else collapseAttribution();
+              }, 100);
+              window.setTimeout(() => window.clearInterval(collapseTimer), 5000);
+              setMapReady(true);
+            });
           });
         } catch {
           if (!controller.signal.aborted) setMapError('Interactive mapping is unavailable in this browser. The boundary records remain accessible below.');
@@ -128,7 +147,7 @@ export function Atlas() {
         <button className="reset-map" disabled={!mapReady} onClick={() => {
           if (datasets) {
             const [west, south, east, north] = datasets[0].metadata.spatial_coverage.bbox;
-            mapRef.current?.fitBounds([[west, south], [east, north]], { padding: 95, maxZoom: 5.05, duration: 0 });
+            mapRef.current?.fitBounds([[west, south], [east, north]], { padding: { top: 120, right: 80, bottom: 120, left: 80 }, maxZoom: 4.8, duration: 0 });
           }
         }}>Reset view</button>
       </div>

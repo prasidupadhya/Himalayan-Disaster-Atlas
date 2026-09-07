@@ -19,6 +19,12 @@ test('static navigation, WebGL, boundary controls and accessible identification'
   await expect(map).toHaveAttribute('data-map-ready', 'true');
   await expect(page.locator('canvas')).toBeVisible();
   await expect(page.locator('.admin-map-label')).toHaveCount(7);
+  const attribution = page.locator('.maplibregl-ctrl-attrib');
+  await expect(attribution).not.toHaveClass(/maplibregl-compact-show/);
+  await expect(attribution.locator('.maplibregl-ctrl-attrib-inner')).toBeHidden();
+  await attribution.locator('.maplibregl-ctrl-attrib-button').click();
+  await expect(attribution).toHaveClass(/maplibregl-compact-show/);
+  await expect(attribution.locator('.maplibregl-ctrl-attrib-inner')).toBeVisible();
 
   await page.locator('.record-picker select').selectOption('np01');
   await expect(page.getByRole('heading', { name: 'Koshi' })).toBeVisible();
