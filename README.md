@@ -123,6 +123,14 @@ Its core principles are:
 - Lake names remain `UNKNOWN` when absent from the source dataset.
 - Every record explicitly keeps hazard status unassessed: glacier-fed, expanding, or statistically significant does not automatically mean dangerous.
 
+### Downstream trace
+
+- Select a river reach and follow its validated NEXT_DOWN chain across both river partitions.
+- Animate the retained path, pause/replay, fit the route, inspect ordered reaches and download the result with input versions and hashes.
+- Show summed source reach length and distinguish coverage exits from source outlets.
+- Keep lake/glacier outlet connections and future exposure intersections UNKNOWN until evidence-backed inputs exist.
+- See [downstream trace methodology and handoff](docs/downstream-trace.md). This is network connectivity analysis, not a flood footprint or forecast.
+
 ## Evidence, provenance, and data integrity
 
 Every published dataset carries machine-readable metadata describing its source, version, licence, attribution, retrieval date, processing date, spatial and temporal coverage, evidence type, limitations, uncertainty, and update policy.

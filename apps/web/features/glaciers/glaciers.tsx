@@ -105,6 +105,7 @@ export function Glaciers({ map }: { map: Map | null }) {
         <dt>DEM source</dt><dd>{feature.properties.dem_source}</dd>
         <dt>Inventory region</dt><dd>{feature.properties.inventory_region}</dd>
         <dt>Display repair</dt><dd>{feature.properties.display_geometry_repaired ? 'Yes — source WFS display geometry was repaired for rendering' : 'No'}</dd>
+        <dt>Downstream trace</dt><dd>UNKNOWN — this inventory does not identify a river outlet. <a href="#downstream-trace">Trace a separately selected river reach</a>.</dd>
       </dl>
     </> : <p>Select a glacier to inspect its stable RGI/GLIMS identity, dated outline, source area and inventory metadata.</p>}</div>
     {evidence && <details><summary>Glacier source & limitations</summary><Evidence metadata={evidence} /></details>}

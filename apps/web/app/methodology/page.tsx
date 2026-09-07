@@ -5,6 +5,11 @@ export default function MethodologyPage() {
     <p className="eyebrow">Methodology</p><h1>Evidence before interpretation.</h1>
     <p>Every published dataset carries its source, version, dates, license, processing method, coverage, limitations, and uncertainty. Missing measurements remain UNKNOWN.</p>
 
+    <h2 id="downstream-method">Downstream trace</h2>
+    <p>The Atlas combines both verified Nepal river partitions and follows HYRIV_ID / NEXT_DOWN pointers from a selected whole reach. Duplicate IDs, inconsistent internal links, invalid lengths and cycles prevent tracing. Each retained reach is counted once, and LENGTH_KM values are summed in kilometres. The first downstream ID outside this release ends the trace with a coverage-boundary notice; an absent source connection is labelled a source outlet.</p>
+    <p>Results are ATLAS DERIVED network analyses. Gold lines and playback show reach order, not a flood footprint, flow velocity or travel time. The selected reach is included in full, irrespective of where it was clicked. Source geometry is unchanged, with no inferred connections across gaps. The downloaded JSON records method version, ordered reach IDs, termination, source versions, hashes and limitations.</p>
+    <p>Lake/glacier outlet links and settlement, infrastructure and population intersections remain UNKNOWN. A shared basin or nearby river is insufficient to establish an outlet connection. No terrain-flow or hydraulic model is used. See the <a href="https://data.hydrosheds.org/file/technical-documentation/HydroRIVERS_TechDoc_v10.pdf">HydroRIVERS attribute definitions</a>.</p>
+
     <h2>Glacial-lake preparation</h2>
     <p>The Atlas pins the GLO v1.02 Sentinel-2 unique-lake centroid and polygon-attribute GeoPackages by SHA-256 and joins them by stable GLO_ID. The EPSG:4326 source centroids are used directly for browser geometry, while source equal-area polygon area/perimeter attributes are retained without reprojecting those polygons.</p>
     <p>AREA_DISSOLVED is the source dissolved maximum mapped extent across 2017–2024, not a current lake-area measurement. Expansion rate, uncertainty and significance are source time-series/statistical fields and are never converted into a hazard class. Specific glacier and river links remain UNKNOWN because this source layer does not identify them.</p>

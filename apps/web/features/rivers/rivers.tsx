@@ -8,6 +8,7 @@ import { Evidence } from '../../components/evidence';
 import { loadDataset, RIVER_MANIFESTS, UnavailableError } from '../../lib/datasets';
 import { mountRiverDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
+import { DownstreamTrace } from '../downstream-trace/downstream-trace';
 
 export function Rivers({ map }: { map: Map | null }) {
   const [resource, setResource] = useState<Resource<Dataset[]>>({ status: 'loading' });
@@ -89,6 +90,7 @@ export function Rivers({ map }: { map: Map | null }) {
     <label className="thematic-picker">Find a reach<input type="search" value={query} disabled={!datasets} placeholder="HYRIV 40669746…" onChange={event => setQuery(event.target.value)} /></label>
     <label className="thematic-picker">River reach<select value={selected} disabled={!datasets} onChange={event => choose(event.target.value)}>
       <option value="">Select a reach…</option>
+      {feature && !matches.some(item => item.id === feature.id) && <option value={String(feature.id)}>HYRIV {feature.properties.source_id} (selected on map)</option>}
       {matches.map(item => <option key={String(item.id)} value={String(item.id)}>HYRIV {item.properties.source_id} · order {item.properties.flow_order} · {item.properties.average_discharge_m3s?.toLocaleString('en-US')} m³/s</option>)}
     </select></label>
     <p className="muted">The source does not provide river names for these reaches. Search and selection therefore use stable HYRIV_ID values.</p>
@@ -108,5 +110,6 @@ export function Rivers({ map }: { map: Map | null }) {
       </dl>
     </> : <p>Select a reach to inspect its topology, source measurements and stable downstream linkage.</p>}</div>
     {evidence && <details><summary>River source & limitations</summary><Evidence metadata={evidence} /></details>}
+    <DownstreamTrace key={`${selected}-${attempt}`} map={map} datasets={datasets} start={feature?.properties.source_id} />
   </section>;
 }
