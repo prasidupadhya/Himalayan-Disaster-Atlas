@@ -135,7 +135,7 @@
           "properties": {
             "path": {
               "type": "string",
-              "pattern": "^/data/nepal-terrain/[0-9]+\\.[0-9]+\\.[0-9]+/tiles\\.json$"
+              "pattern": "^/data/(?:nepal-terrain|asia-terrain-context)/[0-9]+\\.[0-9]+\\.[0-9]+/tiles\\.json$"
             },
             "format": {
               "const": "TerrainRGB-index"
@@ -147,7 +147,7 @@
             "byte_size": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 65536
+              "maximum": 131072
             }
           }
         }
@@ -175,7 +175,10 @@
           "const": "EPSG:3857"
         },
         "vertical_datum": {
-          "const": "EGM2008 (EPSG:3855)"
+          "enum": [
+            "EGM2008 (EPSG:3855)",
+            null
+          ]
         },
         "unit": {
           "const": "m"
@@ -184,10 +187,16 @@
           "const": 256
         },
         "minzoom": {
-          "const": 5
+          "enum": [
+            1,
+            5
+          ]
         },
         "maxzoom": {
-          "const": 9
+          "enum": [
+            5,
+            9
+          ]
         },
         "encoding": {
           "const": "mapbox"
@@ -196,17 +205,33 @@
           "type": "null"
         },
         "native_crs": {
-          "const": "EPSG:4326"
+          "enum": [
+            "EPSG:4326",
+            "EPSG:3857"
+          ]
         },
         "native_resolution_degree": {
-          "type": "number",
-          "exclusiveMinimum": 0
+          "anyOf": [
+            {
+              "type": "number",
+              "exclusiveMinimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "resampling": {
-          "const": "bilinear"
+          "enum": [
+            "bilinear",
+            "none"
+          ]
         },
         "tile_count": {
-          "const": 341
+          "enum": [
+            341,
+            682
+          ]
         }
       }
     }

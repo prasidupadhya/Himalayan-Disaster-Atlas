@@ -1,0 +1,11 @@
+# Asia terrain context 1.0.0
+
+The atlas snapshots [Mapzen Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) from the public `elevation-tiles-prod` S3 bucket. `pipelines/terrain-context-sources.json` records every URL, actual retrieval timestamp, original hash, size and source header. `npm` builds never acquire tiles; run `.venv/bin/python -m pipelines.atlas_pipeline.terrain_context` to acquire the pinned files offline. Published releases are immutable.
+
+The snapshot contains 682 256 px XYZ tiles at zooms 1–5 for the eastern hemisphere, with a buffer beyond the interactive Asia extent (30–165 E, 15 S–65 N). It occupies about 20.3 MiB. The viewport requests tiles on demand, validates a bounded index and verifies tile bytes. Native Terrarium decoding follows the [provider format](https://github.com/tilezen/joerd/blob/master/docs/formats.md): `R*256+G+B/256-32768`. The display derivative encodes heights in Mapbox RGB. Negative heights are rendered at sea level, not as seabed relief. All licence notices are retained in LICENSE.txt; provider attributions are available in map attribution and the source/catalog pages.
+
+This is overview context only. Source resolution, acquisition periods and vertical references vary; the unified vertical datum and local accuracy are UNKNOWN. The finest overview pixels are about 4.3 km at 28 N. Zooming closer interpolates those pixels and adds no detail. No context elevations are returned as measurements.
+
+The display adapter fills requested high-zoom tiles outside the Copernicus domain from registered context ancestor tiles. Interpolation uses decoded numerical heights, not RGB channels. A one-degree feather inside the outer edge of the buffered Copernicus rectangle prevents an abrupt terrain edge. That buffer is outside Nepal; original Copernicus files and the elevation inspector remain unchanged. This display combination is not a datum-normalized analytical mosaic and must not be used for hazard/hydrology calculations.
+
+An explicit minimum zoom, recomputed from viewport dimensions, and broad Asia maxBounds stop excessive zoom-out/panning. Coverage extends beyond those bounds to support pitched views without showing the edge of a terrain square.

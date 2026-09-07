@@ -11,3 +11,5 @@ Dependencies retain their own licenses. The lockfile pins installed packages; di
 Every future dataset needs its precise release license, source attribution, redistribution constraints, and source/license links recorded. Accessibility of a download or API does not grant redistribution rights. If terms are unclear, do not publish the artifact as an authoritative public layer.
 
 Terrain uses Copernicus WorldDEM-90 under its free and open licence, which retains attribution and liability obligations. Each terrain release includes LICENSE.txt and its source URL. See [terrain dataset notes](../datasets/nepal-terrain.md) for redistribution requirements.
+
+The Asia context snapshot uses Mapzen Terrain Tiles with source-specific terms. Full provider attribution notices are included in its versioned LICENSE.txt; see [context notes](../datasets/asia-terrain-context.md).

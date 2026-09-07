@@ -59,3 +59,38 @@ def verify_terrain(path, public=None):
             if (path / name).read_bytes() != (public / name).read_bytes():
                 raise ValueError(f'Public terrain differs: {name}')
     return manifest
+
+
+def verify_context(path, public=None):
+    manifest = json.loads((path / 'manifest.json').read_text())
+    VALIDATOR.validate(manifest)
+    m = manifest['metadata']
+    if m['dataset_id'] != 'asia-terrain-context' or m['artifact']['path'] != f"/data/asia-terrain-context/{m['dataset_version']}/tiles.json":
+        raise ValueError('Context identity mismatch')
+    if m['status'] != 'ATLAS_DERIVED' or m['evidence_type'] != 'derived' or m['is_fixture']:
+        raise ValueError('Context evidence mismatch')
+    content = (path / 'tiles.json').read_bytes()
+    if hashlib.sha256(content).hexdigest() != m['artifact']['sha256'] or len(content) != m['artifact']['byte_size']:
+        raise ValueError('Context index checksum mismatch')
+    index = json.loads(content)
+    expected = {f'{z}/{x}/{y}.png' for z in range(1, 6) for x in range(2 ** (z - 1), 2 ** z) for y in range(2 ** z)}
+    if set(index) != expected or manifest['raster']['tile_count'] != 682:
+        raise ValueError('Incomplete context pyramid')
+    for key, item in index.items():
+        tile = (path / key).read_bytes()
+        if len(tile) != item['byte_size'] or len(tile) > 262144 or hashlib.sha256(tile).hexdigest() != item['sha256']:
+            raise ValueError('Context tile checksum mismatch')
+        with Image.open(path / key) as image:
+            if image.mode != 'RGB' or image.size != (256, 256):
+                raise ValueError('Invalid context PNG')
+    sources = json.loads((path / 'sources.json').read_text())
+    if sources != json.loads((ROOT / 'pipelines/terrain-context-sources.json').read_text()):
+        raise ValueError('Context source inventory mismatch')
+    files = expected | {'manifest.json', 'tiles.json', 'sources.json', 'LICENSE.txt'}
+    if {str(p.relative_to(path)) for p in path.rglob('*') if p.is_file()} != files:
+        raise ValueError('Unregistered context artifact')
+    if public:
+        for name in files:
+            if (path / name).read_bytes() != (public / name).read_bytes():
+                raise ValueError('Public context mismatch')
+    return manifest

@@ -55,3 +55,23 @@ test('corrupt terrain tiles are rejected', async ({ page }) => {
   await expect(terrain.getByRole('checkbox', { name: '3D terrain' })).toBeDisabled();
   await expect(page.locator('.record-picker select')).toBeEnabled();
 });
+
+test('Asia zoom-out stays bounded with terrain throughout the viewport', async ({ page }) => {
+  const failedTiles: string[] = [];
+  page.on('response', response => {
+    if (response.url().includes('terrain') && response.url().endsWith('.png') && !response.ok()) failedTiles.push(response.url());
+  });
+  await page.goto('/atlas/');
+  await expect(page.locator('[data-terrain-state]')).toHaveAttribute('data-terrain-state', 'ready');
+  const zoomOut = page.getByRole('button', { name: 'Zoom out', exact: true });
+  for (let i = 0; i < 10; i++) {
+    if (await zoomOut.isDisabled()) break;
+    await zoomOut.click();
+  }
+  await expect(zoomOut).toBeDisabled();
+  await expect(page.locator('[data-terrain-state]')).toHaveAttribute('data-terrain-state', 'ready');
+  await page.screenshot({ path: 'test-results/terrain-asia.png', fullPage: true });
+  expect(failedTiles).toEqual([]);
+  await page.getByRole('button', { name: 'Reset view' }).click();
+  await expect(zoomOut).toBeEnabled();
+});

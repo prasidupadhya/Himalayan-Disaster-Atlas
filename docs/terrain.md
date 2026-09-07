@@ -20,3 +20,7 @@ The atlas adds local, versioned Copernicus GLO-90 terrain beneath administrative
 See [dataset notes](datasets/nepal-terrain.md). This national overview is deliberately coarser than the retained source data. Higher-detail terrain requires a new derivative release and measured delivery budgets.
 
 Validation completed: `npm run check` (16 Python tests, 43 TypeScript tests, data validation, linters, static build and security checks); all 10 browser tests pass, including terrain toggles, invariant inspected height under exaggeration, bounded local tile requests, unavailable/retry and corrupt-tile rejection. Desktop 2D/3D and mobile views were inspected in the shared preview. The map now uses responsive fit padding without a tight maxBounds constraint, which previously overrode the requested zoom on narrow screens.
+
+## Regional context follow-up
+
+`fix/terrain-extent-vercel` adds a verified, local Mapzen context pyramid and broad Asia navigation bounds. A display-only transition in the outer buffer removes the abrupt rectangular cutoff. The original Copernicus release and elevation readings are unchanged. See [context dataset notes](datasets/asia-terrain-context.md).
