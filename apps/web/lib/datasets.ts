@@ -7,6 +7,7 @@ export const ADMIN_MANIFESTS = [
   '/data/nepal-admin-districts/2.0.1/manifest.json',
   '/data/nepal-admin-local-levels/2.0.1/manifest.json',
 ] as const;
+export const MOUNTAINS_MANIFEST = '/data/nepal-mountains/1.0.0/manifest.json';
 export const MAX_GEOJSON_BYTES = 2_097_152;
 export const MAX_DECODED_GEOJSON_BYTES = 8_388_608;
 export class UnavailableError extends Error {}

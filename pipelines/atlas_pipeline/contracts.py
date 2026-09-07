@@ -99,6 +99,22 @@ def validate_dataset(metadata, collection):
             label = Point(properties['label_longitude'], properties['label_latitude'])
             if not geom.covers(label):
                 raise ValueError('Administrative label is outside its geometry')
+        if properties.get('entity_type') == 'mountain':
+            required = {
+                'source_id', 'search_terms', 'feature_code', 'source_modified',
+                'elevation_reference', 'aliases',
+            }
+            if not required.issubset(properties):
+                raise ValueError('Mountain features require complete catalogue metadata')
+            if geometry['type'] != 'Point':
+                raise ValueError('Mountain features must use Point geometry')
+            if properties['feature_code'] not in {'PK', 'MT'}:
+                raise ValueError('Unsupported mountain feature code')
+            if properties['name'] not in properties['search_terms']:
+                raise ValueError('Mountain search terms must include the canonical name')
+            if properties['value'] is not None:
+                if properties['unit'] != 'm' or not 0 <= properties['value'] <= 9000:
+                    raise ValueError('Mountain elevation is implausible')
         for lon, lat in positions(geometry['coordinates']):
             if not (west <= lon <= east and south <= lat <= north):
                 raise ValueError('Geometry outside declared spatial coverage')

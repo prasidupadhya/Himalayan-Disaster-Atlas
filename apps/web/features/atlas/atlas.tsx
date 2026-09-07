@@ -8,6 +8,7 @@ import { ADMIN_MANIFESTS, loadDataset, UnavailableError } from '../../lib/datase
 import { mountAdministrativeDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
 import { Terrain } from '../terrain/terrain';
+import { Mountains } from '../mountains/mountains';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -174,6 +175,7 @@ export function Atlas() {
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
       <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
+      <Mountains key={`mountains-${attempt}`} map={mapReady ? mapRef.current : null} />
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">

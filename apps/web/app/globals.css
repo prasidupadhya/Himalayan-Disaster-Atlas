@@ -46,7 +46,7 @@ input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--accent); }
 .feature-list { padding: 1.5rem 2rem; }
 .feature-buttons { display: flex; gap: .7rem; flex-wrap: wrap; }
 .record-picker { display: grid; gap: .35rem; max-width: 560px; font-weight: 700; }
-.record-picker select { width: 100%; min-height: 44px; padding: .55rem; border: 1px solid #9eb0ba; background: white; color: var(--ink); }
+.record-picker select, .thematic-picker select, .thematic-picker input[type="search"] { width: 100%; min-height: 44px; padding: .55rem; border: 1px solid #9eb0ba; background: white; color: var(--ink); }
 .selection { border-top: 1px solid var(--line); margin-top: 1.5rem; padding-top: .5rem; overflow-wrap: anywhere; }
 .badges { display: flex; gap: .4rem; flex-wrap: wrap; }
 .badge { font-size: .75rem; padding: .2rem .5rem; background: #eaf0f3; font-weight: 700; }
@@ -68,6 +68,10 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .terrain-controls input[type="number"] { padding: .45rem; border: 1px solid #8ba0ab; border-radius: .25rem; }
 .terrain-controls form button { margin-top: .5rem; }
 .terrain-controls [role="status"] { overflow-wrap: anywhere; }
+.thematic-controls { border-top: 1px solid var(--line); margin-top: 1.5rem; padding-top: 1rem; }
+.thematic-controls > label { display: flex; gap: .65rem; align-items: center; margin: .55rem 0; }
+.thematic-controls > .thematic-picker { display: grid; align-items: stretch; gap: .35rem; font-weight: 700; }
+.thematic-controls details > .evidence { border-top: 0; margin-top: .5rem; padding-top: 0; }
 
 .map .maplibregl-ctrl-attrib.maplibregl-compact-show { width: min(22rem, calc(100vw - 4rem)); }
 .map .maplibregl-ctrl-attrib-inner { max-height: 8rem; overflow: auto; white-space: normal; overflow-wrap: anywhere; }

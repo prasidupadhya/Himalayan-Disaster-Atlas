@@ -23,6 +23,8 @@ export interface FeatureProperties {
   admin_category?: 'country' | 'province' | 'district' | 'local_level' | 'special_area';
   pcode?: string; parent_pcode?: string | null; parent_name?: string | null; aliases?: string[];
   label_longitude?: number; label_latitude?: number; valid_from?: string; valid_to?: string | null; source_version?: string;
+  entity_type?: 'mountain'; source_id?: string; search_terms?: string[]; feature_code?: string;
+  source_modified?: string; elevation_reference?: string;
 }
 export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'GeometryCollection' }>, FeatureProperties>;
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
@@ -63,6 +65,13 @@ export function parseDataset(input: unknown): Dataset {
       if (wrongCategory) throw new Error('Administrative category is inconsistent with its level');
       if (p.admin_level === 3 && !['local_level', 'special_area'].includes(p.admin_category)) throw new Error('Level 3 category is inconsistent');
       if (p.label_longitude < west || p.label_longitude > east || p.label_latitude < south || p.label_latitude > north) throw new Error('Administrative label is outside coverage');
+    }
+    if (f.properties.entity_type === 'mountain') {
+      const p = f.properties;
+      if (f.geometry.type !== 'Point' || !p.source_id || !p.search_terms?.length || !p.feature_code || !p.source_modified || !p.elevation_reference) throw new Error('Mountain features require complete catalogue metadata');
+      if (!['PK', 'MT'].includes(p.feature_code)) throw new Error('Mountain feature code is unsupported');
+      if (p.value !== null && (p.unit !== 'm' || p.value < 0 || p.value > 9000)) throw new Error('Mountain elevation is implausible');
+      if (!p.search_terms.includes(p.name)) throw new Error('Mountain search terms must include the canonical name');
     }
     if (coordinates(f.geometry.coordinates).some(([lon, lat]) => lon < west || lon > east || lat < south || lat > north)) throw new Error('Geometry outside coverage');
     const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flat() : [];

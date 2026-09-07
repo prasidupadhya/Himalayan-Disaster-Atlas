@@ -594,6 +594,36 @@
                   "source_version": {
                     "type": "string",
                     "minLength": 1
+                  },
+                  "entity_type": {
+                    "enum": [
+                      "mountain"
+                    ]
+                  },
+                  "source_id": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "search_terms": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                  },
+                  "feature_code": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "source_modified": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "elevation_reference": {
+                    "type": "string",
+                    "minLength": 1
                   }
                 },
                 "required": [
