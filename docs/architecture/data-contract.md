@@ -34,3 +34,9 @@ Fixture status is independently and prominently marked. This sample uses UNKNOWN
 - Future scientific processing must explicitly record source CRS, processing CRS, transformation method and relevant vertical datum. Nepal-spanning datasets must not assume one UTM zone fits every calculation. Choose a suitable local metric CRS or geodesic method per algorithm and record it. Raster no-data values must remain distinct from zero, and elevation needs a vertical reference.
 
 See [GeoJSON RFC 7946](https://www.rfc-editor.org/rfc/rfc7946) for coordinate order and geometry representation. Production validation should extend the present gate with source-specific units, duplicate resolution, topology relationships and domain plausibility; a valid geometry alone is not verified science.
+
+## Raster schema 2
+
+`terrain.schema.json` references the canonical metadata property definitions and explicitly changes schema version/artifact delivery for terrain. A raster manifest has `metadata` and `raster`; its artifact is a bounded SHA-256-verified `TerrainRGB-index` JSON mapping every XYZ tile to its size/hash. Each PNG is at most 256 KiB and 256 × 256 RGB. The current adapter supports the complete 341-tile pyramid rooted at 5/23/13 through zoom 9. Unsupported layouts, datums and encodings fail validation; extend the contract for future layouts.
+
+Native/display CRS, vertical datum, unit, nodata, sample spacing, resampling and tile count are required. Null observation/publication dates are allowed for this static raster product with known source release year but unknown exact timestamps, instead of inventing dates. Elevation inspection outside coverage is null/UNKNOWN; missing raster values cannot be encoded as zero. This contract does not make GeoJSON accept raster artifacts.

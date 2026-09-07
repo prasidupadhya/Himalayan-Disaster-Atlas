@@ -1,0 +1,214 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.invalid/schemas/terrain.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "metadata",
+    "raster"
+  ],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "dataset_id",
+        "dataset_name",
+        "dataset_version",
+        "source",
+        "source_url",
+        "license",
+        "license_url",
+        "attribution",
+        "observation_date",
+        "publication_date",
+        "retrieval_date",
+        "processing_date",
+        "processing_version",
+        "method",
+        "spatial_resolution",
+        "temporal_resolution",
+        "spatial_coverage",
+        "temporal_coverage",
+        "crs",
+        "status",
+        "evidence_type",
+        "is_fixture",
+        "limitations",
+        "uncertainty",
+        "update_frequency",
+        "stale_after",
+        "artifact"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "2.0.0"
+        },
+        "dataset_id": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/dataset_id"
+        },
+        "dataset_name": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/dataset_name"
+        },
+        "dataset_version": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/dataset_version"
+        },
+        "source": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/source"
+        },
+        "source_url": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/source_url"
+        },
+        "license": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/license"
+        },
+        "license_url": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/license_url"
+        },
+        "attribution": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/attribution"
+        },
+        "observation_date": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/observation_date"
+        },
+        "publication_date": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/publication_date"
+        },
+        "retrieval_date": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/retrieval_date"
+        },
+        "processing_date": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/processing_date"
+        },
+        "processing_version": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/processing_version"
+        },
+        "method": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/method"
+        },
+        "spatial_resolution": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/spatial_resolution"
+        },
+        "temporal_resolution": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/temporal_resolution"
+        },
+        "spatial_coverage": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/spatial_coverage"
+        },
+        "temporal_coverage": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/temporal_coverage"
+        },
+        "crs": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/crs"
+        },
+        "status": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/status"
+        },
+        "evidence_type": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/evidence_type"
+        },
+        "is_fixture": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/is_fixture"
+        },
+        "limitations": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/limitations"
+        },
+        "uncertainty": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/uncertainty"
+        },
+        "update_frequency": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/update_frequency"
+        },
+        "stale_after": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/stale_after"
+        },
+        "artifact": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "format",
+            "sha256",
+            "byte_size"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "pattern": "^/data/nepal-terrain/[0-9]+\\.[0-9]+\\.[0-9]+/tiles\\.json$"
+            },
+            "format": {
+              "const": "TerrainRGB-index"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "byte_size": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 65536
+            }
+          }
+        }
+      }
+    },
+    "raster": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "crs",
+        "vertical_datum",
+        "unit",
+        "tile_size",
+        "minzoom",
+        "maxzoom",
+        "encoding",
+        "nodata",
+        "native_crs",
+        "native_resolution_degree",
+        "resampling",
+        "tile_count"
+      ],
+      "properties": {
+        "crs": {
+          "const": "EPSG:3857"
+        },
+        "vertical_datum": {
+          "const": "EGM2008 (EPSG:3855)"
+        },
+        "unit": {
+          "const": "m"
+        },
+        "tile_size": {
+          "const": 256
+        },
+        "minzoom": {
+          "const": 5
+        },
+        "maxzoom": {
+          "const": 9
+        },
+        "encoding": {
+          "const": "mapbox"
+        },
+        "nodata": {
+          "type": "null"
+        },
+        "native_crs": {
+          "const": "EPSG:4326"
+        },
+        "native_resolution_degree": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "resampling": {
+          "const": "bilinear"
+        },
+        "tile_count": {
+          "const": 341
+        }
+      }
+    }
+  }
+}

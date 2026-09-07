@@ -57,3 +57,9 @@ Future simulation engines must be model-agnostic and return separate scenario in
 
 - [Next.js static exports](https://nextjs.org/docs/app/guides/static-exports)
 - [MapLibre GeoJSON sources](https://maplibre.org/maplibre-gl-js/docs/API/classes/GeoJSONSource/)
+
+## Terrain extension
+
+`schemas/terrain.schema.json` adds schema 2 raster delivery while existing schema 1 vectors remain immutable. `packages/contracts/terrain.ts` validates the raster manifest and complete XYZ inventory; `terrain_contracts.py` verifies every release tile and public copy. Canonical source/evidence fields are referenced from the existing central schema. Raster metadata explicitly distinguishes geographic coverage, native EPSG:4326 samples, display EPSG:3857 pixels and EGM2008 vertical metres.
+
+`features/terrain` owns independent layer state and failures. A scoped MapLibre protocol verifies tile bytes against the hashed local index before rendering. Cleanup removes terrain, layers, source and protocol. Coordinate inspection reads one finest-display tile and is independent of exaggeration. All acquisition and native rasters stay offline. See [terrain handoff](../terrain.md) and [dataset notes](../datasets/nepal-terrain.md).

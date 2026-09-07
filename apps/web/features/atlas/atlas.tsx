@@ -7,8 +7,17 @@ import { Evidence } from '../../components/evidence';
 import { ADMIN_MANIFESTS, loadDataset, UnavailableError } from '../../lib/datasets';
 import { mountAdministrativeDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
+import { Terrain } from '../terrain/terrain';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
+
+function frameNepal(map: Map, bbox: [number, number, number, number]) {
+  const [west, south, east, north] = bbox;
+  const horizontal = map.getContainer().clientWidth < 600 ? 24 : 80;
+  map.fitBounds([[west, south], [east, north]], {
+    padding: { top: 80, right: horizontal, bottom: 80, left: horizontal }, maxZoom: 6, duration: 0,
+  });
+}
 
 export function Atlas() {
   const container = useRef<HTMLDivElement>(null);
@@ -43,7 +52,9 @@ export function Atlas() {
             style: { version: 8, sources: {}, layers: [{ id: 'background', type: 'background', paint: { 'background-color': '#152737' } }] },
             center: [84.1, 28.4], zoom: 4.5, minZoom: 3.5, maxZoom: 13,
             attributionControl: false,
-            maxBounds: [[79, 25], [90, 32]], renderWorldCopies: false,
+            // Tight maxBounds imposes an implicit minimum zoom that can defeat
+            // fitBounds on narrow screens. Frame Nepal without that constraint.
+            renderWorldCopies: false,
           });
           mapRef.current = map;
           map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
@@ -54,7 +65,10 @@ export function Atlas() {
           let attributionOpened = false;
           attribution?.querySelector('.maplibregl-ctrl-attrib-button')?.addEventListener('click', () => { attributionOpened = true; }, { once: true });
           collapseAttribution();
-          map.on('error', () => { if (!controller.signal.aborted) setMapError('The map could not render. You can still inspect the boundary records below.'); });
+          map.on('error', event => {
+            const sourceId = 'sourceId' in event ? String(event.sourceId) : '';
+            if (!controller.signal.aborted && !sourceId.startsWith('nepal-terrain@') && !/terrain/i.test(event.error.message)) setMapError('The map could not render. You can still inspect the boundary records below.');
+          });
           map.on('load', () => {
             if (controller.signal.aborted || !map) return;
             const mounted = datasets.map(dataset => mountAdministrativeDataset(map!, dataset));
@@ -72,8 +86,7 @@ export function Atlas() {
                 feature.properties.label_longitude!, feature.properties.label_latitude!,
               ]).addTo(map));
             }
-            const [west, south, east, north] = datasets[0].metadata.spatial_coverage.bbox;
-            map.fitBounds([[west, south], [east, north]], { padding: { top: 120, right: 80, bottom: 120, left: 80 }, maxZoom: 4.8, duration: 0 });
+            frameNepal(map, datasets[0].metadata.spatial_coverage.bbox);
             map.once('idle', () => {
               if (controller.signal.aborted) return;
               // Attribution can refresh while source metadata settles. Keep it
@@ -128,14 +141,15 @@ export function Atlas() {
 
   return <div className="atlas-workspace">
     <aside className="atlas-panel">
-      <p className="eyebrow">Nepal / administrative boundaries</p>
-      <h1>Explore Nepal’s boundaries</h1>
-      <p>Move from provinces to districts and local levels using verified COD-AB v02 records.</p>
+      <p className="eyebrow">Nepal / terrain & boundaries</p>
+      <h1>Explore Nepal’s terrain & boundaries</h1>
+      <p>Explore the landscape with Copernicus terrain and verified COD-AB v02 administrative records.</p>
       <DataState state={resource} retry={retry} />
       <section className="layer-controls" aria-label="Map layers"><h2>Boundary levels</h2>
         {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
+      <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">
@@ -145,9 +159,8 @@ export function Atlas() {
         {datasets && !mapReady && !mapError && <div className="map-message" role="status">Preparing the interactive map…</div>}
         {mapError && <div className="map-message" role="alert">{mapError}</div>}
         <button className="reset-map" disabled={!mapReady} onClick={() => {
-          if (datasets) {
-            const [west, south, east, north] = datasets[0].metadata.spatial_coverage.bbox;
-            mapRef.current?.fitBounds([[west, south], [east, north]], { padding: { top: 120, right: 80, bottom: 120, left: 80 }, maxZoom: 4.8, duration: 0 });
+          if (datasets && mapRef.current) {
+            frameNepal(mapRef.current, datasets[0].metadata.spatial_coverage.bbox);
           }
         }}>Reset view</button>
       </div>

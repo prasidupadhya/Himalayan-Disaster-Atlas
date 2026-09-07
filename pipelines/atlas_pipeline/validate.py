@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 from .contracts import ROOT, verify_artifact
+from .terrain_contracts import verify_terrain
 
 
 def main():
@@ -11,6 +12,10 @@ def main():
         raise ValueError('No release manifests found')
     for path in releases:
         metadata = json.loads(path.read_text())
+        if 'raster' in metadata:
+            manifest = verify_terrain(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
+            print(f"Valid: {manifest['metadata']['dataset_id']}@{manifest['metadata']['dataset_version']}")
+            continue
         artifact_name = Path(metadata['artifact']['path']).name
         content = path.with_name(artifact_name).read_bytes()
         verify_artifact(metadata, content)
