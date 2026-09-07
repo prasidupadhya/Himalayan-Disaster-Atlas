@@ -1,0 +1,98 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.invalid/schemas/population.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["metadata", "raster", "analysis"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version", "dataset_id", "dataset_name", "dataset_version", "source", "source_url",
+        "license", "license_url", "attribution", "observation_date", "publication_date", "retrieval_date",
+        "processing_date", "processing_version", "method", "spatial_resolution", "temporal_resolution",
+        "spatial_coverage", "temporal_coverage", "crs", "status", "evidence_type", "is_fixture",
+        "limitations", "uncertainty", "update_frequency", "stale_after", "artifact"
+      ],
+      "properties": {
+        "schema_version": { "const": "3.0.0" },
+        "dataset_id": { "const": "nepal-population" },
+        "dataset_name": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/dataset_name" },
+        "dataset_version": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/dataset_version" },
+        "source": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/source" },
+        "source_url": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/source_url" },
+        "license": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/license" },
+        "license_url": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/license_url" },
+        "attribution": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/attribution" },
+        "observation_date": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/observation_date" },
+        "publication_date": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/publication_date" },
+        "retrieval_date": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/retrieval_date" },
+        "processing_date": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/processing_date" },
+        "processing_version": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/processing_version" },
+        "method": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/method" },
+        "spatial_resolution": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/spatial_resolution" },
+        "temporal_resolution": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/temporal_resolution" },
+        "spatial_coverage": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/spatial_coverage" },
+        "temporal_coverage": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/temporal_coverage" },
+        "crs": { "const": "OGC:CRS84" },
+        "status": { "const": "MODELLED" },
+        "evidence_type": { "const": "modelled" },
+        "is_fixture": { "const": false },
+        "limitations": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/limitations" },
+        "uncertainty": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/uncertainty" },
+        "update_frequency": { "const": "periodic" },
+        "stale_after": { "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/stale_after" },
+        "artifact": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["path", "format", "sha256", "byte_size"],
+          "properties": {
+            "path": { "const": "/data/nepal-population/1.0.0/tiles.json" },
+            "format": { "const": "PopulationRGBA-index" },
+            "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+            "byte_size": { "type": "integer", "minimum": 1, "maximum": 131072 }
+          }
+        }
+      }
+    },
+    "raster": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["crs", "tile_size", "minzoom", "maxzoom", "encoding", "resampling", "tile_count", "display_semantics"],
+      "properties": {
+        "crs": { "const": "EPSG:3857" },
+        "tile_size": { "const": 256 },
+        "minzoom": { "const": 5 },
+        "maxzoom": { "const": 10 },
+        "encoding": { "const": "RGBA-log-intensity" },
+        "resampling": { "const": "bilinear-display-only" },
+        "tile_count": { "type": "integer", "minimum": 1 },
+        "display_semantics": { "type": "string", "minLength": 1 }
+      }
+    },
+    "analysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_filename", "source_sha256", "crs", "width", "height", "resolution_degree", "nodata",
+        "unit", "valid_cells", "zero_cells", "population_sum", "max_cell_value", "display_reference_value"
+      ],
+      "properties": {
+        "source_filename": { "const": "npl_pop_2025_CN_100m_R2025A_v1.tif" },
+        "source_sha256": { "const": "b7b581e181df5e2f84b2e20d3455429393829395619a9600e45c6907674a0639" },
+        "crs": { "const": "EPSG:4326" },
+        "width": { "const": 9773 },
+        "height": { "const": 4921 },
+        "resolution_degree": { "type": "number", "minimum": 0.00083333332, "maximum": 0.00083333334 },
+        "nodata": { "const": -99999 },
+        "unit": { "const": "people/source-grid-cell" },
+        "valid_cells": { "const": 5706074 },
+        "zero_cells": { "const": 105654 },
+        "population_sum": { "type": "number", "minimum": 29000000, "maximum": 31000000 },
+        "max_cell_value": { "type": "number", "minimum": 0 },
+        "display_reference_value": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    }
+  }
+}

@@ -4,6 +4,10 @@ export default function SourcesPage() {
   return <article className="page prose">
     <p className="eyebrow">Sources</p><h1>Trace every layer.</h1>
 
+    <h2>Population</h2>
+    <p>The population layer uses <a href="https://hub.worldpop.org/geodata/summary?id=74559">WorldPop Global 2015–2030 R2025A v1</a>, Nepal model year 2025, constrained population counts at 3 arc-second resolution in EPSG:4326. The exact source GeoTIFF is pinned by SHA-256 and identified by DOI <a href="https://doi.org/10.5258/SOTON/WP00839">10.5258/SOTON/WP00839</a>.</p>
+    <p>The source raster declares CC BY 4.0. WorldPop also publishes an ODbL derived-data clause for some building-derived products, so that licensing nuance is retained in the release metadata for review. The 2025 values are modelled estimates rather than a census observed at each grid cell.</p>
+
     <h2>Downstream connectivity</h2>
     <p>Downstream trace reuses both pinned FAO Rivers 2026 / HydroRIVERS Nepal partitions, version 1.0.0. It introduces no new geographic source. <a href="https://data.hydrosheds.org/file/technical-documentation/HydroRIVERS_TechDoc_v10.pdf">HydroRIVERS technical documentation</a> defines NEXT_DOWN and LENGTH_KM. Per-result input hashes identify the exact releases; the source river evidence and licensing remain applicable.</p>
 

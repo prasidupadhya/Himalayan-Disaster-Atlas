@@ -36,6 +36,7 @@
     ,"data:floods": ".venv/bin/python -m pipelines.atlas_pipeline.floods"
     ,"data:landslides": ".venv/bin/python -m pipelines.atlas_pipeline.landslides"
     ,"data:hydropower": ".venv/bin/python -m pipelines.atlas_pipeline.hydropower"
+    ,"data:population": ".venv/bin/python -m pipelines.atlas_pipeline.population --source data/raw/population/npl_pop_2025_CN_100m_R2025A_v1.tif"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
