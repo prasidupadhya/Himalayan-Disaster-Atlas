@@ -1,92 +1,149 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
-import type { Map } from 'maplibre-gl';
-import { formatMeasurement, isStale, type Dataset } from '../../../../packages/contracts';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type { Map, Marker } from 'maplibre-gl';
+import { isStale, type Dataset } from '../../../../packages/contracts';
 import { DataState } from '../../components/data-state';
 import { Evidence } from '../../components/evidence';
-import { loadDataset, SAMPLE_MANIFEST, UnavailableError } from '../../lib/datasets';
-import { mountDataset } from '../../lib/map-layers';
+import { ADMIN_MANIFESTS, loadDataset, UnavailableError } from '../../lib/datasets';
+import { mountAdministrativeDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
+
+const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
 export function Atlas() {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map | null>(null);
-  const layerRef = useRef<ReturnType<typeof mountDataset> | null>(null);
-  const [resource, setResource] = useState<Resource<Dataset>>({ status: 'loading' });
+  const layerRef = useRef<ReturnType<typeof mountAdministrativeDataset>[]>([]);
+  const [resource, setResource] = useState<Resource<Dataset[]>>({ status: 'loading' });
   const [mapError, setMapError] = useState<string | null>(null);
   const [mapReady, setMapReady] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const visibleRef = useRef(true);
+  const [visible, setVisible] = useState([true, true, true, true]);
+  const visibleRef = useRef(visible);
   const [selected, setSelected] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
+
   useEffect(() => {
     const controller = new AbortController();
     let map: Map | undefined;
-    let disposeLayer: (() => void) | undefined;
-    const init = async () => {
+    const markers: Marker[] = [];
+    async function init() {
       try {
-        const dataset = await loadDataset(SAMPLE_MANIFEST, controller.signal);
+        const datasets = await Promise.all(ADMIN_MANIFESTS.map(path => loadDataset(path, controller.signal)));
         if (controller.signal.aborted) return;
-        setResource({ status: isStale(dataset.metadata) ? 'stale' : dataset.collection.features.length ? 'ready' : 'empty', data: dataset });
+        setResource({
+          status: datasets.some(dataset => isStale(dataset.metadata)) ? 'stale' : datasets.every(dataset => dataset.collection.features.length) ? 'ready' : 'empty',
+          data: datasets,
+        });
         try {
-          const { Map: MapLibre, NavigationControl, setWorkerUrl, getVersion } = await import('maplibre-gl');
+          const { Map: MapLibre, Marker: MapMarker, NavigationControl, setWorkerUrl, getVersion } = await import('maplibre-gl');
           if (controller.signal.aborted || !container.current) return;
           setWorkerUrl(`/vendor/maplibre-gl/${getVersion()}/maplibre-gl-worker.mjs`);
-          map = new MapLibre({ container: container.current, style: { version: 8, sources: {}, layers: [{ id: 'background', type: 'background', paint: { 'background-color': '#152737' } }] },
-            center: [86, 28], zoom: 8, minZoom: 5, maxZoom: 15, maxBounds: [[79, 25], [90, 32]], renderWorldCopies: false });
+          map = new MapLibre({
+            container: container.current,
+            style: { version: 8, sources: {}, layers: [{ id: 'background', type: 'background', paint: { 'background-color': '#152737' } }] },
+            center: [84.1, 28.4], zoom: 5.4, minZoom: 5, maxZoom: 13,
+            maxBounds: [[79, 25], [90, 32]], renderWorldCopies: false,
+          });
           mapRef.current = map;
           map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
-          map.on('error', () => { if (!controller.signal.aborted) setMapError('The map could not render. You can still inspect the dataset below.'); });
+          map.on('error', () => { if (!controller.signal.aborted) setMapError('The map could not render. You can still inspect the boundary records below.'); });
           map.on('load', () => {
             if (controller.signal.aborted || !map) return;
-            const mounted = mountDataset(map, dataset);
+            const mounted = datasets.map(dataset => mountAdministrativeDataset(map!, dataset));
             layerRef.current = mounted;
-            disposeLayer = mounted.dispose;
-            mounted.setVisible(visibleRef.current);
-            const [w, s, e, n] = dataset.metadata.spatial_coverage.bbox;
-            map.fitBounds([[w, s], [e, n]], { padding: 60, duration: 0 });
-            map.on('click', mounted.layers, event => { const id = event.features?.[0]?.id; if (id !== undefined) setSelected(String(id)); });
+            mounted.forEach((layer, index) => layer.setVisible(visibleRef.current[index]));
+            map.on('click', mounted.flatMap(layer => layer.interactiveLayers).reverse(), event => {
+              const id = event.features?.[0]?.id;
+              if (id !== undefined) selectFeature(String(id));
+            });
+            for (const feature of datasets[1].collection.features) {
+              const element = document.createElement('span');
+              element.className = 'admin-map-label';
+              element.textContent = feature.properties.name;
+              markers.push(new MapMarker({ element, anchor: feature.properties.pcode === 'NP07' ? 'left' : 'center' }).setLngLat([
+                feature.properties.label_longitude!, feature.properties.label_latitude!,
+              ]).addTo(map));
+            }
+            const [west, south, east, north] = datasets[0].metadata.spatial_coverage.bbox;
+            map.fitBounds([[west, south], [east, north]], { padding: 50, duration: 0 });
             map.once('idle', () => { if (!controller.signal.aborted) setMapReady(true); });
           });
         } catch {
-          if (!controller.signal.aborted) setMapError('Interactive mapping is unavailable in this browser. The dataset remains accessible below.');
+          if (!controller.signal.aborted) setMapError('Interactive mapping is unavailable in this browser. The boundary records remain accessible below.');
         }
       } catch (error) {
         if (!controller.signal.aborted) setResource({ status: error instanceof UnavailableError ? 'unavailable' : 'error', message: error instanceof Error ? error.message : 'Unable to load data.' });
       }
-    };
+    }
     void init();
-    return () => { controller.abort(); disposeLayer?.(); map?.remove(); mapRef.current = null; layerRef.current = null; };
+    return () => {
+      controller.abort();
+      markers.forEach(marker => marker.remove());
+      layerRef.current.forEach(layer => layer.dispose());
+      map?.remove();
+      mapRef.current = null;
+      layerRef.current = [];
+    };
   }, [attempt]);
-  const dataset = 'data' in resource ? resource.data : null;
-  const feature = dataset?.collection.features.find(f => f.id === selected);
-  function toggle() { const next = !visible; visibleRef.current = next; setVisible(next); layerRef.current?.setVisible(next); }
-  function retry() { setResource({ status: 'loading' }); setMapError(null); setMapReady(false); setSelected(null); setAttempt(value => value + 1); }
+
+  const datasets = 'data' in resource ? resource.data : null;
+  const features = useMemo(() => datasets?.flatMap(dataset => dataset.collection.features) ?? [], [datasets]);
+  const feature = features.find(item => item.id === selected);
+  const evidence = datasets?.[feature?.properties.admin_level ?? 1]?.metadata;
+
+  function selectFeature(id: string) {
+    setSelected(id || null);
+    layerRef.current.forEach(layer => layer.setSelected(id || null));
+  }
+  function toggle(index: number) {
+    const next = visible.map((value, item) => item === index ? !value : value);
+    visibleRef.current = next;
+    setVisible(next);
+    layerRef.current[index]?.setVisible(next[index]);
+  }
+  function retry() {
+    setResource({ status: 'loading' });
+    setMapError(null); setMapReady(false); setSelected(null);
+    setAttempt(value => value + 1);
+  }
+
   return <div className="atlas-workspace">
     <aside className="atlas-panel">
-      <p className="eyebrow">Foundation / development sample</p>
-      <h1>Explore the atlas</h1>
-      <p>Inspect a synthetic dataset to explore how map layers and their evidence fit together.</p>
+      <p className="eyebrow">Nepal / administrative boundaries</p>
+      <h1>Explore Nepal’s boundaries</h1>
+      <p>Move from provinces to districts and local levels using verified COD-AB v02 records.</p>
       <DataState state={resource} retry={retry} />
-      <section className="layer-controls" aria-label="Map layers"><h2>Layers</h2>
-        <label><input type="checkbox" checked={visible} onChange={toggle} disabled={!dataset} /> Synthetic points</label>
-        <p className="muted">No basemap or terrain dataset is loaded.</p>
+      <section className="layer-controls" aria-label="Map layers"><h2>Boundary levels</h2>
+        {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
+        <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
-      {dataset && <Evidence metadata={dataset.metadata} />}
+      {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">
       <div className="map-shell">
-        <div ref={container} className="map" role="region" aria-label="Interactive synthetic sample map" data-map-ready={mapReady} />
-        <div className="map-caption"><span className="dot" /> Synthetic sample · not real features</div>
-        {dataset && !mapReady && !mapError && <div className="map-message" role="status">Preparing the interactive map…</div>}
+        <div ref={container} className="map" role="region" aria-label="Interactive Nepal administrative boundary map" data-map-ready={mapReady} />
+        <div className="map-caption"><span className="boundary-key" /> COD-AB v02 · click a boundary to inspect it</div>
+        {datasets && !mapReady && !mapError && <div className="map-message" role="status">Preparing the interactive map…</div>}
         {mapError && <div className="map-message" role="alert">{mapError}</div>}
-        <button className="reset-map" disabled={!mapReady} onClick={() => { if (dataset) { const [w,s,e,n] = dataset.metadata.spatial_coverage.bbox; mapRef.current?.fitBounds([[w,s],[e,n]], { padding: 60, duration: 0 }); } }}>Reset view</button>
+        <button className="reset-map" disabled={!mapReady} onClick={() => {
+          if (datasets) {
+            const [west, south, east, north] = datasets[0].metadata.spatial_coverage.bbox;
+            mapRef.current?.fitBounds([[west, south], [east, north]], { padding: 50, duration: 0 });
+          }
+        }}>Reset view</button>
       </div>
-      <section className="feature-list" aria-label="Accessible dataset features">
-        <h2>Inspect a sample point</h2>
-        <p className="muted">These controls provide the same selection as clicking the map.</p>
-        <div className="feature-buttons">{dataset?.collection.features.map(f => <button key={f.id} aria-pressed={selected === f.id} onClick={() => setSelected(String(f.id))}>{f.properties.name}</button>)}</div>
-        <div className="selection" aria-live="polite">{feature ? <><h3>{feature.properties.name}</h3><p>Measurement: <strong>{formatMeasurement(feature.properties.value, feature.properties.unit)}</strong></p><p>Geometry: {feature.geometry.type} · Coordinates: {JSON.stringify(feature.geometry.coordinates)} · OGC:CRS84 (longitude, latitude)</p><p>Synthetic position; no scientific measurement is available.</p></> : <p>Select a point to inspect its record.</p>}</div>
+      <section className="feature-list" aria-label="Accessible boundary records">
+        <h2>Identify an administrative unit</h2>
+        <p className="muted">The searchable list provides the same identification as clicking the map.</p>
+        <label className="record-picker">Boundary record<select value={selected ?? ''} onChange={event => selectFeature(event.target.value)} disabled={!datasets}>
+          <option value="">Select a boundary…</option>
+          {datasets?.map((dataset, level) => <optgroup key={level} label={LEVEL_LABELS[level]}>{dataset.collection.features.map(item => <option key={item.id} value={String(item.id)}>{item.properties.name} ({item.properties.pcode})</option>)}</optgroup>)}
+        </select></label>
+        <div className="selection" aria-live="polite">{feature ? <>
+          <p className="eyebrow">{feature.properties.admin_category?.replace('_', ' ')}</p>
+          <h3>{feature.properties.name}</h3>
+          <dl><dt>P-code</dt><dd>{feature.properties.pcode}</dd><dt>Parent</dt><dd>{feature.properties.admin_level === 0 ? 'None (country)' : feature.properties.parent_name}</dd><dt>Source area</dt><dd>{feature.properties.value === null ? 'UNKNOWN' : `${feature.properties.value.toLocaleString('en-US', { maximumFractionDigits: 1 })} km²`}</dd><dt>Valid from</dt><dd>{feature.properties.valid_from?.slice(0, 10)}</dd><dt>Source version</dt><dd>{feature.properties.source_version}</dd><dt>Aliases</dt><dd>{feature.properties.aliases?.length ? feature.properties.aliases.join(', ') : 'UNKNOWN'}</dd></dl>
+        </> : <p>Select a boundary to inspect its stable identifier, hierarchy, and source metadata.</p>}</div>
       </section>
     </div>
   </div>;

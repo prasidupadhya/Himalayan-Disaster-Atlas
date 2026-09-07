@@ -17,6 +17,7 @@
     "test:python": ".venv/bin/python -m unittest discover -s tests/python -v",
     "test:e2e": "playwright test",
     "data:sample": ".venv/bin/python -m pipelines.atlas_pipeline.sample",
+    "data:admin": ".venv/bin/python -m pipelines.atlas_pipeline.admin_boundaries",
     "data:validate": ".venv/bin/python -m pipelines.atlas_pipeline.validate",
     "security:check": "node scripts/check-security.mjs",
     "check": "npm run data:sample && npm run data:validate && npm run test:python && npm run test && npm run typecheck && npm run lint && npm run lint:python && npm run build",

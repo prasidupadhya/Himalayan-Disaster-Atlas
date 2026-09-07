@@ -8,7 +8,7 @@ Use React + TypeScript + Next.js App Router with `output: 'export'` and trailing
 
 The root `<body>` suppresses hydration attribute warnings one level deep because browser extensions such as Grammarly add attributes before React hydrates. This is covered by a development-mode regression test. Mismatches inside application content remain visible and must be fixed rather than suppressed.
 
-MapLibre GL JS is the primary map engine. Foundation uses a local background style and synthetic GeoJSON, so no external basemap or tile service is needed. Map layers mount only after both validation and style load. Each source ID includes dataset ID and version. The renderer promotes a private copy of each canonical string ID so tile encoding cannot discard selection identity. Public feature properties are unchanged. The shared layer controller sets visibility and disposes layers before sources; unmount aborts pending requests and removes the map. New style-switching features must explicitly dispose and remount managed layers after style changes.
+MapLibre GL JS is the primary map engine. The administrative atlas uses a local background style and compressed GeoJSON, so no external basemap or tile service is needed. Map layers mount only after both validation and style load. Each source ID includes dataset ID and version. The renderer promotes a private copy of each canonical string ID so tile encoding cannot discard selection identity. Public feature properties are unchanged. Administrative layers use zoom-dependent visibility, stable P-code selection, seven validated province label points, and separate styling for special-area pieces. Shared controllers set visibility and dispose layers before sources; unmount aborts pending requests and removes the map.
 
 MapLibre 6 uses an external ES module worker. Root dev/build scripts copy the pinned worker, shared module and BSD notice into an ignored, versioned public vendor directory and configure its local URL explicitly; Next bundling must not infer the worker URL. Readiness waits for the map to become idle after source processing.
 
@@ -35,13 +35,13 @@ Checked-in fixture release metadata includes a fixed acquisition/processing time
 
 | Artifact | Use and delivery |
 | --- | --- |
-| GeoJSON | Small inspectable layers, at most 1 MiB per artifact; manifest at most 64 KiB |
+| GeoJSON / gzip GeoJSON | Small inspectable layers, at most 2 MiB compressed and 8 MiB decoded per artifact; manifest at most 64 KiB |
 | PMTiles / vector tiles | Large roads, rivers, buildings and inventories; viewport-driven requests |
 | COG | Raster source/analysis access with range support; tiled visual products for the map |
 | GeoParquet | Offline analytical tables and geometry; not a default browser payload |
 | DEM raster tiles | Future visualization derived from documented DEM source and vertical datum |
 
-Only GeoJSON is implemented. Extend the schema with a new version and a delivery adapter before using other formats. Large originals/intermediates stay outside Git. Future artifact hosting must provide CORS where needed, correct MIME types, byte-range requests, size limits, immutable version URLs, and checksums. A manifest references one artifact in v1; multi-artifact releases require an explicit contract extension. Never send a national inventory as an unbounded JSON response.
+GeoJSON and deterministic gzip-wrapped GeoJSON are implemented. The browser verifies compressed bytes before bounded decompression and schema validation. Extend the schema with a new version and a delivery adapter before using other formats. Large originals/intermediates stay outside Git. Future artifact hosting must provide CORS where needed, correct MIME types, byte-range requests, size limits, immutable version URLs, and checksums. A manifest references one artifact in v1; multi-artifact releases require an explicit contract extension.
 
 ## User-visible states
 
