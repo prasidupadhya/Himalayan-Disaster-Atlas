@@ -1,0 +1,286 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "version",
+    "documents",
+    "chunks"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "kind": {
+      "const": "evidence-corpus"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "documents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "source_id",
+          "version",
+          "publication_date",
+          "version_date",
+          "accessed_at",
+          "license",
+          "geographies",
+          "topics",
+          "inputs",
+          "superseded_by",
+          "stale_after",
+          "snapshot_path",
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "source_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "version": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "publication_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "version_date": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "accessed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "license": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "geographies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "maxItems": 20
+          },
+          "topics": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            },
+            "maxItems": 20
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "dataset_id",
+                "dataset_version",
+                "manifest_path",
+                "sha256",
+                "stale_after"
+              ],
+              "properties": {
+                "dataset_id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100
+                },
+                "dataset_version": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 40
+                },
+                "manifest_path": {
+                  "type": "string",
+                  "pattern": "^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/manifest\\.json$"
+                },
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "stale_after": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            },
+            "maxItems": 30
+          },
+          "superseded_by": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "stale_after": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "snapshot_path": {
+            "type": "string",
+            "pattern": "^/data/atlas-evidence/[0-9]+\\.[0-9]+\\.[0-9]+/documents/[a-z0-9-]+\\.txt$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100000
+          }
+        }
+      },
+      "maxItems": 128
+    },
+    "chunks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "document_id",
+          "section",
+          "start_line",
+          "end_line",
+          "text",
+          "assertions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "document_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "section": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "start_line": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "end_line": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 4000
+          },
+          "assertions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "subject",
+                "predicate",
+                "scope",
+                "value"
+              ],
+              "properties": {
+                "subject": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100
+                },
+                "predicate": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 100
+                },
+                "scope": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200
+                },
+                "value": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                }
+              }
+            },
+            "maxItems": 20
+          }
+        }
+      },
+      "maxItems": 2048
+    }
+  }
+}
