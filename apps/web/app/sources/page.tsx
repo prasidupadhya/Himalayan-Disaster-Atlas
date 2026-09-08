@@ -28,6 +28,7 @@ export default function SourcesPage() {
   return <div className="page sources-page">
     <p className="eyebrow">Sources</p><h1>Trace every production layer to its source.</h1>
     <p className="intro">Official providers, acquisition endpoints, access dates, licences, attribution requirements and known limitations are derived from the same release metadata used by the Data Catalog.</p>
+    <p>For exact project-document excerpts and dataset-version citations, open the <Link href="/evidence/">evidence browser</Link>.</p>
     <nav className="source-toc" aria-label="Source categories">{SECTIONS.map(([anchor, label]) => <a key={anchor} href={`#${anchor}`}>{label}</a>)}</nav>
     <p className="muted">Atlas-derived analysis is listed separately from originating evidence. A derived product does not become an independent external source simply because it has its own release artifact.</p>
     {SECTIONS.map(([anchor, label]) => {

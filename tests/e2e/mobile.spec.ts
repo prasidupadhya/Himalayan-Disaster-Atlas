@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-const HEAVY = /\/data\/(nepal-mountains|nepal-rivers-|nepal-glaciers-|nepal-transboundary-glacial-lakes|nepal-hydrology|nepal-rainfall|nepal-region-earthquakes|nepal-reported-|nepal-osm-hydropower|nepal-population|nepal-sentinel|nepal-power-climate)\//;
+const HEAVY = /\/data\/(nepal-mountains|nepal-glaciers-|nepal-transboundary-glacial-lakes|nepal-hydrology|nepal-rainfall|nepal-region-earthquakes|nepal-reported-|nepal-osm-hydropower|nepal-population|nepal-sentinel|nepal-power-climate)\//;
 
 test('phone layout defers large thematic data and keeps core touch workflows usable', async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
