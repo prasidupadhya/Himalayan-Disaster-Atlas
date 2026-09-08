@@ -14,7 +14,7 @@ The mobile Atlas preserves the same scientific meanings, evidence labels and pro
 
 ## Mobile bandwidth
 
-The administrative map, Search, Compare, Time Machine, Simulation/Scenario controls, Hazard Graph controls, Location Explorer, Water Change and Terrain foundation remain immediately available. On viewports at or below 800 px, larger automatically loaded thematic datasets are deferred behind **Load additional map datasets**. This prevents a phone from fetching mountains, rivers, glaciers, glacial lakes, stations, hazard archives, hydropower, population, satellite and climate payloads before the user requests them.
+The administrative map, Search, Compare, Time Machine, Simulation/Scenario controls, Hazard Graph controls, Location Explorer, Water Change, Terrain, Rivers/downstream tracing and Exposure remain immediately available. On viewports at or below 800 px, larger secondary thematic datasets are deferred behind **Load additional map datasets**. This prevents a phone from fetching mountains, glaciers, glacial lakes, stations, hazard archives, hydropower, population, satellite and climate payloads before the user requests them while preserving the core analytical workflows.
 
 Desktop behavior remains unchanged. Once a mobile visitor opts in, the same components, artifacts, checksums, dates, evidence labels and limitations are loaded as on desktop; this is a delivery optimization, not a reduced scientific mode.
 
