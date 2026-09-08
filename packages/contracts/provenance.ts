@@ -36,3 +36,26 @@ export function parseProvenanceCatalog(value: unknown): ProvenanceCatalog {
 export function currentProductionRecords(catalog: ProvenanceCatalog) {
   return catalog.records.filter(record => record.state === 'current' && !record.is_fixture);
 }
+
+export interface ProvenanceFilters {
+  query?: string;
+  category?: ProvenanceCategory | '';
+  source?: string;
+  includeNonCurrent?: boolean;
+}
+
+function normalize(value: string) {
+  return value.normalize('NFKD').replace(/\p{M}/gu, '').toLocaleLowerCase('en-US').replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
+}
+
+export function filterProvenanceRecords(records: ProvenanceRecord[], filters: ProvenanceFilters) {
+  const query = normalize(filters.query ?? '');
+  return records.filter(record => {
+    if (!filters.includeNonCurrent && (record.state !== 'current' || record.is_fixture)) return false;
+    if (filters.category && record.category !== filters.category) return false;
+    if (filters.source && record.source !== filters.source) return false;
+    if (!query) return true;
+    const haystack = normalize(`${record.title} ${record.id} ${record.version} ${record.source} ${record.category} ${record.evidence_type} ${record.status}`);
+    return haystack.includes(query);
+  }).sort((a, b) => a.category.localeCompare(b.category, 'en') || a.title.localeCompare(b.title, 'en') || b.version.localeCompare(a.version, 'en'));
+}
