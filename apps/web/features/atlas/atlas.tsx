@@ -24,6 +24,7 @@ import { Population } from '../population/population';
 import { ExposureEngine } from '../exposure-engine/exposure-engine';
 import { Satellite } from '../satellite/satellite';
 import { ScenarioEngine } from '../scenario-engine/scenario-engine';
+import { SimulationUI } from '../simulation-ui/simulation-ui';
 import { HazardGraph } from '../hazard-graph/hazard-graph';
 import { TimeMachine } from '../time-machine/time-machine';
 import type { TemporalSelection } from '../../../../packages/contracts/temporal';
@@ -214,6 +215,7 @@ export function Atlas() {
       </section>
       <Search onFocus={focusSearch} />
       <CompareMode onFocus={focusComparison} />
+      <SimulationUI key={`simulation-ui-${attempt}`} map={mapReady ? mapRef.current : null} />
       <ScenarioEngine key={`scenario-${attempt}`} map={mapReady ? mapRef.current : null} />
       <HazardGraph key={`hazard-graph-${attempt}`} map={mapReady ? mapRef.current : null} />
       <TimeMachine value={temporal} onChange={setTemporal} />
