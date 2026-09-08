@@ -20,6 +20,7 @@ export function DataCatalog({ records }: { records: ProvenanceRecord[] }) {
   const [source, setSource] = useState('');
   const [includeNonCurrent, setIncludeNonCurrent] = useState(false);
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const catalogRef = useRef<HTMLDivElement>(null);
   const detailRef = useRef<HTMLElement>(null);
   const filtered = useMemo(() => filterProvenanceRecords(records, { query, category, source, includeNonCurrent }), [records, query, category, source, includeNonCurrent]);
   const selected = records.find(record => record.key === selectedKey) ?? null;
@@ -32,8 +33,8 @@ export function DataCatalog({ records }: { records: ProvenanceRecord[] }) {
   }, [records]);
 
   useEffect(() => {
-    if (selectedKey) requestAnimationFrame(() => detailRef.current?.focus());
-  }, [selectedKey]);
+    if (catalogRef.current) catalogRef.current.dataset.catalogInteractive = 'ready';
+  }, []);
 
   function select(record: ProvenanceRecord) {
     setSelectedKey(record.key);
@@ -42,7 +43,17 @@ export function DataCatalog({ records }: { records: ProvenanceRecord[] }) {
     window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}#catalog-detail`);
   }
 
-  return <div className="catalog-browser">
+  function activateFromKeyboard(event: React.KeyboardEvent<HTMLButtonElement>, record: ProvenanceRecord) {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    // Prevent the browser from synthesizing its own click/focus sequence.
+    // This keeps the dynamic-detail focus move deterministic for keyboard users.
+    event.preventDefault();
+    event.stopPropagation();
+    select(record);
+    setTimeout(() => detailRef.current?.focus({ preventScroll: true }), 0);
+  }
+
+  return <div ref={catalogRef} className="catalog-browser" data-catalog-interactive="loading">
     <form className="catalog-filters" role="search" onSubmit={event => event.preventDefault()}>
       <label>Search datasets<input type="search" value={query} placeholder="Glacier, WorldPop, HydroRIVERS, scenario…" onChange={event => setQuery(event.target.value)} /></label>
       <label>Category<select value={category} onChange={event => setCategory(event.target.value as ProvenanceCategory | '')}><option value="">All categories</option>{categories.map(value => <option key={value}>{value}</option>)}</select></label>
@@ -55,7 +66,7 @@ export function DataCatalog({ records }: { records: ProvenanceRecord[] }) {
         {categories.map(group => {
           const items = filtered.filter(record => record.category === group);
           return items.length ? <section key={group} className="catalog-group"><h2>{group}</h2><ul>{items.map(record => <li key={record.key}>
-            <button className="catalog-record" type="button" aria-pressed={selectedKey === record.key} onClick={() => select(record)}>
+            <button className="catalog-record" type="button" aria-pressed={selectedKey === record.key} aria-controls="catalog-detail" onClick={() => select(record)} onKeyDown={event => activateFromKeyboard(event, record)}>
               <strong>{record.title}</strong><span>{record.id}@{record.version}</span><span>{record.source}</span>
               <span className="badges"><EvidenceBadge record={record} />{record.state !== 'current' && <span className="badge">{record.state.toUpperCase()}</span>}</span>
             </button>

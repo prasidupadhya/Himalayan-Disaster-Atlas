@@ -84,6 +84,7 @@ test('keyboard users can skip map, search and reach dynamic results', async ({ p
 
 test('catalog and simulation move focus to newly requested detail/results', async ({ page }) => {
   await page.goto('/data-catalog/');
+  await expect(page.locator('.catalog-browser')).toHaveAttribute('data-catalog-interactive', 'ready');
   const firstCatalogRecord = page.locator('.catalog-record').first();
   await firstCatalogRecord.focus();
   await page.keyboard.press('Enter');
