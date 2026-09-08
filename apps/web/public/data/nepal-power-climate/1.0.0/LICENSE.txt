@@ -1,0 +1,2 @@
+NASA Earth Science data use guidance: https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy
+NASA POWER referencing guidance: https://power.larc.nasa.gov/docs/referencing/

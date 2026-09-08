@@ -8,6 +8,14 @@ export default function SourcesPage() {
     <p>The population layer uses <a href="https://hub.worldpop.org/geodata/summary?id=74559">WorldPop Global 2015–2030 R2025A v1</a>, Nepal model year 2025, constrained population counts at 3 arc-second resolution in EPSG:4326. The exact source GeoTIFF is pinned by SHA-256 and identified by DOI <a href="https://doi.org/10.5258/SOTON/WP00839">10.5258/SOTON/WP00839</a>.</p>
     <p>The source raster declares CC BY 4.0. WorldPop also publishes an ODbL derived-data clause for some building-derived products, so that licensing nuance is retained in the release metadata for review. The 2025 values are modelled estimates rather than a census observed at each grid cell.</p>
 
+    <h2>Satellite observations</h2>
+    <p>The satellite feature uses <a href="https://earth-search.aws.element84.com/v1/collections/sentinel-2-c1-l2a">Copernicus Sentinel-2 Collection-1 Level-2A</a> scenes distributed as public Cloud Optimized GeoTIFFs through Element 84 Earth Search/AWS. The official Level-2A product citation is DOI <a href="https://doi.org/10.5270/S2_-znk9xsj">10.5270/S2_-znk9xsj</a>. The release pins each selected true-colour and Scene Classification Layer object by exact URL and HTTP object identity metadata before preprocessing.</p>
+    <p>Use and redistribution follow the <a href="https://cds.climate.copernicus.eu/licences/ec-sentinel">Copernicus Sentinel Data Legal Notice</a>. The Atlas previews are modified data and carry the required notice “Contains modified Copernicus Sentinel data 2026.” Element 84 is the distribution/catalog provider, not the satellite data producer.</p>
+
+    <h2>Climate context</h2>
+    <p>The climate feature uses the public, unauthenticated <a href="https://power.larc.nasa.gov/docs/services/api/temporal/monthly/">NASA POWER Monthly and Annual API</a>, API version 2.9.8 in this release. The source reports MERRA-2 meteorology on its native 0.5° latitude × 0.625° longitude grid. The Atlas requests monthly 2 m air temperature (<code>T2M</code>, °C) and corrected precipitation rate (<code>PRECTOTCORR</code>, mm/day) for 1991–2020 and retains those units.</p>
+    <p>POWER values are reanalysis-derived grid-box products, not station observations. The release records the exact public query URLs and SHA-256 hashes of canonicalized source payloads, excluding only response-timing fields that change between identical requests. NASA <a href="https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy">Earth Science data-use guidance</a> and <a href="https://power.larc.nasa.gov/docs/referencing/">POWER referencing guidance</a> apply. The 1991–2020 period is used as the complete baseline for the displayed monthly normals.</p>
+
     <h2>Exposure calculations</h2>
     <p>Exposure results combine the existing WorldPop 2025 R2025A v1 native population grid, OpenStreetMap infrastructure and hydropower inventories, and COD-AB v02 district boundaries. Prepared footprint requests document their hypothetical buffer assumptions and the exact HydroRIVERS release hashes. They are derived estimates, not an additional observed hazard dataset. Input source/licence notices remain applicable, including WorldPop’s documented licensing nuance and OSM ODbL requirements.</p>
 
@@ -48,7 +56,13 @@ export default function SourcesPage() {
     <h2>Asia terrain context</h2>
     <p><a href="https://registry.opendata.aws/terrain-tiles/">Mapzen Terrain Tiles</a> provide a pinned regional backdrop with source-specific vertical references and resolutions. It is used only for visual context. <a href="/data/asia-terrain-context/1.0.0/LICENSE.txt">Attribution and licence notices</a> accompany the snapshot; <a href="/data/asia-terrain-context/1.0.0/sources.json">per-tile provenance</a> records source headers and hashes.</p>
 
+    <h2>Water Change</h2>
+    <p>Contains modified Copernicus Sentinel data (2024, 2025, 2026), from Element 84 Earth Search Collection 1 L2A under the <a href="https://cds.climate.copernicus.eu/licences/ec-sentinel">Sentinel Data Legal Notice</a>. <a href="/data/phewa-water-change/1.0.0/sources.json">Pinned source windows</a> record acquisition dates, instruments, calibration, hashes and native grid. Whole-object checksums are source-declared; exact downloaded window hashes are locally verified.</p>
+
+    <h2>Time Machine index</h2>
+    <p>The <a href="/data/atlas-time-index/1.0.0/index.json">observation index</a> derives dates and reported-event counts from the versioned Sentinel, POWER and BIPAD releases already cited here. It records input hashes and preserves their source attribution and temporal precision. Publication and retrieval dates are not substituted for observation dates.</p>
+
     <h2>Mapping software</h2>
-    <p>The interactive view uses <a href="https://maplibre.org/">MapLibre GL JS</a>. Versioned data and terrain derivatives are served locally; no third-party runtime tile or feature API is required.</p>
+    <p>The interactive view uses <a href="https://maplibre.org/">MapLibre GL JS</a>. Versioned data, terrain derivatives, satellite previews and climate series are served locally; no third-party runtime tile or feature API is required.</p>
   </article>;
 }

@@ -75,3 +75,11 @@ Future simulation engines must be model-agnostic and return separate scenario in
 ## Exposure engine extension
 
 `processing/exposure/engine.py` performs native-raster fractional-cell and indexed vector overlays offline. `pipelines/atlas_pipeline/exposure.py` verifies source inputs and publishes immutable request/result/spatial artifacts with schema 4.0.0; `exposure_contracts.py` integrates with the root data validation gate. `features/exposure-engine` only loads registered, validated results and mounts an independent disposable map overlay. National population processing never runs in the browser. See [exposure handoff](../exposure-engine.md) for supported footprints, numerical and deduplication rules, administrative accounting, uncertainty and benchmarks.
+
+## Water Change
+
+Feature 21 uses the offline `processing/water_change` engine and `water_change` publisher. Its dedicated schema and Python/TypeScript validators preserve native 20 m classifications, UNKNOWN quality masks and valid-only comparisons; hashed display images mount and dispose independently. See [water method and provenance](../water-change.md).
+
+## Time Machine
+
+Feature 22 adds a static temporal index, strict UTC interval contracts and one Atlas date selection shared by Water Change, Satellite, Climate and Disaster Events. Other datasets remain explicitly dated context. A 16 MiB verified-byte LRU and abort/dispose lifecycle bound temporal imagery resources. See [temporal semantics and coverage](../time-machine.md).

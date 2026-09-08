@@ -1,0 +1,31 @@
+import { expect, test } from '@playwright/test';
+test('water comparisons preserve UNKNOWN and reject reversed dates', async ({ page }) => {
+  await page.goto('/atlas/');
+  const water = page.getByRole('region', { name: 'Water Change', exact: true });
+  await expect(water).toHaveAttribute('data-water-change-state', 'ready');
+  await expect(water).toContainText('3.2224 km²');
+  await water.getByLabel('Show water observation').check();
+  await expect(water.getByRole('img')).toBeVisible();
+  await water.getByLabel('Later water observation').selectOption('2026-04-26');
+  await expect(water).toContainText('Comparison unavailable:');
+  await expect(water.getByRole('img')).toHaveCount(0);
+  await water.getByLabel('Water display').selectOption('true_colour');
+  await expect(water.getByRole('img')).toBeVisible();
+  await water.getByLabel('Water display').selectOption('change');
+  await water.getByLabel('Earlier water observation').selectOption('2026-04-26');
+  await water.getByLabel('Later water observation').selectOption('2024-04-19');
+  await expect(water).toContainText('Choose two different dates in chronological order');
+  await expect(water.getByRole('img')).toHaveCount(0);
+});
+test('water rejects a corrupt display image and allows retry', async ({ page }) => {
+  await page.route('**/phewa-water-change/1.0.0/*-change.png', route => route.fulfill({ body: 'bad image' }));
+  await page.goto('/atlas/');
+  const water = page.getByRole('region', { name: 'Water Change', exact: true });
+  await expect(water).toHaveAttribute('data-water-change-state', 'ready');
+  await water.getByLabel('Show water observation').check();
+  await expect(water).toContainText('Water image could not be verified');
+  await expect(water.getByRole('img')).toHaveCount(0);
+  await page.unroute('**/phewa-water-change/1.0.0/*-change.png');
+  await water.getByRole('button', { name: 'Try again' }).click();
+  await expect(water.getByRole('img')).toBeVisible();
+});

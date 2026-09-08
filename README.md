@@ -1,6 +1,6 @@
 # Himalayan Disaster Atlas
 
-Himalayan Disaster Atlas is a public, read-only geospatial atlas focused on Nepal and the Himalayan systems that influence it. The project brings together terrain, mountains, rivers, glaciers, glacial lakes, and administrative geography in one evidence-traceable interactive map.
+Himalayan Disaster Atlas is a public, read-only geospatial atlas focused on Nepal and the Himalayan systems that influence it. The project brings together terrain, mountains, rivers, glaciers, glacial lakes, satellite observations, climate context, population, infrastructure, disaster records, and administrative geography in one evidence-traceable interactive map.
 
 The purpose of the atlas is to build a reliable geographic foundation for understanding how Himalayan landscapes, water systems, cryosphere features, settlements, infrastructure, and future hazard-analysis layers relate to one another. The current application concentrates on verified source data and geographic context rather than presenting unverified predictions, operational warnings, or inferred hazard classifications.
 
@@ -138,6 +138,31 @@ Its core principles are:
 - Map viewer for two hypothetical trace corridors, with matched assets, provenance and downloadable inputs/results.
 - [Exposure methodology, commands and benchmark](docs/exposure-engine.md). Estimates are potentially intersecting population/infrastructure, not confirmed damage or risk.
 
+### Satellite observations
+
+- Three fixed Sentinel-2 Collection-1 Level-2A true-colour observation windows for western, central, and eastern Nepal context.
+- Exact scene/product IDs and acquisition timestamps shown in the atlas.
+- Source 10 m TCI and 20 m Scene Classification Layer metadata retained in the release provenance.
+- Scene-selection rule limited to at most 5% source cloud cover and zero SCL NoData for the selected windows.
+- Independent SCL cloud, NoData, and snow/ice QA recorded per scene.
+- Source COG URL, ETag, byte size, CRS, grid code, and official product DOI retained for reproducibility.
+- Checksum-verified local 768 × 768 previews keep visitor-time use static and account-free.
+- Separate footprints remain explicit; the feature does not claim seamless Nepal-wide or single-date satellite coverage.
+- Clouds, shadows, snow, and date-to-date visual differences are not interpreted as water, land, hazard, or change detection.
+
+### Climate context
+
+- NASA POWER monthly MERRA-2-derived climate context for the complete 1991–2020 baseline.
+- 360 monthly Nepal-wide records plus 12 derived monthly climatological normals.
+- Two explicit variables with source units preserved: 2 m air temperature in °C and corrected precipitation rate in mm/day.
+- Native 0.5° latitude × 0.625° longitude source-grid semantics retained in metadata.
+- Equal-area weighting of 66 source grid cells intersecting the pinned unsimplified Nepal COD-AB v02 boundary.
+- 100% valid Nepal-area coverage required for every published month; missing source cells would not be silently filled.
+- Interactive variable, year/normal, and month controls with an accessible monthly chart.
+- Product type shown as reanalysis-derived; values are never labelled station observations.
+- Historical monthly minimum/maximum shown only as reanalysis variability, not uncertainty intervals.
+- The 1991–2020 normal is historical context, not a forecast, current-condition estimate, or local valley-scale climate value.
+
 ## Evidence, provenance, and data integrity
 
 Every published dataset carries machine-readable metadata describing its source, version, licence, attribution, retrieval date, processing date, spatial and temporal coverage, evidence type, limitations, uncertainty, and update policy.
@@ -207,8 +232,14 @@ The browser suite covers administrative boundaries, terrain, mountains, rivers, 
 - **River data:** FAO AQUASTAT Rivers 2026, HydroRIVERS, HydroSHEDS, HydroBASINS
 - **Glacier data:** Randolph Glacier Inventory 7.0, GLIMS
 - **Glacial-lake data:** Glacial Lake Observatory v1.02, Sentinel-2-derived inventory
+- **Satellite observations:** Copernicus Sentinel-2 Collection-1 Level-2A via Element 84 Earth Search/AWS Open Data
+- **Climate data:** NASA POWER Monthly and Annual API, MERRA-2-derived T2M and PRECTOTCORR
 - **Data processing:** Python, Shapely, JSON Schema
 - **Validation:** AJV, shared TypeScript/Python data contracts, SHA-256 artifact verification
 - **Testing:** Vitest, Python `unittest`, Playwright
 - **Code quality:** ESLint, Ruff, TypeScript type checking
 - **Delivery:** Static Next.js export with versioned local data artifacts
+
+Water Change provides three dated Phewa Lake observations, conservative masks and coverage-gated comparisons. See [feature 21](docs/water-change.md); run `npm run data:water-change` to verify/reproduce the immutable release.
+
+Time Machine synchronizes explicit UTC observations across water, satellite, monthly climate and reported disaster events, preserving gaps and inventory context. See [feature 22](docs/time-machine.md); `npm run data:time-machine` verifies the temporal index.
