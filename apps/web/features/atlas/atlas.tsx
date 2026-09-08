@@ -30,6 +30,7 @@ import { Climate } from '../climate/climate';
 import { LocationExplorer } from '../location-explorer/location-explorer';
 import { Search } from '../search/search';
 import type { SearchRecord } from '../../../../packages/contracts/search';
+import { CompareMode } from '../compare-mode/compare-mode';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -190,6 +191,14 @@ export function Atlas() {
     if (record.type === 'administrative_unit') selectFeature(record.feature_id);
     if (map) map.easeTo({ center: [record.longitude, record.latitude], zoom: Math.max(map.getZoom(), record.type === 'administrative_unit' ? 7 : 9), duration: 0 });
   }
+  function focusComparison(a: SearchRecord, b: SearchRecord) {
+    const map = mapRef.current;
+    if (!map) return;
+    const west = Math.min(a.longitude, b.longitude); const east = Math.max(a.longitude, b.longitude);
+    const south = Math.min(a.latitude, b.latitude); const north = Math.max(a.latitude, b.latitude);
+    if (west === east && south === north) map.easeTo({ center: [west, south], zoom: Math.max(map.getZoom(), 9), duration: 0 });
+    else map.fitBounds([[west, south], [east, north]], { padding: 80, maxZoom: 9, duration: 0 });
+  }
 
   return <div className="atlas-workspace">
     <aside className="atlas-panel">
@@ -202,6 +211,7 @@ export function Atlas() {
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
       <Search onFocus={focusSearch} />
+      <CompareMode onFocus={focusComparison} />
       <TimeMachine value={temporal} onChange={setTemporal} />
       <LocationExplorer key={`location-explorer-${attempt}`} map={mapReady ? mapRef.current : null} adminDatasets={datasets} />
       <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? mapRef.current : null} />

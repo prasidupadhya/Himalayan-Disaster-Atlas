@@ -34,7 +34,8 @@ export interface CompareEntity {
 export interface CompareRow {
   key: string;
   label: string;
-  unit: string;
+  unit_a: string;
+  unit_b: string;
   a: number | null;
   b: number | null;
   state: 'comparable' | 'unavailable' | 'blocked';
@@ -59,12 +60,13 @@ export function compareEntities(a: CompareEntity, b: CompareEntity): CompareResu
     const left = a.metrics.find(metric => metric.key === key);
     const right = b.metrics.find(metric => metric.key === key);
     const label = left?.label ?? right?.label ?? key;
-    const unit = left?.unit ?? right?.unit ?? '';
-    if (!left || !right) return { key, label, unit, a: left?.value ?? null, b: right?.value ?? null, state: 'unavailable' as const, reason: 'Metric is not published for both records.', basis_a: left?.basis ?? null, basis_b: right?.basis ?? null };
-    if (left.value === null || right.value === null) return { key, label, unit, a: left.value, b: right.value, state: 'unavailable' as const, reason: 'At least one source value is UNKNOWN.', basis_a: left.basis, basis_b: right.basis };
-    if (left.unit !== right.unit) return { key, label, unit: `${left.unit} / ${right.unit}`, a: left.value, b: right.value, state: 'blocked' as const, reason: 'Units are incompatible.', basis_a: left.basis, basis_b: right.basis };
-    if (!left.compatibility || left.compatibility !== right.compatibility) return { key, label, unit, a: left.value, b: right.value, state: 'blocked' as const, reason: 'Metric meanings are incompatible even though the values may share a unit.', basis_a: left.basis, basis_b: right.basis };
-    return { key, label, unit, a: left.value, b: right.value, state: 'comparable' as const, reason: null, basis_a: left.basis, basis_b: right.basis };
+    const unitA = left?.unit ?? '';
+    const unitB = right?.unit ?? '';
+    if (!left || !right) return { key, label, unit_a: unitA, unit_b: unitB, a: left?.value ?? null, b: right?.value ?? null, state: 'unavailable' as const, reason: 'Metric is not published for both records.', basis_a: left?.basis ?? null, basis_b: right?.basis ?? null };
+    if (left.value === null || right.value === null) return { key, label, unit_a: left.unit, unit_b: right.unit, a: left.value, b: right.value, state: 'unavailable' as const, reason: 'At least one source value is UNKNOWN.', basis_a: left.basis, basis_b: right.basis };
+    if (left.unit !== right.unit) return { key, label, unit_a: left.unit, unit_b: right.unit, a: left.value, b: right.value, state: 'blocked' as const, reason: 'Units are incompatible.', basis_a: left.basis, basis_b: right.basis };
+    if (!left.compatibility || left.compatibility !== right.compatibility) return { key, label, unit_a: left.unit, unit_b: right.unit, a: left.value, b: right.value, state: 'blocked' as const, reason: 'Metric meanings are incompatible even though the values may share a unit.', basis_a: left.basis, basis_b: right.basis };
+    return { key, label, unit_a: left.unit, unit_b: right.unit, a: left.value, b: right.value, state: 'comparable' as const, reason: null, basis_a: left.basis, basis_b: right.basis };
   });
   return { state: 'ready', reason: null, rows };
 }
