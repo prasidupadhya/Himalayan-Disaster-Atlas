@@ -1,0 +1,182 @@
+[
+  {
+    "scene_id": "S2B_T44RQS_20240419T050125_L2A",
+    "acquired_at": "2024-04-19T05:10:56.988000Z",
+    "platform": "sentinel-2b",
+    "processing_baseline": "05.10",
+    "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-c1-l2a/items/S2B_T44RQS_20240419T050125_L2A",
+    "stac_sha256": "0bb6e6b36c28680ff3ed6f001849618f5a5a62a15ad59dc36b429572fb2dffae",
+    "grid": {
+      "crs": "EPSG:32644",
+      "transform": [
+        20.0,
+        0.0,
+        784480.0,
+        0.0,
+        -20.0,
+        3130780.0
+      ],
+      "width": 505,
+      "height": 512
+    },
+    "assets": {
+      "green": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2024/4/S2B_T44RQS_20240419T050125_L2A/B03.tif",
+        "source_etag": "\"82e71694e0e643f501aa46b29e47936e-28\"",
+        "source_byte_size": 233995172,
+        "source_checksum_declared": "1220b7da3c1a43de70d31425c6d7af8a5bf5cae91315ec1e7503c2af04c72e1ee61c",
+        "window_sha256": "0d2444a8d3e707bdd72b38ac2716dc80c855c8b59b57b2f8199aca652b476a22",
+        "scale": 0.0001,
+        "offset": -0.1
+      },
+      "nir": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2024/4/S2B_T44RQS_20240419T050125_L2A/B08.tif",
+        "source_etag": "\"5bfe26e0f4e8d65a11b572c18edc14f1-30\"",
+        "source_byte_size": 249519687,
+        "source_checksum_declared": "12201d304568432dea807bf8668bae4bbb3e07f67cb35f0d9a4cae62e22e750b78f3",
+        "window_sha256": "a15432e1c7d5a6ecf0c70278c4ea08f059005b9d355dacb1545b0aa1f0cf5b20",
+        "scale": 0.0001,
+        "offset": -0.1
+      },
+      "scl": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2024/4/S2B_T44RQS_20240419T050125_L2A/SCL.tif",
+        "source_etag": "\"008c3d96623d5f50b52b3452debd68bc\"",
+        "source_byte_size": 3284426,
+        "source_checksum_declared": "12209cbe569fc8b569d4177ec05d0e44377c7a3117896ae32b2a4dc39fad3864c5cf",
+        "window_sha256": "e1402d3498fb16df4d3dfcf888dfff9ed5740a4d27a129e01390f62f13fd8ca3",
+        "scale": 1,
+        "offset": 0
+      },
+      "visual": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2024/4/S2B_T44RQS_20240419T050125_L2A/TCI.tif",
+        "source_etag": "\"854e8cd18ad50b537d189d7f03b0b4de-39\"",
+        "source_byte_size": 322259157,
+        "source_checksum_declared": "1220fbc66e4151e203000d1ec074b7e0279a67d036be6230321f65ff699ac72aee59",
+        "window_sha256": "8bbb916f5fcb0b44b2be50d0cf38c299ae7826699ce0d5aaa8cc24a8c562fcab",
+        "scale": 1,
+        "offset": 0
+      }
+    },
+    "published_at": "2024-04-19T11:16:28.582Z"
+  },
+  {
+    "scene_id": "S2A_T44RQS_20250401T050902_L2A",
+    "acquired_at": "2025-04-01T05:11:06.525000Z",
+    "platform": "sentinel-2a",
+    "processing_baseline": "05.11",
+    "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-c1-l2a/items/S2A_T44RQS_20250401T050902_L2A",
+    "stac_sha256": "b1ae02900d58aba499f5d898433bd6db71a5e45af457064ed69e8aa41cf91826",
+    "grid": {
+      "crs": "EPSG:32644",
+      "transform": [
+        20.0,
+        0.0,
+        784480.0,
+        0.0,
+        -20.0,
+        3130780.0
+      ],
+      "width": 505,
+      "height": 512
+    },
+    "assets": {
+      "green": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2025/4/S2A_T44RQS_20250401T050902_L2A/B03.tif",
+        "source_etag": "\"bfce3d5772106d568103ca7b8212e14c-29\"",
+        "source_byte_size": 235138829,
+        "source_checksum_declared": "12203d1f623694a8ed7492708d67358c70efeaca82da9ed98de118dd9ff9f8f1bd06",
+        "window_sha256": "65bc0104e684ccacd2bf93018b5e1b9f772b58b54d14a00a871f7e30a0460c46",
+        "scale": 0.0001,
+        "offset": -0.1
+      },
+      "nir": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2025/4/S2A_T44RQS_20250401T050902_L2A/B08.tif",
+        "source_etag": "\"f90218e7b204318ed5dde5f8ea4f47db-30\"",
+        "source_byte_size": 250674884,
+        "source_checksum_declared": "1220ae8ce6ed754ec59bf34286f42196bb5bb4acf9999ced6e018984d0f1211d4125",
+        "window_sha256": "1c04fd8defd37dde7b58f9f3f67450e1d399bc425aa319fbca8bd084bf48d63c",
+        "scale": 0.0001,
+        "offset": -0.1
+      },
+      "scl": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2025/4/S2A_T44RQS_20250401T050902_L2A/SCL.tif",
+        "source_etag": "\"96a803303cb6a79ddddb2d5f0f9b9156\"",
+        "source_byte_size": 3803244,
+        "source_checksum_declared": "122098161d7cb478236dcca81a3dc05d0592481e1188f85c2006c3cb5999808b0b9a",
+        "window_sha256": "f8082486dfa04c88b67dc01614be7950ffe450bfe54eb24ee00cd867f71320e8",
+        "scale": 1,
+        "offset": 0
+      },
+      "visual": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2025/4/S2A_T44RQS_20250401T050902_L2A/TCI.tif",
+        "source_etag": "\"5f34f2e8917b0c855a14b4988a414d83-40\"",
+        "source_byte_size": 329285154,
+        "source_checksum_declared": "122037ff953c47656b5219fe15fbd38567aa6861c65e6e47877824dd7841ed88144e",
+        "window_sha256": "3842e821c011e11e639cb906e909fbe1be66a7574f9b0ef96818950b4b8f412e",
+        "scale": 1,
+        "offset": 0
+      }
+    },
+    "published_at": "2025-04-01T12:22:06.186Z"
+  },
+  {
+    "scene_id": "S2A_T44RQS_20260426T050651_L2A",
+    "acquired_at": "2026-04-26T05:11:12.585000Z",
+    "platform": "sentinel-2a",
+    "processing_baseline": "05.12",
+    "stac_url": "https://earth-search.aws.element84.com/v1/collections/sentinel-2-c1-l2a/items/S2A_T44RQS_20260426T050651_L2A",
+    "stac_sha256": "96f35ab5e27f47de4972ed3914c4ce77f296d9b18369797be97c692529c4d668",
+    "grid": {
+      "crs": "EPSG:32644",
+      "transform": [
+        20.0,
+        0.0,
+        784480.0,
+        0.0,
+        -20.0,
+        3130780.0
+      ],
+      "width": 505,
+      "height": 512
+    },
+    "assets": {
+      "green": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2026/4/S2A_T44RQS_20260426T050651_L2A/B03.tif",
+        "source_etag": "\"1a0e8bc81b752162acbd1bda54f028eb-29\"",
+        "source_byte_size": 237473951,
+        "source_checksum_declared": "122043afe2dff0e5773de8981a29bd7d9c4f094cc5f2f1d29d384ec8d2208ea9f4b2",
+        "window_sha256": "4ed2381c39fd02b38335962779902ace8abe2826fca6f657cf96833a1c3d5580",
+        "scale": 0.0001,
+        "offset": -0.1
+      },
+      "nir": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2026/4/S2A_T44RQS_20260426T050651_L2A/B08.tif",
+        "source_etag": "\"9fcd4d4e1985f9d447dc5bc1436df9e3-30\"",
+        "source_byte_size": 247228035,
+        "source_checksum_declared": "1220f25755491a0cb1ebe3db86562910b0c40c6c90316cc79db0fa05095c8dc7cec1",
+        "window_sha256": "adcad5f8c2d6ac0f0a3d118c1fde4f5723732447fef0841863fcf7c37822f0da",
+        "scale": 0.0001,
+        "offset": -0.1
+      },
+      "scl": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2026/4/S2A_T44RQS_20260426T050651_L2A/SCL.tif",
+        "source_etag": "\"433668a55c52369dc3be1c9ae7b116fe\"",
+        "source_byte_size": 3023449,
+        "source_checksum_declared": "1220de0c90bb8225ca9dcb7b2f587852b3351bdeaa4b3261a4446223e783c1d6eea4",
+        "window_sha256": "06e2678cb533d609ad0d6f7b2840bf1bb86af1ff81633c443c84481215384857",
+        "scale": 1,
+        "offset": 0
+      },
+      "visual": {
+        "url": "https://e84-earth-search-sentinel-data.s3.us-west-2.amazonaws.com/sentinel-2-c1-l2a/44/R/QS/2026/4/S2A_T44RQS_20260426T050651_L2A/TCI.tif",
+        "source_etag": "\"45e1028e38a7354d0f0bfda07f0943a2-30\"",
+        "source_byte_size": 250883916,
+        "source_checksum_declared": "1220cf43d142913476c04db636740c5a51d3773bac747e9910499c392bf21eebcc63",
+        "window_sha256": "b73f79af9f6cef045eb52222703fb840d94a2eeb795eeb5d3cae86a1b6626eca",
+        "scale": 1,
+        "offset": 0
+      }
+    },
+    "published_at": "2026-05-05T09:07:11.110Z"
+  }
+]

@@ -56,6 +56,9 @@ export default function SourcesPage() {
     <h2>Asia terrain context</h2>
     <p><a href="https://registry.opendata.aws/terrain-tiles/">Mapzen Terrain Tiles</a> provide a pinned regional backdrop with source-specific vertical references and resolutions. It is used only for visual context. <a href="/data/asia-terrain-context/1.0.0/LICENSE.txt">Attribution and licence notices</a> accompany the snapshot; <a href="/data/asia-terrain-context/1.0.0/sources.json">per-tile provenance</a> records source headers and hashes.</p>
 
+    <h2>Water Change</h2>
+    <p>Contains modified Copernicus Sentinel data (2024, 2025, 2026), from Element 84 Earth Search Collection 1 L2A under the <a href="https://cds.climate.copernicus.eu/licences/ec-sentinel">Sentinel Data Legal Notice</a>. <a href="/data/phewa-water-change/1.0.0/sources.json">Pinned source windows</a> record acquisition dates, instruments, calibration, hashes and native grid. Whole-object checksums are source-declared; exact downloaded window hashes are locally verified.</p>
+
     <h2>Mapping software</h2>
     <p>The interactive view uses <a href="https://maplibre.org/">MapLibre GL JS</a>. Versioned data, terrain derivatives, satellite previews and climate series are served locally; no third-party runtime tile or feature API is required.</p>
   </article>;

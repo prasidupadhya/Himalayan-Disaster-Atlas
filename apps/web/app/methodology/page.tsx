@@ -5,6 +5,10 @@ export default function MethodologyPage() {
     <p className="eyebrow">Methodology</p><h1>Evidence before interpretation.</h1>
     <p>Every published dataset carries its source, version, dates, license, processing method, coverage, limitations, and uncertainty. Missing measurements remain UNKNOWN.</p>
 
+    <h2 id="water-method">Water Change</h2>
+    <p>Three April Sentinel-2 observations around Phewa Lake share a native 20 m UTM grid. Calibrated green/NIR reflectance, NDWI above 0.05 and SCL water must agree. Land requires NDWI below −0.05 and valid non-water SCL. Clouds, shadows, snow, a 20 m exclusion buffer, uncertain pixels and water patches below 0.0036 km² remain UNKNOWN. Only jointly valid pixels contribute to gain, loss and persistence. Both full-window and mapped-water-union coverage must reach 80%; failing comparisons have UNKNOWN metrics. Display masks are reprojected separately from native area counts.</p>
+    <p>These dates do not establish seasonal behaviour, trends, flood extent or causes. Mapped area is partial coverage, not total lake area. Cross-sensor, atmospheric and shoreline uncertainty remain; no independent accuracy estimate is available. <a href="/data/phewa-water-change/1.0.0/qa.json">Coverage QA</a> · <a href="/data/phewa-water-change/1.0.0/sources.json">Source windows and calibration</a>.</p>
+
     <h2>Population preparation</h2>
     <p>The Atlas pins the WorldPop Nepal 2025 R2025A v1 constrained Float32 GeoTIFF by SHA-256 and validates its EPSG:4326 CRS, 9,773 × 4,921 dimensions, 3 arc-second cell spacing, <code>-99999</code> NoData value, finite non-negative valid cells, and source raster bounds. Valid zero population cells remain distinct from NoData.</p>
     <p>The native source raster remains the numerical analysis input. A separate EPSG:3857 zoom 5–10 PNG pyramid is generated only for visualization using bilinear reprojection and a log-scaled intensity transform. Display pixels therefore cannot be sampled or summed as population counts. The national source-cell sum is retained as an integrity check, not presented as a census total or an administrative validation target.</p>

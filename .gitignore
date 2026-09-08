@@ -18,3 +18,5 @@ data/processed/*
 !data/processed/README.md
 .ruff_cache/
 apps/web/public/vendor/
+
+data/staging/
