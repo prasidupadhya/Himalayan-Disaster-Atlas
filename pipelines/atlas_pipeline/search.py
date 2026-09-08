@@ -3,7 +3,6 @@
 import gzip
 import hashlib
 import json
-import re
 import shutil
 import unicodedata
 from pathlib import Path
