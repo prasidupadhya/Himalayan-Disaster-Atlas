@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "assumptions": {
+    "source-topology": "Follow only source NEXT_DOWN; source coverage exits are not outlets and no connection is inferred.",
+    "whole-reaches": "Start at the upstream end of the entire selected source reach. Distances sum source LENGTH_KM, not click-to-outlet distance.",
+    "fixed-celerity": "One user-assumed positive celerity translates a signal along every retained reach; it is not measured water velocity.",
+    "rectangular-pulse": "Hypothetical release is a rectangular pulse with constant discharge volume/duration and zero additional release outside its duration.",
+    "no-attenuation": "Pure translation with no attenuation, storage, dispersion, tributary inflow, losses or feedback. Volume per section is conserved by definition."
+  },
+  "models": {
+    "network-path": ["source-topology", "whole-reaches"],
+    "constant-celerity-pulse": ["source-topology", "whole-reaches", "fixed-celerity", "rectangular-pulse", "no-attenuation"]
+  }
+}

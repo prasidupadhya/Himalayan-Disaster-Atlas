@@ -1,0 +1,249 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "version",
+    "method",
+    "inputs",
+    "nodes",
+    "edges",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "kind": {
+      "const": "hazard-graph"
+    },
+    "version": {
+      "const": "1.0.0"
+    },
+    "method": {
+      "const": "evidence-relationships/1.0.0"
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dataset_id",
+          "version",
+          "path",
+          "sha256",
+          "artifact_sha256",
+          "source",
+          "license",
+          "date"
+        ],
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^/data/[a-z0-9-]+/[0-9.]+/manifest.json$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "artifact_sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "license": {
+            "type": "string",
+            "minLength": 1
+          },
+          "date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "maxItems": 25000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "type",
+          "label",
+          "input",
+          "record_id",
+          "coordinates",
+          "boundary_next_id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "glacier",
+              "lake",
+              "river",
+              "hazard",
+              "infrastructure",
+              "population_area",
+              "event",
+              "scenario",
+              "exposure"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1
+          },
+          "input": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "coordinates": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "array",
+                "minItems": 2,
+                "maxItems": 2,
+                "items": {
+                  "type": "number"
+                }
+              }
+            ]
+          },
+          "boundary_next_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "maxItems": 30000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "from",
+          "to",
+          "type",
+          "evidence",
+          "confidence",
+          "input",
+          "record_id",
+          "method",
+          "assumptions",
+          "limitations"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "from": {
+            "type": "string",
+            "minLength": 1
+          },
+          "to": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "glacier_lake",
+              "lake_river",
+              "river_downstream",
+              "hazard_exposure",
+              "landslide_blockage",
+              "scenario_exposure",
+              "footprint_intersection"
+            ]
+          },
+          "evidence": {
+            "enum": [
+              "observed",
+              "derived",
+              "inferred",
+              "modelled"
+            ]
+          },
+          "confidence": {
+            "enum": [
+              null,
+              "low",
+              "medium",
+              "high"
+            ]
+          },
+          "input": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "record_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "method": {
+            "type": "string",
+            "minLength": 1
+          },
+          "assumptions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "limitations": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

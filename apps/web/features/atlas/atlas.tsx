@@ -23,10 +23,17 @@ import { Infrastructure } from '../infrastructure/infrastructure';
 import { Population } from '../population/population';
 import { ExposureEngine } from '../exposure-engine/exposure-engine';
 import { Satellite } from '../satellite/satellite';
+import { ScenarioEngine } from '../scenario-engine/scenario-engine';
+import { SimulationUI } from '../simulation-ui/simulation-ui';
+import { HazardGraph } from '../hazard-graph/hazard-graph';
 import { TimeMachine } from '../time-machine/time-machine';
 import type { TemporalSelection } from '../../../../packages/contracts/temporal';
 import { WaterChange } from '../water-change/water-change';
 import { Climate } from '../climate/climate';
+import { LocationExplorer } from '../location-explorer/location-explorer';
+import { Search } from '../search/search';
+import type { SearchRecord } from '../../../../packages/contracts/search';
+import { CompareMode } from '../compare-mode/compare-mode';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -182,6 +189,19 @@ export function Atlas() {
     setMapError(null); setMapReady(false); setSelected(null);
     setAttempt(value => value + 1);
   }
+  function focusSearch(record: SearchRecord) {
+    const map = mapRef.current;
+    if (record.type === 'administrative_unit') selectFeature(record.feature_id);
+    if (map) map.easeTo({ center: [record.longitude, record.latitude], zoom: Math.max(map.getZoom(), record.type === 'administrative_unit' ? 7 : 9), duration: 0 });
+  }
+  function focusComparison(a: SearchRecord, b: SearchRecord) {
+    const map = mapRef.current;
+    if (!map) return;
+    const west = Math.min(a.longitude, b.longitude); const east = Math.max(a.longitude, b.longitude);
+    const south = Math.min(a.latitude, b.latitude); const north = Math.max(a.latitude, b.latitude);
+    if (west === east && south === north) map.easeTo({ center: [west, south], zoom: Math.max(map.getZoom(), 9), duration: 0 });
+    else map.fitBounds([[west, south], [east, north]], { padding: 80, maxZoom: 9, duration: 0 });
+  }
 
   return <div className="atlas-workspace">
     <aside className="atlas-panel">
@@ -193,7 +213,13 @@ export function Atlas() {
         {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
+      <Search onFocus={focusSearch} />
+      <CompareMode onFocus={focusComparison} />
+      <SimulationUI key={`simulation-ui-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <ScenarioEngine key={`scenario-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <HazardGraph key={`hazard-graph-${attempt}`} map={mapReady ? mapRef.current : null} />
       <TimeMachine value={temporal} onChange={setTemporal} />
+      <LocationExplorer key={`location-explorer-${attempt}`} map={mapReady ? mapRef.current : null} adminDatasets={datasets} />
       <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
       <Mountains key={`mountains-${attempt}`} map={mapReady ? mapRef.current : null} />

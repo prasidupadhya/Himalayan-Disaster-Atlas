@@ -83,3 +83,27 @@ Feature 21 uses the offline `processing/water_change` engine and `water_change` 
 ## Time Machine
 
 Feature 22 adds a static temporal index, strict UTC interval contracts and one Atlas date selection shared by Water Change, Satellite, Climate and Disaster Events. Other datasets remain explicitly dated context. A 16 MiB verified-byte LRU and abort/dispose lifecycle bound temporal imagery resources. See [temporal semantics and coverage](../time-machine.md).
+
+## Search
+
+Feature 25 derives a separate immutable search release from the validated source releases instead of scanning all source GeoJSON in the browser. Eight bounded gzip shards preserve composite source identity, type, context, representative coordinates and source dates. The browser verifies each shard and processes them sequentially on explicit search submission. Ranking and normalization live in the shared TypeScript contract; no source-missing common names or transliterations are invented. See [global search semantics](../search.md).
+
+## Compare Mode
+
+Feature 26 reuses Search only to resolve stable versioned identities, then loads the two exact source datasets before comparison. `packages/contracts/compare.ts` owns entity-family and metric compatibility, so matching units never bypass semantic meaning. Cross-type pairs and incompatible metric definitions are blocked; missing values remain UNKNOWN. The UI provides an accessible table with source/version/date/resolution/evidence provenance and synchronizes the existing map to the two representative positions without creating a second map. See [comparison semantics](../compare-mode.md).
+
+## Location Explorer
+
+Feature 24 adds an opt-in deterministic spatial-context reader. It computes administrative containment and minimum geometry distance from validated local datasets rather than querying rendered map features, so layer visibility and zoom do not alter results. Category-specific radii/caps, source dates, partial-unavailable states and the WorldPop numerical-lookup limitation are documented in [the Location Explorer methodology](../location-explorer.md).
+
+## Hazard Graph
+
+An offline, immutable relationship index links exact source records. Shared typed semantics and validators separate observation, derivation, inference and modelling. Bounded cycle-safe exploration owns a disposable map selection. See [graph contracts and evidence rules](../hazard-graph.md).
+
+## Scenario Engine
+
+Level 0 versioned definitions and a shared assumption registry gate offline Level 1 network and Level 2 pulse adapters. Every result preserves model/input/processing provenance, units, limits, partial coverage and null unsupported outputs. The browser verifies static results and owns an independent hypothetical pathway overlay. Physical adapters remain unregistered. See [scenario lifecycle and validation](../scenario-engine.md).
+
+## Simulation UI
+
+Feature 29 adds a static-safe workbench on top of the verified Scenario Engine. Shared TypeScript rules mirror the request-schema parameter limits and reuse the versioned assumption registry. The browser first verifies both registered Feature 28 releases, then may recompute only the same Level 1/2 deterministic network equations over their common source pathway. Interactive runs keep a deterministic fingerprint, model/data provenance, explicit modelled evidence class and null unsupported physical outputs. Compatible-run comparison requires identical level/model/version/source basis. No API route, server process, third-party runtime call or unregistered physical adapter is introduced. See [Simulation UI semantics and failure rules](../simulation-ui.md).

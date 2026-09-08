@@ -163,6 +163,50 @@ Its core principles are:
 - Historical monthly minimum/maximum shown only as reanalysis variability, not uncertainty intervals.
 - The 1991–2020 normal is historical context, not a forecast, current-condition estimate, or local valley-scale climate value.
 
+### Historical event pages
+
+- Static `/events/` reader for verified + approved BIPAD disaster-event records from 2015–2026.
+- Loads one immutable year partition at a time instead of preloading the full 57,216-record archive.
+- Preserves incident time, reported time, location text, reported point, source-reported impacts, verification flags, and source paths.
+- Missing descriptions or impact values remain `UNKNOWN`; a source zero remains a real zero.
+- Reported points are never presented as affected areas or hazard footprints, and the reader adds no unsupported mechanism or causal narrative.
+- Shareable `year` + stable event-ID query state with navigation back to the Atlas, Data Catalog, Sources and Methodology.
+- See [event-page evidence semantics](docs/event-pages.md).
+
+### Location Explorer
+
+- Opt-in map-click or coordinate-form inspection for locations inside Nepal.
+- Deterministic province/district containment and checksum-verified Copernicus terrain elevation.
+- Capped nearby spatial context for rivers, glaciers, glacial lakes, hydropower, infrastructure, earthquake epicenters, reported floods, reported landslides and historical events.
+- Every nearby result keeps distance, stable source ID, dataset/version and source date; different dataset dates remain visible.
+- “Nearby” is explicitly distance-only and never relabelled as hazard, exposure, causal connection, impact or risk.
+- Partial dataset failures stay explicit while other verified categories remain usable.
+- WorldPop point counts remain `UNAVAILABLE` because the published web tiles are display-only and cannot be truthfully sampled as population values.
+- See [Location Explorer methodology](docs/location-explorer.md).
+
+### Global search
+
+- One global search across administrative units, mountains, river reaches, glaciers, glacial lakes, hydropower, infrastructure and disaster events.
+- Immutable source-derived index with stable composite identities, entity types, source dates and disambiguating context.
+- Exact, alias, prefix and partial matching with deterministic ranking and diacritic normalization.
+- Duplicate names remain explicit rather than being auto-selected; results always show what type of object was found.
+- Eight checksum-verified bounded shards avoid loading the full atlas inventories at search time.
+- Unsupported common river/lake names and cross-script transliterations are not invented when the source releases do not provide a verified linkage.
+- No-result messages describe index matching only and never claim geographic absence.
+- See [global search methodology](docs/search.md).
+
+### Compare mode
+
+- Side-by-side comparison for districts, mountains, river reaches, glaciers, glacial lakes, BIPAD disaster events and USGS earthquakes.
+- Search resolves stable identities, then Compare loads the exact two versioned source datasets rather than comparing index snippets.
+- Same-type and metric-specific semantic compatibility rules prevent invalid comparisons even when units happen to match.
+- Source/version, feature date, observation date, temporal coverage, spatial resolution and evidence type remain visible for both records.
+- `UNKNOWN` stays distinct from zero; incompatible metrics are marked `NOT COMPARABLE` rather than coerced.
+- Derived and reported bases remain labelled, and no better/worse or hazard ranking is calculated.
+- The existing map fits both representative positions while the comparison table remains usable without WebGL.
+- Arbitrary Location Explorer coordinates are excluded until a versioned numerical location-snapshot contract exists.
+- See [Compare Mode methodology](docs/compare-mode.md).
+
 ## Evidence, provenance, and data integrity
 
 Every published dataset carries machine-readable metadata describing its source, version, licence, attribution, retrieval date, processing date, spatial and temporal coverage, evidence type, limitations, uncertainty, and update policy.
@@ -243,3 +287,9 @@ The browser suite covers administrative boundaries, terrain, mountains, rivers, 
 Water Change provides three dated Phewa Lake observations, conservative masks and coverage-gated comparisons. See [feature 21](docs/water-change.md); run `npm run data:water-change` to verify/reproduce the immutable release.
 
 Time Machine synchronizes explicit UTC observations across water, satellite, monthly climate and reported disaster events, preserving gaps and inventory context. See [feature 22](docs/time-machine.md); `npm run data:time-machine` verifies the temporal index.
+
+Hazard Graph exposes source-backed drainage and hypothetical exposure relationships, with explicit evidence classes and UNKNOWN confidence. See [feature 27](docs/hazard-graph.md).
+
+Scenario Engine publishes reproducible Level 1 network paths and Level 2 hypothetical constant-celerity pulse translations. These are educational approximations, not hydraulic forecasts. See [feature 28](docs/scenario-engine.md) and `npm run data:scenarios`.
+
+Simulation UI adds the interactive Feature 29 workbench over those verified scenario inputs: explicit Level 1/2 selection, bounded Level 2 parameter controls, pre-run assumptions, deterministic browser recomputation, compatible-run comparison, map/perspective presentation and complete model/data provenance. It never creates a hydraulic footprint or exposure estimate when the validated model does not provide one. See [feature 29](docs/simulation-ui.md).

@@ -1,0 +1,476 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "id",
+    "version",
+    "status",
+    "evidence_type",
+    "label",
+    "simulation_level",
+    "model_class",
+    "model",
+    "is_fixture",
+    "run_sha256",
+    "calculated_at",
+    "processing_version",
+    "runtime",
+    "definition",
+    "assumptions",
+    "crs",
+    "vertical_datum",
+    "spatial_resolution",
+    "time_basis",
+    "path",
+    "termination",
+    "next_reach_id",
+    "total_length_km",
+    "pulse_discharge_m3_s",
+    "volume_per_section_m3",
+    "footprint",
+    "depth_m",
+    "velocity_m_s",
+    "confidence_interval",
+    "validation",
+    "limitations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "kind": {
+      "const": "scenario-result"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "const": "1.0.0"
+    },
+    "status": {
+      "enum": [
+        "complete",
+        "partial_coverage"
+      ]
+    },
+    "evidence_type": {
+      "const": "modelled"
+    },
+    "label": {
+      "const": "HYPOTHETICAL MODELLED SCENARIO \u2014 NOT A FORECAST"
+    },
+    "simulation_level": {
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "model_class": {
+      "const": "network_approximation"
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "enum": [
+            "network-path",
+            "constant-celerity-pulse"
+          ]
+        },
+        "version": {
+          "const": "1.0.0"
+        }
+      }
+    },
+    "is_fixture": {
+      "type": "boolean"
+    },
+    "run_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "calculated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "processing_version": {
+      "const": "scenario-runner/1.0.0"
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "python"
+      ],
+      "properties": {
+        "python": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "definition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "kind",
+        "id",
+        "version",
+        "is_fixture",
+        "model",
+        "simulation_level",
+        "source_reach_id",
+        "inputs",
+        "assumptions",
+        "parameters"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "kind": {
+          "const": "scenario-definition"
+        },
+        "id": {
+          "type": "string",
+          "pattern": "^scenario-[a-z0-9-]+$"
+        },
+        "version": {
+          "const": "1.0.0"
+        },
+        "is_fixture": {
+          "type": "boolean"
+        },
+        "model": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "version"
+          ],
+          "properties": {
+            "id": {
+              "enum": [
+                "network-path",
+                "constant-celerity-pulse"
+              ]
+            },
+            "version": {
+              "const": "1.0.0"
+            }
+          }
+        },
+        "simulation_level": {
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "source_reach_id": {
+          "type": "string",
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "inputs": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "dataset_id",
+              "dataset_version",
+              "sha256",
+              "processing_version",
+              "source",
+              "license",
+              "observation_date"
+            ],
+            "properties": {
+              "dataset_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dataset_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "processing_version": {
+                "type": "string",
+                "minLength": 1
+              },
+              "source": {
+                "type": "string",
+                "minLength": 1
+              },
+              "license": {
+                "type": "string",
+                "minLength": 1
+              },
+              "observation_date": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              }
+            }
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "parameters": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [],
+              "properties": {}
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "celerity",
+                "release_volume",
+                "release_duration"
+              ],
+              "properties": {
+                "celerity": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "value",
+                    "unit"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "number",
+                      "minimum": 0.1,
+                      "maximum": 10
+                    },
+                    "unit": {
+                      "const": "m/s"
+                    }
+                  }
+                },
+                "release_volume": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "value",
+                    "unit"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 10000000
+                    },
+                    "unit": {
+                      "const": "m3"
+                    }
+                  }
+                },
+                "release_duration": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "value",
+                    "unit"
+                  ],
+                  "properties": {
+                    "value": {
+                      "type": "number",
+                      "minimum": 60,
+                      "maximum": 86400
+                    },
+                    "unit": {
+                      "const": "s"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "$schema": "http://json-schema.org/draft-07/schema#"
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "version",
+          "statement"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "version": {
+            "const": "1.0.0"
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "crs": {
+      "const": "OGC:CRS84"
+    },
+    "vertical_datum": {
+      "type": "null"
+    },
+    "spatial_resolution": {
+      "const": "source river reaches; no terrain resampling"
+    },
+    "time_basis": {
+      "const": "seconds relative to hypothetical release; not calendar arrival times"
+    },
+    "path": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reach_id",
+          "length_km",
+          "cumulative_length_km",
+          "entry_delay_s",
+          "exit_delay_s",
+          "pulse_end_at_exit_s"
+        ],
+        "properties": {
+          "reach_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "length_km": {
+            "type": "number",
+            "minimum": 0
+          },
+          "cumulative_length_km": {
+            "type": "number",
+            "minimum": 0
+          },
+          "entry_delay_s": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "exit_delay_s": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "pulse_end_at_exit_s": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "minimum": 0
+          }
+        }
+      }
+    },
+    "termination": {
+      "enum": [
+        "source_outlet",
+        "coverage_boundary"
+      ]
+    },
+    "next_reach_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "total_length_km": {
+      "type": "number",
+      "minimum": 0
+    },
+    "pulse_discharge_m3_s": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "volume_per_section_m3": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0
+    },
+    "footprint": {
+      "type": "null"
+    },
+    "depth_m": {
+      "type": "null"
+    },
+    "velocity_m_s": {
+      "type": "null"
+    },
+    "confidence_interval": {
+      "type": "null"
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "real_event_validation"
+      ],
+      "properties": {
+        "status": {
+          "const": "synthetic_analytic_cases_only"
+        },
+        "real_event_validation": {
+          "const": false
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

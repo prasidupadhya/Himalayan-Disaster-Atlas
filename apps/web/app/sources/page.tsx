@@ -62,7 +62,12 @@ export default function SourcesPage() {
     <h2>Time Machine index</h2>
     <p>The <a href="/data/atlas-time-index/1.0.0/index.json">observation index</a> derives dates and reported-event counts from the versioned Sentinel, POWER and BIPAD releases already cited here. It records input hashes and preserves their source attribution and temporal precision. Publication and retrieval dates are not substituted for observation dates.</p>
 
+    <h2>Search and comparison</h2>
+    <p>The <a href="/data/atlas-search-index/1.0.0/manifest.json">global Search index</a> is an Atlas-derived discovery artifact built only from the versioned sources cited on this page. Its input manifest hashes are recorded; it adds no external gazetteer, inferred river/lake name link or unverified transliteration. Compare Mode introduces no new upstream source: after selection it reloads the exact two versioned source records and preserves their original attribution, dates, units and evidence type.</p>
+
     <h2>Mapping software</h2>
     <p>The interactive view uses <a href="https://maplibre.org/">MapLibre GL JS</a>. Versioned data, terrain derivatives, satellite previews and climate series are served locally; no third-party runtime tile or feature API is required.</p>
+    <h2>Hazard Graph</h2><p>The relationship index derives from the versioned FAO/HydroRIVERS and hypothetical exposure releases. Each node and edge points to source record IDs and hashed input manifests, with their original attribution and licences. <a href="/data/nepal-hazard-graph/1.0.0/manifest.json">Graph release</a>.</p>
+    <h2>Scenario Engine and Simulation UI inputs</h2><p>The two hypothetical network scenarios use the checked-in FAO/HydroRIVERS partitions, preserving their versions, processing versions, hashes, attribution and CC BY 4.0 source licence. Their parameters are explicit hypothetical choices, not acquired observations. <a href="/data/scenario-pulse-40669746/1.0.0/request.json">Pulse definition and source provenance</a>. Feature 29 introduces no new external source: it verifies these same registered scenario artifacts and recomputes only their documented Level 1/2 network equations locally in the browser.</p>
   </article>;
 }

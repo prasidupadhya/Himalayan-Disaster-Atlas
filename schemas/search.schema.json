@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.invalid/schemas/search.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "schema_version", "version", "shards", "inputs", "limitations"],
+  "properties": {
+    "kind": { "const": "search-index" },
+    "schema_version": { "const": "1.0.0" },
+    "version": { "const": "1.0.0" },
+    "shards": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "path", "sha256", "byte_size", "decoded_byte_size", "count"],
+        "properties": {
+          "id": { "enum": ["core", "infra-network", "infra-schools", "infra-services", "events-2015-2020", "events-2021-2024", "events-2025-2026", "earthquakes"] },
+          "path": { "type": "string", "pattern": "^/data/atlas-search-index/1\\.0\\.0/[a-z0-9-]+\\.json\\.gz$" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "byte_size": { "type": "integer", "minimum": 1, "maximum": 2097152 },
+          "decoded_byte_size": { "type": "integer", "minimum": 1, "maximum": 16777216 },
+          "count": { "type": "integer", "minimum": 1, "maximum": 100000 }
+        }
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 40,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "byte_size"],
+        "properties": {
+          "path": { "type": "string", "pattern": "^/data/[a-z0-9-]+/[0-9.]+/manifest.json$" },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "byte_size": { "type": "integer", "minimum": 1, "maximum": 262144 }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 2,
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

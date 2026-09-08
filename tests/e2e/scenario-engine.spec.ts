@@ -1,0 +1,35 @@
+import { expect, test } from '@playwright/test';
+test('scenario inspection keeps modelled assumptions and partial coverage visible', async ({ page }) => {
+  const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
+  await page.goto('/atlas/');
+  const section = page.getByRole('region', { name: 'Scenario Engine', exact: true });
+  await section.getByLabel('Inspect prepared scenarios').check();
+  await expect(section).toHaveAttribute('data-scenario-state', 'ready');
+  await expect(section).toContainText('network-path@1.0.0');
+  await expect(section).toContainText('No physical parameters; connectivity only');
+  await section.getByRole('combobox', { name: 'Prepared scenario' }).selectOption('scenario-pulse-40669746');
+  await expect(section).toHaveAttribute('data-scenario-state', 'ready');
+  await expect(section).toContainText('constant-celerity-pulse@1.0.0');
+  await expect(section).toContainText('PARTIAL — stops before unavailable HYRIV 40768704');
+  await expect(section).toContainText('27.778 m³/s');
+  await expect(section).toContainText('UNKNOWN — not calculated');
+  await expect(section).toContainText('fixed-celerity@1.0.0');
+  await section.getByLabel('Show hypothetical pathway').check();
+  await page.locator('.map-shell').screenshot({ path: 'test-results/scenario-pathway.png' });
+  const download = await section.getByRole('link', { name: 'Download reproducible definition' }).getAttribute('href');
+  expect(download).toBe('/data/scenario-pulse-40669746/1.0.0/request.json');
+  await section.getByLabel('Inspect prepared scenarios').uncheck();
+  await expect(section.getByRole('combobox')).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+test('corrupt scenario output never renders and can be retried', async ({ page }) => {
+  await page.route('**/scenario-network-40669746/1.0.0/result.json.gz', route => route.fulfill({ body: 'bad' }));
+  await page.goto('/atlas/');
+  const section = page.getByRole('region', { name: 'Scenario Engine', exact: true });
+  await section.getByLabel('Inspect prepared scenarios').check();
+  await expect(section).toHaveAttribute('data-scenario-state', 'error');
+  await expect(section.getByLabel('Show hypothetical pathway')).toHaveCount(0);
+  await page.unroute('**/scenario-network-40669746/1.0.0/result.json.gz');
+  await section.getByRole('button', { name: 'Try again' }).click();
+  await expect(section).toHaveAttribute('data-scenario-state', 'ready');
+});
