@@ -111,3 +111,7 @@ Feature 29 adds a static-safe workbench on top of the verified Scenario Engine. 
 ## Evidence-grounded RAG
 
 Feature 30 ingests only hash-pinned, allowlisted project documents offline. Shared Python/TypeScript contracts preserve exact source lines, versions, dates and dataset provenance. The static evidence inspector verifies a bounded corpus before lexical retrieval; conflict groups, outdated sources, missing evidence and unverified inference remain explicit. No model or provider secret enters the browser. See [RAG corpus, ranking and grounding boundary](../rag.md).
+
+## AI Analyst
+
+Feature 31 composes a static question interface, the approved RAG corpus and allowlisted river/scenario loaders. Whole-question planning and exact identity checks prevent silent entity substitution. Shared contracts produce cited source statements, deterministic network calculations and labelled modelled outputs; missing or conflicting evidence prevents unsupported conclusions. Requests are cancellable, answers stay in memory, and no provider credential or runtime AI dependency is introduced. See [analyst scope and grounding](../ai-analyst.md).

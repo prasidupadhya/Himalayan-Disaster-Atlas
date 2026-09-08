@@ -48,7 +48,7 @@ export function evidenceFreshness(d: EvidenceDocument, asOf: string): EvidenceFr
   return d.stale_after === null ? 'unknown' : 'within_review_period';
 }
 export interface EvidenceFilters {
-  source?: string; dataset?: string; geography?: string; topic?: string;
+  source?: string; dataset?: string; geography?: string; topic?: string; document?: string;
   dateField?: 'publication_date' | 'version_date' | 'accessed_at'; from?: string; to?: string;
   includeOutdated?: boolean;
 }
@@ -77,7 +77,7 @@ export function retrieveEvidence(corpus: EvidenceCorpus, query: string, options:
   const docs = new Map(corpus.documents.map(d => [d.id, d]));
   const eligible = (d: EvidenceDocument) => {
     const date = d[filters.dateField ?? 'publication_date']?.slice(0, 10);
-    return (!filters.source || d.source_id === filters.source) && (!filters.dataset || d.inputs.some(i => i.dataset_id === filters.dataset)) &&
+    return (!filters.document || d.id === filters.document) && (!filters.source || d.source_id === filters.source) && (!filters.dataset || d.inputs.some(i => i.dataset_id === filters.dataset)) &&
       (!filters.geography || d.geographies.includes(filters.geography)) && (!filters.topic || d.topics.includes(filters.topic)) &&
       (!(filters.from || filters.to) || (date !== undefined && (!filters.from || date >= filters.from) && (!filters.to || date <= filters.to)));
   };

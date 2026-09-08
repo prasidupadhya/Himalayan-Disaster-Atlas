@@ -187,3 +187,5 @@ export { compareEntities, formatCompareValue } from './compare';
 export { compareInteractiveSimulations, controlsForLevel, runInteractiveSimulation, simulationAssumptions, validateSimulationControls } from './simulation-ui';
 
 export * from './rag';
+
+export * from './analyst';
