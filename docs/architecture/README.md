@@ -88,6 +88,10 @@ Feature 22 adds a static temporal index, strict UTC interval contracts and one A
 
 Feature 25 derives a separate immutable search release from the validated source releases instead of scanning all source GeoJSON in the browser. Eight bounded gzip shards preserve composite source identity, type, context, representative coordinates and source dates. The browser verifies each shard and processes them sequentially on explicit search submission. Ranking and normalization live in the shared TypeScript contract; no source-missing common names or transliterations are invented. See [global search semantics](../search.md).
 
+## Compare Mode
+
+Feature 26 reuses Search only to resolve stable versioned identities, then loads the two exact source datasets before comparison. `packages/contracts/compare.ts` owns entity-family and metric compatibility, so matching units never bypass semantic meaning. Cross-type pairs and incompatible metric definitions are blocked; missing values remain UNKNOWN. The UI provides an accessible table with source/version/date/resolution/evidence provenance and synchronizes the existing map to the two representative positions without creating a second map. See [comparison semantics](../compare-mode.md).
+
 ## Location Explorer
 
 Feature 24 adds an opt-in deterministic spatial-context reader. It computes administrative containment and minimum geometry distance from validated local datasets rather than querying rendered map features, so layer visibility and zoom do not alter results. Category-specific radii/caps, source dates, partial-unavailable states and the WorldPop numerical-lookup limitation are documented in [the Location Explorer methodology](../location-explorer.md).

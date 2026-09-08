@@ -195,6 +195,18 @@ Its core principles are:
 - No-result messages describe index matching only and never claim geographic absence.
 - See [global search methodology](docs/search.md).
 
+### Compare mode
+
+- Side-by-side comparison for districts, mountains, river reaches, glaciers, glacial lakes, BIPAD disaster events and USGS earthquakes.
+- Search resolves stable identities, then Compare loads the exact two versioned source datasets rather than comparing index snippets.
+- Same-type and metric-specific semantic compatibility rules prevent invalid comparisons even when units happen to match.
+- Source/version, feature date, observation date, temporal coverage, spatial resolution and evidence type remain visible for both records.
+- `UNKNOWN` stays distinct from zero; incompatible metrics are marked `NOT COMPARABLE` rather than coerced.
+- Derived and reported bases remain labelled, and no better/worse or hazard ranking is calculated.
+- The existing map fits both representative positions while the comparison table remains usable without WebGL.
+- Arbitrary Location Explorer coordinates are excluded until a versioned numerical location-snapshot contract exists.
+- See [Compare Mode methodology](docs/compare-mode.md).
+
 ## Evidence, provenance, and data integrity
 
 Every published dataset carries machine-readable metadata describing its source, version, licence, attribution, retrieval date, processing date, spatial and temporal coverage, evidence type, limitations, uncertainty, and update policy.

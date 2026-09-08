@@ -62,6 +62,9 @@ export default function SourcesPage() {
     <h2>Time Machine index</h2>
     <p>The <a href="/data/atlas-time-index/1.0.0/index.json">observation index</a> derives dates and reported-event counts from the versioned Sentinel, POWER and BIPAD releases already cited here. It records input hashes and preserves their source attribution and temporal precision. Publication and retrieval dates are not substituted for observation dates.</p>
 
+    <h2>Search and comparison</h2>
+    <p>The <a href="/data/atlas-search-index/1.0.0/manifest.json">global Search index</a> is an Atlas-derived discovery artifact built only from the versioned sources cited on this page. Its input manifest hashes are recorded; it adds no external gazetteer, inferred river/lake name link or unverified transliteration. Compare Mode introduces no new upstream source: after selection it reloads the exact two versioned source records and preserves their original attribution, dates, units and evidence type.</p>
+
     <h2>Mapping software</h2>
     <p>The interactive view uses <a href="https://maplibre.org/">MapLibre GL JS</a>. Versioned data, terrain derivatives, satellite previews and climate series are served locally; no third-party runtime tile or feature API is required.</p>
   </article>;

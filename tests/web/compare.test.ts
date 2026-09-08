@@ -24,7 +24,7 @@ describe('scientific comparison compatibility', () => {
     ]);
     const rows = compareEntities(a, b).rows;
     expect(rows.find(row => row.key === 'deaths')?.state).toBe('comparable');
-    expect(formatCompareValue(rows[0].a, rows[0].unit)).toBe('0 count');
+    expect(formatCompareValue(rows[0].a, rows[0].unit_a)).toBe('0 count');
     expect(rows.find(row => row.key === 'affected')?.state).toBe('unavailable');
   });
 
@@ -32,5 +32,13 @@ describe('scientific comparison compatibility', () => {
     const a = entity('a', 'earthquake', [{ key: 'magnitude', label: 'Magnitude', value: 6, unit: 'Mw', compatibility: 'mw', basis: 'source' }]);
     const b = entity('b', 'earthquake', [{ key: 'magnitude', label: 'Magnitude', value: 6, unit: 'Mw', compatibility: 'mb', basis: 'source' }]);
     expect(compareEntities(a, b).rows[0].state).toBe('blocked');
+  });
+
+  it('keeps each raw unit visible when units themselves are incompatible', () => {
+    const a = entity('a', 'earthquake', [{ key: 'magnitude', label: 'Magnitude', value: 6, unit: 'Mw', compatibility: 'magnitude', basis: 'source' }]);
+    const b = entity('b', 'earthquake', [{ key: 'magnitude', label: 'Magnitude', value: 6, unit: 'mb', compatibility: 'magnitude', basis: 'source' }]);
+    const row = compareEntities(a, b).rows[0];
+    expect([row.unit_a, row.unit_b]).toEqual(['Mw', 'mb']);
+    expect(row.state).toBe('blocked');
   });
 });

@@ -1,5 +1,7 @@
 import type { Dataset } from '../../../packages/contracts';
 import type { CompareEntity, CompareMetric, CompareEntityType } from '../../../packages/contracts/compare';
+import type { SearchRecord } from '../../../packages/contracts/search';
+import { loadDataset } from './datasets';
 
 type Feature = Dataset['collection']['features'][number];
 
@@ -79,4 +81,14 @@ export function buildCompareEntity(dataset: Dataset, feature: Feature): CompareE
   } else return null;
 
   return { key, label: p.name, source_id: sourceId, type, compatibility, metrics, provenance: provenance(dataset, featureDate) };
+}
+
+export async function loadCompareEntity(record: SearchRecord, signal?: AbortSignal) {
+  const dataset = await loadDataset(record.manifest_path, signal);
+  if (dataset.metadata.dataset_id !== record.dataset_id || dataset.metadata.dataset_version !== record.dataset_version) throw new Error('Compare search identity does not match the versioned dataset.');
+  const feature = dataset.collection.features.find(item => String(item.id) === record.feature_id);
+  if (!feature) throw new Error('Compare entity is missing from its versioned dataset.');
+  const sourceId = feature.properties.source_id ?? feature.properties.pcode ?? String(feature.id);
+  if (sourceId !== record.source_id) throw new Error('Compare source identity mismatch.');
+  return buildCompareEntity(dataset, feature);
 }

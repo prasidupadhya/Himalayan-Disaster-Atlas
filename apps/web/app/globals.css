@@ -120,3 +120,14 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .search-result-group li { display: grid; gap: .35rem; margin-bottom: .7rem; }
 .search-result { width: 100%; display: grid; gap: .2rem; text-align: left; min-height: 44px; }
 .search-result span { color: var(--muted); font-size: .78rem; }
+.compare-pickers { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; margin: 1rem 0; }
+.compare-picker { min-width: 0; border: 1px solid var(--line); padding: .75rem; }
+.compare-picker legend { font-weight: 700; }
+.compare-picker form, .compare-picker label { display: grid; gap: .35rem; }
+.compare-picker input, .compare-picker select { width: 100%; min-height: 44px; padding: .5rem; border: 1px solid #9eb0ba; background: white; }
+.compare-picker form button { margin-top: .5rem; }
+.compare-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: .82rem; }
+.compare-table caption { text-align: left; font-weight: 700; padding-bottom: .45rem; }
+.compare-table th, .compare-table td { border: 1px solid var(--line); padding: .5rem; text-align: left; vertical-align: top; overflow-wrap: anywhere; }
+.compare-basis { display: block; color: var(--muted); font-size: .72rem; }
+@media (max-width: 800px) { .compare-pickers { grid-template-columns: 1fr; } .compare-table { display: block; overflow-x: auto; } }
