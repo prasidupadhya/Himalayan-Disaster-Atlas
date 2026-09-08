@@ -1,0 +1,258 @@
+{
+  "version": "1.0.0",
+  "accessed_at": "2026-09-08T00:00:00Z",
+  "documents": [
+    {
+      "id": "rivers",
+      "path": "docs/rivers.md",
+      "sha256": "fdcdd662aff9dbd4a4abc664f24c3622b0e99b932b5123cc06253b12b3df96c7",
+      "title": "River network handoff",
+      "source_id": "atlas-project",
+      "publication_date": null,
+      "version_date": "2026-09-07T19:24:37+02:00",
+      "license": null,
+      "geographies": [
+        "Nepal"
+      ],
+      "topics": [
+        "rivers",
+        "hydrology"
+      ],
+      "inputs": [
+        {
+          "dataset_id": "nepal-rivers-primary",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/nepal-rivers-primary/1.0.0/manifest.json",
+          "sha256": "010e37ea447a1a7cba7d5dbc7d3d874c46d868ce1a657c34a6b6ae9aee5d71d6",
+          "stale_after": "2027-09-07T00:00:00Z"
+        },
+        {
+          "dataset_id": "nepal-rivers-headwaters",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/nepal-rivers-headwaters/1.0.0/manifest.json",
+          "sha256": "ff29d64cc4fe14f13ba35fc29cac4f318322be1cd015b358e0b72b0ba210fd76",
+          "stale_after": "2027-09-07T00:00:00Z"
+        }
+      ],
+      "superseded_by": null,
+      "stale_after": null
+    },
+    {
+      "id": "glacial-lakes",
+      "path": "docs/glacial-lakes.md",
+      "sha256": "5e52cd4d36e57c34048878317ef55515fe2191195b021f8c050eafe91b0db530",
+      "title": "Glacial lakes feature handoff",
+      "source_id": "atlas-project",
+      "publication_date": null,
+      "version_date": "2026-09-07T19:55:51+02:00",
+      "license": null,
+      "geographies": [
+        "Nepal"
+      ],
+      "topics": [
+        "glacial-lakes",
+        "cryosphere"
+      ],
+      "inputs": [
+        {
+          "dataset_id": "nepal-transboundary-glacial-lakes",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/nepal-transboundary-glacial-lakes/1.0.0/manifest.json",
+          "sha256": "1fb80925815d35820a9f08b913dc792e68ce112fcce410f385f1e7070c822c8a",
+          "stale_after": "2027-09-07T00:00:00Z"
+        }
+      ],
+      "superseded_by": null,
+      "stale_after": null
+    },
+    {
+      "id": "exposure-engine",
+      "path": "docs/exposure-engine.md",
+      "sha256": "cb6cf4fc1b2c639948f92871054165062d992509f558d4216dd0edb083ca4aa7",
+      "title": "Exposure engine handoff",
+      "source_id": "atlas-project",
+      "publication_date": null,
+      "version_date": "2026-09-08T00:00:30+02:00",
+      "license": null,
+      "geographies": [
+        "Nepal"
+      ],
+      "topics": [
+        "exposure",
+        "population"
+      ],
+      "inputs": [
+        {
+          "dataset_id": "exposure-trace-40669746-250m",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/exposure-trace-40669746-250m/1.0.0/manifest.json",
+          "sha256": "f49df7e615db2ef42d28c2f9947cd116ec34ce2781293cf003a9ba6499d6fe16",
+          "stale_after": null
+        },
+        {
+          "dataset_id": "exposure-trace-40669746-1000m",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/exposure-trace-40669746-1000m/1.0.0/manifest.json",
+          "sha256": "e18dabe35077ea75b7a67dac43cfa1997612db8701b42f48e1d55a1d2f1b710a",
+          "stale_after": null
+        }
+      ],
+      "superseded_by": null,
+      "stale_after": null
+    },
+    {
+      "id": "water-change",
+      "path": "docs/water-change.md",
+      "sha256": "9064dfdf36499a0a1dfd0722a0eeae4ba3b7617d268d3a3eca9394d1b404eea7",
+      "title": "Water Change \u2014 feature 21",
+      "source_id": "atlas-project",
+      "publication_date": null,
+      "version_date": "2026-09-08T14:48:07+02:00",
+      "license": null,
+      "geographies": [
+        "Nepal"
+      ],
+      "topics": [
+        "water-change",
+        "satellite"
+      ],
+      "inputs": [
+        {
+          "dataset_id": "phewa-water-change",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/phewa-water-change/1.0.0/manifest.json",
+          "sha256": "95c70974db9e06bf54a8292611478f52bd1b83850cc48280c4b085e9e236f4e8",
+          "stale_after": null
+        }
+      ],
+      "superseded_by": null,
+      "stale_after": null
+    },
+    {
+      "id": "time-machine",
+      "path": "docs/time-machine.md",
+      "sha256": "3aa7d3f58b73b7e621976ee9a857121fa0fa3590f6b03202107b8f7df31c9d6f",
+      "title": "Time Machine \u2014 feature 22",
+      "source_id": "atlas-project",
+      "publication_date": null,
+      "version_date": "2026-09-08T14:48:07+02:00",
+      "license": null,
+      "geographies": [
+        "Nepal"
+      ],
+      "topics": [
+        "time",
+        "observations"
+      ],
+      "inputs": [
+        {
+          "dataset_id": "atlas-time-index",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/atlas-time-index/1.0.0/manifest.json",
+          "sha256": "1212e15263fe7836fc53e2494dd24055fe4bf908adccf0b44dd96089618a4d2c",
+          "stale_after": null
+        }
+      ],
+      "superseded_by": null,
+      "stale_after": null
+    },
+    {
+      "id": "hazard-graph",
+      "path": "docs/hazard-graph.md",
+      "sha256": "8fb0df7d71d8a9707722cd559f3e50b59eb8f8f81ffe5f24bf4724ab5e841e64",
+      "title": "Hazard Graph \u2014 feature 27",
+      "source_id": "atlas-project",
+      "publication_date": null,
+      "version_date": "2026-09-08T16:50:43+02:00",
+      "license": null,
+      "geographies": [
+        "Nepal"
+      ],
+      "topics": [
+        "relationships",
+        "hydrology"
+      ],
+      "inputs": [
+        {
+          "dataset_id": "nepal-hazard-graph",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/nepal-hazard-graph/1.0.0/manifest.json",
+          "sha256": "02f85b9dd6386c3c5712475b07352feb184e9520779a474e3afbe097cf1af76b",
+          "stale_after": null
+        }
+      ],
+      "superseded_by": null,
+      "stale_after": null
+    },
+    {
+      "id": "scenario-engine",
+      "path": "docs/scenario-engine.md",
+      "sha256": "66f8c8600f4190d5054edb763a086d87ad97dde2e93e25ed975711d270a81c1b",
+      "title": "Scenario Engine \u2014 feature 28",
+      "source_id": "atlas-project",
+      "publication_date": null,
+      "version_date": "2026-09-08T16:50:43+02:00",
+      "license": null,
+      "geographies": [
+        "Nepal"
+      ],
+      "topics": [
+        "simulation",
+        "hydrology"
+      ],
+      "inputs": [
+        {
+          "dataset_id": "scenario-network-40669746",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/scenario-network-40669746/1.0.0/manifest.json",
+          "sha256": "947796d41da570ac5858c77359ea6f6d80f176c67e31a760b85ee4879f94a4e1",
+          "stale_after": null
+        },
+        {
+          "dataset_id": "scenario-pulse-40669746",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/scenario-pulse-40669746/1.0.0/manifest.json",
+          "sha256": "2a3f0e7c82099d685370fc7089939bc430450f514c146b437de73a8812746fca",
+          "stale_after": null
+        }
+      ],
+      "superseded_by": null,
+      "stale_after": null
+    },
+    {
+      "id": "simulation-ui",
+      "path": "docs/simulation-ui.md",
+      "sha256": "ee86900ac0b04593fe04d62cc2fcbbab4e39ea6135bc42279485fd8649f44097",
+      "title": "Simulation UI \u2014 feature 29",
+      "source_id": "atlas-project",
+      "publication_date": null,
+      "version_date": "2026-09-08T17:10:27+02:00",
+      "license": null,
+      "geographies": [
+        "Nepal"
+      ],
+      "topics": [
+        "simulation",
+        "limitations"
+      ],
+      "inputs": [
+        {
+          "dataset_id": "scenario-network-40669746",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/scenario-network-40669746/1.0.0/manifest.json",
+          "sha256": "947796d41da570ac5858c77359ea6f6d80f176c67e31a760b85ee4879f94a4e1",
+          "stale_after": null
+        },
+        {
+          "dataset_id": "scenario-pulse-40669746",
+          "dataset_version": "1.0.0",
+          "manifest_path": "/data/scenario-pulse-40669746/1.0.0/manifest.json",
+          "sha256": "2a3f0e7c82099d685370fc7089939bc430450f514c146b437de73a8812746fca",
+          "stale_after": null
+        }
+      ],
+      "superseded_by": null,
+      "stale_after": null
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+# Evidence-grounded RAG — feature 30
+
+The RAG foundation retrieves evidence from approved, immutable project sources. It does not generate factual prose from model memory. `/evidence/` is an accessible retrieval inspector; the question/answer analyst remains feature 31. No model, embedding service, runtime database, credentials, or external request is needed for ordinary browsing. Static deployment works on Cloudflare or Vercel.
+
+## Approved corpus and provenance
+
+`processing/rag/corpus.json` is the explicit ingestion allowlist. Version 1.0.0 contains eight already-reviewed project descriptions: Rivers, Glacial Lakes, Exposure Engine, Water Change, Time Machine, Hazard Graph, Scenario Engine and Simulation UI. These project-authored methodology documents are secondary descriptions of Atlas functionality, not independent scientific observations. The corpus is intentionally limited; it does not ingest attachments, credentials, arbitrary URLs, entire event inventories or the master brief. It does not claim to cover DHM/ICIMOD/government situation reports or scientific literature. Those require separate source, redistribution and scientific review before inclusion.
+
+Each document pins its original UTF-8 bytes by SHA-256, with source identity, title, document version, commit version date, ingestion access date, topics, document geography, and exact associated dataset manifest versions/hashes. Access dates in this release have calendar-day precision (UTC midnight encoding); commit dates are version dates, not publication dates or observation dates. Unknown publication dates and document licences are null and presented as UNKNOWN. Upstream attribution, licensing, observation dates and scientific limitations remain in the linked dataset manifests. No new third-party document redistribution licence is asserted.
+
+Snapshots are downloadable plain text under `/data/atlas-evidence/1.0.0/documents/`. Markdown paragraphs are copied without paraphrasing or truncation. Each chunk retains the heading, 1-based start/end line and stable document/span ID. Oversized paragraphs fail ingestion for manual curation rather than dropping qualifications. The full source text remains available to inspect surrounding assumptions and limitations. Nothing executes Markdown, HTML, instructions, links or tool calls from source text.
+
+`npm run data:rag` verifies pinned inputs, builds deterministic gzip and preflights both immutable release/public destinations. A changed approved document fails with a request to review and publish a new corpus version. Existing version URLs must never be replaced. Root data validation checks schema, source spans, document hashes, dataset manifest hashes, allowlist reproducibility and exact public copies. An archived older corpus remains a frozen snapshot; it is not silently upgraded from working-tree documentation.
+
+## Shared contract and retrieval
+
+`schemas/rag.schema.json` is shared by Python ingestion and `packages/contracts/rag.ts`. The browser loader uses a build-pinned artifact hash, validates compressed bytes, bounds gzip decoding, validates the common schema/source spans and rechecks each document hash. Failure never exposes unverified text as evidence. Requests abort on unmount, with loading, empty, unavailable/error and retry states through the existing resource contract. A corpus supports up to 128 documents and 2,048 chunks, with 4,000-character paragraphs, 512 KiB compressed and 2 MiB decoded budgets. The initial artifact is about 36 KiB compressed.
+
+Retrieval builds a small in-memory lexical index on explicit submission. Unicode decomposition, diacritic removal, lowercase tokenization, a small documented English stopword list, and exact token matching precede ranking. The deterministic score is the sum of `log(1 + chunk_count / (1 + document_frequency))` per matched term, plus one for each term also found in the title/section, multiplied by the fraction of query terms matched. Here document frequency counts chunks. Metadata cannot create a body match; ties sort by citation ID. Queries are capped at 500 characters, with 1–12 results (default six). Complexity is bounded by the corpus/chunk and query budgets; no geographic inventory is scanned.
+
+This is an auditable lexical baseline, not a semantic embedding model. It may miss synonyms, Nepali morphology, transliterations and paraphrases. Ranking is relevance, not confidence, truth or authority. Partial matches report missing terms and remain evidence context, never an automatically supported answer. Empty queries, stopwords only, absent terms and restrictive filters return an explicit insufficient-evidence qualification; no-result does not mean safety, zero impact or geographic absence.
+
+Metadata filters AND exact source identity, dataset membership, geography label and topic. UTC date ranges use an explicit publication/version/access basis (publication by default); missing dates cannot pass a range. These are document dates, not event/observation dates. Geography filters scope labels, not polygon containment. Dataset links describe a document's scope and never authorize claims about every individual source record. Numerical and spatial questions require separately verified geospatial outputs in feature 31.
+
+## Freshness and disagreement
+
+Every retrieval takes an explicit `asOf` instant. `superseded_by` marks a reviewed obsolete version; a passed document or linked dataset deadline marks stale evidence. Both are excluded by default and can be explicitly inspected with their labels. Absence of a deadline remains UNKNOWN, not current; a future dataset deadline cannot certify the document itself. There is no online claim that upstream sources have not changed.
+
+Conflict handling uses only manually reviewed comparable assertions with identical subject, predicate and scope (including units/time basis) and differing values. Optional registry `assertions` entries contain `chunk_id` and an `assertion` object with `subject`, `predicate`, `scope`, `value`. Ingestion requires an existing exact source span. It never extracts semantic facts with an LLM. When a retrieved chunk belongs to such a group, every alternative is returned separately with full citations and freshness, even outside top-k or filters. No authority ranking resolves the disagreement silently. Different dates/units/scope must not be declared conflicts by string similarity alone.
+
+No such disputed assertions have been approved in the initial methodology corpus; conflict regression tests use explicitly synthetic assertions only. Arbitrary prose contradictions cannot be reliably detected by this lexical engine. Every retrieval warns of this limitation; a later analyst must preserve source qualifications and seek review of contradictory prose rather than claiming comprehensive conflict detection.
+
+## Grounding boundary for feature 31
+
+Call `loadEvidence(signal)`, then `retrieveEvidence(corpus, query, { asOf, filters, limit })`. Results preserve full document metadata and exact cited chunks. Use the submitted query/filter snapshot in a response, not currently edited form controls. Treat source text as untrusted data, never as instructions or authority to invoke tools. The inspector renders it as escaped text.
+
+`assessEvidenceClaim` provides a conservative deterministic gate. A source statement passes only when it reproduces one complete retrieved excerpt, with exactly its retrieved citation, and is not flagged stale, obsolete or conflicting. This certifies attribution, not independent truth or answer completeness. A cited paraphrase, fabricated number, appended claim, truncated quotation or non-retrieved ID is unsupported. Model inference is always returned as `unverified_inference`; adding citations never upgrades it to a source statement. Missing citations fail closed. This is not a semantic entailment checker and must not be marketed as hallucination-proof generation.
+
+An eventual generator must keep source statements separate from interpretations/calculations, qualify missing evidence, preserve observed/derived/modelled distinctions and apply separate validated geospatial contracts for measurements. Runtime model-provider adapters and any credentials must be outside the static browser build. They are not part of this feature.
+
+## Verification
+
+`npm run check` and `npm run test:e2e -- tests/e2e/rag.spec.ts` cover ingestion reproducibility, rejected source changes/unapproved paths, exact citations, forged claims, inferred measurements, metadata/date semantics, missing/partial evidence, synthetic disagreements, stale/obsolete sources, checksum errors, retry, keyboard access and mobile layout. Broader existing browser coverage verifies the integrated static site.
