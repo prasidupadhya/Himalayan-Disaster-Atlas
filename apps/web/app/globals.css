@@ -95,3 +95,14 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .water-preview figcaption { font-size: .8rem; }
 
 .temporal-navigation { display: flex; flex-wrap: wrap; gap: .5rem; }
+.event-pages { max-width: 980px; }
+.event-page-controls { display: grid; grid-template-columns: minmax(120px, .45fr) minmax(220px, 1fr) minmax(260px, 1.5fr); gap: 1rem; margin: 1.5rem 0; }
+.event-page-controls label { display: grid; gap: .35rem; font-weight: 700; }
+.event-page-controls select, .event-page-controls input { min-height: 44px; padding: .55rem; border: 1px solid #9eb0ba; background: white; color: var(--ink); width: 100%; }
+.event-case-study { margin-top: 2rem; padding: 1.5rem; border: 1px solid var(--line); background: white; }
+.event-case-study h3 { margin-top: 1.7rem; }
+.event-impact-row { display: contents; }
+.claim-source { color: var(--muted); font-size: .78rem; overflow-wrap: anywhere; }
+.claim-source code { font-size: inherit; }
+.empty-case { min-height: 12rem; }
+@media (max-width: 800px) { .event-page-controls { grid-template-columns: 1fr; } .event-case-study { padding: 1rem; } }

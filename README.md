@@ -163,6 +163,16 @@ Its core principles are:
 - Historical monthly minimum/maximum shown only as reanalysis variability, not uncertainty intervals.
 - The 1991–2020 normal is historical context, not a forecast, current-condition estimate, or local valley-scale climate value.
 
+### Historical event pages
+
+- Static `/events/` reader for verified + approved BIPAD disaster-event records from 2015–2026.
+- Loads one immutable year partition at a time instead of preloading the full 57,216-record archive.
+- Preserves incident time, reported time, location text, reported point, source-reported impacts, verification flags, and source paths.
+- Missing descriptions or impact values remain `UNKNOWN`; a source zero remains a real zero.
+- Reported points are never presented as affected areas or hazard footprints, and the reader adds no unsupported mechanism or causal narrative.
+- Shareable `year` + stable event-ID query state with navigation back to the Atlas, Data Catalog, Sources and Methodology.
+- See [event-page evidence semantics](docs/event-pages.md).
+
 ## Evidence, provenance, and data integrity
 
 Every published dataset carries machine-readable metadata describing its source, version, licence, attribution, retrieval date, processing date, spatial and temporal coverage, evidence type, limitations, uncertainty, and update policy.
