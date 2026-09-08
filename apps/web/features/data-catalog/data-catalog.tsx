@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { filterProvenanceRecords, type ProvenanceCategory, type ProvenanceRecord } from '../../../../packages/contracts/provenance';
 
 function formatDate(value: string | null) {
@@ -20,6 +20,7 @@ export function DataCatalog({ records }: { records: ProvenanceRecord[] }) {
   const [source, setSource] = useState('');
   const [includeNonCurrent, setIncludeNonCurrent] = useState(false);
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const detailRef = useRef<HTMLElement>(null);
   const filtered = useMemo(() => filterProvenanceRecords(records, { query, category, source, includeNonCurrent }), [records, query, category, source, includeNonCurrent]);
   const selected = records.find(record => record.key === selectedKey) ?? null;
 
@@ -30,12 +31,15 @@ export function DataCatalog({ records }: { records: ProvenanceRecord[] }) {
     if (match) queueMicrotask(() => { setIncludeNonCurrent(match.state !== 'current' || match.is_fixture); setSelectedKey(match.key); });
   }, [records]);
 
+  useEffect(() => {
+    if (selectedKey) requestAnimationFrame(() => detailRef.current?.focus());
+  }, [selectedKey]);
+
   function select(record: ProvenanceRecord) {
     setSelectedKey(record.key);
     const params = new URLSearchParams(window.location.search);
     params.set('dataset', record.id); params.set('version', record.version);
     window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}#catalog-detail`);
-    requestAnimationFrame(() => document.getElementById('catalog-detail')?.focus());
   }
 
   return <div className="catalog-browser">
@@ -59,7 +63,7 @@ export function DataCatalog({ records }: { records: ProvenanceRecord[] }) {
         })}
         {!filtered.length && <p className="data-state">No catalog record matches these filters. This does not imply the dataset or real-world feature is absent.</p>}
       </section>
-      <section id="catalog-detail" className="catalog-detail" tabIndex={-1} aria-label="Dataset detail">
+      <section ref={detailRef} id="catalog-detail" className="catalog-detail" tabIndex={-1} aria-label="Dataset detail">
         {selected ? <>
           <p className="eyebrow">{selected.category}</p><h2>{selected.title}</h2>
           <div className="badges"><EvidenceBadge record={selected} /><span className="badge">{selected.status}</span>{selected.state !== 'current' && <span className="badge">{selected.state.toUpperCase()}</span>}</div>
