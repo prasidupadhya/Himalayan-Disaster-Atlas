@@ -23,6 +23,8 @@ import { Infrastructure } from '../infrastructure/infrastructure';
 import { Population } from '../population/population';
 import { ExposureEngine } from '../exposure-engine/exposure-engine';
 import { Satellite } from '../satellite/satellite';
+import { TimeMachine } from '../time-machine/time-machine';
+import type { TemporalSelection } from '../../../../packages/contracts/temporal';
 import { WaterChange } from '../water-change/water-change';
 import { Climate } from '../climate/climate';
 
@@ -47,6 +49,7 @@ export function Atlas() {
   const visibleRef = useRef(visible);
   const [selected, setSelected] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
+  const [temporal, setTemporal] = useState<TemporalSelection | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -190,6 +193,8 @@ export function Atlas() {
         {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
+      <TimeMachine value={temporal} onChange={setTemporal} />
+      <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
       <Mountains key={`mountains-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Rivers key={`rivers-${attempt}`} map={mapReady ? mapRef.current : null} />
@@ -198,22 +203,21 @@ export function Atlas() {
       <GlacialLakes key={`glacial-lakes-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Hydrology key={`hydrology-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Rainfall key={`rainfall-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <DisasterEvents key={`disaster-events-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <DisasterEvents temporal={temporal} key={`disaster-events-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Earthquakes key={`earthquakes-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Floods key={`floods-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Landslides key={`landslides-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Hydropower key={`hydropower-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Population key={`population-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Satellite key={`satellite-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <WaterChange key={`water-change-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Climate key={`climate-${attempt}`} />
+      <Satellite temporal={temporal} key={`satellite-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Climate temporal={temporal} key={`climate-${attempt}`} />
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">
-      <div className="map-shell">
+      <div className="map-shell" id="atlas-map">
         <div ref={container} className="map" role="region" aria-label="Interactive Nepal administrative boundary map" data-map-ready={mapReady} />
-        <div className="map-caption"><span className="boundary-key" /> COD-AB v02 · click a boundary to inspect it</div>
+        <div className="map-caption"><span className="boundary-key" /> {temporal ? `Time Machine · ${temporal.date} UTC · unavailable observations hidden` : 'COD-AB v02 · click a boundary to inspect it'}</div>
         {datasets && !mapReady && !mapError && <div className="map-message" role="status">Preparing the interactive map…</div>}
         {mapError && <div className="map-message" role="alert">{mapError}</div>}
         <button className="reset-map" disabled={!mapReady} onClick={() => {

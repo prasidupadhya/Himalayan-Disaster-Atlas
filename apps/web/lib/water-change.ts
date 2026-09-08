@@ -1,10 +1,15 @@
 import { parseWaterManifest, type WaterArtifact } from '../../../packages/contracts/water-change';
 import { readBounded } from './datasets';
+import { temporalCache } from './temporal-cache';
 export const WATER_MANIFEST = '/data/phewa-water-change/1.0.0/manifest.json';
 export async function loadWaterArtifact(ref: WaterArtifact, signal?: AbortSignal) {
+  const key = `${ref.path}#${ref.sha256}`;
+  const cached = temporalCache.get(key);
+  if (cached) return cached;
   const bytes = await readBounded(await fetch(ref.path, { signal }), 4_194_304);
   const hash = await crypto.subtle.digest('SHA-256', bytes);
   if (bytes.length !== ref.byte_size || Array.from(new Uint8Array(hash), v => v.toString(16).padStart(2, '0')).join('') !== ref.sha256) throw new Error('Water artifact checksum failed');
+  if (!signal?.aborted) temporalCache.set(key, bytes);
   return bytes;
 }
 export async function loadWaterChange(signal?: AbortSignal) {
