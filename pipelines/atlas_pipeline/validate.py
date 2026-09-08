@@ -2,6 +2,7 @@
 import json
 from pathlib import Path
 
+from .climate_contracts import verify_climate
 from .contracts import ROOT, verify_artifact
 from .exposure_contracts import verify_exposure
 from .population_contracts import verify_population
@@ -25,6 +26,10 @@ def main():
             continue
         if metadata.get('metadata', {}).get('dataset_id') == 'nepal-sentinel-observations':
             manifest = verify_satellite(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
+            print(f"Valid: {manifest['metadata']['dataset_id']}@{manifest['metadata']['dataset_version']}")
+            continue
+        if metadata.get('metadata', {}).get('dataset_id') == 'nepal-power-climate':
+            manifest = verify_climate(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
             print(f"Valid: {manifest['metadata']['dataset_id']}@{manifest['metadata']['dataset_version']}")
             continue
         if 'raster' in metadata:

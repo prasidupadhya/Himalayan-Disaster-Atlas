@@ -180,3 +180,4 @@ export function formatMeasurement(value: number | null, unit: Unit | null): stri
 }
 
 export { parseSatelliteManifest } from './satellite';
+export { parseClimateManifest } from './climate';
