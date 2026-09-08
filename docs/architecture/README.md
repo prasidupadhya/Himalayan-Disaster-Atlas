@@ -99,3 +99,7 @@ Feature 24 adds an opt-in deterministic spatial-context reader. It computes admi
 ## Hazard Graph
 
 An offline, immutable relationship index links exact source records. Shared typed semantics and validators separate observation, derivation, inference and modelling. Bounded cycle-safe exploration owns a disposable map selection. See [graph contracts and evidence rules](../hazard-graph.md).
+
+## Scenario Engine
+
+Level 0 versioned definitions and a shared assumption registry gate offline Level 1 network and Level 2 pulse adapters. Every result preserves model/input/processing provenance, units, limits, partial coverage and null unsupported outputs. The browser verifies static results and owns an independent hypothetical pathway overlay. Physical adapters remain unregistered. See [scenario lifecycle and validation](../scenario-engine.md).

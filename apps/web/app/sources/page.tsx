@@ -68,5 +68,6 @@ export default function SourcesPage() {
     <h2>Mapping software</h2>
     <p>The interactive view uses <a href="https://maplibre.org/">MapLibre GL JS</a>. Versioned data, terrain derivatives, satellite previews and climate series are served locally; no third-party runtime tile or feature API is required.</p>
     <h2>Hazard Graph</h2><p>The relationship index derives from the versioned FAO/HydroRIVERS and hypothetical exposure releases. Each node and edge points to source record IDs and hashed input manifests, with their original attribution and licences. <a href="/data/nepal-hazard-graph/1.0.0/manifest.json">Graph release</a>.</p>
+    <h2>Scenario Engine inputs</h2><p>The two hypothetical network scenarios use the checked-in FAO/HydroRIVERS partitions, preserving their versions, processing versions, hashes, attribution and CC BY 4.0 source licence. Their parameters are explicit hypothetical choices, not acquired observations. <a href="/data/scenario-pulse-40669746/1.0.0/request.json">Pulse definition and source provenance</a>.</p>
   </article>;
 }

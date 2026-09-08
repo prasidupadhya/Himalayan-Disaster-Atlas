@@ -8,6 +8,7 @@ from .exposure_contracts import verify_exposure
 from .hazard_graph import verify_hazard_graph
 from .population_contracts import verify_population
 from .satellite_contracts import verify_satellite
+from .scenarios import verify_scenario
 from .search import verify_search_index
 from .terrain_contracts import verify_context, verify_terrain
 from .time_machine import verify_time_index
@@ -20,6 +21,10 @@ def main():
         raise ValueError('No release manifests found')
     for path in releases:
         metadata = json.loads(path.read_text())
+        if metadata.get('kind') == 'scenario-release':
+            verify_scenario(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
+            print(f"Valid: {metadata['id']}@{metadata['version']}")
+            continue
         if metadata.get('kind') == 'hazard-graph-release':
             verify_hazard_graph(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
             print('Valid: nepal-hazard-graph@1.0.0')
