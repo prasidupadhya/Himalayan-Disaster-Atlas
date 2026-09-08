@@ -40,7 +40,8 @@
     "data:population": ".venv/bin/python -m pipelines.atlas_pipeline.population --source data/raw/population/npl_pop_2025_CN_100m_R2025A_v1.tif",
     "data:exposure": ".venv/bin/python -m pipelines.atlas_pipeline.exposure",
     "data:satellite": ".venv/bin/python -m pipelines.atlas_pipeline.satellite",
-    "data:climate": ".venv/bin/python -m pipelines.atlas_pipeline.climate"
+    "data:climate": ".venv/bin/python -m pipelines.atlas_pipeline.climate",
+    "data:water-change": ".venv/bin/python -m pipelines.atlas_pipeline.water_change"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

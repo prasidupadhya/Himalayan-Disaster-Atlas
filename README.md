@@ -239,3 +239,5 @@ The browser suite covers administrative boundaries, terrain, mountains, rivers, 
 - **Testing:** Vitest, Python `unittest`, Playwright
 - **Code quality:** ESLint, Ruff, TypeScript type checking
 - **Delivery:** Static Next.js export with versioned local data artifacts
+
+Water Change provides three dated Phewa Lake observations, conservative masks and coverage-gated comparisons. See [feature 21](docs/water-change.md); run `npm run data:water-change` to verify/reproduce the immutable release.

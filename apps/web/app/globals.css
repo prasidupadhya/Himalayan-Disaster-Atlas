@@ -89,3 +89,7 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .trace-hash { overflow-wrap: anywhere; font-size: .8rem; }
 .trace-controls ol { padding-left: 1.6rem; }
 .trace-controls li { margin-bottom: .5rem; }
+
+.water-preview { margin: 1rem 0; }
+.water-preview img { display: block; width: 100%; height: auto; background: #152737; }
+.water-preview figcaption { font-size: .8rem; }
