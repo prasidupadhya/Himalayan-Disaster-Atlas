@@ -181,3 +181,4 @@ export function formatMeasurement(value: number | null, unit: Unit | null): stri
 
 export { parseSatelliteManifest } from './satellite';
 export { parseClimateManifest } from './climate';
+export { buildEventPage, eventSourcePath, parseEventPage } from './event-page';
