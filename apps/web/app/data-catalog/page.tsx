@@ -45,5 +45,6 @@ export default function CatalogPage() {
       const dataset = parseDataset({ metadata: manifest, collection: { type: 'FeatureCollection', features: [] } });
       return <section className="catalog-entry" key={manifest.dataset_id}><h2>{manifest.dataset_name}</h2><p>{counts[index].toLocaleString('en-US')} boundary {counts[index] === 1 ? 'record' : 'records'} · OGC:CRS84 · topology-preserving display geometry</p><p><a href={`/data/${manifest.dataset_id}/2.0.1/manifest.json`}>Download manifest</a> · <a href={manifest.artifact.path}>Download compressed GeoJSON</a></p><Evidence metadata={dataset.metadata} /></section>;
     })}
+    <section className="catalog-entry"><h2>Hazard Graph</h2><p>18,811 source-linked nodes and 18,620 evidence-labelled relationships. Drainage connectivity and conditional exposure only; unsupported glacier outlets and blockages remain UNKNOWN. <a href="/data/nepal-hazard-graph/1.0.0/manifest.json">Graph manifest</a>.</p></section>
   </div>;
 }

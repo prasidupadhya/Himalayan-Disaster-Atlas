@@ -86,5 +86,6 @@ export default function MethodologyPage() {
 
     <h2>Research boundary</h2>
     <p>No operational forecast, hazard classification, confirmed-damage estimate or risk score is included in this release. The exposure engine reports explicitly hypothetical spatial intersections, while source-reported areas, satellite imagery and change statistics remain descriptive evidence rather than predictions or impact claims.</p>
+    <h2>Hazard Graph</h2><p>Directed edges carry source records, methods, evidence class and assumptions. River NEXT_DOWN links are derived drainage topology. Corridor exposure links are modelled and conditional on hypothetical footprints. Dashed inferred/modelled links are never presented as observed causes. Missing links and unsupported confidence remain UNKNOWN. Diagram positions are schematic; traversal is bounded and cycle-safe.</p>
   </article>;
 }
