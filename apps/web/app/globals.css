@@ -114,3 +114,9 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .location-result-group li { margin-bottom: .65rem; }
 .location-result-group summary { min-height: 44px; cursor: pointer; }
 @media (max-width: 800px) { .location-coordinate-form { grid-template-columns: 1fr; } }
+.global-search form { display: grid; gap: .6rem; }
+.search-result-group { border-top: 1px solid var(--line); margin-top: 1rem; padding-top: .7rem; }
+.search-result-group ul { list-style: none; padding: 0; margin: 0; }
+.search-result-group li { display: grid; gap: .35rem; margin-bottom: .7rem; }
+.search-result { width: 100%; display: grid; gap: .2rem; text-align: left; min-height: 44px; }
+.search-result span { color: var(--muted); font-size: .78rem; }
