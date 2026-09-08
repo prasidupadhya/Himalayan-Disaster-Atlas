@@ -38,7 +38,8 @@
     "data:hydropower": ".venv/bin/python -m pipelines.atlas_pipeline.hydropower",
     "data:infrastructure": ".venv/bin/python -m pipelines.atlas_pipeline.infrastructure --snapshot data/raw/osm/nepal-infrastructure-2026-09-07.json --roads-dir data/raw/osm/infrastructure",
     "data:population": ".venv/bin/python -m pipelines.atlas_pipeline.population --source data/raw/population/npl_pop_2025_CN_100m_R2025A_v1.tif",
-    "data:exposure": ".venv/bin/python -m pipelines.atlas_pipeline.exposure"
+    "data:exposure": ".venv/bin/python -m pipelines.atlas_pipeline.exposure",
+    "data:satellite": ".venv/bin/python -m pipelines.atlas_pipeline.satellite"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
