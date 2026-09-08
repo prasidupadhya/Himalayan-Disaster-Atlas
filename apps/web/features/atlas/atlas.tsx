@@ -57,6 +57,19 @@ export function Atlas() {
   const [selected, setSelected] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   const [temporal, setTemporal] = useState<TemporalSelection | null>(null);
+  const [mobileMode, setMobileMode] = useState<'checking' | 'mobile' | 'desktop'>('checking');
+  const [additionalLayers, setAdditionalLayers] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 800px)');
+    const update = () => {
+      if (media.matches) setMobileMode('mobile');
+      else { setMobileMode('desktop'); setAdditionalLayers(true); }
+    };
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -222,22 +235,29 @@ export function Atlas() {
       <LocationExplorer key={`location-explorer-${attempt}`} map={mapReady ? mapRef.current : null} adminDatasets={datasets} />
       <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
-      <Mountains key={`mountains-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Rivers key={`rivers-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <ExposureEngine key={`exposure-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Glaciers key={`glaciers-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <GlacialLakes key={`glacial-lakes-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Hydrology key={`hydrology-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Rainfall key={`rainfall-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <DisasterEvents temporal={temporal} key={`disaster-events-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Earthquakes key={`earthquakes-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Floods key={`floods-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Landslides key={`landslides-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Hydropower key={`hydropower-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Population key={`population-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Satellite temporal={temporal} key={`satellite-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Climate temporal={temporal} key={`climate-${attempt}`} />
+      {mobileMode !== 'desktop' && !additionalLayers && <section className="thematic-controls mobile-data-gate" aria-label="Mobile data loading" data-mobile-data="deferred">
+        <h2>Additional map datasets</h2>
+        <p>To reduce automatic downloads on a phone, larger thematic datasets are deferred. Mountains, rivers, glaciers, lakes, stations, hazards, infrastructure, population, satellite and climate remain available with their full scientific labels and provenance.</p>
+        <button type="button" onClick={() => setAdditionalLayers(true)}>Load additional map datasets</button>
+      </section>}
+      {additionalLayers && <div data-mobile-data="loaded">
+        <Mountains key={`mountains-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Rivers key={`rivers-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <ExposureEngine key={`exposure-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Glaciers key={`glaciers-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <GlacialLakes key={`glacial-lakes-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Hydrology key={`hydrology-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Rainfall key={`rainfall-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <DisasterEvents temporal={temporal} key={`disaster-events-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Earthquakes key={`earthquakes-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Floods key={`floods-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Landslides key={`landslides-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Hydropower key={`hydropower-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Population key={`population-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Satellite temporal={temporal} key={`satellite-${attempt}`} map={mapReady ? mapRef.current : null} />
+        <Climate temporal={temporal} key={`climate-${attempt}`} />
+      </div>}
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">
