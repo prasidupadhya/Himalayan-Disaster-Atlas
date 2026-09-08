@@ -8,6 +8,7 @@ from .exposure_contracts import verify_exposure
 from .population_contracts import verify_population
 from .satellite_contracts import verify_satellite
 from .terrain_contracts import verify_context, verify_terrain
+from .time_machine import verify_time_index
 from .water_change_contracts import verify_water_change
 
 
@@ -17,6 +18,10 @@ def main():
         raise ValueError('No release manifests found')
     for path in releases:
         metadata = json.loads(path.read_text())
+        if metadata.get('kind') == 'temporal-index':
+            verify_time_index(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
+            print('Valid: atlas-time-index@1.0.0')
+            continue
         if metadata.get('metadata', {}).get('dataset_id') == 'phewa-water-change':
             verify_water_change(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
             print('Valid: phewa-water-change@1.0.0')

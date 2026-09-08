@@ -306,8 +306,8 @@ export function mountDisasterEventDataset(map: Map, dataset: Dataset) {
     setArchiveFilter(hazard: string, start: string, end: string) {
       const clauses: FilterSpecification[] = [];
       if (hazard) clauses.push(['==', ['get', 'hazard_name'], hazard]);
-      if (start) clauses.push(['>=', ['get', 'event_time'], `${start}T00:00:00Z`]);
-      if (end) clauses.push(['<=', ['get', 'event_time'], `${end}T23:59:59Z`]);
+      if (start) clauses.push(['>=', ['slice', ['get', 'event_time'], 0, 10], start]);
+      if (end) clauses.push(['<=', ['slice', ['get', 'event_time'], 0, 10], end]);
       const filter = clauses.length === 0 ? null : clauses.length === 1 ? clauses[0] : ['all', ...clauses] as FilterSpecification;
       map.setFilter(points, filter);
     },

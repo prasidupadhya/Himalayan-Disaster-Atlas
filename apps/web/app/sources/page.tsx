@@ -59,6 +59,9 @@ export default function SourcesPage() {
     <h2>Water Change</h2>
     <p>Contains modified Copernicus Sentinel data (2024, 2025, 2026), from Element 84 Earth Search Collection 1 L2A under the <a href="https://cds.climate.copernicus.eu/licences/ec-sentinel">Sentinel Data Legal Notice</a>. <a href="/data/phewa-water-change/1.0.0/sources.json">Pinned source windows</a> record acquisition dates, instruments, calibration, hashes and native grid. Whole-object checksums are source-declared; exact downloaded window hashes are locally verified.</p>
 
+    <h2>Time Machine index</h2>
+    <p>The <a href="/data/atlas-time-index/1.0.0/index.json">observation index</a> derives dates and reported-event counts from the versioned Sentinel, POWER and BIPAD releases already cited here. It records input hashes and preserves their source attribution and temporal precision. Publication and retrieval dates are not substituted for observation dates.</p>
+
     <h2>Mapping software</h2>
     <p>The interactive view uses <a href="https://maplibre.org/">MapLibre GL JS</a>. Versioned data, terrain derivatives, satellite previews and climate series are served locally; no third-party runtime tile or feature API is required.</p>
   </article>;

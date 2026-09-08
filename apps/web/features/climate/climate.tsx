@@ -10,7 +10,7 @@ import type { Resource } from '../../lib/resource';
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'] as const;
 type Variable = 'temperature' | 'precipitation';
 
-function Chart({ values, unit, variable }: { values: number[]; unit: string; variable: Variable }) {
+function Chart({ values, unit, variable, focus }: { focus: number; values: number[]; unit: string; variable: Variable }) {
   const width = 280;
   const height = 120;
   const padding = 16;
@@ -22,16 +22,19 @@ function Chart({ values, unit, variable }: { values: number[]; unit: string; var
   return <svg className="climate-chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`Monthly ${variable} chart in ${unit}`}>
     <line x1={padding} y1={height - padding} x2={width - padding} y2={height - padding} />
     <polyline points={points} fill="none" stroke="currentColor" strokeWidth="2" />
-    {values.map((value, index) => <circle key={index} cx={scaleX(index)} cy={scaleY(value)} r="2.5"><title>{MONTHS[index]}: {value.toFixed(variable === 'temperature' ? 1 : 2)} {unit}</title></circle>)}
+    {values.map((value, index) => <circle key={index} cx={scaleX(index)} cy={scaleY(value)} r={index + 1 === focus ? 5 : 2.5}><title>{MONTHS[index]}: {value.toFixed(variable === 'temperature' ? 1 : 2)} {unit}</title></circle>)}
   </svg>;
 }
 
-export function Climate() {
+export function Climate({ temporal }: { temporal?: { date: string } | null }) {
   const [resource, setResource] = useState<Resource<ClimateDataset>>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const [variable, setVariable] = useState<Variable>('temperature');
-  const [period, setPeriod] = useState('normal');
-  const [month, setMonth] = useState(7);
+  const [localPeriod, setPeriod] = useState('normal');
+  const [localMonth, setMonth] = useState(7);
+
+  const period = temporal ? temporal.date.slice(0, 4) : localPeriod;
+  const month = temporal ? Number(temporal.date.slice(5, 7)) : localMonth;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -57,9 +60,11 @@ export function Climate() {
     <p>NASA POWER · MERRA-2 reanalysis-derived · monthly 1991–2020</p>
     <DataState state={resource} retry={() => { setResource({ status: 'loading' }); setAttempt(value => value + 1); }} />
     <label className="thematic-picker">Variable<select value={variable} disabled={!manifest} onChange={event => setVariable(event.target.value as Variable)}><option value="temperature">2 m air temperature (°C)</option><option value="precipitation">Corrected precipitation rate (mm/day)</option></select></label>
-    <label className="thematic-picker">Period<select value={period} disabled={!manifest} onChange={event => setPeriod(event.target.value)}><option value="normal">1991–2020 monthly normal</option>{Array.from({ length: 30 }, (_, index) => 1991 + index).map(year => <option key={year} value={year}>{year}</option>)}</select></label>
-    <label className="thematic-picker">Focus month<select value={month} disabled={!manifest} onChange={event => setMonth(Number(event.target.value))}>{MONTHS.map((label, index) => <option key={label} value={index + 1}>{label}</option>)}</select></label>
-    {manifest && values.length === 12 && <div className="climate-figure"><Chart values={values} unit={unit} variable={variable} /><div className="climate-months" aria-hidden="true"><span>Jan</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Dec</span></div></div>}
+    <label className="thematic-picker">Period<select value={period} disabled={!manifest || Boolean(temporal)} onChange={event => setPeriod(event.target.value)}>{temporal && !selected && <option value={period}>{period} · unavailable</option>}<option value="normal">1991–2020 monthly normal</option>{Array.from({ length: 30 }, (_, index) => 1991 + index).map(year => <option key={year} value={year}>{year}</option>)}</select></label>
+    <label className="thematic-picker">Focus month<select value={month} disabled={!manifest || Boolean(temporal)} onChange={event => setMonth(Number(event.target.value))}>{MONTHS.map((label, index) => <option key={label} value={index + 1}>{label}</option>)}</select></label>
+    {manifest && values.length === 12 && <div className="climate-figure"><Chart focus={month} values={values} unit={unit} variable={variable} /><div className="climate-months" aria-hidden="true"><span>Jan</span><span>Apr</span><span>Jul</span><span>Oct</span><span>Dec</span></div></div>}
+    {temporal && manifest && !selected && <p role="status">UNAVAILABLE — no climate month for {temporal.date.slice(0, 7)}. No daily estimate or nearest-month substitution.</p>}
+    {temporal && selected && <p>Time Machine selects the whole month {temporal.date.slice(0, 7)}; this is not a daily measurement.</p>}
     {selected && <div className="selection" aria-live="polite"><dl>
       <dt>Period</dt><dd>{period === 'normal' ? '1991–2020 normal' : `${period}-${String(month).padStart(2, '0')}`}</dd>
       <dt>{variable === 'temperature' ? 'Temperature' : 'Precipitation'}</dt><dd>{(variable === 'temperature' ? selected.temperature_c : selected.precipitation_mm_day).toFixed(variable === 'temperature' ? 1 : 2)} {unit}</dd>

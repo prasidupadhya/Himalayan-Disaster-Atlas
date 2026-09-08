@@ -41,7 +41,8 @@
     "data:exposure": ".venv/bin/python -m pipelines.atlas_pipeline.exposure",
     "data:satellite": ".venv/bin/python -m pipelines.atlas_pipeline.satellite",
     "data:climate": ".venv/bin/python -m pipelines.atlas_pipeline.climate",
-    "data:water-change": ".venv/bin/python -m pipelines.atlas_pipeline.water_change"
+    "data:water-change": ".venv/bin/python -m pipelines.atlas_pipeline.water_change",
+    "data:time-machine": ".venv/bin/python -m pipelines.atlas_pipeline.time_machine"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

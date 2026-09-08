@@ -93,3 +93,5 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .water-preview { margin: 1rem 0; }
 .water-preview img { display: block; width: 100%; height: auto; background: #152737; }
 .water-preview figcaption { font-size: .8rem; }
+
+.temporal-navigation { display: flex; flex-wrap: wrap; gap: .5rem; }

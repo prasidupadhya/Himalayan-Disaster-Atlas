@@ -79,3 +79,7 @@ Future simulation engines must be model-agnostic and return separate scenario in
 ## Water Change
 
 Feature 21 uses the offline `processing/water_change` engine and `water_change` publisher. Its dedicated schema and Python/TypeScript validators preserve native 20 m classifications, UNKNOWN quality masks and valid-only comparisons; hashed display images mount and dispose independently. See [water method and provenance](../water-change.md).
+
+## Time Machine
+
+Feature 22 adds a static temporal index, strict UTC interval contracts and one Atlas date selection shared by Water Change, Satellite, Climate and Disaster Events. Other datasets remain explicitly dated context. A 16 MiB verified-byte LRU and abort/dispose lifecycle bound temporal imagery resources. See [temporal semantics and coverage](../time-machine.md).
