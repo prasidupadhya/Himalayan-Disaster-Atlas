@@ -205,3 +205,9 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .methodology-toc { display: flex; flex-wrap: wrap; gap: .45rem .8rem; padding: 1rem; border: 1px solid var(--line); background: white; }
 .methodology-toc strong { flex-basis: 100%; }
 .evidence-terms dt { font-weight: 700; color: var(--ink); }
+.sources-page { max-width: 1040px; }
+.source-toc { display: flex; flex-wrap: wrap; gap: .5rem .9rem; padding: 1rem; border: 1px solid var(--line); background: white; margin: 1rem 0; }
+.source-section { scroll-margin-top: 1rem; margin-top: 2rem; }
+.source-entry { border-top: 1px solid var(--line); padding: 1rem 0; overflow-wrap: anywhere; }
+.source-entry h4 { margin-bottom: .3rem; }
+.source-entry summary { min-height: 44px; cursor: pointer; padding-block: .45rem; }
