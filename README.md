@@ -291,3 +291,5 @@ Time Machine synchronizes explicit UTC observations across water, satellite, mon
 Hazard Graph exposes source-backed drainage and hypothetical exposure relationships, with explicit evidence classes and UNKNOWN confidence. See [feature 27](docs/hazard-graph.md).
 
 Scenario Engine publishes reproducible Level 1 network paths and Level 2 hypothetical constant-celerity pulse translations. These are educational approximations, not hydraulic forecasts. See [feature 28](docs/scenario-engine.md) and `npm run data:scenarios`.
+
+Simulation UI adds the interactive Feature 29 workbench over those verified scenario inputs: explicit Level 1/2 selection, bounded Level 2 parameter controls, pre-run assumptions, deterministic browser recomputation, compatible-run comparison, map/perspective presentation and complete model/data provenance. It never creates a hydraulic footprint or exposure estimate when the validated model does not provide one. See [feature 29](docs/simulation-ui.md).
