@@ -14,6 +14,9 @@ nav { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 nav a { color: var(--ink); font-size: .9rem; }
 .skip-link { position: absolute; left: 1rem; top: -100px; z-index: 20; background: white; padding: 1rem; }
 .skip-link:focus { top: 1rem; }
+.sr-only { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0, 0, 0, 0) !important; white-space: nowrap !important; border: 0 !important; }
+.map-skip-link { position: absolute; left: .75rem; top: -100px; z-index: 8; background: white; color: var(--ink); padding: .65rem .9rem; }
+.map-skip-link:focus { top: .75rem; }
 h1, h2, h3 { line-height: 1.15; }
 h1 { font-size: clamp(2rem, 4.5vw, 4.5rem); letter-spacing: -.045em; font-weight: 600; }
 h2 { font-size: 1.25rem; }
@@ -245,4 +248,13 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 @media (max-width: 900px) and (orientation: landscape) and (max-height: 600px) {
   .map-shell { height: min(68svh, 24rem); min-height: 15rem; }
   .site-header { position: static; }
+}
+@media (prefers-contrast: more) {
+  :root { --muted: #31434f; --line: #7b8e99; }
+  button, input, select, textarea, .badge, .catalog-detail, .compare-picker { border-width: 2px; }
+}
+@media (forced-colors: active) {
+  .badge, .simulation-warning, .data-state, .map-caption, .catalog-detail, .compare-picker { border: 1px solid CanvasText; }
+  .boundary-key, .legend-dot, .dot { border: 1px solid CanvasText; background: Canvas; }
+  .climate-chart { forced-color-adjust: auto; }
 }
