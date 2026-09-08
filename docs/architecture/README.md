@@ -95,3 +95,7 @@ Feature 26 reuses Search only to resolve stable versioned identities, then loads
 ## Location Explorer
 
 Feature 24 adds an opt-in deterministic spatial-context reader. It computes administrative containment and minimum geometry distance from validated local datasets rather than querying rendered map features, so layer visibility and zoom do not alter results. Category-specific radii/caps, source dates, partial-unavailable states and the WorldPop numerical-lookup limitation are documented in [the Location Explorer methodology](../location-explorer.md).
+
+## Hazard Graph
+
+An offline, immutable relationship index links exact source records. Shared typed semantics and validators separate observation, derivation, inference and modelling. Bounded cycle-safe exploration owns a disposable map selection. See [graph contracts and evidence rules](../hazard-graph.md).

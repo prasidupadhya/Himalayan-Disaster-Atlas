@@ -287,3 +287,5 @@ The browser suite covers administrative boundaries, terrain, mountains, rivers, 
 Water Change provides three dated Phewa Lake observations, conservative masks and coverage-gated comparisons. See [feature 21](docs/water-change.md); run `npm run data:water-change` to verify/reproduce the immutable release.
 
 Time Machine synchronizes explicit UTC observations across water, satellite, monthly climate and reported disaster events, preserving gaps and inventory context. See [feature 22](docs/time-machine.md); `npm run data:time-machine` verifies the temporal index.
+
+Hazard Graph exposes source-backed drainage and hypothetical exposure relationships, with explicit evidence classes and UNKNOWN confidence. See [feature 27](docs/hazard-graph.md).

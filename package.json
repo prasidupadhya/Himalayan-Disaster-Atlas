@@ -43,7 +43,8 @@
     "data:climate": ".venv/bin/python -m pipelines.atlas_pipeline.climate",
     "data:water-change": ".venv/bin/python -m pipelines.atlas_pipeline.water_change",
     "data:time-machine": ".venv/bin/python -m pipelines.atlas_pipeline.time_machine",
-    "data:search": ".venv/bin/python -m pipelines.atlas_pipeline.search"
+    "data:search": ".venv/bin/python -m pipelines.atlas_pipeline.search",
+    "data:hazard-graph": ".venv/bin/python -m pipelines.atlas_pipeline.hazard_graph"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

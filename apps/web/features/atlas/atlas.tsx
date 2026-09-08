@@ -23,6 +23,7 @@ import { Infrastructure } from '../infrastructure/infrastructure';
 import { Population } from '../population/population';
 import { ExposureEngine } from '../exposure-engine/exposure-engine';
 import { Satellite } from '../satellite/satellite';
+import { HazardGraph } from '../hazard-graph/hazard-graph';
 import { TimeMachine } from '../time-machine/time-machine';
 import type { TemporalSelection } from '../../../../packages/contracts/temporal';
 import { WaterChange } from '../water-change/water-change';
@@ -212,6 +213,7 @@ export function Atlas() {
       </section>
       <Search onFocus={focusSearch} />
       <CompareMode onFocus={focusComparison} />
+      <HazardGraph key={`hazard-graph-${attempt}`} map={mapReady ? mapRef.current : null} />
       <TimeMachine value={temporal} onChange={setTemporal} />
       <LocationExplorer key={`location-explorer-${attempt}`} map={mapReady ? mapRef.current : null} adminDatasets={datasets} />
       <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? mapRef.current : null} />
