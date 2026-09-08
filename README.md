@@ -1,6 +1,6 @@
 # Himalayan Disaster Atlas
 
-Himalayan Disaster Atlas is a public, read-only geospatial atlas focused on Nepal and the Himalayan systems that influence it. The project brings together terrain, mountains, rivers, glaciers, glacial lakes, satellite observations, population, infrastructure, disaster records, and administrative geography in one evidence-traceable interactive map.
+Himalayan Disaster Atlas is a public, read-only geospatial atlas focused on Nepal and the Himalayan systems that influence it. The project brings together terrain, mountains, rivers, glaciers, glacial lakes, satellite observations, climate context, population, infrastructure, disaster records, and administrative geography in one evidence-traceable interactive map.
 
 The purpose of the atlas is to build a reliable geographic foundation for understanding how Himalayan landscapes, water systems, cryosphere features, settlements, infrastructure, and future hazard-analysis layers relate to one another. The current application concentrates on verified source data and geographic context rather than presenting unverified predictions, operational warnings, or inferred hazard classifications.
 
@@ -150,6 +150,19 @@ Its core principles are:
 - Separate footprints remain explicit; the feature does not claim seamless Nepal-wide or single-date satellite coverage.
 - Clouds, shadows, snow, and date-to-date visual differences are not interpreted as water, land, hazard, or change detection.
 
+### Climate context
+
+- NASA POWER monthly MERRA-2-derived climate context for the complete 1991–2020 baseline.
+- 360 monthly Nepal-wide records plus 12 derived monthly climatological normals.
+- Two explicit variables with source units preserved: 2 m air temperature in °C and corrected precipitation rate in mm/day.
+- Native 0.5° latitude × 0.625° longitude source-grid semantics retained in metadata.
+- Equal-area weighting of 66 source grid cells intersecting the pinned unsimplified Nepal COD-AB v02 boundary.
+- 100% valid Nepal-area coverage required for every published month; missing source cells would not be silently filled.
+- Interactive variable, year/normal, and month controls with an accessible monthly chart.
+- Product type shown as reanalysis-derived; values are never labelled station observations.
+- Historical monthly minimum/maximum shown only as reanalysis variability, not uncertainty intervals.
+- The 1991–2020 normal is historical context, not a forecast, current-condition estimate, or local valley-scale climate value.
+
 ## Evidence, provenance, and data integrity
 
 Every published dataset carries machine-readable metadata describing its source, version, licence, attribution, retrieval date, processing date, spatial and temporal coverage, evidence type, limitations, uncertainty, and update policy.
@@ -220,6 +233,7 @@ The browser suite covers administrative boundaries, terrain, mountains, rivers, 
 - **Glacier data:** Randolph Glacier Inventory 7.0, GLIMS
 - **Glacial-lake data:** Glacial Lake Observatory v1.02, Sentinel-2-derived inventory
 - **Satellite observations:** Copernicus Sentinel-2 Collection-1 Level-2A via Element 84 Earth Search/AWS Open Data
+- **Climate data:** NASA POWER Monthly and Annual API, MERRA-2-derived T2M and PRECTOTCORR
 - **Data processing:** Python, Shapely, JSON Schema
 - **Validation:** AJV, shared TypeScript/Python data contracts, SHA-256 artifact verification
 - **Testing:** Vitest, Python `unittest`, Playwright

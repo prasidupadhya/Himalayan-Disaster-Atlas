@@ -76,6 +76,11 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .population-opacity input { width: 100%; }
 .population-legend { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: .5rem; font-size: .8rem; color: var(--muted); margin: .75rem 0; }
 .population-gradient { height: .65rem; border-radius: 999px; background: linear-gradient(90deg, rgba(35,185,215,.2), rgba(215,90,160,.95)); border: 1px solid #a4b4bd; }
+.climate-figure { margin: 1rem 0; }
+.climate-chart { display: block; width: 100%; height: auto; max-height: 160px; border: 1px solid var(--line); background: #fbfcfd; color: var(--accent); }
+.climate-chart line { stroke: var(--line); }
+.climate-chart circle { fill: currentColor; }
+.climate-months { display: flex; justify-content: space-between; color: var(--muted); font-size: .72rem; padding-inline: .4rem; }
 
 .map .maplibregl-ctrl-attrib.maplibregl-compact-show { width: min(22rem, calc(100vw - 4rem)); }
 .map .maplibregl-ctrl-attrib-inner { max-height: 8rem; overflow: auto; white-space: normal; overflow-wrap: anywhere; }

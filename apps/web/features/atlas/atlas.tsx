@@ -23,6 +23,7 @@ import { Infrastructure } from '../infrastructure/infrastructure';
 import { Population } from '../population/population';
 import { ExposureEngine } from '../exposure-engine/exposure-engine';
 import { Satellite } from '../satellite/satellite';
+import { Climate } from '../climate/climate';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -204,6 +205,7 @@ export function Atlas() {
       <Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Population key={`population-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Satellite key={`satellite-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <Climate key={`climate-${attempt}`} />
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">
