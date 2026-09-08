@@ -83,3 +83,7 @@ Feature 21 uses the offline `processing/water_change` engine and `water_change` 
 ## Time Machine
 
 Feature 22 adds a static temporal index, strict UTC interval contracts and one Atlas date selection shared by Water Change, Satellite, Climate and Disaster Events. Other datasets remain explicitly dated context. A 16 MiB verified-byte LRU and abort/dispose lifecycle bound temporal imagery resources. See [temporal semantics and coverage](../time-machine.md).
+
+## Location Explorer
+
+Feature 24 adds an opt-in deterministic spatial-context reader. It computes administrative containment and minimum geometry distance from validated local datasets rather than querying rendered map features, so layer visibility and zoom do not alter results. Category-specific radii/caps, source dates, partial-unavailable states and the WorldPop numerical-lookup limitation are documented in [the Location Explorer methodology](../location-explorer.md).
