@@ -51,6 +51,12 @@ input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--accent); }
 .badges { display: flex; gap: .4rem; flex-wrap: wrap; }
 .badge { font-size: .75rem; padding: .2rem .5rem; background: #eaf0f3; font-weight: 700; }
 .fixture { background: #fff0c8; color: #705000; }
+.evidence-label { border: 1px solid #8ba0ab; }
+.evidence-observed, .evidence-historical { background: #eaf5f2; }
+.evidence-derived { background: #eef3f8; }
+.evidence-estimated, .evidence-modelled { background: #fff3df; }
+.evidence-unknown { background: #f1f1f1; }
+.evidence-links { font-size: .85rem; }
 dl { display: grid; grid-template-columns: minmax(95px, 1fr) minmax(0, 2fr); gap: .5rem 1rem; font-size: .9rem; }
 dt { color: var(--muted); }
 dd { margin: 0; overflow-wrap: anywhere; }
