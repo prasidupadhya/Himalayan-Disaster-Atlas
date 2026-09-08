@@ -7,6 +7,7 @@ from .contracts import ROOT, verify_artifact
 from .exposure_contracts import verify_exposure
 from .population_contracts import verify_population
 from .satellite_contracts import verify_satellite
+from .search import verify_search_index
 from .terrain_contracts import verify_context, verify_terrain
 from .time_machine import verify_time_index
 from .water_change_contracts import verify_water_change
@@ -21,6 +22,10 @@ def main():
         if metadata.get('kind') == 'temporal-index':
             verify_time_index(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
             print('Valid: atlas-time-index@1.0.0')
+            continue
+        if metadata.get('kind') == 'search-index':
+            verify_search_index(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
+            print('Valid: atlas-search-index@1.0.0')
             continue
         if metadata.get('metadata', {}).get('dataset_id') == 'phewa-water-change':
             verify_water_change(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))

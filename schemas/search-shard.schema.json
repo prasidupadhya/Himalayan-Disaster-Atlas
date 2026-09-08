@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.invalid/schemas/search-shard.schema.json",
+  "type": "array",
+  "maxItems": 100000,
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["key", "type", "dataset_id", "dataset_version", "feature_id", "source_id", "name", "aliases", "normalized_name", "normalized_aliases", "context", "longitude", "latitude", "date", "manifest_path", "detail_href"],
+    "properties": {
+      "key": { "type": "string", "minLength": 1 },
+      "type": { "enum": ["administrative_unit", "mountain", "river", "glacier", "glacial_lake", "hydropower", "infrastructure", "event"] },
+      "dataset_id": { "type": "string", "minLength": 1 },
+      "dataset_version": { "type": "string", "minLength": 1 },
+      "feature_id": { "type": "string", "minLength": 1 },
+      "source_id": { "type": "string", "minLength": 1 },
+      "name": { "type": "string", "minLength": 1 },
+      "aliases": { "type": "array", "maxItems": 40, "items": { "type": "string", "minLength": 1 } },
+      "normalized_name": { "type": "string", "minLength": 1 },
+      "normalized_aliases": { "type": "array", "maxItems": 40, "items": { "type": "string", "minLength": 1 } },
+      "context": { "type": "string", "minLength": 1 },
+      "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
+      "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+      "date": { "type": ["string", "null"] },
+      "manifest_path": { "type": "string", "pattern": "^/data/" },
+      "detail_href": { "type": ["string", "null"], "pattern": "^/" }
+    }
+  }
+}
