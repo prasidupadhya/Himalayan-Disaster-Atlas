@@ -173,3 +173,9 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .evidence-citation { border-top: 1px solid var(--border, #b7c7ce); padding-block: 1rem; overflow-wrap: anywhere; }
 .evidence-excerpt { white-space: pre-wrap; }
 .evidence-citation blockquote { margin-inline: 0; padding-inline: 1rem; border-left: 3px solid #427d79; }
+
+.analyst textarea { display: block; width: 100%; min-width: 0; font: inherit; }
+.analyst-examples, .analyst-actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: 1rem; }
+.analyst-examples button { text-align: left; }
+.analyst-claim, .analyst-source { border-top: 1px solid #b7c7ce; padding-block: 1rem; overflow-wrap: anywhere; }
+.analyst-reaches { max-height: 12rem; overflow: auto; overflow-wrap: anywhere; }

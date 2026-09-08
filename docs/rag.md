@@ -41,3 +41,5 @@ An eventual generator must keep source statements separate from interpretations/
 ## Verification
 
 `npm run check` and `npm run test:e2e -- tests/e2e/rag.spec.ts` cover ingestion reproducibility, rejected source changes/unapproved paths, exact citations, forged claims, inferred measurements, metadata/date semantics, missing/partial evidence, synthetic disagreements, stale/obsolete sources, checksum errors, retry, keyboard access and mobile layout. Broader existing browser coverage verifies the integrated static site.
+
+Feature 31 adds an optional exact `document` retrieval filter before ranking, retaining conflict alternatives across the corpus. The [local analyst](ai-analyst.md) consumes the same immutable release and grounding gate; it does not introduce generated factual paraphrases.
