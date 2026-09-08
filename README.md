@@ -289,3 +289,5 @@ Water Change provides three dated Phewa Lake observations, conservative masks an
 Time Machine synchronizes explicit UTC observations across water, satellite, monthly climate and reported disaster events, preserving gaps and inventory context. See [feature 22](docs/time-machine.md); `npm run data:time-machine` verifies the temporal index.
 
 Hazard Graph exposes source-backed drainage and hypothetical exposure relationships, with explicit evidence classes and UNKNOWN confidence. See [feature 27](docs/hazard-graph.md).
+
+Scenario Engine publishes reproducible Level 1 network paths and Level 2 hypothetical constant-celerity pulse translations. These are educational approximations, not hydraulic forecasts. See [feature 28](docs/scenario-engine.md) and `npm run data:scenarios`.
