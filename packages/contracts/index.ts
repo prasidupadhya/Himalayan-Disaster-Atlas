@@ -183,3 +183,4 @@ export { parseSatelliteManifest } from './satellite';
 export { parseClimateManifest } from './climate';
 export { buildEventPage, eventSourcePath, parseEventPage } from './event-page';
 export { normalizeSearchTerm, parseSearchManifest, parseSearchShard, searchRecords } from './search';
+export { compareEntities, formatCompareValue } from './compare';
