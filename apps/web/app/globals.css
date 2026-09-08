@@ -202,3 +202,6 @@ footer { padding: 1rem 3vw; font-size: .8rem; border-top: 1px solid var(--line);
 .catalog-detail code { overflow-wrap: anywhere; }
 .catalog-detail-links { display: flex; flex-wrap: wrap; gap: .75rem; border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 1rem; }
 @media (max-width: 900px) { .catalog-filters, .catalog-layout { grid-template-columns: 1fr; } .catalog-detail { position: static; } }
+.methodology-toc { display: flex; flex-wrap: wrap; gap: .45rem .8rem; padding: 1rem; border: 1px solid var(--line); background: white; }
+.methodology-toc strong { flex-basis: 100%; }
+.evidence-terms dt { font-weight: 700; color: var(--ink); }
