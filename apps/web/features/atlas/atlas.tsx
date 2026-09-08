@@ -27,6 +27,7 @@ import { TimeMachine } from '../time-machine/time-machine';
 import type { TemporalSelection } from '../../../../packages/contracts/temporal';
 import { WaterChange } from '../water-change/water-change';
 import { Climate } from '../climate/climate';
+import { LocationExplorer } from '../location-explorer/location-explorer';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -194,6 +195,7 @@ export function Atlas() {
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
       <TimeMachine value={temporal} onChange={setTemporal} />
+      <LocationExplorer key={`location-explorer-${attempt}`} map={mapReady ? mapRef.current : null} adminDatasets={datasets} />
       <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? mapRef.current : null} />
       <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
       <Mountains key={`mountains-${attempt}`} map={mapReady ? mapRef.current : null} />

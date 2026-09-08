@@ -173,6 +173,17 @@ Its core principles are:
 - Shareable `year` + stable event-ID query state with navigation back to the Atlas, Data Catalog, Sources and Methodology.
 - See [event-page evidence semantics](docs/event-pages.md).
 
+### Location Explorer
+
+- Opt-in map-click or coordinate-form inspection for locations inside Nepal.
+- Deterministic province/district containment and checksum-verified Copernicus terrain elevation.
+- Capped nearby spatial context for rivers, glaciers, glacial lakes, hydropower, infrastructure, earthquake epicenters, reported floods, reported landslides and historical events.
+- Every nearby result keeps distance, stable source ID, dataset/version and source date; different dataset dates remain visible.
+- “Nearby” is explicitly distance-only and never relabelled as hazard, exposure, causal connection, impact or risk.
+- Partial dataset failures stay explicit while other verified categories remain usable.
+- WorldPop point counts remain `UNAVAILABLE` because the published web tiles are display-only and cannot be truthfully sampled as population values.
+- See [Location Explorer methodology](docs/location-explorer.md).
+
 ## Evidence, provenance, and data integrity
 
 Every published dataset carries machine-readable metadata describing its source, version, licence, attribution, retrieval date, processing date, spatial and temporal coverage, evidence type, limitations, uncertainty, and update policy.
