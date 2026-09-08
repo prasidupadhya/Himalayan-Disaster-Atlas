@@ -70,7 +70,7 @@ def digest(raw):
 
 def normalize(value):
     decomposed = unicodedata.normalize("NFKD", value)
-    plain = "".join(char for char in decomposed if not unicodedata.combining(char)).casefold()
+    plain = "".join(char for char in decomposed if not unicodedata.category(char).startswith("M")).lower()
     return " ".join("".join(char if char.isalnum() else " " for char in plain).split())
 
 

@@ -28,6 +28,8 @@ import type { TemporalSelection } from '../../../../packages/contracts/temporal'
 import { WaterChange } from '../water-change/water-change';
 import { Climate } from '../climate/climate';
 import { LocationExplorer } from '../location-explorer/location-explorer';
+import { Search } from '../search/search';
+import type { SearchRecord } from '../../../../packages/contracts/search';
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -183,6 +185,11 @@ export function Atlas() {
     setMapError(null); setMapReady(false); setSelected(null);
     setAttempt(value => value + 1);
   }
+  function focusSearch(record: SearchRecord) {
+    const map = mapRef.current;
+    if (record.type === 'administrative_unit') selectFeature(record.feature_id);
+    if (map) map.easeTo({ center: [record.longitude, record.latitude], zoom: Math.max(map.getZoom(), record.type === 'administrative_unit' ? 7 : 9), duration: 0 });
+  }
 
   return <div className="atlas-workspace">
     <aside className="atlas-panel">
@@ -194,6 +201,7 @@ export function Atlas() {
         {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
+      <Search onFocus={focusSearch} />
       <TimeMachine value={temporal} onChange={setTemporal} />
       <LocationExplorer key={`location-explorer-${attempt}`} map={mapReady ? mapRef.current : null} adminDatasets={datasets} />
       <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? mapRef.current : null} />

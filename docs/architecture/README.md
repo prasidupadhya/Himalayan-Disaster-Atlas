@@ -84,6 +84,10 @@ Feature 21 uses the offline `processing/water_change` engine and `water_change` 
 
 Feature 22 adds a static temporal index, strict UTC interval contracts and one Atlas date selection shared by Water Change, Satellite, Climate and Disaster Events. Other datasets remain explicitly dated context. A 16 MiB verified-byte LRU and abort/dispose lifecycle bound temporal imagery resources. See [temporal semantics and coverage](../time-machine.md).
 
+## Search
+
+Feature 25 derives a separate immutable search release from the validated source releases instead of scanning all source GeoJSON in the browser. Eight bounded gzip shards preserve composite source identity, type, context, representative coordinates and source dates. The browser verifies each shard and processes them sequentially on explicit search submission. Ranking and normalization live in the shared TypeScript contract; no source-missing common names or transliterations are invented. See [global search semantics](../search.md).
+
 ## Location Explorer
 
 Feature 24 adds an opt-in deterministic spatial-context reader. It computes administrative containment and minimum geometry distance from validated local datasets rather than querying rendered map features, so layer visibility and zoom do not alter results. Category-specific radii/caps, source dates, partial-unavailable states and the WorldPop numerical-lookup limitation are documented in [the Location Explorer methodology](../location-explorer.md).

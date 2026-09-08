@@ -184,6 +184,17 @@ Its core principles are:
 - WorldPop point counts remain `UNAVAILABLE` because the published web tiles are display-only and cannot be truthfully sampled as population values.
 - See [Location Explorer methodology](docs/location-explorer.md).
 
+### Global search
+
+- One global search across administrative units, mountains, river reaches, glaciers, glacial lakes, hydropower, infrastructure and disaster events.
+- Immutable source-derived index with stable composite identities, entity types, source dates and disambiguating context.
+- Exact, alias, prefix and partial matching with deterministic ranking and diacritic normalization.
+- Duplicate names remain explicit rather than being auto-selected; results always show what type of object was found.
+- Eight checksum-verified bounded shards avoid loading the full atlas inventories at search time.
+- Unsupported common river/lake names and cross-script transliterations are not invented when the source releases do not provide a verified linkage.
+- No-result messages describe index matching only and never claim geographic absence.
+- See [global search methodology](docs/search.md).
+
 ## Evidence, provenance, and data integrity
 
 Every published dataset carries machine-readable metadata describing its source, version, licence, attribution, retrieval date, processing date, spatial and temporal coverage, evidence type, limitations, uncertainty, and update policy.
