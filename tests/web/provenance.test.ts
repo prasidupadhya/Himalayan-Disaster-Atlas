@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { currentProductionRecords, filterProvenanceRecords, parseProvenanceCatalog } from '../../packages/contracts/provenance';
+import { buildSourceDirectory, currentProductionRecords, filterProvenanceRecords, parseProvenanceCatalog } from '../../packages/contracts/provenance';
 
 const catalog = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.0.0/manifest.json', 'utf8')));
 
@@ -23,5 +23,12 @@ describe('provenance catalog', () => {
     const source = glaciers[0].source;
     expect(filterProvenanceRecords(catalog.records, { source }).every(record => record.source === source)).toBe(true);
     expect(filterProvenanceRecords(catalog.records, { query: 'nepal-admin-country', includeNonCurrent: true }).some(record => record.version === '2.0.0' && record.state === 'superseded')).toBe(true);
+  });
+  it('groups every current production release into a traceable source directory', () => {
+    const directory = buildSourceDirectory(catalog.records);
+    const represented = new Set(directory.flatMap(entry => entry.datasets.map(dataset => `${dataset.id}@${dataset.version}`)));
+    expect(represented).toEqual(new Set(currentProductionRecords(catalog).map(record => record.key)));
+    expect(directory.some(entry => entry.name.includes('GeoNames') && entry.url?.startsWith('https://'))).toBe(true);
+    expect(directory.some(entry => entry.derived && entry.name === 'Himalayan Disaster Atlas derived product')).toBe(true);
   });
 });
