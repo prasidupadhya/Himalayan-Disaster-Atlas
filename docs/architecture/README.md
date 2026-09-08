@@ -103,3 +103,7 @@ An offline, immutable relationship index links exact source records. Shared type
 ## Scenario Engine
 
 Level 0 versioned definitions and a shared assumption registry gate offline Level 1 network and Level 2 pulse adapters. Every result preserves model/input/processing provenance, units, limits, partial coverage and null unsupported outputs. The browser verifies static results and owns an independent hypothetical pathway overlay. Physical adapters remain unregistered. See [scenario lifecycle and validation](../scenario-engine.md).
+
+## Simulation UI
+
+Feature 29 adds a static-safe workbench on top of the verified Scenario Engine. Shared TypeScript rules mirror the request-schema parameter limits and reuse the versioned assumption registry. The browser first verifies both registered Feature 28 releases, then may recompute only the same Level 1/2 deterministic network equations over their common source pathway. Interactive runs keep a deterministic fingerprint, model/data provenance, explicit modelled evidence class and null unsupported physical outputs. Compatible-run comparison requires identical level/model/version/source basis. No API route, server process, third-party runtime call or unregistered physical adapter is introduced. See [Simulation UI semantics and failure rules](../simulation-ui.md).
