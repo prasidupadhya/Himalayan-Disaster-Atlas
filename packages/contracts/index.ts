@@ -178,3 +178,5 @@ export function isStale(metadata: Metadata, now = Date.now()): boolean {
 export function formatMeasurement(value: number | null, unit: Unit | null): string {
   return value === null ? 'UNKNOWN' : `${value.toLocaleString('en-US')}${unit ? ` ${unit}` : ''}`;
 }
+
+export { parseSatelliteManifest } from './satellite';

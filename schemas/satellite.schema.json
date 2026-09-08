@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.invalid/schemas/satellite.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["metadata", "observations"],
+  "properties": {
+    "metadata": {
+      "type": "object",
+      "required": ["schema_version", "dataset_id", "dataset_name", "dataset_version", "source", "source_url", "license", "license_url", "attribution", "observation_date", "publication_date", "retrieval_date", "processing_date", "processing_version", "method", "spatial_resolution", "temporal_resolution", "spatial_coverage", "temporal_coverage", "crs", "status", "evidence_type", "is_fixture", "limitations", "uncertainty", "update_frequency", "stale_after", "artifact"],
+      "properties": {
+        "schema_version": { "const": "4.0.0" },
+        "dataset_id": { "const": "nepal-sentinel-observations" },
+        "dataset_name": { "type": "string", "minLength": 1 },
+        "dataset_version": { "const": "1.0.0" },
+        "source": { "type": "string", "minLength": 1 },
+        "source_url": { "type": "string", "format": "uri" },
+        "license": { "type": "string", "minLength": 1 },
+        "license_url": { "type": "string", "format": "uri" },
+        "attribution": { "type": "string", "minLength": 1 },
+        "observation_date": { "type": "null" },
+        "publication_date": { "type": "null" },
+        "retrieval_date": { "type": "string", "format": "date-time" },
+        "processing_date": { "type": "string", "format": "date-time" },
+        "processing_version": { "type": "string", "minLength": 1 },
+        "method": { "type": "string", "minLength": 1 },
+        "spatial_resolution": { "type": "object", "required": ["value", "unit"], "properties": { "value": { "const": 10 }, "unit": { "const": "m" } }, "additionalProperties": false },
+        "temporal_resolution": { "const": "individual Sentinel-2 acquisitions" },
+        "spatial_coverage": { "type": "object", "required": ["description", "bbox"], "properties": { "description": { "type": "string", "minLength": 1 }, "bbox": { "type": "array", "items": { "type": "number" }, "minItems": 4, "maxItems": 4 } }, "additionalProperties": false },
+        "temporal_coverage": { "type": "object", "required": ["start", "end"], "properties": { "start": { "type": "string", "format": "date-time" }, "end": { "type": "string", "format": "date-time" } }, "additionalProperties": false },
+        "crs": { "const": "OGC:CRS84" },
+        "status": { "const": "SATELLITE_DERIVED" },
+        "evidence_type": { "const": "derived" },
+        "is_fixture": { "const": false },
+        "limitations": { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 },
+        "uncertainty": { "type": "string", "minLength": 1 },
+        "update_frequency": { "const": "static" },
+        "stale_after": { "type": "null" },
+        "artifact": { "type": "object", "required": ["path", "format", "sha256", "byte_size"], "properties": { "path": { "const": "/data/nepal-sentinel-observations/1.0.0/observations.json" }, "format": { "const": "SatelliteObservation-index" }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }, "byte_size": { "type": "integer", "minimum": 1, "maximum": 65536 } }, "additionalProperties": false }
+      },
+      "additionalProperties": false
+    },
+    "observations": {
+      "type": "array", "minItems": 3, "maxItems": 3,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "label", "scene_id", "acquired_at", "cloud_percent", "nodata_percent", "snow_ice_percent", "source_crs", "source_resolution_m", "source_asset", "source_scl", "source_etag", "source_byte_size", "image", "coordinates"],
+        "properties": {
+          "id": { "enum": ["west", "central", "east"] }, "label": { "type": "string", "minLength": 1 }, "scene_id": { "type": "string", "minLength": 1 },
+          "acquired_at": { "type": "string", "format": "date-time" }, "cloud_percent": { "type": "number", "minimum": 0, "maximum": 100 }, "nodata_percent": { "type": "number", "minimum": 0, "maximum": 100 }, "snow_ice_percent": { "type": "number", "minimum": 0, "maximum": 100 },
+          "source_crs": { "type": "string", "pattern": "^EPSG:[0-9]+$" }, "source_resolution_m": { "const": 10 }, "source_asset": { "type": "string", "format": "uri" }, "source_scl": { "type": "string", "format": "uri" }, "source_etag": { "type": "string", "minLength": 1 }, "source_byte_size": { "type": "integer", "minimum": 1 },
+          "image": { "type": "object", "additionalProperties": false, "required": ["path", "sha256", "byte_size", "width", "height"], "properties": { "path": { "type": "string", "pattern": "^/data/nepal-sentinel-observations/1.0.0/(west|central|east)\\.png$" }, "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }, "byte_size": { "type": "integer", "minimum": 1, "maximum": 4194304 }, "width": { "const": 768 }, "height": { "const": 768 } } },
+          "coordinates": { "type": "array", "minItems": 4, "maxItems": 4, "items": { "type": "array", "minItems": 2, "maxItems": 2, "items": { "type": "number" } } }
+        }
+      }
+    }
+  }
+}
