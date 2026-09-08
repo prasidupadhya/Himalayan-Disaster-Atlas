@@ -25,7 +25,7 @@ export default function SourcesPage() {
   const records = currentProductionRecords(catalog);
   const directory = buildSourceDirectory(catalog.records);
   const byKey = new Map(records.map(record => [record.key, record]));
-  return <main className="page sources-page">
+  return <div className="page sources-page">
     <p className="eyebrow">Sources</p><h1>Trace every production layer to its source.</h1>
     <p className="intro">Official providers, acquisition endpoints, access dates, licences, attribution requirements and known limitations are derived from the same release metadata used by the Data Catalog.</p>
     <nav className="source-toc" aria-label="Source categories">{SECTIONS.map(([anchor, label]) => <a key={anchor} href={`#${anchor}`}>{label}</a>)}</nav>
@@ -57,5 +57,5 @@ export default function SourcesPage() {
       </section>;
     })}
     <section className="source-section"><h2>Attribution and licence discipline</h2><p>The Atlas preserves the licence/attribution text supplied by each release rather than substituting one project-wide licence for upstream data. Where a derived product combines multiple parents, its catalog lineage remains the authoritative path to each parent licence.</p><p>Source links are not credentials. Private account secrets, OAuth tokens, API keys and local acquisition configuration are not published in this directory.</p></section>
-  </main>;
+  </div>;
 }

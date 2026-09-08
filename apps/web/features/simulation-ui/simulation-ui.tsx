@@ -87,6 +87,7 @@ export function SimulationUI({ map }: { map: Map | null }) {
   const [perspective, setPerspective] = useState(false);
   const [comparisonA, setComparisonA] = useState<BrowserSimulationRun | null>(null);
   const runSequence = useRef(0);
+  const resultRef = useRef<HTMLDivElement>(null);
   const basis = enabled && 'data' in basisResource ? basisResource.data : null;
 
   const controls = useMemo(() => controlsForLevel(level, level === 2 ? {
@@ -143,7 +144,10 @@ export function SimulationUI({ map }: { map: Map | null }) {
     setRunState({ status: 'running' });
     try {
       const data = await runBrowserSimulation(basis, controls);
-      if (runSequence.current === token) setRunState({ status: 'ready', data });
+      if (runSequence.current === token) {
+        setRunState({ status: 'ready', data });
+        requestAnimationFrame(() => resultRef.current?.focus());
+      }
     } catch (error) {
       if (runSequence.current === token) setRunState({ status: 'error', message: error instanceof Error ? error.message : 'Simulation failed.' });
     }
@@ -230,7 +234,7 @@ export function SimulationUI({ map }: { map: Map | null }) {
         {runState.status === 'running' ? <p className="data-state" role="status">Running deterministic {controls.model}@1.0.0 over the verified published pathway…</p> : null}
         {runState.status === 'error' ? <p className="data-state error" role="alert">{runState.message}</p> : null}
 
-        {current && <div className="simulation-result" aria-live="polite">
+        {current && <div ref={resultRef} tabIndex={-1} className="simulation-result" aria-live="polite" aria-label="Simulation result">
           <div className="simulation-warning simulation-result-label"><strong>{current.label}</strong><span>Result from Level {current.simulation_level} · {current.model.id}@{current.model.version}</span></div>
           <h3>What the model produced</h3>
           <dl>

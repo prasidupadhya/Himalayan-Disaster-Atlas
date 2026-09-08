@@ -81,6 +81,7 @@ export function CompareMode({ onFocus }: { onFocus: (a: SearchRecord, b: SearchR
   const [state, setState] = useState<'idle' | 'loading' | 'ready' | 'blocked' | 'error'>('idle');
   const [message, setMessage] = useState('Choose two supported entities. Only scientifically compatible definitions are compared.');
   const request = useRef<AbortController | null>(null);
+  const resultRef = useRef<HTMLDivElement>(null);
 
   async function runComparison() {
     if (!choiceA || !choiceB) { setState('blocked'); setMessage('Choose both entity A and entity B before comparing.'); return; }
@@ -95,6 +96,7 @@ export function CompareMode({ onFocus }: { onFocus: (a: SearchRecord, b: SearchR
       setEntities([a, b]); setResult(comparison); onFocus(choiceA, choiceB);
       if (comparison.state === 'blocked') { setState('blocked'); setMessage(comparison.reason ?? 'Comparison blocked.'); }
       else { setState('ready'); setMessage('Compatible source metrics are shown side by side. No better/worse ranking is calculated.'); }
+      requestAnimationFrame(() => resultRef.current?.focus());
     } catch (error) {
       if (!controller.signal.aborted) { setState('error'); setMessage(error instanceof Error ? error.message : 'Comparison source unavailable.'); }
     }
@@ -107,12 +109,12 @@ export function CompareMode({ onFocus }: { onFocus: (a: SearchRecord, b: SearchR
     <div className="compare-pickers"><SearchPicker side="A" value={choiceA} onChange={setChoiceA} /><SearchPicker side="B" value={choiceB} onChange={setChoiceB} /></div>
     <button type="button" disabled={state === 'loading'} onClick={() => void runComparison()}>Compare selected</button>
     <p className={state === 'error' || state === 'blocked' ? 'data-state error' : 'muted'} aria-live="polite">{message}</p>
-    {entities && <>
+    {entities && <div ref={resultRef} tabIndex={-1} className="compare-results" aria-label="Comparison results">
       {result?.state === 'ready' ? <table className="compare-table"><caption>Scientifically compatible metrics</caption><thead><tr><th scope="col">Metric</th><th scope="col">A · {entities[0].label}</th><th scope="col">B · {entities[1].label}</th><th scope="col">Compatibility</th></tr></thead><tbody>
         {result.rows.map(row => <tr key={row.key}><th scope="row">{row.label}</th><td>{formatCompareValue(row.a, row.unit_a)}{row.basis_a ? <span className="compare-basis">{row.basis_a}</span> : null}</td><td>{formatCompareValue(row.b, row.unit_b)}{row.basis_b ? <span className="compare-basis">{row.basis_b}</span> : null}</td><td>{row.state === 'comparable' ? 'Comparable definition' : row.state === 'unavailable' ? `UNAVAILABLE — ${row.reason}` : `NOT COMPARABLE — ${row.reason}`}</td></tr>)}
       </tbody></table> : null}
       <ProvenanceTable a={entities[0]} b={entities[1]} />
-    </>}
+    </div>}
     <p className="muted">The table never ranks entities. Reported, derived, estimated or modelled bases remain labelled. Unsupported values stay UNKNOWN or NOT COMPARABLE rather than being converted or guessed.</p>
   </section>;
 }

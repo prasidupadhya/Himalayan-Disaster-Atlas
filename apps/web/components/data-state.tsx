@@ -8,7 +8,7 @@ export function DataState({ state, retry }: { state: Resource<unknown>; retry?: 
     error: 'The dataset could not be validated.',
     unavailable: 'The dataset is currently unavailable.',
   };
-  return <div className={`data-state ${state.status}`} role={state.status === 'error' ? 'alert' : 'status'}>
+  return <div className={`data-state ${state.status}`} role={state.status === 'error' ? 'alert' : 'status'} aria-live={state.status === 'error' ? 'assertive' : 'polite'} aria-atomic="true">
     <p>{messages[state.status]}</p>
     {'message' in state && <p>{state.message}</p>}
     {retry && (state.status === 'error' || state.status === 'unavailable') && <button onClick={retry}>Try again</button>}

@@ -6,10 +6,10 @@ export const metadata = { title: 'Data catalog' };
 
 export default function CatalogPage() {
   const catalog = parseProvenanceCatalog(catalogJson);
-  return <main className="page catalog-page">
+  return <div className="page catalog-page">
     <p className="eyebrow">Data catalog</p>
     <h1>Know exactly what powers the atlas.</h1>
     <p className="intro">Search the versioned release inventory, inspect lineage and limitations, and follow each record to its map, methodology and originating source.</p>
     <DataCatalog records={catalog.records} />
-  </main>;
+  </div>;
 }

@@ -262,7 +262,9 @@ export function Atlas() {
     </aside>
     <div className="map-column">
       <div className="map-shell" id="atlas-map">
-        <div ref={container} className="map" role="region" aria-label="Interactive Nepal administrative boundary map" data-map-ready={mapReady} />
+        <a className="map-skip-link" href="#accessible-boundary-records">Skip interactive map to boundary records</a>
+        <p id="atlas-map-alternative" className="sr-only">The map is a visual navigation surface. Administrative boundaries can also be identified with the labelled boundary selector and textual details immediately after the map. The Atlas panel contains labelled controls and evidence text for thematic layers.</p>
+        <div ref={container} className="map" role="region" aria-label="Interactive Nepal administrative boundary map" aria-describedby="atlas-map-alternative" data-map-ready={mapReady} />
         <div className="map-caption"><span className="boundary-key" /> {temporal ? `Time Machine · ${temporal.date} UTC · unavailable observations hidden` : 'COD-AB v02 · click a boundary to inspect it'}</div>
         {datasets && !mapReady && !mapError && <div className="map-message" role="status">Preparing the interactive map…</div>}
         {mapError && <div className="map-message" role="alert">{mapError}</div>}
@@ -272,7 +274,7 @@ export function Atlas() {
           }
         }}>Reset view</button>
       </div>
-      <section className="feature-list" aria-label="Accessible boundary records">
+      <section className="feature-list" id="accessible-boundary-records" tabIndex={-1} aria-label="Accessible boundary records">
         <h2>Identify an administrative unit</h2>
         <p className="muted">The searchable list provides the same identification as clicking the map.</p>
         <label className="record-picker">Boundary record<select value={selected ?? ''} onChange={event => selectFeature(event.target.value)} disabled={!datasets}>
