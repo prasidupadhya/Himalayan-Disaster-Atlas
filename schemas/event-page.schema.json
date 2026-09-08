@@ -1,0 +1,124 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.invalid/schemas/event-page.schema.json",
+  "title": "Himalayan Disaster Atlas event page",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "event_id", "dataset_id", "dataset_version", "title", "date",
+    "location", "hazard", "description", "impacts", "timeline", "sources", "uncertainty",
+    "related_datasets", "verification"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "event_id": { "type": "string", "minLength": 1 },
+    "dataset_id": { "type": "string", "pattern": "^nepal-disaster-events-" },
+    "dataset_version": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "title": { "type": "string", "minLength": 1 },
+    "date": { "type": "string", "format": "date-time" },
+    "location": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "longitude", "latitude", "relationship", "source_path"],
+      "properties": {
+        "label": { "type": ["string", "null"] },
+        "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
+        "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+        "relationship": { "const": "reported incident point" },
+        "source_path": { "type": "string", "minLength": 1 }
+      }
+    },
+    "hazard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "source_path"],
+      "properties": {
+        "value": { "type": "string", "minLength": 1 },
+        "source_path": { "type": "string", "minLength": 1 }
+      }
+    },
+    "description": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "source_path"],
+      "properties": {
+        "value": { "type": ["string", "null"] },
+        "source_path": { "type": "string", "minLength": 1 }
+      }
+    },
+    "impacts": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "value", "unit", "source_path"],
+        "properties": {
+          "kind": { "enum": ["deaths", "injured", "missing", "affected", "estimated_loss"] },
+          "value": { "type": ["number", "null"], "minimum": 0 },
+          "unit": { "enum": ["person", "NPR"] },
+          "source_path": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "timeline": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "time", "source_path"],
+        "properties": {
+          "label": { "enum": ["Incident time", "Reported time"] },
+          "time": { "type": "string", "format": "date-time" },
+          "source_path": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "dataset_id", "dataset_version", "manifest_path", "source_url"],
+        "properties": {
+          "label": { "type": "string", "minLength": 1 },
+          "dataset_id": { "type": "string", "minLength": 1 },
+          "dataset_version": { "type": "string", "minLength": 1 },
+          "manifest_path": { "type": "string", "pattern": "^/data/" },
+          "source_url": { "type": ["string", "null"], "format": "uri" }
+        }
+      }
+    },
+    "uncertainty": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "related_datasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "href", "relationship"],
+        "properties": {
+          "label": { "type": "string", "minLength": 1 },
+          "href": { "type": "string", "pattern": "^/" },
+          "relationship": { "const": "context only — not asserted as causally related" }
+        }
+      }
+    },
+    "verification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verified", "approved"],
+      "properties": {
+        "verified": { "type": "boolean" },
+        "approved": { "type": "boolean" }
+      }
+    }
+  }
+}
