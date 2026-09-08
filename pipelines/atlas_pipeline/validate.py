@@ -7,6 +7,7 @@ from .contracts import ROOT, verify_artifact
 from .exposure_contracts import verify_exposure
 from .hazard_graph import verify_hazard_graph
 from .population_contracts import verify_population
+from .provenance import verify_provenance
 from .rag import verify_rag
 from .satellite_contracts import verify_satellite
 from .scenarios import verify_scenario
@@ -22,6 +23,10 @@ def main():
         raise ValueError('No release manifests found')
     for path in releases:
         metadata = json.loads(path.read_text())
+        if metadata.get('kind') == 'provenance-catalog':
+            verify_provenance(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
+            print('Valid: atlas-provenance@1.0.0')
+            continue
         if metadata.get('kind') == 'evidence-release':
             verify_rag(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
             print('Valid: atlas-evidence@' + metadata['version'])

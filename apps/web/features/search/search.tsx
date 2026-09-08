@@ -18,6 +18,7 @@ export function Search({ onFocus }: { onFocus: (record: SearchRecord) => void })
   const [selected, setSelected] = useState<SearchRecord | null>(null);
   const [message, setMessage] = useState('Search by verified name, alias, stable ID, type, or indexed source text.');
   const request = useRef<AbortController | null>(null);
+  const selectionRef = useRef<HTMLDivElement>(null);
   const groups = Array.from(new Set(results.map(item => item.type)));
 
   async function submit() {
@@ -43,6 +44,7 @@ export function Search({ onFocus }: { onFocus: (record: SearchRecord) => void })
   function choose(record: SearchRecord) {
     setSelected(record);
     onFocus(record);
+    requestAnimationFrame(() => selectionRef.current?.focus());
   }
 
   return <section id="global-search" className="thematic-controls global-search" aria-label="Global Search" data-search-state={state}>
@@ -63,7 +65,7 @@ export function Search({ onFocus }: { onFocus: (record: SearchRecord) => void })
         {record.detail_href ? <Link href={record.detail_href}>Open detailed event page</Link> : null}
       </li>)}</ul>
     </section>)}
-    {selected && <div className="selection" aria-live="polite">
+    {selected && <div ref={selectionRef} tabIndex={-1} className="selection" aria-live="polite">
       <p className="eyebrow">{selected.type.replace('_', ' ')}</p><h3>{selected.name}</h3>
       {hasAmbiguousName(results, selected) ? <p><strong>Ambiguous name:</strong> another indexed entity has this canonical name. The type, context and stable identity below distinguish this selection.</p> : null}
       <dl><dt>Context</dt><dd>{selected.context}</dd><dt>Stable ID</dt><dd>{selected.source_id}</dd><dt>Dataset</dt><dd>{selected.dataset_id}@{selected.dataset_version}</dd><dt>Source date</dt><dd>{selected.date ?? 'UNKNOWN'}</dd><dt>Coordinates</dt><dd>{selected.latitude.toFixed(5)}, {selected.longitude.toFixed(5)}</dd></dl>

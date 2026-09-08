@@ -297,3 +297,15 @@ Simulation UI adds the interactive Feature 29 workbench over those verified scen
 Evidence-grounded RAG provides a versioned project-document corpus, deterministic retrieval, metadata filters and exact citations with conservative grounding checks. Preview `/evidence/`; see [feature 30](docs/rag.md) and `npm run data:rag`. Conversational AI generation remains a separate feature.
 
 AI Analyst adds an explicit local evidence mode for supported methodology questions, downstream traces by exact HYRIV ID and registered scenario summaries. Answers preserve citations, model/data versions and UNKNOWN values. Preview `/analyst/`; see [feature 31](docs/ai-analyst.md). No external language model is connected.
+
+Provenance is now a first-class release contract. `atlas-provenance@1.0.0` is generated from every checked-in release manifest, marks superseded/fixture records explicitly, carries source/licence/date/resolution/coverage/uncertainty fields, and records parent releases for derived products where the underlying contracts expose them. Map Evidence panels surface the same lineage in context. See [feature 32](docs/provenance.md) and `npm run data:provenance`.
+
+The public `/data-catalog/` is backed by that provenance registry rather than duplicated hand-written metadata. It supports text/category/source filtering, current-versus-superseded visibility, detailed artifacts/checksums, parent inputs, processing steps, limitations and direct Atlas/Methodology/Sources navigation.
+
+The `/methodology/` page documents the actual offline pipeline, CRS/analysis choices, raster/vector processing, simplification/tiling boundaries, evidence terminology and all implemented analysis/model families. Stable section anchors are tested against every current production catalog record. See [feature 34 maintenance rules](docs/methodology.md).
+
+The `/sources/` directory is also provenance-backed. It groups official/acquisition providers by domain, shows access dates, licences, attribution, limitations and the exact datasets that use each source, while keeping Atlas-derived products distinct from upstream evidence. See [feature 35 source conventions](docs/sources.md).
+
+Mobile delivery keeps the core map/search/analysis controls usable at phone sizes while deferring larger auto-loaded thematic datasets behind an explicit mobile opt-in. Touch controls, portrait/landscape map sizing and responsive scientific tables/pages are covered by touch-enabled browser tests. See [feature 36](docs/mobile.md).
+
+Accessibility is enforced as a scientific-delivery requirement: one main landmark, skip links, labelled native controls, keyboard focus after dynamic results, non-map map alternatives, full climate-chart text, semantic table captions, explicit non-color evidence labels, contrast modes and automated structural/keyboard browser audits. See [feature 37](docs/accessibility.md).

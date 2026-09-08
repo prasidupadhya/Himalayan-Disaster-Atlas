@@ -115,3 +115,15 @@ Feature 30 ingests only hash-pinned, allowlisted project documents offline. Shar
 ## AI Analyst
 
 Feature 31 composes a static question interface, the approved RAG corpus and allowlisted river/scenario loaders. Whole-question planning and exact identity checks prevent silent entity substitution. Shared contracts produce cited source statements, deterministic network calculations and labelled modelled outputs; missing or conflicting evidence prevents unsupported conclusions. Requests are cancellable, answers stay in memory, and no provider credential or runtime AI dependency is introduced. See [analyst scope and grounding](../ai-analyst.md).
+
+## Provenance and public research documentation
+
+Features 32–35 share one generated provenance spine instead of maintaining separate copies of source metadata. `pipelines/atlas_pipeline/provenance.py` enumerates every release manifest, normalizes source/licence/dates/resolution/coverage/processing/uncertainty/evidence fields, marks superseded and fixture versions, and captures exact parent releases for derived contracts where available. Root validation regenerates the catalog and requires exact coverage of the release inventory. The same static registry drives Data Catalog and Sources, while per-record methodology/source anchors are checked against public pages. See [provenance conventions](../provenance.md), [methodology maintenance](../methodology.md), and [source-directory conventions](../sources.md).
+
+## Mobile delivery
+
+Feature 36 keeps the desktop component architecture but adds a phone-width delivery gate before the larger automatically loaded thematic bundle. The administrative map, explicit-search and opt-in research tools remain available first; opting in mounts the same full desktop components and verified artifacts. Responsive CSS moves the bounded map before the long panel on phone layouts, enlarges touch controls, preserves semantic tables through horizontal scrolling and handles short landscape viewports. See [mobile interaction/data rules](../mobile.md).
+
+## Accessibility
+
+Feature 37 treats non-visual access as part of correctness. Root landmarks and skip targets are explicit; the map points to an equivalent textual boundary workflow; dynamic Search/Catalog/Compare/Simulation results receive focus only after user actions; statuses are live/atomic; climate SVG output has a complete textual series; evidence status is always textual; and high-contrast/forced-colors modes retain structural borders. Playwright performs cross-route structural and keyboard audits in addition to feature E2E. See [accessibility contract](../accessibility.md).

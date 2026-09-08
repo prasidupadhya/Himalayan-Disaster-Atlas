@@ -19,7 +19,10 @@ function Chart({ values, unit, variable, focus }: { focus: number; values: numbe
   const scaleX = (index: number) => padding + index * ((width - padding * 2) / 11);
   const scaleY = (value: number) => height - padding - ((value - min) / Math.max(max - min, .001)) * (height - padding * 2);
   const points = values.map((value, index) => `${scaleX(index)},${scaleY(value)}`).join(' ');
-  return <svg className="climate-chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-label={`Monthly ${variable} chart in ${unit}`}>
+  const summary = values.map((value, index) => `${MONTHS[index]} ${value.toFixed(variable === 'temperature' ? 1 : 2)} ${unit}`).join('; ');
+  return <svg className="climate-chart" viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby="climate-chart-title climate-chart-description">
+    <title id="climate-chart-title">Monthly {variable} chart in {unit}</title>
+    <desc id="climate-chart-description">{summary}</desc>
     <line x1={padding} y1={height - padding} x2={width - padding} y2={height - padding} />
     <polyline points={points} fill="none" stroke="currentColor" strokeWidth="2" />
     {values.map((value, index) => <circle key={index} cx={scaleX(index)} cy={scaleY(value)} r={index + 1 === focus ? 5 : 2.5}><title>{MONTHS[index]}: {value.toFixed(variable === 'temperature' ? 1 : 2)} {unit}</title></circle>)}
