@@ -59,3 +59,52 @@ export function filterProvenanceRecords(records: ProvenanceRecord[], filters: Pr
     return haystack.includes(query);
   }).sort((a, b) => a.category.localeCompare(b.category, 'en') || a.title.localeCompare(b.title, 'en') || b.version.localeCompare(a.version, 'en'));
 }
+
+export interface SourceDirectoryEntry {
+  key: string;
+  name: string;
+  url: string | null;
+  license: string;
+  license_url: string | null;
+  attributions: string[];
+  categories: ProvenanceCategory[];
+  access_dates: string[];
+  datasets: Array<{ id: string; version: string; title: string; state: ProvenanceRecord['state']; catalog_href: string }>;
+  limitations: string[];
+  derived: boolean;
+}
+
+export function buildSourceDirectory(records: ProvenanceRecord[]): SourceDirectoryEntry[] {
+  const current = records.filter(record => record.state === 'current' && !record.is_fixture);
+  const groups = new Map<string, SourceDirectoryEntry>();
+  for (const record of current) {
+    const key = `${record.source}\u0000${record.source_url ?? ''}\u0000${record.license}`;
+    const entry = groups.get(key) ?? {
+      key,
+      name: record.source,
+      url: record.source_url,
+      license: record.license,
+      license_url: record.license_url,
+      attributions: [],
+      categories: [],
+      access_dates: [],
+      datasets: [],
+      limitations: [],
+      derived: record.source === 'Himalayan Disaster Atlas derived product',
+    };
+    if (!entry.attributions.includes(record.attribution)) entry.attributions.push(record.attribution);
+    if (!entry.categories.includes(record.category)) entry.categories.push(record.category);
+    if (record.access_date && !entry.access_dates.includes(record.access_date)) entry.access_dates.push(record.access_date);
+    entry.datasets.push({ id: record.id, version: record.version, title: record.title, state: record.state, catalog_href: `/data-catalog/?dataset=${encodeURIComponent(record.id)}&version=${encodeURIComponent(record.version)}` });
+    for (const limitation of record.limitations) if (!entry.limitations.includes(limitation)) entry.limitations.push(limitation);
+    groups.set(key, entry);
+  }
+  return [...groups.values()].map(entry => ({
+    ...entry,
+    attributions: entry.attributions.sort(),
+    categories: entry.categories.sort(),
+    access_dates: entry.access_dates.sort(),
+    datasets: entry.datasets.sort((a, b) => a.title.localeCompare(b.title, 'en') || a.id.localeCompare(b.id, 'en')),
+    limitations: entry.limitations.slice(0, 8),
+  })).sort((a, b) => Number(a.derived) - Number(b.derived) || a.name.localeCompare(b.name, 'en'));
+}
