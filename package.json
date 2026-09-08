@@ -45,7 +45,8 @@
     "data:time-machine": ".venv/bin/python -m pipelines.atlas_pipeline.time_machine",
     "data:search": ".venv/bin/python -m pipelines.atlas_pipeline.search",
     "data:hazard-graph": ".venv/bin/python -m pipelines.atlas_pipeline.hazard_graph",
-    "data:scenarios": ".venv/bin/python -m pipelines.atlas_pipeline.scenarios"
+    "data:scenarios": ".venv/bin/python -m pipelines.atlas_pipeline.scenarios",
+    "data:rag": ".venv/bin/python -m pipelines.atlas_pipeline.rag"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

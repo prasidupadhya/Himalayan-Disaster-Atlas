@@ -293,3 +293,5 @@ Hazard Graph exposes source-backed drainage and hypothetical exposure relationsh
 Scenario Engine publishes reproducible Level 1 network paths and Level 2 hypothetical constant-celerity pulse translations. These are educational approximations, not hydraulic forecasts. See [feature 28](docs/scenario-engine.md) and `npm run data:scenarios`.
 
 Simulation UI adds the interactive Feature 29 workbench over those verified scenario inputs: explicit Level 1/2 selection, bounded Level 2 parameter controls, pre-run assumptions, deterministic browser recomputation, compatible-run comparison, map/perspective presentation and complete model/data provenance. It never creates a hydraulic footprint or exposure estimate when the validated model does not provide one. See [feature 29](docs/simulation-ui.md).
+
+Evidence-grounded RAG provides a versioned project-document corpus, deterministic retrieval, metadata filters and exact citations with conservative grounding checks. Preview `/evidence/`; see [feature 30](docs/rag.md) and `npm run data:rag`. Conversational AI generation remains a separate feature.

@@ -185,3 +185,5 @@ export { buildEventPage, eventSourcePath, parseEventPage } from './event-page';
 export { normalizeSearchTerm, parseSearchManifest, parseSearchShard, searchRecords } from './search';
 export { compareEntities, formatCompareValue } from './compare';
 export { compareInteractiveSimulations, controlsForLevel, runInteractiveSimulation, simulationAssumptions, validateSimulationControls } from './simulation-ui';
+
+export * from './rag';

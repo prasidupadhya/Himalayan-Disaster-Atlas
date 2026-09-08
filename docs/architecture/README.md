@@ -107,3 +107,7 @@ Level 0 versioned definitions and a shared assumption registry gate offline Leve
 ## Simulation UI
 
 Feature 29 adds a static-safe workbench on top of the verified Scenario Engine. Shared TypeScript rules mirror the request-schema parameter limits and reuse the versioned assumption registry. The browser first verifies both registered Feature 28 releases, then may recompute only the same Level 1/2 deterministic network equations over their common source pathway. Interactive runs keep a deterministic fingerprint, model/data provenance, explicit modelled evidence class and null unsupported physical outputs. Compatible-run comparison requires identical level/model/version/source basis. No API route, server process, third-party runtime call or unregistered physical adapter is introduced. See [Simulation UI semantics and failure rules](../simulation-ui.md).
+
+## Evidence-grounded RAG
+
+Feature 30 ingests only hash-pinned, allowlisted project documents offline. Shared Python/TypeScript contracts preserve exact source lines, versions, dates and dataset provenance. The static evidence inspector verifies a bounded corpus before lexical retrieval; conflict groups, outdated sources, missing evidence and unverified inference remain explicit. No model or provider secret enters the browser. See [RAG corpus, ranking and grounding boundary](../rag.md).
