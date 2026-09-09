@@ -131,3 +131,7 @@ Feature 37 treats non-visual access as part of correctness. Root landmarks and s
 ## Performance
 
 Feature 38 uses an explicit optional-layer boundary on desktop and mobile, lazy schema compilation, a serial cancellable vector-validation worker and an 8 MiB verified terrain-byte cache. Existing immutable artifacts and scientific checks are unchanged. Map rasterization/tile retention and transient decode queues have explicit limits. See [performance measurements, budgets and compatibility limits](../performance.md).
+
+## CI/CD
+
+Feature 39 runs the root validation/build and complete static browser suite in a secret-free, read-only pull-request workflow. Tested artifacts are keyed by commit, with deployment kept behind successful checks. See [CI prerequisites and failure handling](../ci-cd.md).
