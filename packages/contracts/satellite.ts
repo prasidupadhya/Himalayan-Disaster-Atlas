@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import schema from '../../schemas/satellite.schema.json';
@@ -18,7 +19,7 @@ export interface SatelliteManifest {
   observations: SatelliteObservation[];
 }
 const ajv = new Ajv({ allErrors: true, strict: true }); addFormats(ajv);
-const validate = ajv.compile<SatelliteManifest>(schema);
+const validate = lazyValidator(() => ajv.compile<SatelliteManifest>(schema));
 export function parseSatelliteManifest(input: unknown): SatelliteManifest {
   if (!validate(input)) throw new Error(`Invalid satellite manifest: ${ajv.errorsText(validate.errors)}`);
   const manifest = input as SatelliteManifest;

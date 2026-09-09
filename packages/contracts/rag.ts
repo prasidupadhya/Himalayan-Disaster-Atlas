@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import schema from '../../schemas/rag.schema.json';
@@ -19,7 +20,7 @@ export interface EvidenceCorpus {
   documents: EvidenceDocument[]; chunks: EvidenceChunk[];
 }
 const ajv = new Ajv({ allErrors: true, strict: true }); addFormats(ajv);
-const validate = ajv.compile<EvidenceCorpus>(schema);
+const validate = lazyValidator(() => ajv.compile<EvidenceCorpus>(schema));
 export function parseEvidenceCorpus(value: unknown): EvidenceCorpus {
   if (!validate(value)) throw new Error(`Invalid evidence corpus: ${ajv.errorsText(validate.errors)}`);
   const docs = new Map(value.documents.map(d => [d.id, d]));

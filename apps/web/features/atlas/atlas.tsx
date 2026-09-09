@@ -1,4 +1,5 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { Map, Marker } from 'maplibre-gl';
 import { isStale, type Dataset } from '../../../../packages/contracts';
@@ -8,32 +9,20 @@ import { ADMIN_MANIFESTS, loadDataset, UnavailableError } from '../../lib/datase
 import { mountAdministrativeDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
 import { Terrain } from '../terrain/terrain';
-import { Mountains } from '../mountains/mountains';
 import { Rivers } from '../rivers/rivers';
-import { Glaciers } from '../glaciers/glaciers';
-import { GlacialLakes } from '../glacial-lakes/glacial-lakes';
-import { Hydrology } from '../hydrology/hydrology';
-import { Rainfall } from '../rainfall/rainfall';
-import { DisasterEvents } from '../disaster-events/disaster-events';
-import { Earthquakes } from '../earthquakes/earthquakes';
-import { Floods } from '../floods/floods';
-import { Landslides } from '../landslides/landslides';
-import { Hydropower } from '../hydropower/hydropower';
-import { Infrastructure } from '../infrastructure/infrastructure';
-import { Population } from '../population/population';
 import { ExposureEngine } from '../exposure-engine/exposure-engine';
-import { Satellite } from '../satellite/satellite';
 import { ScenarioEngine } from '../scenario-engine/scenario-engine';
 import { SimulationUI } from '../simulation-ui/simulation-ui';
 import { HazardGraph } from '../hazard-graph/hazard-graph';
 import { TimeMachine } from '../time-machine/time-machine';
 import type { TemporalSelection } from '../../../../packages/contracts/temporal';
 import { WaterChange } from '../water-change/water-change';
-import { Climate } from '../climate/climate';
 import { LocationExplorer } from '../location-explorer/location-explorer';
 import { Search } from '../search/search';
 import type { SearchRecord } from '../../../../packages/contracts/search';
 import { CompareMode } from '../compare-mode/compare-mode';
+
+const AdditionalLayers = dynamic(() => import('./additional-layers').then(m => m.AdditionalLayers), { loading: () => <p role="status">Loading additional layer controls…</p> });
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -57,19 +46,7 @@ export function Atlas() {
   const [selected, setSelected] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   const [temporal, setTemporal] = useState<TemporalSelection | null>(null);
-  const [mobileMode, setMobileMode] = useState<'checking' | 'mobile' | 'desktop'>('checking');
   const [additionalLayers, setAdditionalLayers] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia('(max-width: 800px)');
-    const update = () => {
-      if (media.matches) setMobileMode('mobile');
-      else { setMobileMode('desktop'); setAdditionalLayers(true); }
-    };
-    update();
-    media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -95,6 +72,9 @@ export function Atlas() {
             // Broad Asia bounds cap zoom-out/panning without squeezing the Nepal view.
             maxBounds: [[30, -15], [165, 65]],
             renderWorldCopies: false,
+            maxTileCacheSize: 64,
+            // Cap display rasterization cost; source samples and map coordinates are unchanged.
+            pixelRatio: Math.min(window.devicePixelRatio || 1, 1.5),
           });
           mapRef.current = map;
           const limitAsiaView = () => {
@@ -237,27 +217,13 @@ export function Atlas() {
       <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
       <Rivers key={`rivers-${attempt}`} map={mapReady ? mapRef.current : null} />
       <ExposureEngine key={`exposure-${attempt}`} map={mapReady ? mapRef.current : null} />
-      {mobileMode !== 'desktop' && !additionalLayers && <section className="thematic-controls mobile-data-gate" aria-label="Mobile data loading" data-mobile-data="deferred">
+      {!additionalLayers && <section className="thematic-controls mobile-data-gate" aria-label="Additional data loading" data-mobile-data="deferred">
         <h2>Additional map datasets</h2>
-        <p>To reduce automatic downloads on a phone, larger secondary thematic datasets are deferred. Mountains, glaciers, lakes, stations, hazards, infrastructure, population, satellite and climate remain available with their full scientific labels and provenance. Rivers/downstream tracing and Exposure remain loaded as core analytical workflows.</p>
+        <p>To keep the core map responsive, larger secondary thematic datasets are deferred. Mountains, glaciers, lakes, stations, hazards, infrastructure, population, satellite and climate remain available with their full scientific labels and provenance. Rivers/downstream tracing and Exposure remain loaded as core analytical workflows.</p>
         <button type="button" onClick={() => setAdditionalLayers(true)}>Load additional map datasets</button>
       </section>}
-      {additionalLayers && <div data-mobile-data="loaded">
-        <Mountains key={`mountains-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Glaciers key={`glaciers-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <GlacialLakes key={`glacial-lakes-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Hydrology key={`hydrology-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Rainfall key={`rainfall-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <DisasterEvents temporal={temporal} key={`disaster-events-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Earthquakes key={`earthquakes-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Floods key={`floods-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Landslides key={`landslides-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Hydropower key={`hydropower-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Population key={`population-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Satellite temporal={temporal} key={`satellite-${attempt}`} map={mapReady ? mapRef.current : null} />
-        <Climate temporal={temporal} key={`climate-${attempt}`} />
-      </div>}
+      {additionalLayers && <button type="button" onClick={() => setAdditionalLayers(false)}>Unload additional map datasets</button>}
+      {additionalLayers && <AdditionalLayers attempt={attempt} temporal={temporal} map={mapReady ? mapRef.current : null} />}
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">

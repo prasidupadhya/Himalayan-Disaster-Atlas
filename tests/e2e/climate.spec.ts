@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('climate keeps reanalysis type, units and monthly precision visible', async ({ page }) => {
   const external: string[] = [];
   page.on('request', request => { if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('blob:')) external.push(request.url()); });
-  await page.goto('/atlas/');
+  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const section = page.getByRole('region', { name: 'Climate', exact: true });
   await expect(section).toHaveAttribute('data-climate-state', 'ready');
   await expect(section).toContainText('MERRA-2 reanalysis-derived');

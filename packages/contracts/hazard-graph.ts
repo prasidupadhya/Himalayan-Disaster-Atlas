@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import schema from '../../schemas/hazard-graph.schema.json';
 export type GraphNodeType = 'glacier' | 'lake' | 'river' | 'hazard' | 'infrastructure' | 'population_area' | 'event' | 'scenario' | 'exposure';
@@ -16,7 +17,7 @@ export const RELATIONS: Record<Relation, { from: GraphNodeType[]; to: GraphNodeT
   footprint_intersection: { from: ['exposure'], to: ['infrastructure', 'population_area'], meaning: 'Mapped record intersects an assumed footprint; not confirmed impact.' },
 };
 const ajv = new Ajv({ allErrors: true, strict: true });
-const validate = ajv.compile<HazardGraph>(schema);
+const validate = lazyValidator(() => ajv.compile<HazardGraph>(schema));
 export function parseHazardGraph(input: unknown): HazardGraph {
   if (!validate(input)) throw new Error(`Invalid hazard graph: ${ajv.errorsText(validate.errors)}`);
   const nodes = new Map(input.nodes.map(n => [n.id, n]));

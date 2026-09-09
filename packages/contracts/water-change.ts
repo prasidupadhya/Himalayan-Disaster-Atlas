@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import schema from '../../schemas/water-change.schema.json';
@@ -20,7 +21,7 @@ export interface WaterManifest {
 }
 const ajv = new Ajv({ allErrors: true, strict: true });
 addFormats(ajv);
-const validate = ajv.compile<WaterManifest>(schema);
+const validate = lazyValidator(() => ajv.compile<WaterManifest>(schema));
 export function parseWaterManifest(input: unknown): WaterManifest {
   if (!validate(input)) throw new Error(`Invalid water manifest: ${ajv.errorsText(validate.errors)}`);
   const ids = input.observations.map(o => o.id);

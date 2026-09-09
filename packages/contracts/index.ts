@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import type { FeatureCollection, Geometry } from 'geojson';
@@ -57,11 +58,15 @@ export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'Geome
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
 const ajv = new Ajv({ allErrors: true, strict: true });
 addFormats(ajv);
-const validate = ajv.compile<Dataset>(schema);
+const validate = lazyValidator(() => ajv.compile<Dataset>(schema));
 
-function coordinates(value: unknown): number[][] {
+function outsideCoverage(value: unknown, west: number, south: number, east: number, north: number): boolean {
   const items = value as unknown[];
-  return typeof items[0] === 'number' ? [items as number[]] : items.flatMap(coordinates);
+  if (typeof items[0] === 'number') {
+    const [lon, lat] = items as number[];
+    return lon < west || lon > east || lat < south || lat > north;
+  }
+  return items.some(item => outsideCoverage(item, west, south, east, north));
 }
 
 /** Browser safety checks complement the full offline Shapely topology gate. */
@@ -164,7 +169,7 @@ export function parseDataset(input: unknown): Dataset {
       if (p.infrastructure_class === 'road' ? !['LineString', 'MultiLineString'].includes(f.geometry.type) : f.geometry.type !== 'Point') throw new Error('Infrastructure geometry does not match its class');
       if (p.value !== null || p.unit !== null) throw new Error('Infrastructure inventory features are not measurements');
     }
-    if (coordinates(f.geometry.coordinates).some(([lon, lat]) => lon < west || lon > east || lat < south || lat > north)) throw new Error('Geometry outside coverage');
+    if (outsideCoverage(f.geometry.coordinates, west, south, east, north)) throw new Error('Geometry outside coverage');
     const rings = f.geometry.type === 'Polygon' ? f.geometry.coordinates : f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates.flat() : [];
     if (rings.some(r => r[0][0] !== r.at(-1)![0] || r[0][1] !== r.at(-1)![1])) throw new Error('Unclosed polygon');
     if (f.geometry.type === 'LineString' && new Set(f.geometry.coordinates.map(p => p.join(','))).size < 2) throw new Error('Degenerate line');

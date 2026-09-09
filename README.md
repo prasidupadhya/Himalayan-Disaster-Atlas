@@ -309,3 +309,5 @@ The `/sources/` directory is also provenance-backed. It groups official/acquisit
 Mobile delivery keeps the core map/search/analysis controls usable at phone sizes while deferring larger auto-loaded thematic datasets behind an explicit mobile opt-in. Touch controls, portrait/landscape map sizing and responsive scientific tables/pages are covered by touch-enabled browser tests. See [feature 36](docs/mobile.md).
 
 Accessibility is enforced as a scientific-delivery requirement: one main landmark, skip links, labelled native controls, keyboard focus after dynamic results, non-map map alternatives, full climate-chart text, semantic table captions, explicit non-color evidence labels, contrast modes and automated structural/keyboard browser audits. See [feature 37](docs/accessibility.md).
+
+Performance architecture defers secondary datasets on every screen, validates vector artifacts in a bounded worker and reuses checksum-verified terrain bytes. See [feature 38 budgets and profiling](docs/performance.md); use `npm run profile:performance` with a local production preview.
