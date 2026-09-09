@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test('terrain renders locally, toggles and inspects elevation independently of exaggeration', async ({ page }) => {
+test('terrain renders locally, toggles and inspects elevation independently of exaggeration', async ({ page, baseURL }) => {
   const errors: string[] = [];
   const tiles: string[] = [];
   const external: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('request', request => {
     if (request.url().includes('/nepal-terrain/') && request.url().endsWith('.png')) tiles.push(request.url());
-    if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('blob:')) external.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url());
   });
   await page.goto('/atlas/');
   const terrain = page.getByRole('region', { name: 'Terrain', exact: true });

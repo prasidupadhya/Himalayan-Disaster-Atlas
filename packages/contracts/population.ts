@@ -1,8 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import commonSchema from '../../schemas/dataset.schema.json';
-import schema from '../../schemas/population.schema.json';
+import validateGenerated from './generated/population.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 import type { Metadata } from './index';
 
 export interface PopulationManifest {
@@ -18,10 +16,7 @@ export interface PopulationManifest {
 }
 export type PopulationIndex = Record<string, { sha256: string; byte_size: number }>;
 
-const ajv = new Ajv({ allErrors: true, strict: true });
-addFormats(ajv);
-ajv.addSchema(commonSchema);
-const validate = lazyValidator(() => ajv.compile<PopulationManifest>(schema));
+const validate = compiledValidator<PopulationManifest>(validateGenerated);
 
 function tileRange(bbox: [number, number, number, number], z: number) {
   const [west, south, east, north] = bbox;
@@ -32,7 +27,7 @@ function tileRange(bbox: [number, number, number, number], z: number) {
 }
 
 export function parsePopulationManifest(input: unknown): PopulationManifest {
-  if (!validate(input)) throw new Error(`Invalid population manifest: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(input)) throw new Error(`Invalid population manifest: ${validationErrors(validate.errors)}`);
   const m = input.metadata;
   if (m.dataset_id !== 'nepal-population' || m.dataset_version !== '1.0.0') throw new Error('Population identity mismatch');
   if (Date.parse(m.processing_date) < Date.parse(m.retrieval_date)) throw new Error('Population processing precedes retrieval');

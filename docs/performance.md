@@ -69,3 +69,5 @@ Full Nepal vector exposure is benchmarked separately against the published asset
 ## Correctness and regression checks
 
 `npm run check` retains all security and immutable-release checks. Unit tests cover lazy-validator errors, byte-cache eviction/copy isolation, shared cancellation, failed/cancelled fetches, full Nepal input immutability and repeated exact trace results. Browser tests cover the core request budget, optional loading/disposal, raster-byte reuse, elevation invariance, corruption handling, no-WebGL fallback, mobile/accessibility and the existing thematic/analytical workflows. Thematic tests explicitly opt into the new gate before inspecting their original scientific assertions.
+
+Feature 41 production follow-up: browser schema compilation has been replaced by AJV standalone code generated offline to support CSP without `unsafe-eval`. This supersedes the runtime lazy-compilation portion above; opt-in datasets, worker queue, cache bounds and immutable scientific data remain unchanged. The measurements above describe feature 38's original implementation; production verification records follow-up measurements separately.

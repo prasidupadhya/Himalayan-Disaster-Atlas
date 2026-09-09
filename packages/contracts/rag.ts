@@ -1,7 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import schema from '../../schemas/rag.schema.json';
+import validateGenerated from './generated/rag.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 
 export interface EvidenceDocument {
   id: string; title: string; source_id: string; version: string; text: string;
@@ -19,10 +18,9 @@ export interface EvidenceCorpus {
   schema_version: '1.0.0'; kind: 'evidence-corpus'; version: string;
   documents: EvidenceDocument[]; chunks: EvidenceChunk[];
 }
-const ajv = new Ajv({ allErrors: true, strict: true }); addFormats(ajv);
-const validate = lazyValidator(() => ajv.compile<EvidenceCorpus>(schema));
+const validate = compiledValidator<EvidenceCorpus>(validateGenerated);
 export function parseEvidenceCorpus(value: unknown): EvidenceCorpus {
-  if (!validate(value)) throw new Error(`Invalid evidence corpus: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(value)) throw new Error(`Invalid evidence corpus: ${validationErrors(validate.errors)}`);
   const docs = new Map(value.documents.map(d => [d.id, d]));
   if (docs.size !== value.documents.length) throw new Error('Duplicate evidence document');
   const ids = new Set<string>();

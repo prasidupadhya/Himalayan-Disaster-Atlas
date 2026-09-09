@@ -1,7 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import schema from '../../schemas/event-page.schema.json';
+import validateGenerated from './generated/event-page.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 import type { Dataset } from './index';
 
 export type EventImpactKind = 'deaths' | 'injured' | 'missing' | 'affected' | 'estimated_loss';
@@ -24,12 +23,10 @@ export interface EventPage {
   verification: { verified: boolean; approved: boolean };
 }
 
-const ajv = new Ajv({ allErrors: true, strict: true });
-addFormats(ajv);
-const validate = lazyValidator(() => ajv.compile<EventPage>(schema));
+const validate = compiledValidator<EventPage>(validateGenerated);
 
 export function parseEventPage(input: unknown): EventPage {
-  if (!validate(input)) throw new Error(`Invalid event page: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(input)) throw new Error(`Invalid event page: ${validationErrors(validate.errors)}`);
   const page = input as EventPage;
   const kinds = page.impacts.map(item => item.kind);
   if (new Set(kinds).size !== 5 || !['deaths', 'injured', 'missing', 'affected', 'estimated_loss'].every(kind => kinds.includes(kind as EventImpactKind))) {

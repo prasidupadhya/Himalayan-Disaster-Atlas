@@ -313,3 +313,5 @@ Accessibility is enforced as a scientific-delivery requirement: one main landmar
 Performance architecture defers secondary datasets on every screen, validates vector artifacts in a bounded worker and reuses checksum-verified terrain bytes. See [feature 38 budgets and profiling](docs/performance.md); use `npm run profile:performance` with a local production preview.
 
 CI runs the full quality gate and static browser suite on pull requests and main. See [CI/CD setup and required repository rules](docs/ci-cd.md).
+
+Original software is MIT; upstream data and dependencies keep their own licences. See [licensing findings and publication blockers](docs/licensing.md). Cloudflare deployment configuration, local runtime preview, and rollback instructions are in [deployment](docs/deployment.md).

@@ -1,3 +1,4 @@
+import { spawnSync } from 'node:child_process';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -16,13 +17,16 @@ const privateValues = Object.entries(process.env)
 
 export function checkSecurity(scanRoot = root) {
   let count = 0;
+  const trackedResult = spawnSync('git', ['-C', scanRoot, 'ls-files', '-z'], { encoding: 'utf8' });
+  const tracked = new Set(trackedResult.status === 0 ? trackedResult.stdout.split('\0') : []);
   function visit(directory) {
     for (const entry of readdirSync(directory, { withFileTypes: true })) {
       if (excluded.has(entry.name)) continue;
       const path = join(directory, entry.name);
       const name = relative(scanRoot, path);
       if (entry.isSymbolicLink()) throw new Error(`Symlinks are not permitted in publishable source: ${name}`);
-      if (entry.name.startsWith('.env') && entry.name !== '.env.example') {
+      if ((entry.name.startsWith('.env') && entry.name !== '.env.example') || entry.name.startsWith('.dev.vars')) {
+        if (tracked.has(name)) throw new Error(`Tracked environment file is prohibited: ${name}; values withheld.`);
         if (name.startsWith('apps/web/')) throw new Error('Next.js environment files are prohibited; use pipeline-only secrets.');
         continue;
       }

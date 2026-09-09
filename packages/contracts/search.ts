@@ -1,7 +1,7 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import searchSchema from '../../schemas/search.schema.json';
-import shardSchema from '../../schemas/search-shard.schema.json';
+import validateManifestGenerated from './generated/search.cjs';
+import validateShardGenerated from './generated/search-shard.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 
 export type SearchEntityType = 'administrative_unit' | 'mountain' | 'river' | 'glacier' | 'glacial_lake' | 'hydropower' | 'infrastructure' | 'event';
 
@@ -33,16 +33,15 @@ export interface SearchManifest {
   limitations: string[];
 }
 
-const ajv = new Ajv({ allErrors: true, strict: true });
-const validateManifest = lazyValidator(() => ajv.compile<SearchManifest>(searchSchema));
-const validateShard = lazyValidator(() => ajv.compile<SearchRecord[]>(shardSchema));
+const validateManifest = compiledValidator<SearchManifest>(validateManifestGenerated);
+const validateShard = compiledValidator<SearchRecord[]>(validateShardGenerated);
 
 export function normalizeSearchTerm(value: string) {
   return value.normalize('NFKD').replace(/\p{M}/gu, '').toLocaleLowerCase('en-US').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ');
 }
 
 export function parseSearchManifest(input: unknown): SearchManifest {
-  if (!validateManifest(input)) throw new Error(`Invalid search manifest: ${ajv.errorsText(validateManifest.errors)}`);
+  if (!validateManifest(input)) throw new Error(`Invalid search manifest: ${validationErrors(validateManifest.errors)}`);
   const manifest = input as SearchManifest;
   if (new Set(manifest.shards.map(item => item.id)).size !== 8) throw new Error('Search shard inventory is incomplete');
   if (new Set(manifest.inputs.map(item => item.path)).size !== manifest.inputs.length) throw new Error('Search inputs contain duplicates');
@@ -50,7 +49,7 @@ export function parseSearchManifest(input: unknown): SearchManifest {
 }
 
 export function parseSearchShard(input: unknown): SearchRecord[] {
-  if (!validateShard(input)) throw new Error(`Invalid search shard: ${ajv.errorsText(validateShard.errors)}`);
+  if (!validateShard(input)) throw new Error(`Invalid search shard: ${validationErrors(validateShard.errors)}`);
   const records = input as SearchRecord[];
   const keys = new Set<string>();
   for (const record of records) {

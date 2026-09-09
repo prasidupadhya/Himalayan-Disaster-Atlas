@@ -1,6 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import schema from '../../schemas/hazard-graph.schema.json';
+import validateGenerated from './generated/hazard-graph.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 export type GraphNodeType = 'glacier' | 'lake' | 'river' | 'hazard' | 'infrastructure' | 'population_area' | 'event' | 'scenario' | 'exposure';
 export type GraphEvidence = 'observed' | 'derived' | 'inferred' | 'modelled';
 export type Relation = 'glacier_lake' | 'lake_river' | 'river_downstream' | 'hazard_exposure' | 'landslide_blockage' | 'scenario_exposure' | 'footprint_intersection';
@@ -16,10 +16,9 @@ export const RELATIONS: Record<Relation, { from: GraphNodeType[]; to: GraphNodeT
   scenario_exposure: { from: ['scenario'], to: ['exposure'], meaning: 'Exposure estimate conditional on a hypothetical corridor.' },
   footprint_intersection: { from: ['exposure'], to: ['infrastructure', 'population_area'], meaning: 'Mapped record intersects an assumed footprint; not confirmed impact.' },
 };
-const ajv = new Ajv({ allErrors: true, strict: true });
-const validate = lazyValidator(() => ajv.compile<HazardGraph>(schema));
+const validate = compiledValidator<HazardGraph>(validateGenerated);
 export function parseHazardGraph(input: unknown): HazardGraph {
-  if (!validate(input)) throw new Error(`Invalid hazard graph: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(input)) throw new Error(`Invalid hazard graph: ${validationErrors(validate.errors)}`);
   const nodes = new Map(input.nodes.map(n => [n.id, n]));
   if (nodes.size !== input.nodes.length) throw new Error('Duplicate graph nodes');
   const ids = new Set<string>(), links = new Set<string>();

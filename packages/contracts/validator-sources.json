@@ -1,0 +1,87 @@
+{
+  "analyst-request": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "analyst-request.schema.json"
+  },
+  "climate": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "climate.schema.json"
+  },
+  "dataset": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "dataset.schema.json"
+  },
+  "event-page": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "event-page.schema.json"
+  },
+  "exposure": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "exposure.schema.json"
+  },
+  "hazard-graph": {
+    "common_schema": false,
+    "formats": false,
+    "schema": "hazard-graph.schema.json"
+  },
+  "population": {
+    "common_schema": true,
+    "formats": true,
+    "schema": "population.schema.json"
+  },
+  "provenance": {
+    "common_schema": false,
+    "formats": false,
+    "schema": "provenance.schema.json"
+  },
+  "rag": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "rag.schema.json"
+  },
+  "satellite": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "satellite.schema.json"
+  },
+  "scenario-request": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "scenario-request.schema.json"
+  },
+  "scenario-result": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "scenario-result.schema.json"
+  },
+  "search": {
+    "common_schema": false,
+    "formats": false,
+    "schema": "search.schema.json"
+  },
+  "search-shard": {
+    "common_schema": false,
+    "formats": false,
+    "schema": "search-shard.schema.json"
+  },
+  "temporal": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "temporal.schema.json"
+  },
+  "terrain": {
+    "common_schema": true,
+    "formats": true,
+    "schema": "terrain.schema.json"
+  },
+  "water-change": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "water-change.schema.json"
+  }
+}

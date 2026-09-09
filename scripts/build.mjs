@@ -1,11 +1,15 @@
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { checkSecurity } from './check-security.mjs';
+import { compileValidators } from './compile-validators.mjs';
+import { prepareHosting } from './prepare-hosting.mjs';
+import { checkStaticExport } from './check-static-export.mjs';
 import { checkLicenses } from './check-licenses.mjs';
 import { prepareSoftwareNotices } from './prepare-software-notices.mjs';
 import { prepareMapWorker } from './prepare-map-worker.mjs';
 // Hosted builds may invoke the web workspace script from apps/web.
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
+compileValidators({ check: true });
 checkLicenses();
 prepareSoftwareNotices();
 prepareMapWorker();
@@ -17,4 +21,6 @@ env.NODE_ENV = 'production';
 const result = spawnSync('npm', ['run', 'build:static', '--workspace', '@atlas/web'], { env, stdio: 'inherit' });
 if (result.error) throw result.error;
 if (result.status !== 0) process.exit(result.status ?? 1);
+prepareHosting();
+checkStaticExport();
 checkSecurity();

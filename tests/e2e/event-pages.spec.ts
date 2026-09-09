@@ -1,8 +1,8 @@
 import { expect, test } from '@playwright/test';
 
-test('event pages expose source-backed facts without inventing unsupported details', async ({ page }) => {
+test('event pages expose source-backed facts without inventing unsupported details', async ({ page, baseURL }) => {
   const external: string[] = [];
-  page.on('request', request => { if (!request.url().startsWith('http://127.0.0.1:4173')) external.push(request.url()); });
+  page.on('request', request => { if (new URL(request.url()).origin !== new URL(baseURL!).origin) external.push(request.url()); });
   await page.goto('/events/');
   const root = page.locator('[data-event-pages-state]');
   await expect(root).toHaveAttribute('data-event-pages-state', 'ready');

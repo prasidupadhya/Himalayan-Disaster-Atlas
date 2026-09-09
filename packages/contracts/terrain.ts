@@ -1,8 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import commonSchema from '../../schemas/dataset.schema.json';
-import schema from '../../schemas/terrain.schema.json';
+import validateGenerated from './generated/terrain.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 import type { Metadata } from './index';
 
 export interface TerrainManifest {
@@ -15,13 +13,10 @@ export interface TerrainManifest {
     native_resolution_degree: number | null; resampling: 'bilinear' | 'none'; tile_count: 341 | 682 };
 }
 export type TerrainIndex = Record<string, { sha256: string; byte_size: number }>;
-const ajv = new Ajv({ allErrors: true, strict: true });
-addFormats(ajv);
-ajv.addSchema(commonSchema);
-const validate = lazyValidator(() => ajv.compile<TerrainManifest>(schema));
+const validate = compiledValidator<TerrainManifest>(validateGenerated);
 
 export function parseTerrainManifest(input: unknown): TerrainManifest {
-  if (!validate(input)) throw new Error(`Invalid terrain manifest: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(input)) throw new Error(`Invalid terrain manifest: ${validationErrors(validate.errors)}`);
   const m = input.metadata;
   if (!['nepal-terrain', 'asia-terrain-context'].includes(m.dataset_id) || m.artifact.path !== `/data/${m.dataset_id}/${m.dataset_version}/tiles.json`) throw new Error('Terrain identity mismatch');
   if (m.status !== 'ATLAS_DERIVED' || m.evidence_type !== 'derived' || m.is_fixture) throw new Error('Terrain evidence mismatch');

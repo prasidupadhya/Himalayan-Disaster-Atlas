@@ -8,7 +8,7 @@ permissions:
   contents: read
 concurrency:
   group: quality-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 jobs:
   quality:
     name: Quality and static browser tests
@@ -33,6 +33,7 @@ jobs:
       - run: npx --no-install playwright install --with-deps chromium
       - run: npm run check
       - run: npm run test:e2e
+      - run: npm run test:e2e:cloudflare
       - name: Retain tested static export
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
@@ -47,3 +48,34 @@ jobs:
           name: browser-failure-${{ github.sha }}
           path: test-results
           retention-days: 7
+  deploy:
+    name: Publish checked Cloudflare static release
+    needs: quality
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.ENABLE_CLOUDFLARE_DEPLOYMENT == 'true'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    environment: production
+    concurrency:
+      group: cloudflare-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci --include=dev --workspaces --include-workspace-root
+      - run: node scripts/prepare-map-worker.mjs && node scripts/prepare-software-notices.mjs
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: atlas-static-${{ github.sha }}
+          path: apps/web/out
+      - run: npm run release:check
+      - name: Deploy tested artifact
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WRANGLER_SEND_METRICS: 'false'
+        run: node scripts/check-deploy-env.mjs && npm run deploy:cloudflare

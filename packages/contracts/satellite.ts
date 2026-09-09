@@ -1,7 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import schema from '../../schemas/satellite.schema.json';
+import validateGenerated from './generated/satellite.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 import type { Metadata } from './index';
 
 export interface SatelliteObservation {
@@ -18,10 +17,9 @@ export interface SatelliteManifest {
   };
   observations: SatelliteObservation[];
 }
-const ajv = new Ajv({ allErrors: true, strict: true }); addFormats(ajv);
-const validate = lazyValidator(() => ajv.compile<SatelliteManifest>(schema));
+const validate = compiledValidator<SatelliteManifest>(validateGenerated);
 export function parseSatelliteManifest(input: unknown): SatelliteManifest {
-  if (!validate(input)) throw new Error(`Invalid satellite manifest: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(input)) throw new Error(`Invalid satellite manifest: ${validationErrors(validate.errors)}`);
   const manifest = input as SatelliteManifest;
   if (Date.parse(manifest.metadata.processing_date) < Date.parse(manifest.metadata.retrieval_date)) throw new Error('Satellite processing precedes retrieval');
   const ids = manifest.observations.map(item => item.id);

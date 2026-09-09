@@ -10,7 +10,7 @@
         "https://data.humdata.org/dataset/cod-ab-npl",
         "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
       ],
-      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "reason": "Pinned COD-AB acquisition metadata records CC BY 3.0 IGO. The provider page returned 403 during this audit; retain the source-specific metadata and licence evidence.",
       "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
       "parents": []
     },
@@ -23,7 +23,7 @@
         "https://data.humdata.org/dataset/cod-ab-npl",
         "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
       ],
-      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "reason": "Pinned COD-AB acquisition metadata records CC BY 3.0 IGO. The provider page returned 403 during this audit; retain the source-specific metadata and licence evidence.",
       "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
       "parents": []
     },
@@ -36,7 +36,7 @@
         "https://data.humdata.org/dataset/cod-ab-npl",
         "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
       ],
-      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "reason": "Pinned COD-AB acquisition metadata records CC BY 3.0 IGO. The provider page returned 403 during this audit; retain the source-specific metadata and licence evidence.",
       "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
       "parents": []
     },
@@ -49,7 +49,7 @@
         "https://data.humdata.org/dataset/cod-ab-npl",
         "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
       ],
-      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "reason": "Pinned COD-AB acquisition metadata records CC BY 3.0 IGO. The provider page returned 403 during this audit; retain the source-specific metadata and licence evidence.",
       "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
       "parents": []
     },
@@ -62,7 +62,7 @@
         "https://data.humdata.org/dataset/cod-ab-npl",
         "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
       ],
-      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "reason": "Pinned COD-AB acquisition metadata records CC BY 3.0 IGO. The provider page returned 403 during this audit; retain the source-specific metadata and licence evidence.",
       "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
       "parents": []
     },
@@ -75,7 +75,7 @@
         "https://data.humdata.org/dataset/cod-ab-npl",
         "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
       ],
-      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "reason": "Pinned COD-AB acquisition metadata records CC BY 3.0 IGO. The provider page returned 403 during this audit; retain the source-specific metadata and licence evidence.",
       "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
       "parents": []
     },
@@ -88,7 +88,7 @@
         "https://data.humdata.org/dataset/cod-ab-npl",
         "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
       ],
-      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "reason": "Pinned COD-AB acquisition metadata records CC BY 3.0 IGO. The provider page returned 403 during this audit; retain the source-specific metadata and licence evidence.",
       "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
       "parents": []
     },
@@ -101,7 +101,7 @@
         "https://data.humdata.org/dataset/cod-ab-npl",
         "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
       ],
-      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "reason": "Pinned COD-AB acquisition metadata records CC BY 3.0 IGO. The provider page returned 403 during this audit; retain the source-specific metadata and licence evidence.",
       "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
       "parents": []
     },
@@ -177,11 +177,11 @@
     "scenario-network-40669746@1.0.0": {
       "manifest_path": "/data/scenario-network-40669746/1.0.0/manifest.json",
       "manifest_sha256": "947796d41da570ac5858c77359ea6f6d80f176c67e31a760b85ee4879f94a4e1",
-      "status": "REVIEW_REQUIRED",
+      "status": "PERMITTED",
       "reviewed_on": "2026-09-09",
       "evidence_urls": [],
-      "reason": "Atlas-derived release: all exact parent reviews must permit publication; mixed-source/database compatibility requires an explicit review.",
-      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Preserve every parent licence. Assess ODbL database share-alike and document the licence for the combined product before publication.",
+      "reason": "This modelled output references only the two FAO Rivers 2026 partitions, both under CC BY 4.0. It has no ODbL or unresolved parent in this version; preserve input credits, source links and the explicit hypothetical processing description.",
+      "obligations": "Retain FAO AQUASTAT, HydroRIVERS/HydroSHEDS and contributor attribution with the parent CC BY 4.0 links. Identify the Atlas model and modifications; do not imply source endorsement or a forecast.",
       "parents": [
         "nepal-rivers-headwaters@1.0.0",
         "nepal-rivers-primary@1.0.0"
@@ -190,11 +190,11 @@
     "scenario-pulse-40669746@1.0.0": {
       "manifest_path": "/data/scenario-pulse-40669746/1.0.0/manifest.json",
       "manifest_sha256": "2a3f0e7c82099d685370fc7089939bc430450f514c146b437de73a8812746fca",
-      "status": "REVIEW_REQUIRED",
+      "status": "PERMITTED",
       "reviewed_on": "2026-09-09",
       "evidence_urls": [],
-      "reason": "Atlas-derived release: all exact parent reviews must permit publication; mixed-source/database compatibility requires an explicit review.",
-      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Preserve every parent licence. Assess ODbL database share-alike and document the licence for the combined product before publication.",
+      "reason": "This modelled output references only the two FAO Rivers 2026 partitions, both under CC BY 4.0. It has no ODbL or unresolved parent in this version; preserve input credits, source links and the explicit hypothetical processing description.",
+      "obligations": "Retain FAO AQUASTAT, HydroRIVERS/HydroSHEDS and contributor attribution with the parent CC BY 4.0 links. Identify the Atlas model and modifications; do not imply source endorsement or a forecast.",
       "parents": [
         "nepal-rivers-headwaters@1.0.0",
         "nepal-rivers-primary@1.0.0"
@@ -209,7 +209,7 @@
         "https://doi.org/10.5281/zenodo.19370146",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "reason": "Pinned GLO acquisition metadata records CC BY 4.0 for this exact release. The DOI fetch did not resolve during this audit; no claim of live re-verification is made.",
       "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
       "parents": []
     },
@@ -492,7 +492,7 @@
         "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2000-01-01&endtime=2026-09-08&minlatitude=26&maxlatitude=31&minlongitude=80&maxlongitude=89&minmagnitude=2.5&orderby=time-asc&limit=20000",
         "https://www.usgs.gov/data-management/data-licensing"
       ],
-      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "reason": "Pinned USGS public earthquake-data metadata records public-domain/CC0 guidance. The provider licensing page was bot-protected during this audit; unrelated third-party USGS materials are not covered.",
       "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
       "parents": []
     },
