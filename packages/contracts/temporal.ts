@@ -1,7 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import schema from '../../schemas/temporal.schema.json';
+import validateGenerated from './generated/temporal.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 /** UTC, half-open observation intervals. Publication/retrieval never drive selection. */
 export type TemporalProductId = 'water' | 'satellite' | 'climate' | 'events';
 export interface TemporalObservation { id: string; start: string; end: string; acquired_at: string | null; published_at: string | null; sensor: string | null; compatibility: string | null; count: number | null }
@@ -25,11 +24,9 @@ export function observationOnDay(product: TemporalProduct, value: string): Tempo
 export function canCompare(before: TemporalObservation, after: TemporalObservation): boolean {
   return before.compatibility !== null && before.compatibility === after.compatibility && Date.parse(before.end) <= Date.parse(after.start);
 }
-const ajv = new Ajv({ allErrors: true, strict: true });
-addFormats(ajv);
-const validate = lazyValidator(() => ajv.compile<TemporalIndex>(schema));
+const validate = compiledValidator<TemporalIndex>(validateGenerated);
 export function validateTemporalIndex(input: unknown): TemporalIndex {
-  if (!validate(input)) throw new Error(`Invalid temporal index: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(input)) throw new Error(`Invalid temporal index: ${validationErrors(validate.errors)}`);
   const index = input;
   if (index.schema_version !== '1.0.0' || !Array.isArray(index.products) || index.products.length !== 4 || new Set(index.products.map(p => p.id)).size !== 4) throw new Error('Invalid temporal product inventory');
   const validTimestamp = (value: string) => {

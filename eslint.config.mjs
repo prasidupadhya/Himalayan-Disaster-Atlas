@@ -8,5 +8,5 @@ export default defineConfig([
     'no-restricted-properties': ['error', { object: 'process', property: 'env', message: 'Browser configuration is explicit and public; secrets belong to acquisition pipelines.' }],
     'no-restricted-imports': ['error', { patterns: ['**/pipelines/**', '**/data/raw/**', '**/data/processed/**', 'node:*'] }]
   } },
-  globalIgnores(['apps/web/public/vendor/**', '**/.next/**', '**/out/**', '**/next-env.d.ts', '.venv/**', 'test-results/**', 'playwright-report/**'])
+  globalIgnores(['packages/contracts/generated/**', '.wrangler/**', 'apps/web/public/vendor/**', '**/.next/**', '**/out/**', '**/next-env.d.ts', '.venv/**', 'test-results/**', 'playwright-report/**'])
 ]);

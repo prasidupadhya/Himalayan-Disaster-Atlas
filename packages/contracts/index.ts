@@ -1,8 +1,7 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
+import validateGenerated from './generated/dataset.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 import type { FeatureCollection, Geometry } from 'geojson';
-import schema from '../../schemas/dataset.schema.json';
 
 export type DataStatus = 'VERIFIED_SOURCE' | 'SATELLITE_DERIVED' | 'ATLAS_DERIVED' | 'ESTIMATED' | 'MODELLED' | 'HISTORICAL' | 'UNKNOWN';
 export type EvidenceType = 'observed' | 'derived' | 'estimated' | 'modelled' | 'historical' | 'unknown';
@@ -56,9 +55,7 @@ export interface FeatureProperties {
 }
 export type AtlasCollection = FeatureCollection<Exclude<Geometry, { type: 'GeometryCollection' }>, FeatureProperties>;
 export interface Dataset { metadata: Metadata; collection: AtlasCollection }
-const ajv = new Ajv({ allErrors: true, strict: true });
-addFormats(ajv);
-const validate = lazyValidator(() => ajv.compile<Dataset>(schema));
+const validate = compiledValidator<Dataset>(validateGenerated);
 
 function outsideCoverage(value: unknown, west: number, south: number, east: number, north: number): boolean {
   const items = value as unknown[];
@@ -71,7 +68,7 @@ function outsideCoverage(value: unknown, west: number, south: number, east: numb
 
 /** Browser safety checks complement the full offline Shapely topology gate. */
 export function parseDataset(input: unknown): Dataset {
-  if (!validate(input)) throw new Error(`Invalid dataset: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(input)) throw new Error(`Invalid dataset: ${validationErrors(validate.errors)}`);
   const { metadata: m, collection } = input;
   const [west, south, east, north] = m.spatial_coverage.bbox;
   if (!(west >= -180 && west < east && east <= 180 && south >= -90 && south < north && north <= 90)) throw new Error('Invalid coverage bounds');

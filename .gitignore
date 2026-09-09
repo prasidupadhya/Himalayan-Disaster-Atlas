@@ -23,3 +23,6 @@ data/staging/
 
 apps/web/public/legal/
 .wrangler/
+
+.dev.vars
+.dev.vars.*

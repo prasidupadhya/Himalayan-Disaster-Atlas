@@ -1,10 +1,10 @@
 import { expect, test } from '@playwright/test';
 
-test('location explorer keeps proximity spatial-only and preserves source dates', async ({ page }) => {
+test('location explorer keeps proximity spatial-only and preserves source dates', async ({ page, baseURL }) => {
   test.setTimeout(60_000);
   const external: string[] = [];
   page.on('request', request => {
-    if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('blob:')) external.push(request.url());
+    if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url());
   });
   await page.goto('/atlas/');
   const explorer = page.getByRole('region', { name: 'Location Explorer' });
