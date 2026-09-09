@@ -10,7 +10,7 @@
     "node": "22.x"
   },
   "scripts": {
-    "dev": "node scripts/prepare-map-worker.mjs && npm run dev --workspace @atlas/web",
+    "dev": "node scripts/prepare-software-notices.mjs && node scripts/prepare-map-worker.mjs && npm run dev --workspace @atlas/web",
     "build": "node scripts/build.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --max-warnings 0",
@@ -48,7 +48,8 @@
     "data:scenarios": ".venv/bin/python -m pipelines.atlas_pipeline.scenarios",
     "data:rag": ".venv/bin/python -m pipelines.atlas_pipeline.rag",
     "data:provenance": ".venv/bin/python -m pipelines.atlas_pipeline.provenance",
-    "profile:performance": "node scripts/profile-performance.mjs"
+    "profile:performance": "node scripts/profile-performance.mjs",
+    "licenses:check": "node scripts/check-licenses.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
@@ -61,5 +62,6 @@
     "eslint-config-next": "16.3.4",
     "typescript": "^5.9.0",
     "vitest": "^3.2.0"
-  }
+  },
+  "license": "MIT"
 }

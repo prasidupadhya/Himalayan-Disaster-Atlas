@@ -240,6 +240,7 @@ export function Atlas() {
           }
         }}>Reset view</button>
       </div>
+      <p className="muted">Data attribution: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors (ODbL)</a> · <a href="/licenses/">Terrain and all source licences</a></p>
       <section className="feature-list" id="accessible-boundary-records" tabIndex={-1} aria-label="Accessible boundary records">
         <h2>Identify an administrative unit</h2>
         <p className="muted">The searchable list provides the same identification as clicking the map.</p>

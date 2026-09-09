@@ -1,9 +1,13 @@
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { checkSecurity } from './check-security.mjs';
+import { checkLicenses } from './check-licenses.mjs';
+import { prepareSoftwareNotices } from './prepare-software-notices.mjs';
 import { prepareMapWorker } from './prepare-map-worker.mjs';
 // Hosted builds may invoke the web workspace script from apps/web.
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
+checkLicenses();
+prepareSoftwareNotices();
 prepareMapWorker();
 checkSecurity();
 // Do not pass acquisition credentials to the static rendering/build process.

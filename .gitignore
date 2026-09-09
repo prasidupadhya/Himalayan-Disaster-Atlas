@@ -20,3 +20,6 @@ data/processed/*
 apps/web/public/vendor/
 
 data/staging/
+
+apps/web/public/legal/
+.wrangler/
