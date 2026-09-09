@@ -1,8 +1,7 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import requestSchema from '../../schemas/scenario-request.schema.json';
-import resultSchema from '../../schemas/scenario-result.schema.json';
+import requestValidatorGenerated from './generated/scenario-request.cjs';
+import resultValidatorGenerated from './generated/scenario-result.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 import registry from './scenario-registry.json';
 export type ScenarioModel = 'network-path' | 'constant-celerity-pulse';
 export interface ScenarioDefinition {
@@ -22,11 +21,10 @@ export interface ScenarioResult {
   pulse_discharge_m3_s: number | null; volume_per_section_m3: number | null; footprint: null; depth_m: null; velocity_m_s: null; confidence_interval: null;
   validation: { status: 'synthetic_analytic_cases_only'; real_event_validation: false }; limitations: string[];
 }
-const ajv = new Ajv({ allErrors: true, strict: true }); addFormats(ajv);
-const requestValidator = lazyValidator(() => ajv.compile<ScenarioDefinition>(requestSchema));
-const resultValidator = lazyValidator(() => ajv.compile<ScenarioResult>(resultSchema));
+const requestValidator = compiledValidator<ScenarioDefinition>(requestValidatorGenerated);
+const resultValidator = compiledValidator<ScenarioResult>(resultValidatorGenerated);
 export function parseScenarioDefinition(value: unknown): ScenarioDefinition {
-  if (!requestValidator(value)) throw new Error(`Invalid scenario definition: ${ajv.errorsText(requestValidator.errors)}`);
+  if (!requestValidator(value)) throw new Error(`Invalid scenario definition: ${validationErrors(requestValidator.errors)}`);
   const model = value.model.id;
   if (value.simulation_level !== (model === 'network-path' ? 1 : 2) || JSON.stringify(value.assumptions) !== JSON.stringify(registry.models[model])) throw new Error('Model/level or assumption registry mismatch');
   const parameters = Object.keys(value.parameters).sort().join(',');
@@ -35,7 +33,7 @@ export function parseScenarioDefinition(value: unknown): ScenarioDefinition {
   return value;
 }
 export function parseScenarioResult(value: unknown): ScenarioResult {
-  if (!resultValidator(value)) throw new Error(`Invalid scenario result: ${ajv.errorsText(resultValidator.errors)}`);
+  if (!resultValidator(value)) throw new Error(`Invalid scenario result: ${validationErrors(resultValidator.errors)}`);
   const d = parseScenarioDefinition(value.definition);
   if (value.id !== d.id || value.version !== d.version || value.is_fixture !== d.is_fixture || value.simulation_level !== d.simulation_level || JSON.stringify(value.model) !== JSON.stringify(d.model)) throw new Error('Scenario definition/result identity mismatch');
   if (value.path[0].reach_id !== d.source_reach_id || new Set(value.path.map(p => p.reach_id)).size !== value.path.length) throw new Error('Scenario path start or duplicate reach mismatch');

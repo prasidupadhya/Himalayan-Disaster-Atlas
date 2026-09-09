@@ -1,7 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import schema from '../../schemas/exposure.schema.json';
+import validateGenerated from './generated/exposure.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 import type { FeatureCollection, Geometry } from 'geojson';
 
 export interface ExposurePopulation {
@@ -21,12 +20,10 @@ export interface ExposureResult {
   artifacts: Record<'request' | 'spatial', { path: string; sha256: string; byte_size: number }>;
 }
 export type ExposureSpatial = FeatureCollection<Geometry, { kind: 'asset' | 'footprint'; asset_id?: string; name?: string | null; categories?: string[] }>;
-const ajv = new Ajv({ allErrors: true, strict: true });
-addFormats(ajv);
-const validate = lazyValidator(() => ajv.compile<ExposureResult>(schema));
+const validate = compiledValidator<ExposureResult>(validateGenerated);
 
 export function parseExposure(input: unknown): ExposureResult {
-  if (!validate(input)) throw new Error(`Invalid exposure result: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(input)) throw new Error(`Invalid exposure result: ${validationErrors(validate.errors)}`);
   if (!/^exposure-[a-z0-9-]+$/.test(input.result_id)) throw new Error('Invalid exposure identity');
   for (const [kind, artifact] of Object.entries(input.artifacts)) {
     const name = kind === 'request' ? 'request.json' : 'spatial.geojson.gz';

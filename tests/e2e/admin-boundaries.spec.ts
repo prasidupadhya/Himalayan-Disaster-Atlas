@@ -8,11 +8,11 @@ const provinceManifestURL = '**/data/nepal-admin-provinces/2.0.1/manifest.json';
 const provinceArtifactURL = '**/data/nepal-admin-provinces/2.0.1/features.geojson.gz';
 const provinceBytes = readFileSync('data/releases/nepal-admin-provinces/2.0.1/features.geojson.gz');
 
-test('static navigation, WebGL, boundary controls and accessible identification', async ({ page }) => {
+test('static navigation, WebGL, boundary controls and accessible identification', async ({ page, baseURL }) => {
   const errors: string[] = [];
   const external: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  page.on('request', request => { if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('blob:')) external.push(request.url()); });
+  page.on('request', request => { if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url()); });
   await page.goto('/');
   await page.getByRole('link', { name: /Explore Nepal’s boundaries/ }).click();
   const map = page.getByRole('region', { name: 'Interactive Nepal administrative boundary map' });

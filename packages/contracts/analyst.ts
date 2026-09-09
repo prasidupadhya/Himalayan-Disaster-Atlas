@@ -1,7 +1,5 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import schema from '../../schemas/analyst-request.schema.json';
+import validateRequestGenerated from './generated/analyst-request.cjs';
+import { compiledValidator } from './validation-errors';
 import { buildRiverNetwork, traceDownstream, type DownstreamResult } from './downstream';
 import { assessEvidenceClaim, retrieveEvidence, type Citation, type EvidenceCorpus } from './rag';
 import { parseScenarioResult, type ScenarioResult } from './scenario';
@@ -22,8 +20,7 @@ export const ANALYST_SCENARIOS = ['scenario-network-40669746', 'scenario-pulse-4
 export const ANALYST_EXAMPLES = ['Explain water change.', 'What are the limitations of glacial lakes?', 'Trace downstream from HYRIV 40669746.', 'Summarize scenario scenario-pulse-40669746.'];
 export interface AnalystRequest { schema_version: '1.0.0'; question: string; as_of: string }
 export type AnalystPlan = { kind: 'methodology'; topic: keyof typeof ANALYST_TOPICS } | { kind: 'downstream'; reach_id: string } | { kind: 'scenario'; scenario_id: string } | { kind: 'unsupported'; reason: string };
-const ajv = new Ajv({ strict: true, allErrors: true }); addFormats(ajv);
-const validateRequest = lazyValidator(() => ajv.compile<AnalystRequest>(schema));
+const validateRequest = compiledValidator<AnalystRequest>(validateRequestGenerated);
 export function parseAnalystRequest(value: unknown): AnalystRequest {
   if (!validateRequest(value) || !value.question.trim()) throw new Error('Provide one question of 1–500 characters and an explicit ISO as-of date.');
   return value;

@@ -1,7 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import schema from '../../schemas/water-change.schema.json';
+import validateGenerated from './generated/water-change.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 import type { Metadata } from './index';
 
 export interface WaterArtifact { path: string; sha256: string; byte_size: number }
@@ -19,11 +18,9 @@ export interface WaterManifest {
   method: 'ndwi-scl-water/1.0.0'; grid: { crs: 'EPSG:32644'; transform: number[]; width: 505; height: 512 };
   coordinates: [[number, number], [number, number], [number, number], [number, number]]; observations: WaterObservation[]; comparisons: WaterComparison[];
 }
-const ajv = new Ajv({ allErrors: true, strict: true });
-addFormats(ajv);
-const validate = lazyValidator(() => ajv.compile<WaterManifest>(schema));
+const validate = compiledValidator<WaterManifest>(validateGenerated);
 export function parseWaterManifest(input: unknown): WaterManifest {
-  if (!validate(input)) throw new Error(`Invalid water manifest: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(input)) throw new Error(`Invalid water manifest: ${validationErrors(validate.errors)}`);
   const ids = input.observations.map(o => o.id);
   if (new Set(ids).size !== ids.length || ids.join() !== [...ids].sort().join() || input.observations.some(o => o.id !== o.acquired_at.slice(0, 10))) throw new Error('Duplicate or unordered water dates');
   const pairs = new Set<string>();

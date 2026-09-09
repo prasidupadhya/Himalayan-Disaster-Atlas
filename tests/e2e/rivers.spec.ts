@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 
-test('river network loads both partitions and exposes downstream topology', async ({ page }) => {
+test('river network loads both partitions and exposes downstream topology', async ({ page, baseURL }) => {
   const external: string[] = [];
-  page.on('request', request => { if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('blob:')) external.push(request.url()); });
+  page.on('request', request => { if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url()); });
   await page.goto('/atlas/');
   const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
   await expect(rivers).toHaveAttribute('data-rivers-state', 'ready');

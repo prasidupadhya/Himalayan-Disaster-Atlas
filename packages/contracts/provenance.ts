@@ -1,6 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import schema from '../../schemas/provenance.schema.json';
+import validateGenerated from './generated/provenance.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 
 export type ProvenanceCategory = 'Administrative' | 'Terrain' | 'Cryosphere' | 'Hydrology & climate' | 'Hazards & events' | 'Infrastructure' | 'Population' | 'Satellite' | 'Analysis & models' | 'Discovery & evidence' | 'Development';
 export type ProvenanceEvidence = 'observed' | 'derived' | 'estimated' | 'modelled' | 'simulated' | 'historical' | 'unknown';
@@ -17,10 +17,9 @@ export interface ProvenanceRecord {
 }
 export interface ProvenanceCatalog { schema_version: '1.0.0'; kind: 'provenance-catalog'; version: '1.0.0'; generated_from_count: number; records: ProvenanceRecord[] }
 
-const ajv = new Ajv({ allErrors: true, strict: true });
-const validate = lazyValidator(() => ajv.compile<ProvenanceCatalog>(schema));
+const validate = compiledValidator<ProvenanceCatalog>(validateGenerated);
 export function parseProvenanceCatalog(value: unknown): ProvenanceCatalog {
-  if (!validate(value)) throw new Error(`Invalid provenance catalog: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(value)) throw new Error(`Invalid provenance catalog: ${validationErrors(validate.errors)}`);
   const keys = new Set<string>();
   for (const record of value.records) {
     if (keys.has(record.key)) throw new Error('Duplicate provenance record');

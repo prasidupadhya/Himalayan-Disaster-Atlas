@@ -1,7 +1,6 @@
-import { lazyValidator } from './lazy-validator';
-import Ajv from 'ajv';
-import addFormats from 'ajv-formats';
-import schema from '../../schemas/climate.schema.json';
+import validateGenerated from './generated/climate.cjs';
+import { validationErrors } from './validation-errors';
+import { compiledValidator } from './validation-errors';
 import type { Metadata } from './index';
 
 export interface ClimateRecord {
@@ -49,12 +48,10 @@ export interface ClimateManifest {
   normals: ClimateNormal[];
 }
 
-const ajv = new Ajv({ allErrors: true, strict: true });
-addFormats(ajv);
-const validate = lazyValidator(() => ajv.compile<ClimateManifest>(schema));
+const validate = compiledValidator<ClimateManifest>(validateGenerated);
 
 export function parseClimateManifest(input: unknown): ClimateManifest {
-  if (!validate(input)) throw new Error(`Invalid climate manifest: ${ajv.errorsText(validate.errors)}`);
+  if (!validate(input)) throw new Error(`Invalid climate manifest: ${validationErrors(validate.errors)}`);
   const manifest = input as ClimateManifest;
   if (Date.parse(manifest.metadata.processing_date) < Date.parse(manifest.metadata.retrieval_date)) throw new Error('Climate processing precedes retrieval');
   const periods = manifest.series.map(item => item.period);

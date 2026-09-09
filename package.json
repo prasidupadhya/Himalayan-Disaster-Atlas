@@ -21,7 +21,7 @@
     "data:admin": ".venv/bin/python -m pipelines.atlas_pipeline.admin_boundaries",
     "data:validate": ".venv/bin/python -m pipelines.atlas_pipeline.validate",
     "security:check": "node scripts/check-security.mjs",
-    "check": "npm run data:sample && npm run data:validate && npm run test:python && npm run test && npm run typecheck && npm run lint && npm run lint:python && npm run build",
+    "check": "npm run contracts:check && npm run data:sample && npm run data:validate && npm run test:python && npm run test && npm run typecheck && npm run lint && npm run lint:python && npm run build",
     "lint:python": ".venv/bin/ruff check pipelines processing tests/python",
     "test:hydration": "playwright test --config playwright.hydration.config.ts",
     "data:terrain": ".venv/bin/python -m pipelines.atlas_pipeline.terrain",
@@ -49,7 +49,14 @@
     "data:rag": ".venv/bin/python -m pipelines.atlas_pipeline.rag",
     "data:provenance": ".venv/bin/python -m pipelines.atlas_pipeline.provenance",
     "profile:performance": "node scripts/profile-performance.mjs",
-    "licenses:check": "node scripts/check-licenses.mjs"
+    "licenses:check": "node scripts/check-licenses.mjs",
+    "release:check": "node scripts/release-check.mjs",
+    "preview:cloudflare": "node scripts/preview-cloudflare.mjs",
+    "deploy:cloudflare": "wrangler deploy",
+    "upload:cloudflare": "wrangler versions upload",
+    "test:e2e:cloudflare": "playwright test --config playwright.cloudflare.config.ts",
+    "contracts:generate": "node scripts/compile-validators.mjs",
+    "contracts:check": "node scripts/compile-validators.mjs --check"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
@@ -61,7 +68,11 @@
     "eslint": "^9.39.0",
     "eslint-config-next": "16.3.4",
     "typescript": "^5.9.0",
-    "vitest": "^3.2.0"
+    "vitest": "4.1.11",
+    "wrangler": "4.130.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "overrides": {
+    "sharp": "0.35.4"
+  }
 }
