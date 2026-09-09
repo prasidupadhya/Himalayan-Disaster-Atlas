@@ -311,3 +311,5 @@ Mobile delivery keeps the core map/search/analysis controls usable at phone size
 Accessibility is enforced as a scientific-delivery requirement: one main landmark, skip links, labelled native controls, keyboard focus after dynamic results, non-map map alternatives, full climate-chart text, semantic table captions, explicit non-color evidence labels, contrast modes and automated structural/keyboard browser audits. See [feature 37](docs/accessibility.md).
 
 Performance architecture defers secondary datasets on every screen, validates vector artifacts in a bounded worker and reuses checksum-verified terrain bytes. See [feature 38 budgets and profiling](docs/performance.md); use `npm run profile:performance` with a local production preview.
+
+CI runs the full quality gate and static browser suite on pull requests and main. See [CI/CD setup and required repository rules](docs/ci-cd.md).
