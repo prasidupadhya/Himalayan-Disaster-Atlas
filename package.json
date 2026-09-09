@@ -46,8 +46,9 @@
     "data:search": ".venv/bin/python -m pipelines.atlas_pipeline.search",
     "data:hazard-graph": ".venv/bin/python -m pipelines.atlas_pipeline.hazard_graph",
     "data:scenarios": ".venv/bin/python -m pipelines.atlas_pipeline.scenarios",
-    "data:rag": ".venv/bin/python -m pipelines.atlas_pipeline.rag"
-    ,"data:provenance": ".venv/bin/python -m pipelines.atlas_pipeline.provenance"
+    "data:rag": ".venv/bin/python -m pipelines.atlas_pipeline.rag",
+    "data:provenance": ".venv/bin/python -m pipelines.atlas_pipeline.provenance",
+    "profile:performance": "node scripts/profile-performance.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

@@ -1,4 +1,5 @@
-import { parseDataset, type Dataset } from '../../../packages/contracts';
+import type { Dataset } from '../../../packages/contracts';
+import { datasetValidation } from './dataset-validation';
 
 export const SAMPLE_MANIFEST = '/data/foundation-sample/1.0.0/manifest.json';
 export const ADMIN_MANIFESTS = [
@@ -79,15 +80,12 @@ export async function loadDataset(manifestPath: string, signal?: AbortSignal): P
   if (!/^\/data\/[a-z0-9-]+\/\d+\.\d+\.\d+\/manifest\.json$/.test(manifestPath)) throw new Error('Only versioned local manifests are supported.');
   const manifestBytes = await readBounded(await fetch(manifestPath, { signal }), 65_536);
   const metadata: unknown = JSON.parse(new TextDecoder().decode(manifestBytes));
-  const validated = parseDataset({ metadata, collection: { type: 'FeatureCollection', features: [] } }).metadata;
+  const validated = (await datasetValidation.run(metadata, undefined, false, signal)).metadata;
   if (manifestPath !== validated.artifact.path.replace(/features\.geojson(?:\.gz)?$/, 'manifest.json')) throw new Error('Manifest identity mismatch.');
   const bytes = await readBounded(await fetch(validated.artifact.path, { signal }), MAX_GEOJSON_BYTES);
   if (bytes.length !== validated.artifact.byte_size) throw new Error('Dataset size does not match its manifest.');
   const hash = await crypto.subtle.digest('SHA-256', bytes);
   const digest = Array.from(new Uint8Array(hash), n => n.toString(16).padStart(2, '0')).join('');
   if (digest !== validated.artifact.sha256) throw new Error('Dataset checksum failed.');
-  const decoded = validated.artifact.format === 'GeoJSON+gzip'
-    ? await readBounded(new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))), MAX_DECODED_GEOJSON_BYTES)
-    : bytes;
-  return parseDataset({ metadata: validated, collection: JSON.parse(new TextDecoder().decode(decoded)) });
+  return datasetValidation.run(validated, bytes.buffer, validated.artifact.format === 'GeoJSON+gzip', signal);
 }

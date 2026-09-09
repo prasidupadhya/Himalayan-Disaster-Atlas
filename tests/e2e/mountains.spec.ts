@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test('mountain catalogue renders, searches and exposes provenance without runtime APIs', async ({ page }) => {
   const external: string[] = [];
   page.on('request', request => { if (!request.url().startsWith('http://127.0.0.1:4173') && !request.url().startsWith('blob:')) external.push(request.url()); });
-  await page.goto('/atlas/');
+  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const mountains = page.getByRole('region', { name: 'Mountains', exact: true });
   await expect(mountains).toHaveAttribute('data-mountains-state', 'ready');
   await mountains.getByLabel('Search peaks').fill('Everest');

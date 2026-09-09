@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('hydrology snapshot exposes observation freshness and source station status', async ({ page }) => {
-  await page.goto('/atlas/');
+  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const section = page.getByRole('region', { name: 'Hydrology', exact: true });
   await expect(section).toHaveAttribute('data-hydrology-state', /ready|stale/);
   await section.getByRole('searchbox').fill('Kali Gandaki');

@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import schema from '../../schemas/provenance.schema.json';
 
@@ -17,7 +18,7 @@ export interface ProvenanceRecord {
 export interface ProvenanceCatalog { schema_version: '1.0.0'; kind: 'provenance-catalog'; version: '1.0.0'; generated_from_count: number; records: ProvenanceRecord[] }
 
 const ajv = new Ajv({ allErrors: true, strict: true });
-const validate = ajv.compile<ProvenanceCatalog>(schema);
+const validate = lazyValidator(() => ajv.compile<ProvenanceCatalog>(schema));
 export function parseProvenanceCatalog(value: unknown): ProvenanceCatalog {
   if (!validate(value)) throw new Error(`Invalid provenance catalog: ${ajv.errorsText(validate.errors)}`);
   const keys = new Set<string>();

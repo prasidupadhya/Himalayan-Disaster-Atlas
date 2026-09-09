@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import schema from '../../schemas/analyst-request.schema.json';
@@ -22,7 +23,7 @@ export const ANALYST_EXAMPLES = ['Explain water change.', 'What are the limitati
 export interface AnalystRequest { schema_version: '1.0.0'; question: string; as_of: string }
 export type AnalystPlan = { kind: 'methodology'; topic: keyof typeof ANALYST_TOPICS } | { kind: 'downstream'; reach_id: string } | { kind: 'scenario'; scenario_id: string } | { kind: 'unsupported'; reason: string };
 const ajv = new Ajv({ strict: true, allErrors: true }); addFormats(ajv);
-const validateRequest = ajv.compile<AnalystRequest>(schema);
+const validateRequest = lazyValidator(() => ajv.compile<AnalystRequest>(schema));
 export function parseAnalystRequest(value: unknown): AnalystRequest {
   if (!validateRequest(value) || !value.question.trim()) throw new Error('Provide one question of 1–500 characters and an explicit ISO as-of date.');
   return value;
