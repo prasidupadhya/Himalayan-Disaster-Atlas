@@ -3,7 +3,7 @@ import { join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
-const excluded = new Set(['node_modules', '.git', '.next', '.venv', '__pycache__', 'test-results', 'playwright-report', 'raw', 'processed', '.ruff_cache']);
+const excluded = new Set(['node_modules', '.wrangler', '.git', '.next', '.venv', '__pycache__', 'test-results', 'playwright-report', 'raw', 'processed', '.ruff_cache']);
 const credentialPatterns = [
   /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
   /\beyJ[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}\.[A-Za-z0-9_-]{15,}/,
@@ -32,7 +32,7 @@ export function checkSecurity(scanRoot = root) {
       if (credentialPatterns.some(pattern => pattern.test(content)) || privateValues.some(value => content.includes(value))) {
         throw new Error(`Potential credential detected in ${name}; value withheld.`);
       }
-      if (name.startsWith('apps/web/public/') && !name.startsWith('apps/web/public/data/') && !/^apps\/web\/public\/vendor\/maplibre-gl\/\d+\.\d+\.\d+\/(maplibre-gl-(worker|shared)\.mjs|LICENSE\.txt)$/.test(name)) throw new Error(`Unregistered public artifact: ${name}`);
+      if (name.startsWith('apps/web/public/') && !name.startsWith('apps/web/public/data/') && !/^apps\/web\/public\/legal\/(LICENSE\.txt|THIRD_PARTY_NOTICES\.txt|software-inventory\.json)$/.test(name) && !/^apps\/web\/public\/vendor\/maplibre-gl\/\d+\.\d+\.\d+\/(maplibre-gl-(worker|shared)\.mjs|LICENSE\.txt)$/.test(name)) throw new Error(`Unregistered public artifact: ${name}`);
       count++;
     }
   }

@@ -8,6 +8,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <a className="skip-link" href="#main">Skip to content</a>
     <header className="site-header"><Link className="brand" href="/"><span aria-hidden="true">△</span> Himalayan Disaster Atlas</Link><nav aria-label="Primary navigation"><Link href="/atlas/">Atlas</Link><Link href="/events/">Events</Link><Link href="/analyst/">AI Analyst</Link><Link href="/data-catalog/">Data catalog</Link><Link href="/methodology/">Methodology</Link><Link href="/sources/">Sources</Link></nav></header>
     <main id="main" tabIndex={-1}>{children}</main>
-    <footer>Public read-only atlas · Sources and limitations are linked with every dataset · No warnings or forecasts</footer>
+    <footer>Public read-only atlas · Sources and limitations are linked with every dataset · No warnings or forecasts · <Link href="/licenses/">Licences and attribution</Link></footer>
   </body></html>;
 }

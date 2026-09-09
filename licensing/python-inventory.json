@@ -1,0 +1,191 @@
+{
+  "requirements_sha256": "12e5378d273ac87c40bc6cf8c476f600bbb9021c4f25c46e28ef4218254eb434",
+  "packages": [
+    {
+      "name": "affine",
+      "version": "3.0.1",
+      "license": "BSD-3-Clause",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "arrow",
+      "version": "1.4.0",
+      "license": "Apache Software License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "attrs",
+      "version": "26.1.0",
+      "license": "MIT",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "certifi",
+      "version": "2026.7.22",
+      "license": "Mozilla Public License 2.0 (MPL 2.0)",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "click",
+      "version": "8.5.0",
+      "license": "BSD-3-Clause",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "click-plugins",
+      "version": "1.1.1.2",
+      "license": "BSD License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "cligj",
+      "version": "0.7.2",
+      "license": "BSD",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "fqdn",
+      "version": "1.5.1",
+      "license": "Mozilla Public License 2.0 (MPL 2.0)",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "idna",
+      "version": "3.19",
+      "license": "BSD-3-Clause",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "isoduration",
+      "version": "20.11.0",
+      "license": "ISC License (ISCL)",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "jsonpointer",
+      "version": "3.1.1",
+      "license": "BSD License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "jsonschema",
+      "version": "4.26.0",
+      "license": "MIT",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "jsonschema-specifications",
+      "version": "2025.9.1",
+      "license": "MIT",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "lark",
+      "version": "1.3.1",
+      "license": "MIT License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "numpy",
+      "version": "2.5.3",
+      "license": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "pillow",
+      "version": "12.1.1",
+      "license": "MIT-CMU",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "pyparsing",
+      "version": "3.3.2",
+      "license": "MIT",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "python-dateutil",
+      "version": "2.9.0.post0",
+      "license": "BSD License, Apache Software License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "rasterio",
+      "version": "1.4.4",
+      "license": "BSD License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "referencing",
+      "version": "0.37.0",
+      "license": "MIT",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "rfc3339-validator",
+      "version": "0.1.4",
+      "license": "MIT License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "rfc3986-validator",
+      "version": "0.1.1",
+      "license": "MIT License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "rfc3987-syntax",
+      "version": "1.1.0",
+      "license": "MIT",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "rpds-py",
+      "version": "2026.6.3",
+      "license": "MIT",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "ruff",
+      "version": "0.12.12",
+      "license": "MIT License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "shapely",
+      "version": "2.1.2",
+      "license": "BSD License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "six",
+      "version": "1.17.0",
+      "license": "MIT License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "typing_extensions",
+      "version": "4.16.0",
+      "license": "PSF-2.0",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "tzdata",
+      "version": "2026.3",
+      "license": "Apache-2.0",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "uri-template",
+      "version": "1.3.0",
+      "license": "MIT License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "webcolors",
+      "version": "25.10.0",
+      "license": "BSD License",
+      "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    }
+  ]
+}

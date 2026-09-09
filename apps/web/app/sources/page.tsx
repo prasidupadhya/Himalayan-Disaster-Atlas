@@ -57,6 +57,6 @@ export default function SourcesPage() {
         })}
       </section>;
     })}
-    <section className="source-section"><h2>Attribution and licence discipline</h2><p>The Atlas preserves the licence/attribution text supplied by each release rather than substituting one project-wide licence for upstream data. Where a derived product combines multiple parents, its catalog lineage remains the authoritative path to each parent licence.</p><p>Source links are not credentials. Private account secrets, OAuth tokens, API keys and local acquisition configuration are not published in this directory.</p></section>
+    <section className="source-section"><h2>Attribution and licence discipline</h2><p><Link href="/licenses/">Dataset redistribution review and software notices</Link> identify permitted uses and unresolved publication rights.</p><p>The Atlas preserves the licence/attribution text supplied by each release rather than substituting one project-wide licence for upstream data. Where a derived product combines multiple parents, its catalog lineage remains the authoritative path to each parent licence.</p><p>Source links are not credentials. Private account secrets, OAuth tokens, API keys and local acquisition configuration are not published in this directory.</p></section>
   </div>;
 }

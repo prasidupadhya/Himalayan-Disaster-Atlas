@@ -1,0 +1,795 @@
+{
+  "schema_version": 1,
+  "reviews": {
+    "nepal-admin-country@2.0.0": {
+      "manifest_path": "/data/nepal-admin-country/2.0.0/manifest.json",
+      "manifest_sha256": "4935e7df5ad164daa6b601cbbd037ef9effbbcfff8ebdacd880ca944f2b3d750",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://data.humdata.org/dataset/cod-ab-npl",
+        "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-admin-country@2.0.1": {
+      "manifest_path": "/data/nepal-admin-country/2.0.1/manifest.json",
+      "manifest_sha256": "147b8a0107d5312eb97475adf3e45da4e3dabaa14c245b97904f8e6256c28a0d",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://data.humdata.org/dataset/cod-ab-npl",
+        "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-admin-districts@2.0.0": {
+      "manifest_path": "/data/nepal-admin-districts/2.0.0/manifest.json",
+      "manifest_sha256": "1444809946a9068147c041a6973403a4e88d0be31598b1f790813f412e04f3b3",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://data.humdata.org/dataset/cod-ab-npl",
+        "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-admin-districts@2.0.1": {
+      "manifest_path": "/data/nepal-admin-districts/2.0.1/manifest.json",
+      "manifest_sha256": "a795999741e293a605f94a5e3a9142c141febb9469aa923c28e9d705c41203cf",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://data.humdata.org/dataset/cod-ab-npl",
+        "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-admin-local-levels@2.0.0": {
+      "manifest_path": "/data/nepal-admin-local-levels/2.0.0/manifest.json",
+      "manifest_sha256": "550bc1ff85326d083314e55fa3a78ecfccc4c88423e46ab9ea959642440a1147",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://data.humdata.org/dataset/cod-ab-npl",
+        "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-admin-local-levels@2.0.1": {
+      "manifest_path": "/data/nepal-admin-local-levels/2.0.1/manifest.json",
+      "manifest_sha256": "a0284148b22bd5f643e1f2182c52cd13499c49563af7e96fba1bbc12154b5d85",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://data.humdata.org/dataset/cod-ab-npl",
+        "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-admin-provinces@2.0.0": {
+      "manifest_path": "/data/nepal-admin-provinces/2.0.0/manifest.json",
+      "manifest_sha256": "dd1e1f3181321cc75c86a816cf70a55ec102183298d40827df8421953e253ae7",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://data.humdata.org/dataset/cod-ab-npl",
+        "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-admin-provinces@2.0.1": {
+      "manifest_path": "/data/nepal-admin-provinces/2.0.1/manifest.json",
+      "manifest_sha256": "6c13ffd007b17a531489ef3c0466320d60e3b001eeaeaa226526c25607e2d23f",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://data.humdata.org/dataset/cod-ab-npl",
+        "https://creativecommons.org/licenses/by/3.0/igo/legalcode"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "exposure-trace-40669746-1000m@1.0.0": {
+      "manifest_path": "/data/exposure-trace-40669746-1000m/1.0.0/manifest.json",
+      "manifest_sha256": "e18dabe35077ea75b7a67dac43cfa1997612db8701b42f48e1d55a1d2f1b710a",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [],
+      "reason": "Atlas-derived release: all exact parent reviews must permit publication; mixed-source/database compatibility requires an explicit review.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Preserve every parent licence. Assess ODbL database share-alike and document the licence for the combined product before publication.",
+      "parents": [
+        "nepal-admin-districts@2.0.1",
+        "nepal-osm-emergency-facilities@1.0.0",
+        "nepal-osm-health-facilities@1.0.0",
+        "nepal-osm-hydropower@1.0.0",
+        "nepal-osm-major-bridges@1.0.0",
+        "nepal-osm-major-roads-central@1.0.0",
+        "nepal-osm-major-roads-east@1.0.0",
+        "nepal-osm-major-roads-west@1.0.0",
+        "nepal-osm-schools-central-east@1.0.0",
+        "nepal-osm-schools-central-west@1.0.0",
+        "nepal-osm-schools-east@1.0.0",
+        "nepal-osm-schools-west@1.0.0",
+        "nepal-osm-settlements@1.0.0",
+        "nepal-population@1.0.0",
+        "nepal-rivers-headwaters@1.0.0",
+        "nepal-rivers-primary@1.0.0"
+      ]
+    },
+    "exposure-trace-40669746-250m@1.0.0": {
+      "manifest_path": "/data/exposure-trace-40669746-250m/1.0.0/manifest.json",
+      "manifest_sha256": "f49df7e615db2ef42d28c2f9947cd116ec34ce2781293cf003a9ba6499d6fe16",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [],
+      "reason": "Atlas-derived release: all exact parent reviews must permit publication; mixed-source/database compatibility requires an explicit review.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Preserve every parent licence. Assess ODbL database share-alike and document the licence for the combined product before publication.",
+      "parents": [
+        "nepal-admin-districts@2.0.1",
+        "nepal-osm-emergency-facilities@1.0.0",
+        "nepal-osm-health-facilities@1.0.0",
+        "nepal-osm-hydropower@1.0.0",
+        "nepal-osm-major-bridges@1.0.0",
+        "nepal-osm-major-roads-central@1.0.0",
+        "nepal-osm-major-roads-east@1.0.0",
+        "nepal-osm-major-roads-west@1.0.0",
+        "nepal-osm-schools-central-east@1.0.0",
+        "nepal-osm-schools-central-west@1.0.0",
+        "nepal-osm-schools-east@1.0.0",
+        "nepal-osm-schools-west@1.0.0",
+        "nepal-osm-settlements@1.0.0",
+        "nepal-population@1.0.0",
+        "nepal-rivers-headwaters@1.0.0",
+        "nepal-rivers-primary@1.0.0"
+      ]
+    },
+    "nepal-hazard-graph@1.0.0": {
+      "manifest_path": "/data/nepal-hazard-graph/1.0.0/manifest.json",
+      "manifest_sha256": "02f85b9dd6386c3c5712475b07352feb184e9520779a474e3afbe097cf1af76b",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [],
+      "reason": "Atlas-derived release: all exact parent reviews must permit publication; mixed-source/database compatibility requires an explicit review.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Preserve every parent licence. Assess ODbL database share-alike and document the licence for the combined product before publication.",
+      "parents": [
+        "exposure-trace-40669746-1000m@1.0.0",
+        "exposure-trace-40669746-250m@1.0.0",
+        "nepal-rivers-headwaters@1.0.0",
+        "nepal-rivers-primary@1.0.0"
+      ]
+    },
+    "scenario-network-40669746@1.0.0": {
+      "manifest_path": "/data/scenario-network-40669746/1.0.0/manifest.json",
+      "manifest_sha256": "947796d41da570ac5858c77359ea6f6d80f176c67e31a760b85ee4879f94a4e1",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [],
+      "reason": "Atlas-derived release: all exact parent reviews must permit publication; mixed-source/database compatibility requires an explicit review.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Preserve every parent licence. Assess ODbL database share-alike and document the licence for the combined product before publication.",
+      "parents": [
+        "nepal-rivers-headwaters@1.0.0",
+        "nepal-rivers-primary@1.0.0"
+      ]
+    },
+    "scenario-pulse-40669746@1.0.0": {
+      "manifest_path": "/data/scenario-pulse-40669746/1.0.0/manifest.json",
+      "manifest_sha256": "2a3f0e7c82099d685370fc7089939bc430450f514c146b437de73a8812746fca",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [],
+      "reason": "Atlas-derived release: all exact parent reviews must permit publication; mixed-source/database compatibility requires an explicit review.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Preserve every parent licence. Assess ODbL database share-alike and document the licence for the combined product before publication.",
+      "parents": [
+        "nepal-rivers-headwaters@1.0.0",
+        "nepal-rivers-primary@1.0.0"
+      ]
+    },
+    "nepal-transboundary-glacial-lakes@1.0.0": {
+      "manifest_path": "/data/nepal-transboundary-glacial-lakes/1.0.0/manifest.json",
+      "manifest_sha256": "1fb80925815d35820a9f08b913dc792e68ce112fcce410f385f1e7070c822c8a",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://doi.org/10.5281/zenodo.19370146",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-glaciers-central@1.0.0": {
+      "manifest_path": "/data/nepal-glaciers-central/1.0.0/manifest.json",
+      "manifest_sha256": "1e396f3312186e5b39249007b217cb00b627e17d96e305510b5e93ddc63da40a",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.glims.org/rgi_user_guide/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-glaciers-east@1.0.0": {
+      "manifest_path": "/data/nepal-glaciers-east/1.0.0/manifest.json",
+      "manifest_sha256": "bdc0980757c3926bab7c9e8e3af304d5258b98665808bbca06c93cf4a2f374c3",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.glims.org/rgi_user_guide/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-glaciers-west@1.0.0": {
+      "manifest_path": "/data/nepal-glaciers-west/1.0.0/manifest.json",
+      "manifest_sha256": "7cfece25dcef5c5cbab80015f8bde5593f297079c78b6d83f2cdf6d8759aab7a",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.glims.org/rgi_user_guide/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "foundation-sample@1.0.0": {
+      "manifest_path": "/data/foundation-sample/1.0.0/manifest.json",
+      "manifest_sha256": "422a465613a1717fb09da5bc9ef00a6b41581f2f2ebbb779c11b093fa092eeb9",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://creativecommons.org/publicdomain/zero/1.0/"
+      ],
+      "reason": "Explicit Atlas synthetic fixture dedicated under CC0; not geographic evidence.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "atlas-evidence@1.0.0": {
+      "manifest_path": "/data/atlas-evidence/1.0.0/manifest.json",
+      "manifest_sha256": "caa83397ce630e316a1990cc0c644f65a142f7c2b4886d1fdfa9b2f230c8babd",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [],
+      "reason": "Atlas-derived release: all exact parent reviews must permit publication; mixed-source/database compatibility requires an explicit review.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Preserve every parent licence. Assess ODbL database share-alike and document the licence for the combined product before publication.",
+      "parents": [
+        "atlas-time-index@1.0.0",
+        "exposure-trace-40669746-1000m@1.0.0",
+        "exposure-trace-40669746-250m@1.0.0",
+        "nepal-hazard-graph@1.0.0",
+        "nepal-rivers-headwaters@1.0.0",
+        "nepal-rivers-primary@1.0.0",
+        "nepal-transboundary-glacial-lakes@1.0.0",
+        "phewa-water-change@1.0.0",
+        "scenario-network-40669746@1.0.0",
+        "scenario-pulse-40669746@1.0.0"
+      ]
+    },
+    "atlas-search-index@1.0.0": {
+      "manifest_path": "/data/atlas-search-index/1.0.0/manifest.json",
+      "manifest_sha256": "f4b934b5fb12b1eb9ce3110a11fa3b2aec06ff9b24cc7ed09161c563c7f93deb",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [],
+      "reason": "Atlas-derived release: all exact parent reviews must permit publication; mixed-source/database compatibility requires an explicit review.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Preserve every parent licence. Assess ODbL database share-alike and document the licence for the combined product before publication.",
+      "parents": [
+        "nepal-admin-country@2.0.1",
+        "nepal-admin-districts@2.0.1",
+        "nepal-admin-local-levels@2.0.1",
+        "nepal-admin-provinces@2.0.1",
+        "nepal-disaster-events-2015-2016@1.0.0",
+        "nepal-disaster-events-2017-2018@1.0.0",
+        "nepal-disaster-events-2019-2020@1.0.0",
+        "nepal-disaster-events-2021-2022@1.0.0",
+        "nepal-disaster-events-2023@1.0.0",
+        "nepal-disaster-events-2024@1.0.0",
+        "nepal-disaster-events-2025@1.0.0",
+        "nepal-disaster-events-2026@1.0.0",
+        "nepal-glaciers-central@1.0.0",
+        "nepal-glaciers-east@1.0.0",
+        "nepal-glaciers-west@1.0.0",
+        "nepal-mountains@1.0.0",
+        "nepal-osm-emergency-facilities@1.0.0",
+        "nepal-osm-health-facilities@1.0.0",
+        "nepal-osm-hydropower@1.0.0",
+        "nepal-osm-major-bridges@1.0.0",
+        "nepal-osm-major-roads-central@1.0.0",
+        "nepal-osm-major-roads-east@1.0.0",
+        "nepal-osm-major-roads-west@1.0.0",
+        "nepal-osm-schools-central-east@1.0.0",
+        "nepal-osm-schools-central-west@1.0.0",
+        "nepal-osm-schools-east@1.0.0",
+        "nepal-osm-schools-west@1.0.0",
+        "nepal-osm-settlements@1.0.0",
+        "nepal-region-earthquakes@1.0.0",
+        "nepal-rivers-headwaters@1.0.0",
+        "nepal-rivers-primary@1.0.0",
+        "nepal-transboundary-glacial-lakes@1.0.0"
+      ]
+    },
+    "atlas-time-index@1.0.0": {
+      "manifest_path": "/data/atlas-time-index/1.0.0/manifest.json",
+      "manifest_sha256": "1212e15263fe7836fc53e2494dd24055fe4bf908adccf0b44dd96089618a4d2c",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [],
+      "reason": "Atlas-derived release: all exact parent reviews must permit publication; mixed-source/database compatibility requires an explicit review.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Preserve every parent licence. Assess ODbL database share-alike and document the licence for the combined product before publication.",
+      "parents": [
+        "nepal-disaster-events-2015-2016@1.0.0",
+        "nepal-disaster-events-2017-2018@1.0.0",
+        "nepal-disaster-events-2019-2020@1.0.0",
+        "nepal-disaster-events-2021-2022@1.0.0",
+        "nepal-disaster-events-2023@1.0.0",
+        "nepal-disaster-events-2024@1.0.0",
+        "nepal-disaster-events-2025@1.0.0",
+        "nepal-disaster-events-2026@1.0.0",
+        "nepal-power-climate@1.0.0",
+        "nepal-sentinel-observations@1.0.0",
+        "phewa-water-change@1.0.0"
+      ]
+    },
+    "nepal-mountains@1.0.0": {
+      "manifest_path": "/data/nepal-mountains/1.0.0/manifest.json",
+      "manifest_sha256": "153f53725682dbcb6ffe11fef8b11b67368a663a8a90741cf59f5f3ab2efc1c6",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.geonames.org/export/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-disaster-events-2015-2016@1.0.0": {
+      "manifest_path": "/data/nepal-disaster-events-2015-2016/1.0.0/manifest.json",
+      "manifest_sha256": "bf93b1b0c6797895c9dab4f7c11a1a3cd43f7e8d2bb740ac936b3a658b7fe52a",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-disaster-events-2017-2018@1.0.0": {
+      "manifest_path": "/data/nepal-disaster-events-2017-2018/1.0.0/manifest.json",
+      "manifest_sha256": "1969d1d45b011a6eb51c2937fe7e78231e93553ac523f6d202c1af63f6301a09",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-disaster-events-2019-2020@1.0.0": {
+      "manifest_path": "/data/nepal-disaster-events-2019-2020/1.0.0/manifest.json",
+      "manifest_sha256": "7f6d37d17ccfad004e0d5d1291c6750b1f37d10d254f840b551ca2b457709599",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-disaster-events-2021-2022@1.0.0": {
+      "manifest_path": "/data/nepal-disaster-events-2021-2022/1.0.0/manifest.json",
+      "manifest_sha256": "578da3bb1a93303f03e26471b7095f87b8cce3aeda467efb3bcd99a02cdfd488",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-disaster-events-2023@1.0.0": {
+      "manifest_path": "/data/nepal-disaster-events-2023/1.0.0/manifest.json",
+      "manifest_sha256": "19121ac1eb329e1192e74e6b8bed8e8d60932d56d191685511ff07893f82d45c",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-disaster-events-2024@1.0.0": {
+      "manifest_path": "/data/nepal-disaster-events-2024/1.0.0/manifest.json",
+      "manifest_sha256": "01c0d4e4c1e8fa641716ef4dd4751d14b0aedf42e639d69ed224f60d30c1c4af",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-disaster-events-2025@1.0.0": {
+      "manifest_path": "/data/nepal-disaster-events-2025/1.0.0/manifest.json",
+      "manifest_sha256": "dc87c1aa0eb1e43e986649514592b432ec4771658f54917056d7e025f393d4ff",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-disaster-events-2026@1.0.0": {
+      "manifest_path": "/data/nepal-disaster-events-2026/1.0.0/manifest.json",
+      "manifest_sha256": "3463801a5323af9d343b062f7bcf5e0c4d4aa1d0db3c1c8a82a5385731d5b229",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-reported-floods@1.0.0": {
+      "manifest_path": "/data/nepal-reported-floods/1.0.0/manifest.json",
+      "manifest_sha256": "00818f9620d1c602806d60f6bc58658ed0cffa3d384eda0d6d521168224ea657",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-reported-landslides@1.0.0": {
+      "manifest_path": "/data/nepal-reported-landslides/1.0.0/manifest.json",
+      "manifest_sha256": "398d421b87fbbe3ac14b2f916a86bd1aec14b5a4344da9866eb899445fc4d910",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-region-earthquakes@1.0.0": {
+      "manifest_path": "/data/nepal-region-earthquakes/1.0.0/manifest.json",
+      "manifest_sha256": "d27ff3deb99ae27fa7587dde9f0395f93967c7d3f5a763ebd90d52c12b9d5dfc",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2000-01-01&endtime=2026-09-08&minlatitude=26&maxlatitude=31&minlongitude=80&maxlongitude=89&minmagnitude=2.5&orderby=time-asc&limit=20000",
+        "https://www.usgs.gov/data-management/data-licensing"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-power-climate@1.0.0": {
+      "manifest_path": "/data/nepal-power-climate/1.0.0/manifest.json",
+      "manifest_sha256": "3a737271bd93e467d5e58d9bc623ed99440037bd85447b8ec8a6072dc2d9b4fb",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://power.larc.nasa.gov/api/temporal/monthly/regional",
+        "https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-rainfall-stations@1.0.0": {
+      "manifest_path": "/data/nepal-rainfall-stations/1.0.0/manifest.json",
+      "manifest_sha256": "d9e28ee707a74cb66c8d84f4fa6a7b6f0e89bfd812119a2da60ad527beb1b421",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-hydrology-stations@1.0.0": {
+      "manifest_path": "/data/nepal-hydrology-stations/1.0.0/manifest.json",
+      "manifest_sha256": "dc70c4b1b8ee1620c7b42c4f729b1d6b32990b8ffbfea2ca6905c315aa10a0c1",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://bipadportal.gov.np/api/"
+      ],
+      "reason": "Public API access is documented, but a standalone redistribution grant for these records is not established. Obtain NDRRMA/BIPAD terms or written permission covering public static redistribution.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-rivers-headwaters@1.0.0": {
+      "manifest_path": "/data/nepal-rivers-headwaters/1.0.0/manifest.json",
+      "manifest_sha256": "ff29d64cc4fe14f13ba35fc29cac4f318322be1cd015b358e0b72b0ba210fd76",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://data.fao.org/catalog/dataset/e22667af-3977-4e9f-b58b-67fb91b0fa87",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-rivers-primary@1.0.0": {
+      "manifest_path": "/data/nepal-rivers-primary/1.0.0/manifest.json",
+      "manifest_sha256": "010e37ea447a1a7cba7d5dbc7d3d874c46d868ce1a657c34a6b6ae9aee5d71d6",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://data.fao.org/catalog/dataset/e22667af-3977-4e9f-b58b-67fb91b0fa87",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "phewa-water-change@1.0.0": {
+      "manifest_path": "/data/phewa-water-change/1.0.0/manifest.json",
+      "manifest_sha256": "95c70974db9e06bf54a8292611478f52bd1b83850cc48280c4b085e9e236f4e8",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://earth-search.aws.element84.com/v1/collections/sentinel-2-c1-l2a",
+        "https://cds.climate.copernicus.eu/licences/ec-sentinel"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Display the dated Contains modified Copernicus Sentinel data notice from the release; retain its LICENSE.txt.",
+      "parents": []
+    },
+    "nepal-osm-major-bridges@1.0.0": {
+      "manifest_path": "/data/nepal-osm-major-bridges/1.0.0/manifest.json",
+      "manifest_sha256": "2ebcceecc68d2dbc93ae32edf747efb2ef37b6df3baf18eddc4504069dc4e0fb",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-emergency-facilities@1.0.0": {
+      "manifest_path": "/data/nepal-osm-emergency-facilities/1.0.0/manifest.json",
+      "manifest_sha256": "0c3021dab07334fca317d7546cb4021748b003ac0b25304973ceec95c31e4190",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-health-facilities@1.0.0": {
+      "manifest_path": "/data/nepal-osm-health-facilities/1.0.0/manifest.json",
+      "manifest_sha256": "63bfe59c3f87d88bd01bcb18ca6a4cd2359725da32fb173864f4839b9a077c0d",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-hydropower@1.0.0": {
+      "manifest_path": "/data/nepal-osm-hydropower/1.0.0/manifest.json",
+      "manifest_sha256": "e0a1221b04c0aaeaf0e596a9d54e0fefeee086f2f04939a1503147110625e720",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/copyright",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-major-roads-central@1.0.0": {
+      "manifest_path": "/data/nepal-osm-major-roads-central/1.0.0/manifest.json",
+      "manifest_sha256": "5a025af65d6dc26165d1a211d47abb3ef66ac04df585d2dd2d442f7ba6b45beb",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-major-roads-east@1.0.0": {
+      "manifest_path": "/data/nepal-osm-major-roads-east/1.0.0/manifest.json",
+      "manifest_sha256": "c64a8a17904fb0b3a9ac45fa2eeb1ab0196bab77d6f4c3d0c1ca696a519eb5f2",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-major-roads-west@1.0.0": {
+      "manifest_path": "/data/nepal-osm-major-roads-west/1.0.0/manifest.json",
+      "manifest_sha256": "c59518784551f2abbca85496e1f5965d00facbf832b934624e16e93eb3ef4685",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-schools-central-east@1.0.0": {
+      "manifest_path": "/data/nepal-osm-schools-central-east/1.0.0/manifest.json",
+      "manifest_sha256": "9283ff07804f6b9244bc9b530354b996dc8d096b72e2a6364e7061cd1ac2492e",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-schools-central-west@1.0.0": {
+      "manifest_path": "/data/nepal-osm-schools-central-west/1.0.0/manifest.json",
+      "manifest_sha256": "a37e4cbc1e59ac1a637f7c1b7a0834f79180ce8d81e413ba190d97d9f195dc1d",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-schools-east@1.0.0": {
+      "manifest_path": "/data/nepal-osm-schools-east/1.0.0/manifest.json",
+      "manifest_sha256": "20b7e03d427d3da9b1c3f414b7f6920ecadb078b645929cf90ce1de5de7aaec6",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-schools-west@1.0.0": {
+      "manifest_path": "/data/nepal-osm-schools-west/1.0.0/manifest.json",
+      "manifest_sha256": "f77dd3e5ea7cd8a68e099c23ca2510e57610bd4b133541e3240e10b4a590eb32",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-osm-settlements@1.0.0": {
+      "manifest_path": "/data/nepal-osm-settlements/1.0.0/manifest.json",
+      "manifest_sha256": "4d1bea84e2c6317e0d86533be943b5c630a30fb60723a795c75ecdf3b0cefefe",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://www.openstreetmap.org/",
+        "https://opendatacommons.org/licenses/odbl/1-0/"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "\u00a9 OpenStreetMap contributors. ODbL 1.0 applies to these adapted databases; retain attribution and offer the complete adapted database under ODbL through the catalog artifact link. Original Atlas software remains MIT.",
+      "parents": []
+    },
+    "nepal-population@1.0.0": {
+      "manifest_path": "/data/nepal-population/1.0.0/manifest.json",
+      "manifest_sha256": "d54ba327b028a79e531bb5e783e89a4fc8e22ec3f36cb8d3af89e92fc36b4b46",
+      "status": "REVIEW_REQUIRED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://hub.worldpop.org/geodata/summary?id=74559",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "reason": "Source GeoTIFF declares CC BY 4.0 but the WorldPop product page also imposes ODbL for some building-derived products. Resolve applicability for R2025A constrained Nepal counts and derivative exposure products.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "nepal-sentinel-observations@1.0.0": {
+      "manifest_path": "/data/nepal-sentinel-observations/1.0.0/manifest.json",
+      "manifest_sha256": "f00ae47ccdcccbf200b50c9e4d4502e2357256b0999d2ca91da5bed65dc20831",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://earth-search.aws.element84.com/v1/collections/sentinel-2-c1-l2a",
+        "https://cds.climate.copernicus.eu/licences/ec-sentinel"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Display the dated Contains modified Copernicus Sentinel data notice from the release; retain its LICENSE.txt.",
+      "parents": []
+    },
+    "asia-terrain-context@1.0.0": {
+      "manifest_path": "/data/asia-terrain-context/1.0.0/manifest.json",
+      "manifest_sha256": "10902329f49296416aa4a92ee6443de395324c821a46c676222ecfe72aab7a79",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://registry.opendata.aws/terrain-tiles/",
+        "https://github.com/tilezen/joerd/blob/master/docs/attribution.md"
+      ],
+      "reason": "Mapzen source-specific terms are retained in the release LICENSE.txt, including public-domain SRTM/GMTED2010/ETOPO1 and other contributor notices.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Retain the complete /data/asia-terrain-context/1.0.0/LICENSE.txt inventory and conversion notice.",
+      "parents": []
+    },
+    "nepal-terrain@1.0.0": {
+      "manifest_path": "/data/nepal-terrain/1.0.0/manifest.json",
+      "manifest_sha256": "ad1afe6be41c631f54e1e2c579436a554c6ac6d2f28730146bcf653f2366dad0",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [
+        "https://registry.opendata.aws/copernicus-dem/",
+        "https://dataspace.copernicus.eu/sites/default/files/media/files/2025-06/copernicus_contributing_mission_data_access_v2_cop_dem_licenses.pdf"
+      ],
+      "reason": "Source-specific release metadata records an open redistribution licence, corroborated by the linked provider/licence documentation.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied. Retain the WorldDEM-90 copyright and liability notice in /data/nepal-terrain/1.0.0/LICENSE.txt.",
+      "parents": []
+    },
+    "atlas-provenance@1.0.0": {
+      "manifest_path": "/data/atlas-provenance/1.0.0/manifest.json",
+      "manifest_sha256": "dec4ae251a6a99e324032a624dce59917246d7835165badd5596613bd31a701d",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-09",
+      "evidence_urls": [],
+      "reason": "Original Atlas catalog of source metadata. Does not grant permission to redistribute underlying records.",
+      "obligations": "Retain source-specific notices and distinguish unresolved rights from permitted data.",
+      "parents": []
+    }
+  },
+  "public_tree_sha256": "760601a6d0df62c3bcfcedf08e82ddfccc86eddeb52be235481654584ac7a30a"
+}
