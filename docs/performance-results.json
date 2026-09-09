@@ -1,0 +1,867 @@
+{
+  "baseline_commit": "e7f3c0c",
+  "after_implementation": "feat/performance working tree before commit",
+  "measured_at": "2026-09-09T07:13:10.362Z",
+  "hardware": {
+    "platform": "darwin",
+    "arch": "arm64",
+    "cpu": "Apple M3 Pro",
+    "memory": 19327352832
+  },
+  "renderer": "Chromium SwiftShader, local static server; control roundtrip includes Playwright overhead; heap excludes GPU and worker processes",
+  "scope_notes": [
+    "Single cold/warm run per viewport; not a statistical hardware/device guarantee.",
+    "Before/after primary metrics share the same harness. Settled control latency was added afterward and has no baseline.",
+    "Main-runtime heap excludes worker/GPU memory; it is not total browser memory.",
+    "3D frame intervals include software-renderer work, not hardware-GPU FPS.",
+    "Cold boundary-map readiness did not improve; deferred work, transfer and worker startup have trade-offs."
+  ],
+  "before": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "cache": "cold",
+      "ready_ms": 2183.2000000476837,
+      "network_settled": true,
+      "controls_roundtrip_ms": 2279.699999988079,
+      "frame_gap_p95_2d_ms": 16.799999999999272,
+      "frame_gap_p95_3d_ms": 483.40000000000055,
+      "heap_used_bytes": 102790224,
+      "dom_content_loaded_ms": 37.90000003576279,
+      "resource_body_bytes": 16476105,
+      "network_transfer_bytes": 12730418,
+      "largest_long_task_ms": 2053,
+      "long_task_count": 24,
+      "vector_requests": [
+        {
+          "name": "/data/nepal-admin-districts/2.0.1/features.geojson.gz",
+          "bytes": 310774,
+          "transfer": 311074,
+          "duration": 4.899999976158142
+        },
+        {
+          "name": "/data/nepal-admin-country/2.0.1/features.geojson.gz",
+          "bytes": 53877,
+          "transfer": 54177,
+          "duration": 3.899999976158142
+        },
+        {
+          "name": "/data/nepal-admin-local-levels/2.0.1/features.geojson.gz",
+          "bytes": 848916,
+          "transfer": 849216,
+          "duration": 5.400000035762787
+        },
+        {
+          "name": "/data/nepal-admin-provinces/2.0.1/features.geojson.gz",
+          "bytes": 142902,
+          "transfer": 143202,
+          "duration": 4.199999988079071
+        },
+        {
+          "name": "/data/nepal-rivers-primary/1.0.0/features.geojson.gz",
+          "bytes": 524854,
+          "transfer": 525154,
+          "duration": 8.300000011920929
+        },
+        {
+          "name": "/data/nepal-rivers-headwaters/1.0.0/features.geojson.gz",
+          "bytes": 655646,
+          "transfer": 655946,
+          "duration": 8.399999976158142
+        },
+        {
+          "name": "/data/nepal-mountains/1.0.0/features.geojson.gz",
+          "bytes": 33073,
+          "transfer": 33373,
+          "duration": 6.099999964237213
+        },
+        {
+          "name": "/data/nepal-glaciers-west/1.0.0/features.geojson.gz",
+          "bytes": 703960,
+          "transfer": 704260,
+          "duration": 11.5
+        },
+        {
+          "name": "/data/nepal-transboundary-glacial-lakes/1.0.0/features.geojson.gz",
+          "bytes": 344272,
+          "transfer": 344572,
+          "duration": 9.800000011920929
+        },
+        {
+          "name": "/data/nepal-glaciers-central/1.0.0/features.geojson.gz",
+          "bytes": 248554,
+          "transfer": 248854,
+          "duration": 9
+        },
+        {
+          "name": "/data/nepal-hydrology-stations/1.0.0/features.geojson.gz",
+          "bytes": 20535,
+          "transfer": 20835,
+          "duration": 7.600000023841858
+        },
+        {
+          "name": "/data/nepal-rainfall-stations/1.0.0/features.geojson.gz",
+          "bytes": 43297,
+          "transfer": 43597,
+          "duration": 8.199999988079071
+        },
+        {
+          "name": "/data/nepal-glaciers-east/1.0.0/features.geojson.gz",
+          "bytes": 350176,
+          "transfer": 350476,
+          "duration": 9.5
+        },
+        {
+          "name": "/data/nepal-region-earthquakes/1.0.0/features.geojson.gz",
+          "bytes": 62629,
+          "transfer": 62929,
+          "duration": 10.199999988079071
+        },
+        {
+          "name": "/data/nepal-reported-landslides/1.0.0/features.geojson.gz",
+          "bytes": 333053,
+          "transfer": 333353,
+          "duration": 10.300000011920929
+        },
+        {
+          "name": "/data/nepal-osm-hydropower/1.0.0/features.geojson.gz",
+          "bytes": 3191,
+          "transfer": 3491,
+          "duration": 9.699999988079071
+        },
+        {
+          "name": "/data/nepal-reported-floods/1.0.0/features.geojson.gz",
+          "bytes": 131199,
+          "transfer": 131499,
+          "duration": 8.699999988079071
+        }
+      ],
+      "raster_requests": 63
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "cache": "warm",
+      "ready_ms": 2440.900000035763,
+      "network_settled": true,
+      "controls_roundtrip_ms": 79.80000001192093,
+      "frame_gap_p95_2d_ms": 16.699999999999818,
+      "frame_gap_p95_3d_ms": 400,
+      "heap_used_bytes": 102207016,
+      "dom_content_loaded_ms": 130.5,
+      "resource_body_bytes": 14397289,
+      "network_transfer_bytes": 34200,
+      "largest_long_task_ms": 1859,
+      "long_task_count": 25,
+      "vector_requests": [
+        {
+          "name": "/data/nepal-admin-provinces/2.0.1/features.geojson.gz",
+          "bytes": 142902,
+          "transfer": 300,
+          "duration": 3.300000011920929
+        },
+        {
+          "name": "/data/nepal-admin-country/2.0.1/features.geojson.gz",
+          "bytes": 53877,
+          "transfer": 300,
+          "duration": 2.700000047683716
+        },
+        {
+          "name": "/data/nepal-admin-districts/2.0.1/features.geojson.gz",
+          "bytes": 310774,
+          "transfer": 300,
+          "duration": 3.300000011920929
+        },
+        {
+          "name": "/data/nepal-admin-local-levels/2.0.1/features.geojson.gz",
+          "bytes": 848916,
+          "transfer": 300,
+          "duration": 3.399999976158142
+        },
+        {
+          "name": "/data/nepal-glaciers-west/1.0.0/features.geojson.gz",
+          "bytes": 703960,
+          "transfer": 300,
+          "duration": 10.099999964237213
+        },
+        {
+          "name": "/data/nepal-mountains/1.0.0/features.geojson.gz",
+          "bytes": 33073,
+          "transfer": 300,
+          "duration": 6.5
+        },
+        {
+          "name": "/data/nepal-rivers-headwaters/1.0.0/features.geojson.gz",
+          "bytes": 655646,
+          "transfer": 300,
+          "duration": 11.700000047683716
+        },
+        {
+          "name": "/data/nepal-rivers-primary/1.0.0/features.geojson.gz",
+          "bytes": 524854,
+          "transfer": 300,
+          "duration": 11.100000023841858
+        },
+        {
+          "name": "/data/nepal-transboundary-glacial-lakes/1.0.0/features.geojson.gz",
+          "bytes": 344272,
+          "transfer": 300,
+          "duration": 9.900000035762787
+        },
+        {
+          "name": "/data/nepal-glaciers-east/1.0.0/features.geojson.gz",
+          "bytes": 350176,
+          "transfer": 300,
+          "duration": 11.699999988079071
+        },
+        {
+          "name": "/data/nepal-glaciers-central/1.0.0/features.geojson.gz",
+          "bytes": 248554,
+          "transfer": 300,
+          "duration": 11.199999988079071
+        },
+        {
+          "name": "/data/nepal-hydrology-stations/1.0.0/features.geojson.gz",
+          "bytes": 20535,
+          "transfer": 300,
+          "duration": 9.100000023841858
+        },
+        {
+          "name": "/data/nepal-rainfall-stations/1.0.0/features.geojson.gz",
+          "bytes": 43297,
+          "transfer": 300,
+          "duration": 8.899999976158142
+        },
+        {
+          "name": "/data/nepal-region-earthquakes/1.0.0/features.geojson.gz",
+          "bytes": 62629,
+          "transfer": 300,
+          "duration": 9.100000023841858
+        },
+        {
+          "name": "/data/nepal-reported-floods/1.0.0/features.geojson.gz",
+          "bytes": 131199,
+          "transfer": 300,
+          "duration": 9.299999952316284
+        },
+        {
+          "name": "/data/nepal-reported-landslides/1.0.0/features.geojson.gz",
+          "bytes": 333053,
+          "transfer": 300,
+          "duration": 9.799999952316284
+        },
+        {
+          "name": "/data/nepal-osm-hydropower/1.0.0/features.geojson.gz",
+          "bytes": 3191,
+          "transfer": 300,
+          "duration": 8.199999988079071
+        }
+      ],
+      "raster_requests": 63
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "cache": "cold",
+      "ready_ms": 1441.800000011921,
+      "network_settled": true,
+      "controls_roundtrip_ms": 62.60000002384186,
+      "frame_gap_p95_2d_ms": 16.700000000000273,
+      "frame_gap_p95_3d_ms": 66.59999999999991,
+      "heap_used_bytes": 44833692,
+      "dom_content_loaded_ms": 13.300000011920929,
+      "resource_body_bytes": 8523096,
+      "network_transfer_bytes": 7624752,
+      "largest_long_task_ms": 917,
+      "long_task_count": 9,
+      "vector_requests": [
+        {
+          "name": "/data/nepal-admin-country/2.0.1/features.geojson.gz",
+          "bytes": 53877,
+          "transfer": 54177,
+          "duration": 1.699999988079071
+        },
+        {
+          "name": "/data/nepal-admin-districts/2.0.1/features.geojson.gz",
+          "bytes": 310774,
+          "transfer": 311074,
+          "duration": 3.900000035762787
+        },
+        {
+          "name": "/data/nepal-admin-local-levels/2.0.1/features.geojson.gz",
+          "bytes": 848916,
+          "transfer": 849216,
+          "duration": 5.600000023841858
+        },
+        {
+          "name": "/data/nepal-admin-provinces/2.0.1/features.geojson.gz",
+          "bytes": 142902,
+          "transfer": 143202,
+          "duration": 2.699999988079071
+        },
+        {
+          "name": "/data/nepal-rivers-primary/1.0.0/features.geojson.gz",
+          "bytes": 524854,
+          "transfer": 525154,
+          "duration": 2.800000011920929
+        },
+        {
+          "name": "/data/nepal-rivers-headwaters/1.0.0/features.geojson.gz",
+          "bytes": 655646,
+          "transfer": 655946,
+          "duration": 3
+        }
+      ],
+      "raster_requests": 21
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "cache": "warm",
+      "ready_ms": 1305,
+      "network_settled": true,
+      "controls_roundtrip_ms": 49,
+      "frame_gap_p95_2d_ms": 16.700000000000273,
+      "frame_gap_p95_3d_ms": 16.800000000000182,
+      "heap_used_bytes": 60516240,
+      "dom_content_loaded_ms": 38.40000003576279,
+      "resource_body_bytes": 6444280,
+      "network_transfer_bytes": 15900,
+      "largest_long_task_ms": 893,
+      "long_task_count": 7,
+      "vector_requests": [
+        {
+          "name": "/data/nepal-admin-country/2.0.1/features.geojson.gz",
+          "bytes": 53877,
+          "transfer": 300,
+          "duration": 2.5
+        },
+        {
+          "name": "/data/nepal-admin-provinces/2.0.1/features.geojson.gz",
+          "bytes": 142902,
+          "transfer": 300,
+          "duration": 2.099999964237213
+        },
+        {
+          "name": "/data/nepal-admin-local-levels/2.0.1/features.geojson.gz",
+          "bytes": 848916,
+          "transfer": 300,
+          "duration": 3
+        },
+        {
+          "name": "/data/nepal-admin-districts/2.0.1/features.geojson.gz",
+          "bytes": 310774,
+          "transfer": 300,
+          "duration": 4.200000047683716
+        },
+        {
+          "name": "/data/nepal-rivers-primary/1.0.0/features.geojson.gz",
+          "bytes": 524854,
+          "transfer": 0,
+          "duration": 1.2999999523162842
+        },
+        {
+          "name": "/data/nepal-rivers-headwaters/1.0.0/features.geojson.gz",
+          "bytes": 655646,
+          "transfer": 0,
+          "duration": 1.199999988079071
+        }
+      ],
+      "raster_requests": 21
+    }
+  ],
+  "after": [
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "cache": "cold",
+      "ready_ms": 2661.300000011921,
+      "network_settled": true,
+      "controls_roundtrip_ms": 528.3999999761581,
+      "settled_controls_roundtrip_ms": 70.69999998807907,
+      "frame_gap_p95_2d_ms": 16.799999999999727,
+      "frame_gap_p95_3d_ms": 183.30000000000018,
+      "heap_used_bytes": 54344848,
+      "dom_content_loaded_ms": 100.30000001192093,
+      "resource_body_bytes": 9061939,
+      "network_transfer_bytes": 9087739,
+      "largest_long_task_ms": 1118,
+      "long_task_count": 16,
+      "vector_requests": [
+        {
+          "name": "/data/nepal-admin-country/2.0.1/features.geojson.gz",
+          "bytes": 53877,
+          "transfer": 54177,
+          "duration": 3
+        },
+        {
+          "name": "/data/nepal-admin-provinces/2.0.1/features.geojson.gz",
+          "bytes": 142902,
+          "transfer": 143202,
+          "duration": 3.199999988079071
+        },
+        {
+          "name": "/data/nepal-admin-districts/2.0.1/features.geojson.gz",
+          "bytes": 310774,
+          "transfer": 311074,
+          "duration": 3.900000035762787
+        },
+        {
+          "name": "/data/nepal-admin-local-levels/2.0.1/features.geojson.gz",
+          "bytes": 848916,
+          "transfer": 849216,
+          "duration": 4.600000023841858
+        },
+        {
+          "name": "/data/nepal-rivers-primary/1.0.0/features.geojson.gz",
+          "bytes": 524854,
+          "transfer": 525154,
+          "duration": 3.700000047683716
+        },
+        {
+          "name": "/data/nepal-rivers-headwaters/1.0.0/features.geojson.gz",
+          "bytes": 655646,
+          "transfer": 655946,
+          "duration": 3.199999988079071
+        }
+      ],
+      "raster_requests": 25
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "cache": "warm",
+      "ready_ms": 1563.6000000238419,
+      "network_settled": true,
+      "controls_roundtrip_ms": 90.5,
+      "settled_controls_roundtrip_ms": 70.90000003576279,
+      "frame_gap_p95_2d_ms": 16.799999999999727,
+      "frame_gap_p95_3d_ms": 183.4000000000001,
+      "heap_used_bytes": 87993048,
+      "dom_content_loaded_ms": 272.30000001192093,
+      "resource_body_bytes": 9061939,
+      "network_transfer_bytes": 1800,
+      "largest_long_task_ms": 1066,
+      "long_task_count": 13,
+      "vector_requests": [
+        {
+          "name": "/data/nepal-admin-country/2.0.1/features.geojson.gz",
+          "bytes": 53877,
+          "transfer": 0,
+          "duration": 1.699999988079071
+        },
+        {
+          "name": "/data/nepal-admin-provinces/2.0.1/features.geojson.gz",
+          "bytes": 142902,
+          "transfer": 0,
+          "duration": 1.899999976158142
+        },
+        {
+          "name": "/data/nepal-admin-districts/2.0.1/features.geojson.gz",
+          "bytes": 310774,
+          "transfer": 0,
+          "duration": 2.100000023841858
+        },
+        {
+          "name": "/data/nepal-admin-local-levels/2.0.1/features.geojson.gz",
+          "bytes": 848916,
+          "transfer": 0,
+          "duration": 2.299999952316284
+        },
+        {
+          "name": "/data/nepal-rivers-primary/1.0.0/features.geojson.gz",
+          "bytes": 524854,
+          "transfer": 0,
+          "duration": 0.5999999642372131
+        },
+        {
+          "name": "/data/nepal-rivers-headwaters/1.0.0/features.geojson.gz",
+          "bytes": 655646,
+          "transfer": 0,
+          "duration": 0.6000000238418579
+        }
+      ],
+      "raster_requests": 25
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "cache": "cold",
+      "ready_ms": 1437.4000000357628,
+      "network_settled": true,
+      "controls_roundtrip_ms": 68.90000003576279,
+      "settled_controls_roundtrip_ms": 69.10000002384186,
+      "frame_gap_p95_2d_ms": 16.700000000000273,
+      "frame_gap_p95_3d_ms": 16.800000000000182,
+      "heap_used_bytes": 69362368,
+      "dom_content_loaded_ms": 49,
+      "resource_body_bytes": 7582988,
+      "network_transfer_bytes": 7603988,
+      "largest_long_task_ms": 964,
+      "long_task_count": 8,
+      "vector_requests": [
+        {
+          "name": "/data/nepal-admin-provinces/2.0.1/features.geojson.gz",
+          "bytes": 142902,
+          "transfer": 143202,
+          "duration": 3.800000011920929
+        },
+        {
+          "name": "/data/nepal-admin-country/2.0.1/features.geojson.gz",
+          "bytes": 53877,
+          "transfer": 54177,
+          "duration": 2.799999952316284
+        },
+        {
+          "name": "/data/nepal-admin-local-levels/2.0.1/features.geojson.gz",
+          "bytes": 848916,
+          "transfer": 849216,
+          "duration": 4.800000011920929
+        },
+        {
+          "name": "/data/nepal-admin-districts/2.0.1/features.geojson.gz",
+          "bytes": 310774,
+          "transfer": 311074,
+          "duration": 3.899999976158142
+        },
+        {
+          "name": "/data/nepal-rivers-headwaters/1.0.0/features.geojson.gz",
+          "bytes": 655646,
+          "transfer": 655946,
+          "duration": 4
+        },
+        {
+          "name": "/data/nepal-rivers-primary/1.0.0/features.geojson.gz",
+          "bytes": 524854,
+          "transfer": 525154,
+          "duration": 3
+        }
+      ],
+      "raster_requests": 12
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "cache": "warm",
+      "ready_ms": 1233.1000000238419,
+      "network_settled": true,
+      "controls_roundtrip_ms": 82.80000001192093,
+      "settled_controls_roundtrip_ms": 70.80000001192093,
+      "frame_gap_p95_2d_ms": 16.700000000000273,
+      "frame_gap_p95_3d_ms": 16.800000000000182,
+      "heap_used_bytes": 46910612,
+      "dom_content_loaded_ms": 353.5,
+      "resource_body_bytes": 7582988,
+      "network_transfer_bytes": 1500,
+      "largest_long_task_ms": 938,
+      "long_task_count": 5,
+      "vector_requests": [
+        {
+          "name": "/data/nepal-admin-country/2.0.1/features.geojson.gz",
+          "bytes": 53877,
+          "transfer": 0,
+          "duration": 0.699999988079071
+        },
+        {
+          "name": "/data/nepal-admin-provinces/2.0.1/features.geojson.gz",
+          "bytes": 142902,
+          "transfer": 0,
+          "duration": 0.699999988079071
+        },
+        {
+          "name": "/data/nepal-admin-districts/2.0.1/features.geojson.gz",
+          "bytes": 310774,
+          "transfer": 0,
+          "duration": 0.7000000476837158
+        },
+        {
+          "name": "/data/nepal-admin-local-levels/2.0.1/features.geojson.gz",
+          "bytes": 848916,
+          "transfer": 0,
+          "duration": 0.8999999761581421
+        },
+        {
+          "name": "/data/nepal-rivers-primary/1.0.0/features.geojson.gz",
+          "bytes": 524854,
+          "transfer": 0,
+          "duration": 0.3999999761581421
+        },
+        {
+          "name": "/data/nepal-rivers-headwaters/1.0.0/features.geojson.gz",
+          "bytes": 655646,
+          "transfer": 0,
+          "duration": 0.30000001192092896
+        }
+      ],
+      "raster_requests": 12
+    }
+  ],
+  "exposure": {
+    "scope": "Full Nepal country polygon and published asset partitions; population excluded",
+    "source_load_s": 13.690281209012028,
+    "index_s": 4.035527332976926,
+    "overlay_s": 6.131018707994372,
+    "source_assets": 43656,
+    "matched_assets": 42348,
+    "peak_rss_bytes": 427245568,
+    "platform": "macOS-26.6.2-arm64-arm-64bit"
+  },
+  "river_benchmark": {
+    "scope": "18,299 source reaches; read/decompress/validate/graph and immutable JSON snapshot assertion",
+    "prepare_ms": 467.55625,
+    "hundred_180_reach_traces_ms": 12.284791,
+    "node_measurement": true
+  },
+  "vector_inventory_all_retained_versions": [
+    {
+      "path": "data/releases/exposure-trace-40669746-1000m/1.0.0/spatial.geojson.gz",
+      "compressed_bytes": 123407,
+      "decoded_bytes": 381776
+    },
+    {
+      "path": "data/releases/exposure-trace-40669746-250m/1.0.0/spatial.geojson.gz",
+      "compressed_bytes": 101969,
+      "decoded_bytes": 276627
+    },
+    {
+      "path": "data/releases/nepal-admin-country/2.0.0/features.geojson.gz",
+      "compressed_bytes": 53878,
+      "decoded_bytes": 145211
+    },
+    {
+      "path": "data/releases/nepal-admin-country/2.0.1/features.geojson.gz",
+      "compressed_bytes": 53877,
+      "decoded_bytes": 145211
+    },
+    {
+      "path": "data/releases/nepal-admin-districts/2.0.0/features.geojson.gz",
+      "compressed_bytes": 310633,
+      "decoded_bytes": 1053447
+    },
+    {
+      "path": "data/releases/nepal-admin-districts/2.0.1/features.geojson.gz",
+      "compressed_bytes": 310774,
+      "decoded_bytes": 1053547
+    },
+    {
+      "path": "data/releases/nepal-admin-local-levels/2.0.0/features.geojson.gz",
+      "compressed_bytes": 848891,
+      "decoded_bytes": 3376155
+    },
+    {
+      "path": "data/releases/nepal-admin-local-levels/2.0.1/features.geojson.gz",
+      "compressed_bytes": 848916,
+      "decoded_bytes": 3376250
+    },
+    {
+      "path": "data/releases/nepal-admin-provinces/2.0.0/features.geojson.gz",
+      "compressed_bytes": 142902,
+      "decoded_bytes": 385639
+    },
+    {
+      "path": "data/releases/nepal-admin-provinces/2.0.1/features.geojson.gz",
+      "compressed_bytes": 142902,
+      "decoded_bytes": 385639
+    },
+    {
+      "path": "data/releases/nepal-disaster-events-2015-2016/1.0.0/features.geojson.gz",
+      "compressed_bytes": 127007,
+      "decoded_bytes": 3009578
+    },
+    {
+      "path": "data/releases/nepal-disaster-events-2017-2018/1.0.0/features.geojson.gz",
+      "compressed_bytes": 320202,
+      "decoded_bytes": 6089113
+    },
+    {
+      "path": "data/releases/nepal-disaster-events-2019-2020/1.0.0/features.geojson.gz",
+      "compressed_bytes": 518706,
+      "decoded_bytes": 7611914
+    },
+    {
+      "path": "data/releases/nepal-disaster-events-2021-2022/1.0.0/features.geojson.gz",
+      "compressed_bytes": 531695,
+      "decoded_bytes": 7510128
+    },
+    {
+      "path": "data/releases/nepal-disaster-events-2023/1.0.0/features.geojson.gz",
+      "compressed_bytes": 356832,
+      "decoded_bytes": 5363147
+    },
+    {
+      "path": "data/releases/nepal-disaster-events-2024/1.0.0/features.geojson.gz",
+      "compressed_bytes": 495078,
+      "decoded_bytes": 7734451
+    },
+    {
+      "path": "data/releases/nepal-disaster-events-2025/1.0.0/features.geojson.gz",
+      "compressed_bytes": 465452,
+      "decoded_bytes": 7519001
+    },
+    {
+      "path": "data/releases/nepal-disaster-events-2026/1.0.0/features.geojson.gz",
+      "compressed_bytes": 410030,
+      "decoded_bytes": 7066788
+    },
+    {
+      "path": "data/releases/nepal-glaciers-central/1.0.0/features.geojson.gz",
+      "compressed_bytes": 248554,
+      "decoded_bytes": 1392998
+    },
+    {
+      "path": "data/releases/nepal-glaciers-east/1.0.0/features.geojson.gz",
+      "compressed_bytes": 350176,
+      "decoded_bytes": 1896742
+    },
+    {
+      "path": "data/releases/nepal-glaciers-west/1.0.0/features.geojson.gz",
+      "compressed_bytes": 703960,
+      "decoded_bytes": 4152246
+    },
+    {
+      "path": "data/releases/nepal-hydrology-stations/1.0.0/features.geojson.gz",
+      "compressed_bytes": 20535,
+      "decoded_bytes": 212531
+    },
+    {
+      "path": "data/releases/nepal-mountains/1.0.0/features.geojson.gz",
+      "compressed_bytes": 33073,
+      "decoded_bytes": 356300
+    },
+    {
+      "path": "data/releases/nepal-osm-emergency-facilities/1.0.0/features.geojson.gz",
+      "compressed_bytes": 52242,
+      "decoded_bytes": 725119
+    },
+    {
+      "path": "data/releases/nepal-osm-health-facilities/1.0.0/features.geojson.gz",
+      "compressed_bytes": 258773,
+      "decoded_bytes": 3710680
+    },
+    {
+      "path": "data/releases/nepal-osm-hydropower/1.0.0/features.geojson.gz",
+      "compressed_bytes": 3191,
+      "decoded_bytes": 33307
+    },
+    {
+      "path": "data/releases/nepal-osm-major-bridges/1.0.0/features.geojson.gz",
+      "compressed_bytes": 137389,
+      "decoded_bytes": 2240943
+    },
+    {
+      "path": "data/releases/nepal-osm-major-roads-central/1.0.0/features.geojson.gz",
+      "compressed_bytes": 217002,
+      "decoded_bytes": 2375672
+    },
+    {
+      "path": "data/releases/nepal-osm-major-roads-east/1.0.0/features.geojson.gz",
+      "compressed_bytes": 129317,
+      "decoded_bytes": 1236808
+    },
+    {
+      "path": "data/releases/nepal-osm-major-roads-west/1.0.0/features.geojson.gz",
+      "compressed_bytes": 150345,
+      "decoded_bytes": 1416508
+    },
+    {
+      "path": "data/releases/nepal-osm-schools-central-east/1.0.0/features.geojson.gz",
+      "compressed_bytes": 478066,
+      "decoded_bytes": 7040978
+    },
+    {
+      "path": "data/releases/nepal-osm-schools-central-west/1.0.0/features.geojson.gz",
+      "compressed_bytes": 263381,
+      "decoded_bytes": 4023950
+    },
+    {
+      "path": "data/releases/nepal-osm-schools-east/1.0.0/features.geojson.gz",
+      "compressed_bytes": 197113,
+      "decoded_bytes": 2912021
+    },
+    {
+      "path": "data/releases/nepal-osm-schools-west/1.0.0/features.geojson.gz",
+      "compressed_bytes": 425642,
+      "decoded_bytes": 6440286
+    },
+    {
+      "path": "data/releases/nepal-osm-settlements/1.0.0/features.geojson.gz",
+      "compressed_bytes": 196074,
+      "decoded_bytes": 2973285
+    },
+    {
+      "path": "data/releases/nepal-rainfall-stations/1.0.0/features.geojson.gz",
+      "compressed_bytes": 43297,
+      "decoded_bytes": 489488
+    },
+    {
+      "path": "data/releases/nepal-region-earthquakes/1.0.0/features.geojson.gz",
+      "compressed_bytes": 62629,
+      "decoded_bytes": 778137
+    },
+    {
+      "path": "data/releases/nepal-reported-floods/1.0.0/features.geojson.gz",
+      "compressed_bytes": 131199,
+      "decoded_bytes": 2355604
+    },
+    {
+      "path": "data/releases/nepal-reported-landslides/1.0.0/features.geojson.gz",
+      "compressed_bytes": 333053,
+      "decoded_bytes": 6569635
+    },
+    {
+      "path": "data/releases/nepal-rivers-headwaters/1.0.0/features.geojson.gz",
+      "compressed_bytes": 655646,
+      "decoded_bytes": 8218099
+    },
+    {
+      "path": "data/releases/nepal-rivers-primary/1.0.0/features.geojson.gz",
+      "compressed_bytes": 524854,
+      "decoded_bytes": 5843839
+    },
+    {
+      "path": "data/releases/nepal-transboundary-glacial-lakes/1.0.0/features.geojson.gz",
+      "compressed_bytes": 344272,
+      "decoded_bytes": 3695819
+    },
+    {
+      "path": "data/releases/scenario-network-40669746/1.0.0/path.geojson.gz",
+      "compressed_bytes": 5194,
+      "decoded_bytes": 52116
+    },
+    {
+      "path": "data/releases/scenario-pulse-40669746/1.0.0/path.geojson.gz",
+      "compressed_bytes": 5194,
+      "decoded_bytes": 52116
+    }
+  ],
+  "terrain_inventory": [
+    {
+      "dataset": "nepal-terrain",
+      "tile_count": 341,
+      "total_bytes": 31978602,
+      "largest_tile_bytes": 135192
+    },
+    {
+      "dataset": "asia-terrain-context",
+      "tile_count": 682,
+      "total_bytes": 21329285,
+      "largest_tile_bytes": 129765
+    }
+  ]
+}

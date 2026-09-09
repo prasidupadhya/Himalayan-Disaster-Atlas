@@ -16,7 +16,7 @@ The mobile Atlas preserves the same scientific meanings, evidence labels and pro
 
 The administrative map, Search, Compare, Time Machine, Simulation/Scenario controls, Hazard Graph controls, Location Explorer, Water Change, Terrain, Rivers/downstream tracing and Exposure remain immediately available. On viewports at or below 800 px, larger secondary thematic datasets are deferred behind **Load additional map datasets**. This prevents a phone from fetching mountains, glaciers, glacial lakes, stations, hazard archives, hydropower, population, satellite and climate payloads before the user requests them while preserving the core analytical workflows.
 
-Desktop behavior remains unchanged. Once a mobile visitor opts in, the same components, artifacts, checksums, dates, evidence labels and limitations are loaded as on desktop; this is a delivery optimization, not a reduced scientific mode.
+Feature 38 extends the same opt-in gate to desktop and adds an unload action that disposes secondary layers and resets their selections. Once a mobile visitor opts in, the same components, artifacts, checksums, dates, evidence labels and limitations are loaded as on desktop; this is a delivery optimization, not a reduced scientific mode.
 
 ## Map interaction
 

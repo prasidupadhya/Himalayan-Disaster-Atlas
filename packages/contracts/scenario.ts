@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import requestSchema from '../../schemas/scenario-request.schema.json';
@@ -22,8 +23,8 @@ export interface ScenarioResult {
   validation: { status: 'synthetic_analytic_cases_only'; real_event_validation: false }; limitations: string[];
 }
 const ajv = new Ajv({ allErrors: true, strict: true }); addFormats(ajv);
-const requestValidator = ajv.compile<ScenarioDefinition>(requestSchema);
-const resultValidator = ajv.compile<ScenarioResult>(resultSchema);
+const requestValidator = lazyValidator(() => ajv.compile<ScenarioDefinition>(requestSchema));
+const resultValidator = lazyValidator(() => ajv.compile<ScenarioResult>(resultSchema));
 export function parseScenarioDefinition(value: unknown): ScenarioDefinition {
   if (!requestValidator(value)) throw new Error(`Invalid scenario definition: ${ajv.errorsText(requestValidator.errors)}`);
   const model = value.model.id;

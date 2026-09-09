@@ -5,7 +5,7 @@ test.use({ timezoneId: 'Asia/Kathmandu' });
 test('UTC timeline synchronizes imagery, gaps, climate months and event days', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/atlas/');
+  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const timeline = page.getByRole('region', { name: 'Time Machine', exact: true });
   const water = page.getByRole('region', { name: 'Water Change', exact: true });
   const satellite = page.getByRole('region', { name: 'Satellite', exact: true });
@@ -46,7 +46,7 @@ test('UTC timeline synchronizes imagery, gaps, climate months and event days', a
 });
 
 test('date browsing is explicit and invalid comparisons remain unavailable', async ({ page }) => {
-  await page.goto('/atlas/');
+  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const timeline = page.getByRole('region', { name: 'Time Machine', exact: true });
   const water = page.getByRole('region', { name: 'Water Change', exact: true });
   await expect(timeline).toHaveAttribute('data-time-machine-state', 'ready');
@@ -65,7 +65,7 @@ test('date browsing is explicit and invalid comparisons remain unavailable', asy
 
 test('a corrupt temporal index is not cached and can be retried', async ({ page }) => {
   await page.route('**/atlas-time-index/1.0.0/index.json', route => route.fulfill({ body: '{}' }));
-  await page.goto('/atlas/');
+  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const timeline = page.getByRole('region', { name: 'Time Machine', exact: true });
   await expect(timeline).toHaveAttribute('data-time-machine-state', 'error');
   await expect(timeline.getByLabel('Synchronize observation date')).toBeDisabled();
@@ -79,7 +79,7 @@ test('late imagery cannot restore an obsolete date after a gap is selected', asy
     await new Promise(resolve => setTimeout(resolve, 1000));
     await route.continue().catch(() => {});
   });
-  await page.goto('/atlas/');
+  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const timeline = page.getByRole('region', { name: 'Time Machine', exact: true });
   const water = page.getByRole('region', { name: 'Water Change', exact: true });
   await expect(timeline).toHaveAttribute('data-time-machine-state', 'ready');

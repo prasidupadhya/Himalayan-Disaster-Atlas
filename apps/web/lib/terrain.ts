@@ -1,15 +1,19 @@
 import { parseTerrainIndex, parseTerrainManifest, terrainPixel, type TerrainIndex, type TerrainManifest } from '../../../packages/contracts/terrain';
 import { readBounded } from './datasets';
+import { VerifiedByteCache } from './verified-byte-cache';
 
 export const TERRAIN_MANIFEST = '/data/nepal-terrain/1.0.0/manifest.json';
 export const CONTEXT_MANIFEST = '/data/asia-terrain-context/1.0.0/manifest.json';
 export interface TerrainDataset { manifest: TerrainManifest; index: TerrainIndex }
 
+const terrainBytes = new VerifiedByteCache(8 * 1024 * 1024);
 async function verified(path: string, expected: { byte_size: number; sha256: string }, signal?: AbortSignal) {
-  const bytes = await readBounded(await fetch(path, { signal }), Math.min(expected.byte_size, 262144));
-  const hash = await crypto.subtle.digest('SHA-256', bytes);
-  if (bytes.length !== expected.byte_size || Array.from(new Uint8Array(hash), n => n.toString(16).padStart(2, '0')).join('') !== expected.sha256) throw new Error('Terrain checksum failed');
-  return bytes;
+  return terrainBytes.get(`${path}:${expected.sha256}:${expected.byte_size}`, async sharedSignal => {
+    const bytes = await readBounded(await fetch(path, { signal: sharedSignal }), Math.min(expected.byte_size, 262144));
+    const hash = await crypto.subtle.digest('SHA-256', bytes);
+    if (bytes.length !== expected.byte_size || Array.from(new Uint8Array(hash), n => n.toString(16).padStart(2, '0')).join('') !== expected.sha256) throw new Error('Terrain checksum failed');
+    return bytes;
+  }, signal);
 }
 
 export async function loadTerrain(signal?: AbortSignal, path = TERRAIN_MANIFEST): Promise<TerrainDataset> {

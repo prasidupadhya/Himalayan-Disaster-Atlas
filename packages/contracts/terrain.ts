@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import commonSchema from '../../schemas/dataset.schema.json';
@@ -17,7 +18,7 @@ export type TerrainIndex = Record<string, { sha256: string; byte_size: number }>
 const ajv = new Ajv({ allErrors: true, strict: true });
 addFormats(ajv);
 ajv.addSchema(commonSchema);
-const validate = ajv.compile<TerrainManifest>(schema);
+const validate = lazyValidator(() => ajv.compile<TerrainManifest>(schema));
 
 export function parseTerrainManifest(input: unknown): TerrainManifest {
   if (!validate(input)) throw new Error(`Invalid terrain manifest: ${ajv.errorsText(validate.errors)}`);

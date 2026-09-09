@@ -109,6 +109,7 @@ test('map and climate have non-visual alternatives and high-contrast UI keeps ex
   await page.goto('/atlas/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
   await expect(page.locator('#atlas-map-alternative')).toContainText('textual details');
+  await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   await expect(page.locator('[aria-label="Climate"]')).toHaveAttribute('data-climate-state', 'ready');
   const description = await page.locator('.climate-chart desc').textContent();
   expect(description).toContain('Jan');

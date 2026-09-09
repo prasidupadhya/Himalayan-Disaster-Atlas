@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import schema from '../../schemas/exposure.schema.json';
@@ -22,7 +23,7 @@ export interface ExposureResult {
 export type ExposureSpatial = FeatureCollection<Geometry, { kind: 'asset' | 'footprint'; asset_id?: string; name?: string | null; categories?: string[] }>;
 const ajv = new Ajv({ allErrors: true, strict: true });
 addFormats(ajv);
-const validate = ajv.compile<ExposureResult>(schema);
+const validate = lazyValidator(() => ajv.compile<ExposureResult>(schema));
 
 export function parseExposure(input: unknown): ExposureResult {
   if (!validate(input)) throw new Error(`Invalid exposure result: ${ajv.errorsText(validate.errors)}`);

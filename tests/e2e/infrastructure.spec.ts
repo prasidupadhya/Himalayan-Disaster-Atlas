@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
 test('infrastructure loads on demand with independent evidence-traceable classes', async ({ page }) => {
-  await page.goto('/atlas/');
+  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const section = page.getByRole('region', { name: 'Infrastructure', exact: true });
   await expect(section).toHaveAttribute('data-infrastructure-state', 'idle');
   await section.getByLabel('Load infrastructure inventory').check();

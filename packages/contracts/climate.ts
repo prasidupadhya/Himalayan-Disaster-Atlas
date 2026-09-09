@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import addFormats from 'ajv-formats';
 import schema from '../../schemas/climate.schema.json';
@@ -50,7 +51,7 @@ export interface ClimateManifest {
 
 const ajv = new Ajv({ allErrors: true, strict: true });
 addFormats(ajv);
-const validate = ajv.compile<ClimateManifest>(schema);
+const validate = lazyValidator(() => ajv.compile<ClimateManifest>(schema));
 
 export function parseClimateManifest(input: unknown): ClimateManifest {
   if (!validate(input)) throw new Error(`Invalid climate manifest: ${ajv.errorsText(validate.errors)}`);

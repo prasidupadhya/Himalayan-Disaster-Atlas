@@ -127,3 +127,7 @@ Feature 36 keeps the desktop component architecture but adds a phone-width deliv
 ## Accessibility
 
 Feature 37 treats non-visual access as part of correctness. Root landmarks and skip targets are explicit; the map points to an equivalent textual boundary workflow; dynamic Search/Catalog/Compare/Simulation results receive focus only after user actions; statuses are live/atomic; climate SVG output has a complete textual series; evidence status is always textual; and high-contrast/forced-colors modes retain structural borders. Playwright performs cross-route structural and keyboard audits in addition to feature E2E. See [accessibility contract](../accessibility.md).
+
+## Performance
+
+Feature 38 uses an explicit optional-layer boundary on desktop and mobile, lazy schema compilation, a serial cancellable vector-validation worker and an 8 MiB verified terrain-byte cache. Existing immutable artifacts and scientific checks are unchanged. Map rasterization/tile retention and transient decode queues have explicit limits. See [performance measurements, budgets and compatibility limits](../performance.md).

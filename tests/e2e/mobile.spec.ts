@@ -9,7 +9,7 @@ test('phone layout defers large thematic data and keeps core touch workflows usa
   page.on('request', request => { if (HEAVY.test(request.url())) heavyRequests.push(request.url()); });
   await page.goto('/atlas/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
-  const gate = page.getByRole('region', { name: 'Mobile data loading' });
+  const gate = page.getByRole('region', { name: 'Additional data loading' });
   await expect(gate).toHaveAttribute('data-mobile-data', 'deferred');
   expect(heavyRequests).toEqual([]);
 

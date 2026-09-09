@@ -1,3 +1,4 @@
+import { lazyValidator } from './lazy-validator';
 import Ajv from 'ajv';
 import searchSchema from '../../schemas/search.schema.json';
 import shardSchema from '../../schemas/search-shard.schema.json';
@@ -33,8 +34,8 @@ export interface SearchManifest {
 }
 
 const ajv = new Ajv({ allErrors: true, strict: true });
-const validateManifest = ajv.compile<SearchManifest>(searchSchema);
-const validateShard = ajv.compile<SearchRecord[]>(shardSchema);
+const validateManifest = lazyValidator(() => ajv.compile<SearchManifest>(searchSchema));
+const validateShard = lazyValidator(() => ajv.compile<SearchRecord[]>(shardSchema));
 
 export function normalizeSearchTerm(value: string) {
   return value.normalize('NFKD').replace(/\p{M}/gu, '').toLocaleLowerCase('en-US').replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' ');
