@@ -1,14 +1,18 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { releaseDirectory } from './public-release-policy.mjs';
 import { createHash } from 'node:crypto';
 const root = fileURLToPath(new URL('..', import.meta.url));
-export function checkStaticExport(output = resolve(root, 'apps/web/out')) {
+export function checkStaticExport(output = resolve(root, 'apps/web/out'), { excludedReleases = [] } = {}) {
+  const excluded = excludedReleases.map(key => releaseDirectory(key).slice(1));
+  const isExcluded = name => excluded.some(prefix => name.startsWith(prefix));
   let count = 0; let bytes = 0;
   const hash = value => createHash('sha256').update(value).digest('hex');
   function visit(directory) {
     for (const entry of readdirSync(directory, { withFileTypes: true })) {
       const path = resolve(directory, entry.name); const name = relative(output, path);
+      if (isExcluded(name + (entry.isDirectory() ? "/" : ""))) throw new Error(`Excluded public artifact: ${name}`);
       if (entry.isSymbolicLink()) throw new Error(`Static symlink: ${name}`);
       if (entry.isDirectory()) { visit(path); continue; }
       if (/(?:^|\/)(?:node_modules|raw|processed|\.env|\.git)(?:\/|$)|\.(?:node|so|dylib|dll|py|pyc|map)$/.test(name)) throw new Error(`Non-public build artifact: ${name}`);
@@ -26,6 +30,7 @@ export function checkStaticExport(output = resolve(root, 'apps/web/out')) {
   // Ensure an old/incomplete export cannot pass simply by omitting public files.
   function requirePublic(directory, prefix = '') {
     for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      if (isExcluded(`${prefix}${entry.name}/`)) continue;
       if (entry.isDirectory()) requirePublic(resolve(directory, entry.name), `${prefix}${entry.name}/`);
       else if (!existsSync(resolve(output, prefix, entry.name))) throw new Error(`Missing public output: ${prefix}${entry.name}`);
     }

@@ -32,8 +32,12 @@ jobs:
       - run: .venv/bin/python -m pip install -r requirements.lock
       - run: npx --no-install playwright install --with-deps chromium
       - run: npm run check
+      - run: npm run build:research
       - run: npm run test:e2e
       - run: npm run test:e2e:cloudflare
+      - run: npm run build
+      - run: npm run test:e2e:public
+      - run: npm run release:check
       - name: Retain tested static export
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:

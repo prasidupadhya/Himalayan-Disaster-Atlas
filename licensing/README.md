@@ -6,4 +6,4 @@ The root MIT licence applies to original Atlas software and original documentati
 
 Do not change a status just to make a build green. Resolve it using source-specific redistribution evidence, record the decision and obligations in a reviewed commit, and republish changed data as a new immutable version. An alternative is a separately tested export that removes both unresolved data and all dependent records/artifacts; hiding a layer in the UI is insufficient.
 
-No existing source release is rewritten by this audit. Local `npm run build` remains a research preview; `npm run release:check` is the publication gate.
+No existing source release is rewritten by this audit. `npm run build` creates a reduced public export, while `npm run build:research` retains the complete local preview; `npm run release:check` is the publication gate.
