@@ -198,10 +198,12 @@ export function Atlas() {
 
   return <div className="atlas-workspace">
     <aside className="atlas-panel">
-      <p className="eyebrow">Nepal / terrain & boundaries</p>
-      <h1>Explore Nepal’s terrain & boundaries</h1>
-      <p>Explore the landscape with Copernicus terrain and verified COD-AB v02 administrative records.</p>
-      <DataState state={resource} retry={retry} />
+      <div className="atlas-panel-header">
+        <p className="eyebrow">Nepal / terrain & boundaries</p>
+        <h1>Explore Nepal’s terrain & boundaries</h1>
+        <p>Explore the landscape with Copernicus terrain and verified COD-AB v02 administrative records.</p>
+        <DataState state={resource} retry={retry} />
+      </div>
       <section className="layer-controls" aria-label="Map layers"><h2>Boundary levels</h2>
         {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
@@ -240,7 +242,7 @@ export function Atlas() {
           }
         }}>Reset view</button>
       </div>
-      <p className="muted">Data attribution: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors (ODbL)</a> · <a href="/licenses/">Terrain and all source licences</a></p>
+      <p className="muted map-attribution-note">Data attribution: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors (ODbL)</a> · <a href="/licenses/">Terrain and all source licences</a></p>
       <section className="feature-list" id="accessible-boundary-records" tabIndex={-1} aria-label="Accessible boundary records">
         <h2>Identify an administrative unit</h2>
         <p className="muted">The searchable list provides the same identification as clicking the map.</p>
