@@ -27,7 +27,7 @@ export function auditDatasets(reviews, manifests) {
   for (const key of keys) visit(key);
   return [...blocked].sort();
 }
-export function checkLicenses({ publication = false } = {}) {
+export function checkLicenses({ publication = false, excludedReleases = [] } = {}) {
   const { reviews, public_tree_sha256 } = read('licensing/datasets.json');
   const tree = createHash('sha256');
   function hashTree(directory, prefix = '') {
@@ -64,7 +64,9 @@ export function checkLicenses({ publication = false } = {}) {
     if (!policy.allowed_expressions.includes(entry.license)) throw new Error(`Unreviewed software licence: ${path}`);
     if (entry.license.includes('LGPL') && !path.includes('/@img/sharp-')) throw new Error(`Unreviewed LGPL redistribution: ${path}`);
   }
-  if (publication && blocked.length) throw new Error(`Publication blocked by unresolved dataset rights (${blocked.length} releases): ${blocked.join(', ')}. See /licenses/ and licensing/datasets.json.`);
+  if (excludedReleases.some(key => !blocked.includes(key))) throw new Error('Only blocked releases may be excluded by the publication gate');
+  const unresolved = blocked.filter(key => !excludedReleases.includes(key));
+  if (publication && unresolved.length) throw new Error(`Publication blocked by unresolved dataset rights (${unresolved.length} releases): ${unresolved.join(', ')}. See /licenses/ and licensing/datasets.json.`);
   console.log(`Licence ledger verified: ${manifests.length} releases, ${blocked.length} publication blockers; dependency licence expressions reviewed.`);
   return blocked;
 }

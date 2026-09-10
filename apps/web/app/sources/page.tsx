@@ -1,3 +1,4 @@
+import { isReleaseIncluded } from '../../lib/public-release';
 import Link from 'next/link';
 import catalogJson from '../../public/data/atlas-provenance/1.0.0/manifest.json';
 import { buildSourceDirectory, currentProductionRecords, parseProvenanceCatalog, type ProvenanceRecord } from '../../../../packages/contracts/provenance';
@@ -22,8 +23,8 @@ function sectionRecords(records: ProvenanceRecord[], anchor: string) {
 
 export default function SourcesPage() {
   const catalog = parseProvenanceCatalog(catalogJson);
-  const records = currentProductionRecords(catalog);
-  const directory = buildSourceDirectory(catalog.records);
+  const records = currentProductionRecords(catalog).filter(record => isReleaseIncluded(record.key));
+  const directory = buildSourceDirectory(catalog.records.filter(record => isReleaseIncluded(record.key)));
   const byKey = new Map(records.map(record => [record.key, record]));
   return <div className="page sources-page">
     <p className="eyebrow">Sources</p><h1>Trace every production layer to its source.</h1>

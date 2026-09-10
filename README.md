@@ -315,3 +315,7 @@ Performance architecture defers secondary datasets on every screen, validates ve
 CI runs the full quality gate and static browser suite on pull requests and main. See [CI/CD setup and required repository rules](docs/ci-cd.md).
 
 Original software is MIT; upstream data and dependencies keep their own licences. See [licensing findings and publication blockers](docs/licensing.md). Cloudflare deployment configuration, local runtime preview, and rollback instructions are in [deployment](docs/deployment.md).
+
+### Deployable public export
+
+`npm run build` now excludes datasets pending redistribution review and their dependent features. Run `npm run test:e2e:public` and `npm run release:check`, then deploy with the existing Cloudflare command. `npm run build:research` retains all features for local use; run the complete `npm run test:e2e` suite against that profile, then rebuild the public profile before deployment. See [release profiles and Cloudflare setup](docs/deployment.md).
