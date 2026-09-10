@@ -56,7 +56,9 @@
     "upload:cloudflare": "wrangler versions upload",
     "test:e2e:cloudflare": "playwright test --config playwright.cloudflare.config.ts",
     "contracts:generate": "node scripts/compile-validators.mjs",
-    "contracts:check": "node scripts/compile-validators.mjs --check"
+    "contracts:check": "node scripts/compile-validators.mjs --check",
+    "build:research": "node scripts/build.mjs --research",
+    "test:e2e:public": "playwright test --config playwright.public.config.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
