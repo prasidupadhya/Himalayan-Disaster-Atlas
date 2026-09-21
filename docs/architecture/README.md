@@ -145,3 +145,7 @@ Production CSP requires the 17 browser schemas to use checked-in AJV standalone 
 ## Public and research release profiles
 
 Root `npm run build` uses a reduced public profile. Its webpack replacement policy excludes feature entry points that require unresolved datasets and rejects accidental blocked-manifest imports. The output removes the full transitive blocked release set, preserves every retained artifact byte, and includes a deterministic file inventory verified again before upload. Catalog and Sources filter availability without rewriting the original immutable provenance metadata. A shared availability notice and explicit route states explain omissions as unavailable, never zero. `npm run build:research` preserves every original feature for local validation and cannot pass the publication gate. CI tests both profiles and publishes only the tested public export. See [deployment](../deployment.md).
+
+## Taste-guided interface refinement
+
+The landing overview renders checksum-verified COD-AB display polygons on the server, so it needs neither a second MapLibre instance nor runtime API requests. Navigation is the only new client leaf; it owns active-route and mobile disclosure state. Release availability uses native details, and map shortcuts use normal document anchors with focusable targets. No layer lifecycle, analysis, source artifact or public-release selection changes. See [UI audit and design rationale](../ui-ux-polish.md).

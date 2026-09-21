@@ -21,7 +21,7 @@
     "data:admin": ".venv/bin/python -m pipelines.atlas_pipeline.admin_boundaries",
     "data:validate": ".venv/bin/python -m pipelines.atlas_pipeline.validate",
     "security:check": "node scripts/check-security.mjs",
-    "check": "npm run contracts:check && npm run data:sample && npm run data:validate && npm run test:python && npm run test && npm run typecheck && npm run lint && npm run lint:python && npm run build",
+    "check": "npm run ui:check && npm run contracts:check && npm run data:sample && npm run data:validate && npm run test:python && npm run test && npm run typecheck && npm run lint && npm run lint:python && npm run build",
     "lint:python": ".venv/bin/ruff check pipelines processing tests/python",
     "test:hydration": "playwright test --config playwright.hydration.config.ts",
     "data:terrain": ".venv/bin/python -m pipelines.atlas_pipeline.terrain",
@@ -58,7 +58,9 @@
     "contracts:generate": "node scripts/compile-validators.mjs",
     "contracts:check": "node scripts/compile-validators.mjs --check",
     "build:research": "node scripts/build.mjs --research",
-    "test:e2e:public": "playwright test --config playwright.public.config.ts"
+    "test:e2e:public": "playwright test --config playwright.public.config.ts",
+    "ui:generate": "node scripts/prepare-overview.mjs",
+    "ui:check": "node scripts/prepare-overview.mjs --check"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

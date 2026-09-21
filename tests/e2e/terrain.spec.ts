@@ -30,7 +30,7 @@ test('terrain renders locally, toggles and inspects elevation independently of e
   await terrain.getByRole('button', { name: 'Inspect elevation' }).click();
   await expect(terrain.getByText('Elevation: UNKNOWN — outside terrain coverage.')).toBeVisible();
   await page.locator('.map-shell').screenshot({ path: 'test-results/terrain-desktop.png' });
-  await page.getByRole('navigation').getByRole('link', { name: 'Sources', exact: true }).click();
+  await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'Sources', exact: true }).click();
   expect(errors).toEqual([]);
   expect(external).toEqual([]);
 });

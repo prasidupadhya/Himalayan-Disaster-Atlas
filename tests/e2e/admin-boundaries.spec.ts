@@ -14,7 +14,7 @@ test('static navigation, WebGL, boundary controls and accessible identification'
   page.on('pageerror', error => errors.push(error.message));
   page.on('request', request => { if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url()); });
   await page.goto('/');
-  await page.getByRole('link', { name: /Explore Nepal’s boundaries/ }).click();
+  await page.getByRole('link', { name: 'Explore Nepal', exact: true }).click();
   const map = page.getByRole('region', { name: 'Interactive Nepal administrative boundary map' });
   await expect(map).toHaveAttribute('data-map-ready', 'true');
   await expect(page.locator('canvas')).toBeVisible();
@@ -39,7 +39,7 @@ test('static navigation, WebGL, boundary controls and accessible identification'
   await page.locator('.map-shell').screenshot({ path: 'test-results/admin-boundaries-desktop.png' });
 
   for (const [name, path] of [['Data catalog', '/data-catalog/'], ['Methodology', '/methodology/'], ['Sources', '/sources/']]) {
-    await page.getByRole('navigation').getByRole('link', { name, exact: true }).click();
+    await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name, exact: true }).click();
     await expect(page).toHaveURL(new RegExp(`${path}$`));
     await expect(page.locator('main h1')).toBeVisible();
   }

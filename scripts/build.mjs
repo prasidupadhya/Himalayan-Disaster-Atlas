@@ -1,3 +1,4 @@
+import { prepareOverview } from './prepare-overview.mjs';
 import { rmSync } from 'node:fs';
 import { preparePublicExport } from './public-export.mjs';
 import { spawnSync } from 'node:child_process';
@@ -12,6 +13,7 @@ import { prepareMapWorker } from './prepare-map-worker.mjs';
 // Hosted builds may invoke the web workspace script from apps/web.
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
 compileValidators({ check: true });
+prepareOverview({ check: true });
 checkLicenses();
 prepareSoftwareNotices();
 prepareMapWorker();

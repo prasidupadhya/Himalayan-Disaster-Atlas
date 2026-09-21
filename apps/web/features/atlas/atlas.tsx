@@ -203,8 +203,9 @@ export function Atlas() {
         <h1>Explore Nepal’s terrain & boundaries</h1>
         <p>Explore the landscape with Copernicus terrain and verified COD-AB v02 administrative records.</p>
         <DataState state={resource} retry={retry} />
+        <nav className="atlas-shortcuts" aria-label="Atlas controls"><a href="#boundary-controls">Boundaries</a><a href="#terrain-controls">Terrain</a><a href="#river-controls">Rivers</a><a href="#additional-controls">More layers</a></nav>
       </div>
-      <section className="layer-controls" aria-label="Map layers"><h2>Boundary levels</h2>
+      <section id="boundary-controls" tabIndex={-1} className="layer-controls" aria-label="Map layers"><h2>Boundary levels</h2>
         {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
@@ -216,9 +217,10 @@ export function Atlas() {
       <TimeMachine value={temporal} onChange={setTemporal} />
       <LocationExplorer key={`location-explorer-${attempt}`} map={mapReady ? mapRef.current : null} adminDatasets={datasets} />
       <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? mapRef.current : null} />
-      <Terrain key={attempt} map={mapReady ? mapRef.current : null} />
-      <Rivers key={`rivers-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <div id="terrain-controls" tabIndex={-1} className="atlas-anchor"><Terrain key={attempt} map={mapReady ? mapRef.current : null} /></div>
+      <div id="river-controls" tabIndex={-1} className="atlas-anchor"><Rivers key={`rivers-${attempt}`} map={mapReady ? mapRef.current : null} /></div>
       <ExposureEngine key={`exposure-${attempt}`} map={mapReady ? mapRef.current : null} />
+      <div id="additional-controls" tabIndex={-1} className="atlas-anchor">
       {!additionalLayers && <section className="thematic-controls mobile-data-gate" aria-label="Additional data loading" data-mobile-data="deferred">
         <h2>Additional map datasets</h2>
         <p>To keep the core map responsive, larger secondary thematic datasets are deferred. Mountains, glaciers, lakes, stations, hazards, infrastructure, population, satellite and climate remain available with their full scientific labels and provenance. Rivers/downstream tracing and Exposure remain loaded as core analytical workflows.</p>
@@ -226,6 +228,7 @@ export function Atlas() {
       </section>}
       {additionalLayers && <button type="button" onClick={() => setAdditionalLayers(false)}>Unload additional map datasets</button>}
       {additionalLayers && <AdditionalLayers attempt={attempt} temporal={temporal} map={mapReady ? mapRef.current : null} />}
+      </div>
       {evidence && <Evidence metadata={evidence} />}
     </aside>
     <div className="map-column">

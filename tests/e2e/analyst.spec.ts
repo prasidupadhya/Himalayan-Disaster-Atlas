@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 test('analyst answers methodology with exact source citations and refuses unsupported follow-ups', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('link', { name: 'AI Analyst', exact: true }).click();
+  await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'Analyst', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'Ask the Atlas.' })).toBeVisible();
   await page.getByLabel('Your question').fill('Explain water change');
   await page.getByRole('button', { name: 'Ask analyst' }).click();

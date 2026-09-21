@@ -1,13 +1,14 @@
 import { expect, test } from '@playwright/test';
 
-test('home presents the finished atlas with terrain context and a direct exploration path', async ({ page }) => {
+test('home presents the atlas with source-backed geography and a direct exploration path', async ({ page }) => {
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1, name: 'Himalayan Disaster Atlas' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Explore Nepal' })).toHaveAttribute('href', '/atlas/');
 
-  const terrain = page.getByRole('complementary', { name: 'Terrain workspace preview' });
-  await expect(terrain).toContainText('Copernicus GLO-90');
-  await expect(terrain).toContainText('not a measured terrain profile');
+  const overview = page.getByRole('img', { name: 'Nepal’s seven provinces' });
+  await expect(overview).toBeVisible();
+  await expect(overview).toContainText('orientation, not measurement');
+  await expect(page.getByRole('link', { name: 'COD-AB v02 · source & limitations' })).toHaveAttribute('href', '/methodology/#administrative-method');
   await expect(page.getByText('753', { exact: true })).toBeVisible();
 });
 
@@ -45,9 +46,10 @@ test('evidence and scenario states retain explicit non-color cues', async ({ pag
   expect(warningMarker).not.toBe('normal');
 });
 
-test('mobile shell keeps every primary destination visible without horizontal page overflow', async ({ page }) => {
+test('mobile menu exposes every primary destination without horizontal page overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/atlas/');
+  await page.getByRole('button', { name: 'Menu', exact: true }).click();
   for (const label of ['Atlas', 'Events', 'Analyst', 'Data catalog', 'Methodology', 'Sources']) {
     await expect(page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: label, exact: true })).toBeVisible();
   }
