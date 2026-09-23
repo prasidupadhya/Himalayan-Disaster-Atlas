@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 test('scenario inspection keeps modelled assumptions and partial coverage visible', async ({ page }) => {
   const errors: string[] = []; page.on('pageerror', e => errors.push(e.message));
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const section = page.getByRole('region', { name: 'Scenario Engine', exact: true });
   await section.getByLabel('Inspect prepared scenarios').check();
   await expect(section).toHaveAttribute('data-scenario-state', 'ready');
@@ -24,7 +24,7 @@ test('scenario inspection keeps modelled assumptions and partial coverage visibl
 });
 test('corrupt scenario output never renders and can be retried', async ({ page }) => {
   await page.route('**/scenario-network-40669746/1.0.0/result.json.gz', route => route.fulfill({ body: 'bad' }));
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const section = page.getByRole('region', { name: 'Scenario Engine', exact: true });
   await section.getByLabel('Inspect prepared scenarios').check();
   await expect(section).toHaveAttribute('data-scenario-state', 'error');

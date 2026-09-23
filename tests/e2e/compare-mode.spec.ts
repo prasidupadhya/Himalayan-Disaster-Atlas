@@ -4,7 +4,7 @@ test('compare mode shows compatible mountain metrics and blocks cross-type compa
   test.setTimeout(90_000);
   const external: string[] = [];
   page.on('request', request => { if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url()); });
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const compare = page.getByRole('region', { name: 'Compare Mode' });
 
   await compare.getByRole('searchbox', { name: 'Search A' }).fill('Everest');

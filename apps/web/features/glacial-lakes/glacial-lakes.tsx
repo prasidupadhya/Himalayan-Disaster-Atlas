@@ -13,7 +13,7 @@ function measurement(value: number | null | undefined, digits = 4) {
   return value === null || value === undefined ? 'UNKNOWN' : value.toLocaleString('en-US', { maximumFractionDigits: digits });
 }
 
-export function GlacialLakes({ map }: { map: Map | null }) {
+export function GlacialLakes({ map, onSelect }: { map: Map | null; onSelect?: (id: string | null) => void }) {
   const [resource, setResource] = useState<Resource<Dataset>>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -70,6 +70,7 @@ export function GlacialLakes({ map }: { map: Map | null }) {
     return items.slice().sort((a, b) => (b.properties.area_km2 ?? 0) - (a.properties.area_km2 ?? 0) || a.properties.source_id!.localeCompare(b.properties.source_id!)).slice(0, 180);
   }, [dataset, query]);
   const feature = dataset?.collection.features.find(item => item.id === selected);
+  useEffect(() => { onSelect?.(feature?.properties.source_id ?? null); }, [feature?.properties.source_id, onSelect]);
   const counts = useMemo(() => {
     const result = { Nepal: 0, China: 0, India: 0 };
     for (const item of dataset?.collection.features ?? []) {

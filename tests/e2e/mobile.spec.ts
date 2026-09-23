@@ -7,7 +7,7 @@ test('phone layout defers large thematic data and keeps core touch workflows usa
   const page = await context.newPage();
   const heavyRequests: string[] = [];
   page.on('request', request => { if (HEAVY.test(request.url())) heavyRequests.push(request.url()); });
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
   const gate = page.getByRole('region', { name: 'Additional data loading' });
   await expect(gate).toHaveAttribute('data-mobile-data', 'deferred');
@@ -46,7 +46,7 @@ test('public scientific pages fit portrait and short landscape mobile viewports'
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), path).toBe(true);
   }
   await page.setViewportSize({ width: 844, height: 390 });
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
   const mapBox = await page.locator('.map-shell').boundingBox();
   expect(mapBox!.height).toBeLessThanOrEqual(390 * .7);

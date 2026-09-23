@@ -319,3 +319,9 @@ Original software is MIT; upstream data and dependencies keep their own licences
 ### Deployable public export
 
 `npm run build` now excludes datasets pending redistribution review and their dependent features. Run `npm run test:e2e:public` and `npm run release:check`, then deploy with the existing Cloudflare command. `npm run build:research` retains all features for local use; run the complete `npm run test:e2e` suite against that profile, then rebuild the public profile before deployment. See [release profiles and Cloudflare setup](docs/deployment.md).
+
+### Focused exploration and physical GLOF work
+
+Explore Nepal (`/atlas/`) now prioritizes glacial lakes, rivers, terrain, administrative identification and opt-in infrastructure. The wider scientific tools and historical layers are available in `/research/`. River-name lookup uses a separate source gazetteer and does not invent names for HydroRIVERS reaches. See [the naming audit and scope](docs/focused-exploration.md).
+
+A separate [offline physical GLOF project](processing/glof/README.md) covers input assessment across the Nepal/transboundary lake inventory. Its shallow-water solver has synthetic verification cases; no real-lake inundation or destruction prediction is validated or published. It requires reviewed terrain, bathymetry, breach and boundary-condition inputs before a physical research run.

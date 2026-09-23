@@ -19,7 +19,7 @@ export default function Home() {
     <section className="home-pathways page" aria-labelledby="pathways-title">
       <h2 id="pathways-title">Choose a starting point.</h2>
       <div className="pathway-layout">
-        <Link className="pathway-primary" href="/atlas/#atlas-map"><span className="pathway-label">Explore the landscape</span><h3>From the mountains<br />to the river network.</h3><p>Inspect terrain, follow a downstream path, or compare dated imagery. Source records stay within reach.</p><span className="pathway-destination">Open the map <span aria-hidden="true">↗</span></span></Link>
+        <Link className="pathway-primary" href="/atlas/#atlas-map"><span className="pathway-label">Explore the landscape</span><h3>From the mountains<br />to the river network.</h3><p>Find glacial lakes, follow downstream rivers, and explore nearby infrastructure. Source records stay within reach.</p><span className="pathway-destination">Open the map <span aria-hidden="true">↗</span></span></Link>
         <div className="pathway-secondary">
           <Link href="/data-catalog/"><h3>Know what powers the map.</h3><p>Find versioned releases, processing history, coverage and download links.</p><span className="pathway-destination">Browse the data catalog <span aria-hidden="true">↗</span></span></Link>
           <Link href="/methodology/"><h3>Read the method, then the result.</h3><p>Understand how observations, derived data and hypothetical scenarios differ.</p><span className="pathway-destination">Read the methodology <span aria-hidden="true">↗</span></span></Link>

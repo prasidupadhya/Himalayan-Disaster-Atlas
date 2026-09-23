@@ -41,9 +41,9 @@ async function structuralAudit(page: Page) {
 }
 
 test('core public pages pass structural semantic audit', async ({ page }) => {
-  for (const path of ['/atlas/', '/events/', '/analyst/', '/evidence/', '/data-catalog/', '/methodology/', '/sources/']) {
+  for (const path of ['/research/', '/events/', '/analyst/', '/evidence/', '/data-catalog/', '/methodology/', '/sources/']) {
     await page.goto(path);
-    if (path === '/atlas/') await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
+    if (path === '/research/') await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
     const audit = await structuralAudit(page);
     expect(audit.mainCount, `${path} main landmarks`).toBe(1);
     expect(audit.h1Count, `${path} level-one headings`).toBeGreaterThanOrEqual(1);
@@ -56,7 +56,7 @@ test('core public pages pass structural semantic audit', async ({ page }) => {
 });
 
 test('keyboard users can skip map, search and reach dynamic results', async ({ page }) => {
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
 
   await page.keyboard.press('Tab');
@@ -91,7 +91,7 @@ test('catalog and simulation move focus to newly requested detail/results', asyn
   await expect(page.locator('#catalog-detail')).toBeFocused();
   await expect(page.locator('#catalog-detail')).toContainText('Stable identity');
 
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
   const simulation = page.getByRole('region', { name: 'Simulation UI' });
   const open = simulation.getByLabel('Open simulation workbench');
@@ -106,7 +106,7 @@ test('catalog and simulation move focus to newly requested detail/results', asyn
 });
 
 test('map and climate have non-visual alternatives and high-contrast UI keeps explicit borders', async ({ page }) => {
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
   await expect(page.locator('#atlas-map-alternative')).toContainText('textual details');
   await page.getByRole('button', { name: 'Load additional map datasets' }).click();

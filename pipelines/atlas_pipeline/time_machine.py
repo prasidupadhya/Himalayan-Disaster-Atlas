@@ -19,7 +19,7 @@ def stamp(date):
     return date.isoformat().replace('+00:00', 'Z')
 
 
-def derive():
+def derive(context_keys=None):
     inputs, products, used = [], [], set()
 
     def read(dataset):
@@ -73,6 +73,8 @@ def derive():
         m = value.get('metadata', value)
         if m.get('dataset_id') in used or 'dataset_id' not in m:
             continue
+        if context_keys is not None and (m['dataset_id'], m['dataset_version']) not in context_keys:
+            continue
         context.append({'dataset_id': m['dataset_id'], 'version': m['dataset_version'], 'observation_date': m['observation_date'], 'coverage': m['temporal_coverage'], 'resolution': m['temporal_resolution']})
     return {'schema_version': '1.0.0', 'products': products, 'inputs': inputs, 'context': context}
 
@@ -84,7 +86,7 @@ def verify_time_index(path, public=None):
     manifest = json.loads((path / 'manifest.json').read_text())
     index = json.loads(raw)
     Draft7Validator(schema, format_checker=FormatChecker()).validate(index)
-    if manifest != {'kind': 'temporal-index', 'version': '1.0.0', 'artifact': {'path': BASE + 'index.json', 'sha256': digest(raw), 'byte_size': len(raw)}} or index != derive():
+    if manifest != {'kind': 'temporal-index', 'version': '1.0.0', 'artifact': {'path': BASE + 'index.json', 'sha256': digest(raw), 'byte_size': len(raw)}} or index != derive({(item['dataset_id'], item['version']) for item in index['context']}):
         raise ValueError('Temporal index or inputs differ from immutable releases')
     if public and any((path / name).read_bytes() != (public / name).read_bytes() for name in ['index.json', 'manifest.json']):
         raise ValueError('Public temporal index differs')

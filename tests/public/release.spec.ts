@@ -15,7 +15,7 @@ test('public pages explain omissions without requesting excluded artifacts', asy
   const errors: string[] = []; const requests: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('request', request => requests.push(new URL(request.url()).pathname));
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   await expect(page.locator('[data-map-ready="true"]')).toBeVisible();
   await expect(page.getByLabel('Public release availability')).toContainText('reviewed datasets only');
   await expect(page.getByRole('region', { name: 'Scenario Engine', exact: true })).toBeVisible();

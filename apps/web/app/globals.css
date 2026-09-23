@@ -597,3 +597,5 @@ tbody th { color: var(--ink-strong); }
 @media (forced-colors: active) {
   .site-header nav a[aria-current="page"] { border-color: Highlight; }
 }
+
+.river-name-label, .administrative-name-label { max-width: 16rem; padding: .35rem .55rem; background: var(--paper); color: var(--ink); border: 1px solid var(--accent); font-size: .8rem; font-weight: 650; pointer-events: none; }

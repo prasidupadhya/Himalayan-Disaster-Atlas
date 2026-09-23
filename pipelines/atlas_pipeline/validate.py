@@ -25,7 +25,7 @@ def main():
         metadata = json.loads(path.read_text())
         if metadata.get('kind') == 'provenance-catalog':
             verify_provenance(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
-            print('Valid: atlas-provenance@1.0.0')
+            print('Valid: atlas-provenance@' + metadata['version'])
             continue
         if metadata.get('kind') == 'evidence-release':
             verify_rag(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))

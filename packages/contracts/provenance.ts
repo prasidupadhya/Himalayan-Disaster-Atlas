@@ -15,7 +15,7 @@ export interface ProvenanceRecord {
   artifacts: Array<{ path: string; sha256: string; byte_size: number }>; parents: ProvenanceParent[]; transformations: string[];
   methodology_href: string; source_href: string; map_href: string | null;
 }
-export interface ProvenanceCatalog { schema_version: '1.0.0'; kind: 'provenance-catalog'; version: '1.0.0'; generated_from_count: number; records: ProvenanceRecord[] }
+export interface ProvenanceCatalog { schema_version: '1.0.0'; kind: 'provenance-catalog'; version: string; generated_from_count: number; records: ProvenanceRecord[] }
 
 const validate = compiledValidator<ProvenanceCatalog>(validateGenerated);
 export function parseProvenanceCatalog(value: unknown): ProvenanceCatalog {

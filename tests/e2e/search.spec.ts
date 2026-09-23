@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('global search finds typed source-backed entities and preserves ambiguity', async ({ page, baseURL }) => {
   const external: string[] = [];
   page.on('request', request => { if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url()); });
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const search = page.getByRole('region', { name: 'Global Search' });
   await search.getByRole('searchbox', { name: 'Search the atlas' }).fill('Everest');
   await search.getByRole('button', { name: 'Search atlas' }).click();

@@ -149,3 +149,9 @@ Root `npm run build` uses a reduced public profile. Its webpack replacement poli
 ## Taste-guided interface refinement
 
 The landing overview renders checksum-verified COD-AB display polygons on the server, so it needs neither a second MapLibre instance nor runtime API requests. Navigation is the only new client leaf; it owns active-route and mobile disclosure state. Release availability uses native details, and map shortcuts use normal document anchors with focusable targets. No layer lifecycle, analysis, source artifact or public-release selection changes. See [UI audit and design rationale](../ui-ux-polish.md).
+
+## Focused exploration and physical modelling
+
+`/atlas/` now composes the focused lake/river workflow; `/research/` explicitly retains the broader workspace. Optional infrastructure and the educational simulator mount only on request in the focused view. A separate GeoNames stream-point release supplies name lookup without inventing topology joins. The active provenance catalog is 1.1.0; historical 1.0.0 stays immutable. The offline ANUGA project writes only research outputs and cannot publish a physical footprint through the educational network adapter. See [scope and naming audit](../focused-exploration.md) and [physical model requirements](../../processing/glof/README.md).
+
+The physical batch runner accounts for every source lake and only executes supplied, identified inputs. Missing inputs and rejected runs remain explicit. The static website has no model execution endpoint; a new reviewed physical-output contract is required before publication of any such run.

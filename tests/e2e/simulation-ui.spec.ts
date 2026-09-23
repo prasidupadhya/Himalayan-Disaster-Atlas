@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('simulation UI validates parameters, runs modelled scenarios and compares compatible runs', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const section = page.getByRole('region', { name: 'Simulation UI', exact: true });
   await expect(section).toContainText('MODELLED SCENARIO — NOT AN OFFICIAL FORECAST');
   await section.getByLabel('Open simulation workbench').check();
@@ -57,7 +57,7 @@ test('simulation UI validates parameters, runs modelled scenarios and compares c
 
 test('simulation UI fails closed when the verified scenario basis is corrupt and supports retry', async ({ page }) => {
   await page.route('**/scenario-network-40669746/1.0.0/result.json.gz', route => route.fulfill({ body: 'corrupt' }));
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const section = page.getByRole('region', { name: 'Simulation UI', exact: true });
   await section.getByLabel('Open simulation workbench').check();
   await expect(section).toHaveAttribute('data-simulation-state', 'error');

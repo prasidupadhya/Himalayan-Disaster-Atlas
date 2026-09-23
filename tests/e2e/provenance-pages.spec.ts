@@ -7,7 +7,7 @@ test('provenance flows from atlas evidence into catalog, methodology and sources
     if (['http:', 'https:'].includes(url.protocol) && url.hostname !== '127.0.0.1') external.push(request.url());
   });
 
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
   const boundary = page.locator('.record-picker select');
   const firstValue = await boundary.locator('option').nth(1).getAttribute('value');

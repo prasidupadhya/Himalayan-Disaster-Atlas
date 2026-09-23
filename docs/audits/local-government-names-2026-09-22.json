@@ -1,0 +1,6124 @@
+{
+  "reviewed_on": "2026-09-22",
+  "source_url": "https://ec.nsonepal.gov.np/html/admin_code.html",
+  "source_sha256": "c7eeefdaf7cd03cb797e54bb1c1cb6e8ecdd4b5a204919166b573663d442ce61",
+  "scope": "Spelling comparison only; not a spatial or identifier crosswalk, or exhaustive settlement inventory. Administrative suffixes, whitespace and case ignored.",
+  "records": [
+    {
+      "pcode": "NP0101301",
+      "source_name": "Phungling",
+      "matching_directory_names": [
+        "Phungling Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0101401",
+      "source_name": "Phaktanlung",
+      "matching_directory_names": [
+        "Phaktanlung Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0101402",
+      "source_name": "Mikwakhola",
+      "matching_directory_names": [
+        "Mikwakhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0101403",
+      "source_name": "Sirijanga",
+      "matching_directory_names": [
+        "Sirijanga Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0101404",
+      "source_name": "Meringden",
+      "matching_directory_names": [
+        "Meringden Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0101405",
+      "source_name": "Maiwakhola",
+      "matching_directory_names": [
+        "Maiwakhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0101406",
+      "source_name": "Aatharai Tribeni",
+      "matching_directory_names": [
+        "Aatharai Tribeni Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0101407",
+      "source_name": "Pathivara Yangwarak",
+      "matching_directory_names": [
+        "Pathivara Yangwarak Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0101408",
+      "source_name": "Sidingba",
+      "matching_directory_names": [
+        "Sidingba Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0102301",
+      "source_name": "Phidim",
+      "matching_directory_names": [
+        "Phidim Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0102401",
+      "source_name": "Hilihan",
+      "matching_directory_names": [
+        "Hilihan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0102402",
+      "source_name": "Yangbarak",
+      "matching_directory_names": [
+        "Yangbarak Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0102403",
+      "source_name": "Falelung",
+      "matching_directory_names": [
+        "Falelung Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0102404",
+      "source_name": "Kummayak",
+      "matching_directory_names": [
+        "Kummayak Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0102405",
+      "source_name": "Falgunanda",
+      "matching_directory_names": [
+        "Falgunanda Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0102406",
+      "source_name": "Tumbewa",
+      "matching_directory_names": [
+        "Tumbewa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0102407",
+      "source_name": "Miklajung",
+      "matching_directory_names": [
+        "Miklajung Gaunpalika",
+        "Miklajung Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0103301",
+      "source_name": "Deumai",
+      "matching_directory_names": [
+        "Deumai Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0103302",
+      "source_name": "Illam",
+      "matching_directory_names": [
+        "Illam Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0103303",
+      "source_name": "Suryodaya",
+      "matching_directory_names": [
+        "Suryodaya Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0103304",
+      "source_name": "Mai",
+      "matching_directory_names": [
+        "Mai Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0103401",
+      "source_name": "Fakfokathum",
+      "matching_directory_names": [
+        "Fakfokathum Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0103402",
+      "source_name": "Sandakpur",
+      "matching_directory_names": [
+        "Sandakpur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0103403",
+      "source_name": "Mai Jogmai",
+      "matching_directory_names": [
+        "Mai Jogmai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0103404",
+      "source_name": "Chulachuli",
+      "matching_directory_names": [
+        "Chulachuli Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0103405",
+      "source_name": "Mangsebung",
+      "matching_directory_names": [
+        "Mangsebung Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0103406",
+      "source_name": "Rong",
+      "matching_directory_names": [
+        "Rong Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104301",
+      "source_name": "Damak",
+      "matching_directory_names": [
+        "Damak Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104302",
+      "source_name": "Shivasatakshi",
+      "matching_directory_names": [
+        "Shivasatakshi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104303",
+      "source_name": "Kankai",
+      "matching_directory_names": [
+        "Kankai Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104304",
+      "source_name": "Arjundhara",
+      "matching_directory_names": [
+        "Arjundhara Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104305",
+      "source_name": "Mechinagar",
+      "matching_directory_names": [
+        "Mechinagar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104306",
+      "source_name": "Gauradaha",
+      "matching_directory_names": [
+        "Gauradaha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104307",
+      "source_name": "Birtamod",
+      "matching_directory_names": [
+        "Birtamod Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104308",
+      "source_name": "Bhadrapur",
+      "matching_directory_names": [
+        "Bhadrapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104401",
+      "source_name": "Kamal",
+      "matching_directory_names": [
+        "Kamal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104402",
+      "source_name": "Buddhashanti",
+      "matching_directory_names": [
+        "Buddhashanti Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104403",
+      "source_name": "Gauriganj",
+      "matching_directory_names": [
+        "Gauriganj Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104404",
+      "source_name": "Jhapa",
+      "matching_directory_names": [
+        "Jhapa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104405",
+      "source_name": "Barhadashi",
+      "matching_directory_names": [
+        "Barhadashi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104406",
+      "source_name": "Haldibari",
+      "matching_directory_names": [
+        "Haldibari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0104407",
+      "source_name": "Kachanakawal",
+      "matching_directory_names": [
+        "Kachanakawal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105101",
+      "source_name": "Biratnagar",
+      "matching_directory_names": [
+        "Biratnagar Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105301",
+      "source_name": "Letang",
+      "matching_directory_names": [
+        "Letang Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105302",
+      "source_name": "Sundarharaicha",
+      "matching_directory_names": [
+        "Sundarharaicha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105303",
+      "source_name": "Belbari",
+      "matching_directory_names": [
+        "Belbari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105304",
+      "source_name": "Pathari Shanishchare",
+      "matching_directory_names": [
+        "Pathari Shanishchare Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105305",
+      "source_name": "Urlabari",
+      "matching_directory_names": [
+        "Urlabari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105306",
+      "source_name": "Rangeli",
+      "matching_directory_names": [
+        "Rangeli Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105307",
+      "source_name": "Sunwarshi",
+      "matching_directory_names": [
+        "Sunwarshi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105308",
+      "source_name": "Ratuwamai",
+      "matching_directory_names": [
+        "Ratuwamai Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105401",
+      "source_name": "Kerabari",
+      "matching_directory_names": [
+        "Kerabari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105402",
+      "source_name": "Miklajung",
+      "matching_directory_names": [
+        "Miklajung Gaunpalika",
+        "Miklajung Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105403",
+      "source_name": "Kanepokhari",
+      "matching_directory_names": [
+        "Kanepokhari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105404",
+      "source_name": "Budhiganga",
+      "matching_directory_names": [
+        "Budhiganga Gaunpalika",
+        "Budhiganga Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105405",
+      "source_name": "Gramthan",
+      "matching_directory_names": [
+        "Gramthan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105406",
+      "source_name": "Katahari",
+      "matching_directory_names": [
+        "Katahari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105407",
+      "source_name": "Jahada",
+      "matching_directory_names": [
+        "Jahada Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0105408",
+      "source_name": "Dhanapalthan",
+      "matching_directory_names": [
+        "Dhanapalthan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106201",
+      "source_name": "Dharan",
+      "matching_directory_names": [
+        "Dharan Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106202",
+      "source_name": "Itahari",
+      "matching_directory_names": [
+        "Itahari Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106301",
+      "source_name": "Barahachhetra",
+      "matching_directory_names": [
+        "Barahachhetra Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106302",
+      "source_name": "Ramdhuni",
+      "matching_directory_names": [
+        "Ramdhuni Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106303",
+      "source_name": "Inaruwa",
+      "matching_directory_names": [
+        "Inaruwa Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106304",
+      "source_name": "Duhabi",
+      "matching_directory_names": [
+        "Duhabi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106401",
+      "source_name": "Koshi",
+      "matching_directory_names": [
+        "Koshi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106402",
+      "source_name": "Bhokraha Narsingh",
+      "matching_directory_names": [
+        "Bhokraha Narsingh Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106403",
+      "source_name": "Gadhi",
+      "matching_directory_names": [
+        "Gadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106404",
+      "source_name": "Harinagar",
+      "matching_directory_names": [
+        "Harinagar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106405",
+      "source_name": "Dewangunj",
+      "matching_directory_names": [
+        "Dewangunj Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0106406",
+      "source_name": "Barju",
+      "matching_directory_names": [
+        "Barju Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0107301",
+      "source_name": "Mahalaxmi",
+      "matching_directory_names": [
+        "Mahalaxmi Municipality",
+        "Mahalaxmi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0107302",
+      "source_name": "Pakhribas",
+      "matching_directory_names": [
+        "Pakhribas Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0107303",
+      "source_name": "Dhankuta",
+      "matching_directory_names": [
+        "Dhankuta Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0107401",
+      "source_name": "Shahidbhumi",
+      "matching_directory_names": [
+        "Shahidbhumi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0107402",
+      "source_name": "Chhathar Jorpati",
+      "matching_directory_names": [
+        "Chhathar Jorpati Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0107403",
+      "source_name": "Sangurigadhi",
+      "matching_directory_names": [
+        "Sangurigadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0107404",
+      "source_name": "Chaubise",
+      "matching_directory_names": [
+        "Chaubise Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0108301",
+      "source_name": "Laligurans",
+      "matching_directory_names": [
+        "Laligurans Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0108302",
+      "source_name": "Myanglung",
+      "matching_directory_names": [
+        "Myanglung Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0108401",
+      "source_name": "Menchhayayem",
+      "matching_directory_names": [
+        "Menchhayayem Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0108402",
+      "source_name": "Phedap",
+      "matching_directory_names": [
+        "Phedap Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0108403",
+      "source_name": "Aatharai",
+      "matching_directory_names": [
+        "Aatharai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0108404",
+      "source_name": "Chhathar",
+      "matching_directory_names": [
+        "Chhathar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0109301",
+      "source_name": "Khandabari",
+      "matching_directory_names": [
+        "Khandabari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0109302",
+      "source_name": "Panchakhapan",
+      "matching_directory_names": [
+        "Panchakhapan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0109303",
+      "source_name": "Chainapur",
+      "matching_directory_names": [
+        "Chainapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0109304",
+      "source_name": "Dharmadevi",
+      "matching_directory_names": [
+        "Dharmadevi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0109305",
+      "source_name": "Madi",
+      "matching_directory_names": [
+        "Madi Municipality",
+        "Madi Municipality",
+        "Madi Gaunpalika",
+        "Madi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0109401",
+      "source_name": "Makalu",
+      "matching_directory_names": [
+        "Makalu Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0109402",
+      "source_name": "Bhotkhola",
+      "matching_directory_names": [
+        "Bhotkhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0109403",
+      "source_name": "Silichong",
+      "matching_directory_names": [
+        "Silichong Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0109404",
+      "source_name": "Chichila",
+      "matching_directory_names": [
+        "Chichila Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0109405",
+      "source_name": "Sabhapokhari",
+      "matching_directory_names": [
+        "Sabhapokhari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0110301",
+      "source_name": "Shadananda",
+      "matching_directory_names": [
+        "Shadananda Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0110302",
+      "source_name": "Bhojpur",
+      "matching_directory_names": [
+        "Bhojpur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0110401",
+      "source_name": "Salpa Silichho",
+      "matching_directory_names": [
+        "Salpa Silichho Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0110402",
+      "source_name": "Temkemaiyum",
+      "matching_directory_names": [
+        "Temkemaiyum Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0110403",
+      "source_name": "Arun",
+      "matching_directory_names": [
+        "Arun Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0110404",
+      "source_name": "Ramprasad Rai",
+      "matching_directory_names": [
+        "Ramprasad Rai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0110405",
+      "source_name": "Pauwa Dunma",
+      "matching_directory_names": [
+        "Pauwa Dunma Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0110406",
+      "source_name": "Aamchowk",
+      "matching_directory_names": [
+        "Aamchowk Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0110407",
+      "source_name": "Hatuwagadhi",
+      "matching_directory_names": [
+        "Hatuwagadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0111301",
+      "source_name": "Solu Dhudhakunda",
+      "matching_directory_names": [
+        "Solu Dhudhakunda Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0111401",
+      "source_name": "Khumbu Pasanglhamu",
+      "matching_directory_names": [
+        "Khumbu Pasanglhamu Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0111402",
+      "source_name": "Mahakulung",
+      "matching_directory_names": [
+        "Mahakulung Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0111403",
+      "source_name": "Likhu Pike",
+      "matching_directory_names": [
+        "Likhu Pike Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0111404",
+      "source_name": "Mapya Dudhkoshi",
+      "matching_directory_names": [
+        "Mapya Dudhkoshi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0111405",
+      "source_name": "Necha Salyan",
+      "matching_directory_names": [
+        "Necha Salyan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0111406",
+      "source_name": "Thulung Dudhkoshi",
+      "matching_directory_names": [
+        "Thulung Dudhkoshi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0111407",
+      "source_name": "Sotang",
+      "matching_directory_names": [
+        "Sotang Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0112301",
+      "source_name": "Halesi Tuwachung",
+      "matching_directory_names": [
+        "Halesi Tuwachung Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0112302",
+      "source_name": "Diktel Rupakot Majhuwagadhi",
+      "matching_directory_names": [
+        "Diktel Rupakot Majhuwagadhi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0112401",
+      "source_name": "Aiselukharka",
+      "matching_directory_names": [
+        "Aiselukharka Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0112402",
+      "source_name": "Kepilasgadhi",
+      "matching_directory_names": [
+        "Kepilasgadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0112403",
+      "source_name": "Rawa Besi",
+      "matching_directory_names": [
+        "Rawa Besi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0112404",
+      "source_name": "Diprung Chuichumma",
+      "matching_directory_names": [
+        "Diprung Chuichumma Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0112405",
+      "source_name": "Sakela",
+      "matching_directory_names": [
+        "Sakela Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0112406",
+      "source_name": "Khotehang",
+      "matching_directory_names": [
+        "Khotehang Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0112407",
+      "source_name": "Baraha Pokhari",
+      "matching_directory_names": [
+        "Baraha Pokhari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0112408",
+      "source_name": "Jante Dhunga",
+      "matching_directory_names": [
+        "Jante Dhunga Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0113301",
+      "source_name": "Siddhicharan",
+      "matching_directory_names": [
+        "Siddhicharan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0113401",
+      "source_name": "Khiji Demba",
+      "matching_directory_names": [
+        "Khiji Demba Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0113402",
+      "source_name": "Likhu",
+      "matching_directory_names": [
+        "Likhu Gaunpalika",
+        "Likhu Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0113403",
+      "source_name": "Molung",
+      "matching_directory_names": [
+        "Molung Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0113404",
+      "source_name": "Champadevi",
+      "matching_directory_names": [
+        "Champadevi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0113405",
+      "source_name": "Sunkoshi",
+      "matching_directory_names": [
+        "Sunkoshi Gaunpalika",
+        "Sunkoshi Gaunpalika",
+        "Sunkoshi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0113406",
+      "source_name": "Chishankhu Gadhi",
+      "matching_directory_names": [
+        "Chishankhu Gadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0113407",
+      "source_name": "Manebhanjyang",
+      "matching_directory_names": [
+        "Manebhanjyang Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0114301",
+      "source_name": "Katari",
+      "matching_directory_names": [
+        "Katari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0114302",
+      "source_name": "Triyuga",
+      "matching_directory_names": [
+        "Triyuga Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0114303",
+      "source_name": "Chaudandigadhi",
+      "matching_directory_names": [
+        "Chaudandigadhi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0114304",
+      "source_name": "Belaka",
+      "matching_directory_names": [
+        "Belaka Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0114401",
+      "source_name": "Tapli",
+      "matching_directory_names": [
+        "Tapli Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0114402",
+      "source_name": "Limchunbung",
+      "matching_directory_names": [
+        "Limchunbung Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0114403",
+      "source_name": "Udayapurgadhi",
+      "matching_directory_names": [
+        "Udayapurgadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0114404",
+      "source_name": "Rautamai",
+      "matching_directory_names": [
+        "Rautamai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215301",
+      "source_name": "Surunga",
+      "matching_directory_names": [
+        "Surunga Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215302",
+      "source_name": "Khadak",
+      "matching_directory_names": [
+        "Khadak Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215303",
+      "source_name": "Shambhunath",
+      "matching_directory_names": [
+        "Shambhunath Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215304",
+      "source_name": "Saptakoshi",
+      "matching_directory_names": [
+        "Saptakoshi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215305",
+      "source_name": "Kanchanrup",
+      "matching_directory_names": [
+        "Kanchanrup Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215306",
+      "source_name": "Bode Barsain",
+      "matching_directory_names": [
+        "Bode Barsain Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215307",
+      "source_name": "Dakneshwori",
+      "matching_directory_names": [
+        "Dakneshwori Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215308",
+      "source_name": "Rajbiraj",
+      "matching_directory_names": [
+        "Rajbiraj Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215309",
+      "source_name": "Hanumannagar Kankalini",
+      "matching_directory_names": [
+        "Hanumannagar Kankalini Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215401",
+      "source_name": "Rupani",
+      "matching_directory_names": [
+        "Rupani Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215402",
+      "source_name": "Agnisair Krishna Sabaran",
+      "matching_directory_names": [
+        "Agnisair Krishna Sabaran Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215403",
+      "source_name": "Tirahut",
+      "matching_directory_names": [
+        "Tirahut Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215404",
+      "source_name": "Balan-Bihul",
+      "matching_directory_names": [
+        "Balan-Bihul Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215405",
+      "source_name": "Mahadewa",
+      "matching_directory_names": [
+        "Mahadewa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215406",
+      "source_name": "Rajgadh",
+      "matching_directory_names": [
+        "Rajgadh Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215407",
+      "source_name": "Bishnupur",
+      "matching_directory_names": [
+        "Bishnupur Gaunpalika",
+        "Bishnupur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215408",
+      "source_name": "Chhinnamasta",
+      "matching_directory_names": [
+        "Chhinnamasta Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0215409",
+      "source_name": "Tilathi Koiladi",
+      "matching_directory_names": [
+        "Tilathi Koiladi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216301",
+      "source_name": "Karjanha",
+      "matching_directory_names": [
+        "Karjanha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216302",
+      "source_name": "Mirchaiya",
+      "matching_directory_names": [
+        "Mirchaiya Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216303",
+      "source_name": "Golbazar",
+      "matching_directory_names": [
+        "Golbazar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216304",
+      "source_name": "Dhangadhimai",
+      "matching_directory_names": [
+        "Dhangadhimai Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216305",
+      "source_name": "Lahan",
+      "matching_directory_names": [
+        "Lahan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216306",
+      "source_name": "Kalyanpur",
+      "matching_directory_names": [
+        "Kalyanpur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216307",
+      "source_name": "Sukhipur",
+      "matching_directory_names": [
+        "Sukhipur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216308",
+      "source_name": "Siraha",
+      "matching_directory_names": [
+        "Siraha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216401",
+      "source_name": "Naraha",
+      "matching_directory_names": [
+        "Naraha Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216402",
+      "source_name": "Bishnupur",
+      "matching_directory_names": [
+        "Bishnupur Gaunpalika",
+        "Bishnupur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216403",
+      "source_name": "Arnama",
+      "matching_directory_names": [
+        "Arnama Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216404",
+      "source_name": "Aurahi",
+      "matching_directory_names": [
+        "Aurahi Gaunpalika",
+        "Aurahi Gaunpalika",
+        "Aurahi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216405",
+      "source_name": "Bariyarpatti",
+      "matching_directory_names": [
+        "Bariyarpatti Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216406",
+      "source_name": "Laxmipur Patari",
+      "matching_directory_names": [
+        "Laxmipur Patari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216407",
+      "source_name": "Nawarajpur",
+      "matching_directory_names": [
+        "Nawarajpur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216408",
+      "source_name": "Sakhuwa Nankarkatti",
+      "matching_directory_names": [
+        "Sakhuwa Nankarkatti Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0216409",
+      "source_name": "Bhagawanpur",
+      "matching_directory_names": [
+        "Bhagawanpur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217201",
+      "source_name": "Janakpurdham",
+      "matching_directory_names": [
+        "Janakpurdham Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217301",
+      "source_name": "Mithila",
+      "matching_directory_names": [
+        "Mithila Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217302",
+      "source_name": "Ganeshman Charnath",
+      "matching_directory_names": [
+        "Ganeshman Charnath Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217303",
+      "source_name": "Chhireshwornath",
+      "matching_directory_names": [
+        "Chhireshwornath Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217304",
+      "source_name": "Dhanushadham",
+      "matching_directory_names": [
+        "Dhanushadham Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217305",
+      "source_name": "Mithila Bihari",
+      "matching_directory_names": [
+        "Mithila Bihari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217306",
+      "source_name": "Sabaila",
+      "matching_directory_names": [
+        "Sabaila Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217307",
+      "source_name": "Hansapur",
+      "matching_directory_names": [
+        "Hansapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217308",
+      "source_name": "Shahidnagar",
+      "matching_directory_names": [
+        "Shahidnagar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217309",
+      "source_name": "Nagarain",
+      "matching_directory_names": [
+        "Nagarain Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217310",
+      "source_name": "Bideha",
+      "matching_directory_names": [
+        "Bideha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217311",
+      "source_name": "Kamala",
+      "matching_directory_names": [
+        "Kamala Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217401",
+      "source_name": "Bateshwor",
+      "matching_directory_names": [
+        "Bateshwor Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217402",
+      "source_name": "Laxminiya",
+      "matching_directory_names": [
+        "Laxminiya Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217403",
+      "source_name": "Aurahi",
+      "matching_directory_names": [
+        "Aurahi Gaunpalika",
+        "Aurahi Gaunpalika",
+        "Aurahi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217404",
+      "source_name": "Dhanauji",
+      "matching_directory_names": [
+        "Dhanauji Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217405",
+      "source_name": "Mukhiyapatti Musaharmiya",
+      "matching_directory_names": [
+        "Mukhiyapatti Musaharmiya Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0217406",
+      "source_name": "Janak Nandini",
+      "matching_directory_names": [
+        "Janak Nandini Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218301",
+      "source_name": "Bardibas",
+      "matching_directory_names": [
+        "Bardibas Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218302",
+      "source_name": "Gaushala",
+      "matching_directory_names": [
+        "Gaushala Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218303",
+      "source_name": "Aurahi",
+      "matching_directory_names": [
+        "Aurahi Gaunpalika",
+        "Aurahi Gaunpalika",
+        "Aurahi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218304",
+      "source_name": "Bhangaha",
+      "matching_directory_names": [
+        "Bhangaha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218305",
+      "source_name": "Ram Gopalpur",
+      "matching_directory_names": [
+        "Ram Gopalpur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218306",
+      "source_name": "Manara Shisawa",
+      "matching_directory_names": [
+        "Manara Shisawa Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218307",
+      "source_name": "Balawa",
+      "matching_directory_names": [
+        "Balawa Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218308",
+      "source_name": "Loharpatti",
+      "matching_directory_names": [
+        "Loharpatti Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218309",
+      "source_name": "Jaleshwor",
+      "matching_directory_names": [
+        "Jaleshwor Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218310",
+      "source_name": "Matihani",
+      "matching_directory_names": [
+        "Matihani Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218401",
+      "source_name": "Sonama",
+      "matching_directory_names": [
+        "Sonama Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218402",
+      "source_name": "Samsi",
+      "matching_directory_names": [
+        "Samsi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218403",
+      "source_name": "Ekadara",
+      "matching_directory_names": [
+        "Ekadara Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218404",
+      "source_name": "Mahottari",
+      "matching_directory_names": [
+        "Mahottari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0218405",
+      "source_name": "Pipara",
+      "matching_directory_names": [
+        "Pipara Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219301",
+      "source_name": "Bagmati",
+      "matching_directory_names": [
+        "Bagmati Municipality",
+        "Bagmati Gaunpalika",
+        "Bagmati Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219302",
+      "source_name": "Hariwan",
+      "matching_directory_names": [
+        "Hariwan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219303",
+      "source_name": "Lalbandi",
+      "matching_directory_names": [
+        "Lalbandi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219304",
+      "source_name": "Barahathawa",
+      "matching_directory_names": [
+        "Barahathawa Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219305",
+      "source_name": "Haripur",
+      "matching_directory_names": [
+        "Haripur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219306",
+      "source_name": "Ishworpur",
+      "matching_directory_names": [
+        "Ishworpur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219307",
+      "source_name": "Kabilashi",
+      "matching_directory_names": [
+        "Kabilashi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219308",
+      "source_name": "Godaita",
+      "matching_directory_names": [
+        "Godaita Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219309",
+      "source_name": "Malangawa",
+      "matching_directory_names": [
+        "Malangawa Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219310",
+      "source_name": "Haripurwa",
+      "matching_directory_names": [
+        "Haripurwa Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219311",
+      "source_name": "Balara",
+      "matching_directory_names": [
+        "Balara Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219401",
+      "source_name": "Basbariya",
+      "matching_directory_names": [
+        "Basbariya Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219402",
+      "source_name": "Chandranagar",
+      "matching_directory_names": [
+        "Chandranagar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219403",
+      "source_name": "Dhanakaul",
+      "matching_directory_names": [
+        "Dhanakaul Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219404",
+      "source_name": "Chakraghatta",
+      "matching_directory_names": [
+        "Chakraghatta Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219405",
+      "source_name": "Ramnagar",
+      "matching_directory_names": [
+        "Ramnagar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219406",
+      "source_name": "Kaudena",
+      "matching_directory_names": [
+        "Kaudena Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219407",
+      "source_name": "Brahmapuri",
+      "matching_directory_names": [
+        "Brahmapuri Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219408",
+      "source_name": "Bishnu",
+      "matching_directory_names": [
+        "Bishnu Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0219409",
+      "source_name": "Parsa",
+      "matching_directory_names": [
+        "Parsa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232301",
+      "source_name": "Gujara",
+      "matching_directory_names": [
+        "Gujara Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232302",
+      "source_name": "Chandrapur",
+      "matching_directory_names": [
+        "Chandrapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232303",
+      "source_name": "Phatuwa Bijayapur",
+      "matching_directory_names": [
+        "Phatuwa Bijayapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232304",
+      "source_name": "Katahariya",
+      "matching_directory_names": [
+        "Katahariya Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232305",
+      "source_name": "Brindaban",
+      "matching_directory_names": [
+        "Brindaban Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232306",
+      "source_name": "Maulapur",
+      "matching_directory_names": [
+        "Maulapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232307",
+      "source_name": "Dewahi Gonahi",
+      "matching_directory_names": [
+        "Dewahi Gonahi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232308",
+      "source_name": "Garuda",
+      "matching_directory_names": [
+        "Garuda Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232309",
+      "source_name": "Gadhimai",
+      "matching_directory_names": [
+        "Gadhimai Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232310",
+      "source_name": "Boudhimai",
+      "matching_directory_names": [
+        "Boudhimai Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232311",
+      "source_name": "Madhav Narayan",
+      "matching_directory_names": [
+        "Madhav Narayan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232312",
+      "source_name": "Paroha",
+      "matching_directory_names": [
+        "Paroha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232313",
+      "source_name": "Ishanath",
+      "matching_directory_names": [
+        "Ishanath Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232314",
+      "source_name": "Rajpur",
+      "matching_directory_names": [
+        "Rajpur Municipality",
+        "Rajpur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232315",
+      "source_name": "Gaur",
+      "matching_directory_names": [
+        "Gaur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232316",
+      "source_name": "Rajdevi",
+      "matching_directory_names": [
+        "Rajdevi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232401",
+      "source_name": "Yamunamai",
+      "matching_directory_names": [
+        "Yamunamai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0232402",
+      "source_name": "Durga Bhagawati",
+      "matching_directory_names": [
+        "Durga Bhagawati Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233201",
+      "source_name": "Jitpur Simara",
+      "matching_directory_names": [
+        "Jitpur Simara Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233202",
+      "source_name": "Kalaiya",
+      "matching_directory_names": [
+        "Kalaiya Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233301",
+      "source_name": "Nijagadh",
+      "matching_directory_names": [
+        "Nijagadh Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233302",
+      "source_name": "Kolhabi",
+      "matching_directory_names": [
+        "Kolhabi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233303",
+      "source_name": "Mahagadhimai",
+      "matching_directory_names": [
+        "Mahagadhimai Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233304",
+      "source_name": "Pacharauta",
+      "matching_directory_names": [
+        "Pacharauta Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233305",
+      "source_name": "Simroungadh",
+      "matching_directory_names": [
+        "Simroungadh Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233401",
+      "source_name": "Parawanipur",
+      "matching_directory_names": [
+        "Parawanipur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233402",
+      "source_name": "Prasauni",
+      "matching_directory_names": [
+        "Prasauni Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233403",
+      "source_name": "Karaiyamai",
+      "matching_directory_names": [
+        "Karaiyamai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233404",
+      "source_name": "Bishrampur",
+      "matching_directory_names": [
+        "Bishrampur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233405",
+      "source_name": "Pheta",
+      "matching_directory_names": [
+        "Pheta Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233406",
+      "source_name": "Baragadhi",
+      "matching_directory_names": [
+        "Baragadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233407",
+      "source_name": "Devtal",
+      "matching_directory_names": [
+        "Devtal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233408",
+      "source_name": "Subarna",
+      "matching_directory_names": [
+        "Subarna Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0233409",
+      "source_name": "Aadarsha Kotwal",
+      "matching_directory_names": [
+        "Aadarsha Kotwal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234101",
+      "source_name": "Birgunj",
+      "matching_directory_names": [
+        "Birgunj Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234301",
+      "source_name": "Pokhariya",
+      "matching_directory_names": [
+        "Pokhariya Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234302",
+      "source_name": "Bahudarmai",
+      "matching_directory_names": [
+        "Bahudarmai Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234303",
+      "source_name": "Parsagadhi",
+      "matching_directory_names": [
+        "Parsagadhi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234401",
+      "source_name": "Thori",
+      "matching_directory_names": [
+        "Thori Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234402",
+      "source_name": "Jirabhawani",
+      "matching_directory_names": [
+        "Jirabhawani Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234403",
+      "source_name": "Paterwa Sugauli",
+      "matching_directory_names": [
+        "Paterwa Sugauli Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234404",
+      "source_name": "Sakhuwa Prasauni",
+      "matching_directory_names": [
+        "Sakhuwa Prasauni Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234405",
+      "source_name": "Jagarnathpur",
+      "matching_directory_names": [
+        "Jagarnathpur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234406",
+      "source_name": "Dhobini",
+      "matching_directory_names": [
+        "Dhobini Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234407",
+      "source_name": "Chhipaharmai",
+      "matching_directory_names": [
+        "Chhipaharmai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234408",
+      "source_name": "Kalikamai",
+      "matching_directory_names": [
+        "Kalikamai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234409",
+      "source_name": "Pakaha Mainpur",
+      "matching_directory_names": [
+        "Pakaha Mainpur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0234410",
+      "source_name": "Bindabasini",
+      "matching_directory_names": [
+        "Bindabasini Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0320301",
+      "source_name": "Kamalamai",
+      "matching_directory_names": [
+        "Kamalamai Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0320302",
+      "source_name": "Dudhouli",
+      "matching_directory_names": [
+        "Dudhouli Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0320401",
+      "source_name": "Hariharpurgaghi",
+      "matching_directory_names": [
+        "Hariharpurgaghi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0320402",
+      "source_name": "Marin",
+      "matching_directory_names": [
+        "Marin Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0320403",
+      "source_name": "Ghyanglekha",
+      "matching_directory_names": [
+        "Ghyanglekha Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0320404",
+      "source_name": "Sunkoshi",
+      "matching_directory_names": [
+        "Sunkoshi Gaunpalika",
+        "Sunkoshi Gaunpalika",
+        "Sunkoshi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0320405",
+      "source_name": "Golanjor",
+      "matching_directory_names": [
+        "Golanjor Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0320406",
+      "source_name": "Tinpatan",
+      "matching_directory_names": [
+        "Tinpatan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0320407",
+      "source_name": "Phikkal",
+      "matching_directory_names": [
+        "Phikkal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0321301",
+      "source_name": "Manthali",
+      "matching_directory_names": [
+        "Manthali Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0321302",
+      "source_name": "Ramechhap",
+      "matching_directory_names": [
+        "Ramechhap Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0321401",
+      "source_name": "Sunapati",
+      "matching_directory_names": [
+        "Sunapati Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0321402",
+      "source_name": "Doramba",
+      "matching_directory_names": [
+        "Doramba Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0321403",
+      "source_name": "Gokulganga",
+      "matching_directory_names": [
+        "Gokulganga Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0321404",
+      "source_name": "Umakunda",
+      "matching_directory_names": [
+        "Umakunda Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0321405",
+      "source_name": "Khandadevi",
+      "matching_directory_names": [
+        "Khandadevi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0321406",
+      "source_name": "Likhu Tamakoshi",
+      "matching_directory_names": [
+        "Likhu Tamakoshi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0322301",
+      "source_name": "Bhimeshwor",
+      "matching_directory_names": [
+        "Bhimeshwor Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0322302",
+      "source_name": "Jiri",
+      "matching_directory_names": [
+        "Jiri Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0322401",
+      "source_name": "Bigu",
+      "matching_directory_names": [
+        "Bigu Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0322402",
+      "source_name": "Gaurishankar",
+      "matching_directory_names": [
+        "Gaurishankar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0322403",
+      "source_name": "Kalinchowk",
+      "matching_directory_names": [
+        "Kalinchowk Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0322404",
+      "source_name": "Baiteshwor",
+      "matching_directory_names": [
+        "Baiteshwor Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0322405",
+      "source_name": "Shailung",
+      "matching_directory_names": [
+        "Shailung Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0322406",
+      "source_name": "Melung",
+      "matching_directory_names": [
+        "Melung Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0322407",
+      "source_name": "Tamakoshi",
+      "matching_directory_names": [
+        "Tamakoshi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323301",
+      "source_name": "Melamchi",
+      "matching_directory_names": [
+        "Melamchi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323302",
+      "source_name": "Choutara Sangachowkgadhi",
+      "matching_directory_names": [
+        "Choutara Sangachowkgadhi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323303",
+      "source_name": "Bahrabise",
+      "matching_directory_names": [
+        "Bahrabise Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323401",
+      "source_name": "Helambu",
+      "matching_directory_names": [
+        "Helambu Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323402",
+      "source_name": "Panchpokhari Thangpal",
+      "matching_directory_names": [
+        "Panchpokhari Thangpal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323403",
+      "source_name": "Jugal",
+      "matching_directory_names": [
+        "Jugal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323404",
+      "source_name": "Bhotekoshi",
+      "matching_directory_names": [
+        "Bhotekoshi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323405",
+      "source_name": "Indrawoti",
+      "matching_directory_names": [
+        "Indrawoti Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323406",
+      "source_name": "Balephi",
+      "matching_directory_names": [
+        "Balephi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323407",
+      "source_name": "Sunkoshi",
+      "matching_directory_names": [
+        "Sunkoshi Gaunpalika",
+        "Sunkoshi Gaunpalika",
+        "Sunkoshi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323408",
+      "source_name": "Tripurasundari",
+      "matching_directory_names": [
+        "Tripurasundari Gaunpalika",
+        "Tripurasundari Gaunpalika",
+        "Tripurasundari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0323409",
+      "source_name": "Lisankhu Pakhar",
+      "matching_directory_names": [
+        "Lisankhu Pakhar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324301",
+      "source_name": "Mandan Deupur",
+      "matching_directory_names": [
+        "Mandan Deupur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324302",
+      "source_name": "Banepa",
+      "matching_directory_names": [
+        "Banepa Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324303",
+      "source_name": "Dhulikhel",
+      "matching_directory_names": [
+        "Dhulikhel Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324304",
+      "source_name": "Panchkhal",
+      "matching_directory_names": [
+        "Panchkhal Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324305",
+      "source_name": "Panauti",
+      "matching_directory_names": [
+        "Panauti Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324306",
+      "source_name": "Namobuddha",
+      "matching_directory_names": [
+        "Namobuddha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324401",
+      "source_name": "Bhumlu",
+      "matching_directory_names": [
+        "Bhumlu Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324402",
+      "source_name": "Chauri Deurali",
+      "matching_directory_names": [
+        "Chauri Deurali Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324403",
+      "source_name": "Bethanchowk",
+      "matching_directory_names": [
+        "Bethanchowk Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324404",
+      "source_name": "Roshi",
+      "matching_directory_names": [
+        "Roshi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324405",
+      "source_name": "Temal",
+      "matching_directory_names": [
+        "Temal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324406",
+      "source_name": "Khanikhola",
+      "matching_directory_names": [
+        "Khanikhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0324407",
+      "source_name": "Mahabharat",
+      "matching_directory_names": [
+        "Mahabharat Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0325101",
+      "source_name": "Lalitpur",
+      "matching_directory_names": [
+        "Lalitpur Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0325301",
+      "source_name": "Godawari",
+      "matching_directory_names": [
+        "Godawari Municipality",
+        "Godawari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0325302",
+      "source_name": "Mahalaxmi",
+      "matching_directory_names": [
+        "Mahalaxmi Municipality",
+        "Mahalaxmi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0325401",
+      "source_name": "Bagmati",
+      "matching_directory_names": [
+        "Bagmati Municipality",
+        "Bagmati Gaunpalika",
+        "Bagmati Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0325402",
+      "source_name": "Konjyosom",
+      "matching_directory_names": [
+        "Konjyosom Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0325403",
+      "source_name": "Mahankal",
+      "matching_directory_names": [
+        "Mahankal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0326301",
+      "source_name": "Madhyapur Thimi",
+      "matching_directory_names": [
+        "Madhyapur Thimi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0326302",
+      "source_name": "Changunarayan",
+      "matching_directory_names": [
+        "Changunarayan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0326303",
+      "source_name": "Bhaktapur",
+      "matching_directory_names": [
+        "Bhaktapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0326304",
+      "source_name": "Suryabinayak",
+      "matching_directory_names": [
+        "Suryabinayak Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327101",
+      "source_name": "Kathmandu",
+      "matching_directory_names": [
+        "Kathmandu Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327301",
+      "source_name": "Tarakeshwor",
+      "matching_directory_names": [
+        "Tarakeshwor Gaunpalika",
+        "Tarakeshwor Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327302",
+      "source_name": "Tokha",
+      "matching_directory_names": [
+        "Tokha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327303",
+      "source_name": "Budhanilkhantha",
+      "matching_directory_names": [
+        "Budhanilkhantha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327304",
+      "source_name": "Gokarneshwor",
+      "matching_directory_names": [
+        "Gokarneshwor Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327305",
+      "source_name": "Nagarjun",
+      "matching_directory_names": [
+        "Nagarjun Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327306",
+      "source_name": "Kageshwori Manahara",
+      "matching_directory_names": [
+        "Kageshwori Manahara Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327307",
+      "source_name": "Shankharapur",
+      "matching_directory_names": [
+        "Shankharapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327308",
+      "source_name": "Chandragiri",
+      "matching_directory_names": [
+        "Chandragiri Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327309",
+      "source_name": "Kirtipur",
+      "matching_directory_names": [
+        "Kirtipur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0327310",
+      "source_name": "Dakshinkali",
+      "matching_directory_names": [
+        "Dakshinkali Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328301",
+      "source_name": "Bidur",
+      "matching_directory_names": [
+        "Bidur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328302",
+      "source_name": "Belkotgadhi",
+      "matching_directory_names": [
+        "Belkotgadhi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328401",
+      "source_name": "Myagang",
+      "matching_directory_names": [
+        "Myagang Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328402",
+      "source_name": "Kispang",
+      "matching_directory_names": [
+        "Kispang Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328403",
+      "source_name": "Tarakeshwor",
+      "matching_directory_names": [
+        "Tarakeshwor Gaunpalika",
+        "Tarakeshwor Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328404",
+      "source_name": "Suryagadhi",
+      "matching_directory_names": [
+        "Suryagadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328405",
+      "source_name": "Tadi",
+      "matching_directory_names": [
+        "Tadi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328406",
+      "source_name": "Likhu",
+      "matching_directory_names": [
+        "Likhu Gaunpalika",
+        "Likhu Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328407",
+      "source_name": "Panchakanya",
+      "matching_directory_names": [
+        "Panchakanya Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328408",
+      "source_name": "Dupcheshwor",
+      "matching_directory_names": [
+        "Dupcheshwor Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328409",
+      "source_name": "Kakani",
+      "matching_directory_names": [
+        "Kakani Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0328410",
+      "source_name": "Shivapuri",
+      "matching_directory_names": [
+        "Shivapuri Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0329401",
+      "source_name": "Aamachhodingmo",
+      "matching_directory_names": [
+        "Aamachhodingmo Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0329402",
+      "source_name": "Gosaikunda",
+      "matching_directory_names": [
+        "Gosaikunda Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0329403",
+      "source_name": "Uttargaya",
+      "matching_directory_names": [
+        "Uttargaya Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0329404",
+      "source_name": "Kalika",
+      "matching_directory_names": [
+        "Kalika Gaunpalika",
+        "Kalika Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0329405",
+      "source_name": "Naukunda",
+      "matching_directory_names": [
+        "Naukunda Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330301",
+      "source_name": "Nilkhantha",
+      "matching_directory_names": [
+        "Nilkhantha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330302",
+      "source_name": "Dhunibenshi",
+      "matching_directory_names": [
+        "Dhunibenshi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330401",
+      "source_name": "Rubi Valley",
+      "matching_directory_names": [
+        "Rubi Valley Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330402",
+      "source_name": "Ganga Jamuna",
+      "matching_directory_names": [
+        "Ganga Jamuna Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330403",
+      "source_name": "Khaniyabas",
+      "matching_directory_names": [
+        "Khaniyabas Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330404",
+      "source_name": "Tripurasundari",
+      "matching_directory_names": [
+        "Tripurasundari Gaunpalika",
+        "Tripurasundari Gaunpalika",
+        "Tripurasundari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330405",
+      "source_name": "Netrawati Dabjong",
+      "matching_directory_names": [
+        "Netrawati Dabjong Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330406",
+      "source_name": "Jwalamukhi",
+      "matching_directory_names": [
+        "Jwalamukhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330407",
+      "source_name": "Siddhalek",
+      "matching_directory_names": [
+        "Siddhalek Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330408",
+      "source_name": "Benighat Rorang",
+      "matching_directory_names": [
+        "Benighat Rorang Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330409",
+      "source_name": "Gajuri",
+      "matching_directory_names": [
+        "Gajuri Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330410",
+      "source_name": "Galchhi",
+      "matching_directory_names": [
+        "Galchhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0330411",
+      "source_name": "Thakre",
+      "matching_directory_names": [
+        "Thakre Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0331201",
+      "source_name": "Hetauda",
+      "matching_directory_names": [
+        "Hetauda Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0331301",
+      "source_name": "Thaha",
+      "matching_directory_names": [
+        "Thaha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0331401",
+      "source_name": "Manahari",
+      "matching_directory_names": [
+        "Manahari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0331402",
+      "source_name": "Raksirang",
+      "matching_directory_names": [
+        "Raksirang Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0331403",
+      "source_name": "Kailash",
+      "matching_directory_names": [
+        "Kailash Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0331404",
+      "source_name": "Bhimphedi",
+      "matching_directory_names": [
+        "Bhimphedi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0331405",
+      "source_name": "Indrasarowar",
+      "matching_directory_names": [
+        "Indrasarowar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0331406",
+      "source_name": "Makawanpurgadhi",
+      "matching_directory_names": [
+        "Makawanpurgadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0331407",
+      "source_name": "Bakaiya",
+      "matching_directory_names": [
+        "Bakaiya Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0331408",
+      "source_name": "Bagmati",
+      "matching_directory_names": [
+        "Bagmati Municipality",
+        "Bagmati Gaunpalika",
+        "Bagmati Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0335101",
+      "source_name": "Bharatpur",
+      "matching_directory_names": [
+        "Bharatpur Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0335301",
+      "source_name": "Kalika",
+      "matching_directory_names": [
+        "Kalika Gaunpalika",
+        "Kalika Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0335302",
+      "source_name": "Ratnanagar",
+      "matching_directory_names": [
+        "Ratnanagar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0335303",
+      "source_name": "Khairahani",
+      "matching_directory_names": [
+        "Khairahani Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0335304",
+      "source_name": "Rapti",
+      "matching_directory_names": [
+        "Rapti Municipality",
+        "Rapti Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0335305",
+      "source_name": "Madi",
+      "matching_directory_names": [
+        "Madi Municipality",
+        "Madi Municipality",
+        "Madi Gaunpalika",
+        "Madi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0335401",
+      "source_name": "Ichchha Kamana",
+      "matching_directory_names": [
+        "Ichchha Kamana Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436301",
+      "source_name": "Palungtar",
+      "matching_directory_names": [
+        "Palungtar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436302",
+      "source_name": "Gorkha",
+      "matching_directory_names": [
+        "Gorkha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436401",
+      "source_name": "Chumanubri",
+      "matching_directory_names": [
+        "Chumanubri Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436402",
+      "source_name": "Ajirkot",
+      "matching_directory_names": [
+        "Ajirkot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436403",
+      "source_name": "Barpak Sulikot",
+      "matching_directory_names": [
+        "Barpak Sulikot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436404",
+      "source_name": "Dharche",
+      "matching_directory_names": [
+        "Dharche Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436405",
+      "source_name": "Siranchowk",
+      "matching_directory_names": [
+        "Siranchowk Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436406",
+      "source_name": "Aarughat",
+      "matching_directory_names": [
+        "Aarughat Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436407",
+      "source_name": "Bhimsenthapa",
+      "matching_directory_names": [
+        "Bhimsenthapa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436408",
+      "source_name": "Shahid Lakhan",
+      "matching_directory_names": [
+        "Shahid Lakhan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0436409",
+      "source_name": "Gandaki",
+      "matching_directory_names": [
+        "Gandaki Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0437301",
+      "source_name": "Madhya Nepal",
+      "matching_directory_names": [
+        "Madhya Nepal Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0437302",
+      "source_name": "Bensishahar",
+      "matching_directory_names": [
+        "Bensishahar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0437303",
+      "source_name": "Sundarbazar",
+      "matching_directory_names": [
+        "Sundarbazar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0437304",
+      "source_name": "Rainas",
+      "matching_directory_names": [
+        "Rainas Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0437401",
+      "source_name": "Kwhola Sothar",
+      "matching_directory_names": [
+        "Kwhola Sothar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0437402",
+      "source_name": "Marshyangdi",
+      "matching_directory_names": [
+        "Marshyangdi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0437403",
+      "source_name": "Dordi",
+      "matching_directory_names": [
+        "Dordi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0437404",
+      "source_name": "Dudhapokhari",
+      "matching_directory_names": [
+        "Dudhapokhari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0438401",
+      "source_name": "Ngisyang",
+      "matching_directory_names": [],
+      "status": "REVIEWED_VARIANT"
+    },
+    {
+      "pcode": "NP0438402",
+      "source_name": "Narpa Bhumi",
+      "matching_directory_names": [
+        "Narpa Bhumi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0438403",
+      "source_name": "Chame",
+      "matching_directory_names": [
+        "Chame Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0438404",
+      "source_name": "Nason",
+      "matching_directory_names": [
+        "Nason Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0439101",
+      "source_name": "Pokhara",
+      "matching_directory_names": [
+        "Pokhara Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0439401",
+      "source_name": "Annapurna",
+      "matching_directory_names": [
+        "Annapurna Gaunpalika",
+        "Annapurna Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0439402",
+      "source_name": "Machhapuchchhre",
+      "matching_directory_names": [
+        "Machhapuchchhre Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0439403",
+      "source_name": "Madi",
+      "matching_directory_names": [
+        "Madi Municipality",
+        "Madi Municipality",
+        "Madi Gaunpalika",
+        "Madi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0439404",
+      "source_name": "Rupa",
+      "matching_directory_names": [
+        "Rupa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0440301",
+      "source_name": "Shuklagandaki",
+      "matching_directory_names": [
+        "Shuklagandaki Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0440302",
+      "source_name": "Byas",
+      "matching_directory_names": [
+        "Byas Municipality",
+        "Byas Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0440303",
+      "source_name": "Bhanu",
+      "matching_directory_names": [
+        "Bhanu Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0440304",
+      "source_name": "Bhimad",
+      "matching_directory_names": [
+        "Bhimad Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0440401",
+      "source_name": "Myagde",
+      "matching_directory_names": [
+        "Myagde Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0440402",
+      "source_name": "Ghiring",
+      "matching_directory_names": [
+        "Ghiring Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0440403",
+      "source_name": "Rhishing",
+      "matching_directory_names": [
+        "Rhishing Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0440404",
+      "source_name": "Bandipur",
+      "matching_directory_names": [
+        "Bandipur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0440405",
+      "source_name": "Aanbu Khaireni",
+      "matching_directory_names": [
+        "Aanbu Khaireni Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0440406",
+      "source_name": "Devghat",
+      "matching_directory_names": [
+        "Devghat Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441301",
+      "source_name": "Putalibazar",
+      "matching_directory_names": [
+        "Putalibazar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441302",
+      "source_name": "Bhirkot",
+      "matching_directory_names": [
+        "Bhirkot Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441303",
+      "source_name": "Galyang",
+      "matching_directory_names": [
+        "Galyang Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441304",
+      "source_name": "Walling",
+      "matching_directory_names": [
+        "Walling Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441305",
+      "source_name": "Chapakot",
+      "matching_directory_names": [
+        "Chapakot Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441401",
+      "source_name": "Aandhikhola",
+      "matching_directory_names": [
+        "Aandhikhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441402",
+      "source_name": "Phedikhola",
+      "matching_directory_names": [
+        "Phedikhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441403",
+      "source_name": "Arjun Choupari",
+      "matching_directory_names": [
+        "Arjun Choupari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441404",
+      "source_name": "Biruwa",
+      "matching_directory_names": [
+        "Biruwa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441405",
+      "source_name": "Harinas",
+      "matching_directory_names": [
+        "Harinas Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0441406",
+      "source_name": "Kaligandaki",
+      "matching_directory_names": [
+        "Kaligandaki Gaunpalika",
+        "Kali Gandaki Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0442301",
+      "source_name": "Kushma",
+      "matching_directory_names": [
+        "Kushma Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0442302",
+      "source_name": "Phalebas",
+      "matching_directory_names": [
+        "Phalebas Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0442401",
+      "source_name": "Jaljala",
+      "matching_directory_names": [
+        "Jaljala Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0442402",
+      "source_name": "Modi",
+      "matching_directory_names": [
+        "Modi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0442403",
+      "source_name": "Bihadi",
+      "matching_directory_names": [
+        "Bihadi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0442404",
+      "source_name": "Mahashila",
+      "matching_directory_names": [
+        "Mahashila Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0442405",
+      "source_name": "Paiyu",
+      "matching_directory_names": [
+        "Paiyu Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0443301",
+      "source_name": "Dhorpatan",
+      "matching_directory_names": [
+        "Dhorpatan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0443302",
+      "source_name": "Galkot",
+      "matching_directory_names": [
+        "Galkot Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0443303",
+      "source_name": "Baglung",
+      "matching_directory_names": [
+        "Baglung Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0443304",
+      "source_name": "Jaimuni",
+      "matching_directory_names": [
+        "Jaimuni Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0443401",
+      "source_name": "Nisikhola",
+      "matching_directory_names": [
+        "Nisikhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0443402",
+      "source_name": "Tamankhola",
+      "matching_directory_names": [
+        "Tamankhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0443403",
+      "source_name": "Badigad",
+      "matching_directory_names": [
+        "Badigad Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0443404",
+      "source_name": "Tarakhola",
+      "matching_directory_names": [
+        "Tarakhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0443405",
+      "source_name": "Kathekhola",
+      "matching_directory_names": [
+        "Kathekhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0443406",
+      "source_name": "Bareng",
+      "matching_directory_names": [
+        "Bareng Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0444301",
+      "source_name": "Beni",
+      "matching_directory_names": [
+        "Beni Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0444401",
+      "source_name": "Dhawalagiri",
+      "matching_directory_names": [
+        "Dhawalagiri Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0444402",
+      "source_name": "Raghuganga",
+      "matching_directory_names": [
+        "Raghuganga Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0444403",
+      "source_name": "Annapurna",
+      "matching_directory_names": [
+        "Annapurna Gaunpalika",
+        "Annapurna Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0444404",
+      "source_name": "Malika",
+      "matching_directory_names": [
+        "Malika Gaunpalika",
+        "Malika Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0444405",
+      "source_name": "Mangala",
+      "matching_directory_names": [
+        "Mangala Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0445401",
+      "source_name": "Lomanthang",
+      "matching_directory_names": [
+        "Lomanthang Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0445402",
+      "source_name": "Lo Ghekar Damodarkunda",
+      "matching_directory_names": [
+        "Lo Ghekar Damodarkunda Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0445403",
+      "source_name": "Varagung Muktichhetra",
+      "matching_directory_names": [
+        "Varagung Muktichhetra Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0445404",
+      "source_name": "Gharpajhong",
+      "matching_directory_names": [
+        "Gharpajhong Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0445405",
+      "source_name": "Thasang",
+      "matching_directory_names": [
+        "Thasang Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0447301",
+      "source_name": "Madhya Bindu",
+      "matching_directory_names": [
+        "Madhya Bindu Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0447302",
+      "source_name": "Kawasoti",
+      "matching_directory_names": [
+        "Kawasoti Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0447303",
+      "source_name": "Devchuli",
+      "matching_directory_names": [
+        "Devchuli Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0447304",
+      "source_name": "Gaidakot",
+      "matching_directory_names": [
+        "Gaidakot Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0447401",
+      "source_name": "Baudikali",
+      "matching_directory_names": [
+        "Baudikali Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0447402",
+      "source_name": "Bulingtar",
+      "matching_directory_names": [
+        "Bulingtar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0447403",
+      "source_name": "Hupsekot",
+      "matching_directory_names": [
+        "Hupsekot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0447404",
+      "source_name": "Binayi Tribeni",
+      "matching_directory_names": [
+        "Binayi Tribeni Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0546301",
+      "source_name": "Tansen",
+      "matching_directory_names": [
+        "Tansen Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0546302",
+      "source_name": "Rampur",
+      "matching_directory_names": [
+        "Rampur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0546401",
+      "source_name": "Rainadevi Chhahara",
+      "matching_directory_names": [
+        "Rainadevi Chhahara Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0546402",
+      "source_name": "Tinau",
+      "matching_directory_names": [
+        "Tinau Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0546403",
+      "source_name": "Ribdikot",
+      "matching_directory_names": [
+        "Ribdikot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0546404",
+      "source_name": "Mathagadhi",
+      "matching_directory_names": [
+        "Mathagadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0546405",
+      "source_name": "Baganaskali",
+      "matching_directory_names": [
+        "Baganaskali Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0546406",
+      "source_name": "Purbakhola",
+      "matching_directory_names": [
+        "Purbakhola Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0546407",
+      "source_name": "Rambha",
+      "matching_directory_names": [
+        "Rambha Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0546408",
+      "source_name": "Nisdi",
+      "matching_directory_names": [
+        "Nisdi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0547301",
+      "source_name": "Sunawal",
+      "matching_directory_names": [
+        "Sunawal Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0547302",
+      "source_name": "Bardaghat",
+      "matching_directory_names": [
+        "Bardaghat Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0547303",
+      "source_name": "Ramgram",
+      "matching_directory_names": [
+        "Ramgram Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0547401",
+      "source_name": "Palhinandan",
+      "matching_directory_names": [
+        "Palhinandan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0547402",
+      "source_name": "Sarawal",
+      "matching_directory_names": [
+        "Sarawal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0547403",
+      "source_name": "Pratapapur",
+      "matching_directory_names": [
+        "Pratapapur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0547404",
+      "source_name": "Susta",
+      "matching_directory_names": [
+        "Susta Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548201",
+      "source_name": "Butwal",
+      "matching_directory_names": [
+        "Butwal Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548301",
+      "source_name": "Sainamaina",
+      "matching_directory_names": [
+        "Sainamaina Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548302",
+      "source_name": "Devdaha",
+      "matching_directory_names": [
+        "Devdaha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548303",
+      "source_name": "Tilottama",
+      "matching_directory_names": [
+        "Tilottama Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548304",
+      "source_name": "Lumbini Sanskritik",
+      "matching_directory_names": [
+        "Lumbini Sanskritik Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548305",
+      "source_name": "Siddharthanagar",
+      "matching_directory_names": [
+        "Siddharthanagar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548401",
+      "source_name": "Kanchan",
+      "matching_directory_names": [
+        "Kanchan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548402",
+      "source_name": "Suddhodhan",
+      "matching_directory_names": [
+        "Suddhodhan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548403",
+      "source_name": "Gaidahawa",
+      "matching_directory_names": [
+        "Gaidahawa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548404",
+      "source_name": "Siyari",
+      "matching_directory_names": [
+        "Siyari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548405",
+      "source_name": "Mayadevi",
+      "matching_directory_names": [
+        "Mayadevi Gaunpalika",
+        "Mayadevi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548406",
+      "source_name": "Om Satiya",
+      "matching_directory_names": [
+        "Om Satiya Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548407",
+      "source_name": "Rohini",
+      "matching_directory_names": [
+        "Rohini Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548408",
+      "source_name": "Kotahimai",
+      "matching_directory_names": [
+        "Kotahimai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548409",
+      "source_name": "Sammarimai",
+      "matching_directory_names": [
+        "Sammarimai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0548410",
+      "source_name": "Marchawari",
+      "matching_directory_names": [
+        "Marchawari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0549301",
+      "source_name": "Shivaraj",
+      "matching_directory_names": [
+        "Shivaraj Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0549302",
+      "source_name": "Buddhabhumi",
+      "matching_directory_names": [
+        "Buddhabhumi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0549303",
+      "source_name": "Banganga",
+      "matching_directory_names": [
+        "Banganga Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0549304",
+      "source_name": "Krishnanagar",
+      "matching_directory_names": [
+        "Krishnanagar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0549305",
+      "source_name": "Maharajganj",
+      "matching_directory_names": [
+        "Maharajganj Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0549306",
+      "source_name": "Kapilbastu",
+      "matching_directory_names": [
+        "Kapilbastu Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0549401",
+      "source_name": "Bijayanagar",
+      "matching_directory_names": [
+        "Bijayanagar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0549402",
+      "source_name": "Yasodhara",
+      "matching_directory_names": [
+        "Yasodhara Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0549403",
+      "source_name": "Mayadevi",
+      "matching_directory_names": [
+        "Mayadevi Gaunpalika",
+        "Mayadevi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0549404",
+      "source_name": "Shuddhodhan",
+      "matching_directory_names": [
+        "Shuddhodhan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0550301",
+      "source_name": "Bhumikasthan",
+      "matching_directory_names": [
+        "Bhumikasthan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0550302",
+      "source_name": "Sandhikharka",
+      "matching_directory_names": [
+        "Sandhikharka Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0550303",
+      "source_name": "Shitaganga",
+      "matching_directory_names": [
+        "Shitaganga Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0550401",
+      "source_name": "Malarani",
+      "matching_directory_names": [
+        "Malarani Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0550402",
+      "source_name": "Chhatradev",
+      "matching_directory_names": [
+        "Chhatradev Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0550403",
+      "source_name": "Panini",
+      "matching_directory_names": [
+        "Panini Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551301",
+      "source_name": "Musikot",
+      "matching_directory_names": [
+        "Musikot Municipality",
+        "Musikot Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551302",
+      "source_name": "Resunga",
+      "matching_directory_names": [
+        "Resunga Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551401",
+      "source_name": "Madane",
+      "matching_directory_names": [
+        "Madane Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551402",
+      "source_name": "Malika",
+      "matching_directory_names": [
+        "Malika Gaunpalika",
+        "Malika Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551403",
+      "source_name": "Dhurkot",
+      "matching_directory_names": [
+        "Dhurkot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551404",
+      "source_name": "Isma",
+      "matching_directory_names": [
+        "Isma Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551405",
+      "source_name": "Gulmi Durbar",
+      "matching_directory_names": [
+        "Gulmi Durbar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551406",
+      "source_name": "Chandrakot",
+      "matching_directory_names": [
+        "Chandrakot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551407",
+      "source_name": "Chhatrakot",
+      "matching_directory_names": [
+        "Chhatrakot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551408",
+      "source_name": "Ruruchhetra",
+      "matching_directory_names": [
+        "Ruruchhetra Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551409",
+      "source_name": "Satyawoti",
+      "matching_directory_names": [
+        "Satyawoti Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0551410",
+      "source_name": "Kali Gandaki",
+      "matching_directory_names": [
+        "Kaligandaki Gaunpalika",
+        "Kali Gandaki Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0552401",
+      "source_name": "Sisne",
+      "matching_directory_names": [
+        "Sisne Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0552402",
+      "source_name": "Putha Uttanganga",
+      "matching_directory_names": [
+        "Putha Uttanganga Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0552403",
+      "source_name": "Bhoome",
+      "matching_directory_names": [
+        "Bhoome Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0554301",
+      "source_name": "Rolpa",
+      "matching_directory_names": [
+        "Rolpa Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0554401",
+      "source_name": "Gangadev",
+      "matching_directory_names": [
+        "Gangadev Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0554402",
+      "source_name": "Pariwartan",
+      "matching_directory_names": [
+        "Pariwartan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0554403",
+      "source_name": "Thawang",
+      "matching_directory_names": [
+        "Thawang Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0554404",
+      "source_name": "Madi",
+      "matching_directory_names": [
+        "Madi Municipality",
+        "Madi Municipality",
+        "Madi Gaunpalika",
+        "Madi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0554405",
+      "source_name": "Sunchhahari",
+      "matching_directory_names": [
+        "Sunchhahari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0554406",
+      "source_name": "Tribeni",
+      "matching_directory_names": [
+        "Tribeni Gaunpalika",
+        "Tribeni Gaunpalika",
+        "Tribeni Gaunpalika",
+        "Tribeni Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0554407",
+      "source_name": "Sunil Smriti",
+      "matching_directory_names": [
+        "Sunil Smriti Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0554408",
+      "source_name": "Lungri",
+      "matching_directory_names": [
+        "Lungri Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0554409",
+      "source_name": "Runtigadhi",
+      "matching_directory_names": [
+        "Runtigadhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0555301",
+      "source_name": "Sworgadwari",
+      "matching_directory_names": [
+        "Sworgadwari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0555302",
+      "source_name": "Pyuthan",
+      "matching_directory_names": [
+        "Pyuthan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0555401",
+      "source_name": "Naubahini",
+      "matching_directory_names": [
+        "Naubahini Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0555402",
+      "source_name": "Gaumukhi",
+      "matching_directory_names": [
+        "Gaumukhi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0555403",
+      "source_name": "Jhimaruk",
+      "matching_directory_names": [
+        "Jhimaruk Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0555404",
+      "source_name": "Mandavi",
+      "matching_directory_names": [
+        "Mandavi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0555405",
+      "source_name": "Mallarani",
+      "matching_directory_names": [
+        "Mallarani Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0555406",
+      "source_name": "Sarumarani",
+      "matching_directory_names": [
+        "Sarumarani Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0555407",
+      "source_name": "Aairawati",
+      "matching_directory_names": [
+        "Aairawati Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0556201",
+      "source_name": "Tulsipur",
+      "matching_directory_names": [
+        "Tulsipur Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0556202",
+      "source_name": "Ghorahi",
+      "matching_directory_names": [
+        "Ghorahi Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0556301",
+      "source_name": "Lamahi",
+      "matching_directory_names": [
+        "Lamahi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0556401",
+      "source_name": "Babai",
+      "matching_directory_names": [
+        "Babai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0556402",
+      "source_name": "Dangisharan",
+      "matching_directory_names": [
+        "Dangisharan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0556403",
+      "source_name": "Shantinagar",
+      "matching_directory_names": [
+        "Shantinagar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0556404",
+      "source_name": "Rajpur",
+      "matching_directory_names": [
+        "Rajpur Municipality",
+        "Rajpur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0556405",
+      "source_name": "Bangalachuli",
+      "matching_directory_names": [
+        "Bangalachuli Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0556406",
+      "source_name": "Gadhawa",
+      "matching_directory_names": [
+        "Gadhawa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0556407",
+      "source_name": "Rapti",
+      "matching_directory_names": [
+        "Rapti Municipality",
+        "Rapti Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0557201",
+      "source_name": "Nepalganj",
+      "matching_directory_names": [
+        "Nepalganj Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0557301",
+      "source_name": "Kohalpur",
+      "matching_directory_names": [
+        "Kohalpur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0557401",
+      "source_name": "Khajura",
+      "matching_directory_names": [
+        "Khajura Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0557402",
+      "source_name": "Baijanath",
+      "matching_directory_names": [
+        "Baijanath Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0557403",
+      "source_name": "Janaki",
+      "matching_directory_names": [
+        "Janaki Gaunpalika",
+        "Janaki Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0557404",
+      "source_name": "Duduwa",
+      "matching_directory_names": [
+        "Duduwa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0557405",
+      "source_name": "Rapti Sonari",
+      "matching_directory_names": [
+        "Rapti Sonari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0557406",
+      "source_name": "Narainapur",
+      "matching_directory_names": [
+        "Narainapur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0558301",
+      "source_name": "Rajapur",
+      "matching_directory_names": [
+        "Rajapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0558302",
+      "source_name": "Madhuwan",
+      "matching_directory_names": [
+        "Madhuwan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0558303",
+      "source_name": "Thakurbaba",
+      "matching_directory_names": [
+        "Thakurbaba Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0558304",
+      "source_name": "Gulariya",
+      "matching_directory_names": [
+        "Gulariya Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0558305",
+      "source_name": "Barbardiya",
+      "matching_directory_names": [
+        "Barbardiya Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0558306",
+      "source_name": "Bansgadhi",
+      "matching_directory_names": [
+        "Bansgadhi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0558401",
+      "source_name": "Geruwa",
+      "matching_directory_names": [
+        "Geruwa Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0558402",
+      "source_name": "Badhaiyatal",
+      "matching_directory_names": [
+        "Badhaiyatal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0652301",
+      "source_name": "Aathabisakot",
+      "matching_directory_names": [
+        "Aathabisakot Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0652302",
+      "source_name": "Chaurjahari",
+      "matching_directory_names": [
+        "Chaurjahari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0652303",
+      "source_name": "Musikot",
+      "matching_directory_names": [
+        "Musikot Municipality",
+        "Musikot Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0652401",
+      "source_name": "Sanibheri",
+      "matching_directory_names": [
+        "Sanibheri Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0652402",
+      "source_name": "Banphikot",
+      "matching_directory_names": [
+        "Banphikot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0652403",
+      "source_name": "Tribeni",
+      "matching_directory_names": [
+        "Tribeni Gaunpalika",
+        "Tribeni Gaunpalika",
+        "Tribeni Gaunpalika",
+        "Tribeni Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0653301",
+      "source_name": "Banagad Kupinde",
+      "matching_directory_names": [
+        "Banagad Kupinde Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0653302",
+      "source_name": "Bagachour",
+      "matching_directory_names": [
+        "Bagachour Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0653303",
+      "source_name": "Sharada",
+      "matching_directory_names": [
+        "Sharada Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0653401",
+      "source_name": "Kumakh",
+      "matching_directory_names": [
+        "Kumakh Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0653402",
+      "source_name": "Darma",
+      "matching_directory_names": [
+        "Darma Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0653403",
+      "source_name": "Siddha Kumakh",
+      "matching_directory_names": [
+        "Siddha Kumakh Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0653404",
+      "source_name": "Kalimati",
+      "matching_directory_names": [
+        "Kalimati Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0653405",
+      "source_name": "Chhatreshwori",
+      "matching_directory_names": [
+        "Chhatreshwori Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0653406",
+      "source_name": "Tribeni",
+      "matching_directory_names": [
+        "Tribeni Gaunpalika",
+        "Tribeni Gaunpalika",
+        "Tribeni Gaunpalika",
+        "Tribeni Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0653407",
+      "source_name": "Kapurkot",
+      "matching_directory_names": [
+        "Kapurkot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0659301",
+      "source_name": "Panchapuri",
+      "matching_directory_names": [
+        "Panchapuri Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0659302",
+      "source_name": "Bheriganga",
+      "matching_directory_names": [
+        "Bheriganga Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0659303",
+      "source_name": "Birendranagar",
+      "matching_directory_names": [
+        "Birendranagar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0659304",
+      "source_name": "Lekabeshi",
+      "matching_directory_names": [
+        "Lekabeshi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0659305",
+      "source_name": "Gurbhakot",
+      "matching_directory_names": [
+        "Gurbhakot Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0659401",
+      "source_name": "Chaukune",
+      "matching_directory_names": [
+        "Chaukune Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0659402",
+      "source_name": "Barahatal",
+      "matching_directory_names": [
+        "Barahatal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0659403",
+      "source_name": "Chingad",
+      "matching_directory_names": [
+        "Chingad Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0659404",
+      "source_name": "Simta",
+      "matching_directory_names": [
+        "Simta Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0660301",
+      "source_name": "Chhedagad",
+      "matching_directory_names": [
+        "Chhedagad Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0660302",
+      "source_name": "Bheri Malika",
+      "matching_directory_names": [
+        "Bheri Malika Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0660303",
+      "source_name": "Nalgad",
+      "matching_directory_names": [
+        "Nalgad Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0660401",
+      "source_name": "Junichande",
+      "matching_directory_names": [
+        "Junichande Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0660402",
+      "source_name": "Kuse",
+      "matching_directory_names": [
+        "Kuse Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0660403",
+      "source_name": "Barekot",
+      "matching_directory_names": [
+        "Barekot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0660404",
+      "source_name": "Shivalaya",
+      "matching_directory_names": [
+        "Shivalaya Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661301",
+      "source_name": "Aathbis",
+      "matching_directory_names": [
+        "Aathbis Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661302",
+      "source_name": "Chamunda Bindrasaini",
+      "matching_directory_names": [
+        "Chamunda Bindrasaini Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661303",
+      "source_name": "Dullu",
+      "matching_directory_names": [
+        "Dullu Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661304",
+      "source_name": "Narayan",
+      "matching_directory_names": [
+        "Narayan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661401",
+      "source_name": "Thantikandh",
+      "matching_directory_names": [
+        "Thantikandh Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661402",
+      "source_name": "Bhairabi",
+      "matching_directory_names": [
+        "Bhairabi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661403",
+      "source_name": "Mahabu",
+      "matching_directory_names": [
+        "Mahabu Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661404",
+      "source_name": "Naumule",
+      "matching_directory_names": [
+        "Naumule Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661405",
+      "source_name": "Gurans",
+      "matching_directory_names": [
+        "Gurans Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661406",
+      "source_name": "Dungeshwor",
+      "matching_directory_names": [
+        "Dungeshwor Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0661407",
+      "source_name": "Bhagawatimai",
+      "matching_directory_names": [
+        "Bhagawatimai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0662301",
+      "source_name": "Tripurasundari",
+      "matching_directory_names": [
+        "Tripurasundari Gaunpalika",
+        "Tripurasundari Gaunpalika",
+        "Tripurasundari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0662302",
+      "source_name": "Thulibheri",
+      "matching_directory_names": [
+        "Thulibheri Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0662401",
+      "source_name": "Shey Phoksundo",
+      "matching_directory_names": [
+        "Shey Phoksundo Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0662402",
+      "source_name": "Jagadulla",
+      "matching_directory_names": [
+        "Jagadulla Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0662403",
+      "source_name": "Dolpo Buddha",
+      "matching_directory_names": [
+        "Dolpo Buddha Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0662404",
+      "source_name": "Mudkechula",
+      "matching_directory_names": [
+        "Mudkechula Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0662405",
+      "source_name": "Kaike",
+      "matching_directory_names": [
+        "Kaike Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0662406",
+      "source_name": "Chharka Tangsong",
+      "matching_directory_names": [
+        "Chharka Tangsong Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0663301",
+      "source_name": "Chandannath",
+      "matching_directory_names": [
+        "Chandannath Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0663401",
+      "source_name": "Kanaka Sundari",
+      "matching_directory_names": [
+        "Kanaka Sundari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0663402",
+      "source_name": "Sinja",
+      "matching_directory_names": [
+        "Sinja Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0663403",
+      "source_name": "Patarasi",
+      "matching_directory_names": [
+        "Patarasi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0663404",
+      "source_name": "Hima",
+      "matching_directory_names": [
+        "Hima Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0663405",
+      "source_name": "Tila",
+      "matching_directory_names": [
+        "Tila Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0663406",
+      "source_name": "Tatopani",
+      "matching_directory_names": [
+        "Tatopani Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0663407",
+      "source_name": "Guthichaur",
+      "matching_directory_names": [
+        "Guthichaur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0664301",
+      "source_name": "Raskot",
+      "matching_directory_names": [
+        "Raskot Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0664302",
+      "source_name": "Khandachakra",
+      "matching_directory_names": [
+        "Khandachakra Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0664303",
+      "source_name": "Tilagupha",
+      "matching_directory_names": [
+        "Tilagupha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0664401",
+      "source_name": "Naraharinath",
+      "matching_directory_names": [
+        "Naraharinath Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0664402",
+      "source_name": "Sanni Tribeni",
+      "matching_directory_names": [
+        "Sanni Tribeni Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0664403",
+      "source_name": "Pachal Jharana",
+      "matching_directory_names": [
+        "Pachal Jharana Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0664404",
+      "source_name": "Palata",
+      "matching_directory_names": [
+        "Palata Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0664405",
+      "source_name": "Shuva Kalika",
+      "matching_directory_names": [
+        "Shuva Kalika Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0664406",
+      "source_name": "Mahawai",
+      "matching_directory_names": [
+        "Mahawai Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0665301",
+      "source_name": "Chhayanath Rara",
+      "matching_directory_names": [
+        "Chhayanath Rara Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0665401",
+      "source_name": "Khatyad",
+      "matching_directory_names": [
+        "Khatyad Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0665402",
+      "source_name": "Soru",
+      "matching_directory_names": [
+        "Soru Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0665403",
+      "source_name": "Mugumakarmarog",
+      "matching_directory_names": [
+        "Mugumakarmarog Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0666401",
+      "source_name": "Namkha",
+      "matching_directory_names": [
+        "Namkha Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0666402",
+      "source_name": "Simkot",
+      "matching_directory_names": [
+        "Simkot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0666403",
+      "source_name": "Kharpunath",
+      "matching_directory_names": [
+        "Kharpunath Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0666404",
+      "source_name": "Sarkegad",
+      "matching_directory_names": [
+        "Sarkegad Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0666405",
+      "source_name": "Chankheli",
+      "matching_directory_names": [
+        "Chankheli Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0666406",
+      "source_name": "Tanjakot",
+      "matching_directory_names": [
+        "Tanjakot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0666407",
+      "source_name": "Adanchuli",
+      "matching_directory_names": [
+        "Adanchuli Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767301",
+      "source_name": "Bungal",
+      "matching_directory_names": [
+        "Bungal Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767302",
+      "source_name": "Jayaprithbi",
+      "matching_directory_names": [
+        "Jayaprithbi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767401",
+      "source_name": "Saipal",
+      "matching_directory_names": [
+        "Saipal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767402",
+      "source_name": "Surma",
+      "matching_directory_names": [
+        "Surma Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767403",
+      "source_name": "Talkot",
+      "matching_directory_names": [
+        "Talkot Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767404",
+      "source_name": "Bitthadchir",
+      "matching_directory_names": [
+        "Bitthadchir Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767405",
+      "source_name": "Kedarsyun",
+      "matching_directory_names": [
+        "Kedarsyun Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767406",
+      "source_name": "Durgathali",
+      "matching_directory_names": [
+        "Durgathali Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767407",
+      "source_name": "Chhabis Pathibhara",
+      "matching_directory_names": [
+        "Chhabis Pathibhara Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767408",
+      "source_name": "Masta",
+      "matching_directory_names": [
+        "Masta Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767409",
+      "source_name": "Thalara",
+      "matching_directory_names": [
+        "Thalara Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0767410",
+      "source_name": "Khaptad Chhanna",
+      "matching_directory_names": [
+        "Khaptad Chhanna Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0768301",
+      "source_name": "Budhinanda",
+      "matching_directory_names": [
+        "Budhinanda Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0768302",
+      "source_name": "Badimalika",
+      "matching_directory_names": [
+        "Badimalika Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0768303",
+      "source_name": "Budhiganga",
+      "matching_directory_names": [
+        "Budhiganga Gaunpalika",
+        "Budhiganga Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0768304",
+      "source_name": "Tribeni",
+      "matching_directory_names": [
+        "Tribeni Gaunpalika",
+        "Tribeni Gaunpalika",
+        "Tribeni Gaunpalika",
+        "Tribeni Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0768401",
+      "source_name": "Himali",
+      "matching_directory_names": [
+        "Himali Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0768402",
+      "source_name": "Gaumul",
+      "matching_directory_names": [
+        "Gaumul Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0768403",
+      "source_name": "Khaptad Chhededaha",
+      "matching_directory_names": [
+        "Khaptad Chhededaha Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0768404",
+      "source_name": "Jagannath",
+      "matching_directory_names": [
+        "Jagannath Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0768405",
+      "source_name": "Swamikartik Khapar",
+      "matching_directory_names": [
+        "Swamikartik Khapar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0769301",
+      "source_name": "Sanphebagar",
+      "matching_directory_names": [
+        "Sanphebagar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0769302",
+      "source_name": "Mangalsen",
+      "matching_directory_names": [
+        "Mangalsen Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0769303",
+      "source_name": "Kamal bazar",
+      "matching_directory_names": [
+        "Kamal bazar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0769304",
+      "source_name": "Panchdebal Binayak",
+      "matching_directory_names": [
+        "Panchdebal Binayak Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0769401",
+      "source_name": "Chaurpati",
+      "matching_directory_names": [
+        "Chaurpati Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0769402",
+      "source_name": "Mellekh",
+      "matching_directory_names": [
+        "Mellekh Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0769403",
+      "source_name": "Bannigadhi Jayagadh",
+      "matching_directory_names": [
+        "Bannigadhi Jayagadh Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0769404",
+      "source_name": "Ramaroshan",
+      "matching_directory_names": [
+        "Ramaroshan Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0769405",
+      "source_name": "Dhakari",
+      "matching_directory_names": [
+        "Dhakari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0769406",
+      "source_name": "Turmakhand",
+      "matching_directory_names": [
+        "Turmakhand Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0770301",
+      "source_name": "Shikhar",
+      "matching_directory_names": [
+        "Shikhar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0770302",
+      "source_name": "Dipayal Silgadhi",
+      "matching_directory_names": [
+        "Dipayal Silgadhi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0770401",
+      "source_name": "Aadarsha",
+      "matching_directory_names": [
+        "Aadarsha Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0770402",
+      "source_name": "Sayal",
+      "matching_directory_names": [
+        "Sayal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0770403",
+      "source_name": "Purbichouki",
+      "matching_directory_names": [
+        "Purbichouki Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0770404",
+      "source_name": "Jorayal",
+      "matching_directory_names": [
+        "Jorayal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0770405",
+      "source_name": "K.I. Singh",
+      "matching_directory_names": [
+        "K.I. Singh Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0770406",
+      "source_name": "Badi Kedar",
+      "matching_directory_names": [
+        "Badi Kedar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0770407",
+      "source_name": "Bogatan Phudsil",
+      "matching_directory_names": [
+        "Bogatan Phudsil Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771201",
+      "source_name": "Dhangadhi",
+      "matching_directory_names": [
+        "Dhangadhi Sub-Metropolitan City"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771301",
+      "source_name": "Godawari",
+      "matching_directory_names": [
+        "Godawari Municipality",
+        "Godawari Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771302",
+      "source_name": "Gauriganga",
+      "matching_directory_names": [
+        "Gauriganga Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771303",
+      "source_name": "Ghodaghodi",
+      "matching_directory_names": [
+        "Ghodaghodi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771304",
+      "source_name": "Bhajani",
+      "matching_directory_names": [
+        "Bhajani Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771305",
+      "source_name": "Tikapur",
+      "matching_directory_names": [
+        "Tikapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771306",
+      "source_name": "Lamki Chuha",
+      "matching_directory_names": [
+        "Lamki Chuha Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771401",
+      "source_name": "Chure",
+      "matching_directory_names": [
+        "Chure Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771402",
+      "source_name": "Kailari",
+      "matching_directory_names": [
+        "Kailari Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771403",
+      "source_name": "Mohanyal",
+      "matching_directory_names": [
+        "Mohanyal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771404",
+      "source_name": "Joshipur",
+      "matching_directory_names": [
+        "Joshipur Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771405",
+      "source_name": "Bardagoriya",
+      "matching_directory_names": [
+        "Bardagoriya Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0771406",
+      "source_name": "Janaki",
+      "matching_directory_names": [
+        "Janaki Gaunpalika",
+        "Janaki Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0772301",
+      "source_name": "Dodhara Chandani",
+      "matching_directory_names": [],
+      "status": "REVIEWED_VARIANT"
+    },
+    {
+      "pcode": "NP0772302",
+      "source_name": "Bhimdatta",
+      "matching_directory_names": [
+        "Bhimdatta Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0772303",
+      "source_name": "Bedkot",
+      "matching_directory_names": [
+        "Bedkot Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0772304",
+      "source_name": "Shuklaphanta",
+      "matching_directory_names": [
+        "Shuklaphanta Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0772305",
+      "source_name": "Krishnapur",
+      "matching_directory_names": [
+        "Krishnapur Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0772306",
+      "source_name": "Belouri",
+      "matching_directory_names": [
+        "Belouri Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0772307",
+      "source_name": "Punarbas",
+      "matching_directory_names": [
+        "Punarbas Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0772401",
+      "source_name": "Beldandi",
+      "matching_directory_names": [
+        "Beldandi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0772402",
+      "source_name": "Laljhadi",
+      "matching_directory_names": [
+        "Laljhadi Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0773301",
+      "source_name": "Parashuram",
+      "matching_directory_names": [
+        "Parashuram Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0773302",
+      "source_name": "Amargadhi",
+      "matching_directory_names": [
+        "Amargadhi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0773401",
+      "source_name": "Bhageshwor",
+      "matching_directory_names": [
+        "Bhageshwor Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0773402",
+      "source_name": "Ajayameru",
+      "matching_directory_names": [
+        "Ajayameru Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0773403",
+      "source_name": "Nawadurga",
+      "matching_directory_names": [
+        "Nawadurga Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0773404",
+      "source_name": "Aalital",
+      "matching_directory_names": [
+        "Aalital Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0773405",
+      "source_name": "Ganyapdhura",
+      "matching_directory_names": [
+        "Ganyapdhura Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0774301",
+      "source_name": "Dasharathchand",
+      "matching_directory_names": [
+        "Dasharathchand Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0774302",
+      "source_name": "Puchaundi",
+      "matching_directory_names": [
+        "Puchaundi Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0774303",
+      "source_name": "Melauli",
+      "matching_directory_names": [
+        "Melauli Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0774304",
+      "source_name": "Patan",
+      "matching_directory_names": [
+        "Patan Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0774401",
+      "source_name": "Dilasaini",
+      "matching_directory_names": [
+        "Dilasaini Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0774402",
+      "source_name": "Dogada Kedar",
+      "matching_directory_names": [
+        "Dogada Kedar Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0774403",
+      "source_name": "Surnaya",
+      "matching_directory_names": [
+        "Surnaya Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0774404",
+      "source_name": "Pancheshwor",
+      "matching_directory_names": [
+        "Pancheshwor Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0774405",
+      "source_name": "Shivanath",
+      "matching_directory_names": [
+        "Shivanath Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0774406",
+      "source_name": "Sigas",
+      "matching_directory_names": [
+        "Sigas Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0775301",
+      "source_name": "Mahakali",
+      "matching_directory_names": [
+        "Mahakali Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0775302",
+      "source_name": "Shailyashikhar",
+      "matching_directory_names": [
+        "Shailyashikhar Municipality"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0775401",
+      "source_name": "Byas",
+      "matching_directory_names": [
+        "Byas Municipality",
+        "Byas Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0775402",
+      "source_name": "Duhun",
+      "matching_directory_names": [
+        "Duhun Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0775403",
+      "source_name": "Apihimal",
+      "matching_directory_names": [
+        "Apihimal Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0775404",
+      "source_name": "Malikarjun",
+      "matching_directory_names": [
+        "Malikarjun Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0775405",
+      "source_name": "Naugad",
+      "matching_directory_names": [
+        "Naugad Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0775406",
+      "source_name": "Lekam",
+      "matching_directory_names": [
+        "Lekam Gaunpalika"
+      ],
+      "status": "MATCH"
+    },
+    {
+      "pcode": "NP0775407",
+      "source_name": "Marma",
+      "matching_directory_names": [
+        "Marma Gaunpalika"
+      ],
+      "status": "MATCH"
+    }
+  ],
+  "exceptions": [
+    {
+      "pcode": "NP0438401",
+      "display_name": "Manang Ngisyang",
+      "source_url": "https://visit.manangngisyangmun.gov.np/",
+      "reason": "Municipality official full name; retain Ngisyang as source name."
+    },
+    {
+      "pcode": "NP0772301",
+      "display_name": "Dodhara Chandani",
+      "source_url": "https://daokanchanpur.moha.gov.np/en/post/dodhara-chandani",
+      "reason": "District administration corroborates Chandani; do not replace with directory variant Chadani."
+    }
+  ]
+}

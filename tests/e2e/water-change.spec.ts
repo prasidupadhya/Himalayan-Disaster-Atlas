@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 test('water comparisons preserve UNKNOWN and reject reversed dates', async ({ page }) => {
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const water = page.getByRole('region', { name: 'Water Change', exact: true });
   await expect(water).toHaveAttribute('data-water-change-state', 'ready');
   await expect(water).toContainText('3.2224 km²');
@@ -19,7 +19,7 @@ test('water comparisons preserve UNKNOWN and reject reversed dates', async ({ pa
 });
 test('water rejects a corrupt display image and allows retry', async ({ page }) => {
   await page.route('**/phewa-water-change/1.0.0/*-change.png', route => route.fulfill({ body: 'bad image' }));
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const water = page.getByRole('region', { name: 'Water Change', exact: true });
   await expect(water).toHaveAttribute('data-water-change-state', 'ready');
   await water.getByLabel('Show water observation').check();

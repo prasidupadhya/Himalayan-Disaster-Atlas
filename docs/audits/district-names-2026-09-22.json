@@ -1,0 +1,393 @@
+{
+  "reviewed_on": "2026-09-22",
+  "source_url": "https://en.wikipedia.org/wiki/List_of_districts_of_Nepal#List_of_districts",
+  "source_sha256": "4fbed71ff99344c73f2dd1152bba19ebee705c7f849741cb01c37dd18d8a5c4d",
+  "scope": "Spelling consistency with the user-selected district reference; not a boundary or jurisdiction update.",
+  "records": [
+    {
+      "pcode": "NP0101",
+      "source_name": "Taplejung",
+      "display_name": "Taplejung"
+    },
+    {
+      "pcode": "NP0102",
+      "source_name": "Panchthar",
+      "display_name": "Panchthar"
+    },
+    {
+      "pcode": "NP0103",
+      "source_name": "Ilam",
+      "display_name": "Ilam"
+    },
+    {
+      "pcode": "NP0104",
+      "source_name": "Jhapa",
+      "display_name": "Jhapa"
+    },
+    {
+      "pcode": "NP0105",
+      "source_name": "Morang",
+      "display_name": "Morang"
+    },
+    {
+      "pcode": "NP0106",
+      "source_name": "Sunsari",
+      "display_name": "Sunsari"
+    },
+    {
+      "pcode": "NP0107",
+      "source_name": "Dhankuta",
+      "display_name": "Dhankuta"
+    },
+    {
+      "pcode": "NP0108",
+      "source_name": "Tehrathum",
+      "display_name": "Tehrathum"
+    },
+    {
+      "pcode": "NP0109",
+      "source_name": "Sankhuwasabha",
+      "display_name": "Sankhuwasabha"
+    },
+    {
+      "pcode": "NP0110",
+      "source_name": "Bhojpur",
+      "display_name": "Bhojpur"
+    },
+    {
+      "pcode": "NP0111",
+      "source_name": "Solukhumbu",
+      "display_name": "Solukhumbu"
+    },
+    {
+      "pcode": "NP0112",
+      "source_name": "Khotang",
+      "display_name": "Khotang"
+    },
+    {
+      "pcode": "NP0113",
+      "source_name": "Okhaldhunga",
+      "display_name": "Okhaldhunga"
+    },
+    {
+      "pcode": "NP0114",
+      "source_name": "Udayapur",
+      "display_name": "Udayapur"
+    },
+    {
+      "pcode": "NP0215",
+      "source_name": "Saptari",
+      "display_name": "Saptari"
+    },
+    {
+      "pcode": "NP0216",
+      "source_name": "Siraha",
+      "display_name": "Siraha"
+    },
+    {
+      "pcode": "NP0217",
+      "source_name": "Dhanusha",
+      "display_name": "Dhanusha"
+    },
+    {
+      "pcode": "NP0218",
+      "source_name": "Mahottari",
+      "display_name": "Mahottari"
+    },
+    {
+      "pcode": "NP0219",
+      "source_name": "Sarlahi",
+      "display_name": "Sarlahi"
+    },
+    {
+      "pcode": "NP0232",
+      "source_name": "Rautahat",
+      "display_name": "Rautahat"
+    },
+    {
+      "pcode": "NP0233",
+      "source_name": "Bara",
+      "display_name": "Bara"
+    },
+    {
+      "pcode": "NP0234",
+      "source_name": "Parsa",
+      "display_name": "Parsa"
+    },
+    {
+      "pcode": "NP0320",
+      "source_name": "Sindhuli",
+      "display_name": "Sindhuli"
+    },
+    {
+      "pcode": "NP0321",
+      "source_name": "Ramechhap",
+      "display_name": "Ramechhap"
+    },
+    {
+      "pcode": "NP0322",
+      "source_name": "Dolakha",
+      "display_name": "Dolakha"
+    },
+    {
+      "pcode": "NP0323",
+      "source_name": "Sindhupalchok",
+      "display_name": "Sindhupalchok"
+    },
+    {
+      "pcode": "NP0324",
+      "source_name": "Kavrepalanchok",
+      "display_name": "Kavrepalanchok"
+    },
+    {
+      "pcode": "NP0325",
+      "source_name": "Lalitpur",
+      "display_name": "Lalitpur"
+    },
+    {
+      "pcode": "NP0326",
+      "source_name": "Bhaktapur",
+      "display_name": "Bhaktapur"
+    },
+    {
+      "pcode": "NP0327",
+      "source_name": "Kathmandu",
+      "display_name": "Kathmandu"
+    },
+    {
+      "pcode": "NP0328",
+      "source_name": "Nuwakot",
+      "display_name": "Nuwakot"
+    },
+    {
+      "pcode": "NP0329",
+      "source_name": "Rasuwa",
+      "display_name": "Rasuwa"
+    },
+    {
+      "pcode": "NP0330",
+      "source_name": "Dhading",
+      "display_name": "Dhading"
+    },
+    {
+      "pcode": "NP0331",
+      "source_name": "Makwanpur",
+      "display_name": "Makwanpur"
+    },
+    {
+      "pcode": "NP0335",
+      "source_name": "Chitwan",
+      "display_name": "Chitwan"
+    },
+    {
+      "pcode": "NP0436",
+      "source_name": "Gorkha",
+      "display_name": "Gorkha"
+    },
+    {
+      "pcode": "NP0437",
+      "source_name": "Lamjung",
+      "display_name": "Lamjung"
+    },
+    {
+      "pcode": "NP0438",
+      "source_name": "Manang",
+      "display_name": "Manang"
+    },
+    {
+      "pcode": "NP0439",
+      "source_name": "Kaski",
+      "display_name": "Kaski"
+    },
+    {
+      "pcode": "NP0440",
+      "source_name": "Tanahun",
+      "display_name": "Tanahun"
+    },
+    {
+      "pcode": "NP0441",
+      "source_name": "Syangja",
+      "display_name": "Syangja"
+    },
+    {
+      "pcode": "NP0442",
+      "source_name": "Parbat",
+      "display_name": "Parbat"
+    },
+    {
+      "pcode": "NP0443",
+      "source_name": "Baglung",
+      "display_name": "Baglung"
+    },
+    {
+      "pcode": "NP0444",
+      "source_name": "Myagdi",
+      "display_name": "Myagdi"
+    },
+    {
+      "pcode": "NP0445",
+      "source_name": "Mustang",
+      "display_name": "Mustang"
+    },
+    {
+      "pcode": "NP0447",
+      "source_name": "Nawalpur",
+      "display_name": "Nawalpur"
+    },
+    {
+      "pcode": "NP0546",
+      "source_name": "Palpa",
+      "display_name": "Palpa"
+    },
+    {
+      "pcode": "NP0547",
+      "source_name": "Nawalparasi (West of Bardaghat Susta)",
+      "display_name": "Nawalparasi (West of Bardaghat Susta)"
+    },
+    {
+      "pcode": "NP0548",
+      "source_name": "Rupandehi",
+      "display_name": "Rupandehi"
+    },
+    {
+      "pcode": "NP0549",
+      "source_name": "Kapilvastu",
+      "display_name": "Kapilvastu"
+    },
+    {
+      "pcode": "NP0550",
+      "source_name": "Arghakhanchi",
+      "display_name": "Arghakhanchi"
+    },
+    {
+      "pcode": "NP0551",
+      "source_name": "Gulmi",
+      "display_name": "Gulmi"
+    },
+    {
+      "pcode": "NP0552",
+      "source_name": "Rukum East",
+      "display_name": "Eastern Rukum"
+    },
+    {
+      "pcode": "NP0554",
+      "source_name": "Rolpa",
+      "display_name": "Rolpa"
+    },
+    {
+      "pcode": "NP0555",
+      "source_name": "Pyuthan",
+      "display_name": "Pyuthan"
+    },
+    {
+      "pcode": "NP0556",
+      "source_name": "Dang",
+      "display_name": "Dang"
+    },
+    {
+      "pcode": "NP0557",
+      "source_name": "Banke",
+      "display_name": "Banke"
+    },
+    {
+      "pcode": "NP0558",
+      "source_name": "Bardiya",
+      "display_name": "Bardiya"
+    },
+    {
+      "pcode": "NP0652",
+      "source_name": "Rukum West",
+      "display_name": "Western Rukum"
+    },
+    {
+      "pcode": "NP0653",
+      "source_name": "Salyan",
+      "display_name": "Salyan"
+    },
+    {
+      "pcode": "NP0659",
+      "source_name": "Surkhet",
+      "display_name": "Surkhet"
+    },
+    {
+      "pcode": "NP0660",
+      "source_name": "Jajarkot",
+      "display_name": "Jajarkot"
+    },
+    {
+      "pcode": "NP0661",
+      "source_name": "Dailekh",
+      "display_name": "Dailekh"
+    },
+    {
+      "pcode": "NP0662",
+      "source_name": "Dolpa",
+      "display_name": "Dolpa"
+    },
+    {
+      "pcode": "NP0663",
+      "source_name": "Jumla",
+      "display_name": "Jumla"
+    },
+    {
+      "pcode": "NP0664",
+      "source_name": "Kalikot",
+      "display_name": "Kalikot"
+    },
+    {
+      "pcode": "NP0665",
+      "source_name": "Mugu",
+      "display_name": "Mugu"
+    },
+    {
+      "pcode": "NP0666",
+      "source_name": "Humla",
+      "display_name": "Humla"
+    },
+    {
+      "pcode": "NP0767",
+      "source_name": "Bajhang",
+      "display_name": "Bajhang"
+    },
+    {
+      "pcode": "NP0768",
+      "source_name": "Bajura",
+      "display_name": "Bajura"
+    },
+    {
+      "pcode": "NP0769",
+      "source_name": "Achham",
+      "display_name": "Achham"
+    },
+    {
+      "pcode": "NP0770",
+      "source_name": "Doti",
+      "display_name": "Doti"
+    },
+    {
+      "pcode": "NP0771",
+      "source_name": "Kailali",
+      "display_name": "Kailali"
+    },
+    {
+      "pcode": "NP0772",
+      "source_name": "Kanchanpur",
+      "display_name": "Kanchanpur"
+    },
+    {
+      "pcode": "NP0773",
+      "source_name": "Dadeldhura",
+      "display_name": "Dadeldhura"
+    },
+    {
+      "pcode": "NP0774",
+      "source_name": "Baitadi",
+      "display_name": "Baitadi"
+    },
+    {
+      "pcode": "NP0775",
+      "source_name": "Darchula",
+      "display_name": "Darchula"
+    }
+  ]
+}

@@ -789,7 +789,30 @@
       "reason": "Original Atlas catalog of source metadata. Does not grant permission to redistribute underlying records.",
       "obligations": "Retain source-specific notices and distinguish unresolved rights from permitted data.",
       "parents": []
+    },
+    "nepal-river-names@1.0.0": {
+      "manifest_path": "/data/nepal-river-names/1.0.0/manifest.json",
+      "manifest_sha256": "3320628d8eb87465dcaaa50b0318f517a2fd74e9296f0a22447c364d28e04542",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-22",
+      "evidence_urls": [
+        "https://www.geonames.org/export/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "reason": "GeoNames export page and the pinned NP.zip README provide CC BY 4.0 terms. This separate named-stream gazetteer preserves names and attribution; no HydroRIVERS name crosswalk is asserted.",
+      "obligations": "Retain source, version, attribution and licence links; identify Atlas processing; no endorsement or warranty is implied.",
+      "parents": []
+    },
+    "atlas-provenance@1.1.0": {
+      "manifest_path": "/data/atlas-provenance/1.1.0/manifest.json",
+      "manifest_sha256": "3948137e0460d330bf11c4dd63496ddee14a402a663d8c2ed579ab85799f8363",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-09-22",
+      "evidence_urls": [],
+      "reason": "Original Atlas catalog of source metadata. Does not grant permission to redistribute underlying records.",
+      "obligations": "Retain source-specific notices and distinguish unresolved rights from permitted data.",
+      "parents": []
     }
   },
-  "public_tree_sha256": "760601a6d0df62c3bcfcedf08e82ddfccc86eddeb52be235481654584ac7a30a"
+  "public_tree_sha256": "87ccb682c14602dac0de4f311a8c93288ae80b402b63e190306066b071fc2db6"
 }

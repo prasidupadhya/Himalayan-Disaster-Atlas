@@ -6,7 +6,7 @@ test('location explorer keeps proximity spatial-only and preserves source dates'
   page.on('request', request => {
     if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url());
   });
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const explorer = page.getByRole('region', { name: 'Location Explorer' });
   await explorer.getByLabel('Load location context datasets').check();
   await expect(explorer).toHaveAttribute('data-location-explorer-state', 'ready', { timeout: 45_000 });

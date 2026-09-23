@@ -1,0 +1,22 @@
+{
+  "model": "anuga-swe-4.0.1",
+  "is_fixture": true,
+  "scope": "Synthetic solver verification, NOT validation of any Nepal GLOF",
+  "dry_dam_break": [
+    {
+      "cells_x": 100,
+      "normalized_depth_l1": 0.004004640465233268,
+      "relative_mass_error": 0.0
+    },
+    {
+      "cells_x": 200,
+      "normalized_depth_l1": 0.0020415067233014736,
+      "relative_mass_error": 0.0
+    }
+  ],
+  "lake_at_rest": {
+    "max_stage_error_m": 1.3322676295501878e-15,
+    "relative_mass_error": 1.8153434099448114e-16
+  },
+  "reference": "https://anuga.readthedocs.io/en/stable/reference/validation.html"
+}

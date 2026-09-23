@@ -14,7 +14,7 @@ test('home presents the atlas with source-backed geography and a direct explorat
 
 test('desktop atlas keeps the map dominant while the scientific rail remains independently usable', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const map = page.locator('.map-shell');
   const rail = page.locator('.atlas-panel');
   await expect(map).toBeVisible();
@@ -37,7 +37,7 @@ test('evidence and scenario states retain explicit non-color cues', async ({ pag
   expect(marker).not.toBe('none');
   expect(marker).not.toBe('normal');
 
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const warning = page.locator('.simulation-warning').first();
   await expect(warning).toContainText('MODELLED SCENARIO — NOT AN OFFICIAL FORECAST');
   expect(Number.parseFloat(await warning.evaluate(element => getComputedStyle(element).borderLeftWidth))).toBeGreaterThanOrEqual(4);
@@ -48,7 +48,7 @@ test('evidence and scenario states retain explicit non-color cues', async ({ pag
 
 test('mobile menu exposes every primary destination without horizontal page overflow', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   await page.getByRole('button', { name: 'Menu', exact: true }).click();
   for (const label of ['Atlas', 'Events', 'Analyst', 'Data catalog', 'Methodology', 'Sources']) {
     await expect(page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: label, exact: true })).toBeVisible();

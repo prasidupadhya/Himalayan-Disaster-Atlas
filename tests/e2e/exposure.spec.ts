@@ -4,7 +4,7 @@ test('exposure results distinguish partial estimates and unavailable inventories
   const errors: string[] = [], external: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('request', request => { if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url()); });
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const exposure = page.getByRole('region', { name: 'Exposure engine', exact: true });
   await exposure.getByLabel('Exposure scenario').selectOption({ index: 1 });
   await expect(exposure.locator('[data-exposure-state]')).toHaveAttribute('data-exposure-state', 'ready');
@@ -28,7 +28,7 @@ test('exposure results distinguish partial estimates and unavailable inventories
 test('exposure rejects corrupt spatial results and can retry missing ones', async ({ page }) => {
   const path = '**/exposure-trace-40669746-250m/1.0.0/spatial.geojson.gz';
   await page.route(path, route => route.fulfill({ status: 503, body: '' }), { times: 1 });
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const exposure = page.getByRole('region', { name: 'Exposure engine', exact: true });
   await exposure.getByLabel('Exposure scenario').selectOption({ index: 1 });
   await expect(exposure.locator('[data-exposure-state]')).toHaveAttribute('data-exposure-state', 'unavailable');
@@ -42,7 +42,7 @@ test('exposure rejects corrupt spatial results and can retry missing ones', asyn
 test('exposure remains usable on mobile and without WebGL', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.addInitScript(() => { HTMLCanvasElement.prototype.getContext = (() => null) as typeof HTMLCanvasElement.prototype.getContext; });
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const exposure = page.getByRole('region', { name: 'Exposure engine', exact: true });
   await exposure.getByLabel('Exposure scenario').selectOption({ index: 1 });
   await expect(exposure.locator('[data-exposure-state]')).toHaveAttribute('data-exposure-state', 'ready');

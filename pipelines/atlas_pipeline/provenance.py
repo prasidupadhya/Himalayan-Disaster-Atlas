@@ -11,7 +11,7 @@ from jsonschema import Draft7Validator
 
 from .contracts import ROOT
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 BASE = f"/data/atlas-provenance/{VERSION}/"
 RELEASE = ROOT / "data/releases/atlas-provenance" / VERSION
 PUBLIC = ROOT / "apps/web/public/data/atlas-provenance" / VERSION
@@ -422,6 +422,11 @@ def verify_provenance(path=RELEASE, public=PUBLIC):
     manifest = json.loads((path / "manifest.json").read_text())
     Draft7Validator(schema).validate(manifest)
     expected = derive()
+    if manifest["version"] != VERSION:
+        historical_keys = {item["key"] for item in manifest["records"]}
+        expected["records"] = [item for item in expected["records"] if item["key"] in historical_keys]
+        expected["version"] = manifest["version"]
+        expected["generated_from_count"] = len(expected["records"])
     if manifest != expected:
         raise ValueError("Provenance registry differs from current release manifests")
     keys = {record["key"] for record in manifest["records"]}
@@ -430,7 +435,7 @@ def verify_provenance(path=RELEASE, public=PUBLIC):
         for p in (ROOT / "data/releases").glob("*/*/manifest.json")
         if p.parent.parent.name != "atlas-provenance"
     }
-    if keys != expected_keys:
+    if (manifest["version"] == VERSION and keys != expected_keys) or not keys.issubset(expected_keys):
         raise ValueError("Provenance registry does not cover every release")
     if public and (public / "manifest.json").read_bytes() != (path / "manifest.json").read_bytes():
         raise ValueError("Public provenance registry differs")

@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { buildSourceDirectory, currentProductionRecords, filterProvenanceRecords, parseProvenanceCatalog } from '../../packages/contracts/provenance';
 
-const catalog = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.0.0/manifest.json', 'utf8')));
+const catalog = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.1.0/manifest.json', 'utf8')));
 
 describe('provenance catalog', () => {
   it('keeps complete current production provenance and derived parents', () => {

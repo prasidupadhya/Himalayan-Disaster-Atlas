@@ -1,5 +1,5 @@
 import { isReleaseIncluded } from '../../lib/public-release';
-import catalogJson from '../../public/data/atlas-provenance/1.0.0/manifest.json';
+import catalogJson from '../../public/data/atlas-provenance/1.1.0/manifest.json';
 import { parseProvenanceCatalog } from '../../../../packages/contracts/provenance';
 import { DataCatalog } from '../../features/data-catalog/data-catalog';
 

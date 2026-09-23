@@ -5,7 +5,7 @@ test('RGI glacier inventory loads, searches and exposes dated provenance', async
   page.on('request', request => {
     if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url());
   });
-  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
+  await page.goto('/research/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const glaciers = page.getByRole('region', { name: 'Glaciers', exact: true });
   await expect(glaciers).toHaveAttribute('data-glaciers-state', 'ready');
   await glaciers.getByRole('searchbox').fill('Imja/Lhotse');

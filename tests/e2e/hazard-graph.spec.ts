@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 test('graph exposes derived and conditional modelled links with source evidence', async ({ page }) => {
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const graph = page.getByRole('region', { name: 'Hazard Graph', exact: true });
   await graph.getByLabel('Load relationship graph').check();
   await expect(graph).toHaveAttribute('data-hazard-graph-state', 'ready');
@@ -17,7 +17,7 @@ test('graph exposes derived and conditional modelled links with source evidence'
 });
 test('corrupt graphs fail closed and retry', async ({ page }) => {
   await page.route('**/nepal-hazard-graph/1.0.0/graph.json.gz', r => r.fulfill({ body: 'corrupt' }));
-  await page.goto('/atlas/');
+  await page.goto('/research/');
   const graph = page.getByRole('region', { name: 'Hazard Graph', exact: true });
   await graph.getByLabel('Load relationship graph').check();
   await expect(graph).toHaveAttribute('data-hazard-graph-state', 'error');

@@ -1,6 +1,6 @@
 import { isReleaseIncluded } from '../../lib/public-release';
 import Link from 'next/link';
-import catalogJson from '../../public/data/atlas-provenance/1.0.0/manifest.json';
+import catalogJson from '../../public/data/atlas-provenance/1.1.0/manifest.json';
 import { buildSourceDirectory, currentProductionRecords, parseProvenanceCatalog, type ProvenanceRecord } from '../../../../packages/contracts/provenance';
 
 export const metadata = { title: 'Sources' };

@@ -1,0 +1,2 @@
+# Optional offline modelling environment. Not installed by the website build.
+-r requirements.lock
