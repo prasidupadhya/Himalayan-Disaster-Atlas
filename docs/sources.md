@@ -1,6 +1,6 @@
 # Source directory conventions — feature 35
 
-The public `/sources/` directory is generated from current production records in `atlas-provenance@1.0.0`. It therefore uses the same source name, official/acquisition URL, access date, licence, attribution, limitations and dataset/version identity that validation sees.
+The public `/sources/` directory is generated from current production records in `atlas-provenance@1.2.0`. It therefore uses the same source name, official/acquisition URL, access date, licence, attribution, limitations and dataset/version identity that validation sees.
 
 External providers and Atlas-derived products are deliberately separated. A Search index, Hazard Graph, exposure result or simulation is a versioned Atlas product, not a new upstream observation provider; its Data Catalog entry points to the exact parent releases that supplied evidence.
 
@@ -9,3 +9,5 @@ Every current production record has a stable `source_href` category. Automated t
 Do not publish API keys, OAuth credentials, private URLs, local filesystem paths or account configuration. Public source URLs are informational/acquisition links only. Where an official source URL is already available in release metadata, do not replace it with an unofficial mirror for convenience.
 
 Licensing is source-specific. Derived products inherit parent obligations; the project does not erase those obligations behind one blanket project licence.
+
+Feature 42 adds `/sources/#live-contracts` for original MIT contract fixtures, separate from current production data. No real feeds are fetched. It links official DHM/NDRRMA/BIPAD authorities and explains conditional providers remain disabled. Future acquisition must register exact sources and terms; no upstream rights are granted. See [Feature 42](live-contracts.md).

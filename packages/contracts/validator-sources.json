@@ -29,6 +29,17 @@
     "formats": false,
     "schema": "hazard-graph.schema.json"
   },
+  "live-index": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "live-index.schema.json",
+    "references": ["live-snapshot.schema.json"]
+  },
+  "live-snapshot": {
+    "common_schema": false,
+    "formats": true,
+    "schema": "live-snapshot.schema.json"
+  },
   "population": {
     "common_schema": true,
     "formats": true,

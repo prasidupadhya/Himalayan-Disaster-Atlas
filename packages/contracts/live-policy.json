@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.0.0",
+  "sources": {
+    "usgs": { "enabled_by_default": true, "publication": "review_exact_release", "reason": "USGS-produced earthquake records; preserve exact product and contributor notices." },
+    "noaa-gfs": { "enabled_by_default": true, "publication": "review_exact_release", "reason": "Initial forecast source is the pinned NOAA GFS model, never an official Nepal warning." },
+    "dhm": { "enabled_by_default": false, "publication": "reference_only", "reason": "Official links only until redistribution permission and interface review are documented." },
+    "bipad": { "enabled_by_default": false, "publication": "review_required", "reason": "No live ingestion; existing unresolved releases remain excluded from the public build." },
+    "openaq": { "enabled_by_default": false, "publication": "review_required", "reason": "Future adapter stays off; enabling requires provider-specific licence review." },
+    "open-meteo": { "enabled_by_default": false, "publication": "review_required", "reason": "Not a default source; service terms and an explicitly pinned model require review." },
+    "imerg": { "enabled_by_default": false, "publication": "review_required", "reason": "Optional satellite-derived estimate, off by default; exact product terms require review." }
+  },
+  "authorities": [
+    { "name": "DHM", "url": "https://www.dhm.gov.np/index.php" },
+    { "name": "NDRRMA", "url": "https://ndrrma.gov.np/" },
+    { "name": "BIPAD", "url": "https://bipadportal.gov.np/" }
+  ]
+}

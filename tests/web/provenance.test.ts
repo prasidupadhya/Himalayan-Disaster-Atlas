@@ -2,9 +2,16 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { buildSourceDirectory, currentProductionRecords, filterProvenanceRecords, parseProvenanceCatalog } from '../../packages/contracts/provenance';
 
-const catalog = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.1.0/manifest.json', 'utf8')));
+const catalog = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.2.0/manifest.json', 'utf8')));
 
 describe('provenance catalog', () => {
+  it('adds only the live fixture without changing historical catalog records', () => {
+    const old = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.1.0/manifest.json', 'utf8')));
+    const added = catalog.records.filter(record => !old.records.some(previous => previous.key === record.key));
+    expect(added.map(record => record.key)).toEqual(['atlas-live-contracts@1.0.0']);
+    for (const record of old.records) expect(catalog.records.find(current => current.key === record.key)).toEqual(record);
+    expect(added[0]).toMatchObject({ is_fixture: true, state: 'fixture', license: 'MIT', evidence_type: 'unknown', parents: [] });
+  });
   it('keeps complete current production provenance and derived parents', () => {
     const current = currentProductionRecords(catalog);
     expect(current.length).toBeGreaterThan(40);

@@ -1,7 +1,7 @@
 import { isPublicRelease, isReleaseIncluded } from '../../lib/public-release';
 import Link from 'next/link';
 import ledger from '../../../../licensing/datasets.json';
-import catalog from '../../public/data/atlas-provenance/1.1.0/manifest.json';
+import catalog from '../../public/data/atlas-provenance/1.2.0/manifest.json';
 export const metadata = { title: 'Licences and attribution' };
 export default function LicensesPage() {
   const reviews = new Map(Object.entries(ledger.reviews));

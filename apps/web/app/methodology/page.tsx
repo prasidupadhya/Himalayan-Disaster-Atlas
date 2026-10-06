@@ -1,4 +1,5 @@
 import { isPublicRelease } from '../../lib/public-release';
+import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 export const metadata = { title: 'Methodology' };
 
 export default function MethodologyPage() {
@@ -13,6 +14,7 @@ export default function MethodologyPage() {
       <a href="#satellite-method">Satellite</a><a href="#climate-method">Climate</a><a href="#events-method">Events</a><a href="#infrastructure-method">Infrastructure</a>
       <a href="#downstream-method">Downstream trace</a><a href="#exposure-method">Exposure</a><a href="#hazard-graph-method">Hazard Graph</a><a href="#scenario-method">Scenario Engine</a>
       <a href="#simulation-ui-method">Simulation UI</a><a href="#search-method">Search</a><a href="#compare-method">Compare</a><a href="#evidence-method">Evidence retrieval</a>
+      <a href="#live-contracts-method">Live contracts</a>
     </nav>
 
     <h2 id="pipeline-method">Overall data pipeline, CRS and evidence semantics</h2>
@@ -21,14 +23,23 @@ export default function MethodologyPage() {
     <p>Geometry simplification and tiling are presentation operations unless a feature explicitly defines otherwise. Administrative display geometry is topology-preserving, major-road display geometry is simplified within the documented tolerance, and terrain/satellite display tiles have their own resolutions. Analysis features use the source/native or explicitly prepared analysis geometry named in their methodology rather than inferring precision from pixels on screen.</p>
     <dl className="evidence-terms">
       <dt>Observed</dt><dd>Measurements or records supplied by a documented source.</dd>
+      <dt>Reported</dt><dd>A source assertion or event report; not automatically an independently observed measurement.</dd>
       <dt>Historical</dt><dd>Source-reported past events or archival observations; historical does not mean current.</dd>
       <dt>Derived</dt><dd>Deterministic output calculated from source data using a documented method.</dd>
       <dt>Estimated</dt><dd>A quantified estimate whose assumptions/coverage remain explicit; not an observed total.</dd>
       <dt>Modelled</dt><dd>Output produced by a model or hypothetical spatial assumption.</dd>
       <dt>Simulated</dt><dd>A modelled scenario run with explicit parameters; never an official forecast unless a future validated forecasting product explicitly says so.</dd>
+      <dt>Hypothetical</dt><dd>An explicitly assumed scenario or input, not an observed event.</dd>
       <dt>Unknown</dt><dd>Reliable information is unavailable or the concept is not applicable.</dd>
     </dl>
     <p>Uncertainty is not reduced to one generic score. Each feature preserves the uncertainty/limitations its source or method can support. UNKNOWN, partial coverage, unavailable and incompatible states are intentionally different from zero.</p>
+
+    <h2 id="live-contracts-method">Live contracts: evidence, freshness and workflow health</h2>
+    <p>Feature 42 defines validated static JSON contracts for periodically updated conditions. It acquires no feeds and adds no forecast or warning service. The Data Catalog exposes synthetic contract cases containing no measurements or locations, with fixed test timestamps and explicit SYNTHETIC FIXTURE labels.</p>
+    <p>Evidence (OBSERVED, REPORTED, DERIVED, MODELLED, HYPOTHETICAL or UNKNOWN), product purpose (observation, reported event, model forecast, official warning or scenario), source freshness and workflow health are separate fields. Forecasts require modelled evidence and issue/validity times. Unknown values remain null/UNKNOWN, while a source zero remains zero. Physical inundation, destroyed buildings, casualties, repair costs, hydropower downtime and economic loss must all remain UNKNOWN in these contracts.</p>
+    <p>Freshness uses source issue time or the oldest known observation in a snapshot, never a renewed fetch time. Explicit expiry and warning validity can shorten that deadline. Unknown warning validity remains STALE. A failed fetch retains the last verified snapshot as STALE; a missing snapshot is UNAVAILABLE. A successful empty response is EMPTY and cannot mean all-clear. Workflow health has its own heartbeat deadline, last attempt and last successful fetch. The browser rechecks deadlines as time passes and when a tab resumes.</p>
+    <p>Only bounded, same-origin JSON is read. Schema, semantic identity, byte size and SHA-256 checks must pass before display. Checksums detect changed bytes; they do not establish scientific accuracy, authenticity or redistribution permission. Source-specific review and immutable provenance remain required before acquiring or publishing real feeds.</p>
+    <p>Official warning authorities: {LIVE_AUTHORITIES.map((authority, i) => <span key={authority.name}>{i > 0 && ' · '}<a href={authority.url}>{authority.name}</a></span>)}. The Atlas is not a real-time warning service.</p>
 
     <h2 id="search-method">Search</h2>
     <p>The global Search index is derived offline from the exact immutable atlas releases and split into eight gzip shards, each capped at 2 MiB compressed and 16 MiB decoded. Every indexed record keeps its source dataset/version, stable feature/source ID, entity type, representative position, source date and disambiguating context. The browser verifies each shard checksum before use and processes shards sequentially on explicit search submission.</p>
