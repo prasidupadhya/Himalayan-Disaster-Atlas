@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { EVIDENCE_LABELS, LIVE_AUTHORITIES, liveFreshness, PRODUCT_LABELS, workflowHealth } from '../../../../packages/contracts/live';
 import { loadLivePublication, watchLiveClock, type LivePublication } from '../../lib/live';
+import { AIR_QUALITY_STATUS } from '../../../../packages/contracts/live-air-quality';
 import type { Resource } from '../../lib/resource';
 import { UnavailableError } from '../../lib/datasets';
 export function LiveDeliveryChecks() {
@@ -38,6 +39,7 @@ export function LiveDeliveryChecks() {
           </>}
         </section>;
       })}</>}
+    <section aria-label="Air quality availability"><h3>Air quality — PM2.5</h3><p>{AIR_QUALITY_STATUS}. OFF in the public build. No provider readings are loaded. AQI: UNKNOWN.</p></section>
     <p>Damage, loss, inundation and casualties: UNKNOWN.</p>
     <p>Official warning authorities: {LIVE_AUTHORITIES.map((authority, i) => <span key={authority.name}>{i > 0 && ' · '}<a href={authority.url}>{authority.name}</a></span>)}.</p>
   </section>;

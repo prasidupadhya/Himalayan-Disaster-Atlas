@@ -29,3 +29,5 @@ Map-layer Evidence panels expose source, dates, version, resolution, coverage, e
 Feature 42 adds `atlas-live-contracts@1.0.0` as a fixture with unknown evidence, no geographic data, fixed synthetic timestamps, an original MIT licence and no upstream parents. The new catalog preserves every 1.1.0 record unchanged. Live contracts separately support reported/hypothetical evidence; historical release records are not relabelled. See [Live contracts](live-contracts.md).
 
 Feature 43 registers original open-feed policy metadata in `atlas-provenance@1.3.0`. Actual periodically updated releases live in a separate immutable data branch; each snapshot has a manifest with raw source revision/hash, request, processing version, exact source review and artifact checksum. The mutable latest index is never treated as immutable. See [live publication](live-open-feeds.md).
+
+Feature 45 registers original air-quality policy metadata and provenance catalog `atlas-provenance@1.4.0`. Earlier catalogs remain immutable. No OpenAQ/provider reading is registered for public delivery or granted rights. See [conditional provider review](live-air-quality.md).

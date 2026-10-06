@@ -1,0 +1,1 @@
+{"schema_version":"1.0.0","enabled_by_default":false,"public_enabled":false,"providers":[],"reason":"No provider redistribution review has passed. Research acquisition requires an explicit flag, reviewed station/provider/licence identities and a GitHub Actions secret. AQI is not calculated."}
