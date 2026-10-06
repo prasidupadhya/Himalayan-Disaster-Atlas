@@ -29,6 +29,7 @@ test('compare mode shows compatible mountain metrics and blocks cross-type compa
 
   await compare.getByRole('searchbox', { name: 'Search B' }).fill('Hindun');
   await compare.getByRole('button', { name: 'Find B' }).click();
+  await expect(compare.locator('fieldset').nth(1)).toHaveAttribute('data-compare-picker-state', 'ready', { timeout: 15_000 });
   const hindun = await compare.getByLabel('Entity B').locator('option').filter({ hasText: 'Hindun' }).first().getAttribute('value');
   expect(hindun).toBeTruthy();
   await compare.getByLabel('Entity B').selectOption(hindun!);

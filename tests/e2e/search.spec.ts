@@ -13,6 +13,7 @@ test('global search finds typed source-backed entities and preserves ambiguity',
 
   await search.getByRole('searchbox', { name: 'Search the atlas' }).fill('Bagmati');
   await search.getByRole('button', { name: 'Search atlas' }).click();
+  await expect(search).toHaveAttribute('data-search-state', 'ready', { timeout: 15_000 });
   await expect(search.getByRole('region', { name: 'Administrative units' })).toBeVisible();
   const bagmatiButtons = search.getByRole('button', { name: /Bagmati/ });
   expect(await bagmatiButtons.count()).toBeGreaterThan(1);
