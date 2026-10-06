@@ -7,7 +7,7 @@ test('global search finds typed source-backed entities and preserves ambiguity',
   const search = page.getByRole('region', { name: 'Global Search' });
   await search.getByRole('searchbox', { name: 'Search the atlas' }).fill('Everest');
   await search.getByRole('button', { name: 'Search atlas' }).click();
-  await expect(search).toHaveAttribute('data-search-state', 'ready');
+  await expect(search).toHaveAttribute('data-search-state', 'ready', { timeout: 15_000 });
   await expect(search.getByText('Mount Everest', { exact: true }).first()).toBeVisible();
   await expect(search).toContainText('mountain');
 

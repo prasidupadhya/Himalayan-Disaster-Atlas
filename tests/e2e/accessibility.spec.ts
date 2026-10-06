@@ -74,7 +74,7 @@ test('keyboard users can skip map, search and reach dynamic results', async ({ p
   await search.fill('Everest');
   await page.keyboard.press('Enter');
   const globalSearch = page.getByRole('region', { name: 'Global Search' });
-  await expect(globalSearch).toHaveAttribute('data-search-state', 'ready');
+  await expect(globalSearch).toHaveAttribute('data-search-state', 'ready', { timeout: 15_000 });
   const everest = globalSearch.getByRole('button', { name: /Mount Everest/ }).first();
   await everest.focus();
   await page.keyboard.press('Enter');

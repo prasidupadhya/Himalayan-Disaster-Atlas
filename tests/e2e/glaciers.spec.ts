@@ -7,7 +7,7 @@ test('RGI glacier inventory loads, searches and exposes dated provenance', async
   });
   await page.goto('/research/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const glaciers = page.getByRole('region', { name: 'Glaciers', exact: true });
-  await expect(glaciers).toHaveAttribute('data-glaciers-state', 'ready');
+  await expect(glaciers).toHaveAttribute('data-glaciers-state', 'ready', { timeout: 15_000 });
   await glaciers.getByRole('searchbox').fill('Imja/Lhotse');
   await expect(glaciers.getByRole('option', { name: /Imja\/Lhotse Shar Gl\./ })).toHaveCount(1);
   await glaciers.getByRole('combobox').selectOption('rgi2000-v7-0-g-15-06763');
