@@ -812,7 +812,27 @@
       "reason": "Original Atlas catalog of source metadata. Does not grant permission to redistribute underlying records.",
       "obligations": "Retain source-specific notices and distinguish unresolved rights from permitted data.",
       "parents": []
+    },
+    "atlas-live-contracts@1.0.0": {
+      "manifest_path": "/data/atlas-live-contracts/1.0.0/manifest.json",
+      "manifest_sha256": "5b695f1fbc64486b3370ac1b87d2adc88eb359721efcfcd351148889573e4461",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-06",
+      "evidence_urls": [],
+      "reason": "Original Atlas measurement-free contract test data under the owner-selected MIT licence. No upstream readings, geography or provider content is redistributed.",
+      "obligations": "Retain MIT notice and explicit synthetic-fixture labels. Fixed timestamps are test inputs, not actual fetches. This review grants no upstream data rights.",
+      "parents": []
+    },
+    "atlas-provenance@1.2.0": {
+      "manifest_path": "/data/atlas-provenance/1.2.0/manifest.json",
+      "manifest_sha256": "53a666d2eb75409667a8db454fe4ee150c61ec5e2ed6742e50f76f53e0df3caa",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-06",
+      "evidence_urls": [],
+      "reason": "Original Atlas metadata catalog adds the MIT live contract fixture while preserving every earlier record. Metadata describes source rights; it grants no redistribution rights to underlying releases.",
+      "obligations": "Retain source-specific notices and fixture/evidence labels; preserve unresolved reviews and immutable historical catalogs.",
+      "parents": []
     }
   },
-  "public_tree_sha256": "87ccb682c14602dac0de4f311a8c93288ae80b402b63e190306066b071fc2db6"
+  "public_tree_sha256": "2a51c5e5d1f3413fecfb61a9dc75bc17c1f878960c7b207565ebcb9cb4e207de"
 }

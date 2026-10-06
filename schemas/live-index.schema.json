@@ -1,0 +1,54 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.invalid/schemas/live-index.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "kind", "is_fixture", "generated_at", "workflow", "feeds"],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "kind": { "const": "live-index" },
+    "is_fixture": { "type": "boolean" },
+    "generated_at": { "$ref": "live-snapshot.schema.json#/definitions/time" },
+    "workflow": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "last_attempt_at", "last_successful_fetch_at", "run_url", "schedule_seconds", "stale_after_seconds"],
+      "properties": {
+        "status": { "enum": ["success", "partial", "failed", "not_configured"] },
+        "last_attempt_at": { "$ref": "live-snapshot.schema.json#/definitions/nullableTime" },
+        "last_successful_fetch_at": { "$ref": "live-snapshot.schema.json#/definitions/nullableTime" },
+        "run_url": { "anyOf": [{ "type": "null" }, { "type": "string", "pattern": "^https://github\\.com/prasidupadhya/Himalayan-Disaster-Atlas/actions/runs/[0-9]+$" }] },
+        "schedule_seconds": { "const": 10800 },
+        "stale_after_seconds": { "type": "integer", "minimum": 10800, "maximum": 86400 }
+      }
+    },
+    "feeds": {
+      "type": "array", "maxItems": 8,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["feed_id", "enabled", "attempt_status", "last_attempt_at", "last_successful_fetch_at", "error_code", "snapshot"],
+        "properties": {
+          "feed_id": { "$ref": "live-snapshot.schema.json#/definitions/feed" },
+          "enabled": { "type": "boolean" },
+          "attempt_status": { "enum": ["success", "failed", "not_configured"] },
+          "last_attempt_at": { "$ref": "live-snapshot.schema.json#/definitions/nullableTime" },
+          "last_successful_fetch_at": { "$ref": "live-snapshot.schema.json#/definitions/nullableTime" },
+          "error_code": { "enum": [null, "http_error", "network_error", "timeout", "invalid_data", "license_unresolved", "disabled"] },
+          "snapshot": { "anyOf": [{ "type": "null" }, { "$ref": "#/definitions/reference" }] }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "reference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["dataset_id", "version", "id", "path", "sha256", "byte_size"],
+      "properties": {
+        "dataset_id": { "$ref": "live-snapshot.schema.json#/definitions/id" },
+        "version": { "$ref": "live-snapshot.schema.json#/definitions/version" },
+        "id": { "$ref": "live-snapshot.schema.json#/definitions/id" },
+        "path": { "type": "string", "pattern": "^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/[a-z0-9-]+\\.json$" },
+        "sha256": { "$ref": "live-snapshot.schema.json#/definitions/hash" },
+        "byte_size": { "type": "integer", "minimum": 1, "maximum": 524288 }
+      }
+    }
+  }
+}

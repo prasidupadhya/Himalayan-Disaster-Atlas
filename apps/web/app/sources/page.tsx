@@ -1,6 +1,7 @@
 import { isReleaseIncluded } from '../../lib/public-release';
 import Link from 'next/link';
-import catalogJson from '../../public/data/atlas-provenance/1.1.0/manifest.json';
+import catalogJson from '../../public/data/atlas-provenance/1.2.0/manifest.json';
+import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { buildSourceDirectory, currentProductionRecords, parseProvenanceCatalog, type ProvenanceRecord } from '../../../../packages/contracts/provenance';
 
 export const metadata = { title: 'Sources' };
@@ -32,6 +33,12 @@ export default function SourcesPage() {
     <p>For exact project-document excerpts and dataset-version citations, open the <Link href="/evidence/">evidence browser</Link>.</p>
     <nav className="source-toc" aria-label="Source categories">{SECTIONS.map(([anchor, label]) => <a key={anchor} href={`#${anchor}`}>{label}</a>)}</nav>
     <p className="muted">Atlas-derived analysis is listed separately from originating evidence. A derived product does not become an independent external source simply because it has its own release artifact.</p>
+    <section id="live-contracts" className="source-section">
+      <h2>Periodically updated conditions: contract fixtures</h2>
+      <p>Feature 42 contains original Atlas test cases under MIT, with no source readings or geographic locations. Fixed timestamps and workflow states are synthetic; they do not report current conditions. <Link href="/data-catalog/#live-contract-checks">Inspect the checksum-verified cases</Link> and <Link href="/methodology/#live-contracts-method">their validation method</Link>.</p>
+      <p>No live source is acquired yet. DHM is reference-only, and BIPAD/NDRRMA ingestion remains excluded from the public build. OpenAQ, Open-Meteo and IMERG remain disabled pending separate reviews. The fixture licence grants no rights to upstream datasets.</p>
+      <p>Official warning authorities: {LIVE_AUTHORITIES.map((authority, i) => <span key={authority.name}>{i > 0 && ' · '}<a href={authority.url}>{authority.name}</a></span>)}.</p>
+    </section>
     {SECTIONS.map(([anchor, label]) => {
       const keys = new Set(sectionRecords(records, anchor).map(record => record.key));
       const entries = directory.filter(entry => entry.datasets.some(dataset => keys.has(`${dataset.id}@${dataset.version}`)));

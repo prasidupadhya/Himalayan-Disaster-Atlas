@@ -44,3 +44,9 @@ The ledger is a documented engineering review of declared terms, not a legal opi
 - [NASA data use guidance](https://www.earthdata.nasa.gov/engage/open-data-services-software-policies/data-use-guidance), [Sentinel legal notice](https://cds.climate.copernicus.eu/licences/ec-sentinel), [Copernicus DEM provider/licence links](https://registry.opendata.aws/copernicus-dem/), [Mapzen source notices](https://github.com/tilezen/joerd/blob/master/docs/attribution.md).
 
 The default public build now implements the separately validated reduced export described above. All 19 blocked release directories and dependent interactive features are omitted. Original source bytes and ledger statuses remain unchanged. See [public build and verification](deployment.md#reduced-public-export-after-the-1804-deployment-failure).
+
+## Feature 42 — live contract preparation, 6 October 2026
+
+The ledger now covers 60 releases, including `atlas-live-contracts@1.0.0` and `atlas-provenance@1.2.0`. Contract fixtures are original MIT test data with no measurements or locations; their fixed timestamps are synthetic. Earlier catalogs/releases and all 19 unresolved reviews remain unchanged. The public-tree hash covers added bytes without relaxing source review.
+
+No provider content is acquired or relicensed. USGS/NOAA GFS are eligible only for later exact-source review; DHM is link-only, BIPAD/NDRRMA live ingestion stays excluded, and OpenAQ/Open-Meteo/IMERG stay disabled. WorldPop/GEM get no public rights grant; GHS-POP must be registered separately in Feature 48. A feed’s `PERMITTED` field never replaces the external manifest-pinned ledger. See [approved policy and limitations](live-contracts.md).

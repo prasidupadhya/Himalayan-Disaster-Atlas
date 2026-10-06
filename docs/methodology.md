@@ -4,7 +4,7 @@ The public `/methodology/` page is the canonical plain-language description of w
 
 ## Stable section contract
 
-Every current production record in `atlas-provenance@1.0.0` carries a `methodology_href`. The automated methodology-link test requires the referenced section ID to exist in the public page. Adding a new production release therefore requires either reusing a scientifically correct existing methodology family or adding a new public section before validation can remain green.
+Every current production record in `atlas-provenance@1.2.0` carries a `methodology_href`. The automated methodology-link test requires the referenced section ID to exist in the public page. Adding a new production release therefore requires either reusing a scientifically correct existing methodology family or adding a new public section before validation can remain green.
 
 The page covers the overall offline acquisition → validation → transformation → immutable-publication pipeline; CRS/projection choices; raster/vector handling; display simplification/tiling; downstream tracing; exposure calculations; hazard-graph semantics; scenario/simulation semantics; search/comparison; and evidence retrieval.
 
@@ -13,11 +13,13 @@ The page covers the overall offline acquisition → validation → transformatio
 Use the following terms consistently across UI, documentation, catalog, and provenance:
 
 - **Observed** — supplied measurement/record from a documented source.
+- **Reported** — source assertion or event report, not automatically independent observation.
 - **Historical** — past/archival source record; not automatically current.
 - **Derived** — deterministic calculation from source data using a documented method.
 - **Estimated** — quantified estimate with explicit assumptions or incomplete coverage.
 - **Modelled** — output of a computational model or hypothetical spatial assumption.
 - **Simulated** — a parameterized model run; never automatically a forecast.
+- **Hypothetical** — explicitly assumed input/scenario, not an observed event.
 - **Unknown** — reliable information is unavailable or the concept does not apply.
 
 Zero, UNKNOWN, unavailable, incomplete/partial coverage, and incompatible are different states and must never be collapsed into one value.
@@ -29,3 +31,5 @@ Screen resolution is not analytical resolution. Web Mercator display tiles, RGB 
 ## Change discipline
 
 When implementation changes, update the methodology in the same feature branch and keep the corresponding catalog/provenance links valid. Important assumptions and limitations belong on the public feature/page itself as well as in deeper documentation; they must not be hidden only in this file.
+
+Feature 42’s `/methodology/#live-contracts-method` explains evidence/purpose, source-time freshness, workflow health, bounded checksums, valid empty versus failed fetch and null-only physical/damage outputs. Acquisition and the live page are not implemented. See [Live contracts](live-contracts.md).

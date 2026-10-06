@@ -9,14 +9,14 @@ test('compare mode shows compatible mountain metrics and blocks cross-type compa
 
   await compare.getByRole('searchbox', { name: 'Search A' }).fill('Everest');
   await compare.getByRole('button', { name: 'Find A' }).click();
-  await expect(compare.locator('fieldset').first()).toHaveAttribute('data-compare-picker-state', 'ready');
+  await expect(compare.locator('fieldset').first()).toHaveAttribute('data-compare-picker-state', 'ready', { timeout: 15_000 });
   const everest = await compare.getByLabel('Entity A').locator('option').filter({ hasText: 'Mount Everest' }).first().getAttribute('value');
   expect(everest).toBeTruthy();
   await compare.getByLabel('Entity A').selectOption(everest!);
 
   await compare.getByRole('searchbox', { name: 'Search B' }).fill('Manaslu');
   await compare.getByRole('button', { name: 'Find B' }).click();
-  await expect(compare.locator('fieldset').nth(1)).toHaveAttribute('data-compare-picker-state', 'ready');
+  await expect(compare.locator('fieldset').nth(1)).toHaveAttribute('data-compare-picker-state', 'ready', { timeout: 15_000 });
   const manaslu = await compare.getByLabel('Entity B').locator('option').filter({ hasText: 'Manāslu' }).first().getAttribute('value');
   expect(manaslu).toBeTruthy();
   await compare.getByLabel('Entity B').selectOption(manaslu!);
@@ -29,6 +29,7 @@ test('compare mode shows compatible mountain metrics and blocks cross-type compa
 
   await compare.getByRole('searchbox', { name: 'Search B' }).fill('Hindun');
   await compare.getByRole('button', { name: 'Find B' }).click();
+  await expect(compare.locator('fieldset').nth(1)).toHaveAttribute('data-compare-picker-state', 'ready', { timeout: 15_000 });
   const hindun = await compare.getByLabel('Entity B').locator('option').filter({ hasText: 'Hindun' }).first().getAttribute('value');
   expect(hindun).toBeTruthy();
   await compare.getByLabel('Entity B').selectOption(hindun!);

@@ -1,5 +1,9 @@
 # Data contract and geospatial conventions
 
+## Live protocol — Feature 42
+
+`live-snapshot.schema.json` and `live-index.schema.json` add separate strict contracts without changing any existing immutable dataset schema. Shared TS/Python checks separate evidence, purpose, source freshness and workflow health. Forecasts remain modelled, unknown remains null, and all six unsupported physical/loss outputs must be null. Units, UTC chronology, identity, local references, sizes and SHA-256 are verified before display. Failed fetches retain snapshots as STALE; valid empty differs from unavailable and all-clear. Source policy is independent of incoming JSON. Only measurement-free MIT fixtures are published here. See [Feature 42 methodology and maintenance](../live-contracts.md).
+
 `schemas/dataset.schema.json` (Draft 7, version 1.0.0) is the authoritative runtime contract. Ajv with format validation checks browser input; Python jsonschema with format dependencies checks offline input. Shared rejection fixtures prevent the two entry points from accepting contradictory basic metadata. TypeScript interfaces provide editor assistance; the JSON schema remains the authority. Unexpected fields fail rather than silently bypassing the contract.
 
 ## Canonical metadata

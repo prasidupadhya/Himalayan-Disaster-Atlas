@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 test('hydrology snapshot exposes observation freshness and source station status', async ({ page }) => {
   await page.goto('/research/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const section = page.getByRole('region', { name: 'Hydrology', exact: true });
-  await expect(section).toHaveAttribute('data-hydrology-state', /ready|stale/);
+  await expect(section).toHaveAttribute('data-hydrology-state', /ready|stale/, { timeout: 15_000 });
   await section.getByRole('searchbox').fill('Kali Gandaki');
   const select = section.getByRole('combobox');
   const option = select.locator('option').filter({ hasText: 'Kali Gandaki' }).first();

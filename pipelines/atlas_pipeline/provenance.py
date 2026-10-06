@@ -4,14 +4,13 @@ import gzip
 import hashlib
 import json
 import re
-import shutil
 from pathlib import Path
 
 from jsonschema import Draft7Validator
 
 from .contracts import ROOT
 
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 BASE = f"/data/atlas-provenance/{VERSION}/"
 RELEASE = ROOT / "data/releases/atlas-provenance" / VERSION
 PUBLIC = ROOT / "apps/web/public/data/atlas-provenance" / VERSION
@@ -29,7 +28,7 @@ def metadata_of(manifest):
 
 
 def category(identifier):
-    if identifier == "foundation-sample":
+    if identifier in ("foundation-sample", "atlas-live-contracts"):
         return "Development"
     if "admin-" in identifier:
         return "Administrative"
@@ -56,6 +55,8 @@ def category(identifier):
 
 
 def anchors(identifier):
+    if identifier == "atlas-live-contracts":
+        return "live-contracts-method", "live-contracts"
     if "admin-" in identifier:
         return "administrative-method", "administrative"
     if "terrain" in identifier:
@@ -200,6 +201,12 @@ def custom_inputs(identifier, manifest, directory):
 
 
 CUSTOM = {
+    "atlas-live-contracts": (
+        "Live contract verification fixtures",
+        "contract-fixtures/1.0.0: deterministic, measurement-free live protocol test cases",
+        "unknown",
+        "SYNTHETIC_FIXTURE",
+    ),
     "atlas-search-index": (
         "Atlas global search index",
         "Offline normalized and sharded discovery index over versioned Atlas releases.",
@@ -239,7 +246,7 @@ def record(path, latest_versions):
     )
     version = metadata["dataset_version"] if metadata else manifest.get("version", path.parent.name)
     methodology, source_anchor = anchors(identifier)
-    is_fixture = bool(metadata and metadata.get("is_fixture"))
+    is_fixture = bool(metadata and metadata.get("is_fixture")) or bool(manifest.get("is_fixture"))
     state = (
         "fixture"
         if is_fixture
@@ -359,31 +366,35 @@ def record(path, latest_versions):
         "version": version,
         "title": title,
         "category": category(identifier),
-        "source": "Himalayan Disaster Atlas derived product",
-        "source_url": f"/methodology/#{methodology}",
-        "license": "Inherited from parent datasets; inspect parent records",
-        "license_url": None,
-        "attribution": "Parent-source attribution and licences remain applicable.",
+        "source": manifest["source"] if is_fixture else "Himalayan Disaster Atlas derived product",
+        "source_url": manifest["source_url"] if is_fixture else f"/methodology/#{methodology}",
+        "license": manifest["license"] if is_fixture else "Inherited from parent datasets; inspect parent records",
+        "license_url": manifest["license_url"] if is_fixture else None,
+        "attribution": manifest["attribution"] if is_fixture else "Parent-source attribution and licences remain applicable.",
         "access_date": max(parent_dates) if parent_dates else None,
         "observation_date": None,
         "publication_date": None,
         "processing_date": processing_date,
         "processing_version": method.split(" via ")[-1] if " via " in method else method,
         "method": method,
-        "spatial_resolution": "Source-dependent / see parent datasets",
-        "spatial_coverage": "Derived from the listed parent datasets; see parent coverage",
-        "temporal_coverage": "Derived from parent dates; no independent observation period",
+        "spatial_resolution": "Not applicable — no measurements" if is_fixture else "Source-dependent / see parent datasets",
+        "spatial_coverage": "No geographic data; contract fixtures only" if is_fixture else "Derived from the listed parent datasets; see parent coverage",
+        "temporal_coverage": "Fixed synthetic timestamps; not source observations" if is_fixture else "Derived from parent dates; no independent observation period",
         "limitations": limits,
-        "uncertainty": "No new observational uncertainty is invented; parent and method limitations govern interpretation.",
+        "uncertainty": "No physical output or loss estimate" if is_fixture else "No new observational uncertainty is invented; parent and method limitations govern interpretation.",
         "evidence_type": evidence,
         "status": status,
-        "is_fixture": False,
+        "is_fixture": is_fixture,
         "state": state,
         "manifest_path": f"/data/{identifier}/{version}/manifest.json",
         "manifest_sha256": digest(raw),
         "artifacts": artifacts(manifest),
         "parents": parents,
         "transformations": [
+            "Build explicit synthetic resource-state cases without measurements or geography",
+            method,
+            "Publish immutable checksum-verified contract fixtures",
+        ] if is_fixture else [
             "Load exact parent release manifests/artifacts",
             method,
             "Publish immutable checksum-verified derived artifact",
@@ -444,17 +455,19 @@ def verify_provenance(path=RELEASE, public=PUBLIC):
 
 def build():
     catalog = derive()
-    if RELEASE.exists():
-        shutil.rmtree(RELEASE)
-    if PUBLIC.exists():
-        shutil.rmtree(PUBLIC)
-    RELEASE.mkdir(parents=True)
-    PUBLIC.mkdir(parents=True)
     raw = (
         json.dumps(catalog, sort_keys=True, separators=(",", ":"), ensure_ascii=False) + "\n"
     ).encode()
-    (RELEASE / "manifest.json").write_bytes(raw)
-    (PUBLIC / "manifest.json").write_bytes(raw)
+    for directory in (RELEASE, PUBLIC):
+        path = directory / "manifest.json"
+        if path.exists() and path.read_bytes() != raw:
+            raise ValueError("Immutable provenance release conflict; publish a new version")
+    for directory in (RELEASE, PUBLIC):
+        directory.mkdir(parents=True, exist_ok=True)
+        path = directory / "manifest.json"
+        if not path.exists():
+            with path.open("xb") as output:
+                output.write(raw)
     verify_provenance()
 
 
