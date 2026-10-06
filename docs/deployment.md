@@ -78,3 +78,7 @@ The second supplied Cloudflare log built successfully and stopped at the reposit
 The release gate requires that public inventory, compares its exclusions to the current transitive licensing review, verifies all output hashes, rejects reintroduced excluded files, and still checks every retained public file against its original bytes. A full research build has no public inventory and cannot deploy. The original provenance and licence metadata remain as an audit record of both available and withheld releases; the interactive catalog and source listings expose only retained downloads. No excluded observations, population rasters, exposure outputs, mixed indexes or evidence corpus are shipped.
 
 Cloudflare Git integration requires no new environment setting: keep build command `npm run build` and deploy command `npx wrangler deploy`, with repository root as the working directory. Apply this branch through the normal reviewed main-branch flow. No rights status has been changed to bypass the gate.
+
+## Manual live publication
+
+Feature 43 uses a data-only live-data branch. Run the manual live workflow on reviewed main, then pin its full commit SHA with `ATLAS_LIVE_DATA_COMMIT` in the next root static build. No live-data commit becomes visible until a validated Cloudflare export is deployed. No active cron, main bot or deployment trigger is added. The default build ships an unconfigured index. [Trade-offs, bounded import and rollback](live-open-feeds.md).

@@ -1,8 +1,27 @@
-import { assertLivePublicationAllowed, LIVE_INDEX_BYTES, LIVE_SNAPSHOT_BYTES, parseLiveIndex, parseLiveSnapshot, validateLivePair, type LiveIndex, type LiveReference, type LiveSnapshot } from '../../../packages/contracts/live';
+import { assertReviewedLiveSource, assertLivePublicationAllowed, LIVE_INDEX_BYTES, LIVE_SNAPSHOT_BYTES, parseLiveIndex, parseLiveSnapshot, validateLivePair, type LiveFeed, type LiveIndex, type LiveReference, type LiveSnapshot } from '../../../packages/contracts/live';
 import { readBounded, UnavailableError } from './datasets';
 
 export interface VerifiedLiveFeed { index: LiveIndex; snapshot: LiveSnapshot | null }
 type Reference = Pick<LiveReference, 'path' | 'sha256' | 'byte_size'>;
+export interface LiveDelivery { feed: LiveFeed; snapshot: LiveSnapshot | null; error: string | null }
+export interface LivePublication { index: LiveIndex; deliveries: LiveDelivery[] }
+
+export async function loadLivePublication(signal?: AbortSignal): Promise<LivePublication> {
+  const index = parseLiveIndex(await jsonBytes(await fetch('/live/latest.json', { signal, cache: 'no-store', redirect: 'error', credentials: 'omit' }), LIVE_INDEX_BYTES));
+  assertLivePublicationAllowed(index);
+  const deliveries = await Promise.all(index.feeds.map(async feed => {
+    if (!feed.enabled || !feed.snapshot) return { feed, snapshot: null, error: null };
+    try {
+      const snapshot = parseLiveSnapshot(await jsonBytes(await fetch(feed.snapshot.path, { signal, cache: 'no-store', redirect: 'error', credentials: 'omit' }), LIVE_SNAPSHOT_BYTES, feed.snapshot));
+      validateLivePair(index, feed, snapshot); assertLivePublicationAllowed(index, snapshot); assertReviewedLiveSource(snapshot);
+      return { feed, snapshot, error: null };
+    } catch (error) {
+      if (signal?.aborted) throw error;
+      return { feed, snapshot: null, error: error instanceof Error ? error.message : 'Snapshot unavailable.' };
+    }
+  }));
+  return { index, deliveries };
+}
 
 async function jsonBytes(response: Response, limit: number, reference?: Reference) {
   const bytes = await readBounded(response, limit);

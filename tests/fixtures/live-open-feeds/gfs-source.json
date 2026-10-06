@@ -1,0 +1,9 @@
+{
+  "is_test_fixture": true,
+  "source_url": "https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl?file=gfs.t12z.pgrb2.0p25.f024&lev_surface=on&var_APCP=on&subregion=&leftlon=80&rightlon=89&bottomlat=26&toplat=31&dir=%2Fgfs.20261006%2F12%2Fatmos",
+  "cycle": "2026-10-06T12:00:00.000Z",
+  "fetched_at": "2026-10-06T20:03:36.356Z",
+  "sha256": "805112ab41af071495ca004be812995148f27f6b5b1c77fc4cc055cf9a7fd928",
+  "license_url": "https://www.weather.gov/disclaimer",
+  "notice": "Archived NOAA source for decoder regression tests only; never current conditions."
+}

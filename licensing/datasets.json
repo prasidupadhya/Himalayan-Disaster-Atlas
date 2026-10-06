@@ -832,7 +832,31 @@
       "reason": "Original Atlas metadata catalog adds the MIT live contract fixture while preserving every earlier record. Metadata describes source rights; it grants no redistribution rights to underlying releases.",
       "obligations": "Retain source-specific notices and fixture/evidence labels; preserve unresolved reviews and immutable historical catalogs.",
       "parents": []
+    },
+    "atlas-live-open-feeds@1.0.0": {
+      "manifest_path": "/data/atlas-live-open-feeds/1.0.0/manifest.json",
+      "manifest_sha256": "42a916a104081eb7859ee556a775a472e1b9e33212c1e5c0638cad0dc8c66793",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-06",
+      "reason": "Original Atlas live policy/documentation or provenance metadata only; no licence grant for provider readings. Live source snapshots require separate exact-byte review under licensing/live-sources.json.",
+      "obligations": "Retain MIT attribution; preserve upstream terms independently. No physical impact or loss estimates.",
+      "parents": [],
+      "evidence_urls": [
+        "https://opensource.org/license/mit/"
+      ]
+    },
+    "atlas-provenance@1.3.0": {
+      "manifest_path": "/data/atlas-provenance/1.3.0/manifest.json",
+      "manifest_sha256": "6d82748c1627de32270d499a4c8a850f161514a048d97cc7a36677113d858c78",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-06",
+      "reason": "Original Atlas live policy/documentation or provenance metadata only; no licence grant for provider readings. Live source snapshots require separate exact-byte review under licensing/live-sources.json.",
+      "obligations": "Retain MIT attribution; preserve upstream terms independently. No physical impact or loss estimates.",
+      "parents": [],
+      "evidence_urls": [
+        "https://opensource.org/license/mit/"
+      ]
     }
   },
-  "public_tree_sha256": "2a51c5e5d1f3413fecfb61a9dc75bc17c1f878960c7b207565ebcb9cb4e207de"
+  "public_tree_sha256": "ced38d4af4c682ea750a434950a1bf3b591598ce148b7a3cfe753ae5f7bf6a7e"
 }

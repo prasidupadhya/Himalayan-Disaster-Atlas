@@ -20,5 +20,9 @@ export function prepareHosting() {
   Cache-Control: public, max-age=31536000, immutable
 /legal/*
   Cache-Control: no-cache
+/live/latest.json
+  Cache-Control: no-store, no-transform
+/live/history/*
+  Cache-Control: public, max-age=31536000, immutable, no-transform
 `);
 }

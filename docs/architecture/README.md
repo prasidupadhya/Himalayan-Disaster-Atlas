@@ -159,3 +159,7 @@ The physical batch runner accounts for every source lake and only executes suppl
 ## Periodically updated conditions contracts
 
 Feature 42 adds bounded static JSON schemas, TS/Python parity, trusted default source policy and a cancellable checksum-verifying loader. Evidence, purpose, freshness and workflow health are separate. No acquisition or live page is enabled; a collapsed Data Catalog inspector loads synthetic measurement-free fixtures on request and rechecks expiry/tab resume. New catalogs reject conflicting existing bytes. See [Live contracts](../live-contracts.md) for failure states, licence boundaries and handoff.
+
+## Feature 43 live acquisition
+
+Offline Python acquisition writes immutable reviewed snapshots and promotes a small index atomically. A manual Action commits only to live-data. The root static build can import a full pinned data commit, verify exact source policy and hashes, then include the bounded history in its normal public inventory. Browser delivery is same-origin, cancellable and checksum verified; source revisions and workflow health remain separate. See [open feeds](../live-open-feeds.md).

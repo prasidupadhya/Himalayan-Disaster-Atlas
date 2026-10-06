@@ -50,3 +50,7 @@ The default public build now implements the separately validated reduced export 
 The ledger now covers 60 releases, including `atlas-live-contracts@1.0.0` and `atlas-provenance@1.2.0`. Contract fixtures are original MIT test data with no measurements or locations; their fixed timestamps are synthetic. Earlier catalogs/releases and all 19 unresolved reviews remain unchanged. The public-tree hash covers added bytes without relaxing source review.
 
 No provider content is acquired or relicensed. USGS/NOAA GFS are eligible only for later exact-source review; DHM is link-only, BIPAD/NDRRMA live ingestion stays excluded, and OpenAQ/Open-Meteo/IMERG stay disabled. WorldPop/GEM get no public rights grant; GHS-POP must be registered separately in Feature 48. A feed’s `PERMITTED` field never replaces the external manifest-pinned ledger. See [approved policy and limitations](live-contracts.md).
+
+## Feature 43 live source review
+
+`licensing/live-sources.json` reviews only preferred USGS-network summaries and NOAA/NCEP GFS APCP, with exact product/contributor restrictions and upstream credit. Every dynamic snapshot carries a hash-pinned review manifest verified separately by the root build/release gates. The original policy registration and new provenance catalog are MIT metadata, not a rights grant to readings. Existing 19 blockers and exclusions remain unchanged. See [the source scope and terms](live-open-feeds.md).

@@ -10,7 +10,7 @@ from jsonschema import Draft7Validator
 
 from .contracts import ROOT
 
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 BASE = f"/data/atlas-provenance/{VERSION}/"
 RELEASE = ROOT / "data/releases/atlas-provenance" / VERSION
 PUBLIC = ROOT / "apps/web/public/data/atlas-provenance" / VERSION
@@ -55,6 +55,9 @@ def category(identifier):
 
 
 def anchors(identifier):
+    if identifier.startswith("atlas-live-") and identifier != "atlas-live-contracts":
+        suffix = identifier.removeprefix("atlas-")
+        return suffix + "-method", suffix
     if identifier == "atlas-live-contracts":
         return "live-contracts-method", "live-contracts"
     if "admin-" in identifier:
@@ -246,6 +249,7 @@ def record(path, latest_versions):
     )
     version = metadata["dataset_version"] if metadata else manifest.get("version", path.parent.name)
     methodology, source_anchor = anchors(identifier)
+    own_policy = manifest.get("kind") == "live-feature-release"
     is_fixture = bool(metadata and metadata.get("is_fixture")) or bool(manifest.get("is_fixture"))
     state = (
         "fixture"
@@ -343,6 +347,10 @@ def record(path, latest_versions):
             "No hydraulic depth, inundation footprint or water velocity is calculated.",
         ]
         processing_date = None
+    elif own_policy:
+        title, method, evidence, status = manifest["title"], manifest["method"], "derived", "ATLAS_DERIVED"
+        limits = manifest["limitations"]
+        processing_date = None
     else:
         title, method, evidence, status = CUSTOM[identifier]
         limits = manifest.get("limitations") or [
@@ -368,9 +376,9 @@ def record(path, latest_versions):
         "category": category(identifier),
         "source": manifest["source"] if is_fixture else "Himalayan Disaster Atlas derived product",
         "source_url": manifest["source_url"] if is_fixture else f"/methodology/#{methodology}",
-        "license": manifest["license"] if is_fixture else "Inherited from parent datasets; inspect parent records",
-        "license_url": manifest["license_url"] if is_fixture else None,
-        "attribution": manifest["attribution"] if is_fixture else "Parent-source attribution and licences remain applicable.",
+        "license": manifest["license"] if is_fixture or own_policy else "Inherited from parent datasets; inspect parent records",
+        "license_url": manifest["license_url"] if is_fixture or own_policy else None,
+        "attribution": manifest["attribution"] if is_fixture or own_policy else "Parent-source attribution and licences remain applicable.",
         "access_date": max(parent_dates) if parent_dates else None,
         "observation_date": None,
         "publication_date": None,
@@ -378,8 +386,8 @@ def record(path, latest_versions):
         "processing_version": method.split(" via ")[-1] if " via " in method else method,
         "method": method,
         "spatial_resolution": "Not applicable — no measurements" if is_fixture else "Source-dependent / see parent datasets",
-        "spatial_coverage": "No geographic data; contract fixtures only" if is_fixture else "Derived from the listed parent datasets; see parent coverage",
-        "temporal_coverage": "Fixed synthetic timestamps; not source observations" if is_fixture else "Derived from parent dates; no independent observation period",
+        "spatial_coverage": "No geographic data; contract fixtures only" if is_fixture else "Policy metadata only; no readings" if own_policy else "Derived from the listed parent datasets; see parent coverage",
+        "temporal_coverage": "Fixed synthetic timestamps; not source observations" if is_fixture else "Versioned policy; source timestamps are separate" if own_policy else "Derived from parent dates; no independent observation period",
         "limitations": limits,
         "uncertainty": "No physical output or loss estimate" if is_fixture else "No new observational uncertainty is invented; parent and method limitations govern interpretation.",
         "evidence_type": evidence,

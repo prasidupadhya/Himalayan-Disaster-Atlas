@@ -2,6 +2,7 @@ import validateIndexGenerated from './generated/live-index.cjs';
 import validateSnapshotGenerated from './generated/live-snapshot.cjs';
 import { compiledValidator, validationErrors } from './validation-errors';
 import policy from './live-policy.json';
+import sourceReviews from '../../licensing/live-sources.json';
 
 export const LIVE_INDEX_BYTES = 65_536;
 export const LIVE_SNAPSHOT_BYTES = 524_288;
@@ -18,6 +19,7 @@ export const LIVE_UNITS = { magnitude: 'magnitude', depth: 'km', precipitation_a
 
 export interface LiveReference { dataset_id: string; version: string; id: string; path: string; sha256: string; byte_size: number }
 export interface LiveRecord {
+  source_revision_at?: LiveTime; source_url?: string | null; source_network?: string | null;
   id: string; label: string | null; coordinates: [number, number] | null; evidence_type: LiveEvidence;
   observed_at: LiveTime; issued_at: LiveTime; valid_from: LiveTime; valid_until: LiveTime;
   measurements: Array<{ variable: keyof typeof LIVE_UNITS; value: number | null; unit: typeof LIVE_UNITS[keyof typeof LIVE_UNITS]; qualifier: string | null; evidence_type: LiveEvidence }>;
@@ -76,6 +78,8 @@ export function parseLiveSnapshot(input: unknown): LiveSnapshot {
   requireCondition(product !== 'unknown' || evidence === 'unknown', 'Unknown product evidence mismatch');
   requireCondition(new Set(snapshot.records.map(record => record.id)).size === snapshot.records.length, 'Duplicate live record');
   for (const record of snapshot.records) {
+    if (record.source_url) safeSource(record.source_url);
+    chronological(record.source_revision_at ?? null, snapshot.fetched_at, 'Revision follows fetch');
     requireCondition(record.evidence_type === evidence, 'Live record evidence mismatch');
     chronological(record.observed_at, snapshot.fetched_at, 'Observation follows fetch');
     chronological(record.issued_at, snapshot.fetched_at, 'Record issue follows fetch');
@@ -166,4 +170,13 @@ export function assertLivePublicationAllowed(index: LiveIndex, snapshot?: LiveSn
   requireCondition(!index.is_fixture || allowFixture, 'Synthetic live fixtures are not conditions');
   for (const feed of index.feeds.filter(feed => feed.enabled)) requireCondition(feed.feed_id === 'contract-fixture' ? allowFixture : policy.sources[feed.feed_id].enabled_by_default, 'Live source is disabled pending review');
   if (snapshot) requireCondition(snapshot.source.license_review === 'PERMITTED', 'Live source redistribution is unresolved');
+}
+
+/** Exact reviewed product identity is trusted code policy, never a downloaded PERMITTED claim. */
+export function assertReviewedLiveSource(snapshot: LiveSnapshot) {
+  requireCondition(!snapshot.is_fixture && (snapshot.feed_id === 'usgs' || snapshot.feed_id === 'noaa-gfs'), 'Source product has no public review');
+  const review = sourceReviews.sources[snapshot.feed_id];
+  for (const key of ['name', 'url', 'license', 'license_url', 'attribution', 'license_review', 'is_official'] as const) requireCondition(snapshot.source[key] === review[key], 'Source differs from reviewed live product');
+  if (snapshot.feed_id === 'usgs') requireCondition(snapshot.product_type === 'reported_event' && snapshot.records.every(record => record.source_network === 'us'), 'Unreviewed USGS contributor');
+  if (snapshot.feed_id === 'noaa-gfs') requireCondition(snapshot.product_type === 'forecast', 'Unreviewed NOAA product');
 }
