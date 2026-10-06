@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.invalid/schemas/openaq-policy.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "enabled_by_default", "public_enabled", "providers", "reason"],
+  "properties": {
+    "schema_version": {"const": "1.0.0"}, "enabled_by_default": {"const": false}, "public_enabled": {"const": false},
+    "reason": {"type": "string", "minLength": 1, "maxLength": 2000},
+    "providers": {"type": "array", "maxItems": 4, "items": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "provider_id", "provider_name", "location_id", "sensor_id", "license_ids", "license_urls", "license", "attribution", "reviewed_on", "evidence_urls", "obligations"],
+      "properties": {
+        "status": {"const": "PERMITTED"},
+        "provider_id": {"type": "integer", "minimum": 1}, "location_id": {"type": "integer", "minimum": 1}, "sensor_id": {"type": "integer", "minimum": 1},
+        "provider_name": {"type": "string", "minLength": 1, "maxLength": 240},
+        "license_ids": {"type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": {"type": "integer", "minimum": 1}},
+        "license_urls": {"type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": {"type": "string", "format": "uri", "pattern": "^https://", "maxLength": 2000}},
+        "license": {"type": "string", "minLength": 1, "maxLength": 2000}, "attribution": {"type": "string", "minLength": 1, "maxLength": 2000},
+        "reviewed_on": {"type": "string", "format": "date"},
+        "evidence_urls": {"type": "array", "minItems": 1, "maxItems": 8, "uniqueItems": true, "items": {"type": "string", "format": "uri", "pattern": "^https://", "maxLength": 2000}},
+        "obligations": {"type": "string", "minLength": 1, "maxLength": 2000}
+      }
+    }}
+  }
+}

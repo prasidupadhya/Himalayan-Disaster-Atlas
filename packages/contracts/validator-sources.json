@@ -111,5 +111,16 @@
     "references": [
       "live-snapshot.schema.json"
     ]
+  },
+  "live-air-quality": {
+    "schema": "live-air-quality.schema.json",
+    "formats": true,
+    "references": [
+      "live-snapshot.schema.json"
+    ]
+  },
+  "openaq-policy": {
+    "schema": "openaq-policy.schema.json",
+    "formats": true
   }
 }

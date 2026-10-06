@@ -10,7 +10,7 @@ from jsonschema import Draft7Validator
 
 from .contracts import ROOT
 
-VERSION = "1.3.0"
+VERSION = "1.4.0"
 BASE = f"/data/atlas-provenance/{VERSION}/"
 RELEASE = ROOT / "data/releases/atlas-provenance" / VERSION
 PUBLIC = ROOT / "apps/web/public/data/atlas-provenance" / VERSION
