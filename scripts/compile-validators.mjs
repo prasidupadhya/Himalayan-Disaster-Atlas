@@ -15,6 +15,7 @@ export function compileValidators({ check = false } = {}) {
     const ajv = new Ajv({ strict: true, allErrors: true, code: { source: true, lines: true } });
     if (entry.formats) addFormats(ajv);
     if (entry.common_schema) ajv.addSchema(JSON.parse(readFileSync(resolve(root, 'schemas/dataset.schema.json'), 'utf8')));
+    for (const reference of entry.references ?? []) ajv.addSchema(JSON.parse(readFileSync(resolve(root, 'schemas', reference), 'utf8')));
     const schema = JSON.parse(readFileSync(resolve(root, 'schemas', entry.schema), 'utf8'));
     const code = `// Generated from ${entry.schema}; run npm run contracts:generate. Do not edit.\n${standalone(ajv, ajv.compile(schema))}\n`;
     const path = resolve(output, `${name}.cjs`);

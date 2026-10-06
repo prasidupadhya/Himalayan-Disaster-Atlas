@@ -6,6 +6,7 @@ from .climate_contracts import verify_climate
 from .contracts import ROOT, verify_artifact
 from .exposure_contracts import verify_exposure
 from .hazard_graph import verify_hazard_graph
+from .live_contracts import verify_live_fixture
 from .population_contracts import verify_population
 from .provenance import verify_provenance
 from .rag import verify_rag
@@ -23,6 +24,10 @@ def main():
         raise ValueError('No release manifests found')
     for path in releases:
         metadata = json.loads(path.read_text())
+        if metadata.get('kind') == 'live-contract-fixture':
+            verify_live_fixture(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
+            print('Valid: atlas-live-contracts@' + metadata['version'])
+            continue
         if metadata.get('kind') == 'provenance-catalog':
             verify_provenance(path.parent, ROOT / 'apps/web/public/data' / path.parent.relative_to(ROOT / 'data/releases'))
             print('Valid: atlas-provenance@' + metadata['version'])

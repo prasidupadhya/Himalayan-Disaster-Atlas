@@ -456,6 +456,7 @@ tbody th { color: var(--ink-strong); }
 .catalog-detail > h3 { margin-top: 2rem; padding-top: .9rem; border-top: 1px solid var(--line); }
 .catalog-detail dl { border-top: 1px solid var(--line); padding-top: 1rem; }
 .catalog-detail-links { gap: .6rem 1.2rem; }
+@media (max-width: 900px) { .catalog-layout { grid-template-columns: minmax(0, 1fr); } }
 
 .prose > p:not(.eyebrow), .sources-page > p:not(.eyebrow) { max-width: 74ch; }
 .prose > h1 { max-width: 850px; margin-bottom: 1.3rem; }
@@ -599,3 +600,10 @@ tbody th { color: var(--ink-strong); }
 }
 
 .river-name-label, .administrative-name-label { max-width: 16rem; padding: .35rem .55rem; background: var(--paper); color: var(--ink); border: 1px solid var(--accent); font-size: .8rem; font-weight: 650; pointer-events: none; }
+
+#live-contract-checks { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+#live-contract-checks summary { min-height: 44px; padding-block: .6rem; cursor: pointer; }
+#live-contract-checks label { display: grid; gap: .35rem; max-width: 32rem; font-weight: 650; }
+#live-contract-checks select { display: block; width: 100%; max-width: 32rem; min-width: 0; min-height: 44px; }
+#live-contract-checks button { margin-block: .75rem; }
+#live-contract-checks dl { max-width: 52rem; }

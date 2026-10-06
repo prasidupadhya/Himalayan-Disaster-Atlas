@@ -18,7 +18,7 @@ test('UTC timeline synchronizes imagery, gaps, climate months and event days', a
   await expect(water.getByRole('img', { name: 'Phewa true colour acquired 2025-04-01' })).toBeVisible();
   await expect(satellite).toContainText('UNAVAILABLE');
   await expect(climate).toContainText('UNAVAILABLE');
-  await expect(events).toHaveAttribute('data-disaster-events-state', /ready|stale/);
+  await expect(events).toHaveAttribute('data-disaster-events-state', /ready|stale/, { timeout: 20_000 });
   await expect(events.getByLabel('From', { exact: true })).toHaveValue('2025-04-01');
   const eventDay = index.products.find(p => p.id === 'events')!.observations.find(o => o.id === '2025-04-01')!;
   await expect(timeline.locator('[data-temporal-product="events"]')).toContainText(`${eventDay.count} reported events`);

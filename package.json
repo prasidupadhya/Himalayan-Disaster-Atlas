@@ -48,6 +48,7 @@
     "data:scenarios": ".venv/bin/python -m pipelines.atlas_pipeline.scenarios",
     "data:rag": ".venv/bin/python -m pipelines.atlas_pipeline.rag",
     "data:provenance": ".venv/bin/python -m pipelines.atlas_pipeline.provenance",
+    "data:live-contracts": ".venv/bin/python -m pipelines.atlas_pipeline.live_fixtures",
     "profile:performance": "node scripts/profile-performance.mjs",
     "licenses:check": "node scripts/check-licenses.mjs",
     "release:check": "node scripts/release-check.mjs",

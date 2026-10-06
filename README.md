@@ -298,7 +298,7 @@ Evidence-grounded RAG provides a versioned project-document corpus, deterministi
 
 AI Analyst adds an explicit local evidence mode for supported methodology questions, downstream traces by exact HYRIV ID and registered scenario summaries. Answers preserve citations, model/data versions and UNKNOWN values. Preview `/analyst/`; see [feature 31](docs/ai-analyst.md). No external language model is connected.
 
-Provenance is now a first-class release contract. `atlas-provenance@1.0.0` is generated from every checked-in release manifest, marks superseded/fixture records explicitly, carries source/licence/date/resolution/coverage/uncertainty fields, and records parent releases for derived products where the underlying contracts expose them. Map Evidence panels surface the same lineage in context. See [feature 32](docs/provenance.md) and `npm run data:provenance`.
+Provenance is now a first-class release contract. Active catalog `atlas-provenance@1.2.0` is generated from every checked-in release manifest, marks superseded/fixture records explicitly, carries source/licence/date/resolution/coverage/uncertainty fields, and records parent releases for derived products where the underlying contracts expose them. Earlier catalogs remain immutable. Map Evidence panels surface the same lineage in context. See [feature 32](docs/provenance.md) and `npm run data:provenance`.
 
 The public `/data-catalog/` is backed by that provenance registry rather than duplicated hand-written metadata. It supports text/category/source filtering, current-versus-superseded visibility, detailed artifacts/checksums, parent inputs, processing steps, limitations and direct Atlas/Methodology/Sources navigation.
 
@@ -325,3 +325,7 @@ Original software is MIT; upstream data and dependencies keep their own licences
 Explore Nepal (`/atlas/`) now prioritizes glacial lakes, rivers, terrain, administrative identification and opt-in infrastructure. The wider scientific tools and historical layers are available in `/research/`. River-name lookup uses a separate source gazetteer and does not invent names for HydroRIVERS reaches. See [the naming audit and scope](docs/focused-exploration.md).
 
 A separate [offline physical GLOF project](processing/glof/README.md) covers input assessment across the Nepal/transboundary lake inventory. Its shallow-water solver has synthetic verification cases; no real-lake inundation or destruction prediction is validated or published. It requires reviewed terrain, bathymetry, breach and boundary-condition inputs before a physical research run.
+
+### Live contracts — Feature 42
+
+Shared live-data schemas separate evidence, source freshness and workflow health and verify bounded static JSON checksums. Only explicit measurement-free synthetic cases are available in the Data Catalog; no live feeds or `/live/` page are enabled yet. See [Live contracts](docs/live-contracts.md) and `npm run data:live-contracts`.

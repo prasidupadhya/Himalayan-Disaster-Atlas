@@ -1,6 +1,6 @@
 # Provenance conventions — feature 32
 
-Provenance is part of the public data contract rather than optional documentation. The immutable `atlas-provenance@1.0.0` registry is rebuilt from every checked-in release manifest and fails validation when a release is missing, duplicated, silently superseded, or loses required lineage fields.
+Provenance is part of the public data contract rather than optional documentation. The active immutable registry is `atlas-provenance@1.2.0`, derived from every checked-in release manifest. Earlier catalogs remain immutable. Validation rejects missing, duplicated, silently superseded or incomplete lineage; generation requires a version bump instead of overwriting conflicting bytes.
 
 ## Required lineage
 
@@ -25,3 +25,5 @@ Older checked-in versions remain visible and are marked `superseded`; they are n
 ## UI
 
 Map-layer Evidence panels expose source, dates, version, resolution, coverage, evidence class, processing method, uncertainty, limitations and licence/attribution in context. They link into the Data Catalog, Source Directory and Methodology so the same metadata can be inspected at progressively deeper levels.
+
+Feature 42 adds `atlas-live-contracts@1.0.0` as a fixture with unknown evidence, no geographic data, fixed synthetic timestamps, an original MIT licence and no upstream parents. The new catalog preserves every 1.1.0 record unchanged. Live contracts separately support reported/hypothetical evidence; historical release records are not relabelled. See [Live contracts](live-contracts.md).

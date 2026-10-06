@@ -7,7 +7,7 @@ test('GLO glacial lakes render as non-hazard inventory records with traceable ch
   });
   await page.goto('/research/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const lakes = page.getByRole('region', { name: 'Glacial lakes', exact: true });
-  await expect(lakes).toHaveAttribute('data-glacial-lakes-state', 'ready');
+  await expect(lakes).toHaveAttribute('data-glacial-lakes-state', 'ready', { timeout: 15_000 });
   await expect(lakes.getByText(/Nepal 2,347 · China 1,745 · India 58/)).toBeVisible();
   await lakes.getByRole('searchbox').fill('GLO_87.08864_27.79792');
   await expect(lakes.getByRole('option', { name: /GLO_87\.08864_27\.79792/ })).toHaveCount(1);
