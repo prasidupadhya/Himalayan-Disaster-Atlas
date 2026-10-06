@@ -7,10 +7,10 @@ const schema23 = {"type":"string","format":"date-time","pattern":"^(?!0000)\\d{4
 const schema16 = {"enum":["usgs","noaa-gfs","dhm","bipad","openaq","open-meteo","imerg","contract-fixture"]};
 const formats4 = require("ajv-formats/dist/formats").fullFormats["date-time"];
 const pattern6 = new RegExp("^(?!0000)\\d{4}-\\d{2}-\\d{2}T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d{1,3})?Z$", "u");
-const pattern10 = new RegExp("^https://github\\.com/prasidupadhya/Himalayan-Disaster-Atlas/actions/runs/[0-9]+$", "u");
+const pattern11 = new RegExp("^https://github\\.com/prasidupadhya/Himalayan-Disaster-Atlas/actions/runs/[0-9]+$", "u");
 const schema24 = {"anyOf":[{"$ref":"#/definitions/time"},{"type":"null"}]};
 
-function validate23(data, {instancePath="", parentData, parentDataProperty, rootData=data}={}){
+function validate24(data, {instancePath="", parentData, parentDataProperty, rootData=data}={}){
 let vErrors = null;
 let errors = 0;
 const _errs0 = errors;
@@ -86,21 +86,21 @@ vErrors = null;
 }
 }
 }
-validate23.errors = vErrors;
+validate24.errors = vErrors;
 return errors === 0;
 }
 
-const schema36 = {"type":"object","additionalProperties":false,"required":["dataset_id","version","id","path","sha256","byte_size"],"properties":{"dataset_id":{"$ref":"live-snapshot.schema.json#/definitions/id"},"version":{"$ref":"live-snapshot.schema.json#/definitions/version"},"id":{"$ref":"live-snapshot.schema.json#/definitions/id"},"path":{"type":"string","pattern":"^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/[a-z0-9-]+\\.json$"},"sha256":{"$ref":"live-snapshot.schema.json#/definitions/hash"},"byte_size":{"type":"integer","minimum":1,"maximum":524288}}};
+const schema37 = {"type":"object","additionalProperties":false,"required":["dataset_id","version","id","path","sha256","byte_size"],"properties":{"dataset_id":{"$ref":"live-snapshot.schema.json#/definitions/id"},"version":{"$ref":"live-snapshot.schema.json#/definitions/version"},"id":{"$ref":"live-snapshot.schema.json#/definitions/id"},"path":{"type":"string","pattern":"^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/[a-z0-9-]+\\.json$"},"sha256":{"$ref":"live-snapshot.schema.json#/definitions/hash"},"byte_size":{"type":"integer","minimum":1,"maximum":524288}}};
 const schema13 = {"type":"string","pattern":"^[a-z0-9]+(?:-[a-z0-9]+)*$","maxLength":100};
 const schema14 = {"type":"string","pattern":"^\\d+\\.\\d+\\.\\d+$","maxLength":40};
 const schema19 = {"type":"string","pattern":"^[a-f0-9]{64}$"};
 const func3 = require("ajv/dist/runtime/ucs2length").default;
 const pattern0 = new RegExp("^[a-z0-9]+(?:-[a-z0-9]+)*$", "u");
 const pattern1 = new RegExp("^\\d+\\.\\d+\\.\\d+$", "u");
-const pattern14 = new RegExp("^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/[a-z0-9-]+\\.json$", "u");
+const pattern15 = new RegExp("^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/[a-z0-9-]+\\.json$", "u");
 const pattern4 = new RegExp("^[a-f0-9]{64}$", "u");
 
-function validate28(data, {instancePath="", parentData, parentDataProperty, rootData=data}={}){
+function validate29(data, {instancePath="", parentData, parentDataProperty, rootData=data}={}){
 let vErrors = null;
 let errors = 0;
 if(data && typeof data == "object" && !Array.isArray(data)){
@@ -284,7 +284,7 @@ errors++;
 if(data.path !== undefined){
 let data3 = data.path;
 if(typeof data3 === "string"){
-if(!pattern14.test(data3)){
+if(!pattern15.test(data3)){
 const err16 = {instancePath:instancePath+"/path",schemaPath:"#/properties/path/pattern",keyword:"pattern",params:{pattern: "^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/[a-z0-9-]+\\.json$"},message:"must match pattern \""+"^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/[a-z0-9-]+\\.json$"+"\""};
 if(vErrors === null){
 vErrors = [err16];
@@ -377,7 +377,7 @@ vErrors.push(err23);
 }
 errors++;
 }
-validate28.errors = vErrors;
+validate29.errors = vErrors;
 return errors === 0;
 }
 
@@ -619,14 +619,14 @@ errors++;
 }
 }
 if(data4.last_attempt_at !== undefined){
-if(!(validate23(data4.last_attempt_at, {instancePath:instancePath+"/workflow/last_attempt_at",parentData:data4,parentDataProperty:"last_attempt_at",rootData}))){
-vErrors = vErrors === null ? validate23.errors : vErrors.concat(validate23.errors);
+if(!(validate24(data4.last_attempt_at, {instancePath:instancePath+"/workflow/last_attempt_at",parentData:data4,parentDataProperty:"last_attempt_at",rootData}))){
+vErrors = vErrors === null ? validate24.errors : vErrors.concat(validate24.errors);
 errors = vErrors.length;
 }
 }
 if(data4.last_successful_fetch_at !== undefined){
-if(!(validate23(data4.last_successful_fetch_at, {instancePath:instancePath+"/workflow/last_successful_fetch_at",parentData:data4,parentDataProperty:"last_successful_fetch_at",rootData}))){
-vErrors = vErrors === null ? validate23.errors : vErrors.concat(validate23.errors);
+if(!(validate24(data4.last_successful_fetch_at, {instancePath:instancePath+"/workflow/last_successful_fetch_at",parentData:data4,parentDataProperty:"last_successful_fetch_at",rootData}))){
+vErrors = vErrors === null ? validate24.errors : vErrors.concat(validate24.errors);
 errors = vErrors.length;
 }
 }
@@ -650,7 +650,7 @@ valid3 = valid3 || _valid0;
 if(!valid3){
 const _errs19 = errors;
 if(typeof data8 === "string"){
-if(!pattern10.test(data8)){
+if(!pattern11.test(data8)){
 const err22 = {instancePath:instancePath+"/workflow/run_url",schemaPath:"#/properties/workflow/properties/run_url/anyOf/1/pattern",keyword:"pattern",params:{pattern: "^https://github\\.com/prasidupadhya/Himalayan-Disaster-Atlas/actions/runs/[0-9]+$"},message:"must match pattern \""+"^https://github\\.com/prasidupadhya/Himalayan-Disaster-Atlas/actions/runs/[0-9]+$"+"\""};
 if(vErrors === null){
 vErrors = [err22];
@@ -893,14 +893,14 @@ errors++;
 }
 }
 if(data12.last_attempt_at !== undefined){
-if(!(validate23(data12.last_attempt_at, {instancePath:instancePath+"/feeds/" + i0+"/last_attempt_at",parentData:data12,parentDataProperty:"last_attempt_at",rootData}))){
-vErrors = vErrors === null ? validate23.errors : vErrors.concat(validate23.errors);
+if(!(validate24(data12.last_attempt_at, {instancePath:instancePath+"/feeds/" + i0+"/last_attempt_at",parentData:data12,parentDataProperty:"last_attempt_at",rootData}))){
+vErrors = vErrors === null ? validate24.errors : vErrors.concat(validate24.errors);
 errors = vErrors.length;
 }
 }
 if(data12.last_successful_fetch_at !== undefined){
-if(!(validate23(data12.last_successful_fetch_at, {instancePath:instancePath+"/feeds/" + i0+"/last_successful_fetch_at",parentData:data12,parentDataProperty:"last_successful_fetch_at",rootData}))){
-vErrors = vErrors === null ? validate23.errors : vErrors.concat(validate23.errors);
+if(!(validate24(data12.last_successful_fetch_at, {instancePath:instancePath+"/feeds/" + i0+"/last_successful_fetch_at",parentData:data12,parentDataProperty:"last_successful_fetch_at",rootData}))){
+vErrors = vErrors === null ? validate24.errors : vErrors.concat(validate24.errors);
 errors = vErrors.length;
 }
 }
@@ -936,8 +936,8 @@ var _valid1 = _errs39 === errors;
 valid8 = valid8 || _valid1;
 if(!valid8){
 const _errs41 = errors;
-if(!(validate28(data19, {instancePath:instancePath+"/feeds/" + i0+"/snapshot",parentData:data12,parentDataProperty:"snapshot",rootData}))){
-vErrors = vErrors === null ? validate28.errors : vErrors.concat(validate28.errors);
+if(!(validate29(data19, {instancePath:instancePath+"/feeds/" + i0+"/snapshot",parentData:data12,parentDataProperty:"snapshot",rootData}))){
+vErrors = vErrors === null ? validate29.errors : vErrors.concat(validate29.errors);
 errors = vErrors.length;
 }
 var _valid1 = _errs41 === errors;

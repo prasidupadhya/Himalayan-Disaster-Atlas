@@ -61,7 +61,8 @@
     "build:research": "node scripts/build.mjs --research",
     "test:e2e:public": "playwright test --config playwright.public.config.ts",
     "ui:generate": "node scripts/prepare-overview.mjs",
-    "ui:check": "node scripts/prepare-overview.mjs --check"
+    "ui:check": "node scripts/prepare-overview.mjs --check",
+    "live:fetch": ".venv/bin/python -m pipelines.atlas_pipeline.live_open_feeds"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

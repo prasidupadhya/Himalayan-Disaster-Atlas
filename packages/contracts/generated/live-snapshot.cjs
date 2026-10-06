@@ -2,7 +2,7 @@
 "use strict";
 module.exports = validate10;
 module.exports.default = validate10;
-const schema11 = {"$schema":"http://json-schema.org/draft-07/schema#","$id":"https://himalayan-disaster-atlas.invalid/schemas/live-snapshot.schema.json","type":"object","additionalProperties":false,"required":["schema_version","kind","dataset_id","version","id","feed_id","is_fixture","source","fetched_at","source_issued_at","freshness","crs","evidence_type","product_type","records","assumptions","limitations","unsupported_outputs","notice"],"properties":{"schema_version":{"const":"1.0.0"},"kind":{"const":"live-snapshot"},"dataset_id":{"$ref":"#/definitions/id"},"version":{"$ref":"#/definitions/version"},"id":{"$ref":"#/definitions/id"},"feed_id":{"$ref":"#/definitions/feed"},"is_fixture":{"type":"boolean"},"source":{"type":"object","additionalProperties":false,"required":["name","url","version","raw_sha256","license","license_url","attribution","license_review","is_official"],"properties":{"name":{"$ref":"#/definitions/text"},"url":{"$ref":"#/definitions/https"},"version":{"type":["string","null"],"minLength":1,"maxLength":120},"raw_sha256":{"anyOf":[{"$ref":"#/definitions/hash"},{"type":"null"}]},"license":{"$ref":"#/definitions/text"},"license_url":{"anyOf":[{"$ref":"#/definitions/https"},{"type":"null"}]},"attribution":{"$ref":"#/definitions/text"},"license_review":{"enum":["PERMITTED","REVIEW_REQUIRED","PROHIBITED"]},"is_official":{"type":"boolean"}}},"fetched_at":{"$ref":"#/definitions/time"},"source_issued_at":{"$ref":"#/definitions/nullableTime"},"freshness":{"type":"object","additionalProperties":false,"required":["basis","as_of","stale_after_seconds","expires_at"],"properties":{"basis":{"enum":["source_issue","observation"]},"as_of":{"$ref":"#/definitions/nullableTime"},"stale_after_seconds":{"type":"integer","minimum":1,"maximum":604800},"expires_at":{"$ref":"#/definitions/nullableTime"}}},"crs":{"const":"OGC:CRS84"},"evidence_type":{"$ref":"#/definitions/evidence"},"product_type":{"$ref":"#/definitions/product"},"records":{"type":"array","maxItems":4096,"items":{"type":"object","additionalProperties":false,"required":["id","label","coordinates","evidence_type","observed_at","issued_at","valid_from","valid_until","measurements"],"properties":{"id":{"type":"string","minLength":1,"maxLength":120},"label":{"type":["string","null"],"minLength":1,"maxLength":240},"coordinates":{"anyOf":[{"type":"null"},{"type":"array","items":[{"type":"number","minimum":-180,"maximum":180},{"type":"number","minimum":-90,"maximum":90}],"additionalItems":false,"minItems":2,"maxItems":2}]},"evidence_type":{"$ref":"#/definitions/evidence"},"observed_at":{"$ref":"#/definitions/nullableTime"},"issued_at":{"$ref":"#/definitions/nullableTime"},"valid_from":{"$ref":"#/definitions/nullableTime"},"valid_until":{"$ref":"#/definitions/nullableTime"},"measurements":{"type":"array","maxItems":16,"items":{"type":"object","additionalProperties":false,"required":["variable","value","unit","qualifier","evidence_type"],"properties":{"variable":{"enum":["magnitude","depth","precipitation_accumulation","precipitation_rate","temperature","water_level","discharge","pm25","aqi"]},"value":{"type":["number","null"]},"unit":{"enum":["magnitude","km","mm","mm/h","degC","m","m3/s","ug/m3","dimensionless"]},"qualifier":{"type":["string","null"],"minLength":1,"maxLength":120},"evidence_type":{"$ref":"#/definitions/evidence"}}}}}}},"assumptions":{"$ref":"#/definitions/texts"},"limitations":{"type":"array","allOf":[{"$ref":"#/definitions/texts"}],"minItems":1},"unsupported_outputs":{"type":"object","additionalProperties":false,"required":["physical_inundation","destroyed_buildings","casualties","repair_costs","hydropower_downtime","economic_loss"],"properties":{"physical_inundation":{"type":"null"},"destroyed_buildings":{"type":"null"},"casualties":{"type":"null"},"repair_costs":{"type":"null"},"hydropower_downtime":{"type":"null"},"economic_loss":{"type":"null"}}},"notice":{"const":"Periodically updated conditions; not a real-time warning service."}},"definitions":{"id":{"type":"string","pattern":"^[a-z0-9]+(?:-[a-z0-9]+)*$","maxLength":100},"version":{"type":"string","pattern":"^\\d+\\.\\d+\\.\\d+$","maxLength":40},"hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},"time":{"type":"string","format":"date-time","pattern":"^(?!0000)\\d{4}-\\d{2}-\\d{2}T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d{1,3})?Z$"},"nullableTime":{"anyOf":[{"$ref":"#/definitions/time"},{"type":"null"}]},"text":{"type":"string","minLength":1,"maxLength":500},"texts":{"type":"array","maxItems":32,"items":{"$ref":"#/definitions/text"}},"https":{"type":"string","format":"uri","pattern":"^https://","maxLength":1000},"feed":{"enum":["usgs","noaa-gfs","dhm","bipad","openaq","open-meteo","imerg","contract-fixture"]},"evidence":{"enum":["observed","reported","derived","modelled","hypothetical","unknown"]},"product":{"enum":["observation","reported_event","forecast","official_warning","scenario","unknown"]}}};
+const schema11 = {"$schema":"http://json-schema.org/draft-07/schema#","$id":"https://himalayan-disaster-atlas.invalid/schemas/live-snapshot.schema.json","type":"object","additionalProperties":false,"required":["schema_version","kind","dataset_id","version","id","feed_id","is_fixture","source","fetched_at","source_issued_at","freshness","crs","evidence_type","product_type","records","assumptions","limitations","unsupported_outputs","notice"],"properties":{"schema_version":{"const":"1.0.0"},"kind":{"const":"live-snapshot"},"dataset_id":{"$ref":"#/definitions/id"},"version":{"$ref":"#/definitions/version"},"id":{"$ref":"#/definitions/id"},"feed_id":{"$ref":"#/definitions/feed"},"is_fixture":{"type":"boolean"},"source":{"type":"object","additionalProperties":false,"required":["name","url","version","raw_sha256","license","license_url","attribution","license_review","is_official"],"properties":{"name":{"$ref":"#/definitions/text"},"url":{"$ref":"#/definitions/https"},"version":{"type":["string","null"],"minLength":1,"maxLength":120},"raw_sha256":{"anyOf":[{"$ref":"#/definitions/hash"},{"type":"null"}]},"license":{"$ref":"#/definitions/text"},"license_url":{"anyOf":[{"$ref":"#/definitions/https"},{"type":"null"}]},"attribution":{"$ref":"#/definitions/text"},"license_review":{"enum":["PERMITTED","REVIEW_REQUIRED","PROHIBITED"]},"is_official":{"type":"boolean"}}},"fetched_at":{"$ref":"#/definitions/time"},"source_issued_at":{"$ref":"#/definitions/nullableTime"},"freshness":{"type":"object","additionalProperties":false,"required":["basis","as_of","stale_after_seconds","expires_at"],"properties":{"basis":{"enum":["source_issue","observation"]},"as_of":{"$ref":"#/definitions/nullableTime"},"stale_after_seconds":{"type":"integer","minimum":1,"maximum":604800},"expires_at":{"$ref":"#/definitions/nullableTime"}}},"crs":{"const":"OGC:CRS84"},"evidence_type":{"$ref":"#/definitions/evidence"},"product_type":{"$ref":"#/definitions/product"},"records":{"type":"array","maxItems":4096,"items":{"type":"object","additionalProperties":false,"required":["id","label","coordinates","evidence_type","observed_at","issued_at","valid_from","valid_until","measurements"],"properties":{"id":{"type":"string","minLength":1,"maxLength":120},"label":{"type":["string","null"],"minLength":1,"maxLength":240},"source_revision_at":{"$ref":"#/definitions/nullableTime"},"source_url":{"anyOf":[{"$ref":"#/definitions/https"},{"type":"null"}]},"source_network":{"type":["string","null"],"minLength":1,"maxLength":40},"coordinates":{"anyOf":[{"type":"null"},{"type":"array","items":[{"type":"number","minimum":-180,"maximum":180},{"type":"number","minimum":-90,"maximum":90}],"additionalItems":false,"minItems":2,"maxItems":2}]},"evidence_type":{"$ref":"#/definitions/evidence"},"observed_at":{"$ref":"#/definitions/nullableTime"},"issued_at":{"$ref":"#/definitions/nullableTime"},"valid_from":{"$ref":"#/definitions/nullableTime"},"valid_until":{"$ref":"#/definitions/nullableTime"},"measurements":{"type":"array","maxItems":16,"items":{"type":"object","additionalProperties":false,"required":["variable","value","unit","qualifier","evidence_type"],"properties":{"variable":{"enum":["magnitude","depth","precipitation_accumulation","precipitation_rate","temperature","water_level","discharge","pm25","aqi"]},"value":{"type":["number","null"]},"unit":{"enum":["magnitude","km","mm","mm/h","degC","m","m3/s","ug/m3","dimensionless"]},"qualifier":{"type":["string","null"],"minLength":1,"maxLength":120},"evidence_type":{"$ref":"#/definitions/evidence"}}}}}}},"assumptions":{"$ref":"#/definitions/texts"},"limitations":{"type":"array","allOf":[{"$ref":"#/definitions/texts"}],"minItems":1},"unsupported_outputs":{"type":"object","additionalProperties":false,"required":["physical_inundation","destroyed_buildings","casualties","repair_costs","hydropower_downtime","economic_loss"],"properties":{"physical_inundation":{"type":"null"},"destroyed_buildings":{"type":"null"},"casualties":{"type":"null"},"repair_costs":{"type":"null"},"hydropower_downtime":{"type":"null"},"economic_loss":{"type":"null"}}},"notice":{"const":"Periodically updated conditions; not a real-time warning service."}},"definitions":{"id":{"type":"string","pattern":"^[a-z0-9]+(?:-[a-z0-9]+)*$","maxLength":100},"version":{"type":"string","pattern":"^\\d+\\.\\d+\\.\\d+$","maxLength":40},"hash":{"type":"string","pattern":"^[a-f0-9]{64}$"},"time":{"type":"string","format":"date-time","pattern":"^(?!0000)\\d{4}-\\d{2}-\\d{2}T(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d{1,3})?Z$"},"nullableTime":{"anyOf":[{"$ref":"#/definitions/time"},{"type":"null"}]},"text":{"type":"string","minLength":1,"maxLength":500},"texts":{"type":"array","maxItems":32,"items":{"$ref":"#/definitions/text"}},"https":{"type":"string","format":"uri","pattern":"^https://","maxLength":1000},"feed":{"enum":["usgs","noaa-gfs","dhm","bipad","openaq","open-meteo","imerg","contract-fixture"]},"evidence":{"enum":["observed","reported","derived","modelled","hypothetical","unknown"]},"product":{"enum":["observation","reported_event","forecast","official_warning","scenario","unknown"]}}};
 const schema12 = {"type":"string","pattern":"^[a-z0-9]+(?:-[a-z0-9]+)*$","maxLength":100};
 const schema13 = {"type":"string","pattern":"^\\d+\\.\\d+\\.\\d+$","maxLength":40};
 const schema15 = {"enum":["usgs","noaa-gfs","dhm","bipad","openaq","open-meteo","imerg","contract-fixture"]};
@@ -103,9 +103,9 @@ validate11.errors = vErrors;
 return errors === 0;
 }
 
-const schema29 = {"type":"array","maxItems":32,"items":{"$ref":"#/definitions/text"}};
+const schema30 = {"type":"array","maxItems":32,"items":{"$ref":"#/definitions/text"}};
 
-function validate19(data, {instancePath="", parentData, parentDataProperty, rootData=data}={}){
+function validate20(data, {instancePath="", parentData, parentDataProperty, rootData=data}={}){
 let vErrors = null;
 let errors = 0;
 if(Array.isArray(data)){
@@ -166,7 +166,7 @@ vErrors.push(err4);
 }
 errors++;
 }
-validate19.errors = vErrors;
+validate20.errors = vErrors;
 return errors === 0;
 }
 
@@ -1406,13 +1406,20 @@ errors++;
 }
 }
 }
-if(data28.coordinates !== undefined){
-let data31 = data28.coordinates;
-const _errs78 = errors;
-let valid21 = false;
+if(data28.source_revision_at !== undefined){
+if(!(validate11(data28.source_revision_at, {instancePath:instancePath+"/records/" + i0+"/source_revision_at",parentData:data28,parentDataProperty:"source_revision_at",rootData}))){
+vErrors = vErrors === null ? validate11.errors : vErrors.concat(validate11.errors);
+errors = vErrors.length;
+}
+}
+if(data28.source_url !== undefined){
+let data32 = data28.source_url;
 const _errs79 = errors;
-if(data31 !== null){
-const err105 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/0/type",keyword:"type",params:{type: "null"},message:"must be null"};
+let valid21 = false;
+const _errs80 = errors;
+if(typeof data32 === "string"){
+if(func3(data32) > 1000){
+const err105 = {instancePath:instancePath+"/records/" + i0+"/source_url",schemaPath:"#/definitions/https/maxLength",keyword:"maxLength",params:{limit: 1000},message:"must NOT have more than 1000 characters"};
 if(vErrors === null){
 vErrors = [err105];
 }
@@ -1421,13 +1428,8 @@ vErrors.push(err105);
 }
 errors++;
 }
-var _valid2 = _errs79 === errors;
-valid21 = valid21 || _valid2;
-if(!valid21){
-const _errs81 = errors;
-if(Array.isArray(data31)){
-if(data31.length > 2){
-const err106 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/maxItems",keyword:"maxItems",params:{limit: 2},message:"must NOT have more than 2 items"};
+if(!pattern3.test(data32)){
+const err106 = {instancePath:instancePath+"/records/" + i0+"/source_url",schemaPath:"#/definitions/https/pattern",keyword:"pattern",params:{pattern: "^https://"},message:"must match pattern \""+"^https://"+"\""};
 if(vErrors === null){
 vErrors = [err106];
 }
@@ -1436,8 +1438,8 @@ vErrors.push(err106);
 }
 errors++;
 }
-if(data31.length < 2){
-const err107 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/minItems",keyword:"minItems",params:{limit: 2},message:"must NOT have fewer than 2 items"};
+if(!(formats0(data32))){
+const err107 = {instancePath:instancePath+"/records/" + i0+"/source_url",schemaPath:"#/definitions/https/format",keyword:"format",params:{format: "uri"},message:"must match format \""+"uri"+"\""};
 if(vErrors === null){
 vErrors = [err107];
 }
@@ -1446,9 +1448,9 @@ vErrors.push(err107);
 }
 errors++;
 }
-const len1 = data31.length;
-if(!(len1 <= 2)){
-const err108 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/additionalItems",keyword:"additionalItems",params:{limit: 2},message:"must NOT have more than 2 items"};
+}
+else {
+const err108 = {instancePath:instancePath+"/records/" + i0+"/source_url",schemaPath:"#/definitions/https/type",keyword:"type",params:{type: "string"},message:"must be string"};
 if(vErrors === null){
 vErrors = [err108];
 }
@@ -1457,12 +1459,12 @@ vErrors.push(err108);
 }
 errors++;
 }
-const len2 = data31.length;
-if(len2 > 0){
-let data32 = data31[0];
-if((typeof data32 == "number") && (isFinite(data32))){
-if(data32 > 180 || isNaN(data32)){
-const err109 = {instancePath:instancePath+"/records/" + i0+"/coordinates/0",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/0/maximum",keyword:"maximum",params:{comparison: "<=", limit: 180},message:"must be <= 180"};
+var _valid2 = _errs80 === errors;
+valid21 = valid21 || _valid2;
+if(!valid21){
+const _errs83 = errors;
+if(data32 !== null){
+const err109 = {instancePath:instancePath+"/records/" + i0+"/source_url",schemaPath:"#/properties/records/items/properties/source_url/anyOf/1/type",keyword:"type",params:{type: "null"},message:"must be null"};
 if(vErrors === null){
 vErrors = [err109];
 }
@@ -1471,8 +1473,11 @@ vErrors.push(err109);
 }
 errors++;
 }
-if(data32 < -180 || isNaN(data32)){
-const err110 = {instancePath:instancePath+"/records/" + i0+"/coordinates/0",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/0/minimum",keyword:"minimum",params:{comparison: ">=", limit: -180},message:"must be >= -180"};
+var _valid2 = _errs83 === errors;
+valid21 = valid21 || _valid2;
+}
+if(!valid21){
+const err110 = {instancePath:instancePath+"/records/" + i0+"/source_url",schemaPath:"#/properties/records/items/properties/source_url/anyOf",keyword:"anyOf",params:{},message:"must match a schema in anyOf"};
 if(vErrors === null){
 vErrors = [err110];
 }
@@ -1481,9 +1486,22 @@ vErrors.push(err110);
 }
 errors++;
 }
+else {
+errors = _errs79;
+if(vErrors !== null){
+if(_errs79){
+vErrors.length = _errs79;
 }
 else {
-const err111 = {instancePath:instancePath+"/records/" + i0+"/coordinates/0",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/0/type",keyword:"type",params:{type: "number"},message:"must be number"};
+vErrors = null;
+}
+}
+}
+}
+if(data28.source_network !== undefined){
+let data33 = data28.source_network;
+if((typeof data33 !== "string") && (data33 !== null)){
+const err111 = {instancePath:instancePath+"/records/" + i0+"/source_network",schemaPath:"#/properties/records/items/properties/source_network/type",keyword:"type",params:{type: schema11.properties.records.items.properties.source_network.type},message:"must be string,null"};
 if(vErrors === null){
 vErrors = [err111];
 }
@@ -1492,12 +1510,9 @@ vErrors.push(err111);
 }
 errors++;
 }
-}
-if(len2 > 1){
-let data33 = data31[1];
-if((typeof data33 == "number") && (isFinite(data33))){
-if(data33 > 90 || isNaN(data33)){
-const err112 = {instancePath:instancePath+"/records/" + i0+"/coordinates/1",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/1/maximum",keyword:"maximum",params:{comparison: "<=", limit: 90},message:"must be <= 90"};
+if(typeof data33 === "string"){
+if(func3(data33) > 40){
+const err112 = {instancePath:instancePath+"/records/" + i0+"/source_network",schemaPath:"#/properties/records/items/properties/source_network/maxLength",keyword:"maxLength",params:{limit: 40},message:"must NOT have more than 40 characters"};
 if(vErrors === null){
 vErrors = [err112];
 }
@@ -1506,8 +1521,8 @@ vErrors.push(err112);
 }
 errors++;
 }
-if(data33 < -90 || isNaN(data33)){
-const err113 = {instancePath:instancePath+"/records/" + i0+"/coordinates/1",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/1/minimum",keyword:"minimum",params:{comparison: ">=", limit: -90},message:"must be >= -90"};
+if(func3(data33) < 1){
+const err113 = {instancePath:instancePath+"/records/" + i0+"/source_network",schemaPath:"#/properties/records/items/properties/source_network/minLength",keyword:"minLength",params:{limit: 1},message:"must NOT have fewer than 1 characters"};
 if(vErrors === null){
 vErrors = [err113];
 }
@@ -1517,8 +1532,14 @@ vErrors.push(err113);
 errors++;
 }
 }
-else {
-const err114 = {instancePath:instancePath+"/records/" + i0+"/coordinates/1",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/1/type",keyword:"type",params:{type: "number"},message:"must be number"};
+}
+if(data28.coordinates !== undefined){
+let data34 = data28.coordinates;
+const _errs88 = errors;
+let valid23 = false;
+const _errs89 = errors;
+if(data34 !== null){
+const err114 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/0/type",keyword:"type",params:{type: "null"},message:"must be null"};
 if(vErrors === null){
 vErrors = [err114];
 }
@@ -1527,10 +1548,13 @@ vErrors.push(err114);
 }
 errors++;
 }
-}
-}
-else {
-const err115 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/type",keyword:"type",params:{type: "array"},message:"must be array"};
+var _valid3 = _errs89 === errors;
+valid23 = valid23 || _valid3;
+if(!valid23){
+const _errs91 = errors;
+if(Array.isArray(data34)){
+if(data34.length > 2){
+const err115 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/maxItems",keyword:"maxItems",params:{limit: 2},message:"must NOT have more than 2 items"};
 if(vErrors === null){
 vErrors = [err115];
 }
@@ -1539,11 +1563,8 @@ vErrors.push(err115);
 }
 errors++;
 }
-var _valid2 = _errs81 === errors;
-valid21 = valid21 || _valid2;
-}
-if(!valid21){
-const err116 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf",keyword:"anyOf",params:{},message:"must match a schema in anyOf"};
+if(data34.length < 2){
+const err116 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/minItems",keyword:"minItems",params:{limit: 2},message:"must NOT have fewer than 2 items"};
 if(vErrors === null){
 vErrors = [err116];
 }
@@ -1552,11 +1573,117 @@ vErrors.push(err116);
 }
 errors++;
 }
+const len1 = data34.length;
+if(!(len1 <= 2)){
+const err117 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/additionalItems",keyword:"additionalItems",params:{limit: 2},message:"must NOT have more than 2 items"};
+if(vErrors === null){
+vErrors = [err117];
+}
 else {
-errors = _errs78;
+vErrors.push(err117);
+}
+errors++;
+}
+const len2 = data34.length;
+if(len2 > 0){
+let data35 = data34[0];
+if((typeof data35 == "number") && (isFinite(data35))){
+if(data35 > 180 || isNaN(data35)){
+const err118 = {instancePath:instancePath+"/records/" + i0+"/coordinates/0",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/0/maximum",keyword:"maximum",params:{comparison: "<=", limit: 180},message:"must be <= 180"};
+if(vErrors === null){
+vErrors = [err118];
+}
+else {
+vErrors.push(err118);
+}
+errors++;
+}
+if(data35 < -180 || isNaN(data35)){
+const err119 = {instancePath:instancePath+"/records/" + i0+"/coordinates/0",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/0/minimum",keyword:"minimum",params:{comparison: ">=", limit: -180},message:"must be >= -180"};
+if(vErrors === null){
+vErrors = [err119];
+}
+else {
+vErrors.push(err119);
+}
+errors++;
+}
+}
+else {
+const err120 = {instancePath:instancePath+"/records/" + i0+"/coordinates/0",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/0/type",keyword:"type",params:{type: "number"},message:"must be number"};
+if(vErrors === null){
+vErrors = [err120];
+}
+else {
+vErrors.push(err120);
+}
+errors++;
+}
+}
+if(len2 > 1){
+let data36 = data34[1];
+if((typeof data36 == "number") && (isFinite(data36))){
+if(data36 > 90 || isNaN(data36)){
+const err121 = {instancePath:instancePath+"/records/" + i0+"/coordinates/1",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/1/maximum",keyword:"maximum",params:{comparison: "<=", limit: 90},message:"must be <= 90"};
+if(vErrors === null){
+vErrors = [err121];
+}
+else {
+vErrors.push(err121);
+}
+errors++;
+}
+if(data36 < -90 || isNaN(data36)){
+const err122 = {instancePath:instancePath+"/records/" + i0+"/coordinates/1",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/1/minimum",keyword:"minimum",params:{comparison: ">=", limit: -90},message:"must be >= -90"};
+if(vErrors === null){
+vErrors = [err122];
+}
+else {
+vErrors.push(err122);
+}
+errors++;
+}
+}
+else {
+const err123 = {instancePath:instancePath+"/records/" + i0+"/coordinates/1",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/items/1/type",keyword:"type",params:{type: "number"},message:"must be number"};
+if(vErrors === null){
+vErrors = [err123];
+}
+else {
+vErrors.push(err123);
+}
+errors++;
+}
+}
+}
+else {
+const err124 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf/1/type",keyword:"type",params:{type: "array"},message:"must be array"};
+if(vErrors === null){
+vErrors = [err124];
+}
+else {
+vErrors.push(err124);
+}
+errors++;
+}
+var _valid3 = _errs91 === errors;
+valid23 = valid23 || _valid3;
+}
+if(!valid23){
+const err125 = {instancePath:instancePath+"/records/" + i0+"/coordinates",schemaPath:"#/properties/records/items/properties/coordinates/anyOf",keyword:"anyOf",params:{},message:"must match a schema in anyOf"};
+if(vErrors === null){
+vErrors = [err125];
+}
+else {
+vErrors.push(err125);
+}
+errors++;
+}
+else {
+errors = _errs88;
 if(vErrors !== null){
-if(_errs78){
-vErrors.length = _errs78;
+if(_errs88){
+vErrors.length = _errs88;
 }
 else {
 vErrors = null;
@@ -1565,14 +1692,14 @@ vErrors = null;
 }
 }
 if(data28.evidence_type !== undefined){
-let data34 = data28.evidence_type;
-if(!((((((data34 === "observed") || (data34 === "reported")) || (data34 === "derived")) || (data34 === "modelled")) || (data34 === "hypothetical")) || (data34 === "unknown"))){
-const err117 = {instancePath:instancePath+"/records/" + i0+"/evidence_type",schemaPath:"#/definitions/evidence/enum",keyword:"enum",params:{allowedValues: schema25.enum},message:"must be equal to one of the allowed values"};
+let data37 = data28.evidence_type;
+if(!((((((data37 === "observed") || (data37 === "reported")) || (data37 === "derived")) || (data37 === "modelled")) || (data37 === "hypothetical")) || (data37 === "unknown"))){
+const err126 = {instancePath:instancePath+"/records/" + i0+"/evidence_type",schemaPath:"#/definitions/evidence/enum",keyword:"enum",params:{allowedValues: schema25.enum},message:"must be equal to one of the allowed values"};
 if(vErrors === null){
-vErrors = [err117];
+vErrors = [err126];
 }
 else {
-vErrors.push(err117);
+vErrors.push(err126);
 }
 errors++;
 }
@@ -1602,114 +1729,10 @@ errors = vErrors.length;
 }
 }
 if(data28.measurements !== undefined){
-let data39 = data28.measurements;
-if(Array.isArray(data39)){
-if(data39.length > 16){
-const err118 = {instancePath:instancePath+"/records/" + i0+"/measurements",schemaPath:"#/properties/records/items/properties/measurements/maxItems",keyword:"maxItems",params:{limit: 16},message:"must NOT have more than 16 items"};
-if(vErrors === null){
-vErrors = [err118];
-}
-else {
-vErrors.push(err118);
-}
-errors++;
-}
-const len3 = data39.length;
-for(let i1=0; i1<len3; i1++){
-let data40 = data39[i1];
-if(data40 && typeof data40 == "object" && !Array.isArray(data40)){
-if(data40.variable === undefined){
-const err119 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/required",keyword:"required",params:{missingProperty: "variable"},message:"must have required property '"+"variable"+"'"};
-if(vErrors === null){
-vErrors = [err119];
-}
-else {
-vErrors.push(err119);
-}
-errors++;
-}
-if(data40.value === undefined){
-const err120 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/required",keyword:"required",params:{missingProperty: "value"},message:"must have required property '"+"value"+"'"};
-if(vErrors === null){
-vErrors = [err120];
-}
-else {
-vErrors.push(err120);
-}
-errors++;
-}
-if(data40.unit === undefined){
-const err121 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/required",keyword:"required",params:{missingProperty: "unit"},message:"must have required property '"+"unit"+"'"};
-if(vErrors === null){
-vErrors = [err121];
-}
-else {
-vErrors.push(err121);
-}
-errors++;
-}
-if(data40.qualifier === undefined){
-const err122 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/required",keyword:"required",params:{missingProperty: "qualifier"},message:"must have required property '"+"qualifier"+"'"};
-if(vErrors === null){
-vErrors = [err122];
-}
-else {
-vErrors.push(err122);
-}
-errors++;
-}
-if(data40.evidence_type === undefined){
-const err123 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/required",keyword:"required",params:{missingProperty: "evidence_type"},message:"must have required property '"+"evidence_type"+"'"};
-if(vErrors === null){
-vErrors = [err123];
-}
-else {
-vErrors.push(err123);
-}
-errors++;
-}
-for(const key4 in data40){
-if(!(((((key4 === "variable") || (key4 === "value")) || (key4 === "unit")) || (key4 === "qualifier")) || (key4 === "evidence_type"))){
-const err124 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/additionalProperties",keyword:"additionalProperties",params:{additionalProperty: key4},message:"must NOT have additional properties"};
-if(vErrors === null){
-vErrors = [err124];
-}
-else {
-vErrors.push(err124);
-}
-errors++;
-}
-}
-if(data40.variable !== undefined){
-let data41 = data40.variable;
-if(!(((((((((data41 === "magnitude") || (data41 === "depth")) || (data41 === "precipitation_accumulation")) || (data41 === "precipitation_rate")) || (data41 === "temperature")) || (data41 === "water_level")) || (data41 === "discharge")) || (data41 === "pm25")) || (data41 === "aqi"))){
-const err125 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/variable",schemaPath:"#/properties/records/items/properties/measurements/items/properties/variable/enum",keyword:"enum",params:{allowedValues: schema11.properties.records.items.properties.measurements.items.properties.variable.enum},message:"must be equal to one of the allowed values"};
-if(vErrors === null){
-vErrors = [err125];
-}
-else {
-vErrors.push(err125);
-}
-errors++;
-}
-}
-if(data40.value !== undefined){
-let data42 = data40.value;
-if((!((typeof data42 == "number") && (isFinite(data42)))) && (data42 !== null)){
-const err126 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/value",schemaPath:"#/properties/records/items/properties/measurements/items/properties/value/type",keyword:"type",params:{type: schema11.properties.records.items.properties.measurements.items.properties.value.type},message:"must be number,null"};
-if(vErrors === null){
-vErrors = [err126];
-}
-else {
-vErrors.push(err126);
-}
-errors++;
-}
-}
-if(data40.unit !== undefined){
-let data43 = data40.unit;
-if(!(((((((((data43 === "magnitude") || (data43 === "km")) || (data43 === "mm")) || (data43 === "mm/h")) || (data43 === "degC")) || (data43 === "m")) || (data43 === "m3/s")) || (data43 === "ug/m3")) || (data43 === "dimensionless"))){
-const err127 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/unit",schemaPath:"#/properties/records/items/properties/measurements/items/properties/unit/enum",keyword:"enum",params:{allowedValues: schema11.properties.records.items.properties.measurements.items.properties.unit.enum},message:"must be equal to one of the allowed values"};
+let data42 = data28.measurements;
+if(Array.isArray(data42)){
+if(data42.length > 16){
+const err127 = {instancePath:instancePath+"/records/" + i0+"/measurements",schemaPath:"#/properties/records/items/properties/measurements/maxItems",keyword:"maxItems",params:{limit: 16},message:"must NOT have more than 16 items"};
 if(vErrors === null){
 vErrors = [err127];
 }
@@ -1718,11 +1741,12 @@ vErrors.push(err127);
 }
 errors++;
 }
-}
-if(data40.qualifier !== undefined){
-let data44 = data40.qualifier;
-if((typeof data44 !== "string") && (data44 !== null)){
-const err128 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/qualifier",schemaPath:"#/properties/records/items/properties/measurements/items/properties/qualifier/type",keyword:"type",params:{type: schema11.properties.records.items.properties.measurements.items.properties.qualifier.type},message:"must be string,null"};
+const len3 = data42.length;
+for(let i1=0; i1<len3; i1++){
+let data43 = data42[i1];
+if(data43 && typeof data43 == "object" && !Array.isArray(data43)){
+if(data43.variable === undefined){
+const err128 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/required",keyword:"required",params:{missingProperty: "variable"},message:"must have required property '"+"variable"+"'"};
 if(vErrors === null){
 vErrors = [err128];
 }
@@ -1731,9 +1755,8 @@ vErrors.push(err128);
 }
 errors++;
 }
-if(typeof data44 === "string"){
-if(func3(data44) > 120){
-const err129 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/qualifier",schemaPath:"#/properties/records/items/properties/measurements/items/properties/qualifier/maxLength",keyword:"maxLength",params:{limit: 120},message:"must NOT have more than 120 characters"};
+if(data43.value === undefined){
+const err129 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/required",keyword:"required",params:{missingProperty: "value"},message:"must have required property '"+"value"+"'"};
 if(vErrors === null){
 vErrors = [err129];
 }
@@ -1742,8 +1765,8 @@ vErrors.push(err129);
 }
 errors++;
 }
-if(func3(data44) < 1){
-const err130 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/qualifier",schemaPath:"#/properties/records/items/properties/measurements/items/properties/qualifier/minLength",keyword:"minLength",params:{limit: 1},message:"must NOT have fewer than 1 characters"};
+if(data43.unit === undefined){
+const err130 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/required",keyword:"required",params:{missingProperty: "unit"},message:"must have required property '"+"unit"+"'"};
 if(vErrors === null){
 vErrors = [err130];
 }
@@ -1752,12 +1775,8 @@ vErrors.push(err130);
 }
 errors++;
 }
-}
-}
-if(data40.evidence_type !== undefined){
-let data45 = data40.evidence_type;
-if(!((((((data45 === "observed") || (data45 === "reported")) || (data45 === "derived")) || (data45 === "modelled")) || (data45 === "hypothetical")) || (data45 === "unknown"))){
-const err131 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/evidence_type",schemaPath:"#/definitions/evidence/enum",keyword:"enum",params:{allowedValues: schema25.enum},message:"must be equal to one of the allowed values"};
+if(data43.qualifier === undefined){
+const err131 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/required",keyword:"required",params:{missingProperty: "qualifier"},message:"must have required property '"+"qualifier"+"'"};
 if(vErrors === null){
 vErrors = [err131];
 }
@@ -1766,10 +1785,8 @@ vErrors.push(err131);
 }
 errors++;
 }
-}
-}
-else {
-const err132 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/type",keyword:"type",params:{type: "object"},message:"must be object"};
+if(data43.evidence_type === undefined){
+const err132 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/required",keyword:"required",params:{missingProperty: "evidence_type"},message:"must have required property '"+"evidence_type"+"'"};
 if(vErrors === null){
 vErrors = [err132];
 }
@@ -1778,10 +1795,9 @@ vErrors.push(err132);
 }
 errors++;
 }
-}
-}
-else {
-const err133 = {instancePath:instancePath+"/records/" + i0+"/measurements",schemaPath:"#/properties/records/items/properties/measurements/type",keyword:"type",params:{type: "array"},message:"must be array"};
+for(const key4 in data43){
+if(!(((((key4 === "variable") || (key4 === "value")) || (key4 === "unit")) || (key4 === "qualifier")) || (key4 === "evidence_type"))){
+const err133 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/additionalProperties",keyword:"additionalProperties",params:{additionalProperty: key4},message:"must NOT have additional properties"};
 if(vErrors === null){
 vErrors = [err133];
 }
@@ -1791,9 +1807,10 @@ vErrors.push(err133);
 errors++;
 }
 }
-}
-else {
-const err134 = {instancePath:instancePath+"/records/" + i0,schemaPath:"#/properties/records/items/type",keyword:"type",params:{type: "object"},message:"must be object"};
+if(data43.variable !== undefined){
+let data44 = data43.variable;
+if(!(((((((((data44 === "magnitude") || (data44 === "depth")) || (data44 === "precipitation_accumulation")) || (data44 === "precipitation_rate")) || (data44 === "temperature")) || (data44 === "water_level")) || (data44 === "discharge")) || (data44 === "pm25")) || (data44 === "aqi"))){
+const err134 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/variable",schemaPath:"#/properties/records/items/properties/measurements/items/properties/variable/enum",keyword:"enum",params:{allowedValues: schema11.properties.records.items.properties.measurements.items.properties.variable.enum},message:"must be equal to one of the allowed values"};
 if(vErrors === null){
 vErrors = [err134];
 }
@@ -1803,9 +1820,10 @@ vErrors.push(err134);
 errors++;
 }
 }
-}
-else {
-const err135 = {instancePath:instancePath+"/records",schemaPath:"#/properties/records/type",keyword:"type",params:{type: "array"},message:"must be array"};
+if(data43.value !== undefined){
+let data45 = data43.value;
+if((!((typeof data45 == "number") && (isFinite(data45)))) && (data45 !== null)){
+const err135 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/value",schemaPath:"#/properties/records/items/properties/measurements/items/properties/value/type",keyword:"type",params:{type: schema11.properties.records.items.properties.measurements.items.properties.value.type},message:"must be number,null"};
 if(vErrors === null){
 vErrors = [err135];
 }
@@ -1815,21 +1833,10 @@ vErrors.push(err135);
 errors++;
 }
 }
-if(data.assumptions !== undefined){
-if(!(validate19(data.assumptions, {instancePath:instancePath+"/assumptions",parentData:data,parentDataProperty:"assumptions",rootData}))){
-vErrors = vErrors === null ? validate19.errors : vErrors.concat(validate19.errors);
-errors = vErrors.length;
-}
-}
-if(data.limitations !== undefined){
-let data47 = data.limitations;
-if(!(validate19(data47, {instancePath:instancePath+"/limitations",parentData:data,parentDataProperty:"limitations",rootData}))){
-vErrors = vErrors === null ? validate19.errors : vErrors.concat(validate19.errors);
-errors = vErrors.length;
-}
-if(Array.isArray(data47)){
-if(data47.length < 1){
-const err136 = {instancePath:instancePath+"/limitations",schemaPath:"#/properties/limitations/minItems",keyword:"minItems",params:{limit: 1},message:"must NOT have fewer than 1 items"};
+if(data43.unit !== undefined){
+let data46 = data43.unit;
+if(!(((((((((data46 === "magnitude") || (data46 === "km")) || (data46 === "mm")) || (data46 === "mm/h")) || (data46 === "degC")) || (data46 === "m")) || (data46 === "m3/s")) || (data46 === "ug/m3")) || (data46 === "dimensionless"))){
+const err136 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/unit",schemaPath:"#/properties/records/items/properties/measurements/items/properties/unit/enum",keyword:"enum",params:{allowedValues: schema11.properties.records.items.properties.measurements.items.properties.unit.enum},message:"must be equal to one of the allowed values"};
 if(vErrors === null){
 vErrors = [err136];
 }
@@ -1839,8 +1846,10 @@ vErrors.push(err136);
 errors++;
 }
 }
-else {
-const err137 = {instancePath:instancePath+"/limitations",schemaPath:"#/properties/limitations/type",keyword:"type",params:{type: "array"},message:"must be array"};
+if(data43.qualifier !== undefined){
+let data47 = data43.qualifier;
+if((typeof data47 !== "string") && (data47 !== null)){
+const err137 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/qualifier",schemaPath:"#/properties/records/items/properties/measurements/items/properties/qualifier/type",keyword:"type",params:{type: schema11.properties.records.items.properties.measurements.items.properties.qualifier.type},message:"must be string,null"};
 if(vErrors === null){
 vErrors = [err137];
 }
@@ -1849,12 +1858,9 @@ vErrors.push(err137);
 }
 errors++;
 }
-}
-if(data.unsupported_outputs !== undefined){
-let data48 = data.unsupported_outputs;
-if(data48 && typeof data48 == "object" && !Array.isArray(data48)){
-if(data48.physical_inundation === undefined){
-const err138 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "physical_inundation"},message:"must have required property '"+"physical_inundation"+"'"};
+if(typeof data47 === "string"){
+if(func3(data47) > 120){
+const err138 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/qualifier",schemaPath:"#/properties/records/items/properties/measurements/items/properties/qualifier/maxLength",keyword:"maxLength",params:{limit: 120},message:"must NOT have more than 120 characters"};
 if(vErrors === null){
 vErrors = [err138];
 }
@@ -1863,8 +1869,8 @@ vErrors.push(err138);
 }
 errors++;
 }
-if(data48.destroyed_buildings === undefined){
-const err139 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "destroyed_buildings"},message:"must have required property '"+"destroyed_buildings"+"'"};
+if(func3(data47) < 1){
+const err139 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/qualifier",schemaPath:"#/properties/records/items/properties/measurements/items/properties/qualifier/minLength",keyword:"minLength",params:{limit: 1},message:"must NOT have fewer than 1 characters"};
 if(vErrors === null){
 vErrors = [err139];
 }
@@ -1873,8 +1879,12 @@ vErrors.push(err139);
 }
 errors++;
 }
-if(data48.casualties === undefined){
-const err140 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "casualties"},message:"must have required property '"+"casualties"+"'"};
+}
+}
+if(data43.evidence_type !== undefined){
+let data48 = data43.evidence_type;
+if(!((((((data48 === "observed") || (data48 === "reported")) || (data48 === "derived")) || (data48 === "modelled")) || (data48 === "hypothetical")) || (data48 === "unknown"))){
+const err140 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1+"/evidence_type",schemaPath:"#/definitions/evidence/enum",keyword:"enum",params:{allowedValues: schema25.enum},message:"must be equal to one of the allowed values"};
 if(vErrors === null){
 vErrors = [err140];
 }
@@ -1883,8 +1893,10 @@ vErrors.push(err140);
 }
 errors++;
 }
-if(data48.repair_costs === undefined){
-const err141 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "repair_costs"},message:"must have required property '"+"repair_costs"+"'"};
+}
+}
+else {
+const err141 = {instancePath:instancePath+"/records/" + i0+"/measurements/" + i1,schemaPath:"#/properties/records/items/properties/measurements/items/type",keyword:"type",params:{type: "object"},message:"must be object"};
 if(vErrors === null){
 vErrors = [err141];
 }
@@ -1893,8 +1905,10 @@ vErrors.push(err141);
 }
 errors++;
 }
-if(data48.hydropower_downtime === undefined){
-const err142 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "hydropower_downtime"},message:"must have required property '"+"hydropower_downtime"+"'"};
+}
+}
+else {
+const err142 = {instancePath:instancePath+"/records/" + i0+"/measurements",schemaPath:"#/properties/records/items/properties/measurements/type",keyword:"type",params:{type: "array"},message:"must be array"};
 if(vErrors === null){
 vErrors = [err142];
 }
@@ -1903,8 +1917,10 @@ vErrors.push(err142);
 }
 errors++;
 }
-if(data48.economic_loss === undefined){
-const err143 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "economic_loss"},message:"must have required property '"+"economic_loss"+"'"};
+}
+}
+else {
+const err143 = {instancePath:instancePath+"/records/" + i0,schemaPath:"#/properties/records/items/type",keyword:"type",params:{type: "object"},message:"must be object"};
 if(vErrors === null){
 vErrors = [err143];
 }
@@ -1913,9 +1929,10 @@ vErrors.push(err143);
 }
 errors++;
 }
-for(const key5 in data48){
-if(!((((((key5 === "physical_inundation") || (key5 === "destroyed_buildings")) || (key5 === "casualties")) || (key5 === "repair_costs")) || (key5 === "hydropower_downtime")) || (key5 === "economic_loss"))){
-const err144 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/additionalProperties",keyword:"additionalProperties",params:{additionalProperty: key5},message:"must NOT have additional properties"};
+}
+}
+else {
+const err144 = {instancePath:instancePath+"/records",schemaPath:"#/properties/records/type",keyword:"type",params:{type: "array"},message:"must be array"};
 if(vErrors === null){
 vErrors = [err144];
 }
@@ -1925,9 +1942,21 @@ vErrors.push(err144);
 errors++;
 }
 }
-if(data48.physical_inundation !== undefined){
-if(data48.physical_inundation !== null){
-const err145 = {instancePath:instancePath+"/unsupported_outputs/physical_inundation",schemaPath:"#/properties/unsupported_outputs/properties/physical_inundation/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(data.assumptions !== undefined){
+if(!(validate20(data.assumptions, {instancePath:instancePath+"/assumptions",parentData:data,parentDataProperty:"assumptions",rootData}))){
+vErrors = vErrors === null ? validate20.errors : vErrors.concat(validate20.errors);
+errors = vErrors.length;
+}
+}
+if(data.limitations !== undefined){
+let data50 = data.limitations;
+if(!(validate20(data50, {instancePath:instancePath+"/limitations",parentData:data,parentDataProperty:"limitations",rootData}))){
+vErrors = vErrors === null ? validate20.errors : vErrors.concat(validate20.errors);
+errors = vErrors.length;
+}
+if(Array.isArray(data50)){
+if(data50.length < 1){
+const err145 = {instancePath:instancePath+"/limitations",schemaPath:"#/properties/limitations/minItems",keyword:"minItems",params:{limit: 1},message:"must NOT have fewer than 1 items"};
 if(vErrors === null){
 vErrors = [err145];
 }
@@ -1937,9 +1966,8 @@ vErrors.push(err145);
 errors++;
 }
 }
-if(data48.destroyed_buildings !== undefined){
-if(data48.destroyed_buildings !== null){
-const err146 = {instancePath:instancePath+"/unsupported_outputs/destroyed_buildings",schemaPath:"#/properties/unsupported_outputs/properties/destroyed_buildings/type",keyword:"type",params:{type: "null"},message:"must be null"};
+else {
+const err146 = {instancePath:instancePath+"/limitations",schemaPath:"#/properties/limitations/type",keyword:"type",params:{type: "array"},message:"must be array"};
 if(vErrors === null){
 vErrors = [err146];
 }
@@ -1949,9 +1977,11 @@ vErrors.push(err146);
 errors++;
 }
 }
-if(data48.casualties !== undefined){
-if(data48.casualties !== null){
-const err147 = {instancePath:instancePath+"/unsupported_outputs/casualties",schemaPath:"#/properties/unsupported_outputs/properties/casualties/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(data.unsupported_outputs !== undefined){
+let data51 = data.unsupported_outputs;
+if(data51 && typeof data51 == "object" && !Array.isArray(data51)){
+if(data51.physical_inundation === undefined){
+const err147 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "physical_inundation"},message:"must have required property '"+"physical_inundation"+"'"};
 if(vErrors === null){
 vErrors = [err147];
 }
@@ -1960,10 +1990,8 @@ vErrors.push(err147);
 }
 errors++;
 }
-}
-if(data48.repair_costs !== undefined){
-if(data48.repair_costs !== null){
-const err148 = {instancePath:instancePath+"/unsupported_outputs/repair_costs",schemaPath:"#/properties/unsupported_outputs/properties/repair_costs/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(data51.destroyed_buildings === undefined){
+const err148 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "destroyed_buildings"},message:"must have required property '"+"destroyed_buildings"+"'"};
 if(vErrors === null){
 vErrors = [err148];
 }
@@ -1972,10 +2000,8 @@ vErrors.push(err148);
 }
 errors++;
 }
-}
-if(data48.hydropower_downtime !== undefined){
-if(data48.hydropower_downtime !== null){
-const err149 = {instancePath:instancePath+"/unsupported_outputs/hydropower_downtime",schemaPath:"#/properties/unsupported_outputs/properties/hydropower_downtime/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(data51.casualties === undefined){
+const err149 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "casualties"},message:"must have required property '"+"casualties"+"'"};
 if(vErrors === null){
 vErrors = [err149];
 }
@@ -1984,10 +2010,8 @@ vErrors.push(err149);
 }
 errors++;
 }
-}
-if(data48.economic_loss !== undefined){
-if(data48.economic_loss !== null){
-const err150 = {instancePath:instancePath+"/unsupported_outputs/economic_loss",schemaPath:"#/properties/unsupported_outputs/properties/economic_loss/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(data51.repair_costs === undefined){
+const err150 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "repair_costs"},message:"must have required property '"+"repair_costs"+"'"};
 if(vErrors === null){
 vErrors = [err150];
 }
@@ -1996,10 +2020,8 @@ vErrors.push(err150);
 }
 errors++;
 }
-}
-}
-else {
-const err151 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/type",keyword:"type",params:{type: "object"},message:"must be object"};
+if(data51.hydropower_downtime === undefined){
+const err151 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "hydropower_downtime"},message:"must have required property '"+"hydropower_downtime"+"'"};
 if(vErrors === null){
 vErrors = [err151];
 }
@@ -2008,10 +2030,8 @@ vErrors.push(err151);
 }
 errors++;
 }
-}
-if(data.notice !== undefined){
-if("Periodically updated conditions; not a real-time warning service." !== data.notice){
-const err152 = {instancePath:instancePath+"/notice",schemaPath:"#/properties/notice/const",keyword:"const",params:{allowedValue: "Periodically updated conditions; not a real-time warning service."},message:"must be equal to constant"};
+if(data51.economic_loss === undefined){
+const err152 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/required",keyword:"required",params:{missingProperty: "economic_loss"},message:"must have required property '"+"economic_loss"+"'"};
 if(vErrors === null){
 vErrors = [err152];
 }
@@ -2020,15 +2040,122 @@ vErrors.push(err152);
 }
 errors++;
 }
-}
-}
-else {
-const err153 = {instancePath,schemaPath:"#/type",keyword:"type",params:{type: "object"},message:"must be object"};
+for(const key5 in data51){
+if(!((((((key5 === "physical_inundation") || (key5 === "destroyed_buildings")) || (key5 === "casualties")) || (key5 === "repair_costs")) || (key5 === "hydropower_downtime")) || (key5 === "economic_loss"))){
+const err153 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/additionalProperties",keyword:"additionalProperties",params:{additionalProperty: key5},message:"must NOT have additional properties"};
 if(vErrors === null){
 vErrors = [err153];
 }
 else {
 vErrors.push(err153);
+}
+errors++;
+}
+}
+if(data51.physical_inundation !== undefined){
+if(data51.physical_inundation !== null){
+const err154 = {instancePath:instancePath+"/unsupported_outputs/physical_inundation",schemaPath:"#/properties/unsupported_outputs/properties/physical_inundation/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(vErrors === null){
+vErrors = [err154];
+}
+else {
+vErrors.push(err154);
+}
+errors++;
+}
+}
+if(data51.destroyed_buildings !== undefined){
+if(data51.destroyed_buildings !== null){
+const err155 = {instancePath:instancePath+"/unsupported_outputs/destroyed_buildings",schemaPath:"#/properties/unsupported_outputs/properties/destroyed_buildings/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(vErrors === null){
+vErrors = [err155];
+}
+else {
+vErrors.push(err155);
+}
+errors++;
+}
+}
+if(data51.casualties !== undefined){
+if(data51.casualties !== null){
+const err156 = {instancePath:instancePath+"/unsupported_outputs/casualties",schemaPath:"#/properties/unsupported_outputs/properties/casualties/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(vErrors === null){
+vErrors = [err156];
+}
+else {
+vErrors.push(err156);
+}
+errors++;
+}
+}
+if(data51.repair_costs !== undefined){
+if(data51.repair_costs !== null){
+const err157 = {instancePath:instancePath+"/unsupported_outputs/repair_costs",schemaPath:"#/properties/unsupported_outputs/properties/repair_costs/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(vErrors === null){
+vErrors = [err157];
+}
+else {
+vErrors.push(err157);
+}
+errors++;
+}
+}
+if(data51.hydropower_downtime !== undefined){
+if(data51.hydropower_downtime !== null){
+const err158 = {instancePath:instancePath+"/unsupported_outputs/hydropower_downtime",schemaPath:"#/properties/unsupported_outputs/properties/hydropower_downtime/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(vErrors === null){
+vErrors = [err158];
+}
+else {
+vErrors.push(err158);
+}
+errors++;
+}
+}
+if(data51.economic_loss !== undefined){
+if(data51.economic_loss !== null){
+const err159 = {instancePath:instancePath+"/unsupported_outputs/economic_loss",schemaPath:"#/properties/unsupported_outputs/properties/economic_loss/type",keyword:"type",params:{type: "null"},message:"must be null"};
+if(vErrors === null){
+vErrors = [err159];
+}
+else {
+vErrors.push(err159);
+}
+errors++;
+}
+}
+}
+else {
+const err160 = {instancePath:instancePath+"/unsupported_outputs",schemaPath:"#/properties/unsupported_outputs/type",keyword:"type",params:{type: "object"},message:"must be object"};
+if(vErrors === null){
+vErrors = [err160];
+}
+else {
+vErrors.push(err160);
+}
+errors++;
+}
+}
+if(data.notice !== undefined){
+if("Periodically updated conditions; not a real-time warning service." !== data.notice){
+const err161 = {instancePath:instancePath+"/notice",schemaPath:"#/properties/notice/const",keyword:"const",params:{allowedValue: "Periodically updated conditions; not a real-time warning service."},message:"must be equal to constant"};
+if(vErrors === null){
+vErrors = [err161];
+}
+else {
+vErrors.push(err161);
+}
+errors++;
+}
+}
+}
+else {
+const err162 = {instancePath,schemaPath:"#/type",keyword:"type",params:{type: "object"},message:"must be object"};
+if(vErrors === null){
+vErrors = [err162];
+}
+else {
+vErrors.push(err162);
 }
 errors++;
 }

@@ -33,3 +33,5 @@ Screen resolution is not analytical resolution. Web Mercator display tiles, RGB 
 When implementation changes, update the methodology in the same feature branch and keep the corresponding catalog/provenance links valid. Important assumptions and limitations belong on the public feature/page itself as well as in deeper documentation; they must not be hidden only in this file.
 
 Feature 42’s `/methodology/#live-contracts-method` explains evidence/purpose, source-time freshness, workflow health, bounded checksums, valid empty versus failed fetch and null-only physical/damage outputs. Acquisition and the live page are not implemented. See [Live contracts](live-contracts.md).
+
+Feature 43 normalizes USGS reported epicentres and one precisely decoded six-hour GFS model forecast interval; it does not derive warnings or impacts. Source time governs freshness, failure retains stale data and valid empty is not all-clear. Publication uses an atomically promoted index after immutable source checks. See [full methodology](live-open-feeds.md).

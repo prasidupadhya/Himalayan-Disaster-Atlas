@@ -329,3 +329,5 @@ A separate [offline physical GLOF project](processing/glof/README.md) covers inp
 ### Live contracts — Feature 42
 
 Shared live-data schemas separate evidence, source freshness and workflow health and verify bounded static JSON checksums. Only explicit measurement-free synthetic cases are available in the Data Catalog; no live feeds or `/live/` page are enabled yet. See [Live contracts](docs/live-contracts.md) and `npm run data:live-contracts`.
+
+Feature 43 adds manual USGS/NOAA GFS acquisition with bounded downloads, exact source review and atomic immutable publication on a dedicated live-data branch. `npm run live:fetch` is the local runner; the Action is workflow_dispatch only. Static builds optionally pin `ATLAS_LIVE_DATA_COMMIT`; default feeds are unconfigured. [Publication trade-offs and limits](docs/live-open-feeds.md).

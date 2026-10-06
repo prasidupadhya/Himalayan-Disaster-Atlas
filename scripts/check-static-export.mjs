@@ -2,6 +2,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { releaseDirectory } from './public-release-policy.mjs';
+import { isLivePath, verifyLiveExport } from './live-publication.mjs';
 import { createHash } from 'node:crypto';
 const root = fileURLToPath(new URL('..', import.meta.url));
 export function checkStaticExport(output = resolve(root, 'apps/web/out'), { excludedReleases = [] } = {}) {
@@ -21,11 +22,12 @@ export function checkStaticExport(output = resolve(root, 'apps/web/out'), { excl
       count++; bytes += size;
       if (name.startsWith('data/') || name.startsWith('vendor/') || name.startsWith('legal/')) {
         const source = resolve(root, 'apps/web/public', name);
-        if (!existsSync(source) || hash(readFileSync(source)) !== hash(readFileSync(path))) throw new Error(`Static artifact differs from reviewed source: ${name}`);
+        if (!isLivePath(name) && (!existsSync(source) || hash(readFileSync(source)) !== hash(readFileSync(path)))) throw new Error(`Static artifact differs from reviewed source: ${name}`);
       }
     }
   }
   visit(output);
+  verifyLiveExport(output);
   if (count > 20000) throw new Error('Cloudflare free static-asset count exceeds 20,000');
   // Ensure an old/incomplete export cannot pass simply by omitting public files.
   function requirePublic(directory, prefix = '') {
