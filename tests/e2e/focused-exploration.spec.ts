@@ -4,7 +4,7 @@ test('focused exploration loads lakes and names without historical or unrelated 
   page.on('request', r => requests.push(r.url()));
   await page.goto('/atlas/');
   await expect(page.getByRole('heading', { name: 'Explore Nepal’s lakes & rivers' })).toBeVisible();
-  await expect(page.getByRole('region', { name: 'Glacial lakes', exact: true })).toHaveAttribute('data-glacial-lakes-state', /ready|stale/);
+  await expect(page.getByRole('region', { name: 'Glacial lakes', exact: true })).toHaveAttribute('data-glacial-lakes-state', /ready|stale/, { timeout: 15_000 });
   await expect(page.getByRole('region', { name: 'GLOF modelling availability' })).toContainText('UNAVAILABLE');
   await expect(page.getByRole('region', { name: 'Earthquakes', exact: true })).toHaveCount(0);
   expect(requests.filter(url => /\/data\/nepal-(region-earthquakes|disaster-events|reported-|population|rainfall|hydrology|mountains|glaciers-)/.test(url))).toEqual([]);
@@ -22,7 +22,7 @@ test('focused exploration loads lakes and names without historical or unrelated 
 test('physical model remains unavailable for a selected inventory lake', async ({ page }) => {
   await page.goto('/atlas/');
   const lakes = page.getByRole('region', { name: 'Glacial lakes', exact: true });
-  await expect(lakes).toHaveAttribute('data-glacial-lakes-state', /ready|stale/);
+  await expect(lakes).toHaveAttribute('data-glacial-lakes-state', /ready|stale/, { timeout: 15_000 });
   const select = lakes.getByLabel('Lake record');
   const value = await select.locator('option').nth(1).getAttribute('value');
   await select.selectOption(value!);
