@@ -146,7 +146,10 @@ test('keyboard users can reach the offline bulletin in Nepali with last-known wo
 test('the worker script is served uncached with the shell manifest pinned', async ({ request }) => {
   const response = await request.get('/sw.js');
   expect(response.ok()).toBe(true);
-  expect(response.headers()['cache-control']).toContain('no-cache');
+  // The Cloudflare host applies _headers; a plain static server (research profile) does not, so verify the shipped rule itself there.
+  const header = response.headers()['cache-control'];
+  if (header !== undefined) expect(header).toContain('no-cache');
+  else expect((await (await request.get('/_headers')).text())).toMatch(/^\/sw\.js\n {2}Cache-Control: no-cache, no-transform$/m);
   const source = await response.text();
   const config = JSON.parse(source.match(/\/\*@atlas-config\*\/([\s\S]*?)\/\*@end\*\//)![1]);
   expect(config.shell.map((entry: { url: string }) => entry.url)).toEqual(expect.arrayContaining(['/', '/live/', '/offline/']));
