@@ -1,6 +1,6 @@
 import { isReleaseIncluded } from '../../lib/public-release';
 import Link from 'next/link';
-import catalogJson from '../../public/data/atlas-provenance/1.3.0/manifest.json';
+import catalogJson from '../../public/data/atlas-provenance/1.4.0/manifest.json';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { buildSourceDirectory, currentProductionRecords, parseProvenanceCatalog, type ProvenanceRecord } from '../../../../packages/contracts/provenance';
 
@@ -9,6 +9,7 @@ export const metadata = { title: 'Sources' };
 const SECTIONS = [
   ['administrative', 'Administrative boundaries'], ['terrain', 'Terrain'], ['mountains', 'Mountains and peaks'], ['rivers', 'Rivers and hydrology'],
   ['glaciers', 'Glaciers'], ['glacial-lakes', 'Glacial lakes'], ['population', 'Population'], ['satellite', 'Satellite and water imagery'],
+  ['live-air-quality', 'Air quality provider review policy'],
   ['live-open-feeds', 'Live open-feed publication policy'],
   ['climate', 'Climate'], ['infrastructure', 'Infrastructure and hydropower'], ['hazards', 'Hazards and reported events'], ['analysis', 'Atlas-derived analysis and models'], ['derived', 'Discovery and evidence products'],
 ] as const;

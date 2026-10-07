@@ -163,3 +163,5 @@ Feature 42 adds bounded static JSON schemas, TS/Python parity, trusted default s
 ## Feature 43 live acquisition
 
 Offline Python acquisition writes immutable reviewed snapshots and promotes a small index atomically. A manual Action commits only to live-data. The root static build can import a full pinned data commit, verify exact source policy and hashes, then include the bounded history in its normal public inventory. Browser delivery is same-origin, cancellable and checksum verified; source revisions and workflow health remain separate. See [open feeds](../live-open-feeds.md).
+
+Feature 45 adds a research-only OpenAQ normalizer around the live contract, with strict station/provider/unit/period/flag validation and a schema-validated empty licence allowlist. Keys belong only to an explicitly enabled manual Actions job. Public loaders continue to reject OpenAQ, and AQI stays UNKNOWN. See [air-quality architecture](../live-air-quality.md).

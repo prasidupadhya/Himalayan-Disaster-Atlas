@@ -1,0 +1,25 @@
+{
+ "$schema":"http://json-schema.org/draft-07/schema#","$id":"https://himalayan-disaster-atlas.invalid/schemas/live-air-quality.schema.json",
+ "type":"object","additionalProperties":false,
+ "required":["schema_version","kind","profile","snapshot","station","records","source_responses","aqi"],
+ "properties":{
+  "schema_version":{"const":"1.0.0"},"kind":{"const":"live-air-quality"},"profile":{"const":"research"},
+  "snapshot":{"$ref":"live-snapshot.schema.json"},
+  "station":{"type":"object","additionalProperties":false,"required":["location_id","sensor_id","provider_id","provider_name","name","country","coordinates","license_ids","license_urls","attribution"],"properties":{
+   "location_id":{"type":"integer","minimum":1},"sensor_id":{"type":"integer","minimum":1},"provider_id":{"type":"integer","minimum":1},
+   "provider_name":{"$ref":"live-snapshot.schema.json#/definitions/text"},"name":{"type":["string","null"],"maxLength":240,"minLength":1},"country":{"const":"NP"},
+   "coordinates":{"type":"array","items":[{"type":"number","minimum":80,"maximum":89},{"type":"number","minimum":26,"maximum":31}],"additionalItems":false,"minItems":2,"maxItems":2},
+   "license_ids":{"type":"array","minItems":1,"maxItems":8,"uniqueItems":true,"items":{"type":"integer","minimum":1}},
+   "license_urls":{"type":"array","minItems":1,"maxItems":8,"uniqueItems":true,"items":{"$ref":"live-snapshot.schema.json#/definitions/https"}},
+   "attribution":{"$ref":"live-snapshot.schema.json#/definitions/text"}
+  }},
+  "records":{"type":"array","maxItems":168,"items":{"type":"object","additionalProperties":false,"required":["id","original_unit","averaging_period_seconds","period_start","period_end","has_flags","reported_value"],"properties":{
+   "id":{"$ref":"live-snapshot.schema.json#/definitions/text"},"original_unit":{"enum":["ug/m3","µg/m³","μg/m³","µg/m3"]},
+   "averaging_period_seconds":{"type":["integer","null"],"minimum":1,"maximum":86400},
+   "period_start":{"$ref":"live-snapshot.schema.json#/definitions/nullableTime"},"period_end":{"$ref":"live-snapshot.schema.json#/definitions/nullableTime"},
+   "has_flags":{"type":["boolean","null"]},"reported_value":{"type":["number","null"],"minimum":0}
+  }}},
+  "source_responses":{"type":"array","minItems":2,"maxItems":2,"items":{"type":"object","additionalProperties":false,"required":["url","sha256"],"properties":{"url":{"$ref":"live-snapshot.schema.json#/definitions/https"},"sha256":{"$ref":"live-snapshot.schema.json#/definitions/hash"}}}},
+  "aqi":{"type":"object","additionalProperties":false,"required":["value","standard","reason"],"properties":{"value":{"type":"null"},"standard":{"type":"null"},"reason":{"const":"No reviewed AQI calculation standard or sufficient averaging/completeness inputs."}}}
+ }
+}
