@@ -122,5 +122,10 @@
   "openaq-policy": {
     "schema": "openaq-policy.schema.json",
     "formats": true
+  },
+  "model-release": {
+    "common_schema": true,
+    "formats": true,
+    "schema": "model-release.schema.json"
   }
 }

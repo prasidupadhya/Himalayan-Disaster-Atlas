@@ -36,3 +36,7 @@ Feature 46 registers the original bilingual presentation policy `atlas-live-cond
 
 
 Feature 47 registers the original offline cache policy `atlas-live-offline-shell@1.0.0` and provenance catalog `atlas-provenance@1.6.0`. Earlier catalogs remain immutable. See [offline shell](offline-shell.md).
+
+## Provenance 1.7.0
+
+Adds records for `nepal-hrsl-population@1.0.0`, `atlas-flood-corridors@1.0.0` and `atlas-gmpe-bssa14@1.0.0`. For model releases, parents are taken from the manifest `inputs` (registered releases by manifest hash; external sources by their pinned file hash).

@@ -170,3 +170,7 @@ Feature 46 adds `app/live` and `features/live-conditions`. `lib/live-conditions.
 
 
 Feature 47 adds `service-worker/sw.template.js`, built into `out/sw.js` by `scripts/prepare-service-worker.mjs` with a SHA-256-pinned shell manifest before the public inventory is hashed; the static-export gate re-verifies it. `components/offline-shell.tsx` registers the worker, shows the offline banner and an explicit update prompt. Playwright blocks workers except in the offline suite. See [offline shell](../offline-shell.md).
+
+## Model releases (Features 48–58)
+
+Scenario inputs use a separate `model-release` contract (`schemas/model-release.schema.json`): release type, standard metadata, pinned parent inputs (manifest SHA-256 or external source hash), checksum-addressed artifacts (≤ 8 MiB each, optionally gzip) and a summary. `pipelines/atlas_pipeline/model_release.py` publishes immutable copies to `data/releases/` and `apps/web/public/data/` and verifies schema, identity, the exact file set, artifact and parent hashes, a per-type semantic verifier and the public mirror. The browser (`apps/web/lib/model-release.ts`) validates the manifest and verifies byte size and SHA-256 before decoding any artifact. All scenario computation runs client-side; there is no server or third-party runtime call.
