@@ -25,7 +25,7 @@ it('verifies and decompresses a bounded administrative release', async () => {
   expect(fetcher.mock.calls[1][0]).toBe(provinceMetadata.artifact.path);
 });
 it('rejects tampering even if the size matches, after one network retry', async () => {
-  const fetcher = vi.fn(async (url: string) => new Response(url === SAMPLE_MANIFEST ? JSON.stringify(metadata) : raw.replace('point A', 'point X')));
+  const fetcher = vi.fn<(url: string, init?: RequestInit) => Promise<Response>>(async url => new Response(url === SAMPLE_MANIFEST ? JSON.stringify(metadata) : raw.replace("point A", "point X")));
   vi.stubGlobal('fetch', fetcher);
   await expect(loadDataset(SAMPLE_MANIFEST)).rejects.toThrow(/checksum/);
   expect(fetcher.mock.calls.filter(([url]) => url === metadata.artifact.path).map(([, init]) => init?.cache)).toEqual([undefined, 'reload']);

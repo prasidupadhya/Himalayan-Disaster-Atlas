@@ -14,17 +14,19 @@ export function Satellite({ map, temporal }: { map: Map | null; temporal?: { dat
   const selected = temporal ? dataset?.observations.find(o => o.acquired_at.slice(0, 10) === temporal.date)?.id ?? '' : localSelected;
   const visible = temporal ? Boolean(selected) : localVisible;
   useEffect(() => { const controller = new AbortController(); void loadSatellite(controller.signal).then(data => setResource({ status: 'ready', data })).catch(error => { if (!controller.signal.aborted) setResource({ status: error instanceof UnavailableError ? 'unavailable' : 'error', message: error instanceof Error ? error.message : 'Satellite unavailable' }); }); return () => controller.abort(); }, [attempt]);
+  const latest = useRef({ visible, opacity });
+  useEffect(() => { latest.current = { visible, opacity }; }, [visible, opacity]);
   useEffect(() => {
-    if (!map || !dataset) return; const item = dataset.observations.find(value => value.id === selected); if (!item) return; const controller = new AbortController();
+    if (!map || !dataset || !visible) return; const item = dataset.observations.find(value => value.id === selected); if (!item) return; const controller = new AbortController();
     const clear = () => { const current = mounted.current; if (!current) return; if (map.getStyle()) { if (map.getLayer(current.layer)) map.removeLayer(current.layer); if (map.getSource(current.source)) map.removeSource(current.source); } URL.revokeObjectURL(current.url); mounted.current = null; };
     clear(); void loadSatelliteImage(item, controller.signal).then(buffer => {
       if (controller.signal.aborted) return; const url = URL.createObjectURL(new Blob([buffer], { type: 'image/png' })); const source = `satellite-${item.id}@1.0.0`; const layer = `${source}-image`;
       map.addSource(source, { type: 'image', url, coordinates: item.coordinates });
-      map.addLayer({ id: layer, type: 'raster', source, layout: { visibility: visible ? 'visible' : 'none' }, paint: { 'raster-opacity': opacity, 'raster-fade-duration': 0 } }, map.getStyle().layers.find(value => !['background', 'raster', 'hillshade'].includes(value.type))?.id);
+      map.addLayer({ id: layer, type: 'raster', source, layout: { visibility: 'visible' }, paint: { 'raster-opacity': latest.current.opacity, 'raster-fade-duration': 0 } }, map.getStyle().layers.find(value => !['background', 'raster', 'hillshade'].includes(value.type))?.id);
       mounted.current = { source, layer, url };
     }).catch(error => { if (!controller.signal.aborted) setResource({ status: error instanceof UnavailableError ? 'unavailable' : 'error', message: 'Satellite preview could not be verified.' }); });
     return () => { controller.abort(); clear(); };
-  }, [map, dataset, selected, visible, opacity]);
+  }, [map, dataset, selected, visible]);
   useEffect(() => { const current = mounted.current; if (!map || !current || !map.getLayer(current.layer)) return; map.setLayoutProperty(current.layer, 'visibility', visible ? 'visible' : 'none'); map.setPaintProperty(current.layer, 'raster-opacity', opacity); }, [map, visible, opacity]);
   const item = dataset?.observations.find(value => value.id === selected);
   return <section className="thematic-controls" aria-label="Satellite" data-satellite-state={resource.status}><h2>Satellite</h2><p>Sentinel-2 L2A · spring 2026 observation windows</p>
