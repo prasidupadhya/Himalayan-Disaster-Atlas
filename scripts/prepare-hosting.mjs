@@ -22,6 +22,9 @@ export function prepareHosting() {
   Cache-Control: no-cache
 /live/latest.json
   Cache-Control: no-store, no-transform
+/sw.js
+  Cache-Control: no-cache, no-transform
+  Content-Type: application/javascript; charset=utf-8
 /live/history/*
   Cache-Control: public, max-age=31536000, immutable, no-transform
 `);
