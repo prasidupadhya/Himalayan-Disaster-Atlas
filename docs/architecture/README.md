@@ -1,3 +1,178 @@
+# Foundation architecture
+
+## Application and feature boundaries
+
+Use React + TypeScript + Next.js App Router with `output: 'export'` and trailing slashes. Routes render at build time; there is no persistent backend, authentication, personal storage, analytics, or private runtime API. Public interaction state exists only in memory. Root navigation includes the working sample and the evidence pages; later feature owners add routes when functionality exists.
+
+`app/` composes routes. `features/<feature>/` owns domain UI; shared `components/` implements evidence and resource-state patterns. `packages/contracts` owns browser validation. Components cannot import acquisition code, raw data, processed data or Node APIs. ESLint enforces that boundary. Heavy map code is dynamically imported only on the Atlas route.
+
+The root `<body>` suppresses hydration attribute warnings one level deep because browser extensions such as Grammarly add attributes before React hydrates. This is covered by a development-mode regression test. Mismatches inside application content remain visible and must be fixed rather than suppressed.
+
+MapLibre GL JS is the primary map engine. The administrative atlas uses a local background style and compressed GeoJSON, so no external basemap or tile service is needed. Map layers mount only after both validation and style load. Each source ID includes dataset ID and version. The renderer promotes a private copy of each canonical string ID so tile encoding cannot discard selection identity. Public feature properties are unchanged. Administrative layers use zoom-dependent visibility, stable P-code selection, seven validated province label points, and separate styling for special-area pieces. Shared controllers set visibility and dispose layers before sources; unmount aborts pending requests and removes the map.
+
+MapLibre 6 uses an external ES module worker. Root dev/build scripts copy the pinned worker, shared module and BSD notice into an ignored, versioned public vendor directory and configure its local URL explicitly; Next bundling must not infer the worker URL. Readiness waits for the map to become idle after source processing.
+
+No deck.gl, Three.js, Tailwind, animation framework, or global state library is installed yet: none is required for the foundation acceptance criteria. MapLibre supports the sample; later performance/terrain/3D work may add focused adapters without changing the dataset contract. The initial CSS is functional scaffolding; the final visual pass remains `feat/ui-ux-polish`.
+
+## Data flow
+
+```text
+external/public source OR local fixture
+    → acquisition with retained source bytes and hash
+    → cleaning and normalization
+    → shared schema + spatial/topology validation
+    → versioned immutable release
+    → small public artifacts / future range-addressable assets
+    → manifest-first browser loading + checksum verification
+    → map + accessible feature inspection + provenance
+```
+
+`data/raw` and `data/processed` are ignored. Production downloads are not public just because they are accessible. Acquisition adapters must first document source accessibility, license, version and redistribution rights. The fixture pipeline intentionally uses local CSV acquisition, preserving the exact original bytes. It does not impersonate an authoritative data source or silently use live APIs.
+
+Checked-in fixture release metadata includes a fixed acquisition/processing timestamp, representing the deterministic fixture release recipe, not the clock time of each rerun. Real acquisition pipelines must record actual retrieval/processing instants and publish new versions. Re-running the fixture yields identical output; changing a published version fails. Publication preflights file conflicts but is not a transactional multi-file storage system; production delivery should publish an entire release atomically and only then update a catalog pointer.
+
+## Static delivery budgets
+
+| Artifact | Use and delivery |
+| --- | --- |
+| GeoJSON / gzip GeoJSON | Small inspectable layers, at most 2 MiB compressed and 8 MiB decoded per artifact; manifest at most 64 KiB |
+| PMTiles / vector tiles | Large roads, rivers, buildings and inventories; viewport-driven requests |
+| COG | Raster source/analysis access with range support; tiled visual products for the map |
+| GeoParquet | Offline analytical tables and geometry; not a default browser payload |
+| DEM raster tiles | Future visualization derived from documented DEM source and vertical datum |
+
+GeoJSON and deterministic gzip-wrapped GeoJSON are implemented. The browser verifies compressed bytes before bounded decompression and schema validation. Extend the schema with a new version and a delivery adapter before using other formats. Large originals/intermediates stay outside Git. Future artifact hosting must provide CORS where needed, correct MIME types, byte-range requests, size limits, immutable version URLs, and checksums. A manifest references one artifact in v1; multi-artifact releases require an explicit contract extension.
+
+The river feature keeps the v1 one-artifact contract by publishing two independently versioned dataset partitions. Each stays below both GeoJSON budgets, while stable `HYRIV_ID` / `NEXT_DOWN` values preserve the logical network across the delivery boundary. This is a presentation partition, not a topological cut or analytical simplification.
+
+The glacier feature uses the same immutable one-artifact contract with three west/central/east presentation partitions. Stable RGI/GLIMS IDs, source area and source outline dates are invariant across the partitions. Invalid GLIMS WFS display geometries are repaired only for rendering and QA records every repair; the source RGI area remains the measurement contract.
+
+## User-visible states
+
+`Resource<T>` separates loading, ready, empty, unavailable, error and stale. Missing files (404/503) are unavailable; invalid schema/checksum is an error and is not rendered. Loading is announced, retry is available after failure, and empty means no records rather than zero measured values. Updating datasets require an explicit stale deadline; a stale snapshot stays inspectable with a notice. Static inventories do not acquire a false live/stale claim from age alone. The current UI evaluates freshness on load; operational features must add deadline-driven refresh/stale transitions.
+
+A failed WebGL context keeps validated records available to screen readers and keyboard users. Loading remote artifacts is cancellable and bounded. Simulation computation is not performed on the rendering thread.
+
+## Scientific extension boundary
+
+Future simulation engines must be model-agnostic and return separate scenario inputs and modelled outputs, with model/version, input dataset versions, assumptions, units, CRS/vertical datum, uncertainty, validation status, and output resolution. Store immutable run metadata and hashes. Never relabel a scenario as observed, a trace as hydraulic inundation, or an exposure estimate as confirmed damage. No fake scenario endpoint or simulation algorithm is introduced by Foundation.
+
+## Framework references
+
+- [Next.js static exports](https://nextjs.org/docs/app/guides/static-exports)
+- [MapLibre GeoJSON sources](https://maplibre.org/maplibre-gl-js/docs/API/classes/GeoJSONSource/)
+
+## Terrain extension
+
+`schemas/terrain.schema.json` adds schema 2 raster delivery while existing schema 1 vectors remain immutable. `packages/contracts/terrain.ts` validates the raster manifest and complete XYZ inventory; `terrain_contracts.py` verifies every release tile and public copy. Canonical source/evidence fields are referenced from the existing central schema. Raster metadata explicitly distinguishes geographic coverage, native EPSG:4326 samples, display EPSG:3857 pixels and EGM2008 vertical metres.
+
+`features/terrain` owns independent layer state and failures. A scoped MapLibre protocol verifies tile bytes against the hashed local index before rendering. Cleanup removes terrain, layers, source and protocol. Coordinate inspection reads one finest-display tile and is independent of exaggeration. All acquisition and native rasters stay offline. See [terrain handoff](../terrain.md) and [dataset notes](../datasets/nepal-terrain.md).
+
+## Downstream trace extension
+
+`features/downstream-trace` consumes the Rivers component's already validated datasets and selected source ID, with no duplicate acquisition. `packages/contracts/downstream.ts` validates the combined directed graph and returns a deterministic, versioned derived result. Both partitions must be available before tracing; a coverage exit is distinct from a source outlet. The independent overlay uses source geometry and a per-reach reveal index, and is disposed with its selection session. No source artifact/schema is modified. See [downstream handoff](../downstream-trace.md) for algorithm, scientific scope and failure cases.
+
+## Exposure engine extension
+
+`processing/exposure/engine.py` performs native-raster fractional-cell and indexed vector overlays offline. `pipelines/atlas_pipeline/exposure.py` verifies source inputs and publishes immutable request/result/spatial artifacts with schema 4.0.0; `exposure_contracts.py` integrates with the root data validation gate. `features/exposure-engine` only loads registered, validated results and mounts an independent disposable map overlay. National population processing never runs in the browser. See [exposure handoff](../exposure-engine.md) for supported footprints, numerical and deduplication rules, administrative accounting, uncertainty and benchmarks.
+
+## Water Change
+
+Feature 21 uses the offline `processing/water_change` engine and `water_change` publisher. Its dedicated schema and Python/TypeScript validators preserve native 20 m classifications, UNKNOWN quality masks and valid-only comparisons; hashed display images mount and dispose independently. See [water method and provenance](../water-change.md).
+
+## Time Machine
+
+Feature 22 adds a static temporal index, strict UTC interval contracts and one Atlas date selection shared by Water Change, Satellite, Climate and Disaster Events. Other datasets remain explicitly dated context. A 16 MiB verified-byte LRU and abort/dispose lifecycle bound temporal imagery resources. See [temporal semantics and coverage](../time-machine.md).
+
+## Search
+
+Feature 25 derives a separate immutable search release from the validated source releases instead of scanning all source GeoJSON in the browser. Eight bounded gzip shards preserve composite source identity, type, context, representative coordinates and source dates. The browser verifies each shard and processes them sequentially on explicit search submission. Ranking and normalization live in the shared TypeScript contract; no source-missing common names or transliterations are invented. See [global search semantics](../search.md).
+
+## Compare Mode
+
+Feature 26 reuses Search only to resolve stable versioned identities, then loads the two exact source datasets before comparison. `packages/contracts/compare.ts` owns entity-family and metric compatibility, so matching units never bypass semantic meaning. Cross-type pairs and incompatible metric definitions are blocked; missing values remain UNKNOWN. The UI provides an accessible table with source/version/date/resolution/evidence provenance and synchronizes the existing map to the two representative positions without creating a second map. See [comparison semantics](../compare-mode.md).
+
+## Location Explorer
+
+Feature 24 adds an opt-in deterministic spatial-context reader. It computes administrative containment and minimum geometry distance from validated local datasets rather than querying rendered map features, so layer visibility and zoom do not alter results. Category-specific radii/caps, source dates, partial-unavailable states and the WorldPop numerical-lookup limitation are documented in [the Location Explorer methodology](../location-explorer.md).
+
+## Hazard Graph
+
+An offline, immutable relationship index links exact source records. Shared typed semantics and validators separate observation, derivation, inference and modelling. Bounded cycle-safe exploration owns a disposable map selection. See [graph contracts and evidence rules](../hazard-graph.md).
+
+## Scenario Engine
+
+Level 0 versioned definitions and a shared assumption registry gate offline Level 1 network and Level 2 pulse adapters. Every result preserves model/input/processing provenance, units, limits, partial coverage and null unsupported outputs. The browser verifies static results and owns an independent hypothetical pathway overlay. Physical adapters remain unregistered. See [scenario lifecycle and validation](../scenario-engine.md).
+
+## Simulation UI
+
+Feature 29 adds a static-safe workbench on top of the verified Scenario Engine. Shared TypeScript rules mirror the request-schema parameter limits and reuse the versioned assumption registry. The browser first verifies both registered Feature 28 releases, then may recompute only the same Level 1/2 deterministic network equations over their common source pathway. Interactive runs keep a deterministic fingerprint, model/data provenance, explicit modelled evidence class and null unsupported physical outputs. Compatible-run comparison requires identical level/model/version/source basis. No API route, server process, third-party runtime call or unregistered physical adapter is introduced. See [Simulation UI semantics and failure rules](../simulation-ui.md).
+
+## Evidence-grounded RAG
+
+Feature 30 ingests only hash-pinned, allowlisted project documents offline. Shared Python/TypeScript contracts preserve exact source lines, versions, dates and dataset provenance. The static evidence inspector verifies a bounded corpus before lexical retrieval; conflict groups, outdated sources, missing evidence and unverified inference remain explicit. No model or provider secret enters the browser. See [RAG corpus, ranking and grounding boundary](../rag.md).
+
+## AI Analyst
+
+Feature 31 composes a static question interface, the approved RAG corpus and allowlisted river/scenario loaders. Whole-question planning and exact identity checks prevent silent entity substitution. Shared contracts produce cited source statements, deterministic network calculations and labelled modelled outputs; missing or conflicting evidence prevents unsupported conclusions. Requests are cancellable, answers stay in memory, and no provider credential or runtime AI dependency is introduced. See [analyst scope and grounding](../ai-analyst.md).
+
+## Provenance and public research documentation
+
+Features 32–35 share one generated provenance spine instead of maintaining separate copies of source metadata. `pipelines/atlas_pipeline/provenance.py` enumerates every release manifest, normalizes source/licence/dates/resolution/coverage/processing/uncertainty/evidence fields, marks superseded and fixture versions, and captures exact parent releases for derived contracts where available. Root validation regenerates the catalog and requires exact coverage of the release inventory. The same static registry drives Data Catalog and Sources, while per-record methodology/source anchors are checked against public pages. See [provenance conventions](../provenance.md), [methodology maintenance](../methodology.md), and [source-directory conventions](../sources.md).
+
+## Mobile delivery
+
+Feature 36 keeps the desktop component architecture but adds a phone-width delivery gate before the larger automatically loaded thematic bundle. The administrative map, explicit-search and opt-in research tools remain available first; opting in mounts the same full desktop components and verified artifacts. Responsive CSS moves the bounded map before the long panel on phone layouts, enlarges touch controls, preserves semantic tables through horizontal scrolling and handles short landscape viewports. See [mobile interaction/data rules](../mobile.md).
+
+## Accessibility
+
+Feature 37 treats non-visual access as part of correctness. Root landmarks and skip targets are explicit; the map points to an equivalent textual boundary workflow; dynamic Search/Catalog/Compare/Simulation results receive focus only after user actions; statuses are live/atomic; climate SVG output has a complete textual series; evidence status is always textual; and high-contrast/forced-colors modes retain structural borders. Playwright performs cross-route structural and keyboard audits in addition to feature E2E. See [accessibility contract](../accessibility.md).
+
+## Performance
+
+Feature 38 uses an explicit optional-layer boundary on desktop and mobile, lazy schema compilation, a serial cancellable vector-validation worker and an 8 MiB verified terrain-byte cache. Existing immutable artifacts and scientific checks are unchanged. Map rasterization/tile retention and transient decode queues have explicit limits. See [performance measurements, budgets and compatibility limits](../performance.md).
+
+## CI/CD
+
+Feature 39 runs the root validation/build and complete static browser suite in a secret-free, read-only pull-request workflow. Tested artifacts are keyed by commit, with deployment kept behind successful checks. See [CI prerequisites and failure handling](../ci-cd.md).
+
+## Licensing and production delivery
+
+Features 40–41 add an external review ledger pinned to every retained manifest and the complete public data tree. Parent rights propagate through provenance independently of scientific validation; unresolved redistribution reviews prevent publication. Original software is MIT, with upstream notices retained separately. Root builds prepare software notices and Cloudflare response rules, then verify static size/count limits and exact public bytes. The same export is tested through Wrangler's local assets runtime. See [licensing findings](../licensing.md) and [deployment/rollback](../deployment.md).
+
+Production CSP requires the 19 browser schemas to use checked-in AJV standalone validators under `packages/contracts/generated`, generated by `scripts/compile-validators.mjs`. The strict schema/format settings and all post-schema scientific checks are retained; only compilation moves offline. Root checks compare generated code with the locked compiler and current schemas. The small `compiledValidator` adapter preserves typed guards/errors without importing the runtime compiler.
+
+## Public and research release profiles
+
+Root `npm run build` uses a reduced public profile. Its webpack replacement policy excludes feature entry points that require unresolved datasets and rejects accidental blocked-manifest imports. The output removes the full transitive blocked release set, preserves every retained artifact byte, and includes a deterministic file inventory verified again before upload. Catalog and Sources filter availability without rewriting the original immutable provenance metadata. A shared availability notice and explicit route states explain omissions as unavailable, never zero. `npm run build:research` preserves every original feature for local validation and cannot pass the publication gate. CI tests both profiles and publishes only the tested public export. See [deployment](../deployment.md).
+
+## Taste-guided interface refinement
+
+The landing overview renders checksum-verified COD-AB display polygons on the server, so it needs neither a second MapLibre instance nor runtime API requests. Navigation is the only new client leaf; it owns active-route and mobile disclosure state. Release availability uses native details, and map shortcuts use normal document anchors with focusable targets. No layer lifecycle, analysis, source artifact or public-release selection changes. See [UI audit and design rationale](../ui-ux-polish.md).
+
+## Focused exploration and physical modelling
+
+`/atlas/` now composes the focused lake/river workflow; `/research/` explicitly retains the broader workspace. Optional infrastructure and the educational simulator mount only on request in the focused view. A separate GeoNames stream-point release supplies name lookup without inventing topology joins. The active provenance catalog is 1.2.0; historical catalogs stay immutable. The offline ANUGA project writes only research outputs and cannot publish a physical footprint through the educational network adapter. See [scope and naming audit](../focused-exploration.md) and [physical model requirements](../../processing/glof/README.md).
+
+The physical batch runner accounts for every source lake and only executes supplied, identified inputs. Missing inputs and rejected runs remain explicit. The static website has no model execution endpoint; a new reviewed physical-output contract is required before publication of any such run.
+
+## Periodically updated conditions contracts
+
+Feature 42 adds bounded static JSON schemas, TS/Python parity, trusted default source policy and a cancellable checksum-verifying loader. Evidence, purpose, freshness and workflow health are separate. No acquisition or live page is enabled; a collapsed Data Catalog inspector loads synthetic measurement-free fixtures on request and rechecks expiry/tab resume. New catalogs reject conflicting existing bytes. See [Live contracts](../live-contracts.md) for failure states, licence boundaries and handoff.
+
+## Feature 43 live acquisition
+
+Offline Python acquisition writes immutable reviewed snapshots and promotes a small index atomically. A manual Action commits only to live-data. The root static build can import a full pinned data commit, verify exact source policy and hashes, then include the bounded history in its normal public inventory. Browser delivery is same-origin, cancellable and checksum verified; source revisions and workflow health remain separate. See [open feeds](../live-open-feeds.md).
+
+Feature 45 adds a research-only OpenAQ normalizer around the live contract, with strict station/provider/unit/period/flag validation and a schema-validated empty licence allowlist. Keys belong only to an explicitly enabled manual Actions job. Public loaders continue to reject OpenAQ, and AQI stays UNKNOWN. See [air-quality architecture](../live-air-quality.md).
+
+Feature 46 adds `app/live` and `features/live-conditions`. `lib/live-conditions.ts` is pure presentation logic over `loadLivePublication` (labels, bulletin, summaries) and is unit-tested; the map is dynamically imported and optional. Bulletin copy is registered policy (`atlas-live-conditions@1.0.0`), never downloaded text. See [live conditions](../live-conditions.md).
 
 
 Feature 47 adds `service-worker/sw.template.js`, built into `out/sw.js` by `scripts/prepare-service-worker.mjs` with a SHA-256-pinned shell manifest before the public inventory is hashed; the static-export gate re-verifies it. `components/offline-shell.tsx` registers the worker, shows the offline banner and an explicit update prompt. Playwright blocks workers except in the offline suite. See [offline shell](../offline-shell.md).
+
+## Model releases (Features 48–58)
+
+Scenario inputs use a separate `model-release` contract (`schemas/model-release.schema.json`): release type, standard metadata, pinned parent inputs (manifest SHA-256 or external source hash), checksum-addressed artifacts (≤ 8 MiB each, optionally gzip) and a summary. `pipelines/atlas_pipeline/model_release.py` publishes immutable copies to `data/releases/` and `apps/web/public/data/` and verifies schema, identity, the exact file set, artifact and parent hashes, a per-type semantic verifier and the public mirror. The browser (`apps/web/lib/model-release.ts`) validates the manifest and verifies byte size and SHA-256 before decoding any artifact. All scenario computation runs client-side; there is no server or third-party runtime call.
+
+Context releases follow the same contract: `climate-context` (`nepal-power-gridded-context`, with `update_frequency: periodic` and a `stale_after` deadline the page enforces on the viewer clock), `terrain-context` (`nepal-terrain-steepness`) and `evidence-corpus` (`atlas-public-evidence`, verbatim passages whose spans the verifier re-reads from the pinned documents). Build-time decoding of the POWER Zarr chunks uses `numcodecs` (offline tooling only).

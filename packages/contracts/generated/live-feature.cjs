@@ -2,7 +2,7 @@
 "use strict";
 module.exports = validate10;
 module.exports.default = validate10;
-const schema11 = {"$schema":"http://json-schema.org/draft-07/schema#","$id":"https://himalayan-disaster-atlas.invalid/schemas/live-feature.schema.json","type":"object","additionalProperties":false,"required":["schema_version","kind","id","version","title","is_fixture","source","source_url","license","license_url","attribution","method","limitations","artifacts"],"properties":{"schema_version":{"const":"1.0.0"},"kind":{"const":"live-feature-release"},"id":{"$ref":"live-snapshot.schema.json#/definitions/id"},"version":{"$ref":"live-snapshot.schema.json#/definitions/version"},"title":{"$ref":"live-snapshot.schema.json#/definitions/text"},"is_fixture":{"const":false},"source":{"const":"Himalayan Disaster Atlas original policy metadata"},"source_url":{"const":"https://github.com/prasidupadhya/Himalayan-Disaster-Atlas"},"license":{"const":"MIT"},"license_url":{"const":"https://opensource.org/license/mit/"},"attribution":{"$ref":"live-snapshot.schema.json#/definitions/text"},"method":{"$ref":"live-snapshot.schema.json#/definitions/text"},"limitations":{"type":"array","minItems":1,"allOf":[{"$ref":"live-snapshot.schema.json#/definitions/texts"}]},"artifacts":{"type":"object","additionalProperties":false,"required":["policy"],"properties":{"policy":{"type":"object","additionalProperties":false,"required":["path","sha256","byte_size"],"properties":{"path":{"type":"string","pattern":"^/data/atlas-[a-z-]+/1\\.0\\.0/policy\\.json$"},"sha256":{"$ref":"live-snapshot.schema.json#/definitions/hash"},"byte_size":{"type":"integer","minimum":1,"maximum":65536}}}}}}};
+const schema11 = {"$schema":"http://json-schema.org/draft-07/schema#","$id":"https://himalayan-disaster-atlas.invalid/schemas/live-feature.schema.json","type":"object","additionalProperties":false,"required":["schema_version","kind","id","version","title","is_fixture","source","source_url","license","license_url","attribution","method","limitations","artifacts"],"properties":{"schema_version":{"const":"1.0.0"},"kind":{"const":"live-feature-release"},"id":{"$ref":"live-snapshot.schema.json#/definitions/id"},"version":{"$ref":"live-snapshot.schema.json#/definitions/version"},"title":{"$ref":"live-snapshot.schema.json#/definitions/text"},"is_fixture":{"const":false},"source":{"const":"Himalayan Disaster Atlas original policy metadata"},"source_url":{"const":"https://github.com/prasidupadhya/Himalayan-Disaster-Atlas"},"license":{"const":"MIT"},"license_url":{"const":"https://opensource.org/license/mit/"},"attribution":{"$ref":"live-snapshot.schema.json#/definitions/text"},"method":{"$ref":"live-snapshot.schema.json#/definitions/text"},"limitations":{"type":"array","minItems":1,"allOf":[{"$ref":"live-snapshot.schema.json#/definitions/texts"}]},"artifacts":{"type":"object","additionalProperties":false,"required":["policy"],"properties":{"policy":{"type":"object","additionalProperties":false,"required":["path","sha256","byte_size"],"properties":{"path":{"type":"string","pattern":"^/data/atlas-[a-z-]+/[0-9]+\\.[0-9]+\\.[0-9]+/policy\\.json$"},"sha256":{"$ref":"live-snapshot.schema.json#/definitions/hash"},"byte_size":{"type":"integer","minimum":1,"maximum":65536}}}}}}};
 const schema13 = {"type":"string","pattern":"^[a-z0-9]+(?:-[a-z0-9]+)*$","maxLength":100};
 const schema14 = {"type":"string","pattern":"^\\d+\\.\\d+\\.\\d+$","maxLength":40};
 const schema17 = {"type":"string","minLength":1,"maxLength":500};
@@ -11,7 +11,7 @@ const func2 = Object.prototype.hasOwnProperty;
 const func4 = require("ajv/dist/runtime/ucs2length").default;
 const pattern0 = new RegExp("^[a-z0-9]+(?:-[a-z0-9]+)*$", "u");
 const pattern1 = new RegExp("^\\d+\\.\\d+\\.\\d+$", "u");
-const pattern11 = new RegExp("^/data/atlas-[a-z-]+/1\\.0\\.0/policy\\.json$", "u");
+const pattern11 = new RegExp("^/data/atlas-[a-z-]+/[0-9]+\\.[0-9]+\\.[0-9]+/policy\\.json$", "u");
 const pattern4 = new RegExp("^[a-f0-9]{64}$", "u");
 const schema31 = {"type":"array","maxItems":32,"items":{"$ref":"#/definitions/text"}};
 
@@ -600,7 +600,7 @@ if(data14.path !== undefined){
 let data15 = data14.path;
 if(typeof data15 === "string"){
 if(!pattern11.test(data15)){
-const err45 = {instancePath:instancePath+"/artifacts/policy/path",schemaPath:"#/properties/artifacts/properties/policy/properties/path/pattern",keyword:"pattern",params:{pattern: "^/data/atlas-[a-z-]+/1\\.0\\.0/policy\\.json$"},message:"must match pattern \""+"^/data/atlas-[a-z-]+/1\\.0\\.0/policy\\.json$"+"\""};
+const err45 = {instancePath:instancePath+"/artifacts/policy/path",schemaPath:"#/properties/artifacts/properties/policy/properties/path/pattern",keyword:"pattern",params:{pattern: "^/data/atlas-[a-z-]+/[0-9]+\\.[0-9]+\\.[0-9]+/policy\\.json$"},message:"must match pattern \""+"^/data/atlas-[a-z-]+/[0-9]+\\.[0-9]+\\.[0-9]+/policy\\.json$"+"\""};
 if(vErrors === null){
 vErrors = [err45];
 }

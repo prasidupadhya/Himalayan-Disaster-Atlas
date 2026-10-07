@@ -928,7 +928,151 @@
       "evidence_urls": [
         "https://opensource.org/license/mit/"
       ]
+    },
+    "nepal-hrsl-population@1.0.0": {
+      "manifest_path": "/data/nepal-hrsl-population/1.0.0/manifest.json",
+      "manifest_sha256": "7d9166e91ff00793e9aa9a4ff3a050c11faf1ab18d6cc96dd4bf3e76a4f57854",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Meta/CIESIN HRSL v1.5 general-population COGs are published on AWS Open Data under CC BY 4.0 (registry entry dataforgood-fb-hrsl). The release contains exact sums of the pinned source tiles inside Nepal and the COD-AB boundary (CC BY parent). No ODbL or unresolved input.",
+      "obligations": "Credit Meta and CIESIN (Columbia University), HRSL 2022 and Maxar source imagery 2016; link CC BY 4.0; identify Atlas aggregation; no endorsement.",
+      "parents": [
+        "nepal-admin-country@2.0.1"
+      ],
+      "evidence_urls": [
+        "https://raw.githubusercontent.com/awslabs/open-data-registry/main/datasets/dataforgood-fb-hrsl.yaml",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ]
+    },
+    "atlas-flood-corridors@1.0.0": {
+      "manifest_path": "/data/atlas-flood-corridors/1.0.0/manifest.json",
+      "manifest_sha256": "3b58d024f1d052526f77ef8dabf1166a0180984062094f31633ce1e9e9bc4f87",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Derived counts and corridor geometry from CC BY 4.0 parents (FAO Rivers/HydroRIVERS, GLO, GeoNames, HRSL, COD-AB) and ODbL OSM partitions that are already PERMITTED with ODbL obligations. OSM-derived asset counts are offered under ODbL; corridor geometries are Atlas-original hypothetical constructs.",
+      "obligations": "Retain all parent attributions and licence links; offer OSM-derived counts under ODbL 1.0 with the parent adapted databases; label every result as a hypothetical educational scenario, not a forecast, flood extent or damage estimate.",
+      "parents": [
+        "nepal-hrsl-population@1.0.0",
+        "nepal-osm-emergency-facilities@1.0.0",
+        "nepal-osm-health-facilities@1.0.0",
+        "nepal-osm-hydropower@1.0.0",
+        "nepal-osm-major-bridges@1.0.0",
+        "nepal-osm-major-roads-central@1.0.0",
+        "nepal-osm-major-roads-east@1.0.0",
+        "nepal-osm-major-roads-west@1.0.0",
+        "nepal-osm-schools-central-east@1.0.0",
+        "nepal-osm-schools-central-west@1.0.0",
+        "nepal-osm-schools-east@1.0.0",
+        "nepal-osm-schools-west@1.0.0",
+        "nepal-osm-settlements@1.0.0",
+        "nepal-river-names@1.0.0",
+        "nepal-rivers-headwaters@1.0.0",
+        "nepal-rivers-primary@1.0.0",
+        "nepal-transboundary-glacial-lakes@1.0.0"
+      ],
+      "evidence_urls": [
+        "https://opendatacommons.org/licenses/odbl/1-0/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ]
+    },
+    "atlas-gmpe-bssa14@1.0.0": {
+      "manifest_path": "/data/atlas-gmpe-bssa14/1.0.0/manifest.json",
+      "manifest_sha256": "4c16b8d56a4a7650a839a44610aa7e6c6998456fd385135b8f22b2fb556f7528",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Published scientific model coefficients (Boore et al. 2014) cited with DOI; the Atlas implementation and metadata are original MIT. No dataset redistribution.",
+      "obligations": "Cite Boore, Stewart, Seyhan & Atkinson (2014), doi:10.1193/070113EQS184M; retain MIT notice for the implementation.",
+      "parents": [],
+      "evidence_urls": [
+        "https://doi.org/10.1193/070113EQS184M",
+        "https://opensource.org/license/mit/"
+      ]
+    },
+    "atlas-provenance@1.7.0": {
+      "manifest_path": "/data/atlas-provenance/1.7.0/manifest.json",
+      "manifest_sha256": "6e651b67b86572fce2fd8e7ab5aeb13856e619bbf4a61a3b1cc35b2fc1b08b32",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Original Atlas provenance metadata only; no licence grant for upstream data.",
+      "obligations": "Retain MIT attribution; upstream terms remain with each parent.",
+      "parents": [],
+      "evidence_urls": [
+        "https://opensource.org/license/mit/"
+      ]
+    },
+    "nepal-power-gridded-context@1.0.0": {
+      "manifest_path": "/data/nepal-power-gridded-context/1.0.0/manifest.json",
+      "manifest_sha256": "ca7ac2f8cb26b51a6ec5abcdc11902eef5a1c5da2edd9ab0fa94e12ad3f9b4c1",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "NASA POWER v10 MERRA-2 monthly Zarr on AWS Open Data is licensed CC BY 4.0 (LICENSE.txt in the nasa-power bucket, pinned by SHA-256). The release contains native-cell values, normals, anomalies and SPI-3 derived from the pinned chunks, plus the COD-AB boundary (CC BY parent). No ODbL or unresolved input.",
+      "obligations": "Credit the NASA Langley Research Center POWER Project (POWER v10.0.0, MERRA-2); link CC BY 4.0; identify Atlas processing; no endorsement.",
+      "parents": [
+        "nepal-admin-country@2.0.1"
+      ],
+      "evidence_urls": [
+        "https://nasa-power.s3.amazonaws.com/LICENSE.txt",
+        "https://registry.opendata.aws/nasa-power/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ]
+    },
+    "nepal-terrain-steepness@1.0.0": {
+      "manifest_path": "/data/nepal-terrain-steepness/1.0.0/manifest.json",
+      "manifest_sha256": "3a66c1c1571f7841bf56b3fb9418785017931c40d50a76b332c3c728f970252e",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Derived district slope and elevation statistics from the same Copernicus GLO-90 tiles already reviewed for nepal-terrain (free and open Copernicus DEM licence permitting redistribution of derived products with the required notice) and the COD-AB districts (CC BY).",
+      "obligations": "Include the Copernicus WorldDEM-90 notice (\u00a9 DLR e.V. 2010-2014 and \u00a9 Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved); credit COD-AB/OCHA; state that this is not landslide susceptibility.",
+      "parents": [
+        "nepal-admin-districts@2.0.1",
+        "nepal-terrain@1.0.0"
+      ],
+      "evidence_urls": [
+        "https://dataspace.copernicus.eu/sites/default/files/media/files/2025-06/copernicus_contributing_mission_data_access_v2_cop_dem_licenses.pdf"
+      ]
+    },
+    "atlas-public-evidence@1.0.0": {
+      "manifest_path": "/data/atlas-public-evidence/1.0.0/manifest.json",
+      "manifest_sha256": "3dbfcc45cffa213125ac9a2336b90f35e4b1f62f551586ef9e931a0676ac63ef",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Verbatim Atlas-authored documentation (MIT) and metadata fields copied from already-reviewed public releases; no third-party document text.",
+      "obligations": "Retain MIT attribution; upstream data terms remain with each linked release.",
+      "parents": [
+        "atlas-flood-corridors@1.0.0",
+        "atlas-gmpe-bssa14@1.0.0",
+        "nepal-hrsl-population@1.0.0",
+        "nepal-power-gridded-context@1.0.0",
+        "nepal-terrain-steepness@1.0.0"
+      ],
+      "evidence_urls": [
+        "https://opensource.org/license/mit/"
+      ]
+    },
+    "atlas-provenance@1.8.0": {
+      "manifest_path": "/data/atlas-provenance/1.8.0/manifest.json",
+      "manifest_sha256": "48ba07ce50be7817ab41f644b7ba19924bb3fdce85c10af5211862346ccaafac",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Original Atlas provenance metadata only; no licence grant for upstream data.",
+      "obligations": "Retain MIT attribution; upstream terms remain with each parent.",
+      "parents": [],
+      "evidence_urls": [
+        "https://opensource.org/license/mit/"
+      ]
+    },
+    "atlas-live-offline-shell@1.1.0": {
+      "manifest_path": "/data/atlas-live-offline-shell/1.1.0/manifest.json",
+      "manifest_sha256": "5422092370fd1501583cfee9d80aaf0a152f11297ee6a55e1133024c90c69572",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Original Atlas cache-policy metadata only (MIT); no readings and no upstream data.",
+      "obligations": "Retain MIT attribution.",
+      "parents": [],
+      "evidence_urls": [
+        "https://opensource.org/license/mit/"
+      ]
     }
   },
-  "public_tree_sha256": "e89d5d0a884331b2b0617ea839894440dce08111fd902699c5b75e647566bf63"
+  "public_tree_sha256": "4e868a998ac25e37c71f2cb74047947459526abd0a30936fa93c21c0ef01c4ec"
 }

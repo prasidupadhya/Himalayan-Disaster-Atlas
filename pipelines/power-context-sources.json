@@ -1,0 +1,102 @@
+{
+  ".zmetadata": {
+    "byte_size": 383412,
+    "sha256": "4a464ff2b5420ec492e114be64658fb9779ee9ba232420d789e12e9adace6dba"
+  },
+  "FRSNO/0.7.13": {
+    "byte_size": 55435,
+    "sha256": "737a19a972e6167aeaaa59392c0acbbeb8785f427b68d96599d79ba1ecccad06"
+  },
+  "FRSNO/0.7.14": {
+    "byte_size": 78754,
+    "sha256": "4ea332f39f17025c975003dd5c5e0f175bbde8b398ef1037b00c97af265076af"
+  },
+  "FRSNO/0.8.13": {
+    "byte_size": 190165,
+    "sha256": "28cc1a68df04360c5323f9f656bf1b6997eaa8879ac3f78bbe2ff2856b434b62"
+  },
+  "FRSNO/0.8.14": {
+    "byte_size": 173102,
+    "sha256": "5464887d126f898ab71d32d8c59394c99e34d581bb06aa5eb4ca396eac65ae0d"
+  },
+  "LICENSE.txt": {
+    "byte_size": 18657,
+    "sha256": "9ba9550ad48438d0836ddab3da480b3b69ffa0aac7b7878b5a0039e7ab429411"
+  },
+  "PRECSNOLAND/0.7.13": {
+    "byte_size": 59848,
+    "sha256": "db41964b5735321393a548457e32ca8bc896ee1cf94180dac938a8904e158033"
+  },
+  "PRECSNOLAND/0.7.14": {
+    "byte_size": 122891,
+    "sha256": "12798b9ada4b00e2760e57b34e3964d0e7fbe7d71efc16b1b3c3a2477d536e3e"
+  },
+  "PRECSNOLAND/0.8.13": {
+    "byte_size": 311254,
+    "sha256": "cb799f6a525aa8fdbbf3bcf87355029c3a0dc002bc31f656d7c64433e6006757"
+  },
+  "PRECSNOLAND/0.8.14": {
+    "byte_size": 303434,
+    "sha256": "84af2d57950bf82bc1b507acc8b0d83b46b72377a26b1c3e95f543c6b5a3d315"
+  },
+  "PRECTOTCORR/0.7.13": {
+    "byte_size": 498129,
+    "sha256": "abe278cfe4923f320e8053ba9a3a6ae5efe728e34c33f6382df3c4caa7f3fd99"
+  },
+  "PRECTOTCORR/0.7.14": {
+    "byte_size": 600865,
+    "sha256": "4158491cd6d8e6b4394abed71436393622d2f2b4e9ef27c2b2139ee8d8f7422d"
+  },
+  "PRECTOTCORR/0.8.13": {
+    "byte_size": 495783,
+    "sha256": "f88d9087e276b349922bec797d957f2f31a1183dcb825d970cb355d9e5b8e888"
+  },
+  "PRECTOTCORR/0.8.14": {
+    "byte_size": 418590,
+    "sha256": "f74469e3aef1c10fb89239cdf72eeb6dc896a78901303088ed771be204f66e7e"
+  },
+  "SNODP/0.7.13": {
+    "byte_size": 63953,
+    "sha256": "e94983dcf05731bf641cd79ef37b74494ca37ccf87e12d148bc6506c1146b96e"
+  },
+  "SNODP/0.7.14": {
+    "byte_size": 176561,
+    "sha256": "200fe3ff9982cc5a047331f25669a0727a87c928ab8245c6b329085601aa85f3"
+  },
+  "SNODP/0.8.13": {
+    "byte_size": 512143,
+    "sha256": "d3f05378d611c5b4b5b529ef0553a36e66b9dd67870326563d977c5ea7adc5b6"
+  },
+  "SNODP/0.8.14": {
+    "byte_size": 544455,
+    "sha256": "73788dc2f1796df7b49b77df134aec24b54aab2dfc5e7de1e03b93ddfe63c65b"
+  },
+  "T2M_MAX/0.7.13": {
+    "byte_size": 673604,
+    "sha256": "4e3423234c136875e176785347f6ca3bdcc4af623db93bdd10ab53d821074c5e"
+  },
+  "T2M_MAX/0.7.14": {
+    "byte_size": 698322,
+    "sha256": "6a89e8cf4487c8215f56fa51567988028c48a8f3b57cb1b63cfa669982773f61"
+  },
+  "T2M_MAX/0.8.13": {
+    "byte_size": 746988,
+    "sha256": "aeccac65f54567216428b31796a45111f2fc558bff107e1bb1be4d00aab1a18e"
+  },
+  "T2M_MAX/0.8.14": {
+    "byte_size": 707581,
+    "sha256": "7fa6c9be0842dbca7f34163c1bccefe7bae18cfe17a0e36648b4cbd753caa259"
+  },
+  "lat/0": {
+    "byte_size": 564,
+    "sha256": "888d8dbe32c0a7b721389bbf2d834aca096c270f949c5a2fcf0a4570bb7f2eb1"
+  },
+  "lon/0": {
+    "byte_size": 1125,
+    "sha256": "421771ee11ee162703d6ecab505b66692a1f8f73fa340c73e43a93582947a595"
+  },
+  "time/0": {
+    "byte_size": 994,
+    "sha256": "d9dbb537af238abb2316c6d2eb2b57e3c070806e72c336716da273e733db15d2"
+  }
+}

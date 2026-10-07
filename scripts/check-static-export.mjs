@@ -39,7 +39,7 @@ export function checkStaticExport(output = resolve(root, 'apps/web/out'), { excl
     }
   }
   requirePublic(resolve(root, 'apps/web/public'));
-  for (const page of ['index.html', '404.html', 'atlas/index.html', 'live/index.html', 'research/index.html', 'events/index.html', 'analyst/index.html', 'evidence/index.html', 'sources/index.html', 'methodology/index.html', 'data-catalog/index.html', 'licenses/index.html', 'offline/index.html', 'sw.js', '_headers']) {
+  for (const page of ['index.html', '404.html', 'atlas/index.html', 'live/index.html', 'simulate/index.html', 'simulate/report/index.html', 'hazards/index.html', 'research/index.html', 'events/index.html', 'analyst/index.html', 'evidence/index.html', 'sources/index.html', 'methodology/index.html', 'data-catalog/index.html', 'licenses/index.html', 'offline/index.html', 'sw.js', '_headers']) {
     if (!existsSync(resolve(output, page))) throw new Error(`Missing static route/configuration: ${page}`);
   }
   verifyServiceWorker(output);

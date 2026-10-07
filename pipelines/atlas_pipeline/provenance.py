@@ -10,7 +10,7 @@ from jsonschema import Draft7Validator
 
 from .contracts import ROOT
 
-VERSION = "1.6.0"
+VERSION = "1.8.0"
 BASE = f"/data/atlas-provenance/{VERSION}/"
 RELEASE = ROOT / "data/releases/atlas-provenance" / VERSION
 PUBLIC = ROOT / "apps/web/public/data/atlas-provenance" / VERSION
@@ -27,7 +27,20 @@ def metadata_of(manifest):
     return metadata if isinstance(metadata, dict) and "dataset_id" in metadata else None
 
 
+NEW_RECORDS = {
+    # Feature 48+ releases: explicit category and methodology/source anchors (older records unchanged).
+    "nepal-hrsl-population": ("Population", "hrsl-population-method", "hrsl-population"),
+    "atlas-flood-corridors": ("Analysis & models", "flood-corridors-method", "flood-corridors"),
+    "atlas-gmpe-bssa14": ("Analysis & models", "earthquake-shaking-method", "earthquake-shaking"),
+    "nepal-power-gridded-context": ("Hydrology & climate", "climate-context-method", "climate-context"),
+    "nepal-terrain-steepness": ("Terrain", "terrain-steepness-method", "terrain-steepness"),
+    "atlas-public-evidence": ("Analysis & models", "public-evidence-method", "public-evidence"),
+}
+
+
 def category(identifier):
+    if identifier in NEW_RECORDS:
+        return NEW_RECORDS[identifier][0]
     if identifier in ("foundation-sample", "atlas-live-contracts"):
         return "Development"
     if "admin-" in identifier:
@@ -55,6 +68,8 @@ def category(identifier):
 
 
 def anchors(identifier):
+    if identifier in NEW_RECORDS:
+        return NEW_RECORDS[identifier][1:]
     if identifier.startswith("atlas-live-") and identifier != "atlas-live-contracts":
         suffix = identifier.removeprefix("atlas-")
         return suffix + "-method", suffix
@@ -272,7 +287,20 @@ def record(path, latest_versions):
             else f"{temporal['start']} → {temporal['end']}"
         )
         parents = []
-        if metadata.get("evidence_type") in ("derived", "estimated", "modelled"):
+        if manifest.get("kind") == "model-release":
+            # Exact parent releases by manifest hash, plus pinned upstream files as external sources.
+            parents = [
+                {"id": item["dataset_id"], "version": item["dataset_version"], "source": item["source"],
+                 "manifest_path": item["manifest_path"], "sha256": item["sha256"]}
+                if item["manifest_path"] else
+                {"id": "external-source", "version": item["dataset_version"], "source": item["source"],
+                 "manifest_path": None, "sha256": item["sha256"]}
+                for item in manifest["inputs"]
+            ]
+            if not parents:
+                parents = [{"id": "external-source", "version": "as cited", "source": metadata["source"],
+                            "manifest_path": None, "sha256": None}]
+        elif metadata.get("evidence_type") in ("derived", "estimated", "modelled"):
             parents = [
                 {
                     "id": "external-source",
@@ -444,6 +472,16 @@ def verify_provenance(path=RELEASE, public=PUBLIC):
     if manifest["version"] != VERSION:
         historical_keys = {item["key"] for item in manifest["records"]}
         expected["records"] = [item for item in expected["records"] if item["key"] in historical_keys]
+        # A historical catalogue records which versions were current at its own publication; a later
+        # version of a dataset must not rewrite that past state.
+        latest = {}
+        for item in expected["records"]:
+            if item["state"] != "fixture":
+                parts = tuple(int(x) for x in item["version"].split("."))
+                latest[item["id"]] = max(latest.get(item["id"], parts), parts)
+        for item in expected["records"]:
+            if item["state"] != "fixture":
+                item["state"] = "current" if tuple(int(x) for x in item["version"].split(".")) == latest[item["id"]] else "superseded"
         expected["version"] = manifest["version"]
         expected["generated_from_count"] = len(expected["records"])
     if manifest != expected:
