@@ -58,3 +58,5 @@ No provider content is acquired or relicensed. USGS/NOAA GFS are eligible only f
 ## Feature 45 conditional OpenAQ review
 
 OpenAQ access does not establish provider redistribution rights. `licensing/openaq-providers.json` remains empty, schema-validated and off by default/public. A future research-only entry requires exact station/sensor/provider and licence identities, evidence and obligations before any key or request. `atlas-live-air-quality@1.0.0` and the new provenance catalog are original MIT policy metadata only; no reading is published or relicensed. See [Feature 45](live-air-quality.md).
+
+`atlas-live-conditions@1.0.0` and `atlas-provenance@1.5.0` are original MIT presentation/provenance metadata. They contain no readings and grant no rights to USGS, NOAA or any provider data, whose reviews remain in `licensing/live-sources.json`. Existing blockers and exclusions are unchanged. See [Feature 46](live-conditions.md).

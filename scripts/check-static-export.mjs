@@ -38,7 +38,7 @@ export function checkStaticExport(output = resolve(root, 'apps/web/out'), { excl
     }
   }
   requirePublic(resolve(root, 'apps/web/public'));
-  for (const page of ['index.html', '404.html', 'atlas/index.html', 'research/index.html', 'events/index.html', 'analyst/index.html', 'evidence/index.html', 'sources/index.html', 'methodology/index.html', 'data-catalog/index.html', 'licenses/index.html', '_headers']) {
+  for (const page of ['index.html', '404.html', 'atlas/index.html', 'live/index.html', 'research/index.html', 'events/index.html', 'analyst/index.html', 'evidence/index.html', 'sources/index.html', 'methodology/index.html', 'data-catalog/index.html', 'licenses/index.html', '_headers']) {
     if (!existsSync(resolve(output, page))) throw new Error(`Missing static route/configuration: ${page}`);
   }
   console.log(`Static deployment verified: ${count} files, ${(bytes / 1048576).toFixed(1)} MiB; each below 25 MiB.`);

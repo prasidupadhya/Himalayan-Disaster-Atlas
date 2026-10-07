@@ -11,6 +11,9 @@ const policy = JSON.parse(policyBytes);
 const hash = raw => createHash('sha256').update(raw).digest('hex');
 const requireValue = (condition, message) => { if (!condition) throw new Error(message); };
 export const isLivePath = path => /^data\/live-(usgs|noaa-gfs)\/\d+\.\d+\.\d+\/(snapshot|manifest)\.json$/.test(path) || /^live\/(latest\.json|history\/\d+\.\d+\.\d+\/index\.json)$/.test(path);
+// The /live/ page route is exported into the same directory as the data index. Only its own
+// static page files are exempt; every other file under live/ must be a verified live artifact.
+export const isLivePagePath = path => /^live\/(?:index\.(?:html|txt)|__next\.[A-Za-z0-9_.-]+\.txt)$/.test(path);
 function bounded(read, name, limit) { const raw = read(name); requireValue(raw.length > 0 && raw.length <= limit, 'Live publication byte budget exceeded'); return raw; }
 export function verifyLiveFiles(read, names) {
   requireValue(names.length <= 64 && names.every(isLivePath), 'Unregistered live publication files');
@@ -55,7 +58,8 @@ export function liveNames(directory) {
     for (const entry of readdirSync(path, { withFileTypes: true })) {
       const full = resolve(path, entry.name);
       requireValue(!entry.isSymbolicLink(), 'Live publication symlink');
-      if (entry.isDirectory()) walk(full); else names.push(relative(directory, full));
+      const name = relative(directory, full);
+      if (entry.isDirectory()) walk(full); else if (!isLivePagePath(name)) names.push(name);
     }
   }
   walk(resolve(directory, 'live'));

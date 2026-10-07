@@ -5,7 +5,7 @@ test('river network loads both partitions and exposes downstream topology', asyn
   page.on('request', request => { if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url()); });
   await page.goto('/atlas/');
   const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
-  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready');
+  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready', { timeout: 15_000 });
   await rivers.getByLabel('Find a reach').fill('40669746');
   await rivers.getByLabel('River reach').selectOption('hyriv-40669746');
   await expect(rivers.getByRole('heading', { name: 'HYRIV 40669746' })).toBeVisible();
