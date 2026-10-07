@@ -80,7 +80,7 @@
 .live-feed-card p { margin: .45rem 0 0; font-size: .92rem; }
 .live-feed-card dl { margin-top: .6rem; font-size: .84rem; }
 .live-feed-card details { font-size: .86rem; }
-.live-feed-card summary { min-height: 44px; display: flex; align-items: center; cursor: pointer; font-weight: 700; }
+.live-feed-card summary { min-height: 44px; padding-block: .65rem; cursor: pointer; font-weight: 700; }
 .live-feed-card[data-freshness="STALE"] { border-style: dashed; border-color: #94600f; }
 .live-feed-card[data-feed-state="error"] { border-color: var(--danger); }
 .live-attribution, .live-links { color: var(--muted-strong); }
