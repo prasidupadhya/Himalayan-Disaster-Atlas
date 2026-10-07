@@ -44,7 +44,7 @@ describe('open feed delivery and exact source review', () => {
     expect(parseLiveIndex(f.index)).toEqual(runtime.parseLiveIndex(f.index));
   });
   it('ships dispatch only, no cron/main publisher, and default unconfigured source index', () => {
-    const workflow = readFileSync('.github/workflows/live-feeds.yml', 'utf8'); expect(workflow).toContain('workflow_dispatch:'); expect(workflow).not.toMatch(/\bschedule:|\bcron:/);
+    const workflow = readFileSync('.github/workflows/live-feeds.yml', 'utf8'); expect(workflow).toContain('workflow_dispatch:'); expect(workflow).not.toMatch(/\bschedule:|\bcron:/); expect(workflow).toContain('persist-credentials: false');
     expect(readFileSync('scripts/publish-live-branch.mjs', 'utf8')).toContain('HEAD:refs/heads/live-data');
     const index = parseLiveIndex(JSON.parse(readFileSync('apps/web/public/live/latest.json', 'utf8'))); expect(index.workflow.last_successful_fetch_at).toBeNull();
   });

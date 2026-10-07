@@ -17,6 +17,8 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 1
+          # The write token is not left in .git/config while dependencies install or external data is processed.
+          persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version-file: .nvmrc
@@ -25,8 +27,18 @@ jobs:
           python-version-file: .python-version
       - run: npm ci --include=dev --workspaces --include-workspace-root
       - run: python -m venv .venv && .venv/bin/pip install -r requirements.lock
-      - run: npm run contracts:check && node scripts/restore-live-branch.mjs
+      - run: npm run contracts:check
+      - name: Restore the published live branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          export GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=http.https://github.com/.extraheader GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          node scripts/restore-live-branch.mjs
       - name: Acquire and atomically validate source snapshots
         run: npm run live:fetch -- --run-url "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
       - name: Publish data branch only
-        run: node scripts/publish-live-branch.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          export GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=http.https://github.com/.extraheader GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          node scripts/publish-live-branch.mjs
