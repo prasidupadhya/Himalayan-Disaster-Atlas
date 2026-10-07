@@ -51,7 +51,7 @@ export function checkLicenses({ publication = false, excludedReleases = [] } = {
   }
   const blocked = auditDatasets(reviews, manifests);
   // Parent declarations must agree with the independently validated provenance catalog.
-  const catalog = read('apps/web/public/data/atlas-provenance/1.2.0/manifest.json');
+  const catalog = read('apps/web/public/data/atlas-provenance/1.3.0/manifest.json');
   for (const record of catalog.records) {
     const parents = record.parents.filter(parent => parent.id !== 'external-source').map(parent => `${parent.id}@${parent.version}`).sort();
     if (JSON.stringify(parents) !== JSON.stringify([...reviews[record.key].parents].sort())) throw new Error(`Licence parent coverage differs: ${record.key}`);

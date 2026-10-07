@@ -11,3 +11,5 @@ Do not publish API keys, OAuth credentials, private URLs, local filesystem paths
 Licensing is source-specific. Derived products inherit parent obligations; the project does not erase those obligations behind one blanket project licence.
 
 Feature 42 adds `/sources/#live-contracts` for original MIT contract fixtures, separate from current production data. No real feeds are fetched. It links official DHM/NDRRMA/BIPAD authorities and explains conditional providers remain disabled. Future acquisition must register exact sources and terms; no upstream rights are granted. See [Feature 42](live-contracts.md).
+
+Feature 43 documents USGS preferred-network summaries and NOAA GFS APCP separately from their original MIT publication-policy metadata. No DHM/BIPAD acquisition or blanket contributor licence is inferred. Every imported live snapshot carries source and review links; the Catalog delivery inspector reads only static verified bytes. See [source evaluation](live-open-feeds.md).

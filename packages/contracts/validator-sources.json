@@ -33,7 +33,9 @@
     "common_schema": false,
     "formats": true,
     "schema": "live-index.schema.json",
-    "references": ["live-snapshot.schema.json"]
+    "references": [
+      "live-snapshot.schema.json"
+    ]
   },
   "live-snapshot": {
     "common_schema": false,
@@ -94,5 +96,20 @@
     "common_schema": false,
     "formats": true,
     "schema": "water-change.schema.json"
+  },
+  "live-release": {
+    "schema": "live-release.schema.json",
+    "formats": true,
+    "references": [
+      "live-snapshot.schema.json",
+      "live-index.schema.json"
+    ]
+  },
+  "live-feature": {
+    "schema": "live-feature.schema.json",
+    "formats": true,
+    "references": [
+      "live-snapshot.schema.json"
+    ]
   }
 }

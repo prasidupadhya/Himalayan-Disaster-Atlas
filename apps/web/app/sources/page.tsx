@@ -1,6 +1,6 @@
 import { isReleaseIncluded } from '../../lib/public-release';
 import Link from 'next/link';
-import catalogJson from '../../public/data/atlas-provenance/1.2.0/manifest.json';
+import catalogJson from '../../public/data/atlas-provenance/1.3.0/manifest.json';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { buildSourceDirectory, currentProductionRecords, parseProvenanceCatalog, type ProvenanceRecord } from '../../../../packages/contracts/provenance';
 
@@ -9,6 +9,7 @@ export const metadata = { title: 'Sources' };
 const SECTIONS = [
   ['administrative', 'Administrative boundaries'], ['terrain', 'Terrain'], ['mountains', 'Mountains and peaks'], ['rivers', 'Rivers and hydrology'],
   ['glaciers', 'Glaciers'], ['glacial-lakes', 'Glacial lakes'], ['population', 'Population'], ['satellite', 'Satellite and water imagery'],
+  ['live-open-feeds', 'Live open-feed publication policy'],
   ['climate', 'Climate'], ['infrastructure', 'Infrastructure and hydropower'], ['hazards', 'Hazards and reported events'], ['analysis', 'Atlas-derived analysis and models'], ['derived', 'Discovery and evidence products'],
 ] as const;
 
@@ -36,9 +37,10 @@ export default function SourcesPage() {
     <section id="live-contracts" className="source-section">
       <h2>Periodically updated conditions: contract fixtures</h2>
       <p>Feature 42 contains original Atlas test cases under MIT, with no source readings or geographic locations. Fixed timestamps and workflow states are synthetic; they do not report current conditions. <Link href="/data-catalog/#live-contract-checks">Inspect the checksum-verified cases</Link> and <Link href="/methodology/#live-contracts-method">their validation method</Link>.</p>
-      <p>No live source is acquired yet. DHM is reference-only, and BIPAD/NDRRMA ingestion remains excluded from the public build. OpenAQ, Open-Meteo and IMERG remain disabled pending separate reviews. The fixture licence grants no rights to upstream datasets.</p>
+      <p>Feature 42 acquires no sources. Feature 43 adds manual USGS/NOAA acquisition. DHM is reference-only, and BIPAD/NDRRMA ingestion remains excluded from the public build. OpenAQ, Open-Meteo and IMERG remain disabled pending separate reviews. The fixture licence grants no rights to upstream datasets.</p>
       <p>Official warning authorities: {LIVE_AUTHORITIES.map((authority, i) => <span key={authority.name}>{i > 0 && ' · '}<a href={authority.url}>{authority.name}</a></span>)}.</p>
     </section>
+    <section id="live-source-review"><h2>USGS and NOAA live sources</h2><p>USGS preferred USGS-network earthquake summaries: <a href="https://www.usgs.gov/data-management/data-licensing">public-domain guidance</a>. NOAA/NCEP GFS 0.25° APCP: <a href="https://www.weather.gov/disclaimer">NWS data terms</a>. Every imported snapshot has an exact-byte licence review, source hash, request and processing version. No warning or third-party contributor licence is inferred.</p></section>
     {SECTIONS.map(([anchor, label]) => {
       const keys = new Set(sectionRecords(records, anchor).map(record => record.key));
       const entries = directory.filter(entry => entry.datasets.some(dataset => keys.has(`${dataset.id}@${dataset.version}`)));

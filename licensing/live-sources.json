@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0.0",
+  "reviewed_on": "2026-10-06",
+  "sources": {
+    "usgs": {
+      "name": "USGS ComCat preferred USGS earthquake summaries",
+      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php",
+      "license": "USGS public-domain data; USGS-produced preferred summaries only",
+      "license_url": "https://www.usgs.gov/data-management/data-licensing",
+      "attribution": "U.S. Geological Survey, ANSS ComCat. Preferred USGS network summaries; source revisions retained. No endorsement.",
+      "license_review": "PERMITTED",
+      "is_official": false,
+      "request_host": "earthquake.usgs.gov",
+      "request_path": "/fdsnws/event/1/query",
+      "evidence_urls": ["https://www.usgs.gov/data-management/data-licensing", "https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php"],
+      "obligations": "Credit USGS; retain event links and revisions. Only net=us preferred summaries are redistributed. Third-party preferred records, images and warning products are not covered."
+    },
+    "noaa-gfs": {
+      "name": "NOAA/NCEP GFS 0.25 degree APCP forecast",
+      "url": "https://www.nco.ncep.noaa.gov/pmb/products/gfs/nomads/",
+      "license": "NOAA/NWS public-domain forecast data",
+      "license_url": "https://www.weather.gov/disclaimer",
+      "attribution": "NOAA/NCEP Global Forecast System. Atlas extraction, not an official Nepal forecast or warning; no endorsement.",
+      "license_review": "PERMITTED",
+      "is_official": false,
+      "request_host": "nomads.ncep.noaa.gov",
+      "request_path": "/cgi-bin/filter_gfs_0p25.pl",
+      "evidence_urls": ["https://www.weather.gov/disclaimer", "https://www.nco.ncep.noaa.gov/pmb/products/gfs/nomads/"],
+      "obligations": "Identify NOAA material as public-domain; retain source/model/cycle/grid/interval. Disclose transformations, no official-government presentation or endorsement; no third-party products."
+    }
+  }
+}

@@ -95,6 +95,9 @@ def parse_live_snapshot(snapshot):
     records = snapshot["records"]
     require(len({record["id"] for record in records}) == len(records), "Duplicate live record")
     for record in records:
+        if record.get("source_url"):
+            safe_source(record["source_url"])
+        chronological(record.get("source_revision_at"), snapshot["fetched_at"], "Revision follows fetch")
         require(record["evidence_type"] == evidence, "Live record evidence mismatch")
         chronological(record["observed_at"], snapshot["fetched_at"], "Observation follows fetch")
         chronological(record["issued_at"], snapshot["fetched_at"], "Record issue follows fetch")
