@@ -165,6 +165,7 @@ export function LiveConditions() {
         <article className="live-feed-card" aria-label="Official warnings availability" data-feed-state="not-ingested">
           <header><h3>Official warnings</h3><div className="live-labels"><PurposeLabel purpose="official_warning" /><span className="live-label live-status">NOT INGESTED</span></div></header>
           <p>DHM and NDRRMA/BIPAD warnings are not ingested. Their absence on this page does not mean there are no warnings.</p>
+          <p><a href="https://dhm.gov.np/mfd/" target="_blank" rel="noopener noreferrer">DHM Meteorological Forecasting Division — official weather forecasts (opens in a new tab)</a></p>
         </article>
       </div>
       <p className="live-impacts"><strong>Damage, loss, inundation and casualties: UNKNOWN.</strong> Nothing on this page estimates them.</p>
