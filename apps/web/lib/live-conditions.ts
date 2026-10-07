@@ -1,9 +1,11 @@
 import policy from '../../../packages/contracts/live-conditions-policy.json';
+import offlinePolicy from '../../../packages/contracts/offline-shell-policy.json';
 import { liveFreshness, type LiveFeed, type LiveSnapshot } from '../../../packages/contracts/live';
-import type { LiveDelivery, LivePublication } from './live';
+import type { LastKnown, LiveDelivery, LivePublication } from './live';
 
 // Presentation only: every value shown here comes from a verified snapshot or is UNKNOWN.
 export const LIVE_CONDITIONS_POLICY = policy;
+export const OFFLINE_POLICY = offlinePolicy;
 export type Lang = 'en' | 'ne';
 export type Freshness = keyof typeof policy.freshness;
 export type Purpose = keyof typeof policy.purposes;
@@ -19,10 +21,13 @@ export function localDigits(text: string, lang: Lang) {
   return lang === 'ne' ? text.replace(/[0-9]/g, digit => NE_DIGITS[Number(digit)]) : text;
 }
 
+const fill = (text: string, lang: Lang, values: Record<string, string>) => text.replace(/\{(\w+)\}/g, (_, name: string) => values[name] ?? policy.copy[lang].unknown);
 export function copy(lang: Lang, key: CopyKey, values: Record<string, string> = {}) {
-  return policy.copy[lang][key].replace(/\{(\w+)\}/g, (_, name: string) => values[name] ?? policy.copy[lang].unknown);
+  return fill(policy.copy[lang][key], lang, values);
 }
-
+export function offlineCopy(lang: Lang, key: keyof typeof offlinePolicy.copy.en, values: Record<string, string> = {}) {
+  return fill(offlinePolicy.copy[lang][key], lang, values);
+}
 /** UTC with Nepal Time (UTC+05:45) alongside. Null stays UNKNOWN; no time is substituted. */
 export function formatTime(iso: string | null, lang: Lang = 'en') {
   if (iso === null) return policy.copy[lang].unknown;
@@ -43,6 +48,8 @@ export function formatValue(value: number | null, lang: Lang = 'en', round = fal
 export interface FeedView {
   feed: LiveFeed; snapshot: LiveSnapshot | null; error: string | null;
   purpose: Purpose; freshness: Freshness; state: FeedState; reason: string; deadline: string | null;
+  /** Non-null when the copy came from this device's offline store or cannot be rechecked while offline. */
+  lastKnown: LastKnown | null;
 }
 
 export function feedPurpose(feed: LiveFeed, snapshot: LiveSnapshot | null): Purpose {
@@ -50,13 +57,21 @@ export function feedPurpose(feed: LiveFeed, snapshot: LiveSnapshot | null): Purp
   return product && product in policy.purposes ? product as Purpose : FEED_PURPOSE[feed.feed_id] ?? 'observation';
 }
 
-export function feedView(publication: LivePublication, delivery: LiveDelivery, now: number): FeedView {
+export function feedView(publication: LivePublication, delivery: LiveDelivery, now: number, offline: LastKnown | null = null): FeedView {
   const purpose = feedPurpose(delivery.feed, delivery.snapshot);
-  if (delivery.error) return { ...delivery, purpose, freshness: 'UNAVAILABLE', state: 'error', reason: `Verification failed: ${delivery.error}. Content is withheld.`, deadline: null };
+  const lastKnown = delivery.lastKnown ?? publication.lastKnown ?? offline;
+  if (delivery.error) return { ...delivery, lastKnown: null, purpose, freshness: 'UNAVAILABLE', state: 'error', reason: `Verification failed: ${delivery.error}. Content is withheld.`, deadline: null };
   const result = liveFreshness(publication.index, delivery.feed, delivery.snapshot, now);
   const freshness: Freshness = result.status === 'ready' || result.status === 'empty' ? 'FRESH' : result.status === 'stale' ? 'STALE' : 'UNAVAILABLE';
   const reason = !delivery.feed.enabled ? 'Feed is not configured in this publication.' : result.reason;
-  return { ...delivery, purpose, freshness, state: result.status, reason, deadline: result.deadline };
+  return { ...delivery, lastKnown: delivery.snapshot ? lastKnown : null, purpose, freshness, state: result.status, reason, deadline: result.deadline };
+}
+
+/** Text label for a feed: an offline copy is LAST KNOWN and never FRESH; STALE/UNAVAILABLE stay visible. */
+export function freshnessText(view: Pick<FeedView, 'freshness' | 'lastKnown'>, lang: Lang = 'en') {
+  const base = policy.freshness[view.freshness][lang];
+  if (!view.lastKnown) return base;
+  return view.freshness === 'FRESH' ? offlinePolicy.last_known[lang] : `${offlinePolicy.last_known[lang]} · ${base}`;
 }
 
 /** Earliest future source or workflow deadline, so freshness changes without a new fetch. */
@@ -95,18 +110,19 @@ export function forecastSummary(snapshot: LiveSnapshot) {
   };
 }
 
-export interface BulletinSection { id: string; heading: string; purpose: Purpose | null; status: string; freshness: Freshness | null; sentences: string[] }
+export interface BulletinSection { id: string; heading: string; purpose: Purpose | null; status: string; freshness: Freshness | null; lastKnown: boolean; sentences: string[] }
 export interface Bulletin { lang: Lang; title: string; notice: string; authorities: string; publication: string; sections: BulletinSection[] }
 
 function statusSentences(view: FeedView | undefined, lang: Lang, content: () => string[]) {
   if (!view) return [copy(lang, 'unavailable')];
   if (view.state === 'error') return [copy(lang, 'error')];
   if (view.state === 'unavailable' || !view.snapshot) return [copy(lang, 'unavailable')];
-  return view.state === 'stale' ? [copy(lang, 'stale_prefix'), ...content()] : content();
+  const offline = view.lastKnown ? [offlineCopy(lang, 'last_known_feed', { time: formatTime(view.lastKnown.savedAt, lang) })] : [];
+  return [...offline, ...(view.state === 'stale' ? [copy(lang, 'stale_prefix')] : []), ...content()];
 }
-const freshnessText = (view: FeedView | undefined, lang: Lang) => policy.freshness[view?.freshness ?? 'UNAVAILABLE'][lang];
+const sectionStatus = (view: FeedView | undefined, lang: Lang) => view ? freshnessText(view, lang) : policy.freshness.UNAVAILABLE[lang];
 
-export function buildBulletin(publication: LivePublication | null, views: FeedView[], lang: Lang): Bulletin {
+export function buildBulletin(publication: LivePublication | null, views: FeedView[], lang: Lang, lastKnown: LastKnown | null = null): Bulletin {
   const usgs = views.find(view => view.feed.feed_id === 'usgs');
   const gfs = views.find(view => view.feed.feed_id === 'noaa-gfs');
   const workflow = publication?.index.workflow;
@@ -133,13 +149,16 @@ export function buildBulletin(publication: LivePublication | null, views: FeedVi
     title: copy(lang, 'title'),
     notice: copy(lang, 'notice'),
     authorities: copy(lang, 'authorities'),
-    publication: !publication ? copy(lang, 'publication_unavailable') : workflow!.status === 'not_configured' ? copy(lang, 'not_configured') : copy(lang, 'published', { time: formatTime(publication.index.generated_at, lang) }),
+    publication: [
+      ...(publication && lastKnown ? [offlineCopy(lang, 'last_known_notice', { time: formatTime(lastKnown.savedAt, lang) })] : []),
+      !publication ? copy(lang, 'publication_unavailable') : workflow!.status === 'not_configured' ? copy(lang, 'not_configured') : copy(lang, 'published', { time: formatTime(publication.index.generated_at, lang) }),
+    ].join(' '),
     sections: [
-      { id: 'earthquakes', heading: copy(lang, 'eq_heading'), purpose: 'reported_event', status: freshnessText(usgs, lang), freshness: usgs?.freshness ?? 'UNAVAILABLE', sentences: earthquakes },
-      { id: 'forecast', heading: copy(lang, 'fc_heading'), purpose: 'forecast', status: freshnessText(gfs, lang), freshness: gfs?.freshness ?? 'UNAVAILABLE', sentences: forecast },
-      { id: 'air-quality', heading: copy(lang, 'aq_heading'), purpose: 'observation', status: copy(lang, 'status_off'), freshness: null, sentences: [copy(lang, 'aq_off')] },
-      { id: 'warnings', heading: copy(lang, 'warn_heading'), purpose: 'official_warning', status: copy(lang, 'status_not_ingested'), freshness: null, sentences: [copy(lang, 'warn_text')] },
-      { id: 'impacts', heading: copy(lang, 'impact_heading'), purpose: null, status: copy(lang, 'status_unknown'), freshness: null, sentences: [copy(lang, 'impact_text')] },
+      { id: 'earthquakes', heading: copy(lang, 'eq_heading'), purpose: 'reported_event', status: sectionStatus(usgs, lang), freshness: usgs?.freshness ?? 'UNAVAILABLE', lastKnown: !!usgs?.lastKnown, sentences: earthquakes },
+      { id: 'forecast', heading: copy(lang, 'fc_heading'), purpose: 'forecast', status: sectionStatus(gfs, lang), freshness: gfs?.freshness ?? 'UNAVAILABLE', lastKnown: !!gfs?.lastKnown, sentences: forecast },
+      { id: 'air-quality', heading: copy(lang, 'aq_heading'), purpose: 'observation', status: copy(lang, 'status_off'), freshness: null, lastKnown: false, sentences: [copy(lang, 'aq_off')] },
+      { id: 'warnings', heading: copy(lang, 'warn_heading'), purpose: 'official_warning', status: copy(lang, 'status_not_ingested'), freshness: null, lastKnown: false, sentences: [copy(lang, 'warn_text')] },
+      { id: 'impacts', heading: copy(lang, 'impact_heading'), purpose: null, status: copy(lang, 'status_unknown'), freshness: null, lastKnown: false, sentences: [copy(lang, 'impact_text')] },
     ],
   };
 }

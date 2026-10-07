@@ -123,3 +123,8 @@
   .live-map-section, .live-health-head button, .live-language, .live-pagination { display: none; }
   .live-layout { grid-template-columns: 1fr; }
 }
+
+/* Offline shell (Feature 47): last-known copies are visibly distinct from fresh ones. */
+.freshness-last-known { background: #ece9f6; border-color: #4f4785; border-style: double; border-width: 3px; }
+.live-last-known { margin: .7rem 0 0; padding: .7rem .9rem; border: 1px solid #4f4785; border-left-width: 5px; border-radius: var(--radius-sm); background: #f3f1fa; color: var(--ink-strong); font-size: .9rem; }
+.live-feed-card .live-last-known { margin-top: .5rem; font-size: .84rem; }

@@ -64,7 +64,8 @@
     "ui:check": "node scripts/prepare-overview.mjs --check",
     "live:fetch": ".venv/bin/python -m pipelines.atlas_pipeline.live_open_feeds",
     "live:air-quality": ".venv/bin/python -m pipelines.atlas_pipeline.live_air_quality",
-    "data:live-conditions": ".venv/bin/python -m pipelines.atlas_pipeline.live_conditions"
+    "data:live-conditions": ".venv/bin/python -m pipelines.atlas_pipeline.live_conditions",
+    "data:offline-shell": ".venv/bin/python -m pipelines.atlas_pipeline.offline_shell"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",
