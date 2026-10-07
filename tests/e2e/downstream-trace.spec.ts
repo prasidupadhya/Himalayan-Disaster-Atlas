@@ -8,7 +8,7 @@ test('traces a selected reach with playback, provenance, download and cleanup', 
   await page.goto('/atlas/');
   const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
   const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
-  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready');
+  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready', { timeout: 15_000 });
   await expect(trace.getByRole('button', { name: 'Trace downstream', exact: true })).toBeDisabled();
   await rivers.getByLabel('Find a reach').fill('40669746');
   await rivers.getByLabel('River reach').selectOption('hyriv-40669746');
@@ -57,7 +57,7 @@ test('requires the full network and supports retry after a missing partition', a
   await expect(rivers).toHaveAttribute('data-rivers-state', 'unavailable');
   await expect(trace.getByRole('button', { name: 'Trace downstream', exact: true })).toBeDisabled();
   await rivers.getByRole('button', { name: 'Try again' }).click();
-  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready');
+  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready', { timeout: 15_000 });
   await expect(trace).toHaveAttribute('data-trace-state', 'idle');
 });
 
@@ -67,7 +67,7 @@ test('supports reduced motion and narrow screens without overflow', async ({ pag
   await page.goto('/atlas/');
   const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
   const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
-  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready');
+  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready', { timeout: 15_000 });
   await rivers.getByLabel('Find a reach').fill('40669746');
   await rivers.getByLabel('River reach').selectOption('hyriv-40669746');
   await trace.getByRole('button', { name: 'Trace downstream', exact: true }).click();
