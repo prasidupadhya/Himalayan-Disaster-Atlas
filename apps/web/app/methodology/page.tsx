@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { isPublicRelease } from '../../lib/public-release';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 export const metadata = { title: 'Methodology' };
@@ -34,6 +35,8 @@ export default function MethodologyPage() {
     </dl>
     <p>Uncertainty is not reduced to one generic score. Each feature preserves the uncertainty/limitations its source or method can support. UNKNOWN, partial coverage, unavailable and incompatible states are intentionally different from zero.</p>
 
+    <h2 id="live-conditions-method">Live conditions page and bilingual bulletin</h2>
+    <p>The <Link href="/live/">Live conditions</Link> page presents only verified Feature 43 snapshots: the same-origin index and each snapshot are size-, SHA-256-, schema- and source-review-checked before any value is shown. Bulletin sentences are generated from those records with fixed English and Nepali templates; unverified, corrupt or absent data produces an UNAVAILABLE sentence rather than a reading. Observations, reported events, model forecasts and official warnings carry distinct glyph-and-text labels, never colour alone. Every record shows its source, observation or issue time, fetched_at and a FRESH / STALE / UNAVAILABLE state recomputed on the viewer&apos;s clock from source, fetch and workflow timestamps. Workflow health and last successful fetch are shown separately. GFS grid squares outline native 0.25° cells for display only; values are not interpolated and legend bins are not hazard thresholds. Official warnings are not ingested, and their absence never means no warnings: DHM and NDRRMA/BIPAD remain the authorities. Air quality stays OFF with AQI UNKNOWN. Damage, loss, inundation and casualties remain UNKNOWN. Nepali copy is project-authored and requires native-speaker review.</p>
     <h2 id="live-air-quality-method">Air quality: disabled until provider review</h2>
     <p>OpenAQ PM2.5 acquisition is off by default and prohibited for public builds. Its provider allowlist is empty. A research-only adapter validates stationary Nepal station/provider/sensor identity, exact licences, original units, averaging periods, timestamps and quality flags. Flagged or unknown-period/quality concentrations remain UNKNOWN; source values are retained separately for review. AQI remains UNKNOWN because no calculation standard or sufficient averaging/completeness inputs have been reviewed. No browser API key or request is used.</p>
     <h2 id="live-open-feeds-method">Manual open feeds: USGS and NOAA GFS</h2>

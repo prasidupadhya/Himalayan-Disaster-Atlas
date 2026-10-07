@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { buildSourceDirectory, currentProductionRecords, parseProvenanceCatalog } from '../../packages/contracts/provenance';
 
-const catalog = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.4.0/manifest.json', 'utf8')));
+const catalog = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.5.0/manifest.json', 'utf8')));
 const sourcePage = readFileSync('apps/web/app/sources/page.tsx', 'utf8');
 
 describe('public source directory', () => {
