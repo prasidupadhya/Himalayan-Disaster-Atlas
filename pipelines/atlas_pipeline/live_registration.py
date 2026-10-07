@@ -11,13 +11,13 @@ from .live_contracts import publish_immutable_files, require
 from .live_fixtures import encode
 
 
-def register(identifier, title, method, source_file, limitations):
+def register(identifier, title, method, source_file, limitations, version="1.0.0"):
     raw = (ROOT / source_file).read_bytes()
     manifest = {
         "schema_version": "1.0.0",
         "kind": "live-feature-release",
         "id": identifier,
-        "version": "1.0.0",
+        "version": version,
         "title": title,
         "is_fixture": False,
         "source": "Himalayan Disaster Atlas original policy metadata",
@@ -29,7 +29,7 @@ def register(identifier, title, method, source_file, limitations):
         "limitations": limitations,
         "artifacts": {
             "policy": {
-                "path": f"/data/{identifier}/1.0.0/policy.json",
+                "path": f"/data/{identifier}/{version}/policy.json",
                 "sha256": hashlib.sha256(raw).hexdigest(),
                 "byte_size": len(raw),
             }
@@ -41,11 +41,11 @@ def register(identifier, title, method, source_file, limitations):
         "LICENSE.txt": (ROOT / "LICENSE").read_bytes(),
     }
     for prefix in ("data/releases", "apps/web/public/data"):
-        directory = ROOT / prefix / identifier / "1.0.0"
+        directory = ROOT / prefix / identifier / version
         publish_immutable_files(directory, content)
     verify_registration(
-        ROOT / "data/releases" / identifier / "1.0.0",
-        ROOT / "apps/web/public/data" / identifier / "1.0.0",
+        ROOT / "data/releases" / identifier / version,
+        ROOT / "apps/web/public/data" / identifier / version,
     )
 
 

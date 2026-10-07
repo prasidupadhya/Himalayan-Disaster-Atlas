@@ -6,8 +6,8 @@ from pipelines.atlas_pipeline.contracts import ROOT
 from pipelines.atlas_pipeline.live_registration import verify_registration
 from pipelines.atlas_pipeline.offline_shell import POLICY, check_policy
 
-RELEASE = ROOT / "data/releases/atlas-live-offline-shell/1.0.0"
-PUBLIC = ROOT / "apps/web/public/data/atlas-live-offline-shell/1.0.0"
+RELEASE = ROOT / "data/releases/atlas-live-offline-shell/1.1.0"
+PUBLIC = ROOT / "apps/web/public/data/atlas-live-offline-shell/1.1.0"
 
 
 def policy():

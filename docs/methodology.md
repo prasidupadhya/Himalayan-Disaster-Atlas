@@ -46,3 +46,7 @@ Feature 47 never alters timestamps: offline copies are labelled LAST KNOWN with 
 ## Scenario simulator (Features 48–51)
 
 Population inputs: [HRSL population](hrsl-population.md). Flood/GLOF corridors and hydrograph translation: [flood corridors](flood-corridors.md). Ground motion: [earthquake shaking](earthquake-shaking.md). Uncertainty is expressed only as declared sensitivity (celerity ensemble, corridor widths) or the published model sigma — never as invented percentage bands.
+
+## Hazard context (Features 53–58)
+
+See [climate context](climate-context.md), [terrain steepness](terrain-steepness.md) and [hazards hub](hazards-hub.md). SPI-3 follows McKee et al. (1993); slope follows Horn (1981). No susceptibility, drought declaration or heatwave classification is made.

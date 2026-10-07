@@ -18,7 +18,7 @@ export function Simulator() {
   const [lang, setLang] = useLanguage();
   const t = UI[lang], c = simCopy(lang);
   const [initial] = useState(initialScenario);
-  const [tab, setTab] = useState<Tab>(initial?.kind === 'earthquake' ? 'earthquake' : 'flood');
+  const [tab, setTab] = useState<Tab>(() => initial?.kind === 'earthquake' || (!initial && new URLSearchParams(window.location.search).get('tab') === 'earthquake') ? 'earthquake' : 'flood');
   const [floodScene, setFloodScene] = useState<MapScene>({});
   const [quakeScene, setQuakeScene] = useState<MapScene>({});
   const [shared, setShared] = useState<Scenario | null>(null);

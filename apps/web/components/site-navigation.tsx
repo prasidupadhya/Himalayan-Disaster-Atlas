@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useRef, useState } from 'react';
-const links = [['/atlas/', 'Atlas'], ['/live/', 'Live'], ['/simulate/', 'Simulate'], ['/events/', 'Events'], ['/analyst/', 'Analyst'], ['/data-catalog/', 'Data catalog'], ['/methodology/', 'Methodology'], ['/sources/', 'Sources']] as const;
+const links = [['/atlas/', 'Atlas'], ['/live/', 'Live'], ['/hazards/', 'Hazards'], ['/simulate/', 'Simulate'], ['/events/', 'Events'], ['/analyst/', 'Analyst'], ['/data-catalog/', 'Data catalog'], ['/methodology/', 'Methodology'], ['/sources/', 'Sources']] as const;
 export function SiteNavigation() {
   const pathname = usePathname().replace(/\/$/, '');
   const [open, setOpen] = useState(false);

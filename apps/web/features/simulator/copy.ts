@@ -188,3 +188,36 @@ export function errorText(message: string, lang: Lang) {
   for (const [pattern, text] of NE_ERRORS) { const m = message.match(pattern); if (m) return text(m); }
   return message;
 }
+
+export const REPORT = {
+  en: {
+    eyebrow: 'Scenario report', quakeTitle: 'Educational earthquake shaking scenario', floodTitle: 'Educational flood / GLOF corridor scenario',
+    official: 'Official forecasts and warnings:', generated: (t: string) => `Generated ${t} (viewer clock) · Himalayan Disaster Atlas · recomputed from verified static releases`,
+    print: 'Print / save as PDF', json: 'Download report JSON', back: 'Back to the simulator',
+    invalid: 'No valid scenario was supplied in the link. Run a scenario in the simulator first.', recomputing: 'Recomputing the scenario from verified inputs…',
+    inputs: 'Inputs and data versions', release: 'Release', hash: 'Manifest SHA-256', results: 'Results', limitations: 'Limitations', limitationsLang: 'Limitations are quoted from each release in English.',
+    unknownTitle: 'Not estimated (UNKNOWN)',
+    unknownText: 'Inundation depth and extent, building damage, casualties, repair costs, hydropower downtime and economic loss are UNKNOWN: no reviewed inputs and validation exist. Absence of a value here is not zero.',
+    releasePoint: 'Release point', path: 'path', hydrograph: 'Hydrograph',
+    hydroText: (shape: string, v: string, d: string, peak: string, check: string) => `${shape}, ${v} m³ over ${d}, source peak ${peak} m³/s (volume check ${check} m³). Translated without attenuation.`,
+    floodCaption: (cs: string, ws: string) => `Arrival (declared celerities ${cs} m/s) and potential exposure (corridors ${ws} m each side)`,
+    distance: 'Distance', front: 'Front arrival', ends: 'Pulse ends', popRange: 'Population (range)', assetRange: 'Mapped assets (range)', partial: '(known subtotal; part of the area UNKNOWN)',
+    scenario: 'Scenario', point: 'point source', line: (l: string, s: string) => `${l} km line at ${s}°`, uniform: 'uniform', model: 'Model',
+    bandCaption: 'Population by PGA band (median, −1σ, +1σ)', band: 'Band', median: 'Median', beyond: (n: string) => `Population beyond the 400 km model domain (no band): ${n}.`,
+  },
+  ne: {
+    eyebrow: 'परिदृश्य प्रतिवेदन', quakeTitle: 'शैक्षिक भूकम्पीय कम्पन परिदृश्य', floodTitle: 'शैक्षिक बाढी / हिमताल विस्फोट करिडोर परिदृश्य',
+    official: 'आधिकारिक पूर्वानुमान र चेतावनी:', generated: (t: string) => `${t} मा तयार (हेर्नेको घडी) · हिमालयन डिजास्टर एटलस · प्रमाणित स्थिर रिलिजबाट पुनर्गणना`,
+    print: 'छाप्नुहोस् / PDF बनाउनुहोस्', json: 'प्रतिवेदन JSON डाउनलोड', back: 'सिमुलेटरमा फर्कनुहोस्',
+    invalid: 'लिङ्कमा कुनै मान्य परिदृश्य छैन। पहिले सिमुलेटरमा परिदृश्य चलाउनुहोस्।', recomputing: 'प्रमाणित इनपुटबाट परिदृश्य पुनर्गणना गर्दै…',
+    inputs: 'इनपुट र डाटा संस्करण', release: 'रिलिज', hash: 'म्यानिफेस्ट SHA-256', results: 'नतिजा', limitations: 'सीमाहरू', limitationsLang: 'सीमाहरू हरेक रिलिजबाट अंग्रेजीमा उद्धृत छन्।',
+    unknownTitle: 'अनुमान नगरिएको (UNKNOWN)',
+    unknownText: 'डुबानको गहिराइ र क्षेत्र, भवन क्षति, हताहत, मर्मत लागत, जलविद्युत् बन्द अवधि र आर्थिक नोक्सानी अज्ञात (UNKNOWN) छन्: समीक्षा गरिएका इनपुट र प्रमाणीकरण छैनन्। यहाँ मान नहुनु शून्य होइन।',
+    releasePoint: 'सुरुवात बिन्दु', path: 'मार्ग', hydrograph: 'हाइड्रोग्राफ',
+    hydroText: (shape: string, v: string, d: string, peak: string, check: string) => `${shape === 'triangular' ? 'त्रिकोणीय' : 'आयताकार'}, ${d} मा ${v} m³, स्रोतमा शिखर ${peak} m³/s (आयतन जाँच ${check} m³)। क्षीणताबिना सारिएको।`,
+    floodCaption: (cs: string, ws: string) => `आइपुग्ने समय (घोषित गति ${cs} m/s) र सम्भावित जोखिम (दुवैतर्फ ${ws} मिटर करिडोर)`,
+    distance: 'दूरी', front: 'अग्रभाग आइपुग्ने', ends: 'प्रवाह सकिने', popRange: 'जनसंख्या (दायरा)', assetRange: 'नक्सांकित संरचना (दायरा)', partial: '(ज्ञात उप-जम्मा; केही क्षेत्र अज्ञात)',
+    scenario: 'परिदृश्य', point: 'बिन्दु स्रोत', line: (l: string, s: string) => `${l} km रेखा, ${s}°`, uniform: 'एकरूप', model: 'मोडेल',
+    bandCaption: 'PGA समूह अनुसार जनसंख्या (मध्य, −१σ, +१σ)', band: 'समूह', median: 'मध्य', beyond: (n: string) => `४०० km मोडेल दायराभन्दा टाढाको जनसंख्या (समूह छैन): ${n}।`,
+  },
+};

@@ -67,3 +67,7 @@ OpenAQ access does not establish provider redistribution rights. `licensing/open
 ## Scenario inputs (Features 48–51)
 
 HRSL v1.5 is CC BY 4.0 (AWS Open Data registry). Corridor counts derived from OSM are ODbL 1.0 with attribution; other corridor inputs are CC BY 4.0 and credited. BSSA14 coefficients are published scientific values cited by DOI; the Atlas implementation is original MIT code (OpenQuake, AGPL, was not used or copied). WorldPop remains excluded from the public build.
+
+## Hazard context (Features 53–58)
+
+NASA POWER data in the `nasa-power` bucket are CC BY 4.0 (the bucket `LICENSE.txt` is pinned). Terrain steepness reuses the already-reviewed Copernicus GLO-90 terms and carries the required WorldDEM-90 notice. The evidence corpus contains only Atlas-authored text (MIT) and metadata from reviewed releases. `numcodecs` 0.17.0 (MIT, bundling BSD c-blosc) is offline tooling only.

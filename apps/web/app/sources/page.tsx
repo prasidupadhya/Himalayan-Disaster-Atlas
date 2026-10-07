@@ -1,6 +1,6 @@
 import { isReleaseIncluded } from '../../lib/public-release';
 import Link from 'next/link';
-import catalogJson from '../../public/data/atlas-provenance/1.7.0/manifest.json';
+import catalogJson from '../../public/data/atlas-provenance/1.8.0/manifest.json';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { buildSourceDirectory, currentProductionRecords, parseProvenanceCatalog, type ProvenanceRecord } from '../../../../packages/contracts/provenance';
 
@@ -12,6 +12,9 @@ const SECTIONS = [
   ['hrsl-population', 'Population for public exposure (HRSL)'],
   ['flood-corridors', 'Flood and GLOF corridor scenarios'],
   ['earthquake-shaking', 'Earthquake ground-motion model'],
+  ['climate-context', 'Rainfall, snow, drought and heat context'],
+  ['terrain-steepness', 'Terrain steepness'],
+  ['public-evidence', 'Public evidence corpus'],
   ['live-conditions', 'Live conditions page presentation policy'],
   ['live-offline-shell', 'Offline shell cache policy'],
   ['live-air-quality', 'Air quality provider review policy'],

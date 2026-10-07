@@ -155,3 +155,27 @@ test('the worker script is served uncached with the shell manifest pinned', asyn
   expect(config.shell.map((entry: { url: string }) => entry.url)).toEqual(expect.arrayContaining(['/', '/live/', '/offline/']));
   for (const entry of config.shell.slice(0, 5)) expect((await request.get(entry.url)).ok()).toBe(true);
 });
+
+test('hazards and the simulator work offline after one online visit, from verified cached releases', async ({ page, context }) => {
+  const network = await serve(context);
+  await page.goto('/hazards/');
+  await page.evaluate(async () => { await navigator.serviceWorker.ready; });
+  await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller), { timeout: 30_000 }).toBe(true);
+  await page.reload();
+  await expect(page.locator('section#terrain .hz-bars li')).toHaveCount(10, { timeout: 30_000 });
+  await expect(page.locator('section#climate .hz-legend')).toBeVisible();
+  await page.goto('/simulate/');
+  await expect(page.locator('#panel-flood').getByRole('checkbox')).toBeVisible({ timeout: 30_000 });
+  await expect.poll(() => page.evaluate(async () => (await (await caches.open('atlas-data-v1')).keys()).length)).toBeGreaterThan(5);
+
+  await goOffline(context, network);
+  await page.goto('/hazards/');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Hazard context for Nepal');
+  await expect(page.locator('section#terrain .hz-bars li')).toHaveCount(10, { timeout: 30_000 });
+  await expect(page.locator('section#climate').getByRole('alert')).toHaveCount(0);
+  await page.goto('/simulate/');
+  await page.locator('#panel-flood').getByRole('checkbox').check();
+  await page.locator('#panel-flood').getByRole('button', { name: 'Run scenario' }).click();
+  await expect(page.locator('[data-sim-result="flood"]')).toContainText('MODELLED · HYPOTHETICAL');
+  await goOnline(context, network);
+});

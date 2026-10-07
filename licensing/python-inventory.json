@@ -1,5 +1,5 @@
 {
-  "requirements_sha256": "12e5378d273ac87c40bc6cf8c476f600bbb9021c4f25c46e28ef4218254eb434",
+  "requirements_sha256": "1254b929266f8de5c33d1d1662d0f564794a09912f2fd1af000765136d8dd521",
   "packages": [
     {
       "name": "affine",
@@ -84,6 +84,12 @@
       "version": "1.3.1",
       "license": "MIT License",
       "scope": "Offline tooling only; no Python code or native binaries redistributed in the static website."
+    },
+    {
+      "name": "numcodecs",
+      "version": "0.17.0",
+      "license": "MIT",
+      "scope": "Offline tooling only (decodes pinned NASA POWER Zarr chunks); no Python code or native binaries redistributed in the static website."
     },
     {
       "name": "numpy",

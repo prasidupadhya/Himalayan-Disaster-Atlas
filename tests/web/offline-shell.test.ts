@@ -185,9 +185,18 @@ describe('navigation and static assets', () => {
     for (const name of ['a', 'b', 'c']) await sw.request(`/_next/static/chunks/${name}.js`);
     expect([...(await sw.storage.open('atlas-static-v1')).entries.keys()]).toEqual(['/_next/static/chunks/b.js', '/_next/static/chunks/c.js']);
   });
-  it('leaves immutable data releases and other origins to the network', async () => {
+  it('caches immutable versioned data releases on use, bounded, and serves them offline', async () => {
+    const sw = boot({ network: async path => Object.defineProperty(new Response(`bytes ${path}`), 'type', { value: 'basic' }) });
+    const path = '/data/nepal-admin-country/2.0.1/manifest.json';
+    expect(await (await sw.request(path))!.text()).toBe(`bytes ${path}`);
+    sw.setNetwork(offline);
+    expect(await (await sw.request(path))!.text()).toBe(`bytes ${path}`);
+    expect([...(await sw.storage.open('atlas-data-v1')).entries.keys()]).toEqual([path]);
+  });
+  it('leaves unversioned data paths and other origins to the network', async () => {
     const sw = boot({ network: offline });
-    expect(await sw.request('/data/nepal-admin-country/2.0.1/manifest.json')).toBeUndefined();
+    expect(await sw.request('/data/README.txt')).toBeUndefined();
+    expect(await sw.request('/data/nepal-admin-country/latest/manifest.json')).toBeUndefined();
   });
 });
 

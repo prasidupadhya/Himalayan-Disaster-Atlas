@@ -8,6 +8,9 @@ export const MODEL_RELEASES = {
   population: { id: 'nepal-hrsl-population', version: '1.0.0', type: 'population-grid' },
   corridors: { id: 'atlas-flood-corridors', version: '1.0.0', type: 'corridor-catalogue' },
   gmpe: { id: 'atlas-gmpe-bssa14', version: '1.0.0', type: 'gmpe-model' },
+  climate: { id: 'nepal-power-gridded-context', version: '1.0.0', type: 'climate-context' },
+  terrain: { id: 'nepal-terrain-steepness', version: '1.0.0', type: 'terrain-context' },
+  evidence: { id: 'atlas-public-evidence', version: '1.0.0', type: 'evidence-corpus' },
 } as const satisfies Record<string, { id: string; version: string; type: ModelReleaseType }>;
 export type ModelKey = keyof typeof MODEL_RELEASES;
 export const manifestPath = (key: { id: string; version: string }) => `/data/${key.id}/${key.version}/manifest.json`;
