@@ -82,10 +82,14 @@ export async function loadDataset(manifestPath: string, signal?: AbortSignal): P
   const metadata: unknown = JSON.parse(new TextDecoder().decode(manifestBytes));
   const validated = (await datasetValidation.run(metadata, undefined, false, signal)).metadata;
   if (manifestPath !== validated.artifact.path.replace(/features\.geojson(?:\.gz)?$/, 'manifest.json')) throw new Error('Manifest identity mismatch.');
-  const bytes = await readBounded(await fetch(validated.artifact.path, { signal }), MAX_GEOJSON_BYTES);
-  if (bytes.length !== validated.artifact.byte_size) throw new Error('Dataset size does not match its manifest.');
-  const hash = await crypto.subtle.digest('SHA-256', bytes);
-  const digest = Array.from(new Uint8Array(hash), n => n.toString(16).padStart(2, '0')).join('');
-  if (digest !== validated.artifact.sha256) throw new Error('Dataset checksum failed.');
+  const fetchBytes = (cache?: RequestCache) => fetch(validated.artifact.path, { signal, cache }).then(response => readBounded(response, MAX_GEOJSON_BYTES));
+  const verify = async (candidate: Uint8Array<ArrayBuffer>) => {
+    const digest = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', candidate)), n => n.toString(16).padStart(2, '0')).join('');
+    return candidate.length === validated.artifact.byte_size && digest === validated.artifact.sha256;
+  };
+  let bytes = await fetchBytes();
+  // A stored copy that fails verification is replaced once by a network copy before the dataset is refused.
+  if (!(await verify(bytes))) bytes = await fetchBytes('reload');
+  if (!(await verify(bytes))) throw new Error('Dataset checksum failed.');
   return datasetValidation.run(validated, bytes.buffer, validated.artifact.format === 'GeoJSON+gzip', signal);
 }

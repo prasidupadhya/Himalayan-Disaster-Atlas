@@ -45,7 +45,10 @@ export async function loadModelRelease(expected: { id: string; version: string; 
 export async function loadModelArtifact<T>(release: ModelRelease, name: string, signal?: AbortSignal): Promise<T> {
   const entry = release.artifacts[name];
   if (!entry) throw new Error(`Release has no artifact ${name}`);
-  const bytes = await readBounded(await fetch(entry.path, { signal, redirect: 'error', credentials: 'omit' }), ARTIFACT_BYTES);
+  const fetchBytes = (cache?: RequestCache) => fetch(entry.path, { signal, redirect: 'error', credentials: 'omit', cache }).then(response => readBounded(response, ARTIFACT_BYTES));
+  let bytes = await fetchBytes();
+  // One retry that bypasses a stored copy: a corrupted cache entry must not make the artifact unusable until the cache is cleared.
+  if (bytes.byteLength !== entry.byte_size || await sha256(bytes) !== entry.sha256) bytes = await fetchBytes('reload');
   if (bytes.byteLength !== entry.byte_size || await sha256(bytes) !== entry.sha256) throw new Error(`Checksum mismatch for ${name}; the artifact was not used`);
   const decoded = entry.media_type === 'application/json+gzip' ? await gunzip(bytes) : bytes;
   return JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(decoded)) as T;

@@ -24,9 +24,16 @@ it('verifies and decompresses a bounded administrative release', async () => {
   expect(dataset.collection.features.find(feature => feature.id === 'np01')?.properties.name).toBe('Koshi');
   expect(fetcher.mock.calls[1][0]).toBe(provinceMetadata.artifact.path);
 });
-it('rejects tampering even if the size matches', async () => {
-  mock(metadata, raw.replace('point A', 'point X'));
+it('rejects tampering even if the size matches, after one network retry', async () => {
+  const fetcher = vi.fn(async (url: string) => new Response(url === SAMPLE_MANIFEST ? JSON.stringify(metadata) : raw.replace('point A', 'point X')));
+  vi.stubGlobal('fetch', fetcher);
   await expect(loadDataset(SAMPLE_MANIFEST)).rejects.toThrow(/checksum/);
+  expect(fetcher.mock.calls.filter(([url]) => url === metadata.artifact.path).map(([, init]) => init?.cache)).toEqual([undefined, 'reload']);
+});
+it('replaces a corrupted stored copy with a fresh network copy', async () => {
+  const fetcher = vi.fn(async (url: string, init?: RequestInit) => new Response(url === SAMPLE_MANIFEST ? JSON.stringify(metadata) : init?.cache === 'reload' ? raw : raw.replace('point A', 'point X')));
+  vi.stubGlobal('fetch', fetcher);
+  expect((await loadDataset(SAMPLE_MANIFEST)).collection.features).toHaveLength(3);
 });
 it('never fetches an artifact from an unvalidated manifest', async () => {
   const manifest = structuredClone(metadata); manifest.artifact.path = 'https://example.com/private';

@@ -14,7 +14,8 @@ const LIVE_ARTIFACT = /^\/data\/live-[a-z0-9-]+\/\d+\.\d+\.\d+\/(?:snapshot|mani
 const LIVE_HISTORY = /^\/live\/history\/\d+\.\d+\.\d+\/index\.json$/;
 const STATIC_ASSET = /^\/(?:_next\/static|vendor)\//;
 // Versioned release paths are immutable (a changed release gets a new version), so they are safe to keep.
-const IMMUTABLE_DATA = /^\/data\/[a-z0-9-]+\/[0-9]+\.[0-9]+\.[0-9]+\//;
+// Raster terrain tiles are large, numerous and outside the offline promise, so they never displace release data.
+const IMMUTABLE_DATA = /^\/data\/[a-z0-9-]+\/[0-9]+\.[0-9]+\.[0-9]+\/(?!.*\.png$)/;
 const LIMITS = { index: 65536, artifact: 524288 };
 const DELIVERY = 'x-atlas-delivery';
 const CACHED_AT = 'x-atlas-cached-at';
@@ -153,8 +154,14 @@ async function cacheFirst(request, name = STATIC_CACHE, limit = CONFIG.staticEnt
   const shell = await (await caches.open(SHELL_CACHE)).match(pathname);
   if (shell) return shell;
   const cache = await caches.open(name);
-  const cached = await cache.match(pathname);
-  if (cached) return cached;
+  // A reload is the page's retry after a checksum failure: it must not be answered from the same bad copy.
+  const cached = request.cache === 'reload' ? undefined : await cache.match(pathname);
+  if (cached) {
+    // Re-inserting on use makes the oldest-first eviction below behave as least-recently-used.
+    await cache.delete(pathname);
+    await cache.put(pathname, cached.clone());
+    return cached;
+  }
   const response = await fetch(request);
   if (response.ok && response.type === 'basic') {
     await cache.put(pathname, response.clone());

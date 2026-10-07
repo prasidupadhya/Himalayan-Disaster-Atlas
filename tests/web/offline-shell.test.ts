@@ -44,13 +44,13 @@ function boot({ shell = [] as Array<{ url: string; bytes: number; sha256: string
   const fetch = vi.fn((input: Request | { url: string }) => { const url = new URL(input.url, ORIGIN); return state.network(url.pathname + url.search); });
   // Inside a worker, relative URLs resolve against its origin; Node needs that base explicitly.
   class WorkerRequest extends Request { constructor(input: RequestInfo | URL, init?: RequestInit) { super(typeof input === 'string' ? new URL(input, ORIGIN) : input, init); } }
-  const config = { version: 'test-1', shell, liveRetentionSeconds: policy.live_retention_seconds, networkTimeoutMs: timeout, staticEntries: 2 };
+  const config = { version: 'test-1', shell, liveRetentionSeconds: policy.live_retention_seconds, networkTimeoutMs: timeout, staticEntries: 2, dataEntries: 2 };
   const source = TEMPLATE.replace(/\/\*@atlas-config\*\/[\s\S]*?\/\*@end\*\//, `/*@atlas-config*/ ${JSON.stringify(config)} /*@end*/`);
   vm.runInContext(source, vm.createContext({ self, caches: storage, fetch, crypto: webcrypto, Request: WorkerRequest, Response, Headers, URL, TextDecoder, setTimeout, clearTimeout, Date: FakeDate }));
   const waitUntil = async (type: string, event: object = {}) => { let pending: Promise<unknown> | undefined; handlers[type]({ ...event, waitUntil: (promise: Promise<unknown>) => { pending = promise; } }); await pending; };
-  const request = async (path: string, mode = 'cors') => {
+  const request = async (path: string, mode = 'cors', cache: RequestCache = 'default') => {
     let pending: Promise<Response> | undefined;
-    handlers.fetch({ request: { url: ORIGIN + path, method: 'GET', mode }, respondWith: (promise: Promise<Response>) => { pending = promise; } });
+    handlers.fetch({ request: { url: ORIGIN + path, method: 'GET', mode, cache }, respondWith: (promise: Promise<Response>) => { pending = promise; } });
     return pending ? await pending : undefined;
   };
   return { self, storage, clock, fetch, setNetwork: (next: Network) => { state.network = next; }, install: () => waitUntil('install'), activate: () => waitUntil('activate'), request, message: (data: unknown) => handlers.message({ data }) };
@@ -192,6 +192,30 @@ describe('navigation and static assets', () => {
     sw.setNetwork(offline);
     expect(await (await sw.request(path))!.text()).toBe(`bytes ${path}`);
     expect([...(await sw.storage.open('atlas-data-v1')).entries.keys()]).toEqual([path]);
+  });
+  it('evicts the least recently used release, not the oldest inserted one', async () => {
+    const sw = boot({ network: async path => Object.defineProperty(new Response(`bytes ${path}`), 'type', { value: 'basic' }) });
+    const [a, b, c] = ['/data/nepal-a/1.0.0/manifest.json', '/data/nepal-b/1.0.0/manifest.json', '/data/nepal-c/1.0.0/manifest.json'];
+    await sw.request(a); await sw.request(b);
+    await sw.request(a);
+    await sw.request(c);
+    expect([...(await sw.storage.open('atlas-data-v1')).entries.keys()].sort()).toEqual([a, c].sort());
+  });
+  it('never stores raster terrain tiles, so they cannot displace release data', async () => {
+    const sw = boot({ network: async path => Object.defineProperty(new Response(`tile ${path}`), 'type', { value: 'basic' }) });
+    const tile = '/data/nepal-terrain/1.0.0/tiles/10/700/400.png';
+    expect(await sw.request(tile)).toBeUndefined();
+    expect(await sw.request(tile)).toBeUndefined();
+    expect(sw.storage.caches.has('atlas-data-v1')).toBe(false);
+  });
+  it('answers a reload from the network and replaces the stored copy', async () => {
+    let version = 'old';
+    const sw = boot({ network: async () => Object.defineProperty(new Response(version), 'type', { value: 'basic' }) });
+    const path = '/data/nepal-admin-country/2.0.1/manifest.json';
+    await sw.request(path);
+    version = 'fresh';
+    expect(await (await sw.request(path, 'cors', 'reload'))!.text()).toBe('fresh');
+    expect(await (await sw.request(path))!.text()).toBe('fresh');
   });
   it('leaves unversioned data paths and other origins to the network', async () => {
     const sw = boot({ network: offline });
