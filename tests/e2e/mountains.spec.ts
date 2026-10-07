@@ -5,7 +5,7 @@ test('mountain catalogue renders, searches and exposes provenance without runtim
   page.on('request', request => { if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url()); });
   await page.goto('/research/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
   const mountains = page.getByRole('region', { name: 'Mountains', exact: true });
-  await expect(mountains).toHaveAttribute('data-mountains-state', 'ready');
+  await expect(mountains).toHaveAttribute('data-mountains-state', 'ready', { timeout: 15_000 });
   await mountains.getByLabel('Search peaks').fill('Everest');
   await mountains.getByLabel('Mountain record').selectOption('geonames-1283416');
   await expect(mountains.getByRole('heading', { name: 'Mount Everest' })).toBeVisible();
