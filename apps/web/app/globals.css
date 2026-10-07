@@ -607,3 +607,10 @@ tbody th { color: var(--ink-strong); }
 #live-contract-checks select { display: block; width: 100%; max-width: 32rem; min-width: 0; min-height: 44px; }
 #live-contract-checks button { margin-block: .75rem; }
 #live-contract-checks dl { max-width: 52rem; }
+/* Offline shell (Feature 47) */
+.offline-banner, .update-banner { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem 1rem; padding: .7rem clamp(1rem, 3vw, 3rem); border-bottom: 1px solid #4f4785; background: #f3f1fa; color: var(--ink-strong); font-size: .9rem; }
+.offline-banner p, .update-banner p { margin: 0; }
+.offline-banner p[lang="ne"] { color: var(--muted-strong); }
+.update-banner { border-color: var(--line-strong); background: var(--surface); }
+.update-banner button { min-height: 44px; }
+

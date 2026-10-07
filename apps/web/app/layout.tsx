@@ -1,4 +1,5 @@
 import { SiteNavigation } from '../components/site-navigation';
+import { OfflineShell } from '../components/offline-shell';
 import { isPublicRelease } from '../lib/public-release';
 import type { Metadata } from 'next';
 import Link from 'next/link';
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </Link>
       <SiteNavigation />
     </div></header>
+    <OfflineShell />
     <main id="main" tabIndex={-1}>{isPublicRelease ? <aside className="release-banner" aria-label="Public release availability"><div className="release-banner-inner"><details className="release-details"><summary><span className="release-kicker">Public release</span><span>reviewed datasets only</span><span className="release-disclosure">Availability details</span></summary><p><strong>Reviewed datasets only.</strong> BIPAD records, population, exposure, hazard graph, time machine, search, comparison, location summaries and evidence-based analyst features are unavailable pending redistribution review. Boundaries, terrain, rivers, glaciers, imagery, climate, OSM infrastructure, earthquakes and river-only scenarios remain available. <Link href="/licenses/">Availability and source terms</Link>.</p></details></div></aside> : null}{children}</main>
     <footer className="site-footer"><div className="site-footer-inner">
       <div className="footer-statement"><span className="footer-mark" aria-hidden="true">△</span><p><strong>Himalayan Disaster Atlas</strong><br />Public, read-only and evidence-traceable. Not an official warning service.</p></div>

@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "offline-shell-policy",
+  "cache_format_version": 1,
+  "shell_pages": [
+    "/",
+    "/live/",
+    "/offline/",
+    "/methodology/",
+    "/sources/"
+  ],
+  "dynamic_imports": [],
+  "vendor_directories": [],
+  "extra_files": [
+    "/icon.svg"
+  ],
+  "shell_budget_bytes": 3145728,
+  "live_retention_seconds": 604800,
+  "network_timeout_ms": 8000,
+  "static_entries": 160,
+  "rules": [
+    "Every shell file is pinned by byte size and SHA-256 at build time and verified before the service worker installs; a mismatch keeps the previous version.",
+    "The map library is not precached, to keep the first offline download small; it is cached only after it has been used online. Offline, every record stays in the tables.",
+    "Live index and snapshots are network first. Any HTTP response is the server's current answer; only a network failure or timeout falls back to a stored copy.",
+    "A stored live copy is kept only if the network copy was verified against the index reference, and is re-verified before every offline use.",
+    "Offline copies are always labelled LAST KNOWN with the time they were saved on this device; they are never shown as freshly checked.",
+    "Source freshness is still recomputed from preserved source, fetch and workflow timestamps, so an expired copy is shown as STALE.",
+    "Stored live copies older than the retention limit are deleted and never served.",
+    "Caches are versioned; an upgrade activates only after the user chooses to reload, and old caches are deleted on activation."
+  ],
+  "last_known": {
+    "glyph": "↺",
+    "en": "LAST KNOWN",
+    "ne": "पछिल्लो ज्ञात"
+  },
+  "copy": {
+    "en": {
+      "offline_banner": "You are offline. Pages and live conditions shown are the last known copies saved on this device; nothing has been rechecked.",
+      "last_known_notice": "LAST KNOWN — saved on this device {time}. Not rechecked; this is not a current check.",
+      "last_known_feed": "LAST KNOWN copy saved {time}; not rechecked.",
+      "update_ready": "An updated version of the atlas is ready.",
+      "update_action": "Reload to update"
+    },
+    "ne": {
+      "offline_banner": "तपाईं अफलाइन हुनुहुन्छ। देखाइएका पृष्ठ र अवस्था यस उपकरणमा सुरक्षित पछिल्लो ज्ञात प्रतिहरू हुन्; केही पनि पुनः जाँच गरिएको छैन।",
+      "last_known_notice": "पछिल्लो ज्ञात (LAST KNOWN) — यस उपकरणमा {time} मा सुरक्षित। पुनः जाँच गरिएको छैन; यो हालको जाँच होइन।",
+      "last_known_feed": "{time} मा सुरक्षित पछिल्लो ज्ञात प्रति; पुनः जाँच गरिएको छैन।",
+      "update_ready": "एटलसको नयाँ संस्करण तयार छ।",
+      "update_action": "अद्यावधिक गर्न पुनः लोड गर्नुहोस्"
+    }
+  }
+}
