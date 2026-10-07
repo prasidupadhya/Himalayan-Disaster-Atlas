@@ -26,3 +26,5 @@ apps/web/public/legal/
 
 .dev.vars
 .dev.vars.*
+
+data/live-publication/

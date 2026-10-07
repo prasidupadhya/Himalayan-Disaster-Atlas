@@ -50,6 +50,9 @@
         "properties": {
           "id": { "type": "string", "minLength": 1, "maxLength": 120 },
           "label": { "type": ["string", "null"], "minLength": 1, "maxLength": 240 },
+          "source_revision_at": { "$ref": "#/definitions/nullableTime" },
+          "source_url": { "anyOf": [{ "$ref": "#/definitions/https" }, { "type": "null" }] },
+          "source_network": { "type": ["string", "null"], "minLength": 1, "maxLength": 40 },
           "coordinates": { "anyOf": [{ "type": "null" }, { "type": "array", "items": [{ "type": "number", "minimum": -180, "maximum": 180 }, { "type": "number", "minimum": -90, "maximum": 90 }], "additionalItems": false, "minItems": 2, "maxItems": 2 }] },
           "evidence_type": { "$ref": "#/definitions/evidence" },
           "observed_at": { "$ref": "#/definitions/nullableTime" },

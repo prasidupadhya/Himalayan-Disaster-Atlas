@@ -1,7 +1,8 @@
 import { isReleaseIncluded } from '../../lib/public-release';
-import catalogJson from '../../public/data/atlas-provenance/1.2.0/manifest.json';
+import catalogJson from '../../public/data/atlas-provenance/1.3.0/manifest.json';
 import { parseProvenanceCatalog } from '../../../../packages/contracts/provenance';
 import { DataCatalog } from '../../features/data-catalog/data-catalog';
+import { LiveDeliveryChecks } from '../../features/live-open-feeds/delivery';
 import { LiveContractChecks } from '../../features/live-contracts/live-contracts';
 
 export const metadata = { title: 'Data catalog' };
@@ -13,6 +14,7 @@ export default function CatalogPage() {
     <h1>Know exactly what powers the atlas.</h1>
     <p className="intro">Search the versioned release inventory, inspect lineage and limitations, and follow each record to its map, methodology and originating source.</p>
     <DataCatalog records={catalog.records.filter(record => isReleaseIncluded(record.key))} />
+    <LiveDeliveryChecks />
     <LiveContractChecks />
   </div>;
 }
