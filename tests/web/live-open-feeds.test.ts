@@ -5,6 +5,8 @@ import * as runtime from '../../packages/contracts/generated/live-runtime.cjs';
 import { assertReviewedLiveSource, liveFreshness, parseLiveIndex, parseLiveSnapshot } from '../../packages/contracts/live';
 import { loadLivePublication } from '../../apps/web/lib/live';
 import { deliveryFixture } from '../helpers/live-publication';
+// Spawned Python runs the complete acquisition path; shared CI runners exceed Vitest's 5-second default.
+const PYTHON_TIMEOUT_MS = 60_000;
 afterEach(() => vi.unstubAllGlobals());
 describe('open feed delivery and exact source review', () => {
   for (const state of ['normal', 'empty', 'failed', 'unavailable', 'stale'] as const) it(`keeps ${state} distinct with Node/TS semantic parity`, async () => {
@@ -48,7 +50,7 @@ describe('open feed delivery and exact source review', () => {
   });
   it('acquisition never introduces a Python/TS contract disagreement', () => {
     const f = deliveryFixture(); const r = spawnSync('.venv/bin/python', ['-c', 'import json,sys\nfrom pipelines.atlas_pipeline.live_contracts import parse_live_index,parse_live_snapshot\nd=json.load(sys.stdin)\nparse_live_index(d["index"])\nparse_live_snapshot(d["snapshot"])'], { input: JSON.stringify(f), encoding: 'utf8' }); expect(r.status, r.stderr).toBe(0);
-  });
+  }, PYTHON_TIMEOUT_MS);
 });
 
 it('Node publication gate rejects altered manifests, unreferenced files and bytes', async () => {
@@ -70,4 +72,4 @@ it('Node publication gate rejects altered manifests, unreferenced files and byte
     expect(() => verifyLiveFiles((name: string) => files.get(name)!, [...names, 'data/live-dhm/1.0.1/snapshot.json'])).toThrow('Unregistered');
     expect(readdirSync(directory)).toContain('live');
   } finally { rmSync(directory, { recursive: true, force: true }); }
-});
+}, PYTHON_TIMEOUT_MS);
