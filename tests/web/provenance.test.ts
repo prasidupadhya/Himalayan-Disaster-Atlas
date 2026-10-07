@@ -2,13 +2,13 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { buildSourceDirectory, currentProductionRecords, filterProvenanceRecords, parseProvenanceCatalog } from '../../packages/contracts/provenance';
 
-const catalog = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.7.0/manifest.json', 'utf8')));
+const catalog = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.8.0/manifest.json', 'utf8')));
 
 describe('provenance catalog', () => {
   it('adds live fixture and original feed policy without changing historical catalog records', () => {
     const old = parseProvenanceCatalog(JSON.parse(readFileSync('data/releases/atlas-provenance/1.1.0/manifest.json', 'utf8')));
     const added = catalog.records.filter(record => !old.records.some(previous => previous.key === record.key));
-    expect(added.map(record => record.key).sort()).toEqual(['atlas-flood-corridors@1.0.0', 'atlas-gmpe-bssa14@1.0.0', 'atlas-live-air-quality@1.0.0', 'atlas-live-conditions@1.0.0', 'atlas-live-contracts@1.0.0', 'atlas-live-offline-shell@1.0.0', 'atlas-live-open-feeds@1.0.0', 'nepal-hrsl-population@1.0.0']);
+    expect(added.map(record => record.key).sort()).toEqual(['atlas-flood-corridors@1.0.0', 'atlas-gmpe-bssa14@1.0.0', 'atlas-live-air-quality@1.0.0', 'atlas-live-conditions@1.0.0', 'atlas-live-contracts@1.0.0', 'atlas-live-offline-shell@1.0.0', 'atlas-live-offline-shell@1.1.0', 'atlas-live-open-feeds@1.0.0', 'atlas-public-evidence@1.0.0', 'nepal-hrsl-population@1.0.0', 'nepal-power-gridded-context@1.0.0', 'nepal-terrain-steepness@1.0.0']);
     for (const record of old.records) expect(catalog.records.find(current => current.key === record.key)).toEqual(record);
     expect(added.find(record => record.id === 'atlas-live-contracts')).toMatchObject({ is_fixture: true, state: 'fixture', license: 'MIT', evidence_type: 'unknown', parents: [] });
   });

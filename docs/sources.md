@@ -26,3 +26,9 @@ Feature 47 adds no source. Offline copies are byte-identical, checksum-verified 
 - Meta/CIESIN HRSL v1.5 general population, AWS Open Data, CC BY 4.0 — `nepal-hrsl-population@1.0.0`.
 - Boore et al. (2014) BSSA14 coefficients, doi:10.1193/070113EQS184M — `atlas-gmpe-bssa14@1.0.0`; reference values from pygmm 0.8.0 (MIT) used only in tests.
 - Corridor catalogue derived from HydroRIVERS, GLO, GeoNames, HRSL and OpenStreetMap — `atlas-flood-corridors@1.0.0`.
+
+## Hazard context (Features 53–58)
+
+- NASA POWER v10.0.0 monthly MERRA-2 Zarr on AWS Open Data, CC BY 4.0 — `nepal-power-gridded-context@1.0.0` (chunk hashes in `pipelines/power-context-sources.json`).
+- Copernicus DEM GLO-90 (tiles pinned in `pipelines/terrain-sources.json`) — `nepal-terrain-steepness@1.0.0`.
+- Atlas documents and release metadata — `atlas-public-evidence@1.0.0`.

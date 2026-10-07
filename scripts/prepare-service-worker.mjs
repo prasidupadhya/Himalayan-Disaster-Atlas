@@ -65,7 +65,7 @@ export function prepareServiceWorker(output = resolve(root, 'apps/web/out'), { l
   const shell = shellEntries(output, shellUrls(output, policy, loadable), policy);
   // A changed shell byte, policy or template yields a new cache version and an explicit upgrade.
   const version = hash(JSON.stringify({ shell, policy, template })).slice(0, 16);
-  const config = { version, shell, liveRetentionSeconds: policy.live_retention_seconds, networkTimeoutMs: policy.network_timeout_ms, staticEntries: policy.static_entries };
+  const config = { version, shell, liveRetentionSeconds: policy.live_retention_seconds, networkTimeoutMs: policy.network_timeout_ms, staticEntries: policy.static_entries, dataEntries: policy.data_entries };
   writeFileSync(resolve(output, 'sw.js'), template.replace(CONFIG, `/*@atlas-config*/ ${JSON.stringify(config)} /*@end*/`));
   console.log(`Offline shell ${version}: ${shell.length} checksum-pinned files, ${(shell.reduce((sum, item) => sum + item.bytes, 0) / 1048576).toFixed(2)} MiB.`);
   return config;

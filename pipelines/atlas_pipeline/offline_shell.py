@@ -37,10 +37,14 @@ def check_policy(policy):
     require(
         0 < policy["live_retention_seconds"] <= 30 * 86400
         and 1000 <= policy["network_timeout_ms"] <= 30000
-        and 0 < policy["shell_budget_bytes"] <= 8 * 1048576,
+        and 0 < policy["shell_budget_bytes"] <= 8 * 1048576
+        and 0 < policy.get("data_entries", 1) <= 400,
         "Offline retention, timeout or budget is outside its reviewed bounds",
     )
     return policy
+
+
+VERSION = "1.1.0"
 
 
 def main():
@@ -48,7 +52,7 @@ def main():
     register(
         "atlas-live-offline-shell",
         "Offline shell cache policy (not readings)",
-        "offline-shell/1.0.0: checksum-pinned app shell, network-first live data, "
+        "offline-shell/1.1.0: checksum-pinned app shell, network-first live data, cache-on-use immutable releases, "
         "last-known labelling, integrity re-verification and bounded retention",
         POLICY,
         [
@@ -56,6 +60,7 @@ def main():
             "Offline copies are last-known device copies, never current checks; expired copies are deleted.",
             "No official warning, damage, loss, inundation or casualty output is produced.",
         ],
+        version=VERSION,
     )
 
 

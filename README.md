@@ -342,3 +342,7 @@ Feature 47 adds the Atlas's own service worker: a checksum-pinned offline shell,
 ### Scenario simulator — Features 48, 49, 51, 57
 
 `/simulate/` runs bilingual (English/Nepali) educational scenarios entirely in the browser from checksum-verified releases: flood/GLOF corridor pulses at 18 verified release points with corridor-width exposure ranges, and BSSA14 earthquake shaking (Gorkha 2015 replay by default) with population and assets by PGA band. Assumptions are shown and acknowledged before each run; results are shareable by URL and printable as a report with input hashes. Inundation, damage, casualties and losses stay UNKNOWN. See [HRSL population](docs/hrsl-population.md), [flood corridors](docs/flood-corridors.md), [earthquake shaking](docs/earthquake-shaking.md) and [scenario reports](docs/scenario-reports.md).
+
+### Hazard context hub — Features 53–56 and 58
+
+`/hazards/` (English/Nepali) shows NASA POWER MERRA-2 rainfall, snow, SPI-3 dryness and maximum-temperature anomalies for the latest 12 months on native cells, district terrain steepness from Copernicus GLO-90 (landslide susceptibility stays UNKNOWN), the gated features 44, 50 and 52 with their unlock conditions, and an evidence analyst that quotes cited passages without generating text. See [climate context](docs/climate-context.md), [terrain steepness](docs/terrain-steepness.md) and [hazards hub](docs/hazards-hub.md). Roadmap status: [docs/ROADMAP.md](docs/ROADMAP.md).

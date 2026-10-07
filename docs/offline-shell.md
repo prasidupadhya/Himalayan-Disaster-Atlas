@@ -45,3 +45,7 @@ Pinned pages: `/`, `/live/`, `/offline/`, `/methodology/`, `/sources/`, with the
 - Cloudflare or any proxy that rewrites shell HTML/JS would change checksums. Installation then fails closed (no offline shell) rather than storing unverified bytes. `sw.js` and data paths are `no-transform`.
 - Adding a shell page, raising the budget, precaching the map or changing retention requires editing the policy and registering a **new version**.
 - Never serve a stored copy without the `last-known` header, never change timestamps in the worker, and never treat a timeout on navigation as offline.
+
+## Policy 1.1.0
+
+`atlas-live-offline-shell@1.1.0` adds `/hazards/`, `/simulate/` and `/simulate/report/` (with their code) to the checksum-pinned shell, raises the shell budget to 4 MiB, and caches immutable versioned `/data/<id>/<x.y.z>/` releases on first online use (cache first, at most 120 entries, cache `atlas-data-v1`). Live data keeps its network-first, LAST KNOWN handling. Pages still check every artifact's size and SHA-256 against its release manifest before use, so a stored copy cannot change what is shown. The hub and the simulator therefore work offline after one online visit. Version 1.0.0 stays published unchanged.

@@ -10,7 +10,7 @@ from jsonschema import Draft7Validator
 
 from .contracts import ROOT
 
-VERSION = "1.7.0"
+VERSION = "1.8.0"
 BASE = f"/data/atlas-provenance/{VERSION}/"
 RELEASE = ROOT / "data/releases/atlas-provenance" / VERSION
 PUBLIC = ROOT / "apps/web/public/data/atlas-provenance" / VERSION
@@ -32,6 +32,9 @@ NEW_RECORDS = {
     "nepal-hrsl-population": ("Population", "hrsl-population-method", "hrsl-population"),
     "atlas-flood-corridors": ("Analysis & models", "flood-corridors-method", "flood-corridors"),
     "atlas-gmpe-bssa14": ("Analysis & models", "earthquake-shaking-method", "earthquake-shaking"),
+    "nepal-power-gridded-context": ("Hydrology & climate", "climate-context-method", "climate-context"),
+    "nepal-terrain-steepness": ("Terrain", "terrain-steepness-method", "terrain-steepness"),
+    "atlas-public-evidence": ("Analysis & models", "public-evidence-method", "public-evidence"),
 }
 
 
@@ -469,6 +472,16 @@ def verify_provenance(path=RELEASE, public=PUBLIC):
     if manifest["version"] != VERSION:
         historical_keys = {item["key"] for item in manifest["records"]}
         expected["records"] = [item for item in expected["records"] if item["key"] in historical_keys]
+        # A historical catalogue records which versions were current at its own publication; a later
+        # version of a dataset must not rewrite that past state.
+        latest = {}
+        for item in expected["records"]:
+            if item["state"] != "fixture":
+                parts = tuple(int(x) for x in item["version"].split("."))
+                latest[item["id"]] = max(latest.get(item["id"], parts), parts)
+        for item in expected["records"]:
+            if item["state"] != "fixture":
+                item["state"] = "current" if tuple(int(x) for x in item["version"].split(".")) == latest[item["id"]] else "superseded"
         expected["version"] = manifest["version"]
         expected["generated_from_count"] = len(expected["records"])
     if manifest != expected:

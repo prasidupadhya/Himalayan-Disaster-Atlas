@@ -17,3 +17,5 @@
   .report-notice { break-inside: avoid; }
   table { break-inside: auto; } tr { break-inside: avoid; }
 }
+.report-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .75rem; }
+@media print { .report-top .language-switch { display: none; } }

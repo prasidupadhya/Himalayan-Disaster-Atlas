@@ -1,17 +1,20 @@
 /* Himalayan Disaster Atlas offline shell (Feature 47). Original MIT code.
  * The build replaces the configuration literal with a checksum-pinned shell manifest. */
 'use strict';
-const CONFIG = /*@atlas-config*/ { version: 'unbuilt', shell: [], liveRetentionSeconds: 604800, networkTimeoutMs: 8000, staticEntries: 160 } /*@end*/;
+const CONFIG = /*@atlas-config*/ { version: 'unbuilt', shell: [], liveRetentionSeconds: 604800, networkTimeoutMs: 8000, staticEntries: 160, dataEntries: 120 } /*@end*/;
 
 const PREFIX = 'atlas-';
 const SHELL_CACHE = `${PREFIX}shell-${CONFIG.version}`;
 const STATIC_CACHE = `${PREFIX}static-v1`;
 const LIVE_CACHE = `${PREFIX}live-v1`;
-const CURRENT = new Set([SHELL_CACHE, STATIC_CACHE, LIVE_CACHE]);
+const DATA_CACHE = `${PREFIX}data-v1`;
+const CURRENT = new Set([SHELL_CACHE, STATIC_CACHE, LIVE_CACHE, DATA_CACHE]);
 const LIVE_INDEX = '/live/latest.json';
 const LIVE_ARTIFACT = /^\/data\/live-[a-z0-9-]+\/\d+\.\d+\.\d+\/(?:snapshot|manifest)\.json$/;
 const LIVE_HISTORY = /^\/live\/history\/\d+\.\d+\.\d+\/index\.json$/;
 const STATIC_ASSET = /^\/(?:_next\/static|vendor)\//;
+// Versioned release paths are immutable (a changed release gets a new version), so they are safe to keep.
+const IMMUTABLE_DATA = /^\/data\/[a-z0-9-]+\/[0-9]+\.[0-9]+\.[0-9]+\//;
 const LIMITS = { index: 65536, artifact: 524288 };
 const DELIVERY = 'x-atlas-delivery';
 const CACHED_AT = 'x-atlas-cached-at';
@@ -145,18 +148,18 @@ async function pageData(request) {
   try { return await fetch(request); }
   catch { return (await (await caches.open(SHELL_CACHE)).match(new URL(request.url).pathname, { ignoreSearch: true })) ?? Response.error(); }
 }
-async function cacheFirst(request) {
+async function cacheFirst(request, name = STATIC_CACHE, limit = CONFIG.staticEntries) {
   const { pathname } = new URL(request.url);
   const shell = await (await caches.open(SHELL_CACHE)).match(pathname);
   if (shell) return shell;
-  const cache = await caches.open(STATIC_CACHE);
+  const cache = await caches.open(name);
   const cached = await cache.match(pathname);
   if (cached) return cached;
   const response = await fetch(request);
   if (response.ok && response.type === 'basic') {
     await cache.put(pathname, response.clone());
     const keys = await cache.keys();
-    for (const old of keys.slice(0, Math.max(0, keys.length - CONFIG.staticEntries))) await cache.delete(old);
+    for (const old of keys.slice(0, Math.max(0, keys.length - limit))) await cache.delete(old);
   }
   return response;
 }
@@ -178,6 +181,7 @@ self.addEventListener('fetch', event => {
   if (url.pathname === LIVE_INDEX || LIVE_ARTIFACT.test(url.pathname) || LIVE_HISTORY.test(url.pathname)) { event.respondWith(liveNetworkFirst(request)); return; }
   if (request.mode === 'navigate') { event.respondWith(navigate(request)); return; }
   if (STATIC_ASSET.test(url.pathname)) { event.respondWith(cacheFirst(request)); return; }
+  if (IMMUTABLE_DATA.test(url.pathname)) { event.respondWith(cacheFirst(request, DATA_CACHE, CONFIG.dataEntries)); return; }
   if (url.searchParams.has('_rsc') || /\/(?:index|__next\.[A-Za-z0-9_.-]+)\.txt$/.test(url.pathname)) { event.respondWith(pageData(request)); return; }
-  // Other files (including immutable /data releases) pass through to the network untouched.
+  // Other files pass through to the network untouched.
 });

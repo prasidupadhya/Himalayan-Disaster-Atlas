@@ -4,9 +4,11 @@ import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { parseCorridorCatalogue, parsePopulationGrid, type CorridorCatalogue, type ModelRelease } from '../../../../packages/contracts/model-release';
 import { ADMIN_MANIFESTS, loadDataset } from '../../lib/datasets';
 import { computeShaking, PGA_BANDS, validateScenario, type GmpeModel, type QuakeScenario, type ShakingResult } from '../../lib/earthquake';
-import { arrivals, decodeScenario, exposureRange, formatDuration, hydrograph, hydrographVolume, validateFlood, type FloodScenario, type Scenario } from '../../lib/flood-scenario';
+import { arrivals, decodeScenario, exposureRange, hydrograph, hydrographVolume, validateFlood, type FloodScenario, type Scenario } from '../../lib/flood-scenario';
 import { loadModelArtifact, loadModelRelease, manifestPath, MODEL_RELEASES } from '../../lib/model-release';
 import { originLabel } from './flood-panel';
+import { duration, REPORT } from './copy';
+import { formatNumber, LanguageSwitch, UI, useLanguage, type Lang } from '../../lib/i18n';
 import { loadAssets } from './quake-panel';
 
 const NOTICE = 'Scenario / educational estimate, not a forecast or warning';
@@ -43,9 +45,11 @@ async function build(scenario: Scenario, signal: AbortSignal): Promise<Report> {
 }
 
 export function ScenarioReport() {
+  const [lang, setLang] = useLanguage();
+  const r = REPORT[lang];
   const [scenario] = useState<Scenario | null>(() => { try { const s = new URLSearchParams(window.location.search).get('s'); return s ? decodeScenario(s) : null; } catch { return null; } });
   const [report, setReport] = useState<Report | null>(null);
-  const [error, setError] = useState<string | null>(scenario ? null : 'No valid scenario was supplied in the link. Run a scenario in the simulator first.');
+  const [error, setError] = useState<string | null>(null);
   const [generated] = useState(() => new Date().toISOString());
   useEffect(() => {
     if (!scenario) return;
@@ -62,25 +66,25 @@ export function ScenarioReport() {
     const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2) + '\n'], { type: 'application/json' })); a.download = `atlas-scenario-report-${report.scenario.kind}.json`; a.click(); URL.revokeObjectURL(a.href);
   };
 
-  return <article className="report-page">
+  return <article className="report-page" lang={lang}>
     <header className="report-header">
-      <p className="eyebrow">Scenario report</p>
-      <h1>{scenario?.kind === 'earthquake' ? 'Educational earthquake shaking scenario' : 'Educational flood / GLOF corridor scenario'}</h1>
-      <p className="report-notice"><strong>{NOTICE}.</strong> Official forecasts and warnings: {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url}>{a.name}</a> ({a.url})</span>)}.</p>
-      <p className="report-meta">Generated {generated} (viewer clock) · Himalayan Disaster Atlas · recomputed from verified static releases</p>
-      <div className="report-actions"><button type="button" onClick={() => window.print()} disabled={!report}>Print / save as PDF</button><button type="button" onClick={json} disabled={!report}>Download report JSON</button><a href={scenario ? `/simulate/?s=${new URLSearchParams(window.location.search).get('s')}` : '/simulate/'}>Back to the simulator</a></div>
+      <div className="report-top"><p className="eyebrow">{r.eyebrow}</p><LanguageSwitch lang={lang} onChange={setLang} /></div>
+      <h1>{scenario?.kind === 'earthquake' ? r.quakeTitle : r.floodTitle}</h1>
+      <p className="report-notice"><strong>{UI[lang].scenarioNotice}.</strong> {r.official} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url}>{a.name}</a> ({a.url})</span>)}.</p>
+      <p className="report-meta">{r.generated(generated)}</p>
+      <div className="report-actions"><button type="button" onClick={() => window.print()} disabled={!report}>{r.print}</button><button type="button" onClick={json} disabled={!report}>{r.json}</button><a href={scenario ? `/simulate/?s=${new URLSearchParams(window.location.search).get('s')}` : '/simulate/'}>{r.back}</a></div>
     </header>
-    {error && <p className="sim-problem" role="alert">{error}</p>}
-    {!report && !error && <p role="status">Recomputing the scenario from verified inputs…</p>}
+    {(error || !scenario) && <p className="sim-problem" role="alert">{error ?? r.invalid}</p>}
+    {!report && !error && scenario && <p role="status">{r.recomputing}</p>}
     {report && <>
-      <section><h2>Inputs and data versions</h2>
-        <table><thead><tr><th scope="col">Release</th><th scope="col">Manifest SHA-256</th></tr></thead>
+      <section><h2>{r.inputs}</h2>
+        <table><thead><tr><th scope="col">{r.release}</th><th scope="col">{r.hash}</th></tr></thead>
           <tbody>{report.inputs.map(i => <tr key={i.id}><th scope="row"><a href={i.manifest}>{i.id}@{i.version}</a></th><td className="report-hash">{i.sha256}</td></tr>)}</tbody></table>
         <pre className="report-json">{JSON.stringify(report.scenario, null, 2)}</pre>
       </section>
-      {report.body.kind === 'flood' ? <FloodReport body={report.body} /> : <QuakeReport body={report.body} />}
-      <section><h2>Limitations</h2><ul>{report.release.flatMap(r => r.metadata.limitations).map(l => <li key={l}>{l}</li>)}</ul></section>
-      <section><h2>Not estimated (UNKNOWN)</h2><p>Inundation depth and extent, building damage, casualties, repair costs, hydropower downtime and economic loss are UNKNOWN: no reviewed inputs and validation exist. Absence of a value here is not zero.</p></section>
+      {report.body.kind === 'flood' ? <FloodReport body={report.body} lang={lang} /> : <QuakeReport body={report.body} lang={lang} />}
+      <section><h2>{r.limitations}</h2>{lang === 'ne' && <p>{r.limitationsLang}</p>}<ul lang="en">{report.release.flatMap(r => r.metadata.limitations).map(l => <li key={l}>{l}</li>)}</ul></section>
+      <section><h2>{r.unknownTitle}</h2><p>{r.unknownText}</p></section>
     </>}
   </article>;
 }
@@ -97,27 +101,32 @@ function quakeJson(body: QuakeBody) {
     population_beyond_domain: body.result.population.beyond, assets: body.result.assets, district_points: body.result.sites };
 }
 
-function FloodReport({ body }: { body: FloodBody }) {
+function FloodReport({ body, lang }: { body: FloodBody; lang: Lang }) {
+  const r = REPORT[lang];
   const origin = body.catalogue.origins.find(o => o.id === body.scenario.origin)!;
   const h = hydrograph(body.scenario);
-  return <section><h2>Results</h2>
-    <p><strong>Release point:</strong> {originLabel(origin)} · path {origin.path_length_km.toFixed(1)} km ({origin.termination.replace('_', ' ')}).</p>
-    <p><strong>Hydrograph:</strong> {body.scenario.shape}, {body.scenario.volume_m3.toLocaleString('en-US')} m³ over {formatDuration(body.scenario.duration_s)}, source peak {h.peak_m3_s.toFixed(1)} m³/s (volume check {hydrographVolume(h.points).toLocaleString('en-US')} m³). Translated without attenuation.</p>
-    <table><caption>Arrival (declared celerities {body.scenario.celerity_m_s.join('/')} m/s) and potential exposure (corridors {body.catalogue.widths_m.join('/')} m each side)</caption>
-      <thead><tr><th scope="col">Distance</th><th scope="col">Front arrival</th><th scope="col">Pulse ends</th><th scope="col">Population (range)</th><th scope="col">Mapped assets (range)</th></tr></thead>
-      <tbody>{origin.checkpoints.map(row => { const a = arrivals(body.scenario, row.prefix_km); const r = exposureRange(row.by_width, body.catalogue.widths_m); return <tr key={row.prefix_km}>
-        <th scope="row">{row.prefix_km.toFixed(1)} km</th><td>{formatDuration(a.front_s[0])} – {formatDuration(a.front_s[2])}</td><td>{formatDuration(a.end_s[0])} – {formatDuration(a.end_s[2])}</td>
-        <td>{r.population.min === null ? 'UNKNOWN' : `${Math.round(r.population.min).toLocaleString('en-US')}–${Math.round(r.population.max!).toLocaleString('en-US')}`}{r.population.partial ? ' (known subtotal; part of the area UNKNOWN)' : ''}</td>
-        <td>{r.assets.min}–{r.assets.max}</td></tr>; })}</tbody></table>
+  const n = (v: number | null, f = 0) => formatNumber(v, lang, f);
+  const list = (vs: number[]) => vs.map(v => n(v, v % 1 ? 1 : 0)).join('/');
+  return <section><h2>{r.results}</h2>
+    <p><strong>{r.releasePoint}:</strong> {originLabel(origin, lang)} · {r.path} {n(origin.path_length_km, 1)} km ({origin.termination.replace('_', ' ')}).</p>
+    <p><strong>{r.hydrograph}:</strong> {r.hydroText(body.scenario.shape, n(body.scenario.volume_m3), duration(body.scenario.duration_s, lang), n(h.peak_m3_s, 1), n(hydrographVolume(h.points)))}</p>
+    <table><caption>{r.floodCaption(list(body.scenario.celerity_m_s), list(body.catalogue.widths_m))}</caption>
+      <thead><tr><th scope="col">{r.distance}</th><th scope="col">{r.front}</th><th scope="col">{r.ends}</th><th scope="col">{r.popRange}</th><th scope="col">{r.assetRange}</th></tr></thead>
+      <tbody>{origin.checkpoints.map(row => { const a = arrivals(body.scenario, row.prefix_km); const x = exposureRange(row.by_width, body.catalogue.widths_m); return <tr key={row.prefix_km}>
+        <th scope="row">{n(row.prefix_km, 1)} km</th><td>{duration(a.front_s[0], lang)} – {duration(a.front_s[2], lang)}</td><td>{duration(a.end_s[0], lang)} – {duration(a.end_s[2], lang)}</td>
+        <td>{x.population.min === null ? n(null) : `${n(Math.round(x.population.min))}–${n(Math.round(x.population.max!))}`}{x.population.partial ? ` ${r.partial}` : ''}</td>
+        <td>{n(x.assets.min)}–{n(x.assets.max)}</td></tr>; })}</tbody></table>
   </section>;
 }
 
-function QuakeReport({ body }: { body: QuakeBody }) {
+function QuakeReport({ body, lang }: { body: QuakeBody; lang: Lang }) {
+  const r = REPORT[lang];
   const s = body.scenario;
-  return <section><h2>Results</h2>
-    <p><strong>Scenario:</strong> M{s.magnitude} {s.mechanism} at {s.longitude.toFixed(3)}°E, {s.latitude.toFixed(3)}°N; {s.rupture.type === 'point' ? 'point source' : `${s.rupture.length_km} km line at ${s.rupture.strike_deg}°`}; uniform V<sub>S30</sub> {s.vs30} m/s. Model {body.model.model} (doi:{body.model.doi}).</p>
-    <table><caption>Population by PGA band (median, −1σ, +1σ)</caption><thead><tr><th scope="col">Band</th><th scope="col">Median</th><th scope="col">−1σ</th><th scope="col">+1σ</th></tr></thead>
-      <tbody>{PGA_BANDS.map((b, i) => <tr key={b.label}><th scope="row">{b.label}</th><td>{Math.round(body.result.population.central[i]).toLocaleString('en-US')}</td><td>{Math.round(body.result.population.low[i]).toLocaleString('en-US')}</td><td>{Math.round(body.result.population.high[i]).toLocaleString('en-US')}</td></tr>)}</tbody></table>
-    <p>Population beyond the 400 km model domain (no band): {Math.round(body.result.population.beyond).toLocaleString('en-US')}.</p>
+  const n = (v: number | null, f = 0) => formatNumber(v, lang, f);
+  return <section><h2>{r.results}</h2>
+    <p><strong>{r.scenario}:</strong> M{n(s.magnitude, 1)} {s.mechanism} · {n(s.longitude, 3)}°E, {n(s.latitude, 3)}°N; {s.rupture.type === 'point' ? r.point : r.line(n(s.rupture.length_km), n(s.rupture.strike_deg))}; {r.uniform} V<sub>S30</sub> {n(s.vs30)} m/s. {r.model} {body.model.model} (doi:{body.model.doi}).</p>
+    <table><caption>{r.bandCaption}</caption><thead><tr><th scope="col">{r.band}</th><th scope="col">{r.median}</th><th scope="col">−1σ</th><th scope="col">+1σ</th></tr></thead>
+      <tbody>{PGA_BANDS.map((b, i) => <tr key={b.label}><th scope="row">{b.label}</th><td>{n(Math.round(body.result.population.central[i]))}</td><td>{n(Math.round(body.result.population.low[i]))}</td><td>{n(Math.round(body.result.population.high[i]))}</td></tr>)}</tbody></table>
+    <p>{r.beyond(n(Math.round(body.result.population.beyond)))}</p>
   </section>;
 }

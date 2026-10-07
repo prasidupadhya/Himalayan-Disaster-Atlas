@@ -68,7 +68,10 @@
     "data:offline-shell": ".venv/bin/python -m pipelines.atlas_pipeline.offline_shell",
     "data:hrsl-population": ".venv/bin/python -m pipelines.atlas_pipeline.population_hrsl",
     "data:flood-corridors": ".venv/bin/python -m pipelines.atlas_pipeline.flood_corridors",
-    "data:gmpe": ".venv/bin/python -m pipelines.atlas_pipeline.gmpe"
+    "data:gmpe": ".venv/bin/python -m pipelines.atlas_pipeline.gmpe",
+    "data:power-context": ".venv/bin/python -m pipelines.atlas_pipeline.power_context",
+    "data:terrain-steepness": ".venv/bin/python -m pipelines.atlas_pipeline.terrain_steepness",
+    "data:evidence-corpus": ".venv/bin/python -m pipelines.atlas_pipeline.evidence_corpus"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

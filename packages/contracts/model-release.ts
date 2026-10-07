@@ -12,6 +12,7 @@ export interface ModelRelease {
     attribution: string; observation_date: string | null; publication_date: string | null; retrieval_date: string; processing_date: string; processing_version: string;
     method: string; evidence_type: 'observed' | 'derived' | 'estimated' | 'modelled' | 'historical' | 'unknown'; status: string; is_fixture: boolean;
     limitations: string[]; uncertainty: string; spatial_coverage: { description: string; bbox: number[] }; temporal_coverage: { start: string | null; end: string | null };
+    update_frequency?: 'static' | 'periodic' | 'operational'; stale_after?: string | null;
   };
   inputs: ModelInput[]; artifacts: Record<string, ModelArtifact>; summary: Record<string, unknown>;
 }
@@ -91,4 +92,49 @@ export function parseCorridorCatalogue(value: unknown, originCount: number): Cor
     }
   }
   return c;
+}
+
+// ---------- Gridded climate context (Features 54-55) ----------
+export type SpiClassId = 'extremely-dry' | 'severely-dry' | 'moderately-dry' | 'near-normal' | 'moderately-wet' | 'severely-wet' | 'extremely-wet';
+export interface ClimateRecent {
+  precip_mm_day: number; precip_anomaly_mm_day: number; precip_percent_of_normal: number | null;
+  snowfall_mm_day: number; snow_depth_cm: number; snow_depth_anomaly_cm: number; snow_cover_fraction: number; snow_cover_anomaly: number;
+  tmax_c: number; tmax_anomaly_c: number; tmax_z: number | null; precip_3mo_mm: number; spi3: number; spi3_class: SpiClassId;
+}
+export interface ClimateCell {
+  id: string; lat: number; lon: number; bounds: [number, number, number, number]; nepal_area_km2: number; cell_area_km2: number;
+  normals: Record<'PRECTOTCORR' | 'PRECSNOLAND' | 'SNODP' | 'FRSNO' | 'T2M_MAX', number[]>; tmax_baseline_std_c: Array<number | null>;
+  spi3_fit: Array<{ alpha: number; beta: number; q: number; n: number }>; recent: ClimateRecent[];
+}
+export interface ClimateContext {
+  format: 'atlas-power-context@1'; baseline: [number, number]; recent_months: string[]; latest_month: string;
+  spi_classes: Array<{ id: SpiClassId; min: number | null; max: number | null; label: string }>;
+  variables: Record<string, { unit: string; label: string }>; cells: ClimateCell[];
+  national: Array<{ month: string; precip_anomaly_mm_day: number; tmax_anomaly_c: number; spi3_area_share: Record<SpiClassId, number> }>;
+}
+export function parseClimateContext(value: unknown, summary: { cells: number; latest_month: string }): ClimateContext {
+  const c = value as ClimateContext;
+  require(!!c && c.format === 'atlas-power-context@1' && Array.isArray(c.cells) && c.cells.length === summary.cells && c.latest_month === summary.latest_month, 'Unsupported climate context');
+  require(c.recent_months.length === 12 && c.recent_months[11] === c.latest_month && c.national.length === 12, 'Climate months differ');
+  const ids = new Set<string>();
+  for (const cell of c.cells) {
+    require(!ids.has(cell.id) && cell.nepal_area_km2 > 0 && cell.recent.length === 12, 'Invalid climate cell'); ids.add(cell.id);
+    for (const row of cell.recent) require(row.precip_mm_day >= 0 && row.snow_cover_fraction >= 0 && row.snow_cover_fraction <= 1 && Number.isFinite(row.spi3), 'Climate value outside physical bounds');
+  }
+  for (const row of c.national) require(Math.abs(Object.values(row.spi3_area_share).reduce((a, b) => a + b, 0) - 1) < 1e-3, 'SPI shares must sum to 1');
+  return c;
+}
+
+// ---------- District terrain steepness (Feature 53) ----------
+export interface DistrictSteepness {
+  district_id: string; name: string; province: string; province_pcode: string; area_km2: number; boundary_area_km2: number | null;
+  slope_class_share: Record<'0-5' | '5-15' | '15-30' | '30-45' | '45+', number>; slope_mean_deg: number; slope_median_deg: number;
+  share_steeper_than_30_deg: number; elevation_mean_m: number; elevation_min_m: number; elevation_max_m: number;
+}
+export interface TerrainSteepness { format: 'atlas-terrain-steepness@1'; slope_classes: Array<{ id: string; min: number; max: number }>; districts: DistrictSteepness[]; national_slope_class_share: Record<string, number>; method: string }
+export function parseTerrainSteepness(value: unknown, summary: { districts: number }): TerrainSteepness {
+  const t = value as TerrainSteepness;
+  require(!!t && t.format === 'atlas-terrain-steepness@1' && t.districts.length === summary.districts, 'Unsupported terrain context');
+  for (const d of t.districts) require(Math.abs(Object.values(d.slope_class_share).reduce((a, b) => a + b, 0) - 1) < 1e-3 && d.share_steeper_than_30_deg >= 0 && d.share_steeper_than_30_deg <= 1, 'Invalid district steepness');
+  return t;
 }
