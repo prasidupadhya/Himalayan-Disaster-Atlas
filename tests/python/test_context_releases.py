@@ -44,7 +44,7 @@ class SpiMathTest(unittest.TestCase):
 
     def test_mckee_classes_partition_the_line(self):
         self.assertEqual([spi_class(v) for v in (-3, -2, -1.5, -1, 0, 0.999, 1, 1.5, 2, 3)],
-                         ["extremely-dry", "severely-dry", "moderately-dry", "near-normal", "near-normal", "near-normal",
+                         ["extremely-dry", "extremely-dry", "severely-dry", "moderately-dry", "near-normal", "near-normal",
                           "moderately-wet", "severely-wet", "extremely-wet", "extremely-wet"])
         self.assertEqual(len(SPI_CLASSES), 7)
 

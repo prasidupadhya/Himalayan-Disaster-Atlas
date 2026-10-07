@@ -1,5 +1,5 @@
 import type { CorridorCatalogue, CorridorExposure, CorridorOrigin } from '../../../packages/contracts/model-release';
-import type { QuakeScenario } from './earthquake';
+import { MECHANISMS, VS30_CLASSES, type QuakeScenario } from './earthquake';
 
 export type HydrographShape = 'rectangular' | 'triangular';
 export interface FloodScenario {
@@ -17,7 +17,7 @@ export function validateFlood(s: FloodScenario, catalogue?: CorridorCatalogue): 
   const within = (v: number, [a, b]: readonly [number, number]) => Number.isFinite(v) && v >= a && v <= b;
   if (!within(s.volume_m3, FLOOD_LIMITS.volume_m3)) e.push('Release volume must be 1,000–500,000,000 m³ (declared demonstration bounds).');
   if (!within(s.duration_s, FLOOD_LIMITS.duration_s)) e.push('Release duration must be 10 minutes to 48 hours.');
-  if (s.shape === 'triangular' && !within(s.peak_fraction, FLOOD_LIMITS.peak_fraction)) e.push('Time to peak must be 5–95% of the duration.');
+  if (!within(s.peak_fraction, FLOOD_LIMITS.peak_fraction)) e.push('Time to peak must be 5–95% of the duration.');
   const [lo, mid, hi] = s.celerity_m_s;
   if (![lo, mid, hi].every(v => within(v, FLOOD_LIMITS.celerity_m_s))) e.push('Each assumed celerity must be 0.1–10 m/s.');
   else if (!(lo <= mid && mid <= hi)) e.push('Celerities must be ordered: minimum ≤ central ≤ maximum.');
@@ -88,7 +88,7 @@ export function decodeScenario(value: string): Scenario | null {
     if (s?.version !== 1) return null;
     if (s.kind === 'flood' && typeof s.origin === 'string' && (s.shape === 'rectangular' || s.shape === 'triangular') && Array.isArray(s.celerity_m_s) && s.celerity_m_s.length === 3
       && [s.volume_m3, s.duration_s, s.peak_fraction, ...s.celerity_m_s].every(v => typeof v === 'number' && Number.isFinite(v))) return { kind: 'flood', version: 1, origin: s.origin, shape: s.shape, volume_m3: s.volume_m3, duration_s: s.duration_s, peak_fraction: s.peak_fraction, celerity_m_s: [s.celerity_m_s[0], s.celerity_m_s[1], s.celerity_m_s[2]] };
-    if (s.kind === 'earthquake' && [s.longitude, s.latitude, s.magnitude, s.vs30].every(v => typeof v === 'number' && Number.isFinite(v)) && typeof s.mechanism === 'string'
+    if (s.kind === 'earthquake' && [s.longitude, s.latitude, s.magnitude, s.vs30].every(v => typeof v === 'number' && Number.isFinite(v)) && (MECHANISMS as readonly unknown[]).includes(s.mechanism) && (VS30_CLASSES as readonly unknown[]).includes(s.vs30)
       && s.rupture && (s.rupture.type === 'point' || (s.rupture.type === 'line' && Number.isFinite(s.rupture.length_km) && Number.isFinite(s.rupture.strike_deg)))) {
       return { kind: 'earthquake', version: 1, preset: typeof s.preset === 'string' ? s.preset : null, longitude: s.longitude, latitude: s.latitude, magnitude: s.magnitude, mechanism: s.mechanism, vs30: s.vs30,
         rupture: s.rupture.type === 'point' ? { type: 'point' } : { type: 'line', length_km: s.rupture.length_km, strike_deg: s.rupture.strike_deg } };

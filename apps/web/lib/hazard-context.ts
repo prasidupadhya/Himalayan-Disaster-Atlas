@@ -19,13 +19,13 @@ export const SPI_SCALE: ScaleClass[] = [
   { id: 'extremely-wet', label: { en: 'Extremely wet (≥ 2)', ne: 'अत्यन्त भिजेको (≥ २)' }, color: '#8fe0d2', min: 2, max: null },
 ];
 export const PRECIP_SCALE: ScaleClass[] = [
-  { id: 'lt50', label: { en: '< 50% of normal', ne: 'सामान्यको ५०% भन्दा कम' }, color: '#f0c47a', min: null, max: 50 },
+  { id: 'lt50', label: { en: '≤ 50% of normal', ne: 'सामान्यको ५०% वा कम' }, color: '#f0c47a', min: null, max: 50 },
   { id: '50-75', label: { en: '50–75%', ne: '५०–७५%' }, color: '#c9923f', min: 50, max: 75 },
   { id: '75-90', label: { en: '75–90%', ne: '७५–९०%' }, color: '#9a6a2c', min: 75, max: 90 },
   { id: '90-110', label: { en: '90–110% (near normal)', ne: '९०–११०% (सामान्य नजिक)' }, color: NEUTRAL, min: 90, max: 110 },
   { id: '110-125', label: { en: '110–125%', ne: '११०–१२५%' }, color: '#2b8a80', min: 110, max: 125 },
   { id: '125-150', label: { en: '125–150%', ne: '१२५–१५०%' }, color: '#47b3a5', min: 125, max: 150 },
-  { id: 'gt150', label: { en: '> 150% of normal', ne: 'सामान्यको १५०% भन्दा बढी' }, color: '#8fe0d2', min: 150, max: null },
+  { id: 'gt150', label: { en: '≥ 150% of normal', ne: 'सामान्यको १५०% वा बढी' }, color: '#8fe0d2', min: 150, max: null },
 ];
 export const TMAX_SCALE: ScaleClass[] = [
   { id: 'much-cooler', label: { en: '≤ −1.5 °C', ne: '≤ −१.५ °C' }, color: '#9cc9ff', min: null, max: -1.5 },
@@ -49,10 +49,20 @@ export const STEEP_SCALE: ScaleClass[] = [
   { id: 'ge55', label: { en: '≥ 55%', ne: '≥ ५५%' }, color: '#ffe3bd', min: 0.55, max: null },
 ];
 
-/** Lower bound inclusive, upper bound exclusive; null is UNKNOWN (never a class). */
+/**
+ * A boundary value belongs to the class farther from normal (McKee 1993: SPI ≤ −2 is extremely dry, ≥ 2 extremely wet).
+ * Classes below the neutral class include their upper bound, classes above it their lower bound, and the neutral class
+ * neither. Scales without a neutral class (sequential) include the lower bound. null is UNKNOWN, never a class.
+ */
 export function classify(scale: ScaleClass[], value: number | null): ScaleClass | null {
   if (value === null || !Number.isFinite(value)) return null;
-  return scale.find(c => (c.min === null || value >= c.min) && (c.max === null || value < c.max)) ?? null;
+  const neutral = scale.findIndex(c => c.color === NEUTRAL);
+  return scale.find((c, i) => {
+    const below = neutral >= 0 && i < neutral, above = neutral < 0 || i > neutral;
+    const lowOk = c.min === null || (above ? value >= c.min : value > c.min);
+    const highOk = c.max === null || (below ? value <= c.max : value < c.max);
+    return lowOk && highOk;
+  }) ?? null;
 }
 
 export type ClimateView = 'spi3' | 'precip' | 'tmax' | 'snow';

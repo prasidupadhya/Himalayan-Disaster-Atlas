@@ -42,7 +42,10 @@ export function formatTime(iso: string | null, lang: Lang = 'en') {
 /** Source numbers are shown as published; only display rounding to 0.01 is applied to model summaries. */
 export function formatValue(value: number | null, lang: Lang = 'en', round = false) {
   if (value === null) return policy.copy[lang].unknown;
-  return localDigits(String(round ? Math.round(value * 100) / 100 : value), lang);
+  if (!round) return localDigits(String(value), lang);
+  const rounded = Math.round(value * 100) / 100;
+  // A source zero stays 0; a positive amount that rounds to zero is shown as <0.01, never as 0.
+  return localDigits(rounded === 0 && value > 0 ? '<0.01' : String(rounded), lang);
 }
 
 export interface FeedView {

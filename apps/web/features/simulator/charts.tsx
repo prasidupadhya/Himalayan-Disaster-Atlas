@@ -34,13 +34,15 @@ export function HydrographChart({ points, title, lang }: { points: [number, numb
   const c = simCopy(lang);
   const summary = c.chartSummary(formatNumber(peakAt[1], lang, 1), duration(peakAt[0], lang), duration(tMax, lang));
   const qTicks = [0, 0.5, 1].map(f => f * qMax);
+  // Enough decimals that the ticks of a very small release stay distinct (and never all read 0.0).
+  const qDigits = qMax >= 10 ? 0 : Math.min(4, Math.max(1, Math.ceil(-Math.log10(qMax / 2)) + 1));
   return <figure className="sim-chart" aria-labelledby={`${id}-title`}>
     <figcaption id={`${id}-title`}>{title}</figcaption>
     <div ref={frame} className="sim-chart-frame">
     <svg viewBox={`0 0 ${W} ${H}`} width={W} height={H} role="img" aria-label={c.chartAria(title, formatNumber(qMax, lang, 1), duration(tMax, lang))}
       onPointerMove={event => { const box = event.currentTarget.getBoundingClientRect(); const px = (event.clientX - box.left) / box.width * W; setHover(Math.max(0, Math.min(tMax, (px - L) / (W - L - R) * tMax))); }}
       onPointerLeave={() => setHover(null)}>
-      {qTicks.map(q => <g key={q}><line x1={L} x2={W - R} y1={y(q)} y2={y(q)} className="sim-grid" /><text x={L - 8} y={y(q) + 4} textAnchor="end" className="sim-axis">{formatNumber(q, lang, q < 10 ? 1 : 0)}</text></g>)}
+      {qTicks.map(q => <g key={q}><line x1={L} x2={W - R} y1={y(q)} y2={y(q)} className="sim-grid" /><text x={L - 8} y={y(q) + 4} textAnchor="end" className="sim-axis">{formatNumber(q, lang, qDigits)}</text></g>)}
       {ticks.map((t, i) => <text key={t} x={x(t)} y={H - 14} textAnchor={i === 0 ? 'start' : i === ticks.length - 1 ? 'end' : 'middle'} className="sim-axis">{duration(t, lang)}</text>)}
       <text x={12} y={T + 4} className="sim-axis-title">m³/s</text>
       <path d={area} className="sim-area" />

@@ -27,7 +27,16 @@ describe('hazard display scales', () => {
       expect(classify(scale, null)).toBeNull(); expect(classify(scale, NaN)).toBeNull();
       for (const c of scale) { expect(c.label.en).toBeTruthy(); expect(c.label.ne).toBeTruthy(); }
     }
-    expect(classify(SPI_SCALE, -1)!.id).toBe('near-normal');
+    expect(classify(SPI_SCALE, -1)!.id).toBe('moderately-dry');
+    expect(classify(SPI_SCALE, -0.9999)!.id).toBe('near-normal');
+    expect(classify(SPI_SCALE, -2)!.id).toBe('extremely-dry');
+    expect(classify(SPI_SCALE, -1.5)!.id).toBe('severely-dry');
+    expect(classify(SPI_SCALE, 1)!.id).toBe('moderately-wet');
+    expect(classify(TMAX_SCALE, -1.5)!.id).toBe('much-cooler');
+    expect(classify(TMAX_SCALE, 1.5)!.id).toBe('much-warmer');
+    expect(classify(PRECIP_SCALE, 150)!.id).toBe('gt150');
+    expect(classify(PRECIP_SCALE, 50)!.id).toBe('lt50');
+    expect(classify(STEEP_SCALE, 0.1)!.id).toBe('10-25');
     expect(classify(SPI_SCALE, -1.0001)!.id).toBe('moderately-dry');
     expect(classify(SPI_SCALE, 2)!.id).toBe('extremely-wet');
   });

@@ -2,8 +2,9 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { readFileSync } from 'node:fs';
 import { gunzipSync } from 'node:zlib';
 import { parseCorridorCatalogue, parseModelRelease, parsePopulationGrid, cellCentre, type ModelRelease } from '../../packages/contracts/model-release';
-import { bandOf, computeShaking, groundMotion, joynerBoore, PGA_BANDS, ruptureLine, validateScenario, type GmpeModel, type QuakeScenario } from '../../apps/web/lib/earthquake';
+import { bandOf, computeShaking, greatCircleKm, groundMotion, joynerBoore, PGA_BANDS, ruptureLine, validateScenario, type GmpeModel, type QuakeScenario } from '../../apps/web/lib/earthquake';
 import { arrivals, decodeScenario, defaultFlood, encodeScenario, exposureRange, FLOOD_LIMITS, hydrograph, hydrographVolume, shortDuration, validateFlood, type FloodScenario } from '../../apps/web/lib/flood-scenario';
+import { formatNumber } from '../../apps/web/lib/i18n';
 import { loadModelArtifact, loadModelRelease, MODEL_RELEASES } from '../../apps/web/lib/model-release';
 
 afterEach(() => vi.unstubAllGlobals());
@@ -148,6 +149,31 @@ describe('flood corridor scenario', () => {
     expect(decodeScenario('a'.repeat(2049))).toBeNull();
     const extra = decodeScenario(encodeScenario({ ...base, injected: '<script>' } as never));
     expect(extra && 'injected' in extra).toBe(false);
+  });
+  it('refuses prototype-chain mechanisms and unoffered site classes instead of zeroing every band', () => {
+    for (const mechanism of ['constructor', 'toString', '__proto__', 'hasOwnProperty']) {
+      expect(decodeScenario(encodeScenario({ ...gorkha, mechanism } as never))).toBeNull();
+      expect(validateScenario(model, { ...gorkha, mechanism } as never)).toContain('Unknown mechanism.');
+    }
+    expect(decodeScenario(encodeScenario({ ...gorkha, vs30: 500 }))).toBeNull();
+    for (const mechanism of ['unspecified', 'strike-slip', 'normal', 'reverse'] as const) {
+      const r = computeShaking(model, { ...gorkha, magnitude: 7, mechanism }, population, []);
+      expect(r.population.central.reduce((a, b) => a + b, 0) + r.population.beyond).toBeCloseTo(r.population.total, 6);
+    }
+  });
+  it('rejects an out-of-range peak fraction for either hydrograph shape', () => {
+    expect(validateFlood({ ...base, shape: 'rectangular', peak_fraction: 1e9 })).toContain('Time to peak must be 5–95% of the duration.');
+  });
+  it('judges the 400 km domain on great-circle distance', () => {
+    const point = { longitude: 80, latitude: 29, rupture: { type: 'point' as const } };
+    expect(Math.abs(joynerBoore(point, 83.85, 27.35) - greatCircleKm(80, 29, 83.85, 27.35))).toBeLessThan(1e-9);
+    expect(greatCircleKm(80, 29, 83.85, 27.35)).toBeGreaterThan(419);
+  });
+  it('never renders a small positive value as zero', () => {
+    expect(formatNumber(0.000457, 'en', 2)).toBe('<0.01');
+    expect(formatNumber(0.0058, 'en', 1)).toBe('<0.1');
+    expect(formatNumber(0, 'en', 1)).toBe('0.0');
+    expect(formatNumber(0.06, 'en', 1)).toBe('0.1');
   });
   it('formats compact durations without inventing precision', () => {
     expect(shortDuration(24 * 60)).toBe('24m');

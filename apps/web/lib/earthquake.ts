@@ -9,7 +9,10 @@ export interface GmpeModel {
   domain: { magnitude: [number, number]; normal_magnitude_max: number; rjb_km: [number, number]; vs30_m_s: [number, number] };
   units: Record<string, string>; omitted: string[];
 }
-export type Mechanism = 'unspecified' | 'strike-slip' | 'normal' | 'reverse';
+export const MECHANISMS = ['unspecified', 'strike-slip', 'normal', 'reverse'] as const;
+export type Mechanism = typeof MECHANISMS[number];
+/** Uniform site classes offered by the simulator (m/s). */
+export const VS30_CLASSES = [760, 360, 270, 180] as const;
 export type Rupture = { type: 'point' } | { type: 'line'; length_km: number; strike_deg: number };
 export interface QuakeScenario { kind: 'earthquake'; version: 1; preset: string | null; longitude: number; latitude: number; magnitude: number; mechanism: Mechanism; rupture: Rupture; vs30: number }
 
@@ -24,18 +27,26 @@ export const PGA_BANDS = [
 export const bandOf = (pga: number) => PGA_BANDS.findIndex(b => pga >= b.min && pga < b.max);
 
 const EARTH_KM = 6371.0088;
+const RAD = Math.PI / 180;
 function toLocal(lon: number, lat: number, lon0: number, lat0: number): [number, number] {
-  const k = Math.PI / 180;
-  return [(lon - lon0) * k * EARTH_KM * Math.cos(lat0 * k), (lat - lat0) * k * EARTH_KM];
+  return [(lon - lon0) * RAD * EARTH_KM * Math.cos(lat0 * RAD), (lat - lat0) * RAD * EARTH_KM];
+}
+/** Great-circle distance (km); the 400 km domain limit is judged on this, not on a flat projection. */
+export function greatCircleKm(lon1: number, lat1: number, lon2: number, lat2: number) {
+  const a = Math.sin((lat2 - lat1) * RAD / 2) ** 2 + Math.cos(lat1 * RAD) * Math.cos(lat2 * RAD) * Math.sin((lon2 - lon1) * RAD / 2) ** 2;
+  return 2 * EARTH_KM * Math.asin(Math.min(1, Math.sqrt(a)));
 }
 /** Joyner-Boore distance to the surface projection: the epicentre (point) or a declared surface line centred on it. */
 export function joynerBoore(s: Pick<QuakeScenario, 'longitude' | 'latitude' | 'rupture'>, lon: number, lat: number) {
+  if (s.rupture.type === 'point') return greatCircleKm(s.longitude, s.latitude, lon, lat);
   const [x, y] = toLocal(lon, lat, s.longitude, s.latitude);
-  if (s.rupture.type === 'point') return Math.hypot(x, y);
-  const theta = s.rupture.strike_deg * Math.PI / 180;
+  const theta = s.rupture.strike_deg * RAD;
   const ux = Math.sin(theta), uy = Math.cos(theta), half = s.rupture.length_km / 2;
   const t = Math.max(-half, Math.min(half, x * ux + y * uy));
-  return Math.hypot(x - t * ux, y - t * uy);
+  // The nearest point is located along the declared line (same geometry as ruptureLine); its distance is great-circle.
+  const nearestLon = s.longitude + t * ux / (EARTH_KM * Math.cos(s.latitude * RAD)) / RAD;
+  const nearestLat = s.latitude + t * uy / EARTH_KM / RAD;
+  return greatCircleKm(nearestLon, nearestLat, lon, lat);
 }
 export function ruptureLine(s: QuakeScenario): [number, number][] {
   if (s.rupture.type === 'point') return [[s.longitude, s.latitude]];
@@ -50,7 +61,7 @@ export function validateScenario(model: GmpeModel, s: QuakeScenario): string[] {
   if (!(s.magnitude >= model.domain.magnitude[0] && s.magnitude <= upper)) errors.push(`Magnitude must be ${model.domain.magnitude[0]}–${upper} for this mechanism (BSSA14 domain).`);
   if (!(s.vs30 >= model.domain.vs30_m_s[0] && s.vs30 <= model.domain.vs30_m_s[1])) errors.push(`V_S30 must be ${model.domain.vs30_m_s[0]}–${model.domain.vs30_m_s[1]} m/s.`);
   if (!(s.longitude >= 78 && s.longitude <= 90 && s.latitude >= 25 && s.latitude <= 32)) errors.push('Epicentre must lie within 78–90°E and 25–32°N.');
-  if (!(s.mechanism in model.mechanisms)) errors.push('Unknown mechanism.');
+  if (!Object.prototype.hasOwnProperty.call(model.mechanisms, s.mechanism) || !(MECHANISMS as readonly string[]).includes(s.mechanism)) errors.push('Unknown mechanism.');
   if (s.rupture.type === 'line' && !(s.rupture.length_km >= 1 && s.rupture.length_km <= 400 && s.rupture.strike_deg >= 0 && s.rupture.strike_deg < 360)) errors.push('Line rupture needs a length of 1–400 km and strike 0–359°.');
   return errors;
 }

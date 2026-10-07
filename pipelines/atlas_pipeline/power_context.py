@@ -173,8 +173,16 @@ def spi(value, alpha, beta, q):
 
 
 def spi_class(value):
+    # A boundary value belongs to the class farther from normal (McKee 1993: <= -2 extremely dry, >= 2 extremely wet).
     for item in SPI_CLASSES:
-        if (item["min"] is None or value >= item["min"]) and (item["max"] is None or value < item["max"]):
+        lo, hi = item["min"], item["max"]
+        if item["id"] == "near-normal":
+            ok = lo < value < hi
+        elif hi is not None and hi <= -1.0:
+            ok = (lo is None or value > lo) and value <= hi
+        else:
+            ok = value >= lo and (hi is None or value < hi)
+        if ok:
             return item["id"]
     raise ValueError("SPI class gap")
 

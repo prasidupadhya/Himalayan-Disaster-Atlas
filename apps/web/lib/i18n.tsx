@@ -27,6 +27,9 @@ const NE_DIGITS = '०१२३४५६७८९';
 export const digits = (text: string, lang: Lang) => lang === 'ne' ? text.replace(/[0-9]/g, d => NE_DIGITS[Number(d)]) : text;
 export function formatNumber(value: number | null, lang: Lang, fraction = 0) {
   if (value === null || !Number.isFinite(value)) return lang === 'ne' ? 'अज्ञात (UNKNOWN)' : 'UNKNOWN';
+  // A positive value that would round to zero is shown as "<0.1" (etc.), so it never reads as a true zero.
+  const step = 10 ** -fraction;
+  if (value > 0 && value < step / 2) return digits(`<${step.toLocaleString('en-US', { maximumFractionDigits: fraction })}`, lang);
   return digits(value.toLocaleString('en-US', { maximumFractionDigits: fraction, minimumFractionDigits: fraction }), lang);
 }
 

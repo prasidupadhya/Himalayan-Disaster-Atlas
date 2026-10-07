@@ -21,6 +21,11 @@ const GORKHA = 'us20002926';
 type Preset = { id: string; label: string; longitude: number; latitude: number; magnitude: number; time: string; depth: number | null; magnitudeType: string | null };
 type Loaded = { release: ModelRelease; model: GmpeModel; population: PopulationCells; populationRelease: ModelRelease; presets: Preset[]; districts: Dataset };
 
+/** A preset identity is kept only when the scenario still matches that catalogue record exactly. */
+function reconcilePreset(s: QuakeScenario, presets: Preset[]): QuakeScenario {
+  const p = presets.find(x => x.id === s.preset);
+  return p && p.longitude === s.longitude && p.latitude === s.latitude && p.magnitude === s.magnitude ? s : { ...s, preset: null };
+}
 export function defaultQuake(preset: Preset): QuakeScenario {
   return { kind: 'earthquake', version: 1, preset: preset.id, longitude: preset.longitude, latitude: preset.latitude, magnitude: preset.magnitude, mechanism: 'unspecified', rupture: { type: 'point' }, vs30: 760 };
 }
@@ -94,7 +99,7 @@ export function QuakePanel({ lang, initial, onScene, onShare, pick, slot }: { la
         .sort((a, b) => (b.p.magnitude as number) - (a.p.magnitude as number)).slice(0, 10)
         .map(({ f, p }) => { const [lon, lat] = (f.geometry as GeoJSON.Point).coordinates; return { id: String(p.source_id), label: `M${p.magnitude} ${p.magnitude_type ?? ''} · ${String(p.event_time).slice(0, 10)} · ${p.place_name ?? 'location UNKNOWN'}`, longitude: lon, latitude: lat, magnitude: p.magnitude as number, time: String(p.event_time), depth: (p.depth_km ?? null) as number | null, magnitudeType: (p.magnitude_type ?? null) as string | null }; });
       return { release, model, population, populationRelease, presets, districts };
-    })().then(value => { setLoaded(value); setDraft(d => d ?? defaultQuake(value.presets.find(p => p.id === GORKHA) ?? value.presets[0])); },
+    })().then(value => { setLoaded(value); setDraft(d => d ? reconcilePreset(d, value.presets) : defaultQuake(value.presets.find(p => p.id === GORKHA) ?? value.presets[0])); },
       reason => { if (!controller.signal.aborted) setError(reason instanceof Error ? reason.message : 'Unavailable'); });
     return () => controller.abort();
   }, [attempt]);
