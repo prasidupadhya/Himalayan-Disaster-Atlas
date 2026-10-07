@@ -42,3 +42,7 @@ Feature 46 generates bulletin sentences only from verified snapshots with fixed 
 
 
 Feature 47 never alters timestamps: offline copies are labelled LAST KNOWN with their device save time, freshness is recomputed from source times, and copies past the seven-day retention are deleted rather than served. See [offline shell](offline-shell.md).
+
+## Scenario simulator (Features 48–51)
+
+Population inputs: [HRSL population](hrsl-population.md). Flood/GLOF corridors and hydrograph translation: [flood corridors](flood-corridors.md). Ground motion: [earthquake shaking](earthquake-shaking.md). Uncertainty is expressed only as declared sensitivity (celerity ensemble, corridor widths) or the published model sigma — never as invented percentage bands.

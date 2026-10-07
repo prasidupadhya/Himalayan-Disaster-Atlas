@@ -10,7 +10,7 @@ from jsonschema import Draft7Validator
 
 from .contracts import ROOT
 
-VERSION = "1.6.0"
+VERSION = "1.7.0"
 BASE = f"/data/atlas-provenance/{VERSION}/"
 RELEASE = ROOT / "data/releases/atlas-provenance" / VERSION
 PUBLIC = ROOT / "apps/web/public/data/atlas-provenance" / VERSION
@@ -27,7 +27,17 @@ def metadata_of(manifest):
     return metadata if isinstance(metadata, dict) and "dataset_id" in metadata else None
 
 
+NEW_RECORDS = {
+    # Feature 48+ releases: explicit category and methodology/source anchors (older records unchanged).
+    "nepal-hrsl-population": ("Population", "hrsl-population-method", "hrsl-population"),
+    "atlas-flood-corridors": ("Analysis & models", "flood-corridors-method", "flood-corridors"),
+    "atlas-gmpe-bssa14": ("Analysis & models", "earthquake-shaking-method", "earthquake-shaking"),
+}
+
+
 def category(identifier):
+    if identifier in NEW_RECORDS:
+        return NEW_RECORDS[identifier][0]
     if identifier in ("foundation-sample", "atlas-live-contracts"):
         return "Development"
     if "admin-" in identifier:
@@ -55,6 +65,8 @@ def category(identifier):
 
 
 def anchors(identifier):
+    if identifier in NEW_RECORDS:
+        return NEW_RECORDS[identifier][1:]
     if identifier.startswith("atlas-live-") and identifier != "atlas-live-contracts":
         suffix = identifier.removeprefix("atlas-")
         return suffix + "-method", suffix
@@ -272,7 +284,20 @@ def record(path, latest_versions):
             else f"{temporal['start']} → {temporal['end']}"
         )
         parents = []
-        if metadata.get("evidence_type") in ("derived", "estimated", "modelled"):
+        if manifest.get("kind") == "model-release":
+            # Exact parent releases by manifest hash, plus pinned upstream files as external sources.
+            parents = [
+                {"id": item["dataset_id"], "version": item["dataset_version"], "source": item["source"],
+                 "manifest_path": item["manifest_path"], "sha256": item["sha256"]}
+                if item["manifest_path"] else
+                {"id": "external-source", "version": item["dataset_version"], "source": item["source"],
+                 "manifest_path": None, "sha256": item["sha256"]}
+                for item in manifest["inputs"]
+            ]
+            if not parents:
+                parents = [{"id": "external-source", "version": "as cited", "source": metadata["source"],
+                            "manifest_path": None, "sha256": None}]
+        elif metadata.get("evidence_type") in ("derived", "estimated", "modelled"):
             parents = [
                 {
                     "id": "external-source",

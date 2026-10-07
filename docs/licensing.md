@@ -63,3 +63,7 @@ OpenAQ access does not establish provider redistribution rights. `licensing/open
 
 
 `atlas-live-offline-shell@1.0.0` and `atlas-provenance@1.6.0` are original MIT policy/provenance metadata. Cached live copies are unmodified published snapshots under their reviewed source terms; no new redistribution is introduced. Exclusions are unchanged. See [Feature 47](offline-shell.md).
+
+## Scenario inputs (Features 48–51)
+
+HRSL v1.5 is CC BY 4.0 (AWS Open Data registry). Corridor counts derived from OSM are ODbL 1.0 with attribution; other corridor inputs are CC BY 4.0 and credited. BSSA14 coefficients are published scientific values cited by DOI; the Atlas implementation is original MIT code (OpenQuake, AGPL, was not used or copied). WorldPop remains excluded from the public build.

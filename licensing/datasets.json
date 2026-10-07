@@ -928,7 +928,78 @@
       "evidence_urls": [
         "https://opensource.org/license/mit/"
       ]
+    },
+    "nepal-hrsl-population@1.0.0": {
+      "manifest_path": "/data/nepal-hrsl-population/1.0.0/manifest.json",
+      "manifest_sha256": "7d9166e91ff00793e9aa9a4ff3a050c11faf1ab18d6cc96dd4bf3e76a4f57854",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Meta/CIESIN HRSL v1.5 general-population COGs are published on AWS Open Data under CC BY 4.0 (registry entry dataforgood-fb-hrsl). The release contains exact sums of the pinned source tiles inside Nepal and the COD-AB boundary (CC BY parent). No ODbL or unresolved input.",
+      "obligations": "Credit Meta and CIESIN (Columbia University), HRSL 2022 and Maxar source imagery 2016; link CC BY 4.0; identify Atlas aggregation; no endorsement.",
+      "parents": [
+        "nepal-admin-country@2.0.1"
+      ],
+      "evidence_urls": [
+        "https://raw.githubusercontent.com/awslabs/open-data-registry/main/datasets/dataforgood-fb-hrsl.yaml",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ]
+    },
+    "atlas-flood-corridors@1.0.0": {
+      "manifest_path": "/data/atlas-flood-corridors/1.0.0/manifest.json",
+      "manifest_sha256": "3b58d024f1d052526f77ef8dabf1166a0180984062094f31633ce1e9e9bc4f87",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Derived counts and corridor geometry from CC BY 4.0 parents (FAO Rivers/HydroRIVERS, GLO, GeoNames, HRSL, COD-AB) and ODbL OSM partitions that are already PERMITTED with ODbL obligations. OSM-derived asset counts are offered under ODbL; corridor geometries are Atlas-original hypothetical constructs.",
+      "obligations": "Retain all parent attributions and licence links; offer OSM-derived counts under ODbL 1.0 with the parent adapted databases; label every result as a hypothetical educational scenario, not a forecast, flood extent or damage estimate.",
+      "parents": [
+        "nepal-hrsl-population@1.0.0",
+        "nepal-osm-emergency-facilities@1.0.0",
+        "nepal-osm-health-facilities@1.0.0",
+        "nepal-osm-hydropower@1.0.0",
+        "nepal-osm-major-bridges@1.0.0",
+        "nepal-osm-major-roads-central@1.0.0",
+        "nepal-osm-major-roads-east@1.0.0",
+        "nepal-osm-major-roads-west@1.0.0",
+        "nepal-osm-schools-central-east@1.0.0",
+        "nepal-osm-schools-central-west@1.0.0",
+        "nepal-osm-schools-east@1.0.0",
+        "nepal-osm-schools-west@1.0.0",
+        "nepal-osm-settlements@1.0.0",
+        "nepal-river-names@1.0.0",
+        "nepal-rivers-headwaters@1.0.0",
+        "nepal-rivers-primary@1.0.0",
+        "nepal-transboundary-glacial-lakes@1.0.0"
+      ],
+      "evidence_urls": [
+        "https://opendatacommons.org/licenses/odbl/1-0/",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ]
+    },
+    "atlas-gmpe-bssa14@1.0.0": {
+      "manifest_path": "/data/atlas-gmpe-bssa14/1.0.0/manifest.json",
+      "manifest_sha256": "4c16b8d56a4a7650a839a44610aa7e6c6998456fd385135b8f22b2fb556f7528",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Published scientific model coefficients (Boore et al. 2014) cited with DOI; the Atlas implementation and metadata are original MIT. No dataset redistribution.",
+      "obligations": "Cite Boore, Stewart, Seyhan & Atkinson (2014), doi:10.1193/070113EQS184M; retain MIT notice for the implementation.",
+      "parents": [],
+      "evidence_urls": [
+        "https://doi.org/10.1193/070113EQS184M",
+        "https://opensource.org/license/mit/"
+      ]
+    },
+    "atlas-provenance@1.7.0": {
+      "manifest_path": "/data/atlas-provenance/1.7.0/manifest.json",
+      "manifest_sha256": "6e651b67b86572fce2fd8e7ab5aeb13856e619bbf4a61a3b1cc35b2fc1b08b32",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Original Atlas provenance metadata only; no licence grant for upstream data.",
+      "obligations": "Retain MIT attribution; upstream terms remain with each parent.",
+      "parents": [],
+      "evidence_urls": [
+        "https://opensource.org/license/mit/"
+      ]
     }
   },
-  "public_tree_sha256": "e89d5d0a884331b2b0617ea839894440dce08111fd902699c5b75e647566bf63"
+  "public_tree_sha256": "393b58e2418913a9ef61db9a34664506b68d98a677d9b15e545b244aefc42170"
 }

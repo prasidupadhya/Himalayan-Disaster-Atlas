@@ -338,3 +338,7 @@ Feature 46 adds the `/live/` page: periodically updated USGS and NOAA GFS condit
 
 
 Feature 47 adds the Atlas's own service worker: a checksum-pinned offline shell, network-first live data, and stored copies that are re-verified, labelled LAST KNOWN (never freshly checked) and deleted after seven days. See [offline shell](docs/offline-shell.md).
+
+### Scenario simulator — Features 48, 49, 51, 57
+
+`/simulate/` runs bilingual (English/Nepali) educational scenarios entirely in the browser from checksum-verified releases: flood/GLOF corridor pulses at 18 verified release points with corridor-width exposure ranges, and BSSA14 earthquake shaking (Gorkha 2015 replay by default) with population and assets by PGA band. Assumptions are shown and acknowledged before each run; results are shareable by URL and printable as a report with input hashes. Inundation, damage, casualties and losses stay UNKNOWN. See [HRSL population](docs/hrsl-population.md), [flood corridors](docs/flood-corridors.md), [earthquake shaking](docs/earthquake-shaking.md) and [scenario reports](docs/scenario-reports.md).

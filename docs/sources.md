@@ -20,3 +20,9 @@ Feature 46 adds no source. The `/live/` page links DHM, NDRRMA and BIPAD as the 
 
 
 Feature 47 adds no source. Offline copies are byte-identical, checksum-verified copies of the published snapshots, with their original source and licence. See [Feature 47](offline-shell.md).
+
+## Scenario inputs (Features 48–51)
+
+- Meta/CIESIN HRSL v1.5 general population, AWS Open Data, CC BY 4.0 — `nepal-hrsl-population@1.0.0`.
+- Boore et al. (2014) BSSA14 coefficients, doi:10.1193/070113EQS184M — `atlas-gmpe-bssa14@1.0.0`; reference values from pygmm 0.8.0 (MIT) used only in tests.
+- Corridor catalogue derived from HydroRIVERS, GLO, GeoNames, HRSL and OpenStreetMap — `atlas-flood-corridors@1.0.0`.
