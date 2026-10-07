@@ -1,19 +1,23 @@
 'use client';
 import dynamic from 'next/dynamic';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import { EVIDENCE_LABELS, LIVE_AUTHORITIES, workflowHealth } from '../../../../packages/contracts/live';
 import { AIR_QUALITY_PUBLIC_ENABLED, AIR_QUALITY_STATUS } from '../../../../packages/contracts/live-air-quality';
 import { UnavailableError } from '../../lib/datasets';
-import { loadLivePublication, watchLiveClock, type LivePublication } from '../../lib/live';
-import { buildBulletin, earthquakeRows, FEED_TITLES, FORECAST_CLASSES, feedView, forecastCells, formatTime, formatValue, LIVE_CONDITIONS_POLICY as policy, nextDeadline, type FeedView, type Freshness, type Lang, type Purpose } from '../../lib/live-conditions';
+import { loadLivePublication, watchLiveClock, type LastKnown, type LivePublication } from '../../lib/live';
+import { buildBulletin, earthquakeRows, FEED_TITLES, FORECAST_CLASSES, feedView, forecastCells, formatTime, formatValue, freshnessText, LIVE_CONDITIONS_POLICY as policy, nextDeadline, offlineCopy, OFFLINE_POLICY, type FeedView, type Freshness, type Lang, type Purpose } from '../../lib/live-conditions';
 
-const LiveMap = dynamic(() => import('./live-map').then(module => module.LiveMap), { ssr: false, loading: () => <div className="live-map-shell"><p className="live-map-status" role="status">Loading map…</p></div> });
-type Load = { status: 'loading' } | { status: 'ready'; data: LivePublication } | { status: 'unavailable' | 'error'; message: string };
+function MapUnavailable() {
+  return <div className="live-map-shell" data-map-state="unavailable"><p className="live-map-status live-map-failure" role="status">The map code is not available on this device (for example while offline). Every verified record remains listed in the tables below.</p></div>;
+}
+// A failed chunk load (e.g. offline before the map was ever cached) degrades to the tables instead of an error page.
+const LiveMap = dynamic(() => import('./live-map').then(module => module.LiveMap).catch(() => MapUnavailable), { ssr: false, loading: () => <div className="live-map-shell"><p className="live-map-status" role="status">Loading map…</p></div> });
+type Load = { status: 'loading' } | { status: 'ready'; data: LivePublication; loadedAt: string } | { status: 'unavailable' | 'error'; message: string };
 const AUTHORITY_NAMES: Record<string, string> = { DHM: 'Department of Hydrology and Meteorology', NDRRMA: 'National Disaster Risk Reduction and Management Authority', BIPAD: 'BIPAD disaster information portal' };
 const PAGE_SIZE = 50;
 
 async function fetchPublication(signal: AbortSignal): Promise<Load> {
-  try { return { status: 'ready', data: await loadLivePublication(signal) }; }
+  try { const data = await loadLivePublication(signal); return { status: 'ready', data, loadedAt: new Date().toISOString() }; }
   catch (error) {
     if (signal.aborted) throw error;
     return { status: error instanceof UnavailableError ? 'unavailable' : 'error', message: error instanceof Error ? error.message : 'Publication unavailable.' };
@@ -24,10 +28,13 @@ export function PurposeLabel({ purpose, lang = 'en' }: { purpose: Purpose; lang?
   const item = policy.purposes[purpose];
   return <span className={`live-label live-purpose purpose-${purpose}`} data-purpose={purpose}><span aria-hidden="true">{item.glyph}</span> {item[lang]}</span>;
 }
-export function FreshnessLabel({ freshness, lang = 'en' }: { freshness: Freshness; lang?: Lang }) {
+export function FreshnessLabel({ freshness, lastKnown = null, lang = 'en' }: { freshness: Freshness; lastKnown?: LastKnown | null; lang?: Lang }) {
   const item = policy.freshness[freshness];
+  // An offline copy is never labelled FRESH: it shows LAST KNOWN, plus STALE/UNAVAILABLE when they apply.
+  if (lastKnown) return <span className={`live-label live-freshness freshness-last-known${freshness === 'FRESH' ? '' : ` freshness-${freshness.toLowerCase()}`}`} data-freshness={freshness === 'FRESH' ? 'LAST_KNOWN' : freshness} data-delivery="last-known"><span aria-hidden="true">{OFFLINE_POLICY.last_known.glyph}</span> {freshnessText({ freshness, lastKnown }, lang)}</span>;
   return <span className={`live-label live-freshness freshness-${freshness.toLowerCase()}`} data-freshness={freshness}><span aria-hidden="true">{item.glyph}</span> {item[lang]}</span>;
 }
+const subscribeOnline = (update: () => void) => { window.addEventListener('online', update); window.addEventListener('offline', update); return () => { window.removeEventListener('online', update); window.removeEventListener('offline', update); }; };
 function Time({ value }: { value: string | null }) {
   return value === null ? <span className="unknown">UNKNOWN</span> : <time dateTime={value}>{formatTime(value)}</time>;
 }
@@ -39,26 +46,36 @@ export function LiveConditions() {
   const [lang, setLang] = useState<Lang>('en');
   const [visible, setVisible] = useState({ earthquakes: true, forecast: true });
 
+  const online = useSyncExternalStore(subscribeOnline, () => navigator.onLine, () => true);
+
   useEffect(() => {
     const controller = new AbortController();
     void fetchPublication(controller.signal).then(result => setLoad(result), () => undefined);
     return () => controller.abort();
   }, [attempt]);
+  // Returning online rechecks the publication instead of keeping a last-known copy on screen.
+  useEffect(() => {
+    const recheck = () => { setLoad({ status: 'loading' }); setAttempt(value => value + 1); };
+    window.addEventListener('online', recheck);
+    return () => window.removeEventListener('online', recheck);
+  }, []);
 
   const publication = load.status === 'ready' ? load.data : null;
-  const views = useMemo(() => publication && now ? publication.deliveries.map(delivery => feedView(publication, delivery, now)) : [], [publication, now]);
+  const loadedAt = load.status === 'ready' ? load.loadedAt : null;
+  const lastKnown = useMemo<LastKnown | null>(() => publication?.lastKnown ?? (!online && publication ? { savedAt: loadedAt } : null), [publication, online, loadedAt]);
+  const views = useMemo(() => publication && now ? publication.deliveries.map(delivery => feedView(publication, delivery, now, online ? null : { savedAt: loadedAt })) : [], [publication, now, online, loadedAt]);
   const deadline = nextDeadline(publication, views, now);
   useEffect(() => watchLiveClock(setNow, deadline), [deadline]);
 
   const health = publication && now ? workflowHealth(publication.index, now) : 'UNAVAILABLE';
-  const bulletin = useMemo(() => buildBulletin(publication, views, lang), [publication, views, lang]);
+  const bulletin = useMemo(() => buildBulletin(publication, views, lang, lastKnown), [publication, views, lang, lastKnown]);
   const usgs = views.find(view => view.feed.feed_id === 'usgs');
   const gfs = views.find(view => view.feed.feed_id === 'noaa-gfs');
   const usgsSnapshot = usgs?.snapshot ?? null, usgsFreshness = usgs?.freshness ?? 'UNAVAILABLE';
   const gfsSnapshot = gfs?.snapshot ?? null, gfsFreshness = gfs?.freshness ?? 'UNAVAILABLE';
   const quakeLayer = useMemo(() => usgsSnapshot ? { rows: earthquakeRows(usgsSnapshot), freshness: usgsFreshness } : null, [usgsSnapshot, usgsFreshness]);
   const forecastLayer = useMemo(() => gfsSnapshot ? { rows: forecastCells(gfsSnapshot), freshness: gfsFreshness } : null, [gfsSnapshot, gfsFreshness]);
-  const announcement = load.status === 'loading' ? 'Loading and verifying the live publication…' : publication ? `Publication verified. Workflow health ${health}. ${views.map(view => `${FEED_TITLES[view.feed.feed_id] ?? view.feed.feed_id}: ${view.freshness}`).join('. ')}.` : `Live publication ${load.status.toUpperCase()}.`;
+  const announcement = load.status === 'loading' ? 'Loading and verifying the live publication…' : publication ? `${lastKnown ? `${offlineCopy('en', 'last_known_notice', { time: formatTime(lastKnown.savedAt) })} ` : 'Publication verified. '}Workflow health ${health}. ${views.map(view => `${FEED_TITLES[view.feed.feed_id] ?? view.feed.feed_id}: ${freshnessText(view)}`).join('. ')}.` : `Live publication ${load.status.toUpperCase()}.`;
 
   return <div className="live-page">
     <header className="live-hero">
@@ -72,16 +89,17 @@ export function LiveConditions() {
       </aside>
     </header>
 
-    <section className="live-health" aria-labelledby="live-health-heading" data-health={health}>
+    <section className="live-health" aria-labelledby="live-health-heading" data-health={health} data-delivery={lastKnown ? 'last-known' : 'network'}>
       <div className="live-health-head">
         <h2 id="live-health-heading">Publication and workflow health</h2>
         <button type="button" onClick={() => { setLoad({ status: 'loading' }); setAttempt(value => value + 1); }} disabled={load.status === 'loading'}>Check for a newer publication</button>
       </div>
-      <p role="status" aria-live="polite" aria-atomic="true" className="live-announcement">{announcement}</p>
+      <p role="status" aria-live="polite" aria-atomic="true" className={lastKnown ? 'live-announcement sr-only' : 'live-announcement'}>{announcement}</p>
+      {lastKnown && <p className="live-last-known" data-delivery="last-known"><strong><span aria-hidden="true">{OFFLINE_POLICY.last_known.glyph}</span> {OFFLINE_POLICY.last_known.en}</strong> {offlineCopy('en', 'last_known_notice', { time: formatTime(lastKnown.savedAt) }).replace(/^LAST KNOWN — /, '')} Source freshness below is still computed from the original source, fetch and workflow times.</p>}
       {load.status === 'loading' && <p className="live-muted">Reading the same-origin index, then verifying each snapshot&apos;s byte size and SHA-256 before display.</p>}
       {(load.status === 'error' || load.status === 'unavailable') && <div className="live-problem" role="alert"><p><strong>Live publication {load.status === 'error' ? 'could not be verified' : 'is unavailable'}.</strong> No readings are shown. {load.message}</p><button type="button" onClick={() => { setLoad({ status: 'loading' }); setAttempt(value => value + 1); }}>Try again</button></div>}
       {publication && <dl className="live-health-grid">
-        <div><dt>Workflow health</dt><dd><strong className="live-label" data-workflow-health={health}>{health}</strong></dd></div>
+        <div><dt>Workflow health</dt><dd><strong className="live-label" data-workflow-health={health}>{health}</strong>{lastKnown && <> <span className="live-label freshness-last-known">{OFFLINE_POLICY.last_known.glyph} {OFFLINE_POLICY.last_known.en}</span></>}</dd></div>
         <div><dt>Last successful fetch</dt><dd><Time value={publication.index.workflow.last_successful_fetch_at} /></dd></div>
         <div><dt>Last attempt</dt><dd><Time value={publication.index.workflow.last_attempt_at} /> · {publication.index.workflow.status.replace('_', ' ').toUpperCase()}</dd></div>
         <div><dt>Publication generated</dt><dd><Time value={publication.index.generated_at} /></dd></div>
@@ -108,7 +126,7 @@ export function LiveConditions() {
               <h3>{section.heading}</h3>
               <div className="live-labels">
                 {section.purpose && <PurposeLabel purpose={section.purpose} lang={lang} />}
-                {section.freshness ? <FreshnessLabel freshness={section.freshness} lang={lang} /> : <span className="live-label live-status">{section.status}</span>}
+                {section.freshness ? <FreshnessLabel freshness={section.freshness} lastKnown={section.lastKnown ? lastKnown ?? { savedAt: null } : null} lang={lang} /> : <span className="live-label live-status">{section.status}</span>}
               </div>
             </header>
             {section.sentences.map(sentence => <p key={sentence}>{sentence}</p>)}
@@ -122,8 +140,8 @@ export function LiveConditions() {
         <a className="map-skip-link" href="#live-records">Skip map to record tables</a>
         <fieldset className="live-layer-controls">
           <legend>Layers</legend>
-          <label><input type="checkbox" checked={visible.earthquakes} onChange={event => setVisible(value => ({ ...value, earthquakes: event.target.checked }))} /> <span>Reported earthquake epicentres</span> {usgs && <FreshnessLabel freshness={usgs.freshness} />}</label>
-          <label><input type="checkbox" checked={visible.forecast} onChange={event => setVisible(value => ({ ...value, forecast: event.target.checked }))} /> <span>Model 6-hour precipitation (GFS grid cells)</span> {gfs && <FreshnessLabel freshness={gfs.freshness} />}</label>
+          <label><input type="checkbox" checked={visible.earthquakes} onChange={event => setVisible(value => ({ ...value, earthquakes: event.target.checked }))} /> <span>Reported earthquake epicentres</span> {usgs && <FreshnessLabel freshness={usgs.freshness} lastKnown={usgs.lastKnown} />}</label>
+          <label><input type="checkbox" checked={visible.forecast} onChange={event => setVisible(value => ({ ...value, forecast: event.target.checked }))} /> <span>Model 6-hour precipitation (GFS grid cells)</span> {gfs && <FreshnessLabel freshness={gfs.freshness} lastKnown={gfs.lastKnown} />}</label>
         </fieldset>
         <LiveMap earthquakes={quakeLayer} forecast={forecastLayer} visible={visible} />
         <div className="live-legend" aria-label="Map legend">
@@ -163,8 +181,9 @@ export function LiveConditions() {
 
 function FeedCard({ view }: { view: FeedView }) {
   const { feed, snapshot } = view;
-  return <article className="live-feed-card" aria-label={`${FEED_TITLES[feed.feed_id] ?? feed.feed_id} status`} data-feed-state={view.state} data-freshness={view.freshness}>
-    <header><h3>{FEED_TITLES[feed.feed_id] ?? feed.feed_id}</h3><div className="live-labels"><PurposeLabel purpose={view.purpose} />{snapshot && <span className="live-label">{EVIDENCE_LABELS[snapshot.evidence_type]}</span>}<FreshnessLabel freshness={view.freshness} /></div></header>
+  return <article className="live-feed-card" aria-label={`${FEED_TITLES[feed.feed_id] ?? feed.feed_id} status`} data-feed-state={view.state} data-freshness={view.lastKnown && view.freshness === 'FRESH' ? 'LAST_KNOWN' : view.freshness} data-delivery={view.lastKnown ? 'last-known' : 'network'}>
+    <header><h3>{FEED_TITLES[feed.feed_id] ?? feed.feed_id}</h3><div className="live-labels"><PurposeLabel purpose={view.purpose} />{snapshot && <span className="live-label">{EVIDENCE_LABELS[snapshot.evidence_type]}</span>}<FreshnessLabel freshness={view.freshness} lastKnown={view.lastKnown} /></div></header>
+    {view.lastKnown && <p className="live-last-known">{offlineCopy('en', 'last_known_feed', { time: formatTime(view.lastKnown.savedAt) })}</p>}
     <p>{view.reason}</p>
     <dl>
       <dt>Source</dt><dd>{snapshot ? <a href={snapshot.source.url}>{snapshot.source.name}</a> : <span className="unknown">UNKNOWN</span>}</dd>
@@ -183,7 +202,7 @@ function FeedCard({ view }: { view: FeedView }) {
 }
 
 function RecordMeta({ view }: { view: FeedView }) {
-  return <><td><a href={view.snapshot!.source.url}>{view.feed.feed_id === 'usgs' ? 'USGS' : 'NOAA GFS'}</a></td><td><Time value={view.snapshot!.fetched_at} /></td><td><FreshnessLabel freshness={view.freshness} /></td></>;
+  return <><td><a href={view.snapshot!.source.url}>{view.feed.feed_id === 'usgs' ? 'USGS' : 'NOAA GFS'}</a></td><td><Time value={view.snapshot!.fetched_at} /></td><td><FreshnessLabel freshness={view.freshness} lastKnown={view.lastKnown} /></td></>;
 }
 
 function EarthquakeTable({ view }: { view: FeedView | undefined }) {

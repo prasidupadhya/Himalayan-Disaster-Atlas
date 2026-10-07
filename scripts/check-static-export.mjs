@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { releaseDirectory } from './public-release-policy.mjs';
 import { isLivePath, verifyLiveExport } from './live-publication.mjs';
 import { createHash } from 'node:crypto';
+import { verifyServiceWorker } from './prepare-service-worker.mjs';
 const root = fileURLToPath(new URL('..', import.meta.url));
 export function checkStaticExport(output = resolve(root, 'apps/web/out'), { excludedReleases = [] } = {}) {
   const excluded = excludedReleases.map(key => releaseDirectory(key).slice(1));
@@ -38,9 +39,10 @@ export function checkStaticExport(output = resolve(root, 'apps/web/out'), { excl
     }
   }
   requirePublic(resolve(root, 'apps/web/public'));
-  for (const page of ['index.html', '404.html', 'atlas/index.html', 'live/index.html', 'research/index.html', 'events/index.html', 'analyst/index.html', 'evidence/index.html', 'sources/index.html', 'methodology/index.html', 'data-catalog/index.html', 'licenses/index.html', '_headers']) {
+  for (const page of ['index.html', '404.html', 'atlas/index.html', 'live/index.html', 'research/index.html', 'events/index.html', 'analyst/index.html', 'evidence/index.html', 'sources/index.html', 'methodology/index.html', 'data-catalog/index.html', 'licenses/index.html', 'offline/index.html', 'sw.js', '_headers']) {
     if (!existsSync(resolve(output, page))) throw new Error(`Missing static route/configuration: ${page}`);
   }
+  verifyServiceWorker(output);
   console.log(`Static deployment verified: ${count} files, ${(bytes / 1048576).toFixed(1)} MiB; each below 25 MiB.`);
   return { count, bytes };
 }

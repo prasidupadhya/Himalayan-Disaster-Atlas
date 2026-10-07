@@ -11,6 +11,7 @@ import { checkStaticExport } from './check-static-export.mjs';
 import { checkLicenses } from './check-licenses.mjs';
 import { prepareSoftwareNotices } from './prepare-software-notices.mjs';
 import { prepareMapWorker } from './prepare-map-worker.mjs';
+import { prepareServiceWorker } from './prepare-service-worker.mjs';
 // Hosted builds may invoke the web workspace script from apps/web.
 process.chdir(fileURLToPath(new URL('..', import.meta.url)));
 compileValidators({ check: true });
@@ -33,6 +34,8 @@ if (result.error) throw result.error;
 if (result.status !== 0) process.exit(result.status ?? 1);
 prepareLiveExport(fileURLToPath(new URL('../apps/web/out', import.meta.url)));
 prepareHosting();
+// The offline shell is pinned before the public inventory hashes every exported byte.
+prepareServiceWorker();
 const excluded = research ? [] : preparePublicExport();
 checkStaticExport(undefined, { excludedReleases: excluded });
 checkSecurity();

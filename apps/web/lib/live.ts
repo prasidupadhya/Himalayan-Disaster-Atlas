@@ -3,24 +3,36 @@ import { readBounded, UnavailableError } from './datasets';
 
 export interface VerifiedLiveFeed { index: LiveIndex; snapshot: LiveSnapshot | null }
 type Reference = Pick<LiveReference, 'path' | 'sha256' | 'byte_size'>;
-export interface LiveDelivery { feed: LiveFeed; snapshot: LiveSnapshot | null; error: string | null }
-export interface LivePublication { index: LiveIndex; deliveries: LiveDelivery[] }
+/** Set when the offline shell answered from a stored copy instead of the network. */
+export interface LastKnown { savedAt: string | null }
+export interface LiveDelivery { feed: LiveFeed; snapshot: LiveSnapshot | null; error: string | null; lastKnown?: LastKnown | null }
+export interface LivePublication { index: LiveIndex; deliveries: LiveDelivery[]; lastKnown?: LastKnown | null }
+
+/** Reads the offline shell's delivery headers. A copy marked last-known is never treated as freshly checked. */
+export function lastKnownDelivery(response: Response): LastKnown | null {
+  if (response.headers.get('x-atlas-delivery') !== 'last-known') return null;
+  const savedAt = response.headers.get('x-atlas-cached-at');
+  return { savedAt: savedAt !== null && Number.isFinite(Date.parse(savedAt)) ? new Date(Date.parse(savedAt)).toISOString() : null };
+}
 
 export async function loadLivePublication(signal?: AbortSignal): Promise<LivePublication> {
-  const index = parseLiveIndex(await jsonBytes(await fetch('/live/latest.json', { signal, cache: 'no-store', redirect: 'error', credentials: 'omit' }), LIVE_INDEX_BYTES));
+  const indexResponse = await fetch('/live/latest.json', { signal, cache: 'no-store', redirect: 'error', credentials: 'omit' });
+  const lastKnown = lastKnownDelivery(indexResponse);
+  const index = parseLiveIndex(await jsonBytes(indexResponse, LIVE_INDEX_BYTES));
   assertLivePublicationAllowed(index);
-  const deliveries = await Promise.all(index.feeds.map(async feed => {
-    if (!feed.enabled || !feed.snapshot) return { feed, snapshot: null, error: null };
+  const deliveries = await Promise.all(index.feeds.map(async (feed): Promise<LiveDelivery> => {
+    if (!feed.enabled || !feed.snapshot) return { feed, snapshot: null, error: null, lastKnown };
     try {
-      const snapshot = parseLiveSnapshot(await jsonBytes(await fetch(feed.snapshot.path, { signal, cache: 'no-store', redirect: 'error', credentials: 'omit' }), LIVE_SNAPSHOT_BYTES, feed.snapshot));
+      const response = await fetch(feed.snapshot.path, { signal, cache: 'no-store', redirect: 'error', credentials: 'omit' });
+      const snapshot = parseLiveSnapshot(await jsonBytes(response, LIVE_SNAPSHOT_BYTES, feed.snapshot));
       validateLivePair(index, feed, snapshot); assertLivePublicationAllowed(index, snapshot); assertReviewedLiveSource(snapshot);
-      return { feed, snapshot, error: null };
+      return { feed, snapshot, error: null, lastKnown: lastKnownDelivery(response) ?? lastKnown };
     } catch (error) {
       if (signal?.aborted) throw error;
-      return { feed, snapshot: null, error: error instanceof Error ? error.message : 'Snapshot unavailable.' };
+      return { feed, snapshot: null, error: error instanceof Error ? error.message : 'Snapshot unavailable.', lastKnown };
     }
   }));
-  return { index, deliveries };
+  return { index, deliveries, lastKnown };
 }
 
 async function jsonBytes(response: Response, limit: number, reference?: Reference) {
