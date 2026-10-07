@@ -65,7 +65,13 @@
     "live:fetch": ".venv/bin/python -m pipelines.atlas_pipeline.live_open_feeds",
     "live:air-quality": ".venv/bin/python -m pipelines.atlas_pipeline.live_air_quality",
     "data:live-conditions": ".venv/bin/python -m pipelines.atlas_pipeline.live_conditions",
-    "data:offline-shell": ".venv/bin/python -m pipelines.atlas_pipeline.offline_shell"
+    "data:offline-shell": ".venv/bin/python -m pipelines.atlas_pipeline.offline_shell",
+    "data:hrsl-population": ".venv/bin/python -m pipelines.atlas_pipeline.population_hrsl",
+    "data:flood-corridors": ".venv/bin/python -m pipelines.atlas_pipeline.flood_corridors",
+    "data:gmpe": ".venv/bin/python -m pipelines.atlas_pipeline.gmpe",
+    "data:power-context": ".venv/bin/python -m pipelines.atlas_pipeline.power_context",
+    "data:terrain-steepness": ".venv/bin/python -m pipelines.atlas_pipeline.terrain_steepness",
+    "data:evidence-corpus": ".venv/bin/python -m pipelines.atlas_pipeline.evidence_corpus"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.0",

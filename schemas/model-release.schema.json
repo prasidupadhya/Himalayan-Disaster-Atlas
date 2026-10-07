@@ -1,0 +1,251 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://himalayan-disaster-atlas.invalid/schemas/model-release.schema.json",
+  "title": "Atlas versioned model/context release (population grids, scenario catalogues, hazard context, gated policies)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "kind",
+    "release_type",
+    "metadata",
+    "inputs",
+    "artifacts",
+    "summary"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "kind": {
+      "const": "model-release"
+    },
+    "release_type": {
+      "enum": [
+        "population-grid",
+        "corridor-catalogue",
+        "gmpe-model",
+        "climate-context",
+        "terrain-context",
+        "evidence-corpus",
+        "gated-policy"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "dataset_id",
+        "dataset_name",
+        "dataset_version",
+        "source",
+        "source_url",
+        "license",
+        "license_url",
+        "attribution",
+        "observation_date",
+        "publication_date",
+        "retrieval_date",
+        "processing_date",
+        "processing_version",
+        "method",
+        "spatial_resolution",
+        "temporal_resolution",
+        "spatial_coverage",
+        "temporal_coverage",
+        "crs",
+        "status",
+        "evidence_type",
+        "is_fixture",
+        "limitations",
+        "uncertainty",
+        "update_frequency",
+        "stale_after"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "1.0.0"
+        },
+        "dataset_id": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/dataset_id"
+        },
+        "dataset_name": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/dataset_name"
+        },
+        "dataset_version": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/dataset_version"
+        },
+        "source": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/source"
+        },
+        "source_url": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/source_url"
+        },
+        "license": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/license"
+        },
+        "license_url": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/license_url"
+        },
+        "attribution": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/attribution"
+        },
+        "observation_date": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/observation_date"
+        },
+        "publication_date": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/publication_date"
+        },
+        "retrieval_date": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/retrieval_date"
+        },
+        "processing_date": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/processing_date"
+        },
+        "processing_version": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/processing_version"
+        },
+        "method": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/method"
+        },
+        "spatial_resolution": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/spatial_resolution"
+        },
+        "temporal_resolution": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/temporal_resolution"
+        },
+        "spatial_coverage": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/spatial_coverage"
+        },
+        "temporal_coverage": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/temporal_coverage"
+        },
+        "crs": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/crs"
+        },
+        "status": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/status"
+        },
+        "evidence_type": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/evidence_type"
+        },
+        "is_fixture": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/is_fixture"
+        },
+        "limitations": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/limitations"
+        },
+        "uncertainty": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/uncertainty"
+        },
+        "update_frequency": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/update_frequency"
+        },
+        "stale_after": {
+          "$ref": "https://himalayan-disaster-atlas.invalid/schemas/dataset.schema.json#/definitions/metadata/properties/stale_after"
+        }
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "dataset_id",
+          "dataset_version",
+          "source",
+          "manifest_path",
+          "sha256"
+        ],
+        "properties": {
+          "dataset_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+          },
+          "dataset_version": {
+            "type": "string",
+            "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 400
+          },
+          "manifest_path": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/manifest\\.json$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "source_url": {
+            "type": "string",
+            "pattern": "^https://",
+            "maxLength": 600
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 16,
+      "propertyNames": {
+        "pattern": "^[a-z][a-z0-9_]*$"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "path",
+          "sha256",
+          "byte_size",
+          "media_type"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "pattern": "^/data/[a-z0-9-]+/[0-9]+\\.[0-9]+\\.[0-9]+/[a-z0-9][a-z0-9._-]*$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "byte_size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 8388608
+          },
+          "media_type": {
+            "enum": [
+              "application/json",
+              "application/json+gzip",
+              "text/plain"
+            ]
+          }
+        }
+      }
+    },
+    "summary": {
+      "type": "object"
+    }
+  }
+}
