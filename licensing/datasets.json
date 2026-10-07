@@ -880,7 +880,31 @@
       "evidence_urls": [
         "https://opensource.org/license/mit/"
       ]
+    },
+    "atlas-live-conditions@1.0.0": {
+      "manifest_path": "/data/atlas-live-conditions/1.0.0/manifest.json",
+      "manifest_sha256": "e4c4946dcf55304eb56d37a2ec71214bcbd3138b4fa0deaa91209df16ef9416f",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Original Atlas live policy/documentation or provenance metadata only; no licence grant for provider readings. Live source snapshots require separate exact-byte review under licensing/live-sources.json.",
+      "obligations": "Retain MIT attribution; preserve upstream terms independently. No physical impact or loss estimates.",
+      "parents": [],
+      "evidence_urls": [
+        "https://opensource.org/license/mit/"
+      ]
+    },
+    "atlas-provenance@1.5.0": {
+      "manifest_path": "/data/atlas-provenance/1.5.0/manifest.json",
+      "manifest_sha256": "86e19d679806ffe65b28937a8e68669410ed7116977432f9386524f37359aaef",
+      "status": "PERMITTED",
+      "reviewed_on": "2026-10-07",
+      "reason": "Original Atlas live policy/documentation or provenance metadata only; no licence grant for provider readings. Live source snapshots require separate exact-byte review under licensing/live-sources.json.",
+      "obligations": "Retain MIT attribution; preserve upstream terms independently. No physical impact or loss estimates.",
+      "parents": [],
+      "evidence_urls": [
+        "https://opensource.org/license/mit/"
+      ]
     }
   },
-  "public_tree_sha256": "b6a0e384ac1ec631aafb4f5fdda9d75d0fd86db0de3487358cddf037de4be47a"
+  "public_tree_sha256": "8c133ee909273a57e24344195d0dc81f4aa7e8c83f04367222d8aba8930b1fed"
 }

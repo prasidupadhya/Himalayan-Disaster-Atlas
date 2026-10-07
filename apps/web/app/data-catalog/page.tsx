@@ -1,5 +1,5 @@
 import { isReleaseIncluded } from '../../lib/public-release';
-import catalogJson from '../../public/data/atlas-provenance/1.4.0/manifest.json';
+import catalogJson from '../../public/data/atlas-provenance/1.5.0/manifest.json';
 import { parseProvenanceCatalog } from '../../../../packages/contracts/provenance';
 import { DataCatalog } from '../../features/data-catalog/data-catalog';
 import { LiveDeliveryChecks } from '../../features/live-open-feeds/delivery';

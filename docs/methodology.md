@@ -37,3 +37,5 @@ Feature 42’s `/methodology/#live-contracts-method` explains evidence/purpose, 
 Feature 43 normalizes USGS reported epicentres and one precisely decoded six-hour GFS model forecast interval; it does not derive warnings or impacts. Source time governs freshness, failure retains stale data and valid empty is not all-clear. Publication uses an atomically promoted index after immutable source checks. See [full methodology](live-open-feeds.md).
 
 Feature 45 preserves original PM2.5 periods, units and flags; usable values remain UNKNOWN for flagged or unknown-quality/period readings. AQI has no reviewed standard and remains UNKNOWN. Public delivery is disabled independently of the research flag. See [air-quality method](live-air-quality.md).
+
+Feature 46 generates bulletin sentences only from verified snapshots with fixed bilingual templates, recomputes FRESH/STALE/UNAVAILABLE on the viewer's clock and labels observation, reported event, model forecast and official warning without colour. GFS cells are displayed without interpolation; legend bins are not hazard thresholds. See [live conditions method](live-conditions.md).

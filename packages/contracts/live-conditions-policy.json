@@ -1,0 +1,140 @@
+{
+  "schema_version": "1.0.0",
+  "kind": "live-conditions-presentation-policy",
+  "translation_review": "Nepali copy is project-authored and requires review by a native Nepali-speaking disaster-communication reviewer before it is relied on for public communication.",
+  "rules": [
+    "Bulletin sentences are generated only from verified snapshots; no sentence is shown for unverified, corrupt or absent data.",
+    "Freshness is FRESH, STALE or UNAVAILABLE and is always recomputed from source, fetch and workflow timestamps on the viewer's clock.",
+    "Product purpose (observation, reported event, model forecast, official warning) is labelled with a distinct glyph and text, never by colour alone.",
+    "Empty valid snapshots are not all-clear statements; absent official warnings are never presented as no warnings.",
+    "The copy says periodically updated conditions and never claims immediacy.",
+    "Damage, loss, inundation and casualties remain UNKNOWN and are never estimated."
+  ],
+  "purposes": {
+    "observation": {
+      "glyph": "◉",
+      "en": "OBSERVATION",
+      "ne": "अवलोकन"
+    },
+    "reported_event": {
+      "glyph": "●",
+      "en": "REPORTED EVENT",
+      "ne": "प्रतिवेदित घटना"
+    },
+    "forecast": {
+      "glyph": "◇",
+      "en": "MODEL FORECAST",
+      "ne": "मोडेल पूर्वानुमान"
+    },
+    "official_warning": {
+      "glyph": "▲",
+      "en": "OFFICIAL WARNING",
+      "ne": "आधिकारिक चेतावनी"
+    }
+  },
+  "freshness": {
+    "FRESH": {
+      "glyph": "✓",
+      "en": "FRESH",
+      "ne": "ताजा"
+    },
+    "STALE": {
+      "glyph": "!",
+      "en": "STALE",
+      "ne": "पुरानो"
+    },
+    "UNAVAILABLE": {
+      "glyph": "×",
+      "en": "UNAVAILABLE",
+      "ne": "उपलब्ध छैन"
+    }
+  },
+  "health": {
+    "HEALTHY": {
+      "en": "HEALTHY",
+      "ne": "सामान्य"
+    },
+    "PARTIAL": {
+      "en": "PARTIAL",
+      "ne": "आंशिक"
+    },
+    "FAILED": {
+      "en": "FAILED",
+      "ne": "असफल"
+    },
+    "STALE": {
+      "en": "STALE",
+      "ne": "पुरानो"
+    },
+    "UNAVAILABLE": {
+      "en": "UNAVAILABLE",
+      "ne": "उपलब्ध छैन"
+    }
+  },
+  "copy": {
+    "en": {
+      "bulletin_heading": "Conditions bulletin",
+      "title": "Periodically updated conditions",
+      "notice": "Compiled only from verified, checksum-checked static snapshots. Periodically updated conditions — not a warning service and not an official forecast.",
+      "authorities": "For official forecasts and warnings, follow DHM and NDRRMA/BIPAD.",
+      "published": "Publication generated {time}.",
+      "not_configured": "No live publication is pinned to this deployment. No readings are shown and none are implied.",
+      "publication_unavailable": "The live publication could not be verified. No readings are shown.",
+      "eq_heading": "Earthquakes",
+      "eq_ready": "Earthquake summaries reported by USGS in the regional query (80–89°E, 26–31°N) for the seven days before the fetch: {n}.",
+      "eq_recent": "Most recent: magnitude {mag} ({type}), {place}, {time}.",
+      "eq_empty": "No USGS-network earthquake summaries were retained for this query. This is not an all-clear: events from other networks are withheld.",
+      "fc_heading": "Precipitation forecast",
+      "fc_ready": "NOAA GFS model forecast of 6-hour precipitation accumulation, valid {from} to {until} (model cycle {issued}).",
+      "fc_range": "Grid-cell values range from {min} to {max} mm. Cells with a value: {known} of {total}. UNKNOWN cells: {unknown}.",
+      "fc_empty": "The forecast snapshot contains no grid cells. This is not a forecast of no precipitation.",
+      "fc_caveat": "Model values are not observed rainfall, not a daily total and not a warning.",
+      "aq_heading": "Air quality (PM2.5)",
+      "aq_off": "OFF. Provider licence review is required, so no readings are loaded. AQI: UNKNOWN.",
+      "warn_heading": "Official warnings",
+      "warn_text": "Not ingested by this atlas. Their absence here does not mean there are no warnings. Check DHM, NDRRMA and BIPAD directly.",
+      "impact_heading": "Impacts",
+      "impact_text": "Damage, loss, inundation and casualties: UNKNOWN. This page does not estimate them.",
+      "stale_prefix": "STALE — last verified snapshot.",
+      "unavailable": "UNAVAILABLE — no verified snapshot.",
+      "error": "UNAVAILABLE — verification failed; content withheld.",
+      "unknown": "UNKNOWN",
+      "npt": "NPT",
+      "status_not_ingested": "NOT INGESTED",
+      "status_off": "OFF",
+      "status_unknown": "UNKNOWN"
+    },
+    "ne": {
+      "bulletin_heading": "अवस्था बुलेटिन",
+      "title": "आवधिक रूपमा अद्यावधिक गरिएको अवस्था",
+      "notice": "प्रमाणित र चेकसम जाँच गरिएका स्थिर स्न्यापसटबाट मात्र तयार पारिएको। आवधिक रूपमा अद्यावधिक गरिएको अवस्था — यो चेतावनी सेवा होइन, आधिकारिक पूर्वानुमान पनि होइन।",
+      "authorities": "आधिकारिक पूर्वानुमान र चेतावनीका लागि जल तथा मौसम विज्ञान विभाग (DHM) र NDRRMA/BIPAD लाई हेर्नुहोस्।",
+      "published": "प्रकाशन तयार भएको समय: {time}।",
+      "not_configured": "यस संस्करणमा कुनै प्रत्यक्ष प्रकाशन जोडिएको छैन। कुनै मापन देखाइएको छैन, न त कुनै मापनको संकेत गरिएको छ।",
+      "publication_unavailable": "प्रत्यक्ष प्रकाशन प्रमाणित गर्न सकिएन। कुनै मापन देखाइएको छैन।",
+      "eq_heading": "भूकम्प",
+      "eq_ready": "USGS ले क्षेत्रीय खोज (पूर्वी देशान्तर ८०–८९°, उत्तरी अक्षांश २६–३१°) मा डाउनलोडअघिका सात दिनभित्र {n} वटा भूकम्प सारांश प्रतिवेदन गरेको छ।",
+      "eq_recent": "पछिल्लो: म्याग्निच्युड {mag} ({type}), {place}, {time}।",
+      "eq_empty": "यस खोजमा USGS नेटवर्कको कुनै भूकम्प सारांश राखिएको छैन। यसको अर्थ सबै सुरक्षित छ भन्ने होइन: अन्य नेटवर्कका घटनाहरू समावेश गरिएका छैनन्।",
+      "fc_heading": "वर्षा पूर्वानुमान",
+      "fc_ready": "NOAA GFS मोडेलको ६ घण्टे सञ्चित वर्षा पूर्वानुमान, मान्य अवधि {from} देखि {until} सम्म (मोडेल चक्र {issued})।",
+      "fc_range": "{total} मध्ये {known} ग्रिड कक्षमा मान {min} देखि {max} मिलिमिटरसम्म छन्; {unknown} कक्षको मान अज्ञात (UNKNOWN) छ।",
+      "fc_empty": "पूर्वानुमान स्न्यापसटमा कुनै ग्रिड कक्ष छैन। यसको अर्थ वर्षा हुँदैन भन्ने होइन।",
+      "fc_caveat": "मोडेलका मानहरू मापन गरिएको वर्षा होइनन्, दैनिक कुल होइनन्, र चेतावनी पनि होइनन्।",
+      "aq_heading": "वायु गुणस्तर (PM2.5)",
+      "aq_off": "बन्द। प्रदायकको इजाजतपत्र समीक्षा आवश्यक भएकाले कुनै मापन लोड गरिएको छैन। AQI: अज्ञात (UNKNOWN)।",
+      "warn_heading": "आधिकारिक चेतावनी",
+      "warn_text": "यो एटलसले आधिकारिक चेतावनी समावेश गर्दैन। यहाँ चेतावनी नदेखिनुको अर्थ चेतावनी छैन भन्ने होइन। DHM, NDRRMA र BIPAD मा सिधै हेर्नुहोस्।",
+      "impact_heading": "प्रभाव",
+      "impact_text": "क्षति, नोक्सानी, डुबान र हताहत: अज्ञात (UNKNOWN)। यो पृष्ठले यिनको अनुमान गर्दैन।",
+      "stale_prefix": "पुरानो (STALE) — पछिल्लो प्रमाणित स्न्यापसट।",
+      "unavailable": "उपलब्ध छैन — कुनै प्रमाणित स्न्यापसट छैन।",
+      "error": "उपलब्ध छैन — प्रमाणीकरण असफल; सामग्री रोकिएको।",
+      "unknown": "अज्ञात (UNKNOWN)",
+      "npt": "नेपाली समय",
+      "status_not_ingested": "समावेश गरिएको छैन",
+      "status_off": "बन्द",
+      "status_unknown": "अज्ञात"
+    }
+  }
+}
