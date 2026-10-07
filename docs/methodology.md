@@ -35,3 +35,5 @@ When implementation changes, update the methodology in the same feature branch a
 Feature 42’s `/methodology/#live-contracts-method` explains evidence/purpose, source-time freshness, workflow health, bounded checksums, valid empty versus failed fetch and null-only physical/damage outputs. Acquisition and the live page are not implemented. See [Live contracts](live-contracts.md).
 
 Feature 43 normalizes USGS reported epicentres and one precisely decoded six-hour GFS model forecast interval; it does not derive warnings or impacts. Source time governs freshness, failure retains stale data and valid empty is not all-clear. Publication uses an atomically promoted index after immutable source checks. See [full methodology](live-open-feeds.md).
+
+Feature 45 preserves original PM2.5 periods, units and flags; usable values remain UNKNOWN for flagged or unknown-quality/period readings. AQI has no reviewed standard and remains UNKNOWN. Public delivery is disabled independently of the research flag. See [air-quality method](live-air-quality.md).

@@ -1,0 +1,14 @@
+[
+ {"name":"valid-zero","valid":true,"path":["records",0,"reported_value"],"value":0},
+ {"name":"wrong-profile","valid":false,"path":["profile"],"value":"public"},
+ {"name":"invented-aqi","valid":false,"path":["aqi","value"],"value":50},
+ {"name":"invented-standard","valid":false,"path":["aqi","standard"],"value":"UNREVIEWED"},
+ {"name":"wrong-country","valid":false,"path":["station","country"],"value":"US"},
+ {"name":"wrong-unit","valid":false,"path":["records",0,"original_unit"],"value":"ppm"},
+ {"name":"wrong-duration","valid":false,"path":["records",0,"averaging_period_seconds"],"value":60},
+ {"name":"wrong-station","valid":false,"path":["station","coordinates"],"value":[86,28]},
+ {"name":"flagged-value","valid":false,"path":["records",0,"has_flags"],"value":true},
+ {"name":"unknown-flags-value","valid":false,"path":["records",0,"has_flags"],"value":null},
+ {"name":"duplicate-record","valid":false,"path":["records",1],"value":{"id":"synthetic","original_unit":"ug/m3","averaging_period_seconds":3600,"period_start":"2026-10-06T11:00:00Z","period_end":"2026-10-06T12:00:00Z","has_flags":false,"reported_value":0}},
+ {"name":"wrong-reference","valid":false,"path":["source_responses",0,"url"],"value":"https://other.invalid/reading"}
+]

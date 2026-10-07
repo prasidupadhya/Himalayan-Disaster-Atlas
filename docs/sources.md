@@ -13,3 +13,5 @@ Licensing is source-specific. Derived products inherit parent obligations; the p
 Feature 42 adds `/sources/#live-contracts` for original MIT contract fixtures, separate from current production data. No real feeds are fetched. It links official DHM/NDRRMA/BIPAD authorities and explains conditional providers remain disabled. Future acquisition must register exact sources and terms; no upstream rights are granted. See [Feature 42](live-contracts.md).
 
 Feature 43 documents USGS preferred-network summaries and NOAA GFS APCP separately from their original MIT publication-policy metadata. No DHM/BIPAD acquisition or blanket contributor licence is inferred. Every imported live snapshot carries source and review links; the Catalog delivery inspector reads only static verified bytes. See [source evaluation](live-open-feeds.md).
+
+Feature 45 adds the conditional OpenAQ source-policy section. The API and each upstream provider retain independent terms. No provider is allowlisted, no public station reading is acquired, and credentials stay in Actions secrets. See [Feature 45](live-air-quality.md).
