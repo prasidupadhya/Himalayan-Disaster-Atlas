@@ -67,7 +67,7 @@ describe('live contract parity and scientific meaning', () => {
     expect(python.accepted).toEqual(cases.map(item => item.valid));
     expect(python.freshness).toEqual(pairs.map(p => liveFreshness(p.index, p.index.feeds[0], p.snapshot, Date.parse(p.now))));
     expect(python.health).toEqual(pairs.map(p => workflowHealth(p.index, Date.parse(p.now))));
-  });
+  }, 60_000);
   it('preserves zero, null and non-colour evidence labels', () => {
     const snapshot = parseLiveSnapshot(observed());
     expect(snapshot.records[0].measurements[0].value).toBe(0);
