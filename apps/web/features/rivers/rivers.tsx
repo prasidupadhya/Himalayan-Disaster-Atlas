@@ -142,7 +142,7 @@ export function Rivers({ map }: { map: Map | null }) {
     <label><input type="checkbox" checked={visible} disabled={!datasets} onChange={event => setVisible(event.target.checked)} /> Show river network</label>
     <p className="muted">Primary and mid-order reaches appear first; headwater/minor reaches load from zoom 6.5. Click a river line on the map to select it, then trace downstream.</p>
     <label className="thematic-picker">Find a river or reach<input type="search" value={query} disabled={!datasets} placeholder="Trishuli, Koshi, HYRIV 40669746…" onChange={event => setQuery(event.target.value)} /></label>
-    <label className="thematic-picker">River or reach<select value={selectValue} disabled={!datasets} onChange={event => choose(event.target.value)}>
+    <label className="thematic-picker">River or reach<select aria-label="River or reach" value={selectValue} disabled={!datasets} onChange={event => choose(event.target.value)}>
       <option value="">Select a river or reach…</option>
       {feature && !reachMatches.some(item => String(item.id) === selected) && <option value={String(feature.id)}>HYRIV {feature.properties.source_id} (selected on map)</option>}
       <optgroup label="Reaches">
