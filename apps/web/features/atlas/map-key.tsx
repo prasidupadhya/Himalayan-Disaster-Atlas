@@ -7,7 +7,7 @@ const ENTRIES: Array<{ shape: 'line' | 'dot' | 'area'; colour: string; label: st
   { shape: 'dot', colour: '#d55181', label: 'Flood', detail: 'BIPAD historical reported incidents' },
   { shape: 'dot', colour: '#c98500', label: 'Landslide', detail: 'BIPAD historical reported incidents' },
   { shape: 'dot', colour: '#e66767', label: 'Earthquake', detail: 'Catalogue events' },
-  { shape: 'dot', colour: '#8fa3ad', label: 'River station', detail: 'Ring: red above danger, ochre above warning' },
+  { shape: 'dot', colour: '#8fa3ad', label: 'River station', detail: 'Red above danger level, ochre above warning level' },
   { shape: 'dot', colour: '#c9d6de', label: 'Rainfall gauge', detail: 'Red when above warning level' },
   { shape: 'dot', colour: '#f5f5f0', label: 'Infrastructure', detail: 'Roads, bridges, schools, health, emergency, settlements' },
   { shape: 'area', colour: '#7f9aa6', label: 'Administrative boundary', detail: 'Click to inspect' },
