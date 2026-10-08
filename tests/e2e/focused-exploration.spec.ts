@@ -8,12 +8,12 @@ test('focused exploration loads lakes and names without historical or unrelated 
   await expect(page.getByRole('region', { name: 'GLOF modelling availability' })).toContainText('UNAVAILABLE');
   await expect(page.getByRole('region', { name: 'Earthquakes', exact: true })).toHaveCount(0);
   expect(requests.filter(url => /\/data\/nepal-(region-earthquakes|disaster-events|reported-|population|rainfall|hydrology|mountains|glaciers-)/.test(url))).toEqual([]);
-  await page.getByLabel('River name', { exact: true }).fill('Trishuli');
-  const names = page.getByLabel('Named river location');
+  await page.getByLabel('Find a river or reach').fill('Trishuli');
+  const names = page.getByLabel('River or reach', { exact: true });
   await expect(names).toContainText('Trishuli');
-  await names.selectOption('geonames-1282639');
+  await names.selectOption('name:geonames-1282639');
   await expect(page.locator('.river-name-label')).toContainText('named location');
-  await expect(page.getByRole('region', { name: 'River names' })).toContainText('UNKNOWN — no HydroRIVERS crosswalk');
+  await expect(page.getByRole('region', { name: 'Rivers', exact: true })).toContainText('candidate for tracing, not a verified identity');
   await page.getByLabel('Find a district or municipality').fill('Manang Ngisyang');
   await page.getByRole('combobox', { name: 'Boundary record', exact: true }).selectOption('np0438401');
   await expect(page.getByRole('heading', { name: 'Manang Ngisyang', exact: true })).toBeVisible();

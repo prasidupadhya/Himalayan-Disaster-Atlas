@@ -10,8 +10,8 @@ test('traces a selected reach with playback, provenance, download and cleanup', 
   const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
   await expect(rivers).toHaveAttribute('data-rivers-state', 'ready', { timeout: 15_000 });
   await expect(trace.getByRole('button', { name: 'Trace downstream', exact: true })).toBeDisabled();
-  await rivers.getByLabel('Find a reach').fill('40669746');
-  await rivers.getByLabel('River reach').selectOption('hyriv-40669746');
+  await rivers.getByLabel('Find a river or reach').fill('40669746');
+  await rivers.getByLabel('River or reach', { exact: true }).selectOption('hyriv-40669746');
   await trace.getByRole('button', { name: 'Trace downstream', exact: true }).click();
   await expect(trace).toHaveAttribute('data-trace-state', 'ready');
   await expect(trace.getByText('180', { exact: true })).toBeVisible();
@@ -42,8 +42,8 @@ test('traces a selected reach with playback, provenance, download and cleanup', 
   await expect(trace).toHaveAttribute('data-trace-state', 'idle');
   await trace.getByRole('button', { name: 'Trace downstream', exact: true }).click();
   await expect(trace).toHaveAttribute('data-trace-state', 'ready');
-  await rivers.getByLabel('Find a reach').fill('40670088');
-  await rivers.getByLabel('River reach').selectOption('hyriv-40670088');
+  await rivers.getByLabel('Find a river or reach').fill('40670088');
+  await rivers.getByLabel('River or reach', { exact: true }).selectOption('hyriv-40670088');
   await expect(trace).toHaveAttribute('data-trace-state', 'idle');
   expect(artifacts).toHaveLength(2);
   expect(errors).toEqual([]);
@@ -68,8 +68,8 @@ test('supports reduced motion and narrow screens without overflow', async ({ pag
   const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
   const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
   await expect(rivers).toHaveAttribute('data-rivers-state', 'ready', { timeout: 15_000 });
-  await rivers.getByLabel('Find a reach').fill('40669746');
-  await rivers.getByLabel('River reach').selectOption('hyriv-40669746');
+  await rivers.getByLabel('Find a river or reach').fill('40669746');
+  await rivers.getByLabel('River or reach', { exact: true }).selectOption('hyriv-40669746');
   await trace.getByRole('button', { name: 'Trace downstream', exact: true }).click();
   await expect(trace.locator('[data-trace-progress]')).toHaveAttribute('data-trace-progress', '180');
   await trace.getByText('Trace method, inputs & limitations', { exact: true }).click();

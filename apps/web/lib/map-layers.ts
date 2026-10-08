@@ -23,7 +23,7 @@ export function mountDataset(map: Map, dataset: Dataset) {
 
 const ADMIN_STYLE = {
   0: { color: '#f5f8fa', opacity: 0, width: 2.5, minzoom: 0 },
-  1: { color: '#35b6a5', opacity: 0.34, width: 2.2, minzoom: 0 },
+  1: { color: '#7f9aa6', opacity: 0.34, width: 2.2, minzoom: 0 },
   2: { color: '#8fd8cf', opacity: 0, width: 0.85, minzoom: 6 },
   3: { color: '#c8eee9', opacity: 0.02, width: 0.55, minzoom: 8 },
 } as const;
@@ -138,7 +138,7 @@ export function mountRiverDataset(map: Map, dataset: Dataset) {
   const minzoom = dataset.metadata.dataset_id.endsWith('headwaters') ? 6.5 : 4.5;
   const width: ExpressionSpecification = ['interpolate', ['linear'], ['get', 'flow_order'], 3, 4.2, 4, 3.2, 5, 2.1, 6, 1.4, 7, 0.9, 8, 0.6];
   map.addLayer({ id: line, source, type: 'line', minzoom, paint: {
-    'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#4aa9d8'],
+    'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#3987e5'],
     'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 5, width],
     'line-opacity': ['case', ['boolean', ['feature-state', 'selected'], false], 1, 0.82],
   } });
@@ -173,11 +173,11 @@ export function mountGlacierDataset(map: Map, dataset: Dataset) {
   const fill = `${source}-fill`;
   const line = `${source}-line`;
   map.addLayer({ id: fill, source, type: 'fill', minzoom: 5.5, paint: {
-    'fill-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#9dd9ef'],
+    'fill-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#dcf1f8'],
     'fill-opacity': ['case', ['boolean', ['feature-state', 'selected'], false], 0.72, 0.42],
   } });
   map.addLayer({ id: line, source, type: 'line', minzoom: 5.5, paint: {
-    'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#d8f2fb'],
+    'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#ffffff'],
     'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.8, 0.9],
   } });
   const ids = new Set(dataset.collection.features.map(feature => String(feature.id)));
@@ -210,7 +210,7 @@ export function mountGlacialLakeDataset(map: Map, dataset: Dataset) {
   })) };
   map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
   const points = `${source}-points`;
-  const sourceColor: ExpressionSpecification = ['match', ['get', 'connectivity'], 'Glacier-fed', '#38bdf8', 'Non Glacier-fed', '#67e8f9', '#67e8f9'];
+  const sourceColor: ExpressionSpecification = ['match', ['get', 'connectivity'], 'Glacier-fed', '#199e70', 'Non Glacier-fed', '#7fd1b5', '#7fd1b5'];
   map.addLayer({ id: points, source, type: 'circle', minzoom: 5.5, paint: {
     'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 9,
       ['interpolate', ['linear'], ['get', 'area_km2'], 0.001, 2.4, 0.1, 4.2, 1, 7, 5.6, 10.5]],
@@ -246,7 +246,7 @@ export function mountHydrologyDataset(map: Map, dataset: Dataset) {
   const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
   map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
   const points = `${source}-points`;
-  const statusColor: ExpressionSpecification = ['match', ['get', 'station_status'], 'ABOVE DANGER LEVEL', '#d1495b', 'ABOVE WARNING LEVEL', '#f4a261', '#2a9d8f'];
+  const statusColor: ExpressionSpecification = ['match', ['get', 'station_status'], 'ABOVE DANGER LEVEL', '#e66767', 'ABOVE WARNING LEVEL', '#c98500', '#8fa3ad'];
   map.addLayer({ id: points, source, type: 'circle', minzoom: 5, paint: {
     'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 9, 5.5],
     'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', statusColor],
@@ -273,7 +273,7 @@ export function mountRainfallDataset(map: Map, dataset: Dataset) {
   const data = { ...dataset.collection, features: dataset.collection.features.map(feature => ({ ...feature, properties: { ...feature.properties, __atlas_id: feature.id } })) };
   map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
   const points = `${source}-points`;
-  const statusColor: ExpressionSpecification = ['match', ['get', 'station_status'], 'ABOVE WARNING LEVEL', '#f4a261', '#457b9d'];
+  const statusColor: ExpressionSpecification = ['match', ['get', 'station_status'], 'ABOVE WARNING LEVEL', '#e66767', '#c9d6de'];
   map.addLayer({ id: points, source, type: 'circle', minzoom: 5, paint: {
     'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 9, 5],
     'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', statusColor],
@@ -292,8 +292,8 @@ export function mountDisasterEventDataset(map: Map, dataset: Dataset) {
   map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
   const points = `${source}-points`;
   const categoryColor: ExpressionSpecification = ['match', ['get', 'hazard_name'],
-    'Flood', '#3b82f6', 'Landslide', '#a16207', 'Earthquake', '#f97316', 'Heavy Rainfall', '#60a5fa',
-    'Fire', '#dc2626', 'Forest Fire', '#b91c1c', 'Thunderbolt', '#eab308', '#8b9aaa'];
+    'Flood', '#d55181', 'Landslide', '#c98500', 'Earthquake', '#e66767', 'Heavy Rainfall', '#c9d6de',
+    'Fire', '#8b9aaa', 'Forest Fire', '#8b9aaa', 'Thunderbolt', '#8b9aaa', '#8b9aaa'];
   map.addLayer({ id: points, source, type: 'circle', minzoom: 6.5, paint: {
     'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 7, 3.2],
     'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', categoryColor],
@@ -327,7 +327,7 @@ export function mountEarthquakeDataset(map: Map, dataset: Dataset) {
   map.addLayer({ id: points, source, type: 'circle', minzoom: 4.5, paint: {
     'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 15,
       ['interpolate', ['exponential', 1.45], ['get', 'magnitude'], 2.5, 3, 4, 4.5, 5, 6.2, 6, 8.8, 7, 12.2, 8, 16]],
-    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#ef8354'],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#e66767'],
     'circle-opacity': 0.78, 'circle-stroke-color': '#402218', 'circle-stroke-width': 1.1,
   } });
   const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
@@ -355,7 +355,7 @@ export function mountFloodDataset(map: Map, dataset: Dataset) {
   const points = `${source}-reported-points`;
   map.addLayer({ id: points, source, type: 'circle', minzoom: 6, paint: {
     'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 8, 4],
-    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#3182ce'],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#d55181'],
     'circle-opacity': 0.82, 'circle-stroke-color': '#102a43', 'circle-stroke-width': 1,
   } });
   const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
@@ -383,7 +383,7 @@ export function mountLandslideDataset(map: Map, dataset: Dataset) {
   const points = `${source}-reported-points`;
   map.addLayer({ id: points, source, type: 'circle', minzoom: 6, paint: {
     'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 8, 4],
-    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#a16207'],
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#c98500'],
     'circle-opacity': 0.82, 'circle-stroke-color': '#3f2d13', 'circle-stroke-width': 1,
   } });
   const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
@@ -412,13 +412,13 @@ export function mountHydropowerDataset(map: Map, dataset: Dataset) {
   const clusters = `${source}-clusters`; const points = `${source}-points`;
   map.addLayer({ id: clusters, source, type: 'circle', filter: ['has', 'point_count'], paint: {
     'circle-radius': ['interpolate', ['linear'], ['get', 'point_count'], 2, 11, 10, 17, 30, 23],
-    'circle-color': '#2f855a', 'circle-opacity': 0.78, 'circle-stroke-color': '#d9f99d', 'circle-stroke-width': 1.5,
+    'circle-color': '#d95926', 'circle-opacity': 0.78, 'circle-stroke-color': '#fbe3d6', 'circle-stroke-width': 1.5,
   } });
   map.addLayer({ id: points, source, type: 'circle', filter: ['!', ['has', 'point_count']], paint: {
     'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 10,
       ['interpolate', ['linear'], ['coalesce', ['get', 'capacity_mw'], 0], 0, 5, 10, 6, 100, 8, 500, 11]],
-    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#65a30d'],
-    'circle-stroke-color': '#26410e', 'circle-stroke-width': 1.2, 'circle-opacity': 0.9,
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#d95926'],
+    'circle-stroke-color': '#402218', 'circle-stroke-width': 1.2, 'circle-opacity': 0.9,
   } });
   const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
   return {
@@ -444,7 +444,7 @@ export function mountInfrastructureDataset(map: Map, dataset: Dataset) {
     ...(pointClass ? { cluster: true, clusterRadius: 38, clusterMaxZoom: 9 } : {}),
   });
   const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
-  const color: Record<string, string> = { road: '#f3c969', bridge: '#d7a65a', school: '#8cc7e8', health: '#62c59b', emergency: '#d88d8d', settlement: '#c3a4df' };
+  const color: Record<string, string> = { road: '#f5f5f0', bridge: '#f5f5f0', school: '#dfe6ea', health: '#ffffff', emergency: '#c9d6de', settlement: '#b8c2c9' };
   if (klass === 'road') {
     const line = `${source}-line`;
     map.addLayer({ id: line, source, type: 'line', minzoom: 5, paint: {

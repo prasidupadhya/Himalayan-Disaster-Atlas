@@ -9,12 +9,12 @@ import { ADMIN_MANIFESTS, loadDataset, UnavailableError } from '../../lib/datase
 import { mountAdministrativeDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
 import { administrativeName, administrativeNameReview } from '../../lib/administrative-names';
-import { RiverNames } from '../river-names/river-names';
 import { GlacialLakes } from '../glacial-lakes/glacial-lakes';
 import { Hydropower } from '../hydropower/hydropower';
 import { Infrastructure } from '../infrastructure/infrastructure';
 import { Terrain } from '../terrain/terrain';
 import { Rivers } from '../rivers/rivers';
+import { MapKey } from './map-key';
 import { ExposureEngine } from '../exposure-engine/exposure-engine';
 import { ScenarioEngine } from '../scenario-engine/scenario-engine';
 import { SimulationUI } from '../simulation-ui/simulation-ui';
@@ -252,7 +252,7 @@ export function Atlas({ research = false }: { research?: boolean }) {
       <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? interactiveMap : null} />
       </>}
       <div id="terrain-controls" tabIndex={-1} className="atlas-anchor"><Terrain key={attempt} map={mapReady ? interactiveMap : null} /></div>
-      <div id="river-controls" tabIndex={-1} className="atlas-anchor"><Rivers key={`rivers-${attempt}`} map={mapReady ? interactiveMap : null} />{!research && <RiverNames map={mapReady ? interactiveMap : null} />}</div>
+      <div id="river-controls" tabIndex={-1} className="atlas-anchor"><Rivers key={`rivers-${attempt}`} map={mapReady ? interactiveMap : null} /></div>
       {research && <ExposureEngine key={`exposure-${attempt}`} map={mapReady ? interactiveMap : null} />}
       {!research && <section className="thematic-controls" aria-label="GLOF modelling availability"><h2>Lake outburst modelling</h2><p>{lakeId ? `Selected lake: ${lakeId}. Physical model inputs required.` : 'Select a lake above to identify the modelling subject.'}</p><p>Flood extent and damage: <strong>UNAVAILABLE</strong>.</p><p>A lake point or a downstream river line cannot identify inundated places or destroyed assets. This inventory has no verified lake outlet-to-river connection, breach parameters or validated hydraulic model.</p><p><a href="/methodology/#glof-physical">Physical GLOF project: scope, required inputs and validation</a></p><p>Use river tracing for connectivity only. Infrastructure is geographic context, not a list of affected assets.</p><details onToggle={event => setEducationalSimulation(event.currentTarget.open)}><summary>Educational river simulation</summary>{educationalSimulation && <SimulationUI key={`focused-simulation-${attempt}`} map={mapReady ? interactiveMap : null} />}</details></section>}
       <div id="additional-controls" tabIndex={-1} className="atlas-anchor">
@@ -282,6 +282,7 @@ export function Atlas({ research = false }: { research?: boolean }) {
           }
         }}>Reset view</button>
       </div>
+      {!research && <MapKey />}
       <p className="muted map-attribution-note">Data attribution: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors (ODbL)</a> · <a href="/licenses/">Terrain and all source licences</a></p>
       <section className="feature-list" id="accessible-boundary-records" tabIndex={-1} aria-label="Accessible boundary records">
         <h2>Identify an administrative unit</h2>
