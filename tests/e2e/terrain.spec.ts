@@ -65,7 +65,8 @@ test('Asia zoom-out stays bounded with terrain throughout the viewport', async (
   await expect(page.locator('[data-terrain-state]')).toHaveAttribute('data-terrain-state', 'ready');
   const zoomOut = page.getByRole('button', { name: 'Zoom out', exact: true });
   // Forced: the button can disable itself at minimum zoom between the check and the click.
-  for (let i = 0; i < 10 && !(await zoomOut.isDisabled()); i++) await zoomOut.click({ force: true });
+  // Each zoom animates from the current zoom, so the next click waits for the previous step to settle.
+  for (let i = 0; i < 10 && !(await zoomOut.isDisabled()); i++) { await zoomOut.click({ force: true }); await page.waitForTimeout(400); }
   await expect(zoomOut).toBeDisabled();
   await expect(page.locator('[data-terrain-state]')).toHaveAttribute('data-terrain-state', 'ready');
   await page.locator('.map-shell').screenshot({ path: 'test-results/terrain-asia.png' });
