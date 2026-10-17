@@ -37,13 +37,14 @@ Web pages use one generic extraction (title, headings, tables, links, paragraphs
 
 1. Installs [Scrapling](https://github.com/D4Vinci/Scrapling) 0.4.15 (BSD-3-Clause) from `pipelines/gov_feeds/requirements.txt`, kept separate from `requirements.lock` so the atlas build is unchanged.
 2. Runs `tests/python/test_gov_feeds.py`.
-3. Runs `python -m pipelines.gov_feeds.digest`, which checks each site's `robots.txt`, fetches with an identifying User-Agent and no browser impersonation, and writes:
+3. Installs Chromium for Scrapling's `DynamicFetcher`. Sources marked `"render": true` (the DHM forecast, flood bulletins and flood archive, NDRRMA and air quality) are single-page apps whose HTML is empty until JavaScript runs, so they are loaded in headless Chromium; everything else uses a plain HTTP fetch.
+4. Runs `python -m pipelines.gov_feeds.digest`, which checks each site's `robots.txt`, fetches with an identifying User-Agent, no browser impersonation and no search-engine referer, and writes:
    - `apps/web/public/gov/latest.json` — the digest the page reads;
    - `data/gov-feeds/history/<YYYY-MM-DD>.json` — one digest per day;
    - `data/gov-feeds/raw/<source>.gz` — the latest raw bytes of each source, for audit.
-4. Commits those files as the repository owner and pushes to `main`, then starts the quality workflow. Cloudflare's Git integration deploys the new commit.
+5. Commits those files as the repository owner and pushes to `main`, then starts the quality workflow. Cloudflare's Git integration deploys the new commit.
 
-A source that fails keeps its last successful copy, marked "last copy from …", and the page says why (HTTP status, robots.txt or a read error). A source that has never succeeded shows no content.
+A source that fails keeps its last successful copy, marked "last copy from …", and the page says why (HTTP status, robots.txt or a read error). A source that has never succeeded shows no content. The same copy feeds the "Today from official sources" section of `/hazards/`.
 
 ## Limits
 

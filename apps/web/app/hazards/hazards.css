@@ -134,3 +134,6 @@
 @media (prefers-contrast: more) { .hz-section, .hz-badge, .hz-field input, .hz-field select, .hz-segmented span { border-width: 2px; } }
 @media (forced-colors: active) { .hz-swatch, .hz-share-bar > span, .hz-column-bar, .hz-bar-track > span { forced-color-adjust: none; border: 1px solid CanvasText; } }
 @media print { .hz-map, .hz-jump, .language-switch, .hz-ask, .hz-suggest { display: none !important; } .hz-map-layout, .hz-charts { grid-template-columns: 1fr; } }
+.hz-today .hz-today-status { font-size: .8rem; color: var(--muted); }
+.hz-today .hz-verbatim { font-style: italic; overflow-wrap: anywhere; }
+.hz-today .hz-card > a + a { margin-top: 0; font-weight: 600; }

@@ -109,3 +109,36 @@ for (const width of [320, 390]) test(`mobile ${width}px has no sideways scroll`,
   await section(page, 'climate').getByText(/All cells for the selected month/).click();
   expect(await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)).toBeLessThanOrEqual(0);
 });
+
+test('today section shows the daily official copy per hazard, with status and UNKNOWN for missing figures', async ({ page }) => {
+  // SYNTHETIC digest: every value below is a test fixture, not a real reading.
+  const digest = {
+    format: 'atlas-gov-digest@1', generated_at: '2026-10-17T00:17:00Z', generated_at_nepal: '2026-10-17 06:02 NPT', notice: 'test',
+    summary: { sources_fetched: 2, sources_last_known: 1, sources_unavailable: 0, rivers_above_danger: 1, rivers_above_warning: null, rain_stations_above_warning: null, new_links: 0 },
+    sources: [
+      { id: 'bipad-river', agency: 'SYNTHETIC agency', title: 'River water levels', category: 'rivers', kind: 'bipad-river', url: 'https://example.test/river', status: 'fetched', http_status: 200, checked_at: '2026-10-17T00:17:00Z', fetched_at: '2026-10-17T00:17:00Z',
+        content: { station_count: 2, status_counts: { 'ABOVE DANGER LEVEL': 1 }, alert_stations: [{ id: '2', name: 'SYNTHETIC Station B', basin: 'Gandaki', status: 'ABOVE DANGER LEVEL', water_level_m: 7.2, warning_level_m: 5.5, danger_level_m: null, observed_at: null }] }, changes: {} },
+      { id: 'seismo-earthquakes', agency: 'SYNTHETIC seismology centre', title: 'Earthquakes', category: 'earthquakes', kind: 'html', url: 'https://example.test/eq', status: 'error', http_status: null, checked_at: '2026-10-17T00:17:00Z', fetched_at: '2026-10-16T00:17:00Z', last_known: true,
+        content: { title: null, headings: [], links: [], paragraphs: [], dates_mentioned: [], tables: [{ caption: null, header: ['Date', 'Magnitude (ML)', 'Epicenter'], rows: [['AD: 2026-10-07', '4.1 ML', 'SYNTHETIC Place']] }] }, changes: {} },
+    ],
+  };
+  await page.route('**/gov/latest.json', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify(digest) }));
+  await page.goto('/hazards/');
+  const today = section(page, 'today');
+  await expect(today).toHaveAttribute('data-today-state', 'ready');
+  await expect(page.getByRole('navigation', { name: 'On this page' }).getByRole('link', { name: 'Today' })).toHaveAttribute('href', '#today');
+  const rivers = today.locator('[data-source="bipad-river"]');
+  await expect(rivers).toContainText('1 stations above danger level');
+  await expect(rivers).toContainText('UNKNOWN above warning level');
+  await expect(rivers).toContainText('SYNTHETIC Station B (Gandaki): above danger level');
+  const quake = today.locator('[data-source="seismo-earthquakes"]');
+  await expect(quake).toHaveAttribute('data-source-status', 'last-known');
+  await expect(quake).toContainText('AD: 2026-10-07 · 4.1 ML · SYNTHETIC Place');
+  await expect(today.getByRole('listitem').filter({ hasText: 'Air quality' })).toContainText('Not available in today’s copy');
+});
+
+test('today section says when no copy exists yet', async ({ page }) => {
+  await page.route('**/gov/latest.json', route => route.fulfill({ status: 404, body: 'missing' }));
+  await page.goto('/hazards/');
+  await expect(section(page, 'today').getByRole('status')).toContainText('first daily copy has not been published yet');
+});

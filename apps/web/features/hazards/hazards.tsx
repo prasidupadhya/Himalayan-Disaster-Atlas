@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { parseClimateContext, parseTerrainSteepness, type ClimateContext, type ModelRelease, type TerrainSteepness } from '../../../../packages/contracts/model-release';
 import { ADMIN_MANIFESTS, loadDataset } from '../../lib/datasets';
+import { findEntry, nepalTime, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type RiverContent } from '../../lib/gov-digest';
 import { buildIndex, parseEvidenceCorpus, retrieve, type EvidenceAnswer, type EvidenceIndex } from '../../lib/evidence';
 import {
   CLIMATE_VIEWS, cellPolygon, classify, freshness, monthLabel, nationalPrecipSeries, SPI_SCALE, spiShare, STEEP_SCALE, steepestDistricts, UNKNOWN_FILL,
@@ -44,7 +45,8 @@ export function Hazards() {
   const climate = useRelease('climate', 'context', parseClimate);
   const terrain = useRelease('terrain', 'steepness', parseTerrain);
   const corpus = useRelease('evidence', 'corpus', parseCorpus);
-  const sections: Array<[string, string]> = [['overview', c.overview], ['climate', c.climateTitle], ['terrain', c.terrainTitle], ['gated', c.gatedTitle], ['evidence', c.evidenceTitle]];
+  const [today, retryToday] = useGovDigest();
+  const sections: Array<[string, string]> = [['today', c.today.jump], ['overview', c.overview], ['climate', c.climateTitle], ['terrain', c.terrainTitle], ['gated', c.gatedTitle], ['evidence', c.evidenceTitle]];
 
   return <div className="hz-page" lang={lang}>
     <header className="hz-hero">
@@ -54,6 +56,7 @@ export function Hazards() {
       <div className="hz-notice" role="note"><span aria-hidden="true">◇</span><div><strong>{c.notice}</strong> {c.authorities} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url} rel="noopener">{a.name}</a></span>)}.</div></div>
       <nav className="hz-jump" aria-label={c.jump}>{sections.map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}</nav>
     </header>
+    <Today c={c} lang={lang} state={today} retry={retryToday} />
     <Overview c={c} lang={lang} climate={climate.value} terrain={terrain.value} />
     <Section id="climate" title={c.climateTitle} badge={c.modelled} lead={c.climateLead} state={climate} c={c}>
       {climate.value && <ClimatePanel loaded={climate.value} c={c} lang={lang} />}
@@ -80,6 +83,72 @@ function Section<T>({ id, title, badge, lead, state, c, children }: { id: string
     {state.error ? <div className="hz-problem" role="alert"><p><strong>{c.failed}</strong> {state.error}</p><button type="button" onClick={state.retry}>{c.retry}</button></div>
       : !state.value ? <p role="status" className="hz-loading">{c.loading}</p> : children}
   </section>;
+}
+
+function Today({ c, lang, state, retry }: { c: HzCopy; lang: Lang; state: ReturnType<typeof useGovDigest>[0]; retry: () => void }) {
+  const t = c.today;
+  return <section id="today" className="hz-section" aria-labelledby="today-title" data-today-state={state.status}>
+    <div className="hz-section-head"><h2 id="today-title">{t.title}</h2><span className="hz-badge">{t.badge}</span></div>
+    <p className="hz-lead">{t.lead}</p>
+    {state.status === 'loading' && <p role="status" className="hz-loading">{t.loading}</p>}
+    {state.status === 'missing' && <p role="status">{t.missing}</p>}
+    {state.status === 'error' && <div className="hz-problem" role="alert"><p><strong>{t.failed}</strong> {state.message}</p><button type="button" onClick={retry}>{c.retry}</button></div>}
+    {state.status === 'ready' && <TodayCards digest={state.digest} c={c} lang={lang} />}
+  </section>;
+}
+
+/** The first readable text on a copied page, verbatim. */
+const firstText = (page: Page) => page.paragraphs[0] ?? page.headings[0] ?? page.tables[0]?.rows[0]?.join(' · ') ?? null;
+const column = (header: string[], pattern: RegExp) => header.findIndex(h => pattern.test(h));
+
+function TodayCards({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) {
+  const t = c.today, s = digest.summary, n = (v: number | null) => v === null ? 'UNKNOWN' : formatNumber(v, lang);
+  const river = findEntry(digest, 'bipad-river'), rain = findEntry(digest, 'bipad-rain'), quake = findEntry(digest, 'seismo-earthquakes');
+  const incidents = findEntry(digest, 'bipad-incidents'), weather = findEntry(digest, 'dhm-forecast'), air = findEntry(digest, 'doenv-air');
+  const riverContent = river?.content as RiverContent | undefined, rainContent = rain?.content as RainContent | undefined;
+  const wettest = rainContent?.wettest_24h[0];
+  const quakeTable = (quake?.content as Page | undefined)?.tables.find(table => column(table.header, /magnitude/i) >= 0);
+  const latestQuake = quakeTable?.rows[0] && [/date/i, /magnitude/i, /epicent/i].map(re => quakeTable.rows[0][column(quakeTable.header, re)]).filter(Boolean).join(' · ');
+  const list = incidents?.content as ListContent | undefined;
+  const forecast = weather?.content && firstText(weather.content as Page), airText = air?.content && firstText(air.content as Page);
+  return <>
+    <ul className="hz-cards hz-today">
+      <TodayCard entry={river} title={t.rivers} anchor="rivers" c={c} lang={lang}>
+        {riverContent && <p className="hz-figure"><strong>{n(s.rivers_above_danger)}</strong> {t.aboveDanger} · <strong>{n(s.rivers_above_warning)}</strong> {t.aboveWarning}</p>}
+        {riverContent?.alert_stations.slice(0, 3).map(st => <p key={st.id}>{st.name ?? 'UNKNOWN'}{st.basin ? ` (${st.basin})` : ''}: {st.status.toLowerCase()}</p>)}
+      </TodayCard>
+      <TodayCard entry={rain} title={t.rain} anchor="rainfall" c={c} lang={lang}>
+        {rainContent && <p className="hz-figure"><strong>{n(s.rain_stations_above_warning)}</strong> {t.rainAbove}</p>}
+        {wettest && <p>{t.wettest} {wettest.name ?? 'UNKNOWN'}, {wettest.rain_24h_mm === null ? 'UNKNOWN' : `${formatNumber(wettest.rain_24h_mm, lang, 1)} mm`}</p>}
+      </TodayCard>
+      <TodayCard entry={quake} title={t.quake} anchor="earthquakes" c={c} lang={lang}>
+        {latestQuake && <p>{t.latestQuake} <span className="hz-verbatim">{latestQuake}</span></p>}
+      </TodayCard>
+      <TodayCard entry={incidents} title={t.disasters} anchor="disasters" c={c} lang={lang}>
+        {list && <p className="hz-figure"><strong>{n(list.record_count)}</strong> {t.records} · <strong>{n(incidents?.changes?.new_records?.length ?? 0)}</strong> {t.newRecords}</p>}
+      </TodayCard>
+      <TodayCard entry={weather} title={t.weather} anchor="weather" c={c} lang={lang}>
+        {weather?.content && <p className="hz-verbatim">{forecast ?? t.noText}</p>}
+      </TodayCard>
+      <TodayCard entry={air} title={t.air} anchor="air-quality" c={c} lang={lang}>
+        {air?.content && <p className="hz-verbatim">{airText ?? t.noText}</p>}
+      </TodayCard>
+    </ul>
+    <p className="hz-provenance">{digest.generated_at_nepal} · <a href="/official/">{t.all}</a></p>
+  </>;
+}
+
+function TodayCard({ entry, title, anchor, c, lang, children }: { entry: Entry | undefined; title: string; anchor: string; c: HzCopy; lang: Lang; children: ReactNode }) {
+  const t = c.today, when = nepalTime(entry?.fetched_at, lang === 'ne' ? 'ne-NP' : 'en-GB');
+  const status = !entry?.content ? t.unavailable : entry.last_known ? `${t.lastKnown} ${when ?? 'UNKNOWN'}` : `${t.copied} ${when ?? 'UNKNOWN'}`;
+  return <li className="hz-card" data-source={entry?.id} data-source-status={!entry?.content ? 'unavailable' : entry.last_known ? 'last-known' : 'fetched'}>
+    <h3>{title}</h3>
+    <p className="hz-today-status">{status}</p>
+    {entry?.content ? children : null}
+    {entry && <p className="muted">{entry.agency}</p>}
+    <a href={`/official/#official-${anchor}`}>{t.full}</a>
+    {entry && <a href={entry.url} rel="noopener noreferrer" target="_blank">{t.agency}</a>}
+  </li>;
 }
 
 function Overview({ c, lang, climate, terrain }: { c: HzCopy; lang: Lang; climate: Loaded<ClimateContext> | null; terrain: Loaded<TerrainSteepness> | null }) {

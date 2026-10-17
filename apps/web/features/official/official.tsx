@@ -1,33 +1,11 @@
 'use client';
-import { useEffect, useState } from 'react';
-
-type Link = { text: string; href: string; document: boolean };
-type Table = { caption: string | null; header: string[]; rows: string[][] };
-type Page = { title: string | null; headings: string[]; tables: Table[]; links: Link[]; paragraphs: string[]; dates_mentioned: string[] };
-type River = { id: string; name: string | null; basin: string | null; status: string; water_level_m: number | null; warning_level_m: number | null; danger_level_m: number | null; observed_at: string | null };
-type Rain = { id: string; name: string | null; basin: string | null; status: string; rain_1h_mm: number | null; rain_24h_mm: number | null; observed_at: string | null };
-type RiverContent = { station_count: number; status_counts: Record<string, number>; alert_stations: River[] };
-type RainContent = { station_count: number; status_counts: Record<string, number>; wettest_24h: Rain[] };
-type Scalar = string | number | boolean | null;
-type ListContent = { record_count: number; columns: string[]; records: Array<Record<string, Scalar>> };
-type Entry = {
-  id: string; agency: string; title: string; category: string; kind: 'html' | 'bipad-river' | 'bipad-rain' | 'json-list'; url: string;
-  status: 'fetched' | 'unreachable' | 'blocked-by-robots' | 'error'; http_status: number | null; checked_at: string; fetched_at?: string | null;
-  last_known?: boolean; error?: string; content?: Page | RiverContent | RainContent | ListContent; changes?: { new_links?: Link[]; new_records?: Array<Record<string, Scalar>>; status_changes?: Array<{ id: string; name: string | null; from: string | null; to: string }> };
-};
-type Digest = { format: 'atlas-gov-digest@1'; generated_at: string; generated_at_nepal: string; notice: string; sources: Entry[];
-  summary: { sources_fetched: number; sources_last_known: number; sources_unavailable: number; rivers_above_danger: number | null; rivers_above_warning: number | null; rain_stations_above_warning: number | null; new_links: number; new_records?: number } };
-type State = { status: 'loading' } | { status: 'missing' } | { status: 'error'; message: string } | { status: 'ready'; digest: Digest };
+import { nepalTime, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type RiverContent, type Scalar, type Table } from '../../lib/gov-digest';
 
 const CATEGORIES: Array<[string, string]> = [['weather', 'Weather'], ['floods', 'Floods'], ['rivers', 'River levels'], ['rainfall', 'Rainfall'], ['disasters', 'Disasters and alerts'], ['earthquakes', 'Earthquakes'], ['air-quality', 'Air quality'], ['roads', 'Roads'], ['notices', 'Notices']];
 const UNKNOWN = 'UNKNOWN';
 const num = (value: number | null | undefined, unit: string) => value === null || value === undefined ? UNKNOWN : `${value.toLocaleString('en-US', { maximumFractionDigits: 2 })} ${unit}`;
 const count = (value: number | null) => value === null ? UNKNOWN : value.toLocaleString('en-US');
-const time = (value: string | null | undefined) => {
-  if (!value) return UNKNOWN;
-  const date = new Date(value);
-  return Number.isNaN(date.getTime()) ? value : `${date.toLocaleString('en-GB', { timeZone: 'Asia/Kathmandu', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })} NPT`;
-};
+const time = (value: string | null | undefined) => nepalTime(value) ?? UNKNOWN;
 
 function statusText(entry: Entry) {
   if (entry.status === 'fetched') return `Copied ${time(entry.fetched_at)}`;
@@ -107,21 +85,7 @@ function EntryView({ entry }: { entry: Entry }) {
 }
 
 export function OfficialSources() {
-  const [state, setState] = useState<State>({ status: 'loading' });
-  const [attempt, setAttempt] = useState(0);
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch('/gov/latest.json', { cache: 'no-store', signal: controller.signal })
-      .then(async response => {
-        if (response.status === 404) return setState({ status: 'missing' });
-        if (!response.ok) throw new Error(`The digest answered HTTP ${response.status}.`);
-        const digest = await response.json() as Digest;
-        if (digest?.format !== 'atlas-gov-digest@1' || !Array.isArray(digest.sources)) throw new Error('The digest has an unexpected format.');
-        setState({ status: 'ready', digest });
-      })
-      .catch(error => { if (!controller.signal.aborted) setState({ status: 'error', message: error instanceof Error ? error.message : 'The digest could not be read.' }); });
-    return () => controller.abort();
-  }, [attempt]);
+  const [state, retry] = useGovDigest();
 
   return <div className="page official-page" data-official-state={state.status}>
     <h1>Official sources today</h1>
@@ -131,7 +95,7 @@ export function OfficialSources() {
     </aside>
     {state.status === 'loading' && <p role="status">Loading today’s copy…</p>}
     {state.status === 'missing' && <p role="status">The first daily copy has not been published yet. It is made each morning at about 06:00 Nepal time.</p>}
-    {state.status === 'error' && <div role="alert"><p>{state.message}</p><button type="button" onClick={() => { setState({ status: 'loading' }); setAttempt(n => n + 1); }}>Try again</button></div>}
+    {state.status === 'error' && <div role="alert"><p>{state.message}</p><button type="button" onClick={retry}>Try again</button></div>}
     {state.status === 'ready' && <Ready digest={state.digest} />}
   </div>;
 }

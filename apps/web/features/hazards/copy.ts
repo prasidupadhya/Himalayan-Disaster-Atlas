@@ -7,6 +7,16 @@ export const HZ = {
     jump: 'On this page', loading: 'Loading and verifying releases…', failed: 'This release could not be verified, so nothing from it is shown.', retry: 'Try again',
     mapLoading: 'Loading map…', mapFailed: 'The interactive map could not render. All values remain in the tables.',
     mapNoWebgl: 'Interactive mapping is unavailable in this browser (WebGL could not start). All values remain in the tables.',
+    today: {
+      title: 'Today from official sources', badge: 'OFFICIAL COPY', jump: 'Today',
+      lead: 'Copied each morning at about 06:00 Nepal time from public government pages, word for word. This is not a warning: open the agency page for the current situation.',
+      loading: 'Loading today’s copy…', missing: 'The first daily copy has not been published yet.', failed: 'Today’s copy could not be read.',
+      copied: 'Copied', lastKnown: 'Not read today; last copy', unavailable: 'Not available in today’s copy', all: 'See every official source',
+      rivers: 'River levels', rain: 'Rainfall', quake: 'Earthquakes', disasters: 'Disaster incidents', weather: 'Weather forecast', air: 'Air quality',
+      aboveDanger: 'stations above danger level', aboveWarning: 'above warning level', rainAbove: 'rain stations above warning level',
+      wettest: 'Wettest in 24 h:', latestQuake: 'Latest recorded:', records: 'incidents in the latest list', newRecords: 'new since the previous copy',
+      noText: 'No text could be read from the page.', full: 'Full copy', agency: 'Open the agency page',
+    },
     overview: 'At a glance', available: 'AVAILABLE', gated: 'GATED', scenario: 'SCENARIO', modelled: 'MODELLED', derived: 'DERIVED',
     cards: {
       flood: ['Floods & GLOF', 'Hypothetical release pulses at 18 verified points; exposure ranges by corridor width.', 'Open flood scenarios'],
@@ -52,6 +62,16 @@ export const HZ = {
     jump: 'यस पृष्ठमा', loading: 'रिलिज लोड र प्रमाणित गर्दै…', failed: 'यो रिलिज प्रमाणित गर्न सकिएन, त्यसैले यसबाट केही देखाइएको छैन।', retry: 'फेरि प्रयास गर्नुहोस्',
     mapLoading: 'नक्सा लोड हुँदैछ…', mapFailed: 'अन्तरक्रियात्मक नक्सा देखाउन सकिएन। सबै मान तालिकामा छन्।',
     mapNoWebgl: 'यस ब्राउजरमा अन्तरक्रियात्मक नक्सा उपलब्ध छैन (WebGL सुरु हुन सकेन)। सबै मान तालिकामा छन्।',
+    today: {
+      title: 'आजका आधिकारिक स्रोतहरू', badge: 'आधिकारिक प्रतिलिपि', jump: 'आज',
+      lead: 'सार्वजनिक सरकारी पृष्ठहरूबाट हरेक बिहान करिब ०६:०० नेपाल समयमा जस्ताको तस्तै प्रतिलिपि गरिएको। यो चेतावनी होइन: हालको अवस्थाका लागि निकायको पृष्ठ खोल्नुहोस्।',
+      loading: 'आजको प्रतिलिपि लोड हुँदैछ…', missing: 'पहिलो दैनिक प्रतिलिपि अझै प्रकाशित भएको छैन।', failed: 'आजको प्रतिलिपि पढ्न सकिएन।',
+      copied: 'प्रतिलिपि गरिएको', lastKnown: 'आज पढिएन; अन्तिम प्रतिलिपि', unavailable: 'आजको प्रतिलिपिमा उपलब्ध छैन', all: 'सबै आधिकारिक स्रोत हेर्नुहोस्',
+      rivers: 'नदीको सतह', rain: 'वर्षा', quake: 'भूकम्प', disasters: 'विपद् घटनाहरू', weather: 'मौसम पूर्वानुमान', air: 'वायु गुणस्तर',
+      aboveDanger: 'केन्द्र खतरा तहभन्दा माथि', aboveWarning: 'चेतावनी तहभन्दा माथि', rainAbove: 'वर्षा केन्द्र चेतावनी तहभन्दा माथि',
+      wettest: '२४ घण्टामा सबैभन्दा बढी:', latestQuake: 'पछिल्लो अभिलेख:', records: 'पछिल्लो सूचीमा घटनाहरू', newRecords: 'अघिल्लो प्रतिलिपिपछि नयाँ',
+      noText: 'पृष्ठबाट पाठ पढ्न सकिएन।', full: 'पूरा प्रतिलिपि', agency: 'निकायको पृष्ठ खोल्नुहोस्',
+    },
     overview: 'एक नजरमा', available: 'उपलब्ध', gated: 'रोकिएको', scenario: 'परिदृश्य', modelled: 'मोडेल गरिएको', derived: 'व्युत्पन्न',
     cards: {
       flood: ['बाढी र हिमताल विस्फोट', '१८ प्रमाणित बिन्दुमा काल्पनिक बहाव; करिडोर चौडाइ अनुसार जोखिम दायरा।', 'बाढी परिदृश्य खोल्नुहोस्'],
