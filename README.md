@@ -336,6 +336,8 @@ Feature 45 adds an OpenAQ PM2.5 research adapter with an empty provider licence 
 
 Feature 46 adds the `/live/` page: periodically updated USGS and NOAA GFS conditions from verified snapshots, a bilingual Nepali/English bulletin, workflow health, per-record source/time/freshness and a map that degrades to tables without WebGL. Air quality shows OFF; official warnings are not ingested and DHM/NDRRMA/BIPAD remain the authorities. See [live conditions](docs/live-conditions.md).
 
+`/official/` shows a daily, organised copy of public DHM, NDRRMA/BIPAD and earthquake-centre pages, refreshed each morning by `.github/workflows/gov-feeds.yml` with Scrapling. Text is copied as published and the agencies stay authoritative. See [official sources](docs/official-sources.md).
+
 
 Feature 47 adds the Atlas's own service worker: a checksum-pinned offline shell, network-first live data, and stored copies that are re-verified, labelled LAST KNOWN (never freshly checked) and deleted after seven days. See [offline shell](docs/offline-shell.md).
 

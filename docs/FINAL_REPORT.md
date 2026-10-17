@@ -54,7 +54,7 @@ The Atlas is a static, account-free, read-only public site. Every number comes f
 
 ## Steps for the owner
 
-1. Features 48–58 and the gated cards landed on `main` through PR #29 (merge `5614a00`) after CI was green on the verified head. Nothing is merged to `main` by a bot, and no scheduled cron is enabled.
+1. Features 48–58 and the gated cards landed on `main` through PR #29 (merge `5614a00`) after CI was green on the verified head. Pull requests are never merged by a bot. One scheduled workflow exists: the daily official-source digest (`docs/official-sources.md`), which commits only its data files.
 2. To refresh the climate snapshot when it shows STALE:
    - run `npm run data:power-context -- --download`;
    - review any upstream byte changes it reports;

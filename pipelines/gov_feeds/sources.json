@@ -1,0 +1,11 @@
+{
+  "format": "atlas-gov-sources@1",
+  "sources": [
+    { "id": "dhm-forecast", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "Weather forecast", "category": "weather", "kind": "html", "url": "https://dhm.gov.np/mfd/" },
+    { "id": "dhm-home", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "DHM notices and bulletins", "category": "notices", "kind": "html", "url": "https://www.dhm.gov.np/" },
+    { "id": "bipad-river", "agency": "BIPAD portal (NDRRMA), readings from DHM", "title": "River water levels", "category": "rivers", "kind": "bipad-river", "url": "https://bipadportal.gov.np/api/v1/river-stations/?limit=1000" },
+    { "id": "bipad-rain", "agency": "BIPAD portal (NDRRMA), readings from DHM", "title": "Rainfall stations", "category": "rainfall", "kind": "bipad-rain", "url": "https://bipadportal.gov.np/api/v1/rain-stations/?limit=1000" },
+    { "id": "ndrrma-home", "agency": "National Disaster Risk Reduction and Management Authority (NDRRMA)", "title": "NDRRMA notices", "category": "notices", "kind": "html", "url": "https://ndrrma.gov.np/" },
+    { "id": "seismo-earthquakes", "agency": "National Earthquake Monitoring and Research Center", "title": "Recent earthquakes", "category": "earthquakes", "kind": "html", "url": "https://seismonepal.gov.np/earthquakes" }
+  ]
+}
