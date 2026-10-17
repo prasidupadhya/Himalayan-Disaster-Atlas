@@ -16,7 +16,6 @@ export const ANALYST_TOPICS = {
   'scenario-engine': { title: 'Scenario Engine', query: 'scenario assumptions limitations', aliases: ['scenario engine', 'scenarios'] },
   'simulation-ui': { title: 'Simulation UI', query: 'simulation limitations', aliases: ['simulation ui', 'simulation workbench'] },
 } as const;
-export const ANALYST_SCENARIOS = ['scenario-network-40669746', 'scenario-pulse-40669746'] as const;
 export const ANALYST_EXAMPLES = ['Explain water change.', 'What are the limitations of glacial lakes?', 'Trace downstream from HYRIV 40669746.', 'Summarize scenario scenario-pulse-40669746.'];
 export interface AnalystRequest { schema_version: '1.0.0'; question: string; as_of: string }
 export type AnalystPlan = { kind: 'methodology'; topic: keyof typeof ANALYST_TOPICS } | { kind: 'downstream'; reach_id: string } | { kind: 'scenario'; scenario_id: string } | { kind: 'unsupported'; reason: string };

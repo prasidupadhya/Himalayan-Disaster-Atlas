@@ -2,7 +2,6 @@ import { parseEvidenceCorpus } from '../../../packages/contracts/rag';
 import manifest from '../public/data/atlas-evidence/1.0.0/manifest.json';
 import { readBounded } from './datasets';
 
-export const EVIDENCE_MANIFEST = manifest;
 async function sha256(bytes: Uint8Array<ArrayBuffer>) {
   return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), v => v.toString(16).padStart(2, '0')).join('');
 }

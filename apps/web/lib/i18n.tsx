@@ -73,4 +73,3 @@ export const UI = {
     damage: 'डुबानको गहिराइ, बाढीको क्षेत्र, भवन क्षति, हताहत र नोक्सानी', notModelled: 'अज्ञात (UNKNOWN) — यस परिदृश्यले मोडेल गर्दैन। सुविधा ५०/५२ खुल्ने सर्तहरू हेर्नुहोस्।',
   },
 } as const;
-export type UIKey = keyof typeof UI.en;

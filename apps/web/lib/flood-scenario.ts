@@ -106,11 +106,3 @@ export function shortDuration(seconds: number) {
   if (h < 48) return `${h}h${String(m).padStart(2, '0')}`;
   return `${Math.floor(h / 24)}d ${String(h % 24).padStart(2, '0')}h`;
 }
-
-export function formatDuration(seconds: number) {
-  if (!Number.isFinite(seconds)) return 'UNKNOWN';
-  const minutes = Math.round(seconds / 60);
-  if (minutes < 60) return `${minutes} min`;
-  const h = Math.floor(minutes / 60), m = minutes % 60;
-  return h < 48 ? `${h} h ${String(m).padStart(2, '0')} min` : `${(seconds / 86400).toFixed(1)} days`;
-}
