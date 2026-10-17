@@ -15,6 +15,7 @@
     "MIT",
     "MIT OR Apache-2.0",
     "MPL-2.0",
+    "OFL-1.1",
     "Python-2.0"
   ],
   "scope": "Locked npm dependencies. Preserve upstream notices. LGPL sharp/libvips binaries are build-only and must not enter the static export. MPL axe-core is test-only, unmodified. Python pipeline dependencies are used offline and are not shipped in the web export; see docs/licensing.md."

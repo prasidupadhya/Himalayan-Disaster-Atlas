@@ -3,6 +3,8 @@ import { OfflineShell } from '../components/offline-shell';
 import { isPublicRelease } from '../lib/public-release';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource-variable/noto-sans-devanagari';
 import './globals.css';
 import './home.css';
 export const metadata: Metadata = { title: { default: 'Himalayan Disaster Atlas', template: '%s | Himalayan Disaster Atlas' }, description: 'An evidence-traceable, Nepal-focused geospatial atlas connecting mountains, water, hazards, infrastructure, communities and labelled research scenarios.' };

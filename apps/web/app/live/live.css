@@ -1,4 +1,4 @@
-.live-page { width: min(1360px, 100%); margin: 0 auto; padding: clamp(2rem, 5vw, 4.5rem) clamp(1rem, 4vw, 3.5rem) 4rem; display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
+.live-page { width: min(var(--page-max), 100%); margin: 0 auto; padding: clamp(2rem, 4vw, 3.5rem) var(--gutter) 4rem; display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
 .live-page h2 { margin: 0; }
 .live-page section { min-width: 0; }
 .live-hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr); gap: clamp(1.25rem, 3vw, 3rem); align-items: end; }
@@ -30,7 +30,7 @@
 .live-announcement { margin: .6rem 0 0; font-size: .9rem; color: var(--muted-strong); }
 .live-health-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin: 1rem 0 0; border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; background: var(--line); font-size: .88rem; }
 .live-health-grid > div { padding: .8rem .95rem; background: var(--surface-muted); }
-.live-health-grid dt { margin-bottom: .2rem; font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 750; }
+.live-health-grid dt { margin-bottom: .2rem; font-size: .72rem; letter-spacing: 0; font-weight: 750; }
 .live-health-grid dd { margin: 0; }
 .live-problem { margin-top: 1rem; padding: .9rem 1rem; border: 1px solid var(--danger); border-left-width: 5px; border-radius: var(--radius-sm); background: #fbeeec; }
 .live-problem p { margin: 0 0 .6rem; }
@@ -56,7 +56,7 @@
 
 .live-map-section { display: grid; gap: .8rem; position: relative; }
 .live-layer-controls { display: grid; gap: .1rem; margin: 0; padding: .5rem .8rem .6rem; border: 1px solid var(--line); border-radius: var(--radius-md); }
-.live-layer-controls legend { padding: 0 .35rem; font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; font-weight: 800; color: var(--muted-strong); }
+.live-layer-controls legend { padding: 0 .35rem; font-size: .75rem; letter-spacing: 0; font-weight: 800; color: var(--muted-strong); }
 .live-layer-controls label { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; min-height: 44px; font-size: .9rem; }
 .live-map-shell { position: relative; height: clamp(320px, 52vh, 560px); border-radius: var(--radius-md); overflow: hidden; background: #152737; }
 .live-map-shell .map { position: absolute; inset: 0; }

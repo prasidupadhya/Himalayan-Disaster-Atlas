@@ -77,7 +77,7 @@ export function Simulator() {
       {shared && shared.kind === (tab === 'flood' ? 'flood' : 'earthquake') && <div className="sim-actions" aria-label={c.shareRegion}>
         <button type="button" onClick={() => { void navigator.clipboard?.writeText(link).then(() => setCopied(true), () => setCopied(false)); }}>{copied ? t.copied : t.share}</button>
         <button type="button" onClick={download}>{t.download}</button>
-        <a className="sim-report-link" href={`/simulate/report/?s=${encodeScenario(shared)}`}>{t.report} →</a>
+        <a className="sim-report-link" href={`/simulate/report/?s=${encodeScenario(shared)}`}>{t.report}</a>
         <p className="sim-muted">{c.shareNote}</p>
       </div>}
     </div>

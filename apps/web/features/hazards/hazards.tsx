@@ -89,7 +89,7 @@ function Overview({ c, lang, climate, terrain }: { c: HzCopy; lang: Lang; climat
   const steep = terrain ? terrain.data.national_slope_class_share['30-45'] + terrain.data.national_slope_class_share['45+'] : null;
   const card = (key: keyof HzCopy['cards'], href: string, badge: string, figure?: ReactNode) => {
     const [title, text, action] = c.cards[key];
-    return <li className="hz-card"><span className="hz-badge">{badge}</span><h3>{title}</h3><p>{text}</p>{figure}<a href={href}>{action} →</a></li>;
+    return <li className="hz-card"><span className="hz-badge">{badge}</span><h3>{title}</h3><p>{text}</p>{figure}<a href={href}>{action}</a></li>;
   };
   return <section id="overview" className="hz-section" aria-labelledby="overview-title">
     <div className="hz-section-head"><h2 id="overview-title">{c.overview}</h2></div>

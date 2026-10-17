@@ -1,4 +1,4 @@
-.sim-page { width: min(1480px, 100%); margin: 0 auto; padding: clamp(1.75rem, 4vw, 3.5rem) clamp(1rem, 3vw, 2.75rem) 4rem; display: grid; gap: 1.5rem; }
+.sim-page { width: min(var(--page-max), 100%); margin: 0 auto; padding: clamp(2rem, 4vw, 3.5rem) var(--gutter) 4rem; display: grid; gap: 1.5rem; }
 .sim-hero { display: grid; gap: .75rem; max-width: 980px; }
 .sim-hero-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; }
 .sim-hero .eyebrow { margin: 0; }
@@ -44,7 +44,7 @@
 .sim-radio input { width: 20px; height: 20px; accent-color: var(--accent); }
 .sim-origin { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 1px; margin: 0; border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; background: var(--line); font-size: .86rem; }
 .sim-origin > div { padding: .6rem .75rem; background: var(--surface-muted); }
-.sim-origin dt { font-size: .7rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 750; color: var(--muted); }
+.sim-origin dt { font-size: .7rem; letter-spacing: 0; font-weight: 750; color: var(--muted); }
 .sim-origin dd { margin: .15rem 0 0; }
 .sim-assumptions { padding: .9rem 1rem; border-radius: var(--radius-md); background: var(--paper-deep); font-size: .88rem; }
 .sim-assumptions ul { margin: .45rem 0 .2rem; padding-left: 1.15rem; display: grid; gap: .35rem; }
@@ -72,7 +72,7 @@
 .sim-badge-model { border-style: dashed; background: #fff3df; }
 .sim-headline { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 1px; border: 1px solid var(--line); border-radius: var(--radius-md); overflow: hidden; background: var(--line); }
 .sim-headline > div { display: grid; gap: .2rem; align-content: start; padding: .85rem .95rem; background: var(--surface-muted); }
-.sim-kicker { font-size: .7rem; text-transform: uppercase; letter-spacing: .07em; font-weight: 750; color: var(--muted); }
+.sim-kicker { font-size: .7rem; letter-spacing: 0; font-weight: 750; color: var(--muted); }
 .sim-headline strong { font-size: 1.25rem; letter-spacing: -.01em; color: var(--ink-strong); font-variant-numeric: tabular-nums; }
 .sim-chart { margin: 0; display: grid; gap: .4rem; }
 .sim-chart figcaption, .sim-bands figcaption { font-weight: 700; font-size: .9rem; }
