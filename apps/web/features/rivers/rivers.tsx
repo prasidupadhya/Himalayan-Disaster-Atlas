@@ -14,9 +14,9 @@ import { DownstreamTrace } from '../downstream-trace/downstream-trace';
 const RIVER_NAMES = '/data/nepal-river-names/1.0.0/manifest.json';
 const PICK_RADIUS_PX = 6;
 const normalize = (value: string) => value.normalize('NFD').replace(/\p{M}/gu, '').toLocaleLowerCase('en-US');
-type Place = { name: string; sourceId: string; lonLat: [number, number]; reachId: string; metres: number };
+type Place = { name: string; source: string; sourceId: string; lonLat: [number, number]; reachId: string; metres: number; caveat?: string };
 
-export function Rivers({ map }: { map: Map | null }) {
+export function Rivers({ map, snap = null }: { map: Map | null; snap?: { id: string; label: string; lonLat: [number, number]; n: number } | null }) {
   const [resource, setResource] = useState<Resource<Dataset[]>>({ status: 'loading' });
   const [names, setNames] = useState<Dataset | null>(null);
   const [namesFailed, setNamesFailed] = useState(false);
@@ -25,6 +25,7 @@ export function Rivers({ map }: { map: Map | null }) {
   const [selected, setSelected] = useState('');
   const [place, setPlace] = useState<Place | null>(null);
   const [query, setQuery] = useState('');
+  const [autoTrace, setAutoTrace] = useState(false);
   const mounted = useRef<ReturnType<typeof mountRiverDataset>[]>([]);
   const marker = useRef<Marker | null>(null);
   const datasets = 'data' in resource ? resource.data : null;
@@ -56,6 +57,7 @@ export function Rivers({ map }: { map: Map | null }) {
           if (!hit || hit.id === undefined) return;
           const value = String(hit.id);
           setPlace(null);
+          setAutoTrace(false);
           setSelected(value);
           handles.forEach(handle => handle.setSelected(value));
         };
@@ -91,7 +93,7 @@ export function Rivers({ map }: { map: Map | null }) {
       if (cancelled) return;
       const label = document.createElement('span');
       label.className = 'river-name-label';
-      label.textContent = `${place.name} · named location`;
+      label.textContent = place.source === 'GeoNames' ? `${place.name} · named location` : `${place.name} · lake`;
       marker.current = new Marker({ element: label }).setLngLat(place.lonLat).addTo(map);
     });
     return () => { cancelled = true; marker.current?.remove(); marker.current = null; };
@@ -111,7 +113,23 @@ export function Rivers({ map }: { map: Map | null }) {
   const feature = features.find(item => String(item.id) === selected);
   const evidence = datasets?.find(dataset => dataset.metadata.dataset_id === feature?.properties.dataset_id)?.metadata ?? datasets?.[0]?.metadata;
 
+  // A new lake request (snap.n) selects the reach nearest its centroid; the map highlight follows in an effect.
+  const [appliedSnap, setAppliedSnap] = useState(0);
+  if (snap && snap.n !== appliedSnap && features.length) {
+    setAppliedSnap(snap.n);
+    const hit = nearestReach(features, snap.lonLat[0], snap.lonLat[1]);
+    if (hit) {
+      setPlace({ name: snap.label, source: 'GLO lake centroid', sourceId: snap.id, lonLat: snap.lonLat, reachId: hit.id, metres: hit.metres,
+        caveat: 'The lake’s real outlet is UNKNOWN; this traces river-network connectivity only, not a flood.' });
+      setSelected(hit.id);
+      setAutoTrace(true);
+    }
+  }
+  useEffect(() => { mounted.current.forEach(handle => handle.setSelected(selected || null)); }, [selected]);
+
+
   function choose(value: string) {
+    setAutoTrace(false);
     if (!value) { setPlace(null); setSelected(''); mounted.current.forEach(handle => handle.setSelected(null)); return; }
     if (value.startsWith('name:')) {
       const named = names?.collection.features.find(item => String(item.id) === value.slice(5));
@@ -119,7 +137,7 @@ export function Rivers({ map }: { map: Map | null }) {
       const [lon, lat] = named.geometry.coordinates as [number, number];
       const hit = nearestReach(features, lon, lat);
       if (!hit) return;
-      setPlace({ name: String(named.properties.name), sourceId: String(named.properties.source_id), lonLat: [lon, lat], reachId: hit.id, metres: hit.metres });
+      setPlace({ name: String(named.properties.name), source: 'GeoNames', sourceId: String(named.properties.source_id), lonLat: [lon, lat], reachId: hit.id, metres: hit.metres });
       setSelected(hit.id);
       mounted.current.forEach(handle => handle.setSelected(hit.id));
       if (map) map.easeTo({ center: [lon, lat], zoom: Math.max(9, map.getZoom()), duration: 0 });
@@ -134,7 +152,7 @@ export function Rivers({ map }: { map: Map | null }) {
     if (coordinates) map.easeTo({ center: coordinates as [number, number], zoom: Math.max(map.getZoom(), 8), duration: 0 });
   }
 
-  const selectValue = place ? `name:${place.sourceId}` : selected;
+  const selectValue = place?.source === 'GeoNames' ? `name:${place.sourceId}` : selected;
   return <section className="thematic-controls rivers-controls" aria-label="Rivers" data-rivers-state={resource.status}>
     <h2>Rivers</h2>
     <p>FAO Rivers 2026 / HydroRIVERS · connected reach IDs</p>
@@ -148,8 +166,8 @@ export function Rivers({ map }: { map: Map | null }) {
       <optgroup label="Reaches">
         {reachMatches.map(item => <option key={String(item.id)} value={String(item.id)}>HYRIV {item.properties.source_id} · order {item.properties.flow_order} · {item.properties.average_discharge_m3s?.toLocaleString('en-US')} m³/s</option>)}
       </optgroup>
-      {(nameMatches.length > 0 || place) && <optgroup label="Named locations (GeoNames)">
-        {place && !nameMatches.some(item => String(item.id) === place.sourceId) && <option value={`name:${place.sourceId}`}>{place.name} · GeoNames {place.sourceId}</option>}
+      {(nameMatches.length > 0 || place?.source === 'GeoNames') && <optgroup label="Named locations (GeoNames)">
+        {place?.source === 'GeoNames' && !nameMatches.some(item => String(item.id) === place.sourceId) && <option value={`name:${place.sourceId}`}>{place.name} · GeoNames {place.sourceId}</option>}
         {nameMatches.map(item => <option key={`name:${item.id}`} value={`name:${item.id}`}>{item.properties.name} · GeoNames {item.properties.source_id}</option>)}
       </optgroup>}
     </select></label>
@@ -158,7 +176,7 @@ export function Rivers({ map }: { map: Map | null }) {
     <p className="muted">The source does not provide river names for these reaches. Reaches are identified by stable HYRIV_ID values; named places come from GeoNames points.</p>
     <div className="selection" aria-live="polite">{feature ? <>
       <p className="eyebrow">river reach</p><h3>HYRIV {feature.properties.source_id}</h3>
-      {place && <p role="note"><strong>{place.name}</strong> (GeoNames {place.sourceId}) is {Math.round(place.metres).toLocaleString('en-US')} m from this nearest mapped reach. The match is a candidate for tracing, not a verified identity: the source gives this reach no name, so its river identity is UNKNOWN.</p>}
+      {place && <p role="note"><strong>{place.name}</strong> ({place.source} {place.sourceId}) is {Math.round(place.metres).toLocaleString('en-US')} m from this nearest mapped reach. The match is a candidate for tracing, not a verified identity: the source gives this reach no name, so its river identity is UNKNOWN.{place.caveat ? ` ${place.caveat}` : ''}</p>}
       <dl>
         <dt>River name</dt><dd>{feature.properties.river_name ?? 'UNKNOWN'}</dd>
         <dt>Flow order</dt><dd>{feature.properties.flow_order}</dd>
@@ -174,6 +192,6 @@ export function Rivers({ map }: { map: Map | null }) {
       <p><a href="#downstream-trace">Go to downstream trace</a></p>
     </> : <p>Select a reach to inspect its topology, source measurements and stable downstream linkage.</p>}</div>
     {evidence && <details><summary>River source & limitations</summary><Evidence metadata={evidence} /></details>}
-    <DownstreamTrace key={`${selected}-${attempt}`} map={map} datasets={datasets} start={feature?.properties.source_id} />
+    <DownstreamTrace key={`${selected}-${attempt}-${autoTrace ? snap?.n : 0}`} map={map} datasets={datasets} start={feature?.properties.source_id} autoRun={autoTrace} />
   </section>;
 }

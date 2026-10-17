@@ -13,7 +13,9 @@ function measurement(value: number | null | undefined, digits = 4) {
   return value === null || value === undefined ? 'UNKNOWN' : value.toLocaleString('en-US', { maximumFractionDigits: digits });
 }
 
-export function GlacialLakes({ map, onSelect }: { map: Map | null; onSelect?: (id: string | null) => void }) {
+export interface LakeChoice { id: string; label: string; lonLat: [number, number] }
+
+export function GlacialLakes({ map, onSelect, onTrace }: { map: Map | null; onSelect?: (lake: LakeChoice | null) => void; onTrace?: (lake: LakeChoice) => void }) {
   const [resource, setResource] = useState<Resource<Dataset>>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -70,7 +72,10 @@ export function GlacialLakes({ map, onSelect }: { map: Map | null; onSelect?: (i
     return items.slice().sort((a, b) => (b.properties.area_km2 ?? 0) - (a.properties.area_km2 ?? 0) || a.properties.source_id!.localeCompare(b.properties.source_id!)).slice(0, 180);
   }, [dataset, query]);
   const feature = dataset?.collection.features.find(item => item.id === selected);
-  useEffect(() => { onSelect?.(feature?.properties.source_id ?? null); }, [feature?.properties.source_id, onSelect]);
+  const choice = useMemo<LakeChoice | null>(() => feature && feature.geometry.type === 'Point'
+    ? { id: String(feature.properties.source_id), label: String(feature.properties.lake_name ?? feature.properties.source_id), lonLat: feature.geometry.coordinates as [number, number] }
+    : null, [feature]);
+  useEffect(() => { onSelect?.(choice); }, [choice, onSelect]);
   const counts = useMemo(() => {
     const result = { Nepal: 0, China: 0, India: 0 };
     for (const item of dataset?.collection.features ?? []) {
@@ -115,7 +120,7 @@ export function GlacialLakes({ map, onSelect }: { map: Map | null; onSelect?: (i
         <dt>Expansion significance</dt><dd>{feature.properties.expansion_significant === null ? 'UNKNOWN' : feature.properties.expansion_significant ? 'TRUE (source statistical flag)' : 'FALSE (source statistical flag)'}</dd>
         <dt>Specific glacier</dt><dd>UNKNOWN — not identified by this source layer</dd>
         <dt>Specific river</dt><dd>UNKNOWN — basin only; no river ID supplied</dd>
-        <dt>Downstream trace</dt><dd>Unavailable from this lake: a verified outlet-to-river link is required. <a href="#downstream-trace">Trace a separately selected river reach</a>.</dd>
+        <dt>Downstream trace</dt><dd>The real outlet is UNKNOWN. The trace starts at the mapped river reach nearest the lake centroid and shows network connectivity only.{choice && onTrace && <><br /><button type="button" className="trace-lake" onClick={() => onTrace(choice)}>Trace water downstream</button></>}</dd>
         <dt>Hazard status</dt><dd>NOT ASSESSED — glacial-lake presence or expansion is not a GLOF hazard classification</dd>
       </dl>
     </> : <p>Select a GLO record to inspect mapped extent, source connectivity, basin, elevation and change statistics without implying hazard status.</p>}</div>

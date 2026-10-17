@@ -7,7 +7,7 @@ import { buildRiverNetwork, traceDownstream, type DownstreamResult } from '../..
 import { fitTrace, mountDownstreamTrace } from '../../lib/downstream-layer';
 
 /** The parent keys this session by selection/retry so old routes and animation are disposed. */
-export function DownstreamTrace({ map, datasets, start }: { map: Map | null; datasets: Dataset[] | null; start: string | undefined }) {
+export function DownstreamTrace({ map, datasets, start, autoRun = false }: { map: Map | null; datasets: Dataset[] | null; start: string | undefined; autoRun?: boolean }) {
   const graph = useMemo(() => {
     if (!datasets) return null;
     try { return { network: buildRiverNetwork(datasets) }; }
@@ -50,6 +50,15 @@ export function DownstreamTrace({ map, datasets, start }: { map: Map | null; dat
     frame = requestAnimationFrame(tick);
     return () => { cancelAnimationFrame(frame); motion.removeEventListener('change', complete); };
   }, [playing, result]);
+
+  const autoStarted = useRef(false);
+  useEffect(() => {
+    if (!autoRun || autoStarted.current || !network || !start) return;
+    autoStarted.current = true;
+    run();
+  // run reads the current network and start; it is invoked once per mounted session.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoRun, network, start]);
 
   function run() {
     if (!network || !start) return;

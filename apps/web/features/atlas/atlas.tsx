@@ -9,7 +9,7 @@ import { ADMIN_MANIFESTS, loadDataset, UnavailableError } from '../../lib/datase
 import { mountAdministrativeDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
 import { administrativeName, administrativeNameReview } from '../../lib/administrative-names';
-import { GlacialLakes } from '../glacial-lakes/glacial-lakes';
+import { GlacialLakes, type LakeChoice } from '../glacial-lakes/glacial-lakes';
 import { Hydropower } from '../hydropower/hydropower';
 import { Infrastructure } from '../infrastructure/infrastructure';
 import { Terrain } from '../terrain/terrain';
@@ -56,7 +56,8 @@ export function Atlas({ research = false }: { research?: boolean }) {
   const [attempt, setAttempt] = useState(0);
   const [temporal, setTemporal] = useState<TemporalSelection | null>(null);
   const [additionalLayers, setAdditionalLayers] = useState(false);
-  const [lakeId, setLakeId] = useState<string | null>(null);
+  const [lake, setLake] = useState<LakeChoice | null>(null);
+  const [lakeTrace, setLakeTrace] = useState<(LakeChoice & { n: number }) | null>(null);
   const [boundaryQuery, setBoundaryQuery] = useState('');
   const [educationalSimulation, setEducationalSimulation] = useState(false);
 
@@ -239,7 +240,7 @@ export function Atlas({ research = false }: { research?: boolean }) {
         <DataState state={resource} retry={retry} />
         <nav className="atlas-shortcuts" aria-label="Atlas controls">{!research && <a href="#lake-controls">Lakes</a>}<a href="#boundary-controls">Boundaries</a><a href="#terrain-controls">Terrain</a><a href="#river-controls">Rivers</a><a href="#additional-controls">{research ? 'More layers' : 'Infrastructure'}</a></nav>
       </div>
-      {!research && <div id="lake-controls" tabIndex={-1} className="atlas-anchor"><GlacialLakes key={`lakes-${attempt}`} map={mapReady ? interactiveMap : null} onSelect={setLakeId} /></div>}
+      {!research && <div id="lake-controls" tabIndex={-1} className="atlas-anchor"><GlacialLakes key={`lakes-${attempt}`} map={mapReady ? interactiveMap : null} onSelect={setLake} onTrace={choice => { setLakeTrace(previous => ({ ...choice, n: (previous?.n ?? 0) + 1 })); document.getElementById('downstream-trace')?.scrollIntoView({ block: 'nearest' }); }} /></div>}
       <section id="boundary-controls" tabIndex={-1} className="layer-controls" aria-label="Map layers"><h2>Boundary levels</h2>
         {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
@@ -255,9 +256,9 @@ export function Atlas({ research = false }: { research?: boolean }) {
       <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? interactiveMap : null} />
       </>}
       <div id="terrain-controls" tabIndex={-1} className="atlas-anchor"><Terrain key={attempt} map={mapReady ? interactiveMap : null} /></div>
-      <div id="river-controls" tabIndex={-1} className="atlas-anchor"><Rivers key={`rivers-${attempt}`} map={mapReady ? interactiveMap : null} /></div>
+      <div id="river-controls" tabIndex={-1} className="atlas-anchor"><Rivers key={`rivers-${attempt}`} map={mapReady ? interactiveMap : null} snap={lakeTrace} /></div>
       {research && <ExposureEngine key={`exposure-${attempt}`} map={mapReady ? interactiveMap : null} />}
-      {!research && <section className="thematic-controls" aria-label="GLOF modelling availability"><h2>Lake outburst modelling</h2><p>{lakeId ? `Selected lake: ${lakeId}. Physical model inputs required.` : 'Select a lake above to identify the modelling subject.'}</p><p>Flood extent and damage: <strong>UNAVAILABLE</strong>.</p><p>A lake point or a downstream river line cannot identify inundated places or destroyed assets. This inventory has no verified lake outlet-to-river connection, breach parameters or validated hydraulic model.</p><p><a href="/methodology/#glof-physical">Physical GLOF project: scope, required inputs and validation</a></p><p>Use river tracing for connectivity only. Infrastructure is geographic context, not a list of affected assets.</p><details onToggle={event => setEducationalSimulation(event.currentTarget.open)}><summary>Educational river simulation</summary>{educationalSimulation && <SimulationUI key={`focused-simulation-${attempt}`} map={mapReady ? interactiveMap : null} />}</details></section>}
+      {!research && <section className="thematic-controls" aria-label="GLOF modelling availability"><h2>Lake outburst modelling</h2><p>{lake ? `Selected lake: ${lake.id}. Physical model inputs required.` : 'Select a lake above to identify the modelling subject.'}</p><p>Flood extent and damage: <strong>UNAVAILABLE</strong>.</p><p>A lake point or a downstream river line cannot identify inundated places or destroyed assets. This inventory has no verified lake outlet-to-river connection, breach parameters or validated hydraulic model.</p><p><a href="/methodology/#glof-physical">Physical GLOF project: scope, required inputs and validation</a></p><p>Use river tracing for connectivity only. Infrastructure is geographic context, not a list of affected assets.</p><details onToggle={event => setEducationalSimulation(event.currentTarget.open)}><summary>Educational river simulation</summary>{educationalSimulation && <SimulationUI key={`focused-simulation-${attempt}`} map={mapReady ? interactiveMap : null} />}</details></section>}
       <div id="additional-controls" tabIndex={-1} className="atlas-anchor">
       {research ? <>
       {!additionalLayers && <section className="thematic-controls mobile-data-gate" aria-label="Additional data loading" data-mobile-data="deferred">

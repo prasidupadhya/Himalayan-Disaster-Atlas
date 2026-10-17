@@ -46,3 +46,20 @@ test('focused mobile view fits and infrastructure remains opt-in', async ({ page
   await expect(page.getByRole('region', { name: 'Hydropower', exact: true })).toHaveCount(0);
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
 });
+
+test('a selected lake traces water downstream from its nearest mapped reach, stating the outlet is unknown', async ({ page }) => {
+  await page.goto('/atlas/');
+  const lakes = page.getByRole('region', { name: 'Glacial lakes', exact: true });
+  const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
+  const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
+  await expect(lakes).toHaveAttribute('data-glacial-lakes-state', /ready|stale/, { timeout: 15_000 });
+  await expect(rivers).toHaveAttribute('data-rivers-state', 'ready', { timeout: 15_000 });
+  const select = lakes.getByLabel('Lake record');
+  await select.selectOption((await select.locator('option').nth(1).getAttribute('value'))!);
+  await expect(lakes).toContainText('The real outlet is UNKNOWN');
+  await lakes.getByRole('button', { name: 'Trace water downstream' }).click();
+  await expect(rivers.getByRole('note')).toContainText('GLO lake centroid');
+  await expect(rivers.getByRole('note')).toContainText('real outlet is UNKNOWN');
+  await expect(trace).toHaveAttribute('data-trace-state', 'ready');
+  await expect(rivers.locator('.selection h3')).toHaveText(/^HYRIV \d+$/);
+});
