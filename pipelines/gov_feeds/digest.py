@@ -51,7 +51,9 @@ def fetch(url):
     """Returns (status, body bytes, final url, content type). Raises on transport failure."""
     from scrapling.fetchers import Fetcher
 
-    response = Fetcher.get(url, headers={"User-Agent": USER_AGENT, "Accept-Language": "en,ne;q=0.8"},
+    # BIPAD's REST API answers an HTML browse page unless JSON is asked for.
+    headers = {"User-Agent": USER_AGENT, "Accept": "application/json, text/html;q=0.9, */*;q=0.8", "Accept-Language": "en,ne;q=0.8"}
+    response = Fetcher.get(url, headers=headers,
                            timeout=45, retries=2, follow_redirects=True, stealthy_headers=False)
     body = response.body if isinstance(response.body, bytes) else str(response.body).encode("utf-8")
     headers = getattr(response, "headers", {}) or {}

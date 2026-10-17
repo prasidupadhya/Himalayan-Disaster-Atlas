@@ -27,7 +27,7 @@
 | Air quality | `doenv-air` — pollution.gov.np | Department of Environment | Page text, tables and links |
 | Roads | `dor-home` — dor.gov.np | Department of Roads | Road notices and links |
 
-Only the two BIPAD station endpoints are already read by this repository's pipelines (`"verified": true` in `sources.json`). The other URLs come from the agencies' own sites and third-party references; the first daily run's HTTP status confirms or rejects each one, and a failing source is shown as such on the page.
+Only the two BIPAD station endpoints are already read by this repository's pipelines (`"verified": true` in `sources.json`). The other URLs come from the agencies' own sites and third-party references; the first daily run's HTTP status confirms or rejects each one, and a failing source is shown as such on the page. The first run (17 October 2026) fetched all twelve web pages. The five BIPAD API endpoints answered with their HTML browse page, so the digest now asks for JSON (`Accept: application/json` and `format=json`). neoc.gov.np failed its TLS handshake and is shown as unreachable.
 
 Web pages use one generic extraction (title, headings, tables, links, paragraphs and date strings) rather than site-specific selectors, so a layout change degrades to less structure instead of wrong values. The BIPAD river and rain endpoints use the field names already verified by the hydrology and rainfall pipelines; the other BIPAD endpoints are copied field by field (plain values only) without interpretation. Missing values stay `null` in the data and `UNKNOWN` on the page.
 
