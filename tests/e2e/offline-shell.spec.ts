@@ -16,6 +16,8 @@ async function serve(context: BrowserContext) {
   await context.route('**/live/latest.json', reply(JSON.stringify(f.index)));
   await context.route(`**${USGS_PATH}`, reply(f.usgsRaw));
   await context.route(`**${GFS_PATH}`, reply(f.gfsRaw));
+  // setOffline does not reach service-worker fetches in every Chromium build; make offline mean offline for data too.
+  await context.route('**/data/**', route => network.up ? route.fallback() : route.abort('internetdisconnected'));
   return network;
 }
 async function controlledLivePage(page: Page) {
@@ -171,12 +173,7 @@ test('hazards and the simulator work offline after one online visit, from verifi
   await goOffline(context, network);
   await page.goto('/hazards/');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Hazard context for Nepal');
-  await expect(page.locator('section#terrain .hz-bars li')).toHaveCount(10, { timeout: 30_000 }).catch(async (error: unknown) => {
-    // Diagnostics for CI, where this has failed without reproducing locally.
-    const keys = await page.evaluate(async () => (await (await caches.open('atlas-data-v1')).keys()).map(r => new URL(r.url).pathname));
-    console.log(`Offline terrain section: ${await page.locator('section#terrain').innerText()}\nData cache (${keys.length}): ${keys.join(', ')}\nControlled: ${await page.evaluate(() => !!navigator.serviceWorker.controller)}`);
-    throw error;
-  });
+  await expect(page.locator('section#terrain .hz-bars li')).toHaveCount(10, { timeout: 30_000 });
   await expect(page.locator('section#climate').getByRole('alert')).toHaveCount(0);
   await page.goto('/simulate/');
   await page.locator('#panel-flood').getByRole('checkbox').check();

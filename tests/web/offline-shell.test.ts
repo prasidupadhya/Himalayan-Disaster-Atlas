@@ -217,6 +217,13 @@ describe('navigation and static assets', () => {
     expect(await (await sw.request(path, 'cors', 'reload'))!.text()).toBe('fresh');
     expect(await (await sw.request(path))!.text()).toBe('fresh');
   });
+  it('answers an offline reload with the stored copy, which the page verifies again', async () => {
+    const sw = boot({ network: async () => Object.defineProperty(new Response('stored'), 'type', { value: 'basic' }) });
+    const path = '/data/nepal-admin-country/2.0.1/manifest.json';
+    await sw.request(path);
+    sw.setNetwork(offline);
+    expect(await (await sw.request(path, 'cors', 'reload'))!.text()).toBe('stored');
+  });
   it('leaves unversioned data paths and other origins to the network', async () => {
     const sw = boot({ network: offline });
     expect(await sw.request('/data/README.txt')).toBeUndefined();

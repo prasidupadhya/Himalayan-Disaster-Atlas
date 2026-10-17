@@ -154,14 +154,23 @@ async function cacheFirst(request, name = STATIC_CACHE, limit = CONFIG.staticEnt
   const shell = await (await caches.open(SHELL_CACHE)).match(pathname);
   if (shell) return shell;
   const cache = await caches.open(name);
-  // A reload is the page's retry after a checksum failure: it must not be answered from the same bad copy.
-  const cached = request.cache === 'reload' ? undefined : await cache.match(pathname);
+  // A reload is the page's retry after a checksum failure: it must not be answered from the same bad copy
+  // while the network can answer. Offline, the stored copy is still returned; the page verifies its size and
+  // SHA-256 again, so a bad copy is still rejected, and a good one is not lost when the browser bypasses caches.
+  if (request.cache === 'reload') {
+    try { return await networkInto(cache, pathname, request, limit); }
+    catch (error) { const stored = await cache.match(pathname); if (stored) return stored; throw error; }
+  }
+  const cached = await cache.match(pathname);
   if (cached) {
     // Re-inserting on use makes the oldest-first eviction below behave as least-recently-used.
     await cache.delete(pathname);
     await cache.put(pathname, cached.clone());
     return cached;
   }
+  return networkInto(cache, pathname, request, limit);
+}
+async function networkInto(cache, pathname, request, limit) {
   const response = await fetch(request);
   if (response.ok && response.type === 'basic') {
     await cache.put(pathname, response.clone());
