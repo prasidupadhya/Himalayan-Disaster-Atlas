@@ -26,15 +26,18 @@ test('exposure results distinguish partial estimates and unavailable inventories
 });
 
 test('exposure rejects corrupt spatial results and can retry missing ones', async ({ page }) => {
-  const path = '**/exposure-trace-40669746-250m/1.0.0/spatial.geojson.gz';
-  await page.route(path, route => route.fulfill({ status: 503, body: '' }), { times: 1 });
+  // Each phase answers every request the same way, so the outcome does not depend on how many fetches a retry makes.
+  let phase: 'missing' | 'corrupt' | 'real' = 'missing';
+  await page.route('**/exposure-trace-40669746-250m/1.0.0/spatial.geojson.gz', route =>
+    phase === 'missing' ? route.fulfill({ status: 503, body: '' }) : phase === 'corrupt' ? route.fulfill({ status: 200, body: 'broken' }) : route.continue());
   await page.goto('/research/');
   const exposure = page.getByRole('region', { name: 'Exposure engine', exact: true });
   await exposure.getByLabel('Exposure scenario').selectOption({ index: 1 });
   await expect(exposure.locator('[data-exposure-state]')).toHaveAttribute('data-exposure-state', 'unavailable');
-  await page.route(path, route => route.fulfill({ status: 200, body: 'broken' }), { times: 1 });
+  phase = 'corrupt';
   await exposure.getByRole('button', { name: 'Try again' }).click();
   await expect(exposure.locator('[data-exposure-state]')).toHaveAttribute('data-exposure-state', 'error');
+  phase = 'real';
   await exposure.getByRole('button', { name: 'Try again' }).click();
   await expect(exposure.locator('[data-exposure-state]')).toHaveAttribute('data-exposure-state', 'ready');
 });
