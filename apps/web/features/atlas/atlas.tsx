@@ -33,9 +33,12 @@ const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and spe
 
 function frameNepal(map: Map, bbox: [number, number, number, number]) {
   const [west, south, east, north] = bbox;
-  const horizontal = map.getContainer().clientWidth < 600 ? 24 : 80;
+  const element = map.getContainer();
+  const horizontal = element.clientWidth < 600 ? 24 : 80;
+  // In the full-screen layout the control drawer floats over the map's left edge.
+  const drawer = element.closest('.atlas-mission') && element.clientWidth > 1000 ? 412 : 0;
   map.fitBounds([[west, south], [east, north]], {
-    padding: { top: 80, right: horizontal, bottom: 80, left: horizontal }, maxZoom: 6, duration: 0,
+    padding: { top: 80, right: horizontal, bottom: 80, left: horizontal + drawer }, maxZoom: 6, duration: 0,
   });
 }
 
@@ -227,7 +230,7 @@ export function Atlas({ research = false }: { research?: boolean }) {
     else map.fitBounds([[west, south], [east, north]], { padding: 80, maxZoom: 9, duration: 0 });
   }
 
-  return <div className="atlas-workspace">
+  return <div className={research ? 'atlas-workspace' : 'atlas-workspace atlas-mission'}>
     <aside className="atlas-panel">
       <div className="atlas-panel-header">
         <p className="eyebrow">Nepal / {research ? 'research atlas' : 'lakes & downstream rivers'}</p>

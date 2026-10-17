@@ -623,3 +623,43 @@ tbody th { color: var(--ink-strong); }
 .map-key-dot { border-radius: 50%; background: var(--swatch); border: 1px solid #152737; }
 .map-key-line { height: .28rem; width: 1.6rem; border-radius: .2rem; background: var(--swatch); }
 .map-key-area { border-radius: .15rem; background: var(--swatch); opacity: .75; border: 1px dashed #152737; }
+
+/* Mission view: on wide screens the focused atlas is a full-screen map with floating instruments. */
+.map-key summary { cursor: pointer; list-style: none; display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+.map-key summary::-webkit-details-marker { display: none; }
+.map-key summary::after { content: '▾'; font-size: .8rem; opacity: .7; }
+.map-key details:not([open]) summary::after { content: '▸'; }
+.map-key summary h2 { display: inline; }
+@media (min-width: 1001px) {
+  .atlas-mission { position: relative; display: block; min-height: 0; }
+  .atlas-mission .map-column { position: relative; }
+  .atlas-mission .map-shell { height: calc(100svh - 118px); min-height: 560px; max-height: none; border-bottom: 0; }
+  .atlas-mission .atlas-panel {
+    --ink: #e4edef; --ink-strong: #ffffff; --muted: #93a9ae; --muted-strong: #bccbce;
+    --line: rgba(255, 255, 255, .1); --line-strong: rgba(255, 255, 255, .26);
+    --surface: #0f262d; --surface-muted: #12303a; --paper: #0c2026; --paper-deep: #1a3a44;
+    --accent: #5cc8b8; --accent-strong: #84dccf; --accent-soft: rgba(92, 200, 184, .14);
+    position: absolute; z-index: 6; top: 1rem; left: 1rem; width: 380px;
+    max-height: calc(100svh - 118px - 2rem); min-height: 0; overflow-y: auto; scrollbar-gutter: auto;
+    padding: 0 1.15rem 1.5rem; color: var(--ink);
+    border: 1px solid rgba(255, 255, 255, .09); border-radius: var(--radius-lg);
+    background: rgba(9, 24, 30, .86); backdrop-filter: blur(14px) saturate(1.15);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .35); scrollbar-color: rgba(255, 255, 255, .22) transparent;
+  }
+  .atlas-mission .atlas-panel-header { margin: 0 -1.15rem; padding: 1.1rem 1.15rem .85rem; background: #09181e; border-bottom-color: var(--line); }
+  .atlas-mission .atlas-panel-header h1 { font-size: 1.35rem; color: var(--ink-strong); }
+  .atlas-mission .map-caption, .atlas-mission .reset-map { left: calc(380px + 2rem); }
+  .atlas-mission .map-key {
+    position: absolute; z-index: 5; top: 5.4rem; right: 1rem; width: 15.5rem; margin: 0; padding: .7rem .85rem;
+    color: #e4edef; border: 1px solid rgba(255, 255, 255, .09); border-radius: var(--radius-md);
+    background: rgba(9, 24, 30, .84); backdrop-filter: blur(12px); box-shadow: 0 14px 36px rgba(0, 0, 0, .3);
+  }
+  .atlas-mission .map-key h2 { font-size: .78rem; letter-spacing: .08em; text-transform: uppercase; color: #bccbce; }
+  .atlas-mission .map-key ul { grid-template-columns: 1fr; gap: .32rem; margin-top: .55rem; }
+  .atlas-mission .map-key li { font-size: .78rem; align-items: center; }
+  .atlas-mission .map-key strong { font-weight: 600; }
+  .atlas-mission .map-key-intro, .atlas-mission .map-key-detail { display: none; }
+}
+@media (min-width: 1001px) {
+  .atlas-mission .atlas-panel .selection > p { font-size: .82rem; color: var(--muted-strong); }
+}
