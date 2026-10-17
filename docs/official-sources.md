@@ -6,16 +6,30 @@
 
 `pipelines/gov_feeds/sources.json` lists every source.
 
-| Source | Agency | How it is organised |
-|---|---|---|
-| `dhm-forecast` — dhm.gov.np/mfd | DHM Meteorological Forecasting Division | Title, headings, forecast paragraphs, tables, linked bulletins |
-| `dhm-home` — dhm.gov.np | DHM | Notices and bulletin links; new links since the previous copy |
-| `bipad-river` — BIPAD river-stations API | BIPAD (NDRRMA), readings from DHM | Station counts by status; stations above warning or danger level with water, warning and danger levels and reading time; status changes since the previous copy |
-| `bipad-rain` — BIPAD rain-stations API | BIPAD (NDRRMA), readings from DHM | Station counts by status; the 15 wettest stations over 24 hours |
-| `ndrrma-home` — ndrrma.gov.np | NDRRMA | Notices and links; new links since the previous copy |
-| `seismo-earthquakes` — seismonepal.gov.np | National Earthquake Monitoring and Research Center | Earthquake tables as published |
+| Category | Source id — page | Agency | Organised as |
+|---|---|---|---|
+| Weather | `dhm-forecast` — dhm.gov.np/mfd | DHM | Forecast headings, paragraphs, tables, bulletin links |
+| Weather | `dhm-home` — www.dhm.gov.np | DHM | Today's weather, forecast products, notices |
+| Weather | `dhm-agromet` — dhm.gov.np/agromet-services | DHM | Weekly weather bulletin and links |
+| Floods | `ffd-bulletins` — hydrology.gov.np | DHM Flood Forecasting Division | Flood bulletins and special bulletins |
+| Floods | `dhm-flood-archive` — dms2.dhm.gov.np | DHM | Flood bulletin archive, SMS alert notices |
+| Floods | `dhm-hms` — dhm.gov.np/hydrology/hms | DHM | Hydrological monitoring page |
+| River levels | `bipad-river` — BIPAD river-stations API | BIPAD (NDRRMA), DHM readings | Counts by status; stations above warning or danger with levels and reading time; status changes |
+| Rainfall | `bipad-rain` — BIPAD rain-stations API | BIPAD (NDRRMA), DHM readings | Counts by status; 15 wettest stations over 24 h |
+| Disasters | `bipad-incidents` — BIPAD incident API | BIPAD (NDRRMA) | Latest 100 incidents, plain fields as published; new records |
+| Disasters | `bipad-alerts` — BIPAD alert API | BIPAD (NDRRMA) | Alerts, plain fields as published; new records |
+| Disasters | `ndrrma-home` — ndrrma.gov.np | NDRRMA | Notices and links |
+| Disasters | `moha-home` — moha.gov.np | Ministry of Home Affairs | Notices and links |
+| Disasters | `neoc-home` — neoc.gov.np | National Emergency Operation Center | Updates and links |
+| Disasters | `drrportal-home` — drrportal.gov.np | Ministry of Home Affairs DRR portal | Reports and links |
+| Earthquakes | `seismo-earthquakes` — seismonepal.gov.np/en/earthquakes | National Earthquake Monitoring and Research Center | Earthquake table as published |
+| Earthquakes | `bipad-earthquakes` — BIPAD earthquake API | BIPAD (NDRRMA) | Records, plain fields as published |
+| Air quality | `doenv-air` — pollution.gov.np | Department of Environment | Page text, tables and links |
+| Roads | `dor-home` — dor.gov.np | Department of Roads | Road notices and links |
 
-Web pages use one generic extraction (title, headings, tables, links, paragraphs and date strings) rather than site-specific selectors, so a layout change degrades to less structure instead of wrong values. The BIPAD API uses the field names already verified by the hydrology and rainfall pipelines. Missing values stay `null` in the data and `UNKNOWN` on the page.
+Only the two BIPAD station endpoints are already read by this repository's pipelines (`"verified": true` in `sources.json`). The other URLs come from the agencies' own sites and third-party references; the first daily run's HTTP status confirms or rejects each one, and a failing source is shown as such on the page.
+
+Web pages use one generic extraction (title, headings, tables, links, paragraphs and date strings) rather than site-specific selectors, so a layout change degrades to less structure instead of wrong values. The BIPAD river and rain endpoints use the field names already verified by the hydrology and rainfall pipelines; the other BIPAD endpoints are copied field by field (plain values only) without interpretation. Missing values stay `null` in the data and `UNKNOWN` on the page.
 
 ## How it runs
 

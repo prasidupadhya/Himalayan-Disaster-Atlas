@@ -1,11 +1,24 @@
 {
   "format": "atlas-gov-sources@1",
+  "note": "Every URL is on a Government of Nepal domain. 'verified' is true only where this repository's own pipelines already read the endpoint; other URLs come from the agencies' sites and third-party references and are confirmed by the first daily run's HTTP status.",
   "sources": [
-    { "id": "dhm-forecast", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "Weather forecast", "category": "weather", "kind": "html", "url": "https://dhm.gov.np/mfd/" },
-    { "id": "dhm-home", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "DHM notices and bulletins", "category": "notices", "kind": "html", "url": "https://www.dhm.gov.np/" },
-    { "id": "bipad-river", "agency": "BIPAD portal (NDRRMA), readings from DHM", "title": "River water levels", "category": "rivers", "kind": "bipad-river", "url": "https://bipadportal.gov.np/api/v1/river-stations/?limit=1000" },
-    { "id": "bipad-rain", "agency": "BIPAD portal (NDRRMA), readings from DHM", "title": "Rainfall stations", "category": "rainfall", "kind": "bipad-rain", "url": "https://bipadportal.gov.np/api/v1/rain-stations/?limit=1000" },
-    { "id": "ndrrma-home", "agency": "National Disaster Risk Reduction and Management Authority (NDRRMA)", "title": "NDRRMA notices", "category": "notices", "kind": "html", "url": "https://ndrrma.gov.np/" },
-    { "id": "seismo-earthquakes", "agency": "National Earthquake Monitoring and Research Center", "title": "Recent earthquakes", "category": "earthquakes", "kind": "html", "url": "https://seismonepal.gov.np/earthquakes" }
+    { "id": "dhm-forecast", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "Weather forecast", "category": "weather", "kind": "html", "url": "https://dhm.gov.np/mfd/", "verified": false },
+    { "id": "dhm-home", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "Today's weather, forecasts and notices", "category": "weather", "kind": "html", "url": "https://www.dhm.gov.np/", "verified": false },
+    { "id": "dhm-agromet", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "Agrometeorological services and weekly weather bulletin", "category": "weather", "kind": "html", "url": "https://dhm.gov.np/agromet-services", "verified": false },
+    { "id": "ffd-bulletins", "agency": "DHM Flood Forecasting Division", "title": "Flood bulletins", "category": "floods", "kind": "html", "url": "https://hydrology.gov.np/", "verified": false },
+    { "id": "dhm-flood-archive", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "Flood bulletin archive and SMS alert notices", "category": "floods", "kind": "html", "url": "https://dms2.dhm.gov.np/", "verified": false },
+    { "id": "dhm-hms", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "Hydrological monitoring system", "category": "floods", "kind": "html", "url": "https://www.dhm.gov.np/hydrology/hms", "verified": false },
+    { "id": "bipad-river", "agency": "BIPAD portal (NDRRMA), readings from DHM", "title": "River water levels", "category": "rivers", "kind": "bipad-river", "url": "https://bipadportal.gov.np/api/v1/river-stations/?limit=1000", "verified": true },
+    { "id": "bipad-rain", "agency": "BIPAD portal (NDRRMA), readings from DHM", "title": "Rainfall stations", "category": "rainfall", "kind": "bipad-rain", "url": "https://bipadportal.gov.np/api/v1/rain-stations/?limit=1000", "verified": true },
+    { "id": "bipad-incidents", "agency": "BIPAD portal (NDRRMA)", "title": "Recent disaster incidents", "category": "disasters", "kind": "json-list", "url": "https://bipadportal.gov.np/api/v1/incident/?limit=100&ordering=-incident_on", "verified": false },
+    { "id": "bipad-alerts", "agency": "BIPAD portal (NDRRMA)", "title": "Alerts", "category": "disasters", "kind": "json-list", "url": "https://bipadportal.gov.np/api/v1/alert/?limit=100", "verified": false },
+    { "id": "ndrrma-home", "agency": "National Disaster Risk Reduction and Management Authority (NDRRMA)", "title": "NDRRMA notices", "category": "disasters", "kind": "html", "url": "https://ndrrma.gov.np/", "verified": false },
+    { "id": "moha-home", "agency": "Ministry of Home Affairs", "title": "Ministry of Home Affairs notices", "category": "disasters", "kind": "html", "url": "https://moha.gov.np/", "verified": false },
+    { "id": "neoc-home", "agency": "National Emergency Operation Center (Ministry of Home Affairs)", "title": "Emergency operation updates", "category": "disasters", "kind": "html", "url": "https://neoc.gov.np/", "verified": false },
+    { "id": "drrportal-home", "agency": "Ministry of Home Affairs DRR portal", "title": "Disaster risk reduction portal", "category": "disasters", "kind": "html", "url": "http://drrportal.gov.np/", "verified": false },
+    { "id": "seismo-earthquakes", "agency": "National Earthquake Monitoring and Research Center", "title": "Recent earthquakes", "category": "earthquakes", "kind": "html", "url": "https://seismonepal.gov.np/en/earthquakes", "verified": false },
+    { "id": "bipad-earthquakes", "agency": "BIPAD portal (NDRRMA)", "title": "Earthquakes recorded on BIPAD", "category": "earthquakes", "kind": "json-list", "url": "https://bipadportal.gov.np/api/v1/earthquake/?limit=100", "verified": false },
+    { "id": "doenv-air", "agency": "Department of Environment", "title": "Air quality monitoring", "category": "air-quality", "kind": "html", "url": "https://pollution.gov.np/", "verified": false },
+    { "id": "dor-home", "agency": "Department of Roads", "title": "Road notices and status", "category": "roads", "kind": "html", "url": "https://dor.gov.np/", "verified": false }
   ]
 }

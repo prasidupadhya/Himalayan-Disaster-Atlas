@@ -166,6 +166,24 @@ def organise_rain(payload):
     return {"station_count": len(stations), "status_counts": dict(sorted(counts.items())), "wettest_24h": wettest, "stations": stations}
 
 
+def organise_list(payload, limit=60):
+    """Unknown JSON APIs: copy only the plain (string, number, boolean, null) fields of each record, verbatim."""
+    rows = payload.get("results") if isinstance(payload, dict) else payload
+    if not isinstance(rows, list):
+        raise ValueError("Response has no results list")
+    records = []
+    for row in rows[:limit]:
+        if isinstance(row, dict):
+            records.append({k: (clean(v, 300) if isinstance(v, str) else v) for k, v in row.items() if v is None or isinstance(v, (str, int, float, bool))})
+    frequency = {}
+    for record in records:
+        for key, value in record.items():
+            if value not in (None, ""):
+                frequency[key] = frequency.get(key, 0) + 1
+    columns = [k for k, _ in sorted(frequency.items(), key=lambda kv: -kv[1])][:8]
+    return {"record_count": len(rows), "columns": columns, "records": records}
+
+
 def organise(kind, body, url):
     if kind == "html":
         return extract_html(body, url)
@@ -174,6 +192,8 @@ def organise(kind, body, url):
         return organise_river(payload)
     if kind == "bipad-rain":
         return organise_rain(payload)
+    if kind == "json-list":
+        return organise_list(payload)
     raise ValueError(f"Unknown source kind {kind}")
 
 
@@ -188,6 +208,9 @@ def changes(kind, previous, current):
         old_rows = {json.dumps(row, ensure_ascii=False) for table in previous.get("tables", []) for row in table.get("rows", [])}
         return {"new_links": [link for link in current["links"] if link["href"] not in old_links][:40],
                 "new_table_rows": [row for table in current["tables"] for row in table["rows"] if json.dumps(row, ensure_ascii=False) not in old_rows][:60]}
+    if kind == "json-list":
+        old_ids = {json.dumps(r.get("id", r), sort_keys=True, ensure_ascii=False) for r in previous.get("records", [])}
+        return {"new_records": [r for r in current["records"] if json.dumps(r.get("id", r), sort_keys=True, ensure_ascii=False) not in old_ids][:40]}
     old = {s["id"]: s["status"] for s in previous.get("stations", [])}
     return {"status_changes": [{"id": s["id"], "name": s["name"], "from": old.get(s["id"]), "to": s["status"]}
                                for s in current["stations"] if s["id"] in old and old[s["id"]] != s["status"]][:60]}
@@ -205,6 +228,7 @@ def summarise(entries):
         "rivers_above_warning": counts.get("ABOVE WARNING LEVEL") if river else None,
         "rain_stations_above_warning": (rain or {}).get("status_counts", {}).get("ABOVE WARNING LEVEL") if rain else None,
         "new_links": sum(len(e.get("changes", {}).get("new_links", [])) for e in entries),
+        "new_records": sum(len(e.get("changes", {}).get("new_records", [])) for e in entries),
     }
 
 

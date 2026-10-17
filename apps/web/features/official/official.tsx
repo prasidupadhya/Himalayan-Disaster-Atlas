@@ -8,16 +8,18 @@ type River = { id: string; name: string | null; basin: string | null; status: st
 type Rain = { id: string; name: string | null; basin: string | null; status: string; rain_1h_mm: number | null; rain_24h_mm: number | null; observed_at: string | null };
 type RiverContent = { station_count: number; status_counts: Record<string, number>; alert_stations: River[] };
 type RainContent = { station_count: number; status_counts: Record<string, number>; wettest_24h: Rain[] };
+type Scalar = string | number | boolean | null;
+type ListContent = { record_count: number; columns: string[]; records: Array<Record<string, Scalar>> };
 type Entry = {
-  id: string; agency: string; title: string; category: string; kind: 'html' | 'bipad-river' | 'bipad-rain'; url: string;
+  id: string; agency: string; title: string; category: string; kind: 'html' | 'bipad-river' | 'bipad-rain' | 'json-list'; url: string;
   status: 'fetched' | 'unreachable' | 'blocked-by-robots' | 'error'; http_status: number | null; checked_at: string; fetched_at?: string | null;
-  last_known?: boolean; error?: string; content?: Page | RiverContent | RainContent; changes?: { new_links?: Link[]; status_changes?: Array<{ id: string; name: string | null; from: string | null; to: string }> };
+  last_known?: boolean; error?: string; content?: Page | RiverContent | RainContent | ListContent; changes?: { new_links?: Link[]; new_records?: Array<Record<string, Scalar>>; status_changes?: Array<{ id: string; name: string | null; from: string | null; to: string }> };
 };
 type Digest = { format: 'atlas-gov-digest@1'; generated_at: string; generated_at_nepal: string; notice: string; sources: Entry[];
-  summary: { sources_fetched: number; sources_last_known: number; sources_unavailable: number; rivers_above_danger: number | null; rivers_above_warning: number | null; rain_stations_above_warning: number | null; new_links: number } };
+  summary: { sources_fetched: number; sources_last_known: number; sources_unavailable: number; rivers_above_danger: number | null; rivers_above_warning: number | null; rain_stations_above_warning: number | null; new_links: number; new_records?: number } };
 type State = { status: 'loading' } | { status: 'missing' } | { status: 'error'; message: string } | { status: 'ready'; digest: Digest };
 
-const CATEGORIES: Array<[string, string]> = [['rivers', 'Rivers'], ['rainfall', 'Rainfall'], ['weather', 'Weather forecast'], ['earthquakes', 'Earthquakes'], ['notices', 'Notices and bulletins']];
+const CATEGORIES: Array<[string, string]> = [['weather', 'Weather'], ['floods', 'Floods'], ['rivers', 'River levels'], ['rainfall', 'Rainfall'], ['disasters', 'Disasters and alerts'], ['earthquakes', 'Earthquakes'], ['air-quality', 'Air quality'], ['roads', 'Roads'], ['notices', 'Notices']];
 const UNKNOWN = 'UNKNOWN';
 const num = (value: number | null | undefined, unit: string) => value === null || value === undefined ? UNKNOWN : `${value.toLocaleString('en-US', { maximumFractionDigits: 2 })} ${unit}`;
 const count = (value: number | null) => value === null ? UNKNOWN : value.toLocaleString('en-US');
@@ -64,6 +66,18 @@ function RainView({ content }: { content: RainContent }) {
   </>;
 }
 
+function cell(value: Scalar) { return value === null || value === '' ? UNKNOWN : typeof value === 'boolean' ? (value ? 'yes' : 'no') : String(value); }
+
+function ListView({ content, entry }: { content: ListContent; entry: Entry }) {
+  const fresh = new Set((entry.changes?.new_records ?? []).map(r => JSON.stringify(r.id ?? r)));
+  if (!content.records.length) return <p>The source returned no records in this copy.</p>;
+  return <div className="official-table-wrap"><table>
+    <caption>{content.record_count.toLocaleString('en-US')} records; first {Math.min(content.records.length, 25)} shown as published</caption>
+    <thead><tr>{content.columns.map(c => <th key={c} scope="col">{c}</th>)}</tr></thead>
+    <tbody>{content.records.slice(0, 25).map((r, i) => <tr key={i}>{content.columns.map((c, j) => <td key={c}>{cell(r[c] ?? null)}{j === 0 && fresh.has(JSON.stringify(r.id ?? r)) && <span className="official-new">new</span>}</td>)}</tr>)}</tbody>
+  </table></div>;
+}
+
 function PageView({ content, entry }: { content: Page; entry: Entry }) {
   const fresh = new Set((entry.changes?.new_links ?? []).map(link => link.href));
   const links = [...content.links].sort((a, b) => Number(fresh.has(b.href)) - Number(fresh.has(a.href)) || Number(b.document) - Number(a.document)).slice(0, 14);
@@ -86,7 +100,8 @@ function EntryView({ entry }: { entry: Entry }) {
     {!content ? <p>No copy is available yet. Open the agency page for the current information.</p>
       : entry.kind === 'bipad-river' ? <RiverView content={content as RiverContent} entry={entry} />
         : entry.kind === 'bipad-rain' ? <RainView content={content as RainContent} />
-          : <PageView content={content as Page} entry={entry} />}
+          : entry.kind === 'json-list' ? <ListView content={content as ListContent} entry={entry} />
+            : <PageView content={content as Page} entry={entry} />}
     <p><a href={entry.url} rel="noopener noreferrer" target="_blank">Open the agency page</a></p>
   </article>;
 }

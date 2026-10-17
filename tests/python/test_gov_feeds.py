@@ -4,7 +4,15 @@ import json
 import unittest
 from datetime import datetime, timezone
 
-from pipelines.gov_feeds.digest import FORMAT, build, changes, organise_rain, organise_river
+from pipelines.gov_feeds.digest import (
+    FORMAT,
+    build,
+    changes,
+    organise_list,
+    organise_rain,
+    organise_river,
+)
+from pipelines.gov_feeds.digest import SOURCES as REGISTRY
 
 MOMENT = datetime(2026, 10, 17, 0, 30, tzinfo=timezone.utc)
 RIVER = {"results": [
@@ -47,6 +55,22 @@ class OrganiseTests(unittest.TestCase):
         rain = organise_rain(RAIN)
         self.assertEqual([s["id"] for s in rain["wettest_24h"]], ["11", "10"])
         self.assertIsNone(next(s for s in rain["stations"] if s["id"] == "12")["rain_24h_mm"])
+
+    def test_unknown_api_copies_plain_fields_only_and_reports_new_records(self):
+        payload = {"count": 9999999, "results": [{"id": 7, "title": "SYNTHETIC incident", "nested": {"x": 1}, "loss": None}, {"id": 8, "title": "SYNTHETIC second"}]}
+        listed = organise_list(payload)
+        self.assertEqual(listed["record_count"], 2)
+        self.assertEqual(listed["records"][0], {"id": 7, "title": "SYNTHETIC incident", "loss": None})
+        self.assertEqual(listed["columns"][:2], ["id", "title"])
+        newer = organise_list({"results": [{"id": 9, "title": "SYNTHETIC third"}, *payload["results"]]})
+        self.assertEqual(changes("json-list", listed, newer)["new_records"], [{"id": 9, "title": "SYNTHETIC third"}])
+
+    def test_source_registry_is_complete_and_government_only(self):
+        sources = json.loads(REGISTRY.read_text())["sources"]
+        self.assertEqual(len({s["id"] for s in sources}), len(sources))
+        for source in sources:
+            self.assertIn(source["kind"], ("html", "bipad-river", "bipad-rain", "json-list"))
+            self.assertTrue(source["url"].split("/")[2].endswith("gov.np"), source["url"])
 
     def test_malformed_payload_is_refused(self):
         with self.assertRaises(ValueError):
