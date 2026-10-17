@@ -26,6 +26,8 @@ jobs:
         with:
           python-version-file: .python-version
       - run: python -m venv .gov && .gov/bin/pip install -r pipelines/gov_feeds/requirements.txt
+      - name: Install the browser for pages built by JavaScript
+        run: .gov/bin/python -m playwright install --with-deps chromium
       - name: Test the digest
         run: .gov/bin/python -m unittest tests.python.test_gov_feeds -v
       - name: Fetch and organise official pages

@@ -110,6 +110,16 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(digest["summary"]["rivers_above_danger"], None)
         self.assertEqual(digest["summary"]["sources_unavailable"], 1)
 
+    def test_pages_built_by_javascript_use_the_browser(self):
+        source = {**SOURCES[0], "render": True}
+        digest, _ = build([source], None, fetcher_for({}), allow, MOMENT, renderer=fetcher_for({"https://example.test/river": (200, RIVER)}))
+        self.assertEqual(digest["sources"][0]["status"], "fetched")
+        self.assertEqual(digest["summary"]["rivers_above_danger"], 1)
+
+    def test_rendered_sources_are_marked_in_the_registry(self):
+        rendered = {s["id"] for s in json.loads(REGISTRY.read_text())["sources"] if s.get("render")}
+        self.assertEqual(rendered, {"dhm-forecast", "ffd-bulletins", "dhm-flood-archive", "ndrrma-home", "doenv-air"})
+
 
 @unittest.skipUnless(importlib.util.find_spec("scrapling"), "scrapling is installed only for the digest workflow")
 class HtmlTests(unittest.TestCase):

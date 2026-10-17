@@ -61,6 +61,21 @@ def fetch(url):
     return int(getattr(response, "status", 0) or 0), body[: LIMITS["body"]], str(getattr(response, "url", url) or url), content_type
 
 
+def render(url):
+    """Like fetch, for pages built by JavaScript in the browser: loads them in headless Chromium."""
+    import os
+
+    from scrapling.fetchers import DynamicFetcher
+
+    options = {"headless": True, "network_idle": True, "timeout": 60_000, "useragent": USER_AGENT,
+               "extra_headers": {"Accept-Language": "en,ne;q=0.8"}, "disable_resources": True, "retries": 2, "google_search": False}
+    if os.environ.get("GOV_BROWSER_PATH"):
+        options["executable_path"] = os.environ["GOV_BROWSER_PATH"]
+    response = DynamicFetcher.fetch(url, **options)
+    body = response.body if isinstance(response.body, bytes) else str(response.body).encode("utf-8")
+    return int(getattr(response, "status", 0) or 0), body[: LIMITS["body"]], str(getattr(response, "url", url) or url), "text/html"
+
+
 def robots_allows(url, fetcher=fetch):
     parsed = urlparse(url)
     robots = f"{parsed.scheme}://{parsed.netloc}/robots.txt"
@@ -236,7 +251,7 @@ def summarise(entries):
 
 # ---- run --------------------------------------------------------------------------------------
 
-def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None):
+def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None, renderer=render):
     moment = moment or now_utc()
     before = {e["id"]: e for e in (previous or {}).get("sources", [])}
     entries, raw = [], {}
@@ -248,7 +263,7 @@ def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None):
             if not robots(source["url"], fetcher):
                 entry["status"] = "blocked-by-robots"
             else:
-                status, body, final_url, _ = fetcher(source["url"])
+                status, body, final_url, _ = (renderer if source.get("render") else fetcher)(source["url"])
                 entry["http_status"] = status
                 if status >= 400:
                     entry["status"] = "unreachable"
