@@ -1,0 +1,3601 @@
+{
+ "format": "atlas-gov-digest@1",
+ "generated_at": "2026-10-17T18:09:03Z",
+ "generated_at_nepal": "2026-10-17 23:54 NPT",
+ "notice": "Verbatim copies of public government pages, organised for reading. The agency websites are authoritative.",
+ "summary": {
+  "sources_fetched": 12,
+  "sources_last_known": 0,
+  "sources_unavailable": 6,
+  "rivers_above_danger": null,
+  "rivers_above_warning": null,
+  "rain_stations_above_warning": null,
+  "new_links": 0,
+  "new_records": 0
+ },
+ "sources": [
+  {
+   "id": "dhm-forecast",
+   "agency": "Department of Hydrology and Meteorology (DHM)",
+   "title": "Weather forecast",
+   "category": "weather",
+   "kind": "html",
+   "url": "https://dhm.gov.np/mfd/",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "aca7c04462af97ae742b2bf668f089050a243e48b4848ab611a137d916822a73",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "Meteorological Forecast Division",
+    "headings": [],
+    "tables": [],
+    "links": [],
+    "paragraphs": [],
+    "dates_mentioned": []
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "dhm-home",
+   "agency": "Department of Hydrology and Meteorology (DHM)",
+   "title": "Today's weather, forecasts and notices",
+   "category": "weather",
+   "kind": "html",
+   "url": "https://www.dhm.gov.np/",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "a277552f3fdad20721a2fd83936b3cff5c7e2046b162ecf8127a0d2f47bb7305",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "DHM",
+    "headings": [
+     "Nepal Meteorological Department",
+     "Rainfall",
+     "Dr. Archana Shrestha",
+     "Bibhuti Pokharel",
+     "Subash Rimal",
+     "Raju Dhar Pradhananga",
+     "Meteorological Observations",
+     "Meteorological Forecast",
+     "Hydrological Observations",
+     "Hydrological Forecast",
+     "Aviation",
+     "Satellite",
+     "NWP",
+     "Real Time Stream Flow",
+     "Survey",
+     "Audio Visual",
+     "Library",
+     "Publication",
+     "Media Briefing",
+     "Resources",
+     "Useful Links"
+    ],
+    "tables": [
+     {
+      "caption": null,
+      "header": [
+       "Station Name",
+       "Water Lvl",
+       "Status"
+      ],
+      "rows": []
+     }
+    ],
+    "links": [
+     {
+      "text": "Government of Nepal Ministry of Agriculture, Forest and Environment Nepal Meteorological Department",
+      "href": "https://dhm.gov.np/",
+      "document": false
+     },
+     {
+      "text": "... ...",
+      "href": "https://dhm.gov.np/hydrology/surface-observation",
+      "document": false
+     },
+     {
+      "text": "EN",
+      "href": "https://dhm.gov.np/bhasa/home/en",
+      "document": false
+     },
+     {
+      "text": "नेप",
+      "href": "https://dhm.gov.np/bhasa/home/np",
+      "document": false
+     },
+     {
+      "text": "Introduction",
+      "href": "https://dhm.gov.np/pages/about-us",
+      "document": false
+     },
+     {
+      "text": "Organizational Structure",
+      "href": "https://dhm.gov.np/organizational-chart",
+      "document": false
+     },
+     {
+      "text": "Citizen Charter",
+      "href": "https://dhm.gov.np/citizen-charter",
+      "document": false
+     },
+     {
+      "text": "Photo Gallery",
+      "href": "https://dhm.gov.np/gallery",
+      "document": false
+     },
+     {
+      "text": "Regional Offices",
+      "href": "https://dhm.gov.np/regional-office",
+      "document": false
+     },
+     {
+      "text": "Staff",
+      "href": "https://dhm.gov.np/who-is-who",
+      "document": false
+     },
+     {
+      "text": "Former Directors General",
+      "href": "https://dhm.gov.np/former-directors-general",
+      "document": false
+     },
+     {
+      "text": "Radiosonde",
+      "href": "https://dhm.gov.np/pages/Radiosonde-data",
+      "document": false
+     },
+     {
+      "text": "Climate Services",
+      "href": "https://dhm.gov.np/climate-services",
+      "document": false
+     },
+     {
+      "text": "Agromet Services",
+      "href": "https://dhm.gov.np/agromet-services",
+      "document": false
+     },
+     {
+      "text": "Instrumentation Services",
+      "href": "https://dhm.gov.np/pages/instrumentation-services",
+      "document": false
+     },
+     {
+      "text": "Flood Forecasting and Early Warning Service",
+      "href": "https://hydrology.gov.np/#/?_k=hq2p4w",
+      "document": false
+     },
+     {
+      "text": "Weather forecasting",
+      "href": "https://dhm.gov.np/mfd/#/",
+      "document": false
+     },
+     {
+      "text": "Data",
+      "href": "https://dhm.gov.np/pages/data",
+      "document": false
+     },
+     {
+      "text": "Legislation",
+      "href": "https://dhm.gov.np/pages/legislation",
+      "document": false
+     },
+     {
+      "text": "Right to Information",
+      "href": "https://dhm.gov.np/pages/right-to-information",
+      "document": false
+     },
+     {
+      "text": "Bulletin",
+      "href": "https://dhm.gov.np/bulletins",
+      "document": false
+     },
+     {
+      "text": "Feedback",
+      "href": "https://dhm.gov.np/feedback",
+      "document": false
+     },
+     {
+      "text": "Contact",
+      "href": "https://dhm.gov.np/contact-us",
+      "document": false
+     },
+     {
+      "text": "Weather Today",
+      "href": "https://dhm.gov.np/mfd/#/weather/manual-observation/table",
+      "document": false
+     },
+     {
+      "text": "Special Weather Forecast",
+      "href": "https://dhm.gov.np/mfd/#/weather/pages/special-weather",
+      "document": false
+     },
+     {
+      "text": "24 Hour Forecast",
+      "href": "https://dhm.gov.np/mfd/#/weather/country",
+      "document": false
+     },
+     {
+      "text": "Three Days Weather Bulletin",
+      "href": "https://dhm.gov.np/mfd/#/weather/three-days-bulletin",
+      "document": false
+     },
+     {
+      "text": "Aviation",
+      "href": "https://dhm.gov.np/mfd/#/aviation",
+      "document": false
+     },
+     {
+      "text": "Point Forecast",
+      "href": "https://dhm.gov.np/mfd/#/forecast",
+      "document": false
+     },
+     {
+      "text": "Weather Forecast",
+      "href": "https://dhm.gov.np/mfd/",
+      "document": false
+     },
+     {
+      "text": "Flood Forcast Bulletin",
+      "href": "https://hydrology.gov.np/#/?_k=a57c80",
+      "document": false
+     },
+     {
+      "text": "Monsoon Onset Bulletin",
+      "href": "https://dhm.gov.np/mfd/#/weather/pages/special-weather/",
+      "document": false
+     },
+     {
+      "text": "Tourism Forecast",
+      "href": "https://tourism.dhm.gov.np/",
+      "document": false
+     },
+     {
+      "text": "Dadeldhura Max: 23-25°C Min: 9-11°C Rain: 0% 6:18:57 AM | 5:56:24 PM",
+      "href": "http://dhm.gov.np/mfd/#/weather/city",
+      "document": false
+     },
+     {
+      "text": "Max 24hr: 9.4 mm Yangjakot",
+      "href": "https://dhm.gov.np/hydrology/rainfallSingle/799",
+      "document": false
+     },
+     {
+      "text": "Narayani at Devghat WL: 3.6 m WR: 7.3 m DL: 9.0 m Karnali at Chisapani WL: 5.0 m WR: 10.0 m DL: 10.8 m Kankai River at Mainachuli WL: 2.6 m WR: 3.8 m DL: 4.3 m Babai at Chepang WL: 2.3 m WR: 5.5 m DL: 6.8 m Mahakali at Parigaon WL: 3.9 m W…",
+      "href": "https://dhm.gov.np/hydrology/river-watch",
+      "document": false
+     },
+     {
+      "text": "Meteorological Observations",
+      "href": "https://dhm.gov.np/meteorology-forecast/3",
+      "document": false
+     },
+     {
+      "text": "Meteorological Forecast",
+      "href": "https://dhm.gov.np/meteorology-forecast/4",
+      "document": false
+     },
+     {
+      "text": "Hydrological Observations",
+      "href": "https://dhm.gov.np/meteorology-forecast/1",
+      "document": false
+     },
+     {
+      "text": "Hydrological Forecast",
+      "href": "https://dhm.gov.np/meteorology-forecast/2",
+      "document": false
+     },
+     {
+      "text": "Satellite",
+      "href": "https://dhm.gov.np/mfd/#/satellite",
+      "document": false
+     },
+     {
+      "text": "NWP",
+      "href": "https://dhm.gov.np/mfd/#/nwp",
+      "document": false
+     },
+     {
+      "text": "News & Notices",
+      "href": "https://dhm.gov.np/notice",
+      "document": false
+     },
+     {
+      "text": "Press Release",
+      "href": "https://dhm.gov.np/pressrelease",
+      "document": false
+     },
+     {
+      "text": "Procurement",
+      "href": "https://dhm.gov.np/tender",
+      "document": false
+     },
+     {
+      "text": "Downloads",
+      "href": "https://dhm.gov.np/downloads",
+      "document": false
+     },
+     {
+      "text": "Publications",
+      "href": "https://dhm.gov.np/publication",
+      "document": false
+     },
+     {
+      "text": "Project",
+      "href": "https://dhm.gov.np/project",
+      "document": false
+     },
+     {
+      "text": "More >>",
+      "href": "https://dhm.gov.np/hydrology/realtime-stream",
+      "document": false
+     },
+     {
+      "text": "Survey",
+      "href": "https://dhm.gov.np/survey",
+      "document": false
+     },
+     {
+      "text": "Audio Visual",
+      "href": "https://dhm.gov.np/audio",
+      "document": false
+     },
+     {
+      "text": "Library",
+      "href": "http://103.1.92.71/dhm/lms/opac_css/",
+      "document": false
+     },
+     {
+      "text": "Subscription",
+      "href": "https://dhm.gov.np/subscription",
+      "document": false
+     },
+     {
+      "text": "DHM(Old Site)",
+      "href": "http://old.dhm.gov.np",
+      "document": false
+     },
+     {
+      "text": "Hydrology(Old Site)",
+      "href": "http://hydrology.gov.np/#/?_k=nfc63d",
+      "document": false
+     },
+     {
+      "text": "MFD(Old Site)",
+      "href": "http://mfd.gov.np/",
+      "document": false
+     },
+     {
+      "text": "Gautam Buddha International Airport Aero-synoptic Station",
+      "href": "https://www.dhm.gov.np/gbiaa/",
+      "document": false
+     }
+    ],
+    "paragraphs": [
+     "About Us Introduction Organizational Structure Citizen Charter Photo Gallery Regional Offices Staff Former Directors General",
+     "Services Climate Services Agromet Services Instrumentation Services Flood Forecasting and Early Warning Service Weather forecasting",
+     "Flood Forecasting and Early Warning Service",
+     "+977- 1- 5319052, 5358224 5358276, 5319007",
+     "DHM Complex, Babarmahal, Kathmandu, Nepal",
+     "Gautam Buddha International Airport Aero-synoptic Station"
+    ],
+    "dates_mentioned": []
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "dhm-agromet",
+   "agency": "Department of Hydrology and Meteorology (DHM)",
+   "title": "Agrometeorological services and weekly weather bulletin",
+   "category": "weather",
+   "kind": "html",
+   "url": "https://dhm.gov.np/agromet-services",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "aca80ded2e5c23526cb844377109c934b22e25eb8d70900a6e4ef825f18fed4b",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "DHM",
+    "headings": [
+     "Nepal Meteorological Department",
+     "Media Briefing",
+     "Resources",
+     "Useful Links"
+    ],
+    "tables": [],
+    "links": [
+     {
+      "text": "Government of Nepal Ministry of Agriculture, Forest and Environment Nepal Meteorological Department",
+      "href": "https://dhm.gov.np/",
+      "document": false
+     },
+     {
+      "text": "... ...",
+      "href": "https://dhm.gov.np/hydrology/surface-observation",
+      "document": false
+     },
+     {
+      "text": "EN",
+      "href": "https://dhm.gov.np/bhasa/agromet-services/en",
+      "document": false
+     },
+     {
+      "text": "नेप",
+      "href": "https://dhm.gov.np/bhasa/agromet-services/np",
+      "document": false
+     },
+     {
+      "text": "Introduction",
+      "href": "https://dhm.gov.np/pages/about-us",
+      "document": false
+     },
+     {
+      "text": "Organizational Structure",
+      "href": "https://dhm.gov.np/organizational-chart",
+      "document": false
+     },
+     {
+      "text": "Citizen Charter",
+      "href": "https://dhm.gov.np/citizen-charter",
+      "document": false
+     },
+     {
+      "text": "Photo Gallery",
+      "href": "https://dhm.gov.np/gallery",
+      "document": false
+     },
+     {
+      "text": "Regional Offices",
+      "href": "https://dhm.gov.np/regional-office",
+      "document": false
+     },
+     {
+      "text": "Staff",
+      "href": "https://dhm.gov.np/who-is-who",
+      "document": false
+     },
+     {
+      "text": "Former Directors General",
+      "href": "https://dhm.gov.np/former-directors-general",
+      "document": false
+     },
+     {
+      "text": "Radiosonde",
+      "href": "https://dhm.gov.np/pages/Radiosonde-data",
+      "document": false
+     },
+     {
+      "text": "Climate Services",
+      "href": "https://dhm.gov.np/climate-services",
+      "document": false
+     },
+     {
+      "text": "Agromet Services",
+      "href": "https://dhm.gov.np/agromet-services",
+      "document": false
+     },
+     {
+      "text": "Instrumentation Services",
+      "href": "https://dhm.gov.np/pages/instrumentation-services",
+      "document": false
+     },
+     {
+      "text": "Flood Forecasting and Early Warning Service",
+      "href": "https://hydrology.gov.np/#/?_k=hq2p4w",
+      "document": false
+     },
+     {
+      "text": "Weather forecasting",
+      "href": "https://dhm.gov.np/mfd/#/",
+      "document": false
+     },
+     {
+      "text": "Data",
+      "href": "https://dhm.gov.np/pages/data",
+      "document": false
+     },
+     {
+      "text": "Legislation",
+      "href": "https://dhm.gov.np/pages/legislation",
+      "document": false
+     },
+     {
+      "text": "Right to Information",
+      "href": "https://dhm.gov.np/pages/right-to-information",
+      "document": false
+     },
+     {
+      "text": "Bulletin",
+      "href": "https://dhm.gov.np/bulletins",
+      "document": false
+     },
+     {
+      "text": "Feedback",
+      "href": "https://dhm.gov.np/feedback",
+      "document": false
+     },
+     {
+      "text": "Contact",
+      "href": "https://dhm.gov.np/contact-us",
+      "document": false
+     },
+     {
+      "text": "SPI Agromet Services",
+      "href": "https://dhm.gov.np/agromet-services/spi",
+      "document": false
+     },
+     {
+      "text": "Agromet Product Agromet Services",
+      "href": "https://dhm.gov.np/agromet-services/agromet-product",
+      "document": false
+     },
+     {
+      "text": "Agromet Reports Agromet Services",
+      "href": "https://dhm.gov.np/agromet-services/agromet-reports",
+      "document": false
+     },
+     {
+      "text": "Research Agromet Services",
+      "href": "https://dhm.gov.np/agromet-services/research",
+      "document": false
+     },
+     {
+      "text": "Weekly Weather Bulletin Agromet Services",
+      "href": "https://dhm.gov.np/agromet-services/weekly-weather-bulletin",
+      "document": false
+     },
+     {
+      "text": "Subscription",
+      "href": "https://dhm.gov.np/subscription",
+      "document": false
+     },
+     {
+      "text": "Weather Forecasting",
+      "href": "https://dhm.gov.np/mfd/",
+      "document": false
+     },
+     {
+      "text": "DHM(Old Site)",
+      "href": "http://old.dhm.gov.np",
+      "document": false
+     },
+     {
+      "text": "Hydrology(Old Site)",
+      "href": "http://hydrology.gov.np/#/?_k=nfc63d",
+      "document": false
+     },
+     {
+      "text": "MFD(Old Site)",
+      "href": "http://mfd.gov.np/",
+      "document": false
+     },
+     {
+      "text": "Gautam Buddha International Airport Aero-synoptic Station",
+      "href": "https://www.dhm.gov.np/gbiaa/",
+      "document": false
+     },
+     {
+      "text": "Weather Today",
+      "href": "https://dhm.gov.np/mfd/#/weather/manual-observation/table",
+      "document": false
+     },
+     {
+      "text": "Flood Forcast Bulletin",
+      "href": "https://hydrology.gov.np/#/?_k=a57c80",
+      "document": false
+     },
+     {
+      "text": "Special Weather Forecast",
+      "href": "https://dhm.gov.np/mfd/#/weather/pages/special-weather",
+      "document": false
+     }
+    ],
+    "paragraphs": [
+     "About Us Introduction Organizational Structure Citizen Charter Photo Gallery Regional Offices Staff Former Directors General",
+     "Services Climate Services Agromet Services Instrumentation Services Flood Forecasting and Early Warning Service Weather forecasting",
+     "Flood Forecasting and Early Warning Service",
+     "+977- 1- 5319052, 5358224 5358276, 5319007",
+     "DHM Complex, Babarmahal, Kathmandu, Nepal",
+     "Gautam Buddha International Airport Aero-synoptic Station"
+    ],
+    "dates_mentioned": []
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "ffd-bulletins",
+   "agency": "DHM Flood Forecasting Division",
+   "title": "Flood bulletins",
+   "category": "floods",
+   "kind": "html",
+   "url": "https://hydrology.gov.np/",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "ce66a13855bb47d4864a3ea02ec7172ea751b94424a0ff44dc89cd21eccae9b4",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "Hydrology",
+    "headings": [],
+    "tables": [],
+    "links": [],
+    "paragraphs": [],
+    "dates_mentioned": []
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "dhm-flood-archive",
+   "agency": "Department of Hydrology and Meteorology (DHM)",
+   "title": "Flood bulletin archive and SMS alert notices",
+   "category": "floods",
+   "kind": "html",
+   "url": "https://dms2.dhm.gov.np/",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "d001b469bc009de8f6276ed40eb7471d75591f3cc332c1855f6dc65025d3f0de",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "Hydrology",
+    "headings": [],
+    "tables": [],
+    "links": [],
+    "paragraphs": [],
+    "dates_mentioned": []
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "dhm-hms",
+   "agency": "Department of Hydrology and Meteorology (DHM)",
+   "title": "Hydrological monitoring system",
+   "category": "floods",
+   "kind": "html",
+   "url": "https://www.dhm.gov.np/hydrology/hms",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "bbafce01cda90088ed623205c4111a86b927ef04fcaa62477fecb70fe5300bdb",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "DHM",
+    "headings": [
+     "Nepal Meteorological Department",
+     "Media Briefing",
+     "Resources",
+     "Useful Links"
+    ],
+    "tables": [],
+    "links": [
+     {
+      "text": "Government of Nepal Ministry of Agriculture, Forest and Environment Nepal Meteorological Department",
+      "href": "https://dhm.gov.np/",
+      "document": false
+     },
+     {
+      "text": "... ...",
+      "href": "https://dhm.gov.np/hydrology/surface-observation",
+      "document": false
+     },
+     {
+      "text": "EN",
+      "href": "https://dhm.gov.np/bhasa/hydrology_hms/en",
+      "document": false
+     },
+     {
+      "text": "नेप",
+      "href": "https://dhm.gov.np/bhasa/hydrology_hms/np",
+      "document": false
+     },
+     {
+      "text": "Introduction",
+      "href": "https://dhm.gov.np/pages/about-us",
+      "document": false
+     },
+     {
+      "text": "Organizational Structure",
+      "href": "https://dhm.gov.np/organizational-chart",
+      "document": false
+     },
+     {
+      "text": "Citizen Charter",
+      "href": "https://dhm.gov.np/citizen-charter",
+      "document": false
+     },
+     {
+      "text": "Photo Gallery",
+      "href": "https://dhm.gov.np/gallery",
+      "document": false
+     },
+     {
+      "text": "Regional Offices",
+      "href": "https://dhm.gov.np/regional-office",
+      "document": false
+     },
+     {
+      "text": "Staff",
+      "href": "https://dhm.gov.np/who-is-who",
+      "document": false
+     },
+     {
+      "text": "Former Directors General",
+      "href": "https://dhm.gov.np/former-directors-general",
+      "document": false
+     },
+     {
+      "text": "Radiosonde",
+      "href": "https://dhm.gov.np/pages/Radiosonde-data",
+      "document": false
+     },
+     {
+      "text": "Climate Services",
+      "href": "https://dhm.gov.np/climate-services",
+      "document": false
+     },
+     {
+      "text": "Agromet Services",
+      "href": "https://dhm.gov.np/agromet-services",
+      "document": false
+     },
+     {
+      "text": "Instrumentation Services",
+      "href": "https://dhm.gov.np/pages/instrumentation-services",
+      "document": false
+     },
+     {
+      "text": "Flood Forecasting and Early Warning Service",
+      "href": "https://hydrology.gov.np/#/?_k=hq2p4w",
+      "document": false
+     },
+     {
+      "text": "Weather forecasting",
+      "href": "https://dhm.gov.np/mfd/#/",
+      "document": false
+     },
+     {
+      "text": "Data",
+      "href": "https://dhm.gov.np/pages/data",
+      "document": false
+     },
+     {
+      "text": "Legislation",
+      "href": "https://dhm.gov.np/pages/legislation",
+      "document": false
+     },
+     {
+      "text": "Right to Information",
+      "href": "https://dhm.gov.np/pages/right-to-information",
+      "document": false
+     },
+     {
+      "text": "Bulletin",
+      "href": "https://dhm.gov.np/bulletins",
+      "document": false
+     },
+     {
+      "text": "Feedback",
+      "href": "https://dhm.gov.np/feedback",
+      "document": false
+     },
+     {
+      "text": "Contact",
+      "href": "https://dhm.gov.np/contact-us",
+      "document": false
+     },
+     {
+      "text": "Subscription",
+      "href": "https://dhm.gov.np/subscription",
+      "document": false
+     },
+     {
+      "text": "Weather Forecasting",
+      "href": "https://dhm.gov.np/mfd/",
+      "document": false
+     },
+     {
+      "text": "DHM(Old Site)",
+      "href": "http://old.dhm.gov.np",
+      "document": false
+     },
+     {
+      "text": "Hydrology(Old Site)",
+      "href": "http://hydrology.gov.np/#/?_k=nfc63d",
+      "document": false
+     },
+     {
+      "text": "MFD(Old Site)",
+      "href": "http://mfd.gov.np/",
+      "document": false
+     },
+     {
+      "text": "Gautam Buddha International Airport Aero-synoptic Station",
+      "href": "https://www.dhm.gov.np/gbiaa/",
+      "document": false
+     },
+     {
+      "text": "Weather Today",
+      "href": "https://dhm.gov.np/mfd/#/weather/manual-observation/table",
+      "document": false
+     },
+     {
+      "text": "Flood Forcast Bulletin",
+      "href": "https://hydrology.gov.np/#/?_k=a57c80",
+      "document": false
+     },
+     {
+      "text": "Special Weather Forecast",
+      "href": "https://dhm.gov.np/mfd/#/weather/pages/special-weather",
+      "document": false
+     }
+    ],
+    "paragraphs": [
+     "About Us Introduction Organizational Structure Citizen Charter Photo Gallery Regional Offices Staff Former Directors General",
+     "Services Climate Services Agromet Services Instrumentation Services Flood Forecasting and Early Warning Service Weather forecasting",
+     "Flood Forecasting and Early Warning Service",
+     "+977- 1- 5319052, 5358224 5358276, 5319007",
+     "DHM Complex, Babarmahal, Kathmandu, Nepal",
+     "Gautam Buddha International Airport Aero-synoptic Station"
+    ],
+    "dates_mentioned": []
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "bipad-river",
+   "agency": "BIPAD portal (NDRRMA), readings from DHM",
+   "title": "River water levels",
+   "category": "rivers",
+   "kind": "bipad-river",
+   "url": "https://bipadportal.gov.np/api/v1/river-stations/?limit=1000",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": null,
+   "status": "error",
+   "error": "JSONDecodeError: Expecting value: line 5 column 1 (char 4)"
+  },
+  {
+   "id": "bipad-rain",
+   "agency": "BIPAD portal (NDRRMA), readings from DHM",
+   "title": "Rainfall stations",
+   "category": "rainfall",
+   "kind": "bipad-rain",
+   "url": "https://bipadportal.gov.np/api/v1/rain-stations/?limit=1000",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": null,
+   "status": "error",
+   "error": "JSONDecodeError: Expecting value: line 5 column 1 (char 4)"
+  },
+  {
+   "id": "bipad-incidents",
+   "agency": "BIPAD portal (NDRRMA)",
+   "title": "Recent disaster incidents",
+   "category": "disasters",
+   "kind": "json-list",
+   "url": "https://bipadportal.gov.np/api/v1/incident/?limit=100&ordering=-incident_on",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": null,
+   "status": "error",
+   "error": "JSONDecodeError: Expecting value: line 5 column 1 (char 4)"
+  },
+  {
+   "id": "bipad-alerts",
+   "agency": "BIPAD portal (NDRRMA)",
+   "title": "Alerts",
+   "category": "disasters",
+   "kind": "json-list",
+   "url": "https://bipadportal.gov.np/api/v1/alert/?limit=100",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": null,
+   "status": "error",
+   "error": "JSONDecodeError: Expecting value: line 5 column 1 (char 4)"
+  },
+  {
+   "id": "ndrrma-home",
+   "agency": "National Disaster Risk Reduction and Management Authority (NDRRMA)",
+   "title": "NDRRMA notices",
+   "category": "disasters",
+   "kind": "html",
+   "url": "https://ndrrma.gov.np/",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "b655d2a2236d9863582eccdee19f519e13e18c3dbecd15b654f3a237ed93b6b6",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "NDRRMA",
+    "headings": [],
+    "tables": [],
+    "links": [],
+    "paragraphs": [],
+    "dates_mentioned": []
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "moha-home",
+   "agency": "Ministry of Home Affairs",
+   "title": "Ministry of Home Affairs notices",
+   "category": "disasters",
+   "kind": "html",
+   "url": "https://moha.gov.np/",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "a8244378ea986c6aa5fb8254d3b490910e62a55f7cb8ac9a57a79845d6edb94c",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "गृह मन्त्रालय",
+    "headings": [
+     "गृह मन्त्रालय",
+     "पहुँचयोग्यता मेनु",
+     "Website Language (भाषा)",
+     "फन्ट साइज (अक्षरको आकार)",
+     "रङ्ग मोड/फिल्टर",
+     "ब्यान्डविथ",
+     "थप सुबिधा",
+     "ताजा अपडेट सबै",
+     "तस्विर संग्रह",
+     "सम्पर्क",
+     "महत्त्वपूर्ण लिंकहरु",
+     "कार्यालय समय"
+    ],
+    "tables": [],
+    "links": [
+     {
+      "text": "Accessibility Mode सुरु गर्नुहोस्",
+      "href": "https://moha.gov.np/accessibility-mode",
+      "document": false
+     },
+     {
+      "text": "गृह मन्त्रालय",
+      "href": "https://moha.gov.np",
+      "document": false
+     },
+     {
+      "text": "EN",
+      "href": "https://moha.gov.np/switch",
+      "document": false
+     },
+     {
+      "text": "न्यून व्यान्डविथ",
+      "href": "https://moha.gov.np/switch-bandwidth",
+      "document": false
+     },
+     {
+      "text": "सम्पर्क",
+      "href": "https://moha.gov.np/contact",
+      "document": false
+     },
+     {
+      "text": "मातहतका कार्यालयहरु",
+      "href": "https://moha.gov.np/office-directory",
+      "document": false
+     },
+     {
+      "text": "टेलिफोन निर्देशिका",
+      "href": "https://moha.gov.np/directory",
+      "document": false
+     },
+     {
+      "text": "स्क्रिन रिडर",
+      "href": "https://moha.gov.np/screen-reader",
+      "document": false
+     },
+     {
+      "text": "हाम्रो बारेमा",
+      "href": "https://moha.gov.np/page/introduction",
+      "document": false
+     },
+     {
+      "text": "मुख्य कार्य",
+      "href": "https://moha.gov.np/page/main-functions",
+      "document": false
+     },
+     {
+      "text": "पूर्व गृह मन्त्रीहरु",
+      "href": "http://moha.gov.np/former-ministers",
+      "document": false
+     },
+     {
+      "text": "पूर्व गृह सचिवहरु",
+      "href": "http://moha.gov.np/former-secretaries",
+      "document": false
+     },
+     {
+      "text": "संगठनिक संरचना",
+      "href": "http://moha.gov.np/office-layout",
+      "document": false
+     },
+     {
+      "text": "कार्यालय",
+      "href": "http://moha.gov.np/offices",
+      "document": false
+     },
+     {
+      "text": "स्रोतहरु",
+      "href": "https://moha.gov.np/page/resources",
+      "document": false
+     },
+     {
+      "text": "ऐन / नियमावली",
+      "href": "https://moha.gov.np/page/act-regulation",
+      "document": false
+     },
+     {
+      "text": "निर्देशिका/कार्यविधि",
+      "href": "https://moha.gov.np/page/directive-framework",
+      "document": false
+     },
+     {
+      "text": "मापदण्ड",
+      "href": "https://moha.gov.np/page/criteria",
+      "document": false
+     },
+     {
+      "text": "रणनीति",
+      "href": "https://moha.gov.np/page/strategy",
+      "document": false
+     },
+     {
+      "text": "कार्ययोजना/मार्गदर्शन",
+      "href": "https://moha.gov.np/page/action-plan-guideline",
+      "document": false
+     },
+     {
+      "text": "प्रकाशन",
+      "href": "https://moha.gov.np/page/publication-1",
+      "document": false
+     },
+     {
+      "text": "अन्य स्रोतहरु",
+      "href": "https://moha.gov.np/page/other-resources",
+      "document": false
+     },
+     {
+      "text": "डाउनलोड",
+      "href": "https://moha.gov.np/page/download-57",
+      "document": false
+     },
+     {
+      "text": "कार्यदल/ समिति/ अध्ययन प्रतिवेदन",
+      "href": "https://moha.gov.np/page/ka-ra-yathal-sama-ta-athha-yayana-pa-rata-va-thana",
+      "document": false
+     },
+     {
+      "text": "प्रगति विवरण",
+      "href": "https://moha.gov.np/page/progress-report-2105",
+      "document": false
+     },
+     {
+      "text": "वार्षिक प्रगति प्रतिवेदन",
+      "href": "https://moha.gov.np/page/annual-progress-report-2079",
+      "document": false
+     },
+     {
+      "text": "त्रैमासिक प्रगति विवरण",
+      "href": "https://moha.gov.np/page/trimester-progress-report-2",
+      "document": false
+     },
+     {
+      "text": "सम्पादित मुख्य कार्यहरु",
+      "href": "https://moha.gov.np/page/key-works-performed",
+      "document": false
+     },
+     {
+      "text": "कार्यसम्पादन सम्झौता मूल्याङ्कन",
+      "href": "https://moha.gov.np/page/performance-evaluation",
+      "document": false
+     },
+     {
+      "text": "Targeted Sanction List",
+      "href": "https://moha.gov.np/page/targeted-sanction-list",
+      "document": false
+     },
+     {
+      "text": "प्रतिबन्धित सूची",
+      "href": "https://moha.gov.np/page/sanction-list",
+      "document": false
+     },
+     {
+      "text": "Consolidated List",
+      "href": "https://www.un.org/securitycouncil/content/un-sc-consolidated-list",
+      "document": false
+     },
+     {
+      "text": "UN Sanction List",
+      "href": "https://moha.gov.np/post/un-sanction-list",
+      "document": false
+     },
+     {
+      "text": "APG Sanction List",
+      "href": "https://apgml.org",
+      "document": false
+     },
+     {
+      "text": "कोष रोक्का आदेश",
+      "href": "https://moha.gov.np/page/freezing-orders",
+      "document": false
+     },
+     {
+      "text": "Guidance on De-listing and unfreezing of assets",
+      "href": "https://moha.gov.np/page/guidance-on-de-listing-and-unfreezing-of-assets",
+      "document": false
+     },
+     {
+      "text": "Directive on Targeted Financial Sanctions on Terrorist Financing & Proliferation Financing",
+      "href": "https://moha.gov.np/page/directive-on-targeted-financial-sanctions-on-terrorist-financing-proliferation",
+      "document": false
+     },
+     {
+      "text": "शान्ति पोर्टल",
+      "href": "https://moha.gov.np/page/peace-portal",
+      "document": false
+     },
+     {
+      "text": "राष्ट्रिय कार्ययोजना",
+      "href": "https://moha.gov.np/page/national-action-plan",
+      "document": false
+     },
+     {
+      "text": "भिडियो",
+      "href": "https://moha.gov.np/page/video-gallery",
+      "document": false
+     },
+     {
+      "text": "बारम्बार सोधिने प्रश्नहरु",
+      "href": "https://moha.gov.np/page/disaster",
+      "document": false
+     },
+     {
+      "text": "लागु औषध नियन्त्रण",
+      "href": "https://moha.gov.np/page/drug-control",
+      "document": false
+     },
+     {
+      "text": "विभूषण",
+      "href": "https://moha.gov.np/page/bibhusan",
+      "document": false
+     },
+     {
+      "text": "सीमा तथा अध्यागमन",
+      "href": "https://moha.gov.np/page/borders-and-immigration",
+      "document": false
+     },
+     {
+      "text": "बिदा",
+      "href": "https://moha.gov.np/page/holidays",
+      "document": false
+     },
+     {
+      "text": "सम्वत् २०८० सालका विदाहरू",
+      "href": "https://moha.gov.np/page/public-holidays-for-2080",
+      "document": false
+     },
+     {
+      "text": "२०८१ सालको सरकारी तथा सार्वजनिक विदा",
+      "href": "https://moha.gov.np/page/government-and-public-holidays-in-2081",
+      "document": false
+     },
+     {
+      "text": "२०८२ सालको सरकारी तथा सार्वजनिक विदा",
+      "href": "https://moha.gov.np/page/government-and-public-holidays-in-2082",
+      "document": false
+     },
+     {
+      "text": "२०८३ सालको सरकारी तथा सार्वजनिक विदा",
+      "href": "https://moha.gov.np/page/government-and-public-holidays-in-2083",
+      "document": false
+     },
+     {
+      "text": "सम्पर्क",
+      "href": "http://moha.gov.np/contact",
+      "document": false
+     },
+     {
+      "text": "सिंहदरबार गेटपास",
+      "href": "https://singhadurbarpass.gov.np/en/login",
+      "document": false
+     },
+     {
+      "text": "TFS लगिन",
+      "href": "https://tfs.moha.gov.np/",
+      "document": false
+     },
+     {
+      "text": "थप पढ्नुहोस",
+      "href": "https://moha.gov.np/accessibility-note",
+      "document": false
+     },
+     {
+      "text": "Accessibility सेटिङ रिसेट गर्नुहोस्",
+      "href": "https://moha.gov.np/reset-accessibility-settings",
+      "document": false
+     },
+     {
+      "text": "विज्ञप्ति",
+      "href": "https://moha.gov.np/post/va-ja-niapa-ta-141",
+      "document": false
+     },
+     {
+      "text": "सूचना",
+      "href": "https://moha.gov.np/post/sa-cana-2688",
+      "document": false
+     },
+     {
+      "text": "उच्च सतर्कताका लागि हार्दिक अनुरोध",
+      "href": "https://moha.gov.np/post/uca-ca-satara-kata-ka-l-ga-ha-ra-tha-ka-ana-ra-thha-3",
+      "document": false
+     },
+     {
+      "text": "जग्गा प्राप्ति सम्बन्धी कानूनलाई संशोधन र एकीकरण गर्न बनेको विधेयकको मस्यौदामा सर्वसाधारणको रायको लागि प्रकाशन",
+      "href": "https://moha.gov.np/post/publication-of-the-bill-to-amend-and-consolidate-the-land-acquisition-law-for",
+      "document": false
+     },
+     {
+      "text": "कार्यविधि विपरीत खटिएका व्यक्तिगत सुरक्षाकर्मीका सम्वन्धमा गुनासो तथा उजुरी गर्ने सम्बन्धी सार्वजनिक सूचना।",
+      "href": "https://moha.gov.np/page/ka-ra-yava-thha-va-para-ta-khata-eka-va-yaka-ta-gata-sa-raka-shha-kara-ma-ka-3",
+      "document": false
+     },
+     {
+      "text": "सबै",
+      "href": "https://moha.gov.np/archive",
+      "document": false
+     },
+     {
+      "text": "हार्दिक अपिल १ महिना अगाडी",
+      "href": "https://moha.gov.np/post/ha-ra-tha-ka-apa-l-11",
+      "document": false
+     },
+     {
+      "text": "गृह मन्त्रालयको मिति २०८३।०६।३० को निर्णयानुसार सरुवा/पदस्थापन भएका रा.प.अनं. प्रथम र द्वितीय श्रेणीका कर्मचारीहरूको विवरण १ दिन अगाडी",
+      "href": "https://moha.gov.np/post/ga-ha-mana-ta-ra-lyaka-ma-ta-ka-na-ra-naeya-na-sa-ra-sara-va-pathasa-tha-pana-7",
+      "document": false
+     },
+     {
+      "text": "रसुवा भोटेकोशी बाढीमा बेपत्ता व्यक्तिको आधिकारिक विवरण यकिन गर्ने प्रक्रिया, २०८३ १ दिन अगाडी ( विपद् तथा द्वन्द्व व्यवस्थापन महाशाखा / विपद् नीति समन्वय तथा अन्तर्राष्ट्रिय सम्बन्ध शाखा)",
+      "href": "https://moha.gov.np/post/rasa-va-bha-ta-ka-sha-b-dha-ma-b-pata-ta-va-yaka-ta-ka-aathha-ka-ra-ka-va",
+      "document": false
+     },
+     {
+      "text": "विपद्सम्बन्धी केही नेपाल ऐनलाई संशोधन गर्ने अध्यादेश, २०८३ १ दिन अगाडी ( विपद् तथा द्वन्द्व व्यवस्थापन महाशाखा / विपद् नीति समन्वय तथा अन्तर्राष्ट्रिय सम्बन्ध शाखा)",
+      "href": "https://moha.gov.np/post/va-patha-sama-bna-thha-ka-ha-na-pa-l-ainal-ii-sa-sha-thhana-gara-na-athha-ya-tha",
+      "document": false
+     },
+     {
+      "text": "कार्यविधि विपरीत खटिएका व्यक्तिगत सुरक्षाकर्मीका सम्वन्धमा गुनासो तथा उजुरी गर्ने सम्बन्धी सार्वजनिक सूचना। ८ दिन अगाडी",
+      "href": "https://moha.gov.np/post/ka-ra-yava-thha-va-para-ta-khata-eka-va-yaka-ta-gata-sa-raka-shha-kara-ma-ka-5",
+      "document": false
+     },
+     {
+      "text": "गृह मन्त्रालयको मिति २०८३।०६।२३ को निर्णयानुसार पदस्थापन भएका रा.प. प्रथम श्रेणीका कर्मचारीहरूको विवरण ८ दिन अगाडी",
+      "href": "https://moha.gov.np/post/ga-ha-mana-ta-ra-lyaka-ma-ta-ka-na-ra-naeya-na-sa-ra-pathasa-tha-pana-bhaeka-ra",
+      "document": false
+     },
+     {
+      "text": "गृह मन्त्रालयको मिति २०८३।०६।१५ र २०८३।०६।२३ को निर्णयानुसार सरुवा भएका रा.प.प्रथम र रा.प.द्वितीय श्रेणीका कर्मचारीहरूको विवरण ८ दिन अगाडी",
+      "href": "https://moha.gov.np/post/ga-ha-mana-ta-ra-lyaka-ma-ta-ra-ka-na-ra-naeya-na-sa-ra-sara-va-bhaeka-ra-pa-pa",
+      "document": false
+     },
+     {
+      "text": "कसूरजन्य सम्पत्ति व्यवस्थापन विभागको कम्प्युटर लगायत अन्य ईलेक्ट्रोनिक्स सामानहरु वार्ता मार्फत बिक्री को सूचना १० दिन अगाडी",
+      "href": "https://moha.gov.np/post/notice-of-sale-of-computers-and-other-electronic-goods-through-negotiation",
+      "document": false
+     },
+     {
+      "text": "हेलो गृह मन्त्रालय गृह मन्त्रालय तथा मातहतका कार्यालयको काम कारबाही सम्बन्धी सन्देश तथा गुनासो",
+      "href": "http://moha.gov.np/hello-moha",
+      "document": false
+     },
+     {
+      "text": "बोलपत्र बोलपत्र / शिलबन्दी दरभाउपत्र सम्बन्धि सम्पूर्ण सूचना",
+      "href": "https://moha.gov.np/page/tender",
+      "document": false
+     },
+     {
+      "text": "बैदेशिक भ्रमण बैदेशिक भ्रमण",
+      "href": "https://moha.gov.np/page/foreign-tours",
+      "document": false
+     },
+     {
+      "text": "जेनजी आन्दोलनको विवरण जेनजी आन्दोलनका शहीद तथा घाईतेहरूको विवरण हेर्नुहोस",
+      "href": "https://moha.gov.np/page/details-of-the-martyrs-of-the-gen-z-movement",
+      "document": false
+     },
+     {
+      "text": "लागु औषध नियन्त्रण पोर्टल लागु औषध नियन्त्रण सम्बन्धि विवरण तथा सचेतनामुलक सामग्री",
+      "href": "https://moha.gov.np/page/annual-journal",
+      "document": false
+     },
+     {
+      "text": "विज्ञप्ति विज्ञप्ति",
+      "href": "https://moha.gov.np/post/va-ja-niapa-ta-128",
+      "document": false
+     },
+     {
+      "text": "सुधन गुरुङ",
+      "href": "https://moha.gov.np/member/sudhan-gurung-2",
+      "document": false
+     },
+     {
+      "text": "केदारनाथ शर्मा",
+      "href": "https://moha.gov.np/member/kedarnath-sharma",
+      "document": false
+     },
+     {
+      "text": "आनन्द काफ्ले",
+      "href": "https://moha.gov.np/member/ananda-kafle",
+      "document": false
+     },
+     {
+      "text": "रमा आचार्य (सुवेदी)",
+      "href": "https://moha.gov.np/member/rama-acharya-subedi",
+      "document": false
+     },
+     {
+      "text": "सुदर्शन न्यौपाने (Employee of the Month - भदौ)",
+      "href": "https://moha.gov.np/member/shudarshan-neupane-employee-of-the-month-bhadra",
+      "document": false
+     },
+     {
+      "text": "कर्मचारी विवरण",
+      "href": "https://moha.gov.np/members",
+      "document": false
+     },
+     {
+      "text": "सबै सूचना हेर्नुहाेस्",
+      "href": "https://moha.gov.np/page/notice",
+      "document": false
+     },
+     {
+      "text": "आत्महत्या न्यूनीकरण गर्न गृह मन्त्रालय र काठमाडौं विश्वविद्यालयबीच समझदारीपत्रमा हस्ताक्षर २०८१-०९-०८ ०८ पुस",
+      "href": "https://moha.gov.np/post/aata-mahata-ya-na-ya-na-karanae-gara-na-ga-ha-mana-ta-ra-lya-ra-ka-thama-da-va",
+      "document": false
+     },
+     {
+      "text": "नवनिर्मित इलाका प्रशासन कार्यालय भवन उद्घाटन, राहदानी तथा राष्ट्रिय परिचयपत्र वितरण सेवा शुभारम्भ २०८१-०९-०३ ०३ पुस",
+      "href": "https://moha.gov.np/post/navana-ra-ma-ta-il-ka-pa-rasha-sana-ka-ra-ya-lya-bhavana-utha-gha-tana-ra-hatha",
+      "document": false
+     },
+     {
+      "text": "लुम्बिनी प्रदेशस्तरीय सुरक्षा गोष्ठी, २०८१ सम्पन्न २०८१-०९-०२ ०२ पुस",
+      "href": "https://moha.gov.np/post/l-ma-b-na-pa-ratha-shasa-tara-ya-sa-raka-shha-ga-shha-tha-sama-pana-na",
+      "document": false
+     },
+     {
+      "text": "कर्णाली प्रदेशस्तरीय सुरक्षा गोष्ठी, २०८१ सम्पन्न २०८१-०८-२४ २४ मङ्सिर",
+      "href": "https://moha.gov.np/post/kara-nae-l-pa-ratha-shasa-tara-ya-sa-raka-shha-ga-shha-tha-sama-pana-na",
+      "document": false
+     },
+     {
+      "text": "सुदूरपश्चिम प्रदेशस्तरीय सुरक्षा गोष्ठी, २०८१ सम्पन्न २०८१-०८-०५ ०५ मङ्सिर",
+      "href": "https://moha.gov.np/post/sa-tha-rapasha-ca-ma-pa-ratha-shasa-tara-ya-sa-raka-shha-ga-shha-tha-sama-pana",
+      "document": false
+     },
+     {
+      "text": "नेपाल प्रहरी प्रदेश कार्यालय, महेन्द्रनगर र इलाका प्रहरी कार्यालय दोधारा चाँदनीको नवनिर्मित भवनको समुद्घाटन २०८१-०५-१९ १९ भाद्र",
+      "href": "https://moha.gov.np/post/na-pa-l-pa-rahara-pa-ratha-sha-ka-ra-ya-lya-maha-na-tha-ranagara-ra-il-ka-pa",
+      "document": false
+     },
+     {
+      "text": "सबै समाचार हेर्नुहाेस्",
+      "href": "https://moha.gov.np/page/news",
+      "document": false
+     },
+     {
+      "text": "भाद्र २३ र २४ को घटना सम्बन्धी जाँचबुझ आयोग २०८२ | विज्ञप्ति ९ महिना अगाडी २५ पुस",
+      "href": "https://moha.gov.np/post/commission-of-inquiry-into-the-incidents-of-bhadra-23-and-24-2082-press-release-2",
+      "document": false
+     },
+     {
+      "text": "भाद्र २३ र २४ को घटना सम्बन्धी जाँचबुझ आयोग २०८२ | विज्ञप्ति ९ महिना अगाडी ०७ पुस",
+      "href": "https://moha.gov.np/post/commission-of-inquiry-into-the-incidents-of-bhadra-23-and-24-2082-press-release",
+      "document": false
+     },
+     {
+      "text": "भाद्र २३ र २४ को घटना सम्बन्धी जाँचबुझ आयोग २०८२ | विज्ञप्ति १० महिना अगाडी २१ मङ्सिर",
+      "href": "https://moha.gov.np/post/bha-tha-ra-ra-ka-ghatana-sama-bna-thha-ja-cab-jha-aaya-ga-va-ja-niapa-ta",
+      "document": false
+     },
+     {
+      "text": "विज्ञप्ति २०८२-०५-२३ २३ भाद्र",
+      "href": "https://moha.gov.np/post/press-release-2126",
+      "document": false
+     },
+     {
+      "text": "प्रेस विज्ञप्ति २०८२-०२-१० १० जेष्ठ",
+      "href": "http://moha.gov.np/page/press-release",
+      "document": false
+     },
+     {
+      "text": "विज्ञप्ति २०८१-१२-१५ १५ चैत्र",
+      "href": "https://moha.gov.np/post/press-release-2120",
+      "document": false
+     },
+     {
+      "text": "सबै प्रेस बिज्ञप्ति हेर्नुहाेस्",
+      "href": "https://moha.gov.np/page/press-release",
+      "document": false
+     },
+     {
+      "text": "Supply and Delivery of Printing खरिद सम्बन्धी बोलपत्र आव्हानको सूचना १ महिना अगाडी २४ भाद्र",
+      "href": "https://moha.gov.np/post/supply-and-delivery-of-printing-khara-tha-sama-bna-thha-b-lpata-ra-aava-ha-naka",
+      "document": false
+     },
+     {
+      "text": "Supply and Delivery of Toner Cartridge खरिद सम्बन्धी बोलपत्र आव्हानको सूचना १ महिना अगाडी २४ भाद्र",
+      "href": "https://moha.gov.np/post/supply-and-delivery-of-toner-cartridge-khara-tha-sama-bna-thha-b-lpata-ra-aava-2",
+      "document": false
+     },
+     {
+      "text": "Supply and Delivery of Stationery and Miscellaneous Goods खरिद सम्बन्धी बोलपत्र आव्हानको सूचना १ महिना अगाडी १८ भाद्र",
+      "href": "https://moha.gov.np/post/notice-inviting-bids-for-the-purchase-of-supply-and-delivery-of-stationery-and-2",
+      "document": false
+     },
+     {
+      "text": "खरिद सम्बन्धी बोलपत्र आव्हानको सूचना (Supply and Delivery of Printing Goods) २ महिना अगाडी ०१ भाद्र",
+      "href": "https://moha.gov.np/post/supply-and-delivery-of-printing-goods",
+      "document": false
+     },
+     {
+      "text": "खरिद सम्बन्धी बोलपत्र आव्हानको सूचना (Supply and Delivery of Toner Cartridge) २ महिना अगाडी २७ श्रवण",
+      "href": "https://moha.gov.np/post/supply-and-delivery-of-toner-cartridge-khara-tha-sama-bna-thha-b-lpata-ra-aava",
+      "document": false
+     },
+     {
+      "text": "Supply and Delivery of Stationery and Miscellaneous Goods खरिद सम्बन्धी बोलपत्र आव्हानको सूचना २ महिना अगाडी २२ श्रवण",
+      "href": "https://moha.gov.np/post/notice-inviting-bids-for-the-purchase-of-supply-and-delivery-of-stationery-and",
+      "document": false
+     },
+     {
+      "text": "विभूषण ऐन, २०६४ 2081-09-25 25 पुस",
+      "href": "https://moha.gov.np/post/va-bha-shhanae-aina-17",
+      "document": false
+     },
+     {
+      "text": "तेजाब-तथा-अन्य-घातक-रासायनिक-पदार्थ-नियमन-ऐन-२०७९ 2080-06-22 22 अशोज",
+      "href": "https://moha.gov.np/post/ta-ja-b-tatha-ana-ya-gha-taka-ra-sa-yana-ka-patha-ra-tha-na-yamana-aina-2",
+      "document": false
+     },
+     {
+      "text": "तेजाब तथा अन्य घातक रासायनिक पदार्थ (नियमन) नियमावली, २०८० 2080-06-22 22 अशोज",
+      "href": "https://moha.gov.np/post/ta-ja-b-tatha-ana-ya-gha-taka-ra-sa-yana-ka-patha-ra-tha-na-yamana-na-yama-val-10",
+      "document": false
+     },
+     {
+      "text": "नेपाल नागरिकता (तेस्रो संशोधन) नियमावली, २०८० 2080-06-09 09 अशोज",
+      "href": "https://moha.gov.np/post/na-pa-l-na-gara-kata-ta-sa-ra-sa-sha-thhana-na-yama-val-2",
+      "document": false
+     },
+     {
+      "text": "नेपाल-नागरिकता-नियमावली-२०६३ 2080-02-19 19 जेष्ठ",
+      "href": "https://moha.gov.np/post/na-pa-l-na-gara-kata-na-yama-val-26",
+      "document": false
+     },
+     {
+      "text": "नेपाल नागरिकता (पहिलो संशोधन) ऐन, २०७९ 2080-02-19 19 जेष्ठ",
+      "href": "https://moha.gov.np/post/na-pa-l-na-gara-kata-paha-l-sa-sha-thhana-aina",
+      "document": false
+     },
+     {
+      "text": "पहिचान नभएका तथा बेवारिसे शव व्यवस्थापन (पहिलो संशोधन) निर्देशिका २०८३ 1 महिना अगाडी 18 भाद्र",
+      "href": "https://moha.gov.np/post/paha-ca-na-nabhaeka-tatha-b-va-ra-sa-shava-va-yavasa-tha-pana-paha-l-sa-sha-3",
+      "document": false
+     },
+     {
+      "text": "पहिचान नभएका तथा बेवारिसे शव व्यवस्थापन (पहिलो संशोधन) निर्देशिका, 2083 1 महिना अगाडी 13 भाद्र",
+      "href": "https://moha.gov.np/post/paha-ca-na-nabhaeka-tatha-b-va-ra-sa-shava-va-yavasa-tha-pana-paha-l-sa-sha",
+      "document": false
+     },
+     {
+      "text": "अनुदान वितरण(लागु औषध उपचार तथा पुनस्थापना केन्द्र) गर्ने कार्यविधि, २०८३ 4 महिना अगाडी 01 अषाढ",
+      "href": "https://moha.gov.np/post/ana-tha-na-va-taranae-l-ga-oushhathha-upaca-ra-tatha-pa-nasa-tha-pana-ka-na-tha",
+      "document": false
+     },
+     {
+      "text": "पुरस्कार प्रदान (उत्कृष्ट लागु औषध उपचार तथा पुनस्थापना केन्द्र)गर्ने कार्यविधि, २०८३ 4 महिना अगाडी 01 अषाढ",
+      "href": "https://moha.gov.np/post/pa-rasa-ka-ra-pa-ratha-na-uta-ka-shha-ta-l-ga-oushhathha-upaca-ra-tatha-pa-nasa",
+      "document": false
+     },
+     {
+      "text": "राष्ट्रिय विपद् जोखिम न्यूनीकरण तथा व्यवस्थापन प्राधिकरणको कार्यकारी प्रमुख नियुक्तिका लागि सिफारिस गर्न गठित सिफारिस समितिको बैठक र छनौट प्रक्रिया सम्बन्धी कार्यविधि, २०८3 4 महिना अगाडी 22 जेष्ठ",
+      "href": "https://moha.gov.np/post/ra-shha-ta-ra-ya-va-patha-ja-kha-ma-na-ya-na-karanae-tatha-va-yavasa-tha-pana-pa-12",
+      "document": false
+     },
+     {
+      "text": "राजस्व, भन्सार तथा औद्योगिक सुरक्षा निर्देशिका, २०७० 6 महिना अगाडी 18 चैत्र",
+      "href": "https://moha.gov.np/post/ra-jasa-va-bhana-sa-ra-tatha-outha-ya-ga-ka-sa-raka-shha-na-ra-tha-sha-ka",
+      "document": false
+     },
+     {
+      "text": "गृह मन्त्रालयबाट आ.व. २०७५-७६ मा भएको खर्चको फाँटवारी 2076-04-12 12 श्रवण",
+      "href": "https://moha.gov.np/post/ga-ha-mana-ta-ra-lyab-ta-aa-va-ma-bhaeka-khara-caka-fa-tava-ra",
+      "document": false
+     },
+     {
+      "text": "सबै बील सार्वजनिकरण",
+      "href": "https://moha.gov.np/page/bill-details-published",
+      "document": false
+     },
+     {
+      "text": "आधिकारिक मेल",
+      "href": "https://mail.nepal.gov.np/",
+      "document": false
+     },
+     {
+      "text": "बील सार्वजनिकरण",
+      "href": "https://www.opmcm.gov.np/paymentbill.php?id=15",
+      "document": false
+     },
+     {
+      "text": "डिआरआर पोर्टल",
+      "href": "http://www.drrportal.gov.np",
+      "document": false
+     },
+     {
+      "text": "गृह मन्त्रालय",
+      "href": "https://www.facebook.com/hellomoha/",
+      "document": false
+     },
+     {
+      "text": "Tweets by गृह मन्त्रालय",
+      "href": "https://twitter.com/moha_nepal",
+      "document": false
+     }
+    ],
+    "paragraphs": [
+     "हाम्रो बारेमा परिचय मुख्य कार्य पूर्व गृह मन्त्रीहरु पूर्व गृह सचिवहरु",
+     "स्रोतहरु ऐन / नियमावली निर्देशिका/कार्यविधि मापदण्ड रणनीति कार्ययोजना/मार्गदर्शन प्रकाशन अन्य स्रोतहरु डाउनलोड कार्यदल/ समिति/ अध्ययन प्रतिवेदन",
+     "प्रगति विवरण वार्षिक प्रगति प्रतिवेदन त्रैमासिक प्रगति विवरण सम्पादित मुख्य कार्यहरु कार्यसम्पादन सम्झौता मूल्याङ्कन",
+     "Targeted Sanction List प्रतिबन्धित सूची Consolidated List UN Sanction List APG Sanction List कोष रोक्का आदेश Guidance on De-listing and unfreezing of assets Directive on Targeted Financial Sanctions on Terrorist Financing & Proliferation Financing",
+     "Guidance on De-listing and unfreezing of assets",
+     "Directive on Targeted Financial Sanctions on Terrorist Financing & Proliferation Financing",
+     "शान्ति पोर्टल राष्ट्रिय कार्ययोजना भिडियो",
+     "बारम्बार सोधिने प्रश्नहरु विपद् लागु औषध नियन्त्रण विभूषण सीमा तथा अध्यागमन",
+     "बिदा सम्वत् २०८० सालका विदाहरू २०८१ सालको सरकारी तथा सार्वजनिक विदा २०८२ सालको सरकारी तथा सार्वजनिक विदा २०८३ सालको सरकारी तथा सार्वजनिक विदा",
+     "You're viewing the website in Nepali Language. हालको भाषा नेपाली हो",
+     "नवनियुक्त माननीय गृहमन्त्री सुधन गुरुङज्यू पदभार ग्रहण गर्नुहुँदै । (२०८२/१२/१३ गते)",
+     "विपद् हेल्पलाइन (२४ सै घण्टा TOLLFREE सेवा): १२३४",
+     "राष्ट्रिय विपद् जोखिम न्यूनीकरण तथा व्यवस्थापन प्राधिकरण (NDRRMA) को कार्यकारी प्रमुखलाई माननीय गृहमन्त्रीज्यूबाट नियुक्ति पत्र प्रदान",
+     "गृह मन्त्रालयको मिति २०८३।०६।३० को निर्णयानुसार सरुवा/पदस्थापन भएका रा.प.अनं. प्रथम र द्वितीय श्रेणीका कर्मचारीहरूको विवरण १ दिन अगाडी",
+     "रसुवा भोटेकोशी बाढीमा बेपत्ता व्यक्तिको आधिकारिक विवरण यकिन गर्ने प्रक्रिया, २०८३ १ दिन अगाडी ( विपद् तथा द्वन्द्व व्यवस्थापन महाशाखा / विपद् नीति समन्वय तथा अन्तर्राष्ट्रिय सम्बन्ध शाखा)",
+     "विपद्सम्बन्धी केही नेपाल ऐनलाई संशोधन गर्ने अध्यादेश, २०८३ १ दिन अगाडी ( विपद् तथा द्वन्द्व व्यवस्थापन महाशाखा / विपद् नीति समन्वय तथा अन्तर्राष्ट्रिय सम्बन्ध शाखा)",
+     "कार्यविधि विपरीत खटिएका व्यक्तिगत सुरक्षाकर्मीका सम्वन्धमा गुनासो तथा उजुरी गर्ने सम्बन्धी सार्वजनिक सूचना। ८ दिन अगाडी",
+     "गृह मन्त्रालयको मिति २०८३।०६।२३ को निर्णयानुसार पदस्थापन भएका रा.प. प्रथम श्रेणीका कर्मचारीहरूको विवरण ८ दिन अगाडी",
+     "गृह मन्त्रालयको मिति २०८३।०६।१५ र २०८३।०६।२३ को निर्णयानुसार सरुवा भएका रा.प.प्रथम र रा.प.द्वितीय श्रेणीका कर्मचारीहरूको विवरण ८ दिन अगाडी",
+     "कसूरजन्य सम्पत्ति व्यवस्थापन विभागको कम्प्युटर लगायत अन्य ईलेक्ट्रोनिक्स सामानहरु वार्ता मार्फत बिक्री को सूचना १० दिन अगाडी",
+     "गृह मन्त्रालय तथा मातहतका कार्यालयको काम कारबाही सम्बन्धी सन्देश तथा गुनासो",
+     "बोलपत्र / शिलबन्दी दरभाउपत्र सम्बन्धि सम्पूर्ण सूचना",
+     "यस मन्त्रालय अन्तर्गतका सम्पूर्ण कार्यालयको विवरण नक्सामा हेर्नुहोस",
+     "गृह मन्त्रालय संग सम्बन्धित बारम्बार सोधिने प्रश्नहरुको उत्तर",
+     "जेनजी आन्दोलनका शहीद तथा घाईतेहरूको विवरण हेर्नुहोस",
+     "लागु औषध नियन्त्रण सम्बन्धि विवरण तथा सचेतनामुलक सामग्री",
+     "कार्यविधि विपरीत खटिएका व्यक्तिगत सुरक्षाकर्मीका सम्वन्धमा गुनासो तथा उजुरी गर्ने सम्बन्धी सार्वजनिक सूचना।",
+     "+९७७-१-४२११२०८, +९७७-१-४२११२१४ १११२ (टोल - फ्री)",
+     "राष्ट्रिय आपतकालिन कार्य सञ्चालन केन्द्र"
+    ],
+    "dates_mentioned": [
+     "२०८२/१२/१३"
+    ]
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "neoc-home",
+   "agency": "National Emergency Operation Center (Ministry of Home Affairs)",
+   "title": "Emergency operation updates",
+   "category": "disasters",
+   "kind": "html",
+   "url": "https://neoc.gov.np/",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": null,
+   "sha256": null,
+   "status": "error",
+   "error": "SSLError: Failed to perform, curl: (35) TLS connect error: error:100000f0:SSL routines:OPENSSL_internal:UNSUPPORTED_PROTOCOL. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+  },
+  {
+   "id": "drrportal-home",
+   "agency": "Ministry of Home Affairs DRR portal",
+   "title": "Disaster risk reduction portal",
+   "category": "disasters",
+   "kind": "html",
+   "url": "http://drrportal.gov.np/",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "879f155b62916bb703ade792a480f721ea6fa11cd7cb559d4cd1badadff8074e",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "Nepal Disaster Risk Reduction Portal",
+    "headings": [
+     "Nepal Disaster Risk Reduction Portal",
+     "Kathmandu, Nepal",
+     "EOCs in Nepal",
+     "Reported No. of Incidents (Last 7 days)"
+    ],
+    "tables": [
+     {
+      "caption": null,
+      "header": [
+       "S.No.",
+       "District",
+       "Local Level",
+       "Incident",
+       "Incident Date",
+       "Death Male",
+       "Death Female",
+       "Death Unknown",
+       "Total Death",
+       "Missing People",
+       "Affected Family",
+       "Estimated Loss",
+       "Injured",
+       "Govt. Houses Fully Damaged",
+       "Govt. Houses Partially Damaged",
+       "Private House Fully Damaged",
+       "Private House Partially Damaged",
+       "Displaced Male(N/A)",
+       "Displaced Female(N/A)",
+       "Property Loss",
+       "Incident Place",
+       "Damaged Houses(%)",
+       "No. of Displaced Family",
+       "Cattles Loss",
+       "Displaced Shed",
+       "Office",
+       "Remarks"
+      ],
+      "rows": [
+       [
+        "1",
+        "Arghakhanchi",
+        "Sandhikharka Municipality",
+        "Landslide",
+        "2026-10-17",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "Nepal Police.",
+        "Gorusinge-Sandhikharka road section"
+       ],
+       [
+        "2",
+        "Kapilbastu",
+        "Buddhabhumi Municipality",
+        "Snake Bite",
+        "2026-10-16",
+        "1",
+        "0",
+        "0",
+        "1",
+        "0",
+        "1",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "Nepal Police.",
+        "Niraha Tharu"
+       ],
+       [
+        "3",
+        "Dhanusha",
+        "Janakpur Submetropolitan City",
+        "Snake Bite",
+        "2026-10-16",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "Nepal Police.",
+        "Lalan Yadav"
+       ],
+       [
+        "4",
+        "Saptari",
+        "Hanumannagarkankalini Municipality",
+        "Fire",
+        "2026-10-16",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "100000",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "Nepal Police.",
+        "Tarananda Majhi"
+       ],
+       [
+        "5",
+        "Khotang",
+        "Aiselukharka Rural Municipality",
+        "Fire",
+        "2026-10-16",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "150000",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "1",
+        "Nepal Police.",
+        "Laxmi Prasad Ghimire"
+       ],
+       [
+        "6",
+        "Kanchanpur",
+        "Belauri Municipality",
+        "Snake Bite",
+        "2026-10-16",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "Nepal Police.",
+        "Aarati Chaudhary"
+       ],
+       [
+        "7",
+        "Nawalparasi (Bardghat Susta East)",
+        "Devchuli Municipality",
+        "Fire",
+        "2026-10-16",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "Nepal Police.",
+        "Sonam B.K."
+       ],
+       [
+        "8",
+        "Siraha",
+        "Bariyapatti Rural Municipality",
+        "Fire",
+        "2026-10-16",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "150000",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "1",
+        "Nepal Police.",
+        "Najib Husen"
+       ],
+       [
+        "9",
+        "Kanchanpur",
+        "Bheemdatta Municipality",
+        "Fire",
+        "2026-10-16",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "Nepal Police.",
+        "Dinesh Pal"
+       ],
+       [
+        "10",
+        "Mahottari",
+        "Jaleshwor Municipality",
+        "Fire",
+        "2026-10-16",
+        "0",
+        "1",
+        "0",
+        "1",
+        "0",
+        "1",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "",
+        "0",
+        "0",
+        "0",
+        "0",
+        "Nepal Police.",
+        "Sunaina Jha"
+       ],
+       [
+        "Total",
+        "6930",
+        "7255",
+        "42",
+        "49618",
+        "3763",
+        "7170718",
+        "56169055091",
+        "103117",
+        "2726",
+        "3951",
+        "1081222",
+        "621106",
+        "260009",
+        "1",
+        "0",
+        ""
+       ]
+      ]
+     }
+    ],
+    "links": [
+     {
+      "text": "Home",
+      "href": "http://drrportal.gov.np/home",
+      "document": false
+     },
+     {
+      "text": "PM Relief Fund",
+      "href": "http://pmrelief.opmcm.gov.np/",
+      "document": false
+     },
+     {
+      "text": "List of Contributer in PM relief fund",
+      "href": "http://drrportal.gov.np/list-of-contributer",
+      "document": false
+     },
+     {
+      "text": "Relief Distributed",
+      "href": "http://drrportal.gov.np/",
+      "document": false
+     },
+     {
+      "text": "Relief Distribution to VDC",
+      "href": "http://drrportal.gov.np/vdcdistribution",
+      "document": false
+     },
+     {
+      "text": "Relief Distribution from District",
+      "href": "http://drrportal.gov.np/distribution",
+      "document": false
+     },
+     {
+      "text": "Relief Obtained in DAO",
+      "href": "http://drrportal.gov.np/obtained",
+      "document": false
+     },
+     {
+      "text": "Releif Dispached from diffirent entity",
+      "href": "http://drrportal.gov.np/distributed_country",
+      "document": false
+     },
+     {
+      "text": "From MOHA",
+      "href": "http://drrportal.gov.np/publication/category/MOHA",
+      "document": false
+     },
+     {
+      "text": "From MOHP",
+      "href": "http://drrportal.gov.np/publication/category/MOHP",
+      "document": false
+     },
+     {
+      "text": "Press Release from MoFALD",
+      "href": "http://drrportal.gov.np/publication/category/MOFALD",
+      "document": false
+     },
+     {
+      "text": "Volunteer",
+      "href": "http://drrportal.gov.np/volunteer",
+      "document": false
+     },
+     {
+      "text": "Feedback",
+      "href": "http://drrportal.gov.np/contactus",
+      "document": false
+     },
+     {
+      "text": "District Level Daily Report",
+      "href": "http://drrportal.gov.np/document/category/covid19-district-level-report",
+      "document": false
+     },
+     {
+      "text": "Disaster Maps 18th Baishakh 2072",
+      "href": "http://drrportal.gov.np/photos/details/disaster-maps-18th-baishakh-2072",
+      "document": false
+     },
+     {
+      "text": "Situation Report of Earthquake 2015",
+      "href": "http://drrportal.gov.np/document/documentdetail/14",
+      "document": false
+     },
+     {
+      "text": "PM Speech on Earthquake 2015",
+      "href": "http://drrportal.gov.np/document/documentdetail/13",
+      "document": false
+     },
+     {
+      "text": "Deputy Prime Minister and Home Minister speech on Earthquake 2015",
+      "href": "http://drrportal.gov.np/news/newsdetail/19",
+      "document": false
+     },
+     {
+      "text": "Damage Assessment in Kathmandu",
+      "href": "http://drrportal.gov.np/uploads/docs/damageassessment.pdf",
+      "document": true
+     },
+     {
+      "text": "Earthquake Live Map",
+      "href": "http://www.ngiip.gov.np/Earthquake/index.html",
+      "document": false
+     },
+     {
+      "text": "Monsoon 2078 BS",
+      "href": "http://drrportal.gov.np/document/category/monsoon-2078-bs",
+      "document": false
+     },
+     {
+      "text": "LEMA Member",
+      "href": "http://drrportal.gov.np/lemamember",
+      "document": false
+     },
+     {
+      "text": "Cluster Focal Person",
+      "href": "http://drrportal.gov.np/focalperson",
+      "document": false
+     },
+     {
+      "text": "Disaster Focal Person",
+      "href": "http://drrportal.gov.np/disasterfocalperson",
+      "document": false
+     },
+     {
+      "text": "CDOs and Asst. CDOs Contact information",
+      "href": "https://moha.gov.np/directory",
+      "document": false
+     },
+     {
+      "text": "Trainees on Hospital Based Reporting",
+      "href": "http://drrportal.gov.np/document/documentdetail/900",
+      "document": false
+     },
+     {
+      "text": "Association of International NGOs in Nepal",
+      "href": "http://drrportal.gov.np/http://drrportal.gov.np/document/documentdetail/1320",
+      "document": false
+     },
+     {
+      "text": "Disaster Assessment (IRA)",
+      "href": "http://drrportal.gov.np/http://drrportal.gov.np/document/documentdetail/1322",
+      "document": false
+     },
+     {
+      "text": "PEER Instructors & Graduates",
+      "href": "http://drrportal.gov.np/http://drrportal.gov.np/document/documentdetail/1324",
+      "document": false
+     },
+     {
+      "text": "Assessment and Coordination Team",
+      "href": "http://drrportal.gov.np/http://drrportal.gov.np/document/documentdetail/1326",
+      "document": false
+     },
+     {
+      "text": "बर्दिया विपद् पूर्वतयारी तथा प्रतिकार्य योजना (DPRP) २०८३",
+      "href": "http://drrportal.gov.np/document/documentdetail/2842",
+      "document": false
+     },
+     {
+      "text": "प्रेस विज्ञप्ति (मिति २०८३।०३।२६)",
+      "href": "http://drrportal.gov.np/document/documentdetail/2731",
+      "document": false
+     },
+     {
+      "text": "मिति २०८३।०६।३१ गते बिहान ०७:०० बजे सम्मको राजमार्ग बिवरण ।",
+      "href": "http://drrportal.gov.np/document/documentdetail/2911",
+      "document": false
+     },
+     {
+      "text": "विपद्सम्बन्धी सूचना, समस्या, गुनासो र सुझावका लागि हटलाइन नम्बर १२३४ मा सम्पर्क गर्नुहुन अनुरोध।",
+      "href": "http://drrportal.gov.np/document/documentdetail/2767",
+      "document": false
+     },
+     {
+      "text": "Reports",
+      "href": "http://drrportal.gov.np/reports",
+      "document": false
+     },
+     {
+      "text": "DRR Acts and policies",
+      "href": "http://drrportal.gov.np/exrules",
+      "document": false
+     },
+     {
+      "text": "National DRR Policy and Strategic Action Plan",
+      "href": "http://drrportal.gov.np/document/category/ndrrpsap",
+      "document": false
+     },
+     {
+      "text": "All DRR Document",
+      "href": "http://drrportal.gov.np/document",
+      "document": false
+     },
+     {
+      "text": "Nepal Risk Information",
+      "href": "http://drrportal.gov.np/risk-profile-of-nepal",
+      "document": false
+     },
+     {
+      "text": "About Nepal",
+      "href": "http://drrportal.gov.np/about-nepal",
+      "document": false
+     },
+     {
+      "text": "Incident Maps",
+      "href": "http://drrportal.gov.np/publication",
+      "document": false
+     },
+     {
+      "text": "Videos",
+      "href": "http://drrportal.gov.np/videos",
+      "document": false
+     },
+     {
+      "text": "More Summary >>",
+      "href": "http://drrportal.gov.np/summary",
+      "document": false
+     },
+     {
+      "text": "2",
+      "href": "http://drrportal.gov.np/incidentreport/index_ajax/2",
+      "document": false
+     },
+     {
+      "text": "3",
+      "href": "http://drrportal.gov.np/incidentreport/index_ajax/3",
+      "document": false
+     },
+     {
+      "text": "Last ›",
+      "href": "http://drrportal.gov.np/incidentreport/index_ajax/6475",
+      "document": false
+     },
+     {
+      "text": "नेपाल सरकार (मन्त्रिपरिषद्) को मिति २०७८/०८/0२ को निर्णयबाट स्वीकृत बेमौसमी बर्षाका कारण धानवालीमा क्षति पुगेका किसानलाई राहत उपलब्ध गराउने सम्बन्धी कार्यविधि, २०७८ ( Date: 2022-01-02 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2318",
+      "document": false
+     },
+     {
+      "text": "मिति २०७८ साल माघ मसान्तसम्म लागु हुने गरी मिति २०७८।०८।२० गते नेपाल राजपत्रमा प्रकाशित विपद् संकटग्रस्त क्षेत्र घोषणा गरिएका जिल्लाहरुको विवरण । (नेपाल सरकार मन्त्रिपरिषद् को मिति २०७८।०८।०२ को निर्णयानुसार) ( Date: 2021-12-10 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2312",
+      "document": false
+     },
+     {
+      "text": "बाढी, पहिरो र डुबानसम्बन्धी नेपाल सरकार (मन्त्रिपरिषद्) को मिति २०७६।०३।२९ को निर्णय । ( Date: 2019-07-16 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/1570",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/cabinet-decisions",
+      "document": false
+     },
+     {
+      "text": "कार्यकारी समितिको १८ औं बैठकका निर्णयहरु ( Date: 2023-06-30 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2495",
+      "document": false
+     },
+     {
+      "text": "कार्यकारी समितिको १५ बैठकका निर्णयहरु २०७९ भाद्र १७ ( Date: 2022-09-02 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2485",
+      "document": false
+     },
+     {
+      "text": "कार्यकारी समितिको बाह्रौ बैठकको निर्णयहरु माघ १४ गते शुक्रबार ( Date: 2022-06-19 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2366",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/cndrc-decisions",
+      "document": false
+     },
+     {
+      "text": "जिल्ला विपद् व्यवस्थापन समितिको बैठकबाट भएको निर्णय ( Date: 2025-06-13 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2685",
+      "document": false
+     },
+     {
+      "text": "रसुवा_निर्णय_जिल्ला विपद् व्यवस्थापन समिति-DDMC_२०८२-०२-१८ ( Date: 2025-06-01 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2682",
+      "document": false
+     },
+     {
+      "text": "बर्दिया जिल्ला विपद् व्यवस्थापन समितिको निर्णय ( Date: 2025-01-08 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2675",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/ddrc-decisions",
+      "document": false
+     },
+     {
+      "text": "विपद् जोखिम न्यूनीकरण तथा व्यवस्थापन राष्ट्रिय परिषदको सातौ बैठकको निर्णयहरु । ( Date: 2021-12-08 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2311",
+      "document": false
+     },
+     {
+      "text": "विपद् जोखिम न्यूनीकरण तथा व्यवस्थापन राष्ट्रिय परिषदको पाँचौ बैठकको निर्णयहरु ।.pdf ( Date: 2021-12-08 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2310",
+      "document": false
+     },
+     {
+      "text": "विपद् जोखिम न्यूनीकरण तथा व्यवस्थापन राष्ट्रिय परिषदको तेस्रो बैठकको निर्णयहरु ।.pdf ( Date: 2021-12-08 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2309",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/ndrrmc",
+      "document": false
+     },
+     {
+      "text": "गृह मन्त्रालयबाट विपद् सम्बन्धी जारी भएको प्रेस विज्ञप्ति (मिति २०७६।०३।२९) ( Date: 2019-07-14 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/1566",
+      "document": false
+     },
+     {
+      "text": "प्रेश विज्ञप्ति ( Date: 2019-06-13 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/1527",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/press-release",
+      "document": false
+     },
+     {
+      "text": "चिशंखुगढी गा.पा.-५, खानिगाउँ, ओखलढुङ्गामा भएको आगलागी ( Date: 2021-02-08 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/1746",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/notice",
+      "document": false
+     },
+     {
+      "text": "CMDNEPAL ( Date: 2025-10-20 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2700",
+      "document": false
+     },
+     {
+      "text": "वाके िजल्ला मा हालसम्म २७८१ जना ले काेभिशिल्ड खाेप लागाएका छन ( Date: 2021-02-02 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/1720",
+      "document": false
+     },
+     {
+      "text": "जिल्ला बाँके नेपालगंज उ.म.न.पा.१ वाटरपार्क नजिक आफ्नै घरको ढोका बन्द गरी घर भित्र आगलागी भएको | ( Date: 2020-07-29 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/1679",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/news",
+      "document": false
+     },
+     {
+      "text": "मनसुनजन्य घटनासहितको प्रतिवेदन - २०८० ( Date: 2024-04-10 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2615",
+      "document": false
+     },
+     {
+      "text": "Nepal National Mid-Term Reports on Implementation of SFDRR 2015-2030 ( Date: 2023-04-25 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2482",
+      "document": false
+     },
+     {
+      "text": "मनसुनजन्य विपद्का घटना सहितको प्रतिवेदन २०७९ ( Date: 2023-01-08 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/2473",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/reports",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/actsregulations",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/policyframework",
+      "document": false
+     },
+     {
+      "text": "विषय-क्षेत्रगत विस्तृत लेखाजोखा (Cluster Specific Detailed Assessment-CSDA) ( Date: 2017-08-22 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/1065",
+      "document": false
+     },
+     {
+      "text": "नेपाल सरकार मुख्य सचिवज्यूको अध्यक्षतामा मिति २०७४।०५।०१ गते वसेको बैठकका निर्णयहरु । ( Date: 2017-08-18 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/1041",
+      "document": false
+     },
+     {
+      "text": "२०७४ साल भाद्र १ गते बसेको विभिन्न विषयगत क्षेत्रको नेतृत्व र सह-नेतृत्वदायी निकायको बैठकका निर्णयहरु ( Date: 2017-08-17 )",
+      "href": "http://drrportal.gov.np/document/documentdetail/1034",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/circulars",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/directive",
+      "document": false
+     },
+     {
+      "text": ">>view all",
+      "href": "http://drrportal.gov.np/document/category/framework",
+      "document": false
+     },
+     {
+      "text": "Sahana",
+      "href": "http://sahana.neoc.gov.np/sahana",
+      "document": false
+     },
+     {
+      "text": "NEOC",
+      "href": "http://neoc.gov.np/en/",
+      "document": false
+     },
+     {
+      "text": "MOHA",
+      "href": "http://moha.gov.np/",
+      "document": false
+     },
+     {
+      "text": "Geo-Portal",
+      "href": "http://drm.moha.gov.np",
+      "document": false
+     },
+     {
+      "text": "Nepal Earthquake 2015 (NDRRIP)",
+      "href": "http://apps.geoportal.icimod.org/ndrrip/mapsection.html",
+      "document": false
+     },
+     {
+      "text": "Tweets by @NEoCOfficial",
+      "href": "https://twitter.com/NEoCOfficial",
+      "document": false
+     }
+    ],
+    "paragraphs": [
+     "PM Relief PM Relief Fund List of Contributer in PM relief fund",
+     "Relief Distributed Relief Distribution to VDC Relief Distribution from District Relief Obtained in DAO Releif Dispached from diffirent entity",
+     "Press Release From MOHA From MOHP Press Release from MoFALD",
+     "Earthquake 2015 Disaster Maps 18th Baishakh 2072 Situation Report of Earthquake 2015 PM Speech on Earthquake 2015 Deputy Prime Minister and Home Minister speech on Earthquake 2015 Earthquake Victims Damage Assessment in Kathmandu Earthquake Live Map",
+     "Deputy Prime Minister and Home Minister speech on Earthquake 2015",
+     "Contact Persons LEMA Member Cluster Focal Person Disaster Focal Person CDOs and Asst. CDOs Contact information Trainees on Hospital Based Reporting Association of International NGOs in Nepal Disaster Assessment (IRA) PEER Instructors & Graduates Assessment and Coordination Team",
+     "Association of International NGOs in Nepal",
+     "बर्दिया विपद् पूर्वतयारी तथा प्रतिकार्य योजना (DPRP) २०८३",
+     "मिति २०८३।०६।३१ गते बिहान ०७:०० बजे सम्मको राजमार्ग बिवरण ।",
+     "विपद्सम्बन्धी सूचना, समस्या, गुनासो र सुझावका लागि हटलाइन नम्बर १२३४ मा सम्पर्क गर्नुहुन अनुरोध।",
+     "National DRR Policy and Strategic Action Plan",
+     "1 National EOC; 7 Provincial EOCs; 70 District EOCs"
+    ],
+    "dates_mentioned": []
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "seismo-earthquakes",
+   "agency": "National Earthquake Monitoring and Research Center",
+   "title": "Recent earthquakes",
+   "category": "earthquakes",
+   "kind": "html",
+   "url": "https://seismonepal.gov.np/en/earthquakes",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "d6a74cda043b43bbf40a56ef71df9b1540f5b92b0bdbfda72c1625cdb5c922e2",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "National Earthquake Monitoring and Research Center",
+    "headings": [
+     "Government of Nepal",
+     "Ministry of Industry, Commerce and Supplies",
+     "Department of Mines and Geology",
+     "National Earthquake Monitoring and Research Center",
+     "Professional and Creative Administration: Development, Prosperity and Good Governance",
+     "Earthquake Records",
+     "Lainchour, Kathmandu"
+    ],
+    "tables": [
+     {
+      "caption": null,
+      "header": [
+       "S.N.",
+       "Date",
+       "Time",
+       "Latitude (°)",
+       "Longitude (°)",
+       "Magnitude (ML)",
+       "Epicenter",
+       "Survey"
+      ],
+      "rows": [
+       [
+        "1",
+        "BS: 2083-06-21 AD: 2026-10-07",
+        "Local: 21:37:00 UTC: 15:52:00",
+        "29.34",
+        "81.27",
+        "4.1 ML",
+        "Bajura",
+        "Did you feel it?"
+       ],
+       [
+        "2",
+        "BS: 2083-05-31 AD: 2026-09-15",
+        "Local: 04:28:00 UTC: 22:43:00",
+        "29.59",
+        "81.96",
+        "4.2 ML",
+        "Mugu",
+        "Did you feel it?"
+       ],
+       [
+        "3",
+        "BS: 2083-05-31 AD: 2026-09-15",
+        "Local: 01:51:00 UTC: 20:06:00",
+        "29.60",
+        "81.95",
+        "4.5 ML",
+        "Mugu",
+        "Did you feel it?"
+       ],
+       [
+        "4",
+        "BS: 2083-05-24 AD: 2026-09-09",
+        "Local: 19:54:00 UTC: 14:09:00",
+        "28.94",
+        "83.94",
+        "4.0 ML",
+        "Mustang",
+        "Did you feel it?"
+       ],
+       [
+        "5",
+        "BS: 2083-05-23 AD: 2026-09-08",
+        "Local: 21:53:34 UTC: 16:08:34",
+        "29.15",
+        "84.01",
+        "5.3 ML",
+        "Mustang",
+        "Did you feel it?"
+       ],
+       [
+        "6",
+        "BS: 2083-05-03 AD: 2026-08-18",
+        "Local: 01:44:00 UTC: 19:59:00",
+        "28.36",
+        "83.96",
+        "4.4 ML",
+        "Kaski",
+        "Did you feel it?"
+       ],
+       [
+        "7",
+        "BS: 2083-04-26 AD: 2026-08-11",
+        "Local: 09:08:00 UTC: 03:23:00",
+        "28.89",
+        "82.16",
+        "4.1 ML",
+        "Jajarkot",
+        "Did you feel it?"
+       ],
+       [
+        "8",
+        "BS: 2083-04-18 AD: 2026-08-02",
+        "Local: 03:07:00 UTC: 21:22:00",
+        "28.48",
+        "82.49",
+        "4.4 ML",
+        "Rolpa",
+        "Did you feel it?"
+       ],
+       [
+        "9",
+        "BS: 2083-03-11 AD: 2026-06-25",
+        "Local: 05:36:00 UTC: 23:51:00",
+        "N/A",
+        "N/A",
+        "4.1 ML",
+        "Jumla",
+        "Did you feel it?"
+       ],
+       [
+        "10",
+        "BS: 2083-03-07 AD: 2026-06-21",
+        "Local: 14:32:00 UTC: 08:47:00",
+        "N/A",
+        "N/A",
+        "4.1 ML",
+        "Humla",
+        "Did you feel it?"
+       ]
+      ]
+     }
+    ],
+    "links": [
+     {
+      "text": "FAQs",
+      "href": "https://seismonepal.gov.np/en/faqs",
+      "document": false
+     },
+     {
+      "text": "Post a Feedback",
+      "href": "https://seismonepal.gov.np/en/get-in-touch",
+      "document": false
+     },
+     {
+      "text": "Screen Reader",
+      "href": "https://seismonepal.gov.np/en/screen-reader",
+      "document": false
+     },
+     {
+      "text": "About Us",
+      "href": "https://seismonepal.gov.np/en/pages/about277us-2886",
+      "document": false
+     },
+     {
+      "text": "Introduction",
+      "href": "https://seismonepal.gov.np/en/pages/introduction-2535",
+      "document": false
+     },
+     {
+      "text": "Major Activities",
+      "href": "https://seismonepal.gov.np/en/pages/major-activities-6540",
+      "document": false
+     },
+     {
+      "text": "Staffs",
+      "href": "https://seismonepal.gov.np/en/staffs",
+      "document": false
+     },
+     {
+      "text": "Geodesy and Paleo Seismology Section",
+      "href": "https://seismonepal.gov.np/en/pages/6aigo7c11fjroguj9ve51cd2uq6nigoxbt13or4e",
+      "document": false
+     },
+     {
+      "text": "Citizens charter",
+      "href": "https://seismonepal.gov.np/en/pages/citizens4173charter-4815",
+      "document": false
+     },
+     {
+      "text": "Organizational Chart",
+      "href": "https://seismonepal.gov.np/en/pages/organizational5233chart-2936",
+      "document": false
+     },
+     {
+      "text": "Earthquake",
+      "href": "https://seismonepal.gov.np/en/earthquakes",
+      "document": false
+     },
+     {
+      "text": "Strong Motion",
+      "href": "https://seismonepal.gov.np/en/pages/geology3269of3269nepal-5108",
+      "document": false
+     },
+     {
+      "text": "Data",
+      "href": "https://seismonepal.gov.np/en/pages/resources-5109",
+      "document": false
+     },
+     {
+      "text": "Epicenter Map",
+      "href": "https://seismonepal.gov.np/en/earthquakes/map",
+      "document": false
+     },
+     {
+      "text": "Gallery",
+      "href": "https://seismonepal.gov.np/en/pages/gallery-1467",
+      "document": false
+     },
+     {
+      "text": "Image Gallery",
+      "href": "https://seismonepal.gov.np/en/image-galleries",
+      "document": false
+     },
+     {
+      "text": "Video Gallery",
+      "href": "https://seismonepal.gov.np/en/video-galleries",
+      "document": false
+     },
+     {
+      "text": "Notice",
+      "href": "https://seismonepal.gov.np/en/notices/notice-3056",
+      "document": false
+     },
+     {
+      "text": "Press Release",
+      "href": "https://seismonepal.gov.np/en/notices/press-release-7572",
+      "document": false
+     },
+     {
+      "text": "Right To Information",
+      "href": "https://seismonepal.gov.np/en/notices/right-to-information-7189",
+      "document": false
+     },
+     {
+      "text": "Tender Notice",
+      "href": "https://seismonepal.gov.np/en/notices/tender-notice-9732",
+      "document": false
+     },
+     {
+      "text": "News",
+      "href": "https://seismonepal.gov.np/en/notices/news-9177",
+      "document": false
+     },
+     {
+      "text": "Home",
+      "href": "https://seismonepal.gov.np/en",
+      "document": false
+     },
+     {
+      "text": "Did you feel it?",
+      "href": "https://seismonepal.gov.np/en/earthquakes/form/1381",
+      "document": false
+     },
+     {
+      "text": "Did you feel it?",
+      "href": "https://seismonepal.gov.np/en/earthquakes/form/1380",
+      "document": false
+     },
+     {
+      "text": "Did you feel it?",
+      "href": "https://seismonepal.gov.np/en/earthquakes/form/1379",
+      "document": false
+     },
+     {
+      "text": "Did you feel it?",
+      "href": "https://seismonepal.gov.np/en/earthquakes/form/1377",
+      "document": false
+     },
+     {
+      "text": "Did you feel it?",
+      "href": "https://seismonepal.gov.np/en/earthquakes/form/1375",
+      "document": false
+     },
+     {
+      "text": "Did you feel it?",
+      "href": "https://seismonepal.gov.np/en/earthquakes/form/1374",
+      "document": false
+     },
+     {
+      "text": "Did you feel it?",
+      "href": "https://seismonepal.gov.np/en/earthquakes/form/1368",
+      "document": false
+     },
+     {
+      "text": "Did you feel it?",
+      "href": "https://seismonepal.gov.np/en/earthquakes/form/1367",
+      "document": false
+     },
+     {
+      "text": "Did you feel it?",
+      "href": "https://seismonepal.gov.np/en/earthquakes/form/1373",
+      "document": false
+     },
+     {
+      "text": "Did you feel it?",
+      "href": "https://seismonepal.gov.np/en/earthquakes/form/1372",
+      "document": false
+     },
+     {
+      "text": "2",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=2",
+      "document": false
+     },
+     {
+      "text": "3",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=3",
+      "document": false
+     },
+     {
+      "text": "4",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=4",
+      "document": false
+     },
+     {
+      "text": "5",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=5",
+      "document": false
+     },
+     {
+      "text": "6",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=6",
+      "document": false
+     },
+     {
+      "text": "7",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=7",
+      "document": false
+     },
+     {
+      "text": "8",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=8",
+      "document": false
+     },
+     {
+      "text": "9",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=9",
+      "document": false
+     },
+     {
+      "text": "10",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=10",
+      "document": false
+     },
+     {
+      "text": "129",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=129",
+      "document": false
+     },
+     {
+      "text": "130",
+      "href": "https://seismonepal.gov.np/en/earthquakes?page=130",
+      "document": false
+     },
+     {
+      "text": "Ministry of Industry, Commerce and Supplies",
+      "href": "https://moics.gov.np/np",
+      "document": false
+     },
+     {
+      "text": "Department of Industry",
+      "href": "https://www.doind.gov.np/",
+      "document": false
+     },
+     {
+      "text": "Department of Cottage and Small Industry",
+      "href": "http://www.dcsi.gov.np/en",
+      "document": false
+     },
+     {
+      "text": "Nepal Bureau of Standards and Metrology",
+      "href": "https://nbsm.gov.np/",
+      "document": false
+     },
+     {
+      "text": "Office of Company Registrar",
+      "href": "https://www.ocr.gov.np/",
+      "document": false
+     },
+     {
+      "text": "Public Procurement Monitoring Office",
+      "href": "https://ppmo.gov.np/",
+      "document": false
+     }
+    ],
+    "paragraphs": [
+     "About Us Introduction Major Activities Staffs Geodesy and Paleo Seismology Section Citizens charter Organizational Chart",
+     "Staffs Geodesy and Paleo Seismology Section",
+     "Notice Notice Press Release Right To Information Tender Notice News",
+     "Ministry of Industry, Commerce and Supplies",
+     "Department of Cottage and Small Industry"
+    ],
+    "dates_mentioned": []
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "bipad-earthquakes",
+   "agency": "BIPAD portal (NDRRMA)",
+   "title": "Earthquakes recorded on BIPAD",
+   "category": "earthquakes",
+   "kind": "json-list",
+   "url": "https://bipadportal.gov.np/api/v1/earthquake/?limit=100",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": null,
+   "status": "error",
+   "error": "JSONDecodeError: Expecting value: line 5 column 1 (char 4)"
+  },
+  {
+   "id": "doenv-air",
+   "agency": "Department of Environment",
+   "title": "Air quality monitoring",
+   "category": "air-quality",
+   "kind": "html",
+   "url": "https://pollution.gov.np/",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "d0c87b722d47a5e78ca6b1ee586161bdf9eb16fe3f3e874f9bd23fb26605b2e4",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "Air Quality Monitoring | Nepal",
+    "headings": [],
+    "tables": [],
+    "links": [],
+    "paragraphs": [],
+    "dates_mentioned": []
+   },
+   "changes": {
+    "compared_with": null
+   }
+  },
+  {
+   "id": "dor-home",
+   "agency": "Department of Roads",
+   "title": "Road notices and status",
+   "category": "roads",
+   "kind": "html",
+   "url": "https://dor.gov.np/",
+   "checked_at": "2026-10-17T18:09:03Z",
+   "http_status": 200,
+   "sha256": "c103330808ed98c44252b4ee874e3f76be1b23f58b2ad3acfa6a8fe587155af5",
+   "status": "fetched",
+   "fetched_at": "2026-10-17T18:09:03Z",
+   "content": {
+    "title": "नेपाल सरकार, सडक बिभाग ||",
+    "headings": [
+     "तपाईलाई सडक विभागमा स्वागत छ।",
+     "प्रेस विज्ञप्ति / सडक सूचना",
+     "Nagdhunga Tunnel Construction",
+     "Toll Free Number",
+     "आर्थिक प्रस्ताव खोल्ने सम्बन्धी सूचना",
+     "SRCTIP-DOR-WPM-RDBRT-NCB-52, Periodic Maintenance of Seuti Bridge - Base Camp (NH08-006 km from 44.28 -47.75) length 3.48 Km",
+     "आशयको सूचना",
+     "Notice to open financial bids",
+     "ठेक्का नं. TRP/RDHTD/33701130/083/84-26 को Bidding Document",
+     "RSDP Procurement Plan",
+     "Report",
+     "General Documents",
+     "Guidelines for Road Slope and Protection",
+     "Otta Seal Documents",
+     "GIOMS User Manual (Nepali)",
+     "GRMS User Manual",
+     "GIOMS - short guide to setup (e-Attendance, System and Digital Signature)",
+     "Digital Signature (emsigner client)",
+     "Deep Patching & Surface Dressing Works -Video Tutorials",
+     "GIOMS and Digital Signature -Guidelines",
+     "वातावरणीय र सामाजिक व्यवस्थापन रूपरेखा, २०८० अंग्रेजी",
+     "वातावरणीय र सामाजिक व्यवस्थापन रूपरेखा, २०८० नेपाली",
+     "DEPARTMENTAL GUIDELINE_ OCCUPATIONAL HEALTH AND SAFETY GUIDELINE FOR ROAD INFRASTRUCTURE DEVELOPMENT AND MANAGEMENT 2080",
+     "Road Safety Audit Manual (April 1997)",
+     "Bio/Geotechnical Engineering Diagnostic Tool (BDT)- User Manual",
+     "Environmental Management Guidelines",
+     "Guideline for Inspection and Maintenance of Bridge Volume 1",
+     "Interim Guidelines For Enhancing Poverty Reduction Impact Of Road Project",
+     "Guidelines for Inspection and Maintenance of Bridges Vol.2- Minor Repairs (Recurrent Maintenance) Reprint- 2013",
+     "Act and Laws Reference Links",
+     "Pile foundation प्रयाेग गरी निर्माणाधीन तथा निर्माण सम्पन्न पुलहरूमा प्रयाेग भएकाे विवरण १५ दिनभित्र पठाउने सम्बन्धमा ।",
+     "काठमाडौं उपत्यकाको ट्राफिक व्यवस्थापन सम्बन्धी कार्ययोजना, २०७८",
+     "जग्गा प्राप्ति ऐन, २०३४",
+     "राष्ट्रिय प्राथमिकता प्राप्त योजनाको लागि राष्ट्रिय वन क्षेत्र प्रयोग गर्ने सम्बन्धी मापदण्ड सहितको कार्यविधि, २०७६",
+     "रसुवा बाढीपछि सडक विभागको पत्रकार सम्मेलन",
+     "Hon Minister Visits DoR",
+     "DoR Official Facebook Post News",
+     "नागढुङ्गा सुरुङमार्ग : अन्तिम चरणमा निर्माण, शीघ्र सञ्चालनमा आउने तयारी",
+     "सडक विभागको पुस्तकालय पुनःसञ्चालन",
+     "DOR Telephone List (As of 2083-03-32)"
+    ],
+    "tables": [],
+    "links": [
+     {
+      "text": "नेपाल सरकार पूर्वाधार विकास मन्त्रालय सडक विभाग",
+      "href": "https://dor.gov.np/home",
+      "document": false
+     },
+     {
+      "text": "स्क्रीन रीडर",
+      "href": "https://dor.gov.np/home/home/screen-reader",
+      "document": false
+     },
+     {
+      "text": "एडमिन / सर्कुलर लगइन",
+      "href": "https://dor.gov.np/admin/login",
+      "document": false
+     },
+     {
+      "text": "मेल चेक",
+      "href": "https://mail.nepal.gov.np/",
+      "document": false
+     },
+     {
+      "text": "सुझाब",
+      "href": "https://dor.gov.np/home/feedback",
+      "document": false
+     },
+     {
+      "text": "लिन्कहरु",
+      "href": "https://dor.gov.np/home/page/links",
+      "document": false
+     },
+     {
+      "text": "सम्पर्क",
+      "href": "https://dor.gov.np/home/contact",
+      "document": false
+     },
+     {
+      "text": "समाचार / प्रकाशन",
+      "href": "https://dor.gov.np/home/page/news-publications",
+      "document": false
+     },
+     {
+      "text": "समाचार",
+      "href": "https://dor.gov.np/home/page/news",
+      "document": false
+     },
+     {
+      "text": "समाचार पाेर्टल लिंक",
+      "href": "https://dor.gov.np/home/page/news-portal-link",
+      "document": false
+     },
+     {
+      "text": "डाेर इन्साइट",
+      "href": "https://dor.gov.np/home/page/dor-insight",
+      "document": false
+     },
+     {
+      "text": "डाेर समाचारपत्र",
+      "href": "https://dor.gov.np/home/page/dor-newsletters",
+      "document": false
+     },
+     {
+      "text": "फोटो-ग्यालरी",
+      "href": "https://dor.gov.np/home/page/gallery-page",
+      "document": false
+     },
+     {
+      "text": "प्रकाशन",
+      "href": "https://dor.gov.np/home/page/publications",
+      "document": false
+     },
+     {
+      "text": "हाम्रो बारेमा",
+      "href": "https://dor.gov.np/home/page/about-dor",
+      "document": false
+     },
+     {
+      "text": "पृष्ठभुमि",
+      "href": "https://dor.gov.np/home/page/background",
+      "document": false
+     },
+     {
+      "text": "हाम्रो उद्देश्य",
+      "href": "https://dor.gov.np/home/page/dor-objective",
+      "document": false
+     },
+     {
+      "text": "भिजन एण्ड मिशन",
+      "href": "https://dor.gov.np/home/page/vision-mission",
+      "document": false
+     },
+     {
+      "text": "संगठन संरचना",
+      "href": "https://dor.gov.np/home/page/organisation-structure",
+      "document": false
+     },
+     {
+      "text": "कार्यालय सम्पर्क",
+      "href": "https://dor.gov.np/home/page/dor-office-contacts",
+      "document": false
+     },
+     {
+      "text": "बिभागका प्रमुखहरु",
+      "href": "https://dor.gov.np/home/page/office-head-upto-date",
+      "document": false
+     },
+     {
+      "text": "शाखा-महाशाखा",
+      "href": "https://dor.gov.np/home/page/unit-branch-centers",
+      "document": false
+     },
+     {
+      "text": "सम्भार महाशाखा",
+      "href": "https://dor.gov.np/home/page/maintb",
+      "document": false
+     },
+     {
+      "text": "विकास सहायता कार्यान्वयन महाशाखा",
+      "href": "https://dor.gov.np/home/page/dorfcb",
+      "document": false
+     },
+     {
+      "text": "योजना तथा अनुगमन महाशाखा",
+      "href": "https://dor.gov.np/home/page/pmb",
+      "document": false
+     },
+     {
+      "text": "योजना अनुगमन तथा मूल्यांकन शाखा",
+      "href": "https://dor.gov.np/home/page/pmeu",
+      "document": false
+     },
+     {
+      "text": "भू-वातावरण तथा सामाजिक शाखा",
+      "href": "https://dor.gov.np/home/page/gesu",
+      "document": false
+     },
+     {
+      "text": "सडक सुरक्षा तथा ट्राफिक शाखा",
+      "href": "https://dor.gov.np/home/page/rstu",
+      "document": false
+     },
+     {
+      "text": "हाईवे व्यवस्थापन सूचना प्रणाली तथा सूचना संचार प्रविधि शाखा",
+      "href": "https://dor.gov.np/home/page/about-hmisict",
+      "document": false
+     },
+     {
+      "text": "यान्त्रिक महाशाखा",
+      "href": "https://dor.gov.np/home/page/mechanical-branch",
+      "document": false
+     },
+     {
+      "text": "पुल महाशाखा",
+      "href": "https://dor.gov.np/home/page/bridgebranch",
+      "document": false
+     },
+     {
+      "text": "प्रशासन शाखा",
+      "href": "https://dor.gov.np/home/page/administration",
+      "document": false
+     },
+     {
+      "text": "आर्थिक प्रशासन शाखा",
+      "href": "https://dor.gov.np/home/page/account",
+      "document": false
+     },
+     {
+      "text": "कानुन तथा विवाद व्यवस्थापन शाखा",
+      "href": "https://dor.gov.np/home/page/law",
+      "document": false
+     },
+     {
+      "text": "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, दमक",
+      "href": "https://dor.gov.np/frsmo-itahari",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, इलाम",
+      "href": "https://dor.gov.np/ilam",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, दमक",
+      "href": "https://dor.gov.np/damak",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, विराटनगर",
+      "href": "https://dor.gov.np/biratnagar",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, धनकुटा",
+      "href": "https://dor.gov.np/dhankuta",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, लहान",
+      "href": "https://dor.gov.np/lahan",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, तुम्लिंगटार",
+      "href": "https://dor.gov.np/tumlingtar",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, हर्कपुर",
+      "href": "https://dor.gov.np/harkapur",
+      "document": false
+     },
+     {
+      "text": "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, काठमाडौं",
+      "href": "https://dor.gov.np/frsmo-kathmandu",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, जनकपुर",
+      "href": "https://dor.gov.np/janakpur",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, चरिकोट",
+      "href": "https://dor.gov.np/charikot",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, चन्द्रनिगाहपुर",
+      "href": "https://dor.gov.np/chandranigahapur",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, हेटौडा",
+      "href": "https://dor.gov.np/hetauda",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, भरतपुर",
+      "href": "https://dor.gov.np/bharatpur",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, काठमाडौं",
+      "href": "https://dor.gov.np/kathmandu",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, भक्तपुर",
+      "href": "https://dor.gov.np/bhaktapur",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, ललितपुर",
+      "href": "https://dor.gov.np/lalitpur",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, नुवाकोट",
+      "href": "https://dor.gov.np/nuwakot",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, खुर्कोट",
+      "href": "https://dor.gov.np/khurkot",
+      "document": false
+     },
+     {
+      "text": "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, पोखरा",
+      "href": "https://dor.gov.np/frsmo-pokhara",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, दमौली",
+      "href": "https://dor.gov.np/damauli",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, पोखरा",
+      "href": "https://dor.gov.np/pokhara",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, पाल्पा",
+      "href": "https://dor.gov.np/palpa",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, बागलुङ",
+      "href": "https://dor.gov.np/baglung",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, बुटवल",
+      "href": "https://dor.gov.np/butwal",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, शिवपुर",
+      "href": "https://dor.gov.np/shivapur",
+      "document": false
+     },
+     {
+      "text": "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, सुर्खेत",
+      "href": "https://dor.gov.np/frsmo-surkhet",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, सुर्खेत",
+      "href": "https://dor.gov.np/surkhet",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, चौरजहारी",
+      "href": "https://dor.gov.np/chaurjahari",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, जुम्ला",
+      "href": "https://dor.gov.np/jumla",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, नेपालगञ्ज",
+      "href": "https://dor.gov.np/nepalgunj",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, डोटी",
+      "href": "https://dor.gov.np/doti",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, दाङ्ग",
+      "href": "https://dor.gov.np/dang",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, बैतडी",
+      "href": "https://dor.gov.np/baitadi",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, प्युठान",
+      "href": "https://dor.gov.np/pyuthan",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, साँफेबगर",
+      "href": "https://dor.gov.np/sanphebagar",
+      "document": false
+     },
+     {
+      "text": "सडक डिभिजन, महेन्द्रनगर",
+      "href": "https://dor.gov.np/mahendranagar",
+      "document": false
+     },
+     {
+      "text": "हेभी इक्वीपमेन्ट डिभिजन, इटहरी",
+      "href": "https://dor.gov.np/hed-itahari",
+      "document": false
+     },
+     {
+      "text": "हेभी इक्वीपमेन्ट डिभिजन, जनकपुर",
+      "href": "https://dor.gov.np/hed-janakpur",
+      "document": false
+     },
+     {
+      "text": "हेभी इक्वीपमेन्ट डिभिजन, हेटौडा",
+      "href": "https://dor.gov.np/hed-hetauda",
+      "document": false
+     },
+     {
+      "text": "हेभी इक्वीपमेन्ट डिभिजन, काठमाडौं",
+      "href": "https://dor.gov.np/hed-kathmandu",
+      "document": false
+     },
+     {
+      "text": "हेभी इक्वीपमेन्ट डिभिजन, पोखरा",
+      "href": "https://dor.gov.np/hed-pokhara",
+      "document": false
+     },
+     {
+      "text": "हेभी इक्वीपमेन्ट डिभिजन, बुटवल",
+      "href": "https://dor.gov.np/hed-butwal",
+      "document": false
+     },
+     {
+      "text": "हेभी इक्वीपमेन्ट डिभिजन, नेपालगन्ज",
+      "href": "https://dor.gov.np/hed-nepalgunj",
+      "document": false
+     },
+     {
+      "text": "हेभी इक्वीपमेन्ट डिभिजन, गोदावरी",
+      "href": "https://dor.gov.np/hed-godawari",
+      "document": false
+     },
+     {
+      "text": "यान्त्रिक कार्यालय, फिदिम",
+      "href": "https://dor.gov.np/mo-phidim",
+      "document": false
+     },
+     {
+      "text": "यान्त्रिक कार्यालय, लहान",
+      "href": "https://dor.gov.np/mo-lahan",
+      "document": false
+     },
+     {
+      "text": "यान्त्रिक कार्यालय, मुलकाेट",
+      "href": "https://dor.gov.np/mo-mulkot",
+      "document": false
+     },
+     {
+      "text": "यान्त्रिक कार्यालय, नुवाकोट",
+      "href": "https://dor.gov.np/mo-nuwakot",
+      "document": false
+     },
+     {
+      "text": "यान्त्रिक कार्यालय, डुम्रे",
+      "href": "https://dor.gov.np/mo-dumre",
+      "document": false
+     },
+     {
+      "text": "यान्त्रिक कार्यालय, दाङ्ग",
+      "href": "https://dor.gov.np/mo-dang",
+      "document": false
+     },
+     {
+      "text": "यान्त्रिक कार्यालय, जुम्ला",
+      "href": "https://dor.gov.np/mo-jumla",
+      "document": false
+     },
+     {
+      "text": "यान्त्रिक कार्यालय, बुडर",
+      "href": "https://dor.gov.np/mo-budar",
+      "document": false
+     },
+     {
+      "text": "यान्त्रिक तालिम केन्द्र, ललितपुर",
+      "href": "https://dor.gov.np/mtc",
+      "document": false
+     },
+     {
+      "text": "उत्तर-दक्षिण तथा व्यापारिक मार्ग विस्तार आयोजना निर्देशनालय",
+      "href": "https://dor.gov.np/nshpd",
+      "document": false
+     },
+     {
+      "text": "तमोर कोरिडोर (चतरा-मुलघाट-सुभाङखोला) सडक योजना",
+      "href": "https://dor.gov.np/tamorcorridor",
+      "document": false
+     },
+     {
+      "text": "तमाेर करिडाेर (सुभाङखाेला-दाेभान-ओलाङचुङगोला) सडक योजना",
+      "href": "https://dor.gov.np/tcrp-sdo",
+      "document": false
+     },
+     {
+      "text": "उत्तर-दक्षिण कोशी सडक योजना",
+      "href": "https://dor.gov.np/snkrp",
+      "document": false
+     },
+     {
+      "text": "कालिगण्डकी कोरिडोर (वेनी-जोमसोम-कोरला) सडक योजना",
+      "href": "https://dor.gov.np/kcrp-bjk",
+      "document": false
+     },
+     {
+      "text": "कालिगण्डकी कोरिडोर (गैंडाकोट-राम्दी-मालढुङ्गा) सडक योजना",
+      "href": "https://dor.gov.np/kgcrp",
+      "document": false
+     },
+     {
+      "text": "भेरी कोरिडोर (जाजरकोट-दुनै-मरिम-तिन्जे धो) सडक योजना",
+      "href": "https://dor.gov.np/bcrp",
+      "document": false
+     },
+     {
+      "text": "कर्णाली काेरिडाेर दक्षिण खण्ड (खुलालु-सल्लीसल्ला) सडक याेजना",
+      "href": "https://dor.gov.np/kcrp-south",
+      "document": false
+     },
+     {
+      "text": "कर्णाली कोरिडोर उत्तर खण्ड (हिल्सा-सिमिकोट) सडक योजना",
+      "href": "https://dor.gov.np/kcrp-hs",
+      "document": false
+     },
+     {
+      "text": "रानी-बिराटनगर-इटहरी-धरान मार्ग विस्तार योजना",
+      "href": "https://dor.gov.np/rbidroadp",
+      "document": false
+     },
+     {
+      "text": "विरगञ्ज-पथलैया सडक विस्तार योजना",
+      "href": "https://dor.gov.np/birgunj6lane",
+      "document": false
+     },
+     {
+      "text": "सालझण्डी-सन्धिखर्क-ढोरपाटन सडक योजना",
+      "href": "https://dor.gov.np/ssdrp",
+      "document": false
+     },
+     {
+      "text": "शहिद मार्ग (घाेराही-नुवागाउँ-तिला-घर्तीगाउँ-थवाङ्ग-मुसिकाेट-मैकाेट) सडक योजना",
+      "href": "https://dor.gov.np/smrp",
+      "document": false
+     },
+     {
+      "text": "कान्ती राजमार्ग सडक योजना",
+      "href": "https://dor.gov.np/klrp",
+      "document": false
+     },
+     {
+      "text": "नाग्म-गमगढी-नाक्चालाग्ना सडक योजना",
+      "href": "https://dor.gov.np/gnrp",
+      "document": false
+     },
+     {
+      "text": "आयोजना निर्दशनालय (ए.डी.बी.)",
+      "href": "https://dor.gov.np/pdadb",
+      "document": false
+     },
+     {
+      "text": "कांकडभिट्टा-लौकही सडक योजना (पूर्वी खण्ड)",
+      "href": "https://dor.gov.np/kblrp-east",
+      "document": false
+     },
+     {
+      "text": "काकडभिट्टा लाैकही सडक याेजना (पश्चिम खण्ड)",
+      "href": "https://dor.gov.np/klrp-west",
+      "document": false
+     },
+     {
+      "text": "नारायणगढ-बुटवल सडक योजना (पूर्वी खण्ड)",
+      "href": "https://dor.gov.np/nbrp-east",
+      "document": false
+     },
+     {
+      "text": "नारायनगढ-बुटवल सडक योजना (पश्चिम खण्ड)",
+      "href": "https://dor.gov.np/nbrp-west",
+      "document": false
+     },
+     {
+      "text": "कञ्चनपुर-कमला सडक योजना (पूर्वी खण्ड)",
+      "href": "https://dor.gov.np/kkrp-east",
+      "document": false
+     },
+     {
+      "text": "कञ्चनपुर-कमला (पश्चिम खण्ड) सडक योजना",
+      "href": "https://dor.gov.np/kkrp-west",
+      "document": false
+     },
+     {
+      "text": "मुग्लिङ्ग-पोखरा सडक योजना (पूर्वी खण्ड)",
+      "href": "https://dor.gov.np/mprpeastern",
+      "document": false
+     },
+     {
+      "text": "मुग्लिङ्ग-पोखरा सडक योजना (पश्चिम खण्ड)",
+      "href": "https://dor.gov.np/mprpwestern",
+      "document": false
+     },
+     {
+      "text": "सडक सुधार तथा विकास आयोजना निर्देशनालय",
+      "href": "https://dor.gov.np/ridpd",
+      "document": false
+     },
+     {
+      "text": "सडक सुधार तथा विकास याेजना कार्यालय, पांचथर",
+      "href": "https://dor.gov.np/brrp",
+      "document": false
+     },
+     {
+      "text": "सडक सुधार तथा विकास याेजना कार्यालय, दाेलखा",
+      "href": "https://dor.gov.np/ridp-ltj",
+      "document": false
+     },
+     {
+      "text": "सडक सुधार तथा विकास याेजना कार्यालय, काठमाडौं",
+      "href": "https://dor.gov.np/bnsbt",
+      "document": false
+     },
+     {
+      "text": "पन्थडिही-कटहरे-हर्मी-साहिलटार सडक याेजना, गाेर्खा",
+      "href": "https://dor.gov.np/pkhsrp",
+      "document": false
+     },
+     {
+      "text": "सडक सुधार तथा विकास याेजना कार्यालय, दाङ्ग",
+      "href": "https://dor.gov.np/bbbcklgt",
+      "document": false
+     },
+     {
+      "text": "सडक सुधार तथा विकास याेजना कार्यालय, कैलाली",
+      "href": "https://dor.gov.np/sbdp",
+      "document": false
+     },
+     {
+      "text": "महाकाली पुल योजना",
+      "href": "https://dor.gov.np/mbpom",
+      "document": false
+     }
+    ],
+    "paragraphs": [
+     "समाचार / प्रकाशन समाचार समाचार पाेर्टल लिंक डाेर इन्साइट डाेर समाचारपत्र फोटो-ग्यालरी प्रकाशन",
+     "समाचार समाचार पाेर्टल लिंक डाेर इन्साइट डाेर समाचारपत्र फोटो-ग्यालरी",
+     "हाम्रो बारेमा पृष्ठभुमि हाम्रो उद्देश्य भिजन एण्ड मिशन संगठन संरचना कार्यालय सम्पर्क बिभागका प्रमुखहरु",
+     "शाखा-महाशाखा सम्भार महाशाखा विकास सहायता कार्यान्वयन महाशाखा योजना तथा अनुगमन महाशाखा योजना अनुगमन तथा मूल्यांकन शाखा भू-वातावरण तथा सामाजिक शाखा सडक सुरक्षा तथा ट्राफिक शाखा हाईवे व्यवस्थापन सूचना प्रणाली तथा सूचना संचार प्रविधि शाखा यान्त्रिक महाशाखा पुल महाशाखा प्रशासन शाखा आर्थिक प्रशासन शाखा कानुन तथा विवाद व्यवस्थापन शाखा",
+     "योजना तथा अनुगमन महाशाखा योजना अनुगमन तथा मूल्यांकन शाखा भू-वातावरण तथा सामाजिक शाखा सडक सुरक्षा तथा ट्राफिक शाखा हाईवे व्यवस्थापन सूचना प्रणाली तथा सूचना संचार प्रविधि शाखा",
+     "हाईवे व्यवस्थापन सूचना प्रणाली तथा सूचना संचार प्रविधि शाखा",
+     "सं.स.सु.तथा अ.का./सडक डिभिजन संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, दमक संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, दमक सडक डिभिजन, इलाम सडक डिभिजन, दमक सडक डिभिजन, विराटनगर सडक डिभिजन, धनकुटा सडक डिभिजन, लहान सडक डिभिजन, तुम्लिंगटार सडक डिभिजन, हर्कपुर संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, काठमाडौं संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, काठमाडौं सडक डिभिजन, जनकपुर सडक डिभिजन, चरिकोट सडक डिभिजन, चन्द्रनिगाहपुर सडक डिभिजन, हेटौडा सडक डिभिजन, भरतपुर सडक डिभिजन, काठमाडौं सडक डिभिजन, भक्तपुर सडक डिभिजन, ललितपुर सडक डिभिजन, नुवाकोट सडक डिभिजन, खुर्कोट संघीय सडक सुपरीवेक्षण तथा अनुगमन क…",
+     "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, दमक संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, दमक सडक डिभिजन, इलाम सडक डिभिजन, दमक सडक डिभिजन, विराटनगर सडक डिभिजन, धनकुटा सडक डिभिजन, लहान सडक डिभिजन, तुम्लिंगटार सडक डिभिजन, हर्कपुर",
+     "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, दमक",
+     "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, काठमाडौं संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, काठमाडौं सडक डिभिजन, जनकपुर सडक डिभिजन, चरिकोट सडक डिभिजन, चन्द्रनिगाहपुर सडक डिभिजन, हेटौडा सडक डिभिजन, भरतपुर सडक डिभिजन, काठमाडौं सडक डिभिजन, भक्तपुर सडक डिभिजन, ललितपुर सडक डिभिजन, नुवाकोट सडक डिभिजन, खुर्कोट",
+     "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, काठमाडौं",
+     "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, पोखरा संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, पोखरा सडक डिभिजन, दमौली सडक डिभिजन, पोखरा सडक डिभिजन, पाल्पा सडक डिभिजन, बागलुङ सडक डिभिजन, बुटवल सडक डिभिजन, शिवपुर",
+     "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, पोखरा",
+     "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, सुर्खेत संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, सुर्खेत सडक डिभिजन, सुर्खेत सडक डिभिजन, चौरजहारी सडक डिभिजन, जुम्ला सडक डिभिजन, नेपालगञ्ज सडक डिभिजन, डोटी सडक डिभिजन, दाङ्ग सडक डिभिजन, बैतडी सडक डिभिजन, प्युठान सडक डिभिजन, साँफेबगर सडक डिभिजन, महेन्द्रनगर",
+     "संघीय सडक सुपरीवेक्षण तथा अनुगमन कार्यालय, सुर्खेत",
+     "हे. ई. डिभिजन / यांत्रिक कार्यालय हेभी इक्वीप्मेण्ट डिभिजनहरु हेभी इक्वीपमेन्ट डिभिजन, इटहरी हेभी इक्वीपमेन्ट डिभिजन, जनकपुर हेभी इक्वीपमेन्ट डिभिजन, हेटौडा हेभी इक्वीपमेन्ट डिभिजन, काठमाडौं हेभी इक्वीपमेन्ट डिभिजन, पोखरा हेभी इक्वीपमेन्ट डिभिजन, बुटवल हेभी इक्वीपमेन्ट डिभिजन, नेपालगन्ज हेभी इक्वीपमेन्ट डिभिजन, गोदावरी यांत्रिक कार्यालयहरु यान्त्रिक कार्यालय, फिदिम यान्त्रिक कार्यालय, लहान यान्त्रिक कार्यालय, मुलकाेट यान्त्रिक कार्यालय, नुवाकोट यान्त्रिक कार्यालय, डुम्रे यान्त्रिक कार्यालय, दाङ्ग यान्त्रिक कार्यालय, जुम्ला यान्त्रिक कार्यालय, बुडर यान्त्रिक तालिम केन्द्र, ललितपुर",
+     "हेभी इक्वीप्मेण्ट डिभिजनहरु हेभी इक्वीपमेन्ट डिभिजन, इटहरी हेभी इक्वीपमेन्ट डिभिजन, जनकपुर हेभी इक्वीपमेन्ट डिभिजन, हेटौडा हेभी इक्वीपमेन्ट डिभिजन, काठमाडौं हेभी इक्वीपमेन्ट डिभिजन, पोखरा हेभी इक्वीपमेन्ट डिभिजन, बुटवल हेभी इक्वीपमेन्ट डिभिजन, नेपालगन्ज हेभी इक्वीपमेन्ट डिभिजन, गोदावरी",
+     "यांत्रिक कार्यालयहरु यान्त्रिक कार्यालय, फिदिम यान्त्रिक कार्यालय, लहान यान्त्रिक कार्यालय, मुलकाेट यान्त्रिक कार्यालय, नुवाकोट यान्त्रिक कार्यालय, डुम्रे यान्त्रिक कार्यालय, दाङ्ग यान्त्रिक कार्यालय, जुम्ला यान्त्रिक कार्यालय, बुडर यान्त्रिक तालिम केन्द्र, ललितपुर",
+     "आयोजना उत्तर-दक्षिण तथा व्यापारिक मार्ग विस्तार आयोजना निर्देशनालय र अन्तर्गत उत्तर-दक्षिण तथा व्यापारिक मार्ग विस्तार आयोजना निर्देशनालय तमोर कोरिडोर (चतरा-मुलघाट-सुभाङखोला) सडक योजना तमाेर करिडाेर (सुभाङखाेला-दाेभान-ओलाङचुङगोला) सडक योजना उत्तर-दक्षिण कोशी सडक योजना कालिगण्डकी कोरिडोर (वेनी-जोमसोम-कोरला) सडक योजना कालिगण्डकी कोरिडोर (गैंडाकोट-राम्दी-मालढुङ्गा) सडक योजना भेरी कोरिडोर (जाजरकोट-दुनै-मरिम-तिन्जे धो) सडक योजना कर्णाली काेरिडाेर दक्षिण खण्ड (खुलालु-सल्लीसल्ला) सडक याेजना कर्णाली कोरिडोर उत्तर खण्ड (हिल्सा-सिमिकोट) सडक योजना रानी-बिराटनगर-इटहरी-धरान मार्ग विस्तार योजना विरगञ्ज-पथल…",
+     "उत्तर-दक्षिण तथा व्यापारिक मार्ग विस्तार आयोजना निर्देशनालय र अन्तर्गत उत्तर-दक्षिण तथा व्यापारिक मार्ग विस्तार आयोजना निर्देशनालय तमोर कोरिडोर (चतरा-मुलघाट-सुभाङखोला) सडक योजना तमाेर करिडाेर (सुभाङखाेला-दाेभान-ओलाङचुङगोला) सडक योजना उत्तर-दक्षिण कोशी सडक योजना कालिगण्डकी कोरिडोर (वेनी-जोमसोम-कोरला) सडक योजना कालिगण्डकी कोरिडोर (गैंडाकोट-राम्दी-मालढुङ्गा) सडक योजना भेरी कोरिडोर (जाजरकोट-दुनै-मरिम-तिन्जे धो) सडक योजना कर्णाली काेरिडाेर दक्षिण खण्ड (खुलालु-सल्लीसल्ला) सडक याेजना कर्णाली कोरिडोर उत्तर खण्ड (हिल्सा-सिमिकोट) सडक योजना रानी-बिराटनगर-इटहरी-धरान मार्ग विस्तार योजना विरगञ्ज-पथलैया सडक…",
+     "उत्तर-दक्षिण तथा व्यापारिक मार्ग विस्तार आयोजना निर्देशनालय",
+     "तमोर कोरिडोर (चतरा-मुलघाट-सुभाङखोला) सडक योजना",
+     "तमाेर करिडाेर (सुभाङखाेला-दाेभान-ओलाङचुङगोला) सडक योजना",
+     "कालिगण्डकी कोरिडोर (वेनी-जोमसोम-कोरला) सडक योजना",
+     "कालिगण्डकी कोरिडोर (गैंडाकोट-राम्दी-मालढुङ्गा) सडक योजना",
+     "भेरी कोरिडोर (जाजरकोट-दुनै-मरिम-तिन्जे धो) सडक योजना",
+     "कर्णाली काेरिडाेर दक्षिण खण्ड (खुलालु-सल्लीसल्ला) सडक याेजना",
+     "कर्णाली कोरिडोर उत्तर खण्ड (हिल्सा-सिमिकोट) सडक योजना",
+     "रानी-बिराटनगर-इटहरी-धरान मार्ग विस्तार योजना",
+     "शहिद मार्ग (घाेराही-नुवागाउँ-तिला-घर्तीगाउँ-थवाङ्ग-मुसिकाेट-मैकाेट) सडक योजना",
+     "आयोजना निर्देशनालय (ए.डी.बी.) र अन्तर्गत आयोजना निर्दशनालय (ए.डी.बी.) कांकडभिट्टा-लौकही सडक योजना (पूर्वी खण्ड) काकडभिट्टा लाैकही सडक याेजना (पश्चिम खण्ड) नारायणगढ-बुटवल सडक योजना (पूर्वी खण्ड) नारायनगढ-बुटवल सडक योजना (पश्चिम खण्ड) कञ्चनपुर-कमला सडक योजना (पूर्वी खण्ड) कञ्चनपुर-कमला (पश्चिम खण्ड) सडक योजना मुग्लिङ्ग-पोखरा सडक योजना (पूर्वी खण्ड) मुग्लिङ्ग-पोखरा सडक योजना (पश्चिम खण्ड)",
+     "कांकडभिट्टा-लौकही सडक योजना (पूर्वी खण्ड)",
+     "काकडभिट्टा लाैकही सडक याेजना (पश्चिम खण्ड)",
+     "सडक सुधार तथा विकास आयोजना निर्देशनालय र अन्तर्गत सडक सुधार तथा विकास आयोजना निर्देशनालय सडक सुधार तथा विकास याेजना कार्यालय, पांचथर सडक सुधार तथा विकास याेजना कार्यालय, दाेलखा सडक सुधार तथा विकास याेजना कार्यालय, काठमाडौं पन्थडिही-कटहरे-हर्मी-साहिलटार सडक याेजना, गाेर्खा सडक सुधार तथा विकास याेजना कार्यालय, दाङ्ग सडक सुधार तथा विकास याेजना कार्यालय, कैलाली महाकाली पुल योजना",
+     "सडक सुधार तथा विकास याेजना कार्यालय, पांचथर",
+     "सडक सुधार तथा विकास याेजना कार्यालय, दाेलखा",
+     "सडक सुधार तथा विकास याेजना कार्यालय, काठमाडौं",
+     "पन्थडिही-कटहरे-हर्मी-साहिलटार सडक याेजना, गाेर्खा",
+     "सडक सुधार तथा विकास याेजना कार्यालय, दाङ्ग",
+     "सडक सुधार तथा विकास याेजना कार्यालय, कैलाली"
+    ],
+    "dates_mentioned": [
+     "2083-03-32",
+     "2083-06-30"
+    ]
+   },
+   "changes": {
+    "compared_with": null
+   }
+  }
+ ]
+}
