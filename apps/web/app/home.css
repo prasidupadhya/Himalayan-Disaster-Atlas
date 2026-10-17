@@ -45,7 +45,7 @@
 .home-foundation p { max-width: 70ch; }
 .home-foundation > a { display: inline-flex; align-items: center; gap: 1.3rem; min-height: 44px; font-size: .88rem; font-weight: 650; }
 @media (max-width: 1000px) {
-  .home-hero { grid-template-columns: 1fr; gap: 2.5rem; padding-bottom: 2.5rem; }
+  .home-hero { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; padding-bottom: 2.5rem; }
   .home-copy { max-width: 44rem; }
   .home h1 { font-size: clamp(2.8rem, 7.5vw, 4.65rem); }
   .home .intro { max-width: 46ch; }
@@ -98,3 +98,7 @@
 .home-hero .overview-labels text { fill: #f5f7f8; stroke: var(--night); }
 .home-hero .nepal-overview figcaption { border-top-color: rgba(169, 207, 218, .2); color: #8fa5ab; }
 .home-hero .nepal-overview figcaption a { color: var(--ice); }
+@media (max-width: 420px) {
+  .home-hero h1 { font-stretch: 100%; font-size: clamp(2.2rem, 11vw, 2.7rem); }
+  .home h1 span { white-space: normal; }
+}
