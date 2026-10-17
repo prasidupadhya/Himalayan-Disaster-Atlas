@@ -32,3 +32,5 @@
 .official-new { margin-left: .5rem; padding: .05rem .4rem; border: 1px solid var(--accent); border-radius: var(--radius-sm); color: var(--accent-strong); font-size: .75rem; font-weight: 650; }
 .official-change { color: var(--muted-strong); font-size: .9rem; }
 @media (max-width: 700px) { .official-summary > div + div { padding-left: 0; border-left: 0; } .official-summary > div { border-bottom: 1px solid var(--line); } }
+.official-stale { margin-top: .8rem; }
+.official-stale summary { cursor: pointer; font-weight: 600; }

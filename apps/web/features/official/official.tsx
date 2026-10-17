@@ -1,5 +1,5 @@
 'use client';
-import { nepalTime, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type RiverContent, type Scalar, type Table } from '../../lib/gov-digest';
+import { nepalTime, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type River, type RiverContent, type Scalar, type Table } from '../../lib/gov-digest';
 
 const CATEGORIES: Array<[string, string]> = [['weather', 'Weather'], ['floods', 'Floods'], ['rivers', 'River levels'], ['rainfall', 'Rainfall'], ['disasters', 'Disasters and alerts'], ['earthquakes', 'Earthquakes'], ['air-quality', 'Air quality'], ['roads', 'Roads'], ['notices', 'Notices']];
 const UNKNOWN = 'UNKNOWN';
@@ -21,26 +21,44 @@ function TableView({ table }: { table: Table }) {
   </table>{table.rows.length > 40 && <p className="muted">Showing 40 of {table.rows.length} rows. The full table is on the source page.</p>}</div>;
 }
 
+function Counts({ counts }: { counts: Record<string, number> | undefined }) {
+  return counts ? <dl className="official-counts">{Object.entries(counts).map(([status, n]) => <div key={status}><dt>{status.toLowerCase()}</dt><dd>{n}</dd></div>)}</dl> : null;
+}
+
+const freshness = (content: RiverContent | RainContent) => content.current_station_count === undefined
+  ? `This copy does not record which of the ${content.station_count} readings are recent.`
+  : `${content.current_station_count} of ${content.station_count} stations reported in the ${content.fresh_hours ?? 24} hours before this copy. Older readings are not counted.`;
+
+function RiverRows({ stations, caption }: { stations: River[]; caption: string }) {
+  return <div className="official-table-wrap"><table>
+    <caption>{caption}</caption>
+    <thead><tr><th scope="col">Station</th><th scope="col">Basin</th><th scope="col">Status</th><th scope="col">Water level</th><th scope="col">Warning</th><th scope="col">Danger</th><th scope="col">Reading time</th></tr></thead>
+    <tbody>{stations.map(s => <tr key={s.id} data-status={s.status}><th scope="row">{s.name ?? UNKNOWN}</th><td>{s.basin ?? UNKNOWN}</td><td>{s.status.toLowerCase()}</td><td>{num(s.water_level_m, 'm')}</td><td>{num(s.warning_level_m, 'm')}</td><td>{num(s.danger_level_m, 'm')}</td><td>{time(s.observed_at)}</td></tr>)}</tbody>
+  </table></div>;
+}
+
 function RiverView({ content, entry }: { content: RiverContent; entry: Entry }) {
+  const stale = content.stale_alert_stations ?? [];
   return <>
-    <dl className="official-counts">{Object.entries(content.status_counts).map(([status, n]) => <div key={status}><dt>{status.toLowerCase()}</dt><dd>{n}</dd></div>)}</dl>
-    {content.alert_stations.length ? <div className="official-table-wrap"><table>
-      <caption>Stations above warning or danger level</caption>
-      <thead><tr><th scope="col">Station</th><th scope="col">Basin</th><th scope="col">Status</th><th scope="col">Water level</th><th scope="col">Warning</th><th scope="col">Danger</th><th scope="col">Reading time</th></tr></thead>
-      <tbody>{content.alert_stations.map(s => <tr key={s.id} data-status={s.status}><th scope="row">{s.name ?? UNKNOWN}</th><td>{s.basin ?? UNKNOWN}</td><td>{s.status.toLowerCase()}</td><td>{num(s.water_level_m, 'm')}</td><td>{num(s.warning_level_m, 'm')}</td><td>{num(s.danger_level_m, 'm')}</td><td>{time(s.observed_at)}</td></tr>)}</tbody>
-    </table></div> : <p>No station is above warning level in this copy of {content.station_count} stations.</p>}
+    <p className="muted">{freshness(content)}</p>
+    <Counts counts={content.current_status_counts ?? content.status_counts} />
+    {content.alert_stations.length ? <RiverRows stations={content.alert_stations} caption="Stations above warning or danger level" />
+      : <p>No recent reading is above warning level.</p>}
+    {stale.length > 0 && <details className="official-stale"><summary>{stale.length} station{stale.length === 1 ? ' still shows' : 's still show'} a warning or danger flag from an older reading</summary>
+      <RiverRows stations={stale} caption="Flags from readings older than the freshness window, as published" /></details>}
     {entry.changes?.status_changes?.length ? <p className="official-change">Changed since the previous copy: {entry.changes.status_changes.map(c => `${c.name ?? c.id} ${c.from?.toLowerCase() ?? UNKNOWN} → ${c.to.toLowerCase()}`).join('; ')}.</p> : null}
   </>;
 }
 
 function RainView({ content }: { content: RainContent }) {
   return <>
-    <dl className="official-counts">{Object.entries(content.status_counts).map(([status, n]) => <div key={status}><dt>{status.toLowerCase()}</dt><dd>{n}</dd></div>)}</dl>
+    <p className="muted">{freshness(content)}{content.implausible_24h ? ` ${content.implausible_24h} recent 24-hour total${content.implausible_24h === 1 ? ' is' : 's are'} larger than the world record and left out of the ranking.` : ''}</p>
+    <Counts counts={content.current_status_counts ?? content.status_counts} />
     {content.wettest_24h.length ? <div className="official-table-wrap"><table>
       <caption>Wettest stations, last 24 hours</caption>
       <thead><tr><th scope="col">Station</th><th scope="col">Basin</th><th scope="col">24 h</th><th scope="col">1 h</th><th scope="col">Status</th><th scope="col">Reading time</th></tr></thead>
       <tbody>{content.wettest_24h.map(s => <tr key={s.id}><th scope="row">{s.name ?? UNKNOWN}</th><td>{s.basin ?? UNKNOWN}</td><td>{num(s.rain_24h_mm, 'mm')}</td><td>{num(s.rain_1h_mm, 'mm')}</td><td>{s.status.toLowerCase()}</td><td>{time(s.observed_at)}</td></tr>)}</tbody>
-    </table></div> : <p>No station reported a 24-hour total in this copy.</p>}
+    </table></div> : <p>No recent station reported a 24-hour total in this copy.</p>}
   </>;
 }
 
@@ -105,9 +123,9 @@ function Ready({ digest }: { digest: Digest }) {
   return <>
     <dl className="official-summary" aria-label="Summary of this copy">
       <div><dt>Copied</dt><dd>{digest.generated_at_nepal}</dd></div>
-      <div><dt>Rivers above danger level</dt><dd>{count(s.rivers_above_danger)}</dd></div>
-      <div><dt>Rivers above warning level</dt><dd>{count(s.rivers_above_warning)}</dd></div>
-      <div><dt>Rain stations above warning level</dt><dd>{count(s.rain_stations_above_warning)}</dd></div>
+      <div><dt>Rivers above danger level (last 24 h)</dt><dd>{count(s.rivers_above_danger)}</dd></div>
+      <div><dt>Rivers above warning level (last 24 h)</dt><dd>{count(s.rivers_above_warning)}</dd></div>
+      <div><dt>Rain stations above warning level (last 24 h)</dt><dd>{count(s.rain_stations_above_warning)}</dd></div>
       <div><dt>Sources read today</dt><dd>{s.sources_fetched} of {digest.sources.length}</dd></div>
     </dl>
     {s.sources_last_known > 0 && <p className="official-change">{s.sources_last_known} source{s.sources_last_known === 1 ? ' is' : 's are'} shown from an earlier copy because today’s read failed.</p>}

@@ -107,6 +107,7 @@ function TodayCards({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang
   const incidents = findEntry(digest, 'bipad-incidents'), weather = findEntry(digest, 'dhm-forecast'), air = findEntry(digest, 'doenv-air');
   const riverContent = river?.content as RiverContent | undefined, rainContent = rain?.content as RainContent | undefined;
   const wettest = rainContent?.wettest_24h[0];
+  const reported = (content: RiverContent | RainContent) => `${content.current_station_count === undefined ? 'UNKNOWN' : formatNumber(content.current_station_count, lang)} / ${formatNumber(content.station_count, lang)}`;
   const quakeTable = (quake?.content as Page | undefined)?.tables.find(table => column(table.header, /magnitude/i) >= 0);
   const latestQuake = quakeTable?.rows[0] && [/date/i, /magnitude/i, /epicent/i].map(re => quakeTable.rows[0][column(quakeTable.header, re)]).filter(Boolean).join(' · ');
   const list = incidents?.content as ListContent | undefined;
@@ -115,10 +116,12 @@ function TodayCards({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang
     <ul className="hz-cards hz-today">
       <TodayCard entry={river} title={t.rivers} anchor="rivers" c={c} lang={lang}>
         {riverContent && <p className="hz-figure"><strong>{n(s.rivers_above_danger)}</strong> {t.aboveDanger} · <strong>{n(s.rivers_above_warning)}</strong> {t.aboveWarning}</p>}
+        {riverContent && <p>{reported(riverContent)} {t.reported}</p>}
         {riverContent?.alert_stations.slice(0, 3).map(st => <p key={st.id}>{st.name ?? 'UNKNOWN'}{st.basin ? ` (${st.basin})` : ''}: {st.status.toLowerCase()}</p>)}
       </TodayCard>
       <TodayCard entry={rain} title={t.rain} anchor="rainfall" c={c} lang={lang}>
         {rainContent && <p className="hz-figure"><strong>{n(s.rain_stations_above_warning)}</strong> {t.rainAbove}</p>}
+        {rainContent && <p>{reported(rainContent)} {t.reported}</p>}
         {wettest && <p>{t.wettest} {wettest.name ?? 'UNKNOWN'}, {wettest.rain_24h_mm === null ? 'UNKNOWN' : `${formatNumber(wettest.rain_24h_mm, lang, 1)} mm`}</p>}
       </TodayCard>
       <TodayCard entry={quake} title={t.quake} anchor="earthquakes" c={c} lang={lang}>

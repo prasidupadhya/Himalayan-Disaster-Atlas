@@ -31,3 +31,17 @@ test('official sources say when no copy exists yet', async ({ page }) => {
   await page.goto('/official/');
   await expect(page.getByRole('status')).toContainText('first daily copy has not been published yet');
 });
+
+test('river flags from old readings are listed apart and not counted as current', async ({ page }) => {
+  const river = { ...digest.sources[0], content: {
+    station_count: 3, fresh_hours: 24, current_station_count: 2, status_counts: { 'ABOVE DANGER LEVEL': 1, 'BELOW WARNING LEVEL': 2 }, current_status_counts: { 'BELOW WARNING LEVEL': 2 }, alert_stations: [],
+    stale_alert_stations: [{ id: '9', name: 'SYNTHETIC Old Station', basin: 'Koshi', status: 'ABOVE DANGER LEVEL', water_level_m: 9, warning_level_m: 5, danger_level_m: 6, observed_at: '2024-11-12T17:25:00Z', current: false }] } };
+  const body = { ...digest, summary: { ...digest.summary, rivers_above_danger: 0, rivers_above_warning: 0 }, sources: [river] };
+  await page.route('**/gov/latest.json', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify(body) }));
+  await page.goto('/official/');
+  const article = page.getByRole('article', { name: 'River water levels' });
+  await expect(article).toContainText('2 of 3 stations reported in the 24 hours before this copy');
+  await expect(article).toContainText('No recent reading is above warning level.');
+  await article.getByText('1 station still shows a warning or danger flag from an older reading').click();
+  await expect(article.getByRole('row', { name: /SYNTHETIC Old Station/ })).toContainText('12 Nov 2024');
+});

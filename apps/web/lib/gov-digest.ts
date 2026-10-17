@@ -5,10 +5,13 @@ import { useEffect, useState } from 'react';
 export type Link = { text: string; href: string; document: boolean };
 export type Table = { caption: string | null; header: string[]; rows: string[][] };
 export type Page = { title: string | null; headings: string[]; tables: Table[]; links: Link[]; paragraphs: string[]; dates_mentioned: string[] };
-export type River = { id: string; name: string | null; basin: string | null; status: string; water_level_m: number | null; warning_level_m: number | null; danger_level_m: number | null; observed_at: string | null };
-export type Rain = { id: string; name: string | null; basin: string | null; status: string; rain_1h_mm: number | null; rain_24h_mm: number | null; observed_at: string | null };
-export type RiverContent = { station_count: number; status_counts: Record<string, number>; alert_stations: River[] };
-export type RainContent = { station_count: number; status_counts: Record<string, number>; wettest_24h: Rain[] };
+export type River = { id: string; name: string | null; basin: string | null; status: string; water_level_m: number | null; warning_level_m: number | null; danger_level_m: number | null; observed_at: string | null; current?: boolean };
+export type Rain = { id: string; name: string | null; basin: string | null; status: string; rain_1h_mm: number | null; rain_24h_mm: number | null; observed_at: string | null; current?: boolean };
+/** Copies made before freshness filtering lack the optional fields; current counts then stay UNKNOWN. */
+export type RiverContent = { station_count: number; status_counts: Record<string, number>; alert_stations: River[];
+  fresh_hours?: number; current_station_count?: number; current_status_counts?: Record<string, number>; stale_alert_stations?: River[] };
+export type RainContent = { station_count: number; status_counts: Record<string, number>; wettest_24h: Rain[];
+  fresh_hours?: number; current_station_count?: number; current_status_counts?: Record<string, number>; implausible_24h?: number };
 export type Scalar = string | number | boolean | null;
 export type ListContent = { record_count: number; columns: string[]; records: Array<Record<string, Scalar>> };
 export type Entry = {
@@ -17,7 +20,7 @@ export type Entry = {
   last_known?: boolean; error?: string; content?: Page | RiverContent | RainContent | ListContent; changes?: { new_links?: Link[]; new_records?: Array<Record<string, Scalar>>; status_changes?: Array<{ id: string; name: string | null; from: string | null; to: string }> };
 };
 export type Digest = { format: 'atlas-gov-digest@1'; generated_at: string; generated_at_nepal: string; notice: string; sources: Entry[];
-  summary: { sources_fetched: number; sources_last_known: number; sources_unavailable: number; rivers_above_danger: number | null; rivers_above_warning: number | null; rain_stations_above_warning: number | null; new_links: number; new_records?: number } };
+  summary: { sources_fetched: number; sources_last_known: number; sources_unavailable: number; rivers_above_danger: number | null; rivers_above_warning: number | null; rain_stations_above_warning: number | null; rivers_current?: number | null; rain_current?: number | null; new_links: number; new_records?: number } };
 export type DigestState = { status: 'loading' } | { status: 'missing' } | { status: 'error'; message: string } | { status: 'ready'; digest: Digest };
 
 export const DIGEST_PATH = '/gov/latest.json';

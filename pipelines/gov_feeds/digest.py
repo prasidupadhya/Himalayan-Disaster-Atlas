@@ -23,6 +23,11 @@ FORMAT = "atlas-gov-digest@1"
 NEPAL = timezone(timedelta(hours=5, minutes=45))
 USER_AGENT = "HimalayanDisasterAtlas/1.0 (+https://github.com/prasidupadhya/Himalayan-Disaster-Atlas; daily public-page digest)"
 LIMITS = {"tables": 8, "rows": 200, "links": 120, "paragraphs": 40, "headings": 40, "text": 600, "body": 5_000_000}
+# A station reading counts as current only if it was observed within this window before the copy.
+FRESH_HOURS = 24
+# The world-record 24-hour rainfall (Foc-Foc, La Réunion, 1966, WMO); larger totals are instrument faults.
+RAIN_24H_MAX_MM = 1825
+ALERTS = ("ABOVE DANGER LEVEL", "ABOVE WARNING LEVEL")
 DOCUMENT = re.compile(r"\.(pdf|docx?|xlsx?|pptx?|jpe?g|png)(\?|$)", re.I)
 DATE_PATTERNS = [
     r"\b\d{4}-\d{2}-\d{2}\b",
@@ -147,30 +152,57 @@ def number(value):
         return None
 
 
-def organise_river(payload):
+def is_current(observed_at, moment):
+    """True when a reading's own timestamp falls within FRESH_HOURS before the copy; unknown times are not current."""
+    try:
+        observed = datetime.fromisoformat(str(observed_at).replace("Z", "+00:00"))
+    except ValueError:
+        return False
+    if observed.tzinfo is None:
+        return False
+    return timedelta(0) <= moment - observed <= timedelta(hours=FRESH_HOURS) or timedelta(0) < observed - moment <= timedelta(minutes=15)
+
+
+def tally(stations):
+    counts = {}
+    for station in stations:
+        counts[station["status"]] = counts.get(station["status"], 0) + 1
+    return dict(sorted(counts.items()))
+
+
+def alert_order(station):
+    return station["status"] != "ABOVE DANGER LEVEL", station["name"] or ""
+
+
+def organise_river(payload, moment=None):
+    moment = moment or now_utc()
     rows = payload.get("results") if isinstance(payload, dict) else None
     if not isinstance(rows, list):
         raise ValueError("BIPAD river response has no results list")
-    stations, counts = [], {}
+    stations = []
     for row in rows:
         status = str(row.get("status") or "UNKNOWN")
-        counts[status] = counts.get(status, 0) + 1
         stations.append({"id": str(row.get("id")), "name": clean(str(row.get("title") or ""), 160) or None, "basin": row.get("basin") or None,
                          "status": status, "water_level_m": number(row.get("waterLevel")), "warning_level_m": number(row.get("warningLevel")),
                          "danger_level_m": number(row.get("dangerLevel")), "observed_at": row.get("waterLevelOn") or None, "trend": row.get("steady") or None})
-    alert = [s for s in stations if s["status"] in ("ABOVE DANGER LEVEL", "ABOVE WARNING LEVEL")]
-    alert.sort(key=lambda s: (s["status"] != "ABOVE DANGER LEVEL", s["name"] or ""))
-    return {"station_count": len(stations), "status_counts": dict(sorted(counts.items())), "alert_stations": alert, "stations": stations}
+    for station in stations:
+        station["current"] = is_current(station["observed_at"], moment)
+    current = [s for s in stations if s["current"]]
+    return {"station_count": len(stations), "status_counts": tally(stations), "fresh_hours": FRESH_HOURS,
+            "current_station_count": len(current), "current_status_counts": tally(current),
+            "alert_stations": sorted((s for s in current if s["status"] in ALERTS), key=alert_order),
+            "stale_alert_stations": sorted((s for s in stations if not s["current"] and s["status"] in ALERTS), key=alert_order),
+            "stations": stations}
 
 
-def organise_rain(payload):
+def organise_rain(payload, moment=None):
+    moment = moment or now_utc()
     rows = payload.get("results") if isinstance(payload, dict) else None
     if not isinstance(rows, list):
         raise ValueError("BIPAD rainfall response has no results list")
-    stations, counts = [], {}
+    stations = []
     for row in rows:
         status = str(row.get("status") or "UNKNOWN")
-        counts[status] = counts.get(status, 0) + 1
         sums = {}
         for item in row.get("averages") or []:
             try:
@@ -179,8 +211,14 @@ def organise_rain(payload):
                 continue
         stations.append({"id": str(row.get("id")), "name": clean(str(row.get("title") or ""), 160) or None, "basin": row.get("basin") or None,
                          "status": status, "rain_1h_mm": sums.get(1), "rain_24h_mm": sums.get(24), "observed_at": row.get("measuredOn") or None})
-    wettest = sorted((s for s in stations if s["rain_24h_mm"] is not None), key=lambda s: -s["rain_24h_mm"])[:15]
-    return {"station_count": len(stations), "status_counts": dict(sorted(counts.items())), "wettest_24h": wettest, "stations": stations}
+    for station in stations:
+        station["current"] = is_current(station["observed_at"], moment)
+    current = [s for s in stations if s["current"]]
+    ranked = [s for s in current if s["rain_24h_mm"] is not None and 0 <= s["rain_24h_mm"] <= RAIN_24H_MAX_MM]
+    return {"station_count": len(stations), "status_counts": tally(stations), "fresh_hours": FRESH_HOURS,
+            "current_station_count": len(current), "current_status_counts": tally(current),
+            "implausible_24h": sum(1 for s in current if s["rain_24h_mm"] is not None and not 0 <= s["rain_24h_mm"] <= RAIN_24H_MAX_MM),
+            "wettest_24h": sorted(ranked, key=lambda s: -s["rain_24h_mm"])[:15], "stations": stations}
 
 
 def organise_list(payload, limit=60):
@@ -201,14 +239,14 @@ def organise_list(payload, limit=60):
     return {"record_count": len(rows), "columns": columns, "records": records}
 
 
-def organise(kind, body, url):
+def organise(kind, body, url, moment=None):
     if kind == "html":
         return extract_html(body, url)
     payload = json.loads(body.decode("utf-8"))
     if kind == "bipad-river":
-        return organise_river(payload)
+        return organise_river(payload, moment)
     if kind == "bipad-rain":
-        return organise_rain(payload)
+        return organise_rain(payload, moment)
     if kind == "json-list":
         return organise_list(payload)
     raise ValueError(f"Unknown source kind {kind}")
@@ -236,14 +274,17 @@ def changes(kind, previous, current):
 def summarise(entries):
     river = next((e["content"] for e in entries if e["kind"] == "bipad-river" and e.get("content")), None)
     rain = next((e["content"] for e in entries if e["kind"] == "bipad-rain" and e.get("content")), None)
-    counts = (river or {}).get("status_counts", {})
+    # Headline counts use only current readings; a stale station keeps whatever status it last reported.
+    counts = (river or {}).get("current_status_counts", {})
     return {
         "sources_fetched": sum(e["status"] == "fetched" for e in entries),
         "sources_last_known": sum(bool(e.get("last_known")) for e in entries),
         "sources_unavailable": sum(e["status"] != "fetched" and not e.get("content") for e in entries),
-        "rivers_above_danger": counts.get("ABOVE DANGER LEVEL") if river else None,
-        "rivers_above_warning": counts.get("ABOVE WARNING LEVEL") if river else None,
-        "rain_stations_above_warning": (rain or {}).get("status_counts", {}).get("ABOVE WARNING LEVEL") if rain else None,
+        "rivers_above_danger": counts.get("ABOVE DANGER LEVEL", 0) if river else None,
+        "rivers_above_warning": counts.get("ABOVE WARNING LEVEL", 0) if river else None,
+        "rivers_current": river.get("current_station_count") if river else None,
+        "rain_current": rain.get("current_station_count") if rain else None,
+        "rain_stations_above_warning": (rain or {}).get("current_status_counts", {}).get("ABOVE WARNING LEVEL", 0) if rain else None,
         "new_links": sum(len(e.get("changes", {}).get("new_links", [])) for e in entries),
         "new_records": sum(len(e.get("changes", {}).get("new_records", [])) for e in entries),
     }
@@ -268,7 +309,7 @@ def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None, r
                 if status >= 400:
                     entry["status"] = "unreachable"
                 else:
-                    content = organise(source["kind"], body, final_url)
+                    content = organise(source["kind"], body, final_url, moment)
                     entry.update({"status": "fetched", "fetched_at": iso(moment), "sha256": hashlib.sha256(body).hexdigest(), "content": content,
                                   "changes": changes(source["kind"], (prior or {}).get("content"), content)})
                     raw[source["id"]] = body

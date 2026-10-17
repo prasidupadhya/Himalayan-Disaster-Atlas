@@ -22,7 +22,7 @@ RIVER = {"results": [
 ]}
 RAIN = {"results": [
     {"id": 10, "title": "SYNTHETIC Gauge X", "status": "BELOW WARNING LEVEL", "averages": [{"interval": 1, "value": 0.5}, {"interval": 24, "value": 12.0}], "measuredOn": "2026-10-17T05:45:00+05:45"},
-    {"id": 11, "title": "SYNTHETIC Gauge Y", "status": "ABOVE WARNING LEVEL", "averages": [{"interval": 24, "value": 88.0}]},
+    {"id": 11, "title": "SYNTHETIC Gauge Y", "status": "ABOVE WARNING LEVEL", "averages": [{"interval": 24, "value": 88.0}], "measuredOn": "2026-10-16T18:00:00+05:45"},
     {"id": 12, "title": "SYNTHETIC Gauge Z", "status": "BELOW WARNING LEVEL", "averages": []},
 ]}
 SOURCES = [
@@ -46,15 +46,29 @@ def allow(url, fetcher):
 
 class OrganiseTests(unittest.TestCase):
     def test_river_counts_and_alert_order_keep_unknown_levels_null(self):
-        river = organise_river(RIVER)
+        river = organise_river(RIVER, MOMENT)
         self.assertEqual(river["status_counts"], {"ABOVE DANGER LEVEL": 1, "ABOVE WARNING LEVEL": 1, "BELOW WARNING LEVEL": 1})
         self.assertEqual([s["id"] for s in river["alert_stations"]], ["2", "1"])
         self.assertIsNone(next(s for s in river["stations"] if s["id"] == "3")["water_level_m"])
 
     def test_rain_ranks_only_stations_with_a_24h_value(self):
-        rain = organise_rain(RAIN)
+        rain = organise_rain(RAIN, MOMENT)
         self.assertEqual([s["id"] for s in rain["wettest_24h"]], ["11", "10"])
         self.assertIsNone(next(s for s in rain["stations"] if s["id"] == "12")["rain_24h_mm"])
+
+    def test_old_readings_keep_their_flag_but_are_not_counted_as_current(self):
+        stale = {**RIVER["results"][1], "id": 4, "title": "SYNTHETIC Station D", "waterLevelOn": "2024-11-12T23:10:00+05:45"}
+        river = organise_river({"results": [*RIVER["results"], stale]}, MOMENT)
+        self.assertEqual(river["status_counts"]["ABOVE DANGER LEVEL"], 2)
+        self.assertEqual(river["current_status_counts"], {"ABOVE DANGER LEVEL": 1, "ABOVE WARNING LEVEL": 1})
+        self.assertEqual((river["current_station_count"], [s["id"] for s in river["stale_alert_stations"]]), (2, ["4"]))
+
+    def test_stale_and_impossible_rain_totals_are_not_ranked(self):
+        rows = [*RAIN["results"], {"id": 13, "title": "SYNTHETIC broken gauge", "status": "ABOVE WARNING LEVEL", "averages": [{"interval": 24, "value": 858993472.4}], "measuredOn": "2026-10-17T05:00:00+05:45"},
+                {"id": 14, "title": "SYNTHETIC old gauge", "status": "ABOVE WARNING LEVEL", "averages": [{"interval": 24, "value": 300.0}], "measuredOn": "2021-09-13T17:00:45.480364+05:45"}]
+        rain = organise_rain({"results": rows}, MOMENT)
+        self.assertEqual([s["id"] for s in rain["wettest_24h"]], ["11", "10"])
+        self.assertEqual((rain["implausible_24h"], rain["current_status_counts"]["ABOVE WARNING LEVEL"]), (1, 2))
 
     def test_unknown_api_copies_plain_fields_only_and_reports_new_records(self):
         payload = {"count": 9999999, "results": [{"id": 7, "title": "SYNTHETIC incident", "nested": {"x": 1}, "loss": None}, {"id": 8, "title": "SYNTHETIC second"}]}
@@ -77,8 +91,8 @@ class OrganiseTests(unittest.TestCase):
             organise_river({"detail": "not found"})
 
     def test_status_changes_compare_with_the_previous_copy(self):
-        before = organise_river(RIVER)
-        after = organise_river({"results": [{**RIVER["results"][0], "status": "BELOW WARNING LEVEL"}, *RIVER["results"][1:]]})
+        before = organise_river(RIVER, MOMENT)
+        after = organise_river({"results": [{**RIVER["results"][0], "status": "BELOW WARNING LEVEL"}, *RIVER["results"][1:]]}, MOMENT)
         self.assertEqual(changes("bipad-river", before, after)["status_changes"], [{"id": "1", "name": "SYNTHETIC Station A", "from": "ABOVE WARNING LEVEL", "to": "BELOW WARNING LEVEL"}])
         self.assertEqual(changes("bipad-river", None, after), {"compared_with": None})
 
