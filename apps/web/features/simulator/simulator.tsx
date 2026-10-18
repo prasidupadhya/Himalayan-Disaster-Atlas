@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { decodeScenario, encodeScenario, type FloodScenario, type Scenario } from '../../lib/flood-scenario';
 import type { QuakeScenario } from '../../lib/earthquake';
-import { LanguageSwitch, UI, useLanguage } from '../../lib/i18n';
+import { UI, useLanguage } from '../../lib/i18n';
 import { FloodPanel } from './flood-panel';
 import { QuakePanel } from './quake-panel';
 import { simCopy } from './copy';
@@ -15,7 +15,7 @@ function initialScenario(): Scenario | null {
 }
 
 export function Simulator() {
-  const [lang, setLang] = useLanguage();
+  const [lang] = useLanguage();
   const t = UI[lang], c = simCopy(lang);
   const [initial] = useState(initialScenario);
   const [tab, setTab] = useState<Tab>(() => initial?.kind === 'earthquake' || (!initial && new URLSearchParams(window.location.search).get('tab') === 'earthquake') ? 'earthquake' : 'flood');
@@ -43,7 +43,7 @@ export function Simulator() {
 
   return <div className="sim-page" lang={lang}>
     <header className="sim-hero">
-      <div className="sim-hero-top"><p className="eyebrow">{c.eyebrow}</p><LanguageSwitch lang={lang} onChange={setLang} /></div>
+      <div className="sim-hero-top"><p className="eyebrow">{c.eyebrow}</p></div>
       <h1>{t.simTitle}</h1>
       <p className="intro">{t.simIntro}</p>
       <div className="sim-notice" role="note"><span aria-hidden="true">◇</span><div><strong>{t.scenarioNotice}.</strong> {t.authoritiesLead} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url} rel="noopener">{a.name}</a></span>)}.</div></div>

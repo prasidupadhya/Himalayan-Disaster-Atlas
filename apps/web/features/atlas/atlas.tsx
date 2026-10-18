@@ -9,6 +9,7 @@ import { ADMIN_MANIFESTS, loadDataset, UnavailableError } from '../../lib/datase
 import { mountAdministrativeDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
 import { administrativeName, administrativeNameReview } from '../../lib/administrative-names';
+import { digits, T, useLanguage } from '../../lib/i18n';
 import { GlacialLakes, type LakeChoice } from '../glacial-lakes/glacial-lakes';
 import { Hydropower } from '../hydropower/hydropower';
 import { Infrastructure } from '../infrastructure/infrastructure';
@@ -17,11 +18,15 @@ import { Rivers } from '../rivers/rivers';
 import { Fold, openFoldFor } from './fold';
 import { MapKey } from './map-key';
 import { SimulationUI } from '../simulation-ui/simulation-ui';
-import { Earthquakes } from '../earthquakes/earthquakes';
 
-const Glaciers = dynamic(() => import('../glaciers/glaciers').then(m => m.Glaciers), { loading: () => <p role="status">Loading glacier outlines…</p> });
+const Glaciers = dynamic(() => import('../glaciers/glaciers').then(m => m.Glaciers), { loading: () => <p role="status"><T en="Loading glacier outlines…" ne="हिमनदीका रूपरेखा लोड गर्दै…" /></p> });
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
+const LEVEL_LABELS_NE = ['देश', 'प्रदेश', 'जिल्ला', 'स्थानीय तह र विशेष क्षेत्र'] as const;
+const MAP_ERRORS_NE: Record<string, string> = {
+  'The map could not render. You can still inspect the boundary records below.': 'नक्सा देखाउन सकिएन। तलका सीमा अभिलेखहरू भने अझै हेर्न सकिन्छ।',
+  'Interactive mapping is unavailable in this browser. The boundary records remain accessible below.': 'यो ब्राउजरमा अन्तरक्रियात्मक नक्सा उपलब्ध छैन। सीमा अभिलेखहरू तल हेर्न सकिन्छ।',
+};
 
 function frameNepal(map: Map, bbox: [number, number, number, number]) {
   const [west, south, east, north] = bbox;
@@ -52,6 +57,8 @@ export function Atlas() {
   const [lakeTrace, setLakeTrace] = useState<(LakeChoice & { n: number }) | null>(null);
   const [boundaryQuery, setBoundaryQuery] = useState('');
   const [educationalSimulation, setEducationalSimulation] = useState(false);
+  const [lang] = useLanguage();
+  const t = (en: string, ne: string) => lang === 'ne' ? ne : en;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -212,59 +219,58 @@ export function Atlas() {
   return <div className="atlas-workspace atlas-mission">
     <aside className="atlas-panel">
       <div className="atlas-panel-header">
-        <p className="eyebrow">Nepal / floods, glacial lakes and earthquakes</p>
-        <h1>Explore Nepal’s lakes, rivers & earthquakes</h1>
-        <p>Pick a glacial lake and follow its water downstream, or read the record of earthquakes around Nepal.</p>
+        <p className="eyebrow">{t('Nepal / glacial lakes and rivers', 'नेपाल / हिमताल र नदीहरू')}</p>
+        <h1>{t('Explore Nepal’s glacial lakes and rivers', 'नेपालका हिमताल र नदीहरू अन्वेषण गर्नुहोस्')}</h1>
+        <p>{t('Pick a glacial lake and follow its water downstream, river by river.', 'एउटा हिमताल छान्नुहोस् र त्यसको पानी नदी-नदी हुँदै तल कहाँ जान्छ पछ्याउनुहोस्।')}</p>
         <DataState state={resource} retry={retry} />
-        <nav className="atlas-shortcuts" aria-label="Atlas controls" onClickCapture={event => { const href = (event.target as Element).closest('a')?.getAttribute('href'); if (href?.startsWith('#')) openFoldFor(href.slice(1)); }}><a href="#lake-controls">Lakes</a><a href="#river-controls">Rivers</a><a href="#earthquake-controls">Earthquakes</a><a href="#terrain-controls">Terrain</a><a href="#boundary-controls">Boundaries</a><a href="#additional-controls">Infrastructure</a></nav>
+        <nav className="atlas-shortcuts" aria-label={t('Atlas controls', 'एटलस नियन्त्रण')} onClickCapture={event => { const href = (event.target as Element).closest('a')?.getAttribute('href'); if (href?.startsWith('#')) openFoldFor(href.slice(1)); }}><a href="#lake-controls">{t('Lakes', 'तालहरू')}</a><a href="#river-controls">{t('Rivers', 'नदीहरू')}</a><a href="#terrain-controls">{t('Terrain', 'भू-आकृति')}</a><a href="#boundary-controls">{t('Boundaries', 'सीमाहरू')}</a><a href="#additional-controls">{t('Infrastructure', 'पूर्वाधार')}</a></nav>
       </div>
       <div id="lake-controls" tabIndex={-1} className="atlas-anchor"><GlacialLakes key={`lakes-${attempt}`} map={mapReady ? interactiveMap : null} onSelect={setLake} onTrace={choice => { setLakeTrace(previous => ({ ...choice, n: (previous?.n ?? 0) + 1 })); document.getElementById('downstream-trace')?.scrollIntoView({ block: 'nearest' }); }} />
-        <section className="thematic-controls" aria-label="Glacier outlines"><h2>Glaciers</h2><p>Show the glacier outlines that feed the lakes (about 1.3 MB).</p><button type="button" onClick={() => setGlaciers(value => !value)}>{glaciers ? 'Hide glacier outlines' : 'Show glacier outlines'}</button>{glaciers && <Glaciers key={`glaciers-${attempt}`} map={mapReady ? interactiveMap : null} />}</section>
+        <section className="thematic-controls" aria-label={t('Glacier outlines', 'हिमनदीका रूपरेखा')}><h2>{t('Glaciers', 'हिमनदीहरू')}</h2><p>{t('Show the glacier outlines that feed the lakes (about 1.3 MB).', 'तालहरूलाई पानी दिने हिमनदीका रूपरेखा देखाउनुहोस् (करिब १.३ MB)।')}</p><button type="button" onClick={() => setGlaciers(value => !value)}>{glaciers ? t('Hide glacier outlines', 'हिमनदीका रूपरेखा लुकाउनुहोस्') : t('Show glacier outlines', 'हिमनदीका रूपरेखा देखाउनुहोस्')}</button>{glaciers && <Glaciers key={`glaciers-${attempt}`} map={mapReady ? interactiveMap : null} />}</section>
       </div>
       <div id="river-controls" tabIndex={-1} className="atlas-anchor"><Rivers key={`rivers-${attempt}`} map={mapReady ? interactiveMap : null} snap={lakeTrace} /></div>
-      <div id="earthquake-controls" tabIndex={-1} className="atlas-anchor"><Earthquakes key={`earthquakes-${attempt}`} map={mapReady ? interactiveMap : null} /></div>
-      <section className="thematic-controls" aria-label="GLOF modelling availability"><h2>Lake outburst modelling</h2><p>{lake ? `Selected lake: ${lake.id}. Physical model inputs required.` : 'Select a lake above to identify the modelling subject.'}</p><p>Flood extent and damage: <strong>UNAVAILABLE</strong>. For a labelled hypothetical corridor with ranges, use the scenario simulator.</p><p><a className="primary-action" href="/simulate/">Run an outburst scenario</a></p><details><summary>Why the map shows no flood extent</summary><p>A lake point or a downstream river line cannot identify inundated places or destroyed assets. This inventory has no verified lake outlet-to-river connection, breach parameters or validated hydraulic model.</p><p>Use river tracing for connectivity only. Infrastructure is geographic context, not a list of affected assets.</p><p><a href="/methodology/#glof-physical">Physical GLOF project: scope, required inputs and validation</a></p></details><details onToggle={event => setEducationalSimulation(event.currentTarget.open)}><summary>Educational river simulation</summary>{educationalSimulation && <SimulationUI key={`focused-simulation-${attempt}`} map={mapReady ? interactiveMap : null} />}</details></section>
-      <Fold title="More layers: terrain, boundaries and infrastructure">
+      <section className="thematic-controls" aria-label={t('GLOF modelling availability', 'हिमताल विस्फोट (GLOF) मोडेलिङको उपलब्धता')}><h2>{t('Lake outburst modelling', 'हिमताल विस्फोट मोडेलिङ')}</h2><p>{lake ? t(`Selected lake: ${lake.id}. Physical model inputs required.`, `छानिएको ताल: ${lake.id}। भौतिक मोडेलका इनपुटहरू आवश्यक छन्।`) : t('Select a lake above to identify the modelling subject.', 'मोडेलिङको विषय पहिचान गर्न माथिबाट एउटा ताल छान्नुहोस्।')}</p><p>{t('Flood extent and damage: ', 'बाढीको क्षेत्र र क्षति: ')}<strong>{t('UNAVAILABLE', 'अनुपलब्ध (UNAVAILABLE)')}</strong>{t('. For a labelled hypothetical corridor with ranges, use the scenario simulator.', '। दायरासहित चिनाइएको काल्पनिक करिडोरका लागि परिदृश्य सिमुलेटर प्रयोग गर्नुहोस्।')}</p><p><a className="primary-action" href="/simulate/">{t('Run an outburst scenario', 'विस्फोट परिदृश्य चलाउनुहोस्')}</a></p><details><summary>{t('Why the map shows no flood extent', 'नक्सामा बाढीको क्षेत्र किन देखाइँदैन')}</summary><p>{t('A lake point or a downstream river line cannot identify inundated places or destroyed assets. This inventory has no verified lake outlet-to-river connection, breach parameters or validated hydraulic model.', 'तालको बिन्दु वा तलतिरको नदी रेखाले डुबानमा परेका ठाउँ वा नष्ट संरचना पहिचान गर्न सक्दैन। यस अभिलेखमा तालको निकास र नदीबीचको प्रमाणित जडान, फुटान (breach) मापदण्ड वा प्रमाणित जलगतिकीय (hydraulic) मोडेल छैन।')}</p><p>{t('Use river tracing for connectivity only. Infrastructure is geographic context, not a list of affected assets.', 'नदी पछ्याउने सुविधा जडान बुझ्न मात्र प्रयोग गर्नुहोस्। पूर्वाधार भौगोलिक सन्दर्भ मात्र हो, प्रभावित संरचनाको सूची होइन।')}</p><p><a href="/methodology/#glof-physical">{t('Physical GLOF project: scope, required inputs and validation', 'भौतिक हिमताल विस्फोट (GLOF) परियोजना: दायरा, आवश्यक इनपुट र प्रमाणीकरण')}</a></p></details><details onToggle={event => setEducationalSimulation(event.currentTarget.open)}><summary>{t('Educational river simulation', 'शैक्षिक नदी सिमुलेसन')}</summary>{educationalSimulation && <SimulationUI key={`focused-simulation-${attempt}`} map={mapReady ? interactiveMap : null} />}</details></section>
+      <Fold title={t('More layers: terrain, boundaries and infrastructure', 'थप तहहरू: भू-आकृति, सीमा र पूर्वाधार')}>
       <div id="terrain-controls" tabIndex={-1} className="atlas-anchor"><Terrain key={attempt} map={mapReady ? interactiveMap : null} /></div>
-      <section id="boundary-controls" tabIndex={-1} className="layer-controls" aria-label="Map layers"><h2>Boundary levels</h2>
-        {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
-        <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
+      <section id="boundary-controls" tabIndex={-1} className="layer-controls" aria-label={t('Map layers', 'नक्साका तहहरू')}><h2>{t('Boundary levels', 'सीमाका तहहरू')}</h2>
+        {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {t(label, LEVEL_LABELS_NE[index])}</label>)}
+        <p className="muted">{t('Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.', 'जिल्लाहरू जुम ६ देखि र स्थानीय तहहरू जुम ८ देखि देखिन्छन्। सुन्तला रङका क्षेत्रहरू स्रोतमा संरक्षित वा विशेष क्षेत्रका भाग हुन्।')}</p>
       </section>
       <div id="additional-controls" tabIndex={-1} className="atlas-anchor">
-      <section className="thematic-controls" aria-label="Infrastructure context"><h2>Infrastructure context</h2><p>Load roads, bridges, facilities and hydropower only when needed. Coverage is incomplete; proximity is not damage.</p><button type="button" onClick={() => setAdditionalLayers(value => !value)}>{additionalLayers ? 'Unload infrastructure context' : 'Load infrastructure context'}</button>{additionalLayers && <><Hydropower key={`hydropower-${attempt}`} map={mapReady ? interactiveMap : null} /><Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? interactiveMap : null} /></>}</section>
+      <section className="thematic-controls" aria-label={t('Infrastructure context', 'पूर्वाधार सन्दर्भ')}><h2>{t('Infrastructure context', 'पूर्वाधार सन्दर्भ')}</h2><p>{t('Load roads, bridges, facilities and hydropower only when needed. Coverage is incomplete; proximity is not damage.', 'सडक, पुल, सेवा केन्द्र र जलविद्युत् आवश्यक परेको बेला मात्र लोड गर्नुहोस्। दायरा अपूर्ण छ; नजिक हुनु क्षति हुनु होइन।')}</p><button type="button" onClick={() => setAdditionalLayers(value => !value)}>{additionalLayers ? t('Unload infrastructure context', 'पूर्वाधार सन्दर्भ हटाउनुहोस्') : t('Load infrastructure context', 'पूर्वाधार सन्दर्भ लोड गर्नुहोस्')}</button>{additionalLayers && <><Hydropower key={`hydropower-${attempt}`} map={mapReady ? interactiveMap : null} /><Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? interactiveMap : null} /></>}</section>
       </div>
       </Fold>
-      {evidence && <Fold title="Sources and evidence for this map"><Evidence metadata={evidence} /></Fold>}
+      {evidence && <Fold title={t('Sources and evidence for this map', 'यस नक्साका स्रोत र प्रमाण')}><Evidence metadata={evidence} /></Fold>}
     </aside>
     <div className="map-column">
       <div className="map-shell" id="atlas-map">
-        <a className="map-skip-link" href="#accessible-boundary-records">Skip interactive map to boundary records</a>
-        <p id="atlas-map-alternative" className="sr-only">The map is a visual navigation surface. Administrative boundaries can also be identified with the labelled boundary selector and textual details immediately after the map. The Atlas panel contains labelled controls and evidence text for thematic layers.</p>
-        <div ref={container} className="map" role="region" aria-label="Interactive Nepal administrative boundary map" aria-describedby="atlas-map-alternative" data-map-ready={mapReady} />
-        <div className="map-caption"><span className="boundary-key" /> COD-AB v02 · click a boundary to inspect it</div>
-        {datasets && !mapReady && !mapError && <div className="map-message" role="status">Preparing the interactive map…</div>}
-        {mapError && <div className="map-message" role="alert">{mapError}</div>}
+        <a className="map-skip-link" href="#accessible-boundary-records">{t('Skip interactive map to boundary records', 'अन्तरक्रियात्मक नक्सा छाडेर सीमा अभिलेखमा जानुहोस्')}</a>
+        <p id="atlas-map-alternative" className="sr-only">{t('The map is a visual navigation surface. Administrative boundaries can also be identified with the labelled boundary selector and textual details immediately after the map. The Atlas panel contains labelled controls and evidence text for thematic layers.', 'नक्सा दृश्य मार्गनिर्देशनका लागि हो। नक्सापछि तुरुन्तै रहेको लेबलसहितको सीमा छनोट र पाठ विवरणबाट पनि प्रशासनिक सीमाहरू पहिचान गर्न सकिन्छ। एटलस प्यानलमा विषयगत तहहरूका लेबलसहितका नियन्त्रण र प्रमाणको पाठ छ।')}</p>
+        <div ref={container} className="map" role="region" aria-label={t('Interactive Nepal administrative boundary map', 'नेपालको अन्तरक्रियात्मक प्रशासनिक सीमा नक्सा')} aria-describedby="atlas-map-alternative" data-map-ready={mapReady} />
+        <div className="map-caption"><span className="boundary-key" /> COD-AB v02 · {t('click a boundary to inspect it', 'विवरण हेर्न सीमामा क्लिक गर्नुहोस्')}</div>
+        {datasets && !mapReady && !mapError && <div className="map-message" role="status">{t('Preparing the interactive map…', 'अन्तरक्रियात्मक नक्सा तयार गर्दै…')}</div>}
+        {mapError && <div className="map-message" role="alert">{t(mapError, MAP_ERRORS_NE[mapError] ?? mapError)}</div>}
         <button className="reset-map" disabled={!mapReady} onClick={() => {
           if (datasets && mapRef.current) {
             frameNepal(mapRef.current, datasets[0].metadata.spatial_coverage.bbox);
           }
-        }}>Reset view</button>
+        }}>{t('Reset view', 'दृश्य पहिलेजस्तै बनाउनुहोस्')}</button>
       </div>
       <MapKey />
-      <p className="muted map-attribution-note">Data attribution: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors (ODbL)</a> · <a href="/licenses/">Terrain and all source licences</a></p>
-      <section className="feature-list" id="accessible-boundary-records" tabIndex={-1} aria-label="Accessible boundary records">
-        <h2>Identify an administrative unit</h2>
-        <p className="muted">The searchable list provides the same identification as clicking the map.</p>
-        <label className="record-picker">Find a district or municipality<input type="search" value={boundaryQuery} onChange={event => setBoundaryQuery(event.target.value)} placeholder="Kathmandu, Chitwan, Manang Ngisyang…" /></label>
-        <label className="record-picker">Boundary record<select value={selected ?? ''} onChange={event => selectFeature(event.target.value)} disabled={!datasets}>
-          <option value="">Select a boundary…</option>
-          {datasets?.map((dataset, level) => <optgroup key={level} label={LEVEL_LABELS[level]}>{dataset.collection.features.filter(item => String(item.id) === selected || [administrativeName(item.properties), item.properties.name, item.properties.pcode, ...(item.properties.aliases ?? [])].some(value => value?.toLocaleLowerCase('en-US').includes(boundaryQuery.trim().toLocaleLowerCase('en-US')))).map(item => <option key={item.id} value={String(item.id)}>{administrativeName(item.properties)} ({item.properties.pcode})</option>)}</optgroup>)}
+      <p className="muted map-attribution-note">{t('Data attribution: ', 'डेटाको श्रेय: ')}<a href="https://www.openstreetmap.org/copyright">{t('© OpenStreetMap contributors (ODbL)', '© OpenStreetMap योगदानकर्ताहरू (ODbL)')}</a> · <a href="/licenses/">{t('Terrain and all source licences', 'भू-आकृति र सबै स्रोतका इजाजतपत्र')}</a></p>
+      <section className="feature-list" id="accessible-boundary-records" tabIndex={-1} aria-label={t('Accessible boundary records', 'पहुँचयोग्य सीमा अभिलेख')}>
+        <h2>{t('Identify an administrative unit', 'प्रशासनिक इकाइ पहिचान गर्नुहोस्')}</h2>
+        <p className="muted">{t('The searchable list provides the same identification as clicking the map.', 'खोज्न मिल्ने यो सूचीले नक्सामा क्लिक गर्दा जस्तै पहिचान दिन्छ।')}</p>
+        <label className="record-picker">{t('Find a district or municipality', 'जिल्ला वा नगरपालिका/गाउँपालिका खोज्नुहोस्')}<input type="search" value={boundaryQuery} onChange={event => setBoundaryQuery(event.target.value)} placeholder="Kathmandu, Chitwan, Manang Ngisyang…" /></label>
+        <label className="record-picker">{t('Boundary record', 'सीमा अभिलेख')}<select value={selected ?? ''} onChange={event => selectFeature(event.target.value)} disabled={!datasets}>
+          <option value="">{t('Select a boundary…', 'सीमा छान्नुहोस्…')}</option>
+          {datasets?.map((dataset, level) => <optgroup key={level} label={t(LEVEL_LABELS[level], LEVEL_LABELS_NE[level])}>{dataset.collection.features.filter(item => String(item.id) === selected || [administrativeName(item.properties), item.properties.name, item.properties.pcode, ...(item.properties.aliases ?? [])].some(value => value?.toLocaleLowerCase('en-US').includes(boundaryQuery.trim().toLocaleLowerCase('en-US')))).map(item => <option key={item.id} value={String(item.id)}>{administrativeName(item.properties)} ({item.properties.pcode})</option>)}</optgroup>)}
         </select></label>
         <div className="selection" aria-live="polite">{feature ? <>
           <p className="eyebrow">{feature.properties.admin_category?.replace('_', ' ')}</p>
-          <h3>{administrativeName(feature.properties)}</h3>{administrativeName(feature.properties) !== feature.properties.name && <p className="muted">Source spelling: {feature.properties.name}. <a href={administrativeNameReview(feature.properties)}>Name reference</a>.</p>}
-          <dl><dt>P-code</dt><dd>{feature.properties.pcode}</dd><dt>Parent</dt><dd>{feature.properties.admin_level === 0 ? 'None (country)' : feature.properties.parent_name}</dd><dt>Source area</dt><dd>{feature.properties.value === null ? 'UNKNOWN' : `${feature.properties.value.toLocaleString('en-US', { maximumFractionDigits: 1 })} km²`}</dd><dt>Valid from</dt><dd>{feature.properties.valid_from?.slice(0, 10)}</dd><dt>Source version</dt><dd>{feature.properties.source_version}</dd><dt>Aliases</dt><dd>{feature.properties.aliases?.length ? feature.properties.aliases.join(', ') : 'UNKNOWN'}</dd></dl>
-        </> : <p>Select a boundary to inspect its stable identifier, hierarchy, and source metadata.</p>}</div>
+          <h3>{administrativeName(feature.properties)}</h3>{administrativeName(feature.properties) !== feature.properties.name && <p className="muted">{t('Source spelling: ', 'स्रोतको हिज्जे: ')}{feature.properties.name}. <a href={administrativeNameReview(feature.properties)}>{t('Name reference', 'नामको सन्दर्भ')}</a>.</p>}
+          <dl><dt>P-code</dt><dd>{feature.properties.pcode}</dd><dt>{t('Parent', 'माथिल्लो एकाइ')}</dt><dd>{feature.properties.admin_level === 0 ? t('None (country)', 'छैन (देश)') : feature.properties.parent_name}</dd><dt>{t('Source area', 'स्रोतअनुसार क्षेत्रफल')}</dt><dd>{feature.properties.value === null ? t('UNKNOWN', 'अज्ञात (UNKNOWN)') : `${digits(feature.properties.value.toLocaleString('en-US', { maximumFractionDigits: 1 }), lang)} km²`}</dd><dt>{t('Valid from', 'लागू मिति')}</dt><dd>{feature.properties.valid_from?.slice(0, 10)}</dd><dt>{t('Source version', 'स्रोत संस्करण')}</dt><dd>{feature.properties.source_version}</dd><dt>{t('Aliases', 'अन्य नामहरू')}</dt><dd>{feature.properties.aliases?.length ? feature.properties.aliases.join(', ') : t('UNKNOWN', 'अज्ञात (UNKNOWN)')}</dd></dl>
+        </> : <p>{t('Select a boundary to inspect its stable identifier, hierarchy, and source metadata.', 'स्थिर पहिचानकर्ता, तह संरचना र स्रोत मेटाडेटा हेर्न सीमा छान्नुहोस्।')}</p>}</div>
       </section>
     </div>
   </div>;

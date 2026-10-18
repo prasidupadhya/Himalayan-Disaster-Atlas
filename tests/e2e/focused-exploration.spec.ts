@@ -3,11 +3,11 @@ test('focused exploration loads lakes and names without historical or unrelated 
   const requests: string[] = [];
   page.on('request', r => requests.push(r.url()));
   await page.goto('/atlas/');
-  await expect(page.getByRole('heading', { name: 'Explore Nepal’s lakes, rivers & earthquakes' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Explore Nepal’s glacial lakes and rivers' })).toBeVisible();
   await expect(page.getByRole('region', { name: 'Glacial lakes', exact: true })).toHaveAttribute('data-glacial-lakes-state', /ready|stale/, { timeout: 15_000 });
   await expect(page.getByRole('region', { name: 'GLOF modelling availability' })).toContainText('UNAVAILABLE');
-  await expect(page.getByRole('region', { name: 'Earthquakes', exact: true })).toHaveAttribute('data-earthquakes-state', /ready|stale/, { timeout: 15_000 });
-  expect(requests.filter(url => /\/data\/nepal-(disaster-events|reported-|population|rainfall|hydrology|mountains|glaciers-)/.test(url))).toEqual([]);
+  await expect(page.getByRole('region', { name: 'Earthquakes', exact: true })).toHaveCount(0);
+  expect(requests.filter(url => /\/data\/nepal-(region-earthquakes|disaster-events|reported-|population|rainfall|hydrology|mountains|glaciers-)/.test(url))).toEqual([]);
   await page.getByLabel('Find a river or reach').fill('Trishuli');
   const names = page.getByLabel('River or reach', { exact: true });
   await expect(names).toContainText('Trishuli');

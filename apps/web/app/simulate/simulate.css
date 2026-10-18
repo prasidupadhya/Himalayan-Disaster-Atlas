@@ -6,10 +6,6 @@
 .sim-hero .intro { margin: 0; }
 .sim-notice { display: flex; gap: .85rem; align-items: flex-start; margin: .25rem 0 0; padding: .9rem 1.1rem; border: 1px solid #8a4d12; border-left-width: 6px; border-radius: var(--radius-md); background: #fbf1e4; color: var(--ink-strong); font-size: .95rem; }
 .sim-notice > span { font-size: 1.2rem; line-height: 1.2; color: #8a4d12; }
-.language-switch { display: inline-flex; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); overflow: hidden; background: var(--surface); }
-.language-switch button { min-height: 40px; border: 0; border-radius: 0; padding: .35rem .85rem; font-size: .88rem; }
-.language-switch button + button { border-left: 1px solid var(--line-strong); }
-.language-switch button[aria-pressed=true], .language-switch button[aria-pressed=true]:hover { background: var(--ink-strong); color: #fff; }
 
 .sim-tabs { display: flex; flex-wrap: wrap; gap: .5rem; border-bottom: 1px solid var(--line); }
 .sim-tabs [role=tab] { min-height: 48px; padding: .6rem 1.1rem; border: 1px solid transparent; border-bottom: 0; border-radius: var(--radius-md) var(--radius-md) 0 0; background: transparent; color: var(--muted-strong); font-weight: 700; }

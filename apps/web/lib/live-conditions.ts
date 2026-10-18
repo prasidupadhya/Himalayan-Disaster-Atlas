@@ -16,6 +16,28 @@ const NEPAL_OFFSET_MINUTES = 345;
 const NE_DIGITS = '०१२३४५६७८९';
 const FEED_PURPOSE: Record<string, Purpose> = { usgs: 'reported_event', 'noaa-gfs': 'forecast', openaq: 'observation' };
 export const FEED_TITLES: Record<string, string> = { usgs: 'USGS earthquake summaries', 'noaa-gfs': 'NOAA GFS precipitation forecast', openaq: 'OpenAQ PM2.5' };
+/** Project-authored Nepali feed titles; dataset and agency names stay as published. */
+export const FEED_TITLES_NE: Record<string, string> = { usgs: 'USGS भूकम्प सारांश', 'noaa-gfs': 'NOAA GFS वर्षा पूर्वानुमान', openaq: 'OpenAQ PM2.5' };
+export const feedTitle = (feedId: string, lang: Lang = 'en') => (lang === 'ne' ? FEED_TITLES_NE[feedId] : FEED_TITLES[feedId]) ?? feedId;
+/** Nepali for the fixed freshness reasons produced by the live contract; English is returned unchanged. */
+const REASONS_NE: Record<string, string> = {
+  'No verified snapshot is available.': 'कुनै प्रमाणित स्न्यापसट उपलब्ध छैन।',
+  'Clock or publication time cannot be verified.': 'घडी वा प्रकाशन समय प्रमाणित गर्न सकिँदैन।',
+  'Latest fetch failed; this is the last verified snapshot.': 'पछिल्लो डाउनलोड असफल भयो; यो पछिल्लो प्रमाणित स्न्यापसट हो।',
+  'Source freshness is UNKNOWN.': 'स्रोतको ताजापन अज्ञात (UNKNOWN) छ।',
+  'Official warning validity is UNKNOWN.': 'आधिकारिक चेतावनीको मान्य अवधि अज्ञात (UNKNOWN) छ।',
+  'Source freshness deadline or validity has expired.': 'स्रोतको ताजापन समयसीमा वा मान्य अवधि सकिएको छ।',
+  'Workflow freshness cannot be confirmed.': 'कार्यप्रवाह (workflow) को ताजापन पुष्टि गर्न सकिँदैन।',
+  'Verified snapshot within its declared freshness policy.': 'घोषित ताजापन नीतिभित्रको प्रमाणित स्न्यापसट।',
+  'Valid empty snapshot; this is not a failed fetch or an all-clear.': 'मान्य खाली स्न्यापसट; यो असफल डाउनलोड होइन, सबै सुरक्षित छ भन्ने सूचना पनि होइन।',
+  'Feed is not configured in this publication.': 'यस प्रकाशनमा यो फिड कन्फिगर गरिएको छैन।',
+};
+export function feedReason(view: Pick<FeedView, 'reason' | 'error'>, lang: Lang = 'en') {
+  if (lang === 'en') return view.reason;
+  // Technical verification detail stays as produced; only the surrounding sentence is translated.
+  if (view.error) return `प्रमाणीकरण असफल: ${view.error}। सामग्री रोकिएको छ।`;
+  return REASONS_NE[view.reason] ?? view.reason;
+}
 
 export function localDigits(text: string, lang: Lang) {
   return lang === 'ne' ? text.replace(/[0-9]/g, digit => NE_DIGITS[Number(digit)]) : text;
@@ -168,12 +190,12 @@ export function buildBulletin(publication: LivePublication | null, views: FeedVi
 
 // Sequential display classes for model accumulation. Breaks are presentation bins, not hazard thresholds.
 export const FORECAST_CLASSES = [
-  { min: 0, label: '0 to < 0.1 mm', color: '#e9f2f1' },
-  { min: 0.1, label: '0.1 to < 1 mm', color: '#bcdcdf' },
-  { min: 1, label: '1 to < 5 mm', color: '#7fbfcb' },
-  { min: 5, label: '5 to < 10 mm', color: '#4797b2' },
-  { min: 10, label: '10 to < 25 mm', color: '#2a6b96' },
-  { min: 25, label: '25 mm or more', color: '#22406f' },
+  { min: 0, label: '0 to < 0.1 mm', ne: '० देखि < ०.१ mm', color: '#e9f2f1' },
+  { min: 0.1, label: '0.1 to < 1 mm', ne: '०.१ देखि < १ mm', color: '#bcdcdf' },
+  { min: 1, label: '1 to < 5 mm', ne: '१ देखि < ५ mm', color: '#7fbfcb' },
+  { min: 5, label: '5 to < 10 mm', ne: '५ देखि < १० mm', color: '#4797b2' },
+  { min: 10, label: '10 to < 25 mm', ne: '१० देखि < २५ mm', color: '#2a6b96' },
+  { min: 25, label: '25 mm or more', ne: '२५ mm वा बढी', color: '#22406f' },
 ] as const;
 
 /** Display-only cell outline around a native 0.25° grid centre; values are not interpolated. */

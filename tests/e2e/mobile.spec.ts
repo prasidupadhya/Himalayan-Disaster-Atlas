@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test';
 // Loaded only on request: glacier outlines (~1.3 MB) and OSM infrastructure/hydropower.
 const DEFERRED = /\/data\/(nepal-glaciers-|nepal-osm-)/;
 
-test('phone map loads lakes and earthquakes, defers heavy layers and keeps touch workflows usable', async ({ browser }) => {
+test('phone map loads lakes, defers heavy layers and keeps touch workflows usable', async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
   const page = await context.newPage();
   const deferred: string[] = [];

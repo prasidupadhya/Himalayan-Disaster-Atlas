@@ -1,7 +1,7 @@
 'use client';
-import { useCallback, useSyncExternalStore } from 'react';
+import { useCallback, useEffect, useSyncExternalStore, type ReactNode } from 'react';
 
-/** Interface language shared by /live/, /simulate/ and /hazards/. Scientific source text stays in its source language. */
+/** Interface language shared by every page, chosen once in the site header. Text copied from a source stays in its source language. */
 export type Lang = 'en' | 'ne';
 const KEY = 'atlas-lang';
 const listeners = new Set<() => void>();
@@ -38,6 +38,25 @@ export function LanguageSwitch({ lang, onChange, label = 'Language / भाष�
     <button type="button" lang="en" aria-pressed={lang === 'en'} onClick={() => onChange('en')}>English</button>
     <button type="button" lang="ne" aria-pressed={lang === 'ne'} onClick={() => onChange('ne')}>नेपाली</button>
   </div>;
+}
+
+/** Inline bilingual text for any page, including server-rendered ones: the static HTML is English and
+ * switches after load when Nepali is chosen. */
+export function T({ en, ne }: { en: ReactNode; ne: ReactNode }) {
+  const [lang] = useLanguage();
+  return <>{lang === 'ne' ? ne : en}</>;
+}
+/** Picks the English or Nepali value of anything (strings, labels, lists) for the current language. */
+export function useT() {
+  const [lang] = useLanguage();
+  return useCallback(<V,>(en: V, ne: V) => lang === 'ne' ? ne : en, [lang]);
+}
+
+/** The one language control, in the site header. It also keeps the document's lang attribute in step. */
+export function SiteLanguage() {
+  const [lang, setLang] = useLanguage();
+  useEffect(() => { document.documentElement.lang = lang; }, [lang]);
+  return <LanguageSwitch lang={lang} onChange={setLang} />;
 }
 
 /** Project-authored Nepali interface copy; requires native-speaker review before operational reliance. */

@@ -8,6 +8,9 @@ import { escapeAttribution } from '../../lib/map-layers';
 import { CONTEXT_MANIFEST, loadTerrain, sampleTerrain, type TerrainDataset } from '../../lib/terrain';
 import { createTerrainDisplay } from '../../lib/terrain-display';
 import type { Resource } from '../../lib/resource';
+import { digits, useLanguage } from '../../lib/i18n';
+
+type Sample = { kind: 'prompt' | 'loading' | 'outside' | 'failed' } | { kind: 'value'; metres: number };
 
 let protocolId = 0;
 
@@ -19,7 +22,9 @@ export function Terrain({ map }: { map: Map | null }) {
   const [exaggeration, setExaggeration] = useState(1);
   const [longitude, setLongitude] = useState('85.324');
   const [latitude, setLatitude] = useState('27.7172');
-  const [sample, setSample] = useState('Choose coordinates or click the map to inspect elevation.');
+  const [sample, setSample] = useState<Sample>({ kind: 'prompt' });
+  const [lang] = useLanguage();
+  const t = (en: string, ne: string) => lang === 'ne' ? ne : en;
   const source = useRef<string | null>(null);
   const inspection = useRef<AbortController | null>(null);
   const dataset = 'data' in resource ? resource.data : null;
@@ -88,11 +93,11 @@ export function Terrain({ map }: { map: Map | null }) {
     const inspect = async (lon: number, lat: number) => {
       inspection.current?.abort();
       const controller = new AbortController(); inspection.current = controller;
-      setLongitude(lon.toFixed(5)); setLatitude(lat.toFixed(5)); setSample('Loading elevation…');
+      setLongitude(lon.toFixed(5)); setLatitude(lat.toFixed(5)); setSample({ kind: 'loading' });
       try {
         const value = await sampleTerrain(dataset, lon, lat, controller.signal);
-        if (!controller.signal.aborted) setSample(value === null ? 'Elevation: UNKNOWN — outside terrain coverage.' : `Elevation: approximately ${Math.round(value).toLocaleString('en-US')} m above EGM2008`);
-      } catch { if (!controller.signal.aborted) setSample('Elevation: UNKNOWN — tile could not be verified. Try inspecting again.'); }
+        if (!controller.signal.aborted) setSample(value === null ? { kind: 'outside' } : { kind: 'value', metres: value });
+      } catch { if (!controller.signal.aborted) setSample({ kind: 'failed' }); }
     };
     const click = (event: MapMouseEvent) => { void inspect(event.lngLat.lng, event.lngLat.lat); };
     const form = document.getElementById('terrain-inspect');
@@ -105,24 +110,29 @@ export function Terrain({ map }: { map: Map | null }) {
     return () => { map.off('click', click); form?.removeEventListener('submit', submit); inspection.current?.abort(); };
   }, [map, dataset]);
 
-  return <section className="terrain-controls" aria-label="Terrain" data-terrain-state={resource.status}>
-    <h2>Terrain</h2>
-    <p>Copernicus GLO-90 · surface elevation</p>
-    <p className="muted">Asia overview: Mapzen terrain. Nepal elevation inspection: Copernicus GLO-90. Zoom out to explore the surrounding region.</p>
+  const sampleText = sample.kind === 'prompt' ? t('Choose coordinates or click the map to inspect elevation.', 'उचाइ हेर्न निर्देशाङ्क (coordinates) छान्नुहोस् वा नक्सामा क्लिक गर्नुहोस्।')
+    : sample.kind === 'loading' ? t('Loading elevation…', 'उचाइ लोड गर्दै…')
+    : sample.kind === 'outside' ? t('Elevation: UNKNOWN — outside terrain coverage.', 'उचाइ: अज्ञात (UNKNOWN) — भू-आकृति दायराभन्दा बाहिर।')
+    : sample.kind === 'failed' ? t('Elevation: UNKNOWN — tile could not be verified. Try inspecting again.', 'उचाइ: अज्ञात (UNKNOWN) — टाइल प्रमाणित गर्न सकिएन। फेरि हेर्ने प्रयास गर्नुहोस्।')
+    : sample.kind !== 'value' ? '' : lang === 'ne' ? `उचाइ: EGM2008 भन्दा करिब ${digits(Math.round(sample.metres).toLocaleString('en-US'), lang)} m माथि` : `Elevation: approximately ${Math.round(sample.metres).toLocaleString('en-US')} m above EGM2008`;
+  return <section className="terrain-controls" aria-label={t('Terrain', 'भू-आकृति')} data-terrain-state={resource.status}>
+    <h2>{t('Terrain', 'भू-आकृति')}</h2>
+    <p>Copernicus GLO-90 · {t('surface elevation', 'सतहको उचाइ')}</p>
+    <p className="muted">{t('Asia overview: Mapzen terrain. Nepal elevation inspection: Copernicus GLO-90. Zoom out to explore the surrounding region.', 'एसियाको सिंहावलोकन: Mapzen भू-आकृति। नेपालको उचाइ निरीक्षण: Copernicus GLO-90। वरपरको क्षेत्र हेर्न जुम घटाउनुहोस्।')}</p>
     {map ? <DataState state={resource} retry={() => {
       setResource({ status: 'loading' }); setHillshade(true); setThreeD(false); setExaggeration(1);
       setAttempt(value => value + 1);
-    }} /> : <p className="muted">Terrain controls require the interactive map.</p>}
-    <label><input type="checkbox" checked={hillshade} disabled={!dataset} onChange={event => setHillshade(event.target.checked)} /> Hillshade</label>
-    <label><input type="checkbox" checked={threeD} disabled={!dataset} onChange={event => setThreeD(event.target.checked)} /> 3D terrain</label>
-    <label>Vertical exaggeration: {exaggeration}×<input type="range" min="1" max="2" step="0.25" value={exaggeration} disabled={!dataset || !threeD} onChange={event => setExaggeration(Number(event.target.value))} /></label>
-    <p className="muted">Hillshade and 3D are derived views. Exaggeration changes appearance only. Includes vegetation and buildings. Finest display pixels are about 270 m here; zooming closer adds no detail.</p>
+    }} /> : <p className="muted">{t('Terrain controls require the interactive map.', 'भू-आकृति नियन्त्रणका लागि अन्तरक्रियात्मक नक्सा चाहिन्छ।')}</p>}
+    <label><input type="checkbox" checked={hillshade} disabled={!dataset} onChange={event => setHillshade(event.target.checked)} /> {t('Hillshade', 'पहाडी छायाँ (hillshade)')}</label>
+    <label><input type="checkbox" checked={threeD} disabled={!dataset} onChange={event => setThreeD(event.target.checked)} /> {t('3D terrain', '3D भू-आकृति')}</label>
+    <label>{t('Vertical exaggeration: ', 'ठाडो अतिरञ्जन (vertical exaggeration): ')}{digits(String(exaggeration), lang)}×<input type="range" min="1" max="2" step="0.25" value={exaggeration} disabled={!dataset || !threeD} onChange={event => setExaggeration(Number(event.target.value))} /></label>
+    <p className="muted">{t('Hillshade and 3D are derived views. Exaggeration changes appearance only. Includes vegetation and buildings. Finest display pixels are about 270 m here; zooming closer adds no detail.', 'पहाडी छायाँ र 3D व्युत्पन्न दृश्य हुन्। अतिरञ्जनले देखावट मात्र बदल्छ। यसमा वनस्पति र भवनहरू पनि समावेश छन्। यहाँ सबैभन्दा सानो प्रदर्शन पिक्सेल करिब २७० m को छ; अझ नजिक जुम गर्दा थप विवरण आउँदैन।')}</p>
     <form id="terrain-inspect">
-      <label>Longitude<input name="longitude" type="number" min="-180" max="180" step="any" required value={longitude} onChange={event => setLongitude(event.target.value)} /></label>
-      <label>Latitude<input name="latitude" type="number" min="-85" max="85" step="any" required value={latitude} onChange={event => setLatitude(event.target.value)} /></label>
-      <button disabled={!dataset} type="submit">Inspect elevation</button>
+      <label>{t('Longitude', 'देशान्तर')}<input name="longitude" type="number" min="-180" max="180" step="any" required value={longitude} onChange={event => setLongitude(event.target.value)} /></label>
+      <label>{t('Latitude', 'अक्षांश')}<input name="latitude" type="number" min="-85" max="85" step="any" required value={latitude} onChange={event => setLatitude(event.target.value)} /></label>
+      <button disabled={!dataset} type="submit">{t('Inspect elevation', 'उचाइ हेर्नुहोस्')}</button>
     </form>
-    <p role="status">{sample}</p>
-    {dataset && <details><summary>Terrain source & limitations</summary><Evidence metadata={dataset.manifest.metadata} /></details>}
+    <p role="status">{sampleText}</p>
+    {dataset && <details><summary>{t('Terrain source & limitations', 'भू-आकृतिको स्रोत र सीमाहरू')}</summary><Evidence metadata={dataset.manifest.metadata} /></details>}
   </section>;
 }

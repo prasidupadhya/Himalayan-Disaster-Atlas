@@ -73,6 +73,8 @@ test('the map has a non-visual alternative and its key does not rely on colour a
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
   await expect(page.locator('#atlas-map-alternative')).toContainText('textual details');
   const key = page.getByRole('region', { name: 'Map key' });
-  await expect(key.getByText('Earthquake, past')).toBeVisible();
-  expect(await key.locator('.map-key-ring').evaluate(element => getComputedStyle(element).borderTopStyle)).toBe('solid');
+  await expect(key.getByText('River reach')).toBeVisible();
+  // Lines, dots and areas use different shapes, so the key does not depend on colour alone.
+  for (const shape of ['line', 'dot', 'area']) await expect(key.locator(`.map-key-${shape}`).first()).toBeAttached();
+  await expect(key.getByText(/Earthquake/)).toHaveCount(0);
 });

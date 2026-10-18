@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState, useSyncExternalStore } from 'react';
 import { EVIDENCE_LABELS, LIVE_AUTHORITIES, workflowHealth } from '../../../../packages/contracts/live';
 import { AIR_QUALITY_PUBLIC_ENABLED, AIR_QUALITY_STATUS } from '../../../../packages/contracts/live-air-quality';
 import { UnavailableError } from '../../lib/datasets';
+import { useLanguage } from '../../lib/i18n';
 import { loadLivePublication, watchLiveClock, type LastKnown, type LivePublication } from '../../lib/live';
 import { buildBulletin, earthquakeRows, FEED_TITLES, FORECAST_CLASSES, feedView, forecastCells, formatTime, formatValue, freshnessText, LIVE_CONDITIONS_POLICY as policy, nextDeadline, offlineCopy, OFFLINE_POLICY, type FeedView, type Freshness, type Lang, type Purpose } from '../../lib/live-conditions';
 
@@ -43,7 +44,7 @@ export function LiveConditions() {
   const [load, setLoad] = useState<Load>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const [now, setNow] = useState(0);
-  const [lang, setLang] = useState<Lang>('en');
+  const [lang] = useLanguage();
   const [visible, setVisible] = useState({ earthquakes: true, forecast: true });
 
   const online = useSyncExternalStore(subscribeOnline, () => navigator.onLine, () => true);
@@ -113,10 +114,6 @@ export function LiveConditions() {
       <section className="live-bulletin" aria-labelledby="live-bulletin-heading">
         <div className="live-bulletin-head">
           <h2 id="live-bulletin-heading">{lang === 'en' ? 'Conditions bulletin' : 'अवस्था बुलेटिन'}</h2>
-          <div className="live-language" role="group" aria-label="Bulletin language / बुलेटिनको भाषा">
-            <button type="button" aria-pressed={lang === 'en'} lang="en" onClick={() => setLang('en')}>English</button>
-            <button type="button" aria-pressed={lang === 'ne'} lang="ne" onClick={() => setLang('ne')}>नेपाली</button>
-          </div>
         </div>
         <div lang={lang} className="live-bulletin-body" aria-live="polite">
           <p className="live-bulletin-notice">{bulletin.notice}</p>

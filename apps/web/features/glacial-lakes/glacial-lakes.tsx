@@ -8,10 +8,13 @@ import { Evidence } from '../../components/evidence';
 import { GLACIAL_LAKES_MANIFEST, loadDataset, UnavailableError } from '../../lib/datasets';
 import { mountGlacialLakeDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
+import { digits, useLanguage } from '../../lib/i18n';
 
-function measurement(value: number | null | undefined, digits = 4) {
-  return value === null || value === undefined ? 'UNKNOWN' : value.toLocaleString('en-US', { maximumFractionDigits: digits });
+function measurement(value: number | null | undefined, fraction = 4, lang: 'en' | 'ne' = 'en') {
+  if (value === null || value === undefined) return lang === 'ne' ? 'अज्ञात (UNKNOWN)' : 'UNKNOWN';
+  return digits(value.toLocaleString('en-US', { maximumFractionDigits: fraction }), lang);
 }
+const COUNTRY_NE: Record<string, string> = { Nepal: 'नेपाल', China: 'चीन', India: 'भारत' };
 
 export interface LakeChoice { id: string; label: string; lonLat: [number, number] }
 
@@ -23,6 +26,10 @@ export function GlacialLakes({ map, onSelect, onTrace }: { map: Map | null; onSe
   const [query, setQuery] = useState('');
   const mounted = useRef<ReturnType<typeof mountGlacialLakeDataset> | null>(null);
   const dataset = 'data' in resource ? resource.data : null;
+  const [lang] = useLanguage();
+  const t = (en: string, ne: string) => lang === 'ne' ? ne : en;
+  const n = (value: number) => digits(value.toLocaleString('en-US'), lang);
+  const unknown = t('UNKNOWN', 'अज्ञात (UNKNOWN)');
 
   useEffect(() => {
     if (!map) return;
@@ -93,37 +100,39 @@ export function GlacialLakes({ map, onSelect, onTrace }: { map: Map | null; onSe
     map.easeTo({ center: item.geometry.coordinates as [number, number], zoom: Math.max(map.getZoom(), 9), duration: 0 });
   }
 
-  return <section className="thematic-controls glacial-lakes-controls" aria-label="Glacial lakes" data-glacial-lakes-state={resource.status}>
-    <h2>Glacial lakes</h2>
-    <p>Glacial Lake Observatory v1.02 · Sentinel-2 · 2017–2024</p>
-    {map ? <DataState state={resource} retry={() => { setResource({ status: 'loading' }); setSelected(''); setAttempt(value => value + 1); }} /> : <p className="muted">Glacial-lake controls require the interactive map.</p>}
-    <label><input type="checkbox" checked={visible} disabled={!dataset} onChange={event => setVisible(event.target.checked)} /> Show GLO unique lakes</label>
-    {dataset && <p className="muted">{dataset.collection.features.length.toLocaleString('en-US')} unique lakes in Nepal/transboundary catchments · Nepal {counts.Nepal.toLocaleString('en-US')} · China {counts.China.toLocaleString('en-US')} · India {counts.India.toLocaleString('en-US')}.</p>}
-    <p className="muted">Points are published GLO centroids. Circle size uses the source dissolved maximum mapped extent across 2017–2024; it is not a 2026 lake-area measurement.</p>
-    <label className="thematic-picker">Search lakes<input type="search" value={query} disabled={!dataset} placeholder="GLO_87.08864_27.79792, Koshi, Nepal…" onChange={event => setQuery(event.target.value)} /></label>
-    <label className="thematic-picker">Lake record<select value={selected} disabled={!dataset} onChange={event => choose(event.target.value)}>
-      <option value="">Select a lake…</option>
-      {matches.map(item => <option key={String(item.id)} value={String(item.id)}>{item.properties.source_id} · {item.properties.country} · {measurement(item.properties.area_km2, 3)} km²</option>)}
+  return <section className="thematic-controls glacial-lakes-controls" aria-label={t('Glacial lakes', 'हिमतालहरू')} data-glacial-lakes-state={resource.status}>
+    <h2>{t('Glacial lakes', 'हिमतालहरू')}</h2>
+    <p>Glacial Lake Observatory v1.02 · Sentinel-2 · {digits('2017–2024', lang)}</p>
+    {map ? <DataState state={resource} retry={() => { setResource({ status: 'loading' }); setSelected(''); setAttempt(value => value + 1); }} /> : <p className="muted">{t('Glacial-lake controls require the interactive map.', 'हिमताल नियन्त्रणका लागि अन्तरक्रियात्मक नक्सा चाहिन्छ।')}</p>}
+    <label><input type="checkbox" checked={visible} disabled={!dataset} onChange={event => setVisible(event.target.checked)} /> {t('Show GLO unique lakes', 'GLO का अद्वितीय तालहरू देखाउनुहोस्')}</label>
+    {dataset && <p className="muted">{lang === 'ne'
+      ? `नेपाल/सीमापार जलाधारमा ${n(dataset.collection.features.length)} अद्वितीय तालहरू · नेपाल ${n(counts.Nepal)} · चीन ${n(counts.China)} · भारत ${n(counts.India)}।`
+      : `${dataset.collection.features.length.toLocaleString('en-US')} unique lakes in Nepal/transboundary catchments · Nepal ${counts.Nepal.toLocaleString('en-US')} · China ${counts.China.toLocaleString('en-US')} · India ${counts.India.toLocaleString('en-US')}.`}</p>}
+    <p className="muted">{t('Points are published GLO centroids. Circle size uses the source dissolved maximum mapped extent across 2017–2024; it is not a 2026 lake-area measurement.', 'बिन्दुहरू प्रकाशित GLO केन्द्रबिन्दु (centroid) हुन्। वृत्तको आकार स्रोतले २०१७–२०२४ ई. सम्ममा नक्सांकन गरेको अधिकतम एकीकृत (dissolved) विस्तारमा आधारित छ; यो २०२६ को ताल-क्षेत्रफल मापन होइन।')}</p>
+    <label className="thematic-picker">{t('Search lakes', 'ताल खोज्नुहोस्')}<input type="search" value={query} disabled={!dataset} placeholder="GLO_87.08864_27.79792, Koshi, Nepal…" onChange={event => setQuery(event.target.value)} /></label>
+    <label className="thematic-picker">{t('Lake record', 'ताल अभिलेख')}<select value={selected} disabled={!dataset} onChange={event => choose(event.target.value)}>
+      <option value="">{t('Select a lake…', 'ताल छान्नुहोस्…')}</option>
+      {matches.map(item => <option key={String(item.id)} value={String(item.id)}>{item.properties.source_id} · {lang === 'ne' ? COUNTRY_NE[String(item.properties.country)] ?? item.properties.country : item.properties.country} · {measurement(item.properties.area_km2, 3, lang)} km²</option>)}
     </select></label>
     <div className="selection" aria-live="polite">{feature ? <>
-      <p className="eyebrow">satellite-derived glacial lake record</p><h3>{feature.properties.lake_name ?? feature.properties.source_id}</h3>
+      <p className="eyebrow">{t('satellite-derived glacial lake record', 'भू-उपग्रहबाट प्राप्त हिमताल अभिलेख')}</p><h3>{feature.properties.lake_name ?? feature.properties.source_id}</h3>
       <dl>
-        <dt>Lake name</dt><dd>{feature.properties.lake_name ?? 'UNKNOWN'}</dd>
+        <dt>{t('Lake name', 'तालको नाम')}</dt><dd>{feature.properties.lake_name ?? unknown}</dd>
         <dt>GLO ID</dt><dd>{feature.properties.source_id}</dd>
-        <dt>Country</dt><dd>{feature.properties.country}</dd>
-        <dt>Basin</dt><dd>{feature.properties.basin}</dd>
-        <dt>Connectivity</dt><dd>{feature.properties.connectivity}</dd>
-        <dt>Mapped extent</dt><dd>{measurement(feature.properties.area_km2, 4)} km² (dissolved maximum, 2017–2024)</dd>
-        <dt>Perimeter</dt><dd>{measurement(feature.properties.perimeter_km, 4)} km</dd>
-        <dt>Mean elevation</dt><dd>{measurement(feature.properties.elevation_mean_m, 0)} m</dd>
-        <dt>Expansion rate</dt><dd>{feature.properties.expansion_rate_km2_per_year === null ? 'UNKNOWN' : `${measurement(feature.properties.expansion_rate_km2_per_year, 4)} ± ${measurement(feature.properties.expansion_uncertainty_km2_per_year, 4)} km²/year`}</dd>
-        <dt>Expansion significance</dt><dd>{feature.properties.expansion_significant === null ? 'UNKNOWN' : feature.properties.expansion_significant ? 'TRUE (source statistical flag)' : 'FALSE (source statistical flag)'}</dd>
-        <dt>Specific glacier</dt><dd>UNKNOWN — not identified by this source layer</dd>
-        <dt>Specific river</dt><dd>UNKNOWN — basin only; no river ID supplied</dd>
-        <dt>Downstream trace</dt><dd>The real outlet is UNKNOWN. The trace starts at the mapped river reach nearest the lake centroid and shows network connectivity only.{choice && onTrace && <><br /><button type="button" className="trace-lake" onClick={() => onTrace(choice)}>Trace water downstream</button></>}</dd>
-        <dt>Hazard status</dt><dd>NOT ASSESSED — glacial-lake presence or expansion is not a GLOF hazard classification</dd>
+        <dt>{t('Country', 'देश')}</dt><dd>{lang === 'ne' ? COUNTRY_NE[String(feature.properties.country)] ?? feature.properties.country : feature.properties.country}</dd>
+        <dt>{t('Basin', 'जलाधार')}</dt><dd>{feature.properties.basin}</dd>
+        <dt>{t('Connectivity', 'जडान')}</dt><dd>{feature.properties.connectivity}</dd>
+        <dt>{t('Mapped extent', 'नक्सांकित विस्तार')}</dt><dd>{measurement(feature.properties.area_km2, 4, lang)} km² {t('(dissolved maximum, 2017–2024)', '(एकीकृत अधिकतम, २०१७–२०२४ ई.)')}</dd>
+        <dt>{t('Perimeter', 'परिधि')}</dt><dd>{measurement(feature.properties.perimeter_km, 4, lang)} km</dd>
+        <dt>{t('Mean elevation', 'औसत उचाइ')}</dt><dd>{measurement(feature.properties.elevation_mean_m, 0, lang)} m</dd>
+        <dt>{t('Expansion rate', 'विस्तार दर')}</dt><dd>{feature.properties.expansion_rate_km2_per_year === null ? unknown : `${measurement(feature.properties.expansion_rate_km2_per_year, 4, lang)} ± ${measurement(feature.properties.expansion_uncertainty_km2_per_year, 4, lang)} ${t('km²/year', 'km²/वर्ष')}`}</dd>
+        <dt>{t('Expansion significance', 'विस्तारको सार्थकता')}</dt><dd>{feature.properties.expansion_significant === null ? unknown : feature.properties.expansion_significant ? t('TRUE (source statistical flag)', 'सत्य — TRUE (स्रोतको तथ्याङ्कीय सङ्केत)') : t('FALSE (source statistical flag)', 'असत्य — FALSE (स्रोतको तथ्याङ्कीय सङ्केत)')}</dd>
+        <dt>{t('Specific glacier', 'सम्बन्धित हिमनदी')}</dt><dd>{t('UNKNOWN — not identified by this source layer', 'अज्ञात (UNKNOWN) — यस स्रोत तहले पहिचान गरेको छैन')}</dd>
+        <dt>{t('Specific river', 'सम्बन्धित नदी')}</dt><dd>{t('UNKNOWN — basin only; no river ID supplied', 'अज्ञात (UNKNOWN) — जलाधार मात्र; नदीको ID दिइएको छैन')}</dd>
+        <dt>{t('Downstream trace', 'तलतिरको मार्ग')}</dt><dd>{t('The real outlet is UNKNOWN. The trace starts at the mapped river reach nearest the lake centroid and shows network connectivity only.', 'वास्तविक निकास अज्ञात (UNKNOWN) छ। मार्ग तालको केन्द्रबिन्दुसँग सबैभन्दा नजिकको नक्सांकित नदी खण्डबाट सुरु हुन्छ र सञ्जालको जडान मात्र देखाउँछ।')}{choice && onTrace && <><br /><button type="button" className="trace-lake" onClick={() => onTrace(choice)}>{t('Trace water downstream', 'पानी तलतिर पछ्याउनुहोस्')}</button></>}</dd>
+        <dt>{t('Hazard status', 'जोखिम स्थिति')}</dt><dd>{t('NOT ASSESSED — glacial-lake presence or expansion is not a GLOF hazard classification', 'मूल्याङ्कन गरिएको छैन (NOT ASSESSED) — हिमताल हुनु वा फैलिनु हिमताल विस्फोट (GLOF) जोखिम वर्गीकरण होइन')}</dd>
       </dl>
-    </> : <p>Select a GLO record to inspect mapped extent, source connectivity, basin, elevation and change statistics without implying hazard status.</p>}</div>
-    {dataset && <details><summary>Glacial-lake source & limitations</summary><Evidence metadata={dataset.metadata} /></details>}
+    </> : <p>{t('Select a GLO record to inspect mapped extent, source connectivity, basin, elevation and change statistics without implying hazard status.', 'जोखिम स्थिति नजनाई नक्सांकित विस्तार, स्रोतको जडान, जलाधार, उचाइ र परिवर्तनको तथ्याङ्क हेर्न GLO अभिलेख छान्नुहोस्।')}</p>}</div>
+    {dataset && <details><summary>{t('Glacial-lake source & limitations', 'हिमतालको स्रोत र सीमाहरू')}</summary><Evidence metadata={dataset.metadata} /></details>}
   </section>;
 }

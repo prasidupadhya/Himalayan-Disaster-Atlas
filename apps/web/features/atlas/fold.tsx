@@ -8,7 +8,7 @@ export function openFoldFor(id: string) {
 }
 
 /** Secondary map controls: open on wide screens, closed on a phone until asked for. */
-export function Fold({ title, children }: { title: string; children: ReactNode }) {
+export function Fold({ title, children }: { title: ReactNode; children: ReactNode }) {
   const details = useRef<HTMLDetailsElement>(null);
   useEffect(() => {
     if (details.current && window.matchMedia('(max-width: 800px)').matches) details.current.open = false;

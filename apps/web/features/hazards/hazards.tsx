@@ -2,13 +2,13 @@
 import type { ReactNode } from 'react';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { findEntry, nepalTime, recentQuakes, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type RiverContent } from '../../lib/gov-digest';
-import { formatNumber, LanguageSwitch, useLanguage, type Lang } from '../../lib/i18n';
+import { formatNumber, useLanguage, type Lang } from '../../lib/i18n';
 import { QuakeMap, RainBars, StatusBar, type StatusPart } from '../../components/today-visuals';
 import { hz, type HzCopy } from './copy';
 
 /** "Today": the daily official copy, arranged around floods, glacial lakes and earthquakes. */
 export function Hazards() {
-  const [lang, setLang] = useLanguage();
+  const [lang] = useLanguage();
   const c = hz(lang);
   const [state, retry] = useGovDigest();
   const digest = state.status === 'ready' ? state.digest : null;
@@ -16,7 +16,7 @@ export function Hazards() {
 
   return <div className="hz-page" lang={lang} data-today-state={state.status}>
     <header className="hz-hero">
-      <div className="hz-hero-top"><p className="eyebrow">{c.eyebrow}</p><LanguageSwitch lang={lang} onChange={setLang} /></div>
+      <div className="hz-hero-top"><p className="eyebrow">{c.eyebrow}</p></div>
       <h1>{c.title}</h1>
       <p className="intro">{c.intro}</p>
       <p className="hz-authorities">{c.authorities} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url} rel="noopener">{a.name}</a></span>)}</p>
@@ -37,7 +37,7 @@ export function Hazards() {
     </Section>
     <Section id="earthquakes" title={c.quakes} lead={c.quakesLead}>
       {digest && <Earthquakes digest={digest} c={c} lang={lang} />}
-      <p className="hz-actions"><a href="/atlas/#earthquake-controls">{c.toMapQuakes}</a><a href="/simulate/?tab=earthquake">{c.toQuakeScenario}</a><a href="/live/">{c.toLive}</a></p>
+      <p className="hz-actions"><a href="/simulate/?tab=earthquake">{c.toQuakeScenario}</a><a href="/live/">{c.toLive}</a></p>
     </Section>
     <Section id="incidents" title={c.incidents} lead={c.incidentsLead}>
       {digest && <Incidents entry={findEntry(digest, 'bipad-incidents')} c={c} lang={lang} />}

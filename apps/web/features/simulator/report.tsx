@@ -8,7 +8,7 @@ import { arrivals, decodeScenario, exposureRange, hydrograph, hydrographVolume, 
 import { loadModelArtifact, loadModelRelease, manifestPath, MODEL_RELEASES } from '../../lib/model-release';
 import { originLabel } from './flood-panel';
 import { duration, REPORT } from './copy';
-import { formatNumber, LanguageSwitch, UI, useLanguage, type Lang } from '../../lib/i18n';
+import { formatNumber, UI, useLanguage, type Lang } from '../../lib/i18n';
 import { loadAssets } from './quake-panel';
 
 const NOTICE = 'Scenario / educational estimate, not a forecast or warning';
@@ -45,7 +45,7 @@ async function build(scenario: Scenario, signal: AbortSignal): Promise<Report> {
 }
 
 export function ScenarioReport() {
-  const [lang, setLang] = useLanguage();
+  const [lang] = useLanguage();
   const r = REPORT[lang];
   const [scenario] = useState<Scenario | null>(() => { try { const s = new URLSearchParams(window.location.search).get('s'); return s ? decodeScenario(s) : null; } catch { return null; } });
   const [report, setReport] = useState<Report | null>(null);
@@ -68,7 +68,7 @@ export function ScenarioReport() {
 
   return <article className="report-page" lang={lang}>
     <header className="report-header">
-      <div className="report-top"><p className="eyebrow">{r.eyebrow}</p><LanguageSwitch lang={lang} onChange={setLang} /></div>
+      <div className="report-top"><p className="eyebrow">{r.eyebrow}</p></div>
       <h1>{scenario?.kind === 'earthquake' ? r.quakeTitle : r.floodTitle}</h1>
       <p className="report-notice"><strong>{UI[lang].scenarioNotice}.</strong> {r.official} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url}>{a.name}</a> ({a.url})</span>)}.</p>
       <p className="report-meta">{r.generated(generated)}</p>

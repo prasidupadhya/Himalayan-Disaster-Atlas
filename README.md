@@ -1,6 +1,6 @@
 # Himalayan Disaster Atlas
 
-A public, read-only website about three hazards in Nepal: **floods, glacial-lake outbursts (GLOF) and earthquakes**. It shows today's official readings, an interactive map, and hypothetical scenarios you can run in the browser. It works on phones, needs no account, and is served as static files.
+A public, read-only website about three hazards in Nepal: **floods, glacial-lake outbursts (GLOF) and earthquakes**. It shows today's official readings, an interactive map, and hypothetical scenarios you can run in the browser. Every page is in English and Nepali, chosen with one switch in the site header. It works on phones, needs no account, and is served as static files.
 
 Every figure is either copied from an official source, with its date, or labelled as a hypothetical scenario. Missing values are shown as **UNKNOWN**, never as zero. This is not a warning service: warnings come from [DHM](https://www.dhm.gov.np/) and [NDRRMA/BIPAD](https://bipadportal.gov.np/).
 
@@ -9,8 +9,8 @@ Every figure is either copied from an official source, with its date, or labelle
 | Page | What you see |
 |---|---|
 | **Home** `/` | The three hazards, today's headline figures and a way into the map. |
-| **Today** `/hazards/` | The daily copy of official sources, by hazard, in English and Nepali. It opens with an at-a-glance line per hazard. Floods show river and rain stations by status, the wettest stations, DHM bulletins and alerts. Earthquakes show a map of the latest NEMRC epicentres next to a date, magnitude and epicentre table. BIPAD incidents cover the last 7 days. |
-| **Map** `/atlas/` | Glacial lakes (GLO inventory), the HydroRIVERS network with downstream tracing from any lake or reach, the USGS earthquake record, and terrain. Glacier outlines, boundaries, hydropower and infrastructure load on request. |
+| **Today** `/hazards/` | The daily copy of official sources, by hazard. It opens with an at-a-glance line per hazard. Floods show river and rain stations by status, the wettest stations, DHM bulletins and alerts. Earthquakes show a map of the latest NEMRC epicentres next to a date, magnitude and epicentre table. BIPAD incidents cover the last 7 days. |
+| **Map** `/atlas/` | Glacial lakes (GLO inventory), the HydroRIVERS network with downstream tracing from any lake or reach, and terrain. Earthquakes are not drawn on the map; they are on Today, `/live/` and Scenarios. Glacier outlines, boundaries, hydropower and infrastructure load on request. |
 | **Scenarios** `/simulate/` | Flood and GLOF release pulses along 18 verified river corridors, and BSSA14 earthquake shaking, including a Gorkha 2015 replay. Every run gives a plain-language summary, ranges (not single numbers), a chart of when the pulse passes each point downstream, a shareable link and a printable report. Inundation, damage and casualties are UNKNOWN. |
 | **About** `/methodology/` | Methods, assumptions and limitations, with [sources](apps/web/app/sources/page.tsx) and licences. |
 
@@ -64,6 +64,7 @@ Start with [architecture](docs/architecture/README.md), [Today page](docs/hazard
 - Published releases are never overwritten; a change gets a new version.
 - No geographic facts, hazard levels or measurements are invented. Synthetic test fixtures are marked SYNTHETIC.
 - Status is never shown by colour alone: there is always a text label or icon.
+- Nepali interface text is project-authored and needs native-speaker review before anyone relies on it operationally. Text copied from a source stays in its source language.
 
 ## Licence
 

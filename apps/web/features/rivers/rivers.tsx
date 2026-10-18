@@ -9,6 +9,7 @@ import { loadDataset, RIVER_MANIFESTS, UnavailableError } from '../../lib/datase
 import { mountRiverDataset } from '../../lib/map-layers';
 import { nearestReach } from '../../lib/river-snap';
 import type { Resource } from '../../lib/resource';
+import { digits, useLanguage } from '../../lib/i18n';
 import { DownstreamTrace } from '../downstream-trace/downstream-trace';
 
 const RIVER_NAMES = '/data/nepal-river-names/1.0.0/manifest.json';
@@ -29,6 +30,9 @@ export function Rivers({ map, snap = null }: { map: Map | null; snap?: { id: str
   const mounted = useRef<ReturnType<typeof mountRiverDataset>[]>([]);
   const marker = useRef<Marker | null>(null);
   const datasets = 'data' in resource ? resource.data : null;
+  const [lang] = useLanguage();
+  const t = (en: string, ne: string) => lang === 'ne' ? ne : en;
+  const num = (value: number | null | undefined) => value === null || value === undefined ? undefined : digits(value.toLocaleString('en-US'), lang);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -93,11 +97,13 @@ export function Rivers({ map, snap = null }: { map: Map | null; snap?: { id: str
       if (cancelled) return;
       const label = document.createElement('span');
       label.className = 'river-name-label';
-      label.textContent = place.source === 'GeoNames' ? `${place.name} · named location` : `${place.name} · lake`;
+      label.textContent = lang === 'ne'
+        ? (place.source === 'GeoNames' ? `${place.name} · नाम भएको स्थान` : `${place.name} · ताल`)
+        : (place.source === 'GeoNames' ? `${place.name} · named location` : `${place.name} · lake`);
       marker.current = new Marker({ element: label }).setLngLat(place.lonLat).addTo(map);
     });
     return () => { cancelled = true; marker.current?.remove(); marker.current = null; };
-  }, [map, place]);
+  }, [map, place, lang]);
 
   const features = useMemo(() => datasets?.flatMap(dataset => dataset.collection.features) ?? [], [datasets]);
   const reachMatches = useMemo(() => {
@@ -153,45 +159,46 @@ export function Rivers({ map, snap = null }: { map: Map | null; snap?: { id: str
   }
 
   const selectValue = place?.source === 'GeoNames' ? `name:${place.sourceId}` : selected;
-  return <section className="thematic-controls rivers-controls" aria-label="Rivers" data-rivers-state={resource.status}>
-    <h2>Rivers</h2>
-    <p>FAO Rivers 2026 / HydroRIVERS · connected reach IDs</p>
-    {map ? <DataState state={resource} retry={() => { setResource({ status: 'loading' }); setSelected(''); setPlace(null); setAttempt(value => value + 1); }} /> : <p className="muted">River controls require the interactive map.</p>}
-    <label><input type="checkbox" checked={visible} disabled={!datasets} onChange={event => setVisible(event.target.checked)} /> Show river network</label>
-    <p className="muted">Primary and mid-order reaches appear first; headwater/minor reaches load from zoom 6.5. Click a river line on the map to select it, then trace downstream.</p>
-    <label className="thematic-picker">Find a river or reach<input type="search" value={query} disabled={!datasets} placeholder="Trishuli, Koshi, HYRIV 40669746…" onChange={event => setQuery(event.target.value)} /></label>
-    <label className="thematic-picker">River or reach<select aria-label="River or reach" value={selectValue} disabled={!datasets} onChange={event => choose(event.target.value)}>
-      <option value="">Select a river or reach…</option>
-      {feature && !reachMatches.some(item => String(item.id) === selected) && <option value={String(feature.id)}>HYRIV {feature.properties.source_id} (selected on map)</option>}
-      <optgroup label="Reaches">
-        {reachMatches.map(item => <option key={String(item.id)} value={String(item.id)}>HYRIV {item.properties.source_id} · order {item.properties.flow_order} · {item.properties.average_discharge_m3s?.toLocaleString('en-US')} m³/s</option>)}
+  return <section className="thematic-controls rivers-controls" aria-label={t('Rivers', 'नदीहरू')} data-rivers-state={resource.status}>
+    <h2>{t('Rivers', 'नदीहरू')}</h2>
+    <p>FAO Rivers {digits('2026', lang)} / HydroRIVERS · {t('connected reach IDs', 'जोडिएका खण्ड ID हरू')}</p>
+    {map ? <DataState state={resource} retry={() => { setResource({ status: 'loading' }); setSelected(''); setPlace(null); setAttempt(value => value + 1); }} /> : <p className="muted">{t('River controls require the interactive map.', 'नदी नियन्त्रणका लागि अन्तरक्रियात्मक नक्सा चाहिन्छ।')}</p>}
+    <label><input type="checkbox" checked={visible} disabled={!datasets} onChange={event => setVisible(event.target.checked)} /> {t('Show river network', 'नदी सञ्जाल देखाउनुहोस्')}</label>
+    <p className="muted">{t('Primary and mid-order reaches appear first; headwater/minor reaches load from zoom 6.5. Click a river line on the map to select it, then trace downstream.', 'मुख्य र मध्यम क्रमका खण्डहरू पहिले देखिन्छन्; शिरभाग/साना खण्डहरू जुम ६.५ देखि लोड हुन्छन्। नक्सामा नदीको रेखामा क्लिक गरेर छान्नुहोस्, त्यसपछि तलतिर पछ्याउनुहोस्।')}</p>
+    <label className="thematic-picker">{t('Find a river or reach', 'नदी वा खण्ड खोज्नुहोस्')}<input type="search" value={query} disabled={!datasets} placeholder="Trishuli, Koshi, HYRIV 40669746…" onChange={event => setQuery(event.target.value)} /></label>
+    <label className="thematic-picker">{t('River or reach', 'नदी वा खण्ड')}<select aria-label={t('River or reach', 'नदी वा खण्ड')} value={selectValue} disabled={!datasets} onChange={event => choose(event.target.value)}>
+      <option value="">{t('Select a river or reach…', 'नदी वा खण्ड छान्नुहोस्…')}</option>
+      {feature && !reachMatches.some(item => String(item.id) === selected) && <option value={String(feature.id)}>HYRIV {feature.properties.source_id} {t('(selected on map)', '(नक्सामा छानिएको)')}</option>}
+      <optgroup label={t('Reaches', 'खण्डहरू')}>
+        {reachMatches.map(item => <option key={String(item.id)} value={String(item.id)}>HYRIV {item.properties.source_id} · {t('order', 'क्रम')} {num(item.properties.flow_order)} · {num(item.properties.average_discharge_m3s)} m³/s</option>)}
       </optgroup>
-      {(nameMatches.length > 0 || place?.source === 'GeoNames') && <optgroup label="Named locations (GeoNames)">
+      {(nameMatches.length > 0 || place?.source === 'GeoNames') && <optgroup label={t('Named locations (GeoNames)', 'नाम भएका स्थानहरू (GeoNames)')}>
         {place?.source === 'GeoNames' && !nameMatches.some(item => String(item.id) === place.sourceId) && <option value={`name:${place.sourceId}`}>{place.name} · GeoNames {place.sourceId}</option>}
         {nameMatches.map(item => <option key={`name:${item.id}`} value={`name:${item.id}`}>{item.properties.name} · GeoNames {item.properties.source_id}</option>)}
       </optgroup>}
     </select></label>
-    {namesFailed && <p className="muted">Named locations are unavailable; reach search still works. <button onClick={() => { setNamesFailed(false); setAttempt(value => value + 1); }}>Retry named locations</button></p>}
-    {query.trim() && !reachMatches.length && !nameMatches.length && <p className="muted">No matching reach or named location. This does not mean the river has no name.</p>}
-    <p className="muted">The source does not provide river names for these reaches. Reaches are identified by stable HYRIV_ID values; named places come from GeoNames points.</p>
+    {namesFailed && <p className="muted">{t('Named locations are unavailable; reach search still works. ', 'नाम भएका स्थानहरू उपलब्ध छैनन्; खण्ड खोज भने काम गर्छ। ')}<button onClick={() => { setNamesFailed(false); setAttempt(value => value + 1); }}>{t('Retry named locations', 'नाम भएका स्थान फेरि लोड गर्नुहोस्')}</button></p>}
+    {query.trim() && !reachMatches.length && !nameMatches.length && <p className="muted">{t('No matching reach or named location. This does not mean the river has no name.', 'मिल्ने खण्ड वा नाम भएको स्थान भेटिएन। यसको अर्थ नदीको नाम छैन भन्ने होइन।')}</p>}
+    <p className="muted">{t('The source does not provide river names for these reaches. Reaches are identified by stable HYRIV_ID values; named places come from GeoNames points.', 'स्रोतले यी खण्डहरूका नदीको नाम दिँदैन। खण्डहरू स्थिर HYRIV_ID मानबाट चिनिन्छन्; नाम भएका स्थानहरू GeoNames बिन्दुबाट आउँछन्।')}</p>
     <div className="selection" aria-live="polite">{feature ? <>
-      <p className="eyebrow">river reach</p><h3>HYRIV {feature.properties.source_id}</h3>
-      {place && <p role="note"><strong>{place.name}</strong> ({place.source} {place.sourceId}) is {Math.round(place.metres).toLocaleString('en-US')} m from this nearest mapped reach. The match is a candidate for tracing, not a verified identity: the source gives this reach no name, so its river identity is UNKNOWN.{place.caveat ? ` ${place.caveat}` : ''}</p>}
+      <p className="eyebrow">{t('river reach', 'नदी खण्ड')}</p><h3>HYRIV {feature.properties.source_id}</h3>
+      {place && <p role="note">{lang === 'ne' ? <><strong>{place.name}</strong> ({place.source === 'GLO lake centroid' ? 'GLO ताल केन्द्रबिन्दु' : place.source} {place.sourceId}) यो सबैभन्दा नजिकको नक्सांकित खण्डबाट {digits(Math.round(place.metres).toLocaleString('en-US'), lang)} m टाढा छ। यो मिलान पछ्याउनका लागि सम्भावित खण्ड मात्र हो, प्रमाणित पहिचान होइन: स्रोतले यस खण्डको नाम दिँदैन, त्यसैले यसको नदी पहिचान अज्ञात (UNKNOWN) छ।{place.caveat ? ' तालको वास्तविक निकास अज्ञात (UNKNOWN) छ; यसले नदी सञ्जालको जडान मात्र पछ्याउँछ, बाढी होइन।' : ''}</>
+        : <><strong>{place.name}</strong> ({place.source} {place.sourceId}) is {Math.round(place.metres).toLocaleString('en-US')} m from this nearest mapped reach. The match is a candidate for tracing, not a verified identity: the source gives this reach no name, so its river identity is UNKNOWN.{place.caveat ? ` ${place.caveat}` : ''}</>}</p>}
       <dl>
-        <dt>River name</dt><dd>{feature.properties.river_name ?? 'UNKNOWN'}</dd>
-        <dt>Flow order</dt><dd>{feature.properties.flow_order}</dd>
-        <dt>Average discharge</dt><dd>{feature.properties.average_discharge_m3s?.toLocaleString('en-US')} m³/s</dd>
-        <dt>Flow regime</dt><dd>{feature.properties.flow_regime}</dd>
-        <dt>Reach length</dt><dd>{feature.properties.length_km?.toLocaleString('en-US')} km</dd>
-        <dt>Upstream area</dt><dd>{feature.properties.upstream_area_km2?.toLocaleString('en-US')} km²</dd>
-        <dt>Catchment area</dt><dd>{feature.properties.catchment_area_km2?.toLocaleString('en-US')} km²</dd>
-        <dt>Next downstream</dt><dd>{feature.properties.downstream_id ? `HYRIV ${feature.properties.downstream_id}${feature.properties.downstream_in_release ? '' : ' (outside Nepal release)'}` : 'Source outlet'}</dd>
-        <dt>Main river ID</dt><dd>{feature.properties.main_river_id}</dd>
+        <dt>{t('River name', 'नदीको नाम')}</dt><dd>{feature.properties.river_name ?? t('UNKNOWN', 'अज्ञात (UNKNOWN)')}</dd>
+        <dt>{t('Flow order', 'प्रवाह क्रम')}</dt><dd>{num(feature.properties.flow_order)}</dd>
+        <dt>{t('Average discharge', 'औसत बहाव')}</dt><dd>{num(feature.properties.average_discharge_m3s)} m³/s</dd>
+        <dt>{t('Flow regime', 'प्रवाहको प्रकृति')}</dt><dd>{feature.properties.flow_regime}</dd>
+        <dt>{t('Reach length', 'खण्डको लम्बाइ')}</dt><dd>{num(feature.properties.length_km)} km</dd>
+        <dt>{t('Upstream area', 'माथिल्लो क्षेत्रफल')}</dt><dd>{num(feature.properties.upstream_area_km2)} km²</dd>
+        <dt>{t('Catchment area', 'जलाधार क्षेत्रफल')}</dt><dd>{num(feature.properties.catchment_area_km2)} km²</dd>
+        <dt>{t('Next downstream', 'तलतिरको अर्को खण्ड')}</dt><dd>{feature.properties.downstream_id ? `HYRIV ${feature.properties.downstream_id}${feature.properties.downstream_in_release ? '' : t(' (outside Nepal release)', ' (नेपाल रिलिजभन्दा बाहिर)')}` : t('Source outlet', 'स्रोतको निकास')}</dd>
+        <dt>{t('Main river ID', 'मुख्य नदी ID')}</dt><dd>{feature.properties.main_river_id}</dd>
         <dt>HydroBASINS L12</dt><dd>{feature.properties.hydrobasin_level12_id}</dd>
       </dl>
-      <p><a href="#downstream-trace">Go to downstream trace</a></p>
-    </> : <p>Select a reach to inspect its topology, source measurements and stable downstream linkage.</p>}</div>
-    {evidence && <details><summary>River source & limitations</summary><Evidence metadata={evidence} /></details>}
+      <p><a href="#downstream-trace">{t('Go to downstream trace', 'तलतिरको मार्गमा जानुहोस्')}</a></p>
+    </> : <p>{t('Select a reach to inspect its topology, source measurements and stable downstream linkage.', 'खण्डको संरचना (topology), स्रोतका मापन र स्थिर तलतिरको जडान हेर्न खण्ड छान्नुहोस्।')}</p>}</div>
+    {evidence && <details><summary>{t('River source & limitations', 'नदीको स्रोत र सीमाहरू')}</summary><Evidence metadata={evidence} /></details>}
     <DownstreamTrace key={`${selected}-${attempt}-${autoTrace ? snap?.n : 0}`} map={map} datasets={datasets} start={feature?.properties.source_id} autoRun={autoTrace} />
   </section>;
 }
