@@ -192,7 +192,7 @@ def organise_river(payload, moment=None):
             "current_station_count": len(current), "current_status_counts": tally(current),
             "alert_stations": sorted((s for s in current if s["status"] in ALERTS), key=alert_order),
             "stale_alert_stations": sorted((s for s in stations if not s["current"] and s["status"] in ALERTS), key=alert_order),
-            "stations": stations}
+            "statuses": {s["id"]: [s["name"], s["status"]] for s in stations}}
 
 
 def organise_rain(payload, moment=None):
@@ -218,7 +218,7 @@ def organise_rain(payload, moment=None):
     return {"station_count": len(stations), "status_counts": tally(stations), "fresh_hours": FRESH_HOURS,
             "current_station_count": len(current), "current_status_counts": tally(current),
             "implausible_24h": sum(1 for s in current if s["rain_24h_mm"] is not None and not 0 <= s["rain_24h_mm"] <= RAIN_24H_MAX_MM),
-            "wettest_24h": sorted(ranked, key=lambda s: -s["rain_24h_mm"])[:15], "stations": stations}
+            "wettest_24h": sorted(ranked, key=lambda s: -s["rain_24h_mm"])[:15]}
 
 
 def organise_list(payload, limit=60):
@@ -239,7 +239,57 @@ def organise_list(payload, limit=60):
     return {"record_count": len(rows), "columns": columns, "records": records}
 
 
-def organise(kind, body, url, moment=None):
+# ---- focus ------------------------------------------------------------------------------------
+
+def parse_time(value):
+    try:
+        moment = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return moment if moment.tzinfo else None
+
+
+def focus_page(page, spec):
+    """Keeps only the parts of a page a source is registered for; everything kept is still verbatim."""
+    pattern = re.compile(spec["paragraphs_matching"], re.I) if spec.get("paragraphs_matching") else None
+    table_pattern = re.compile(spec["tables_matching"], re.I) if spec.get("tables_matching") else None
+    tables = [t for t in page["tables"] if table_pattern and any(table_pattern.search(h) for h in t["header"])][:1]
+    for table in tables:
+        table["rows"] = table["rows"][: spec.get("rows", 15)]
+    paragraphs = [p for p in page["paragraphs"] if pattern and pattern.search(p)][: spec.get("paragraphs", 3)]
+    links = [link for link in page["links"] if link["document"]][: spec.get("documents", 0)]
+    return {"title": page["title"], "headings": page["headings"][: spec.get("headings", 0)], "tables": tables, "links": links,
+            "paragraphs": paragraphs, "dates_mentioned": []}
+
+
+def focus_list(listed, spec, moment):
+    """Recent (or still active) records only, newest first, with the registered fields."""
+    window = timedelta(days=spec.get("within_days", 7))
+    kept = []
+    for record in listed["records"]:
+        when = parse_time(record.get(spec["date_field"]))
+        until = parse_time(record.get(spec["active_field"])) if spec.get("active_field") else None
+        if (when and moment - window <= when <= moment + timedelta(minutes=15)) or (until and until >= moment):
+            kept.append((when or moment, {field: record.get(field) for field in spec["fields"]}))
+    kept.sort(key=lambda pair: pair[0], reverse=True)
+    # When every fetched record falls inside the window, the API page may have cut the window short.
+    complete = len(kept) < len(listed["records"])
+    return {"record_count": len(kept), "complete": complete, "within_days": window.days, "columns": spec["fields"],
+            "records": [record for _, record in kept][: spec.get("limit", 40)]}
+
+
+def organise(kind, body, url, moment=None, focus=None):
+    content = organise_unfocused(kind, body, url, moment)
+    if not focus:
+        return content
+    if kind == "html":
+        return focus_page(content, focus)
+    if kind == "json-list":
+        return focus_list(content, focus, moment or now_utc())
+    return content
+
+
+def organise_unfocused(kind, body, url, moment=None):
     if kind == "html":
         return extract_html(body, url)
     payload = json.loads(body.decode("utf-8"))
@@ -248,7 +298,7 @@ def organise(kind, body, url, moment=None):
     if kind == "bipad-rain":
         return organise_rain(payload, moment)
     if kind == "json-list":
-        return organise_list(payload)
+        return organise_list(payload, limit=200)
     raise ValueError(f"Unknown source kind {kind}")
 
 
@@ -266,9 +316,12 @@ def changes(kind, previous, current):
     if kind == "json-list":
         old_ids = {json.dumps(r.get("id", r), sort_keys=True, ensure_ascii=False) for r in previous.get("records", [])}
         return {"new_records": [r for r in current["records"] if json.dumps(r.get("id", r), sort_keys=True, ensure_ascii=False) not in old_ids][:40]}
-    old = {s["id"]: s["status"] for s in previous.get("stations", [])}
-    return {"status_changes": [{"id": s["id"], "name": s["name"], "from": old.get(s["id"]), "to": s["status"]}
-                               for s in current["stations"] if s["id"] in old and old[s["id"]] != s["status"]][:60]}
+    if "statuses" not in current:
+        return {}
+    # Copies before October 2026 kept full station lists; later ones keep {id: [name, status]}.
+    old = {k: v[1] for k, v in previous.get("statuses", {}).items()} or {s["id"]: s["status"] for s in previous.get("stations", [])}
+    return {"status_changes": [{"id": k, "name": name, "from": old[k], "to": status}
+                               for k, (name, status) in current["statuses"].items() if k in old and old[k] != status][:60]}
 
 
 def summarise(entries):
@@ -309,7 +362,7 @@ def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None, r
                 if status >= 400:
                     entry["status"] = "unreachable"
                 else:
-                    content = organise(source["kind"], body, final_url, moment)
+                    content = organise(source["kind"], body, final_url, moment, source.get("focus"))
                     entry.update({"status": "fetched", "fetched_at": iso(moment), "sha256": hashlib.sha256(body).hexdigest(), "content": content,
                                   "changes": changes(source["kind"], (prior or {}).get("content"), content)})
                     raw[source["id"]] = body
@@ -330,10 +383,17 @@ def write(digest, raw):
     PUBLIC.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(digest, ensure_ascii=False, indent=1) + "\n"
     PUBLIC.write_text(text, encoding="utf-8")
+    # The full copy is versioned by git through latest.json; the daily history keeps only what is needed for trends.
     day = digest["generated_at_nepal"][:10]
+    record = {"format": FORMAT, "generated_at": digest["generated_at"], "summary": digest["summary"],
+              "sources": [{k: e.get(k) for k in ("id", "status", "http_status", "last_known", "sha256")} for e in digest["sources"]]}
     (ARCHIVE / "history").mkdir(parents=True, exist_ok=True)
-    (ARCHIVE / "history" / f"{day}.json").write_text(text, encoding="utf-8")
+    (ARCHIVE / "history" / f"{day}.json").write_text(json.dumps(record, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     (ARCHIVE / "raw").mkdir(parents=True, exist_ok=True)
+    registered = {e["id"] for e in digest["sources"]}
+    for stale in (ARCHIVE / "raw").glob("*.gz"):
+        if stale.stem not in registered:
+            stale.unlink()
     for source_id, body in raw.items():
         (ARCHIVE / "raw" / f"{source_id}.gz").write_bytes(gzip.compress(body, mtime=0))
 

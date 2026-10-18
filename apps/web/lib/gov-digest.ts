@@ -13,7 +13,8 @@ export type RiverContent = { station_count: number; status_counts: Record<string
 export type RainContent = { station_count: number; status_counts: Record<string, number>; wettest_24h: Rain[];
   fresh_hours?: number; current_station_count?: number; current_status_counts?: Record<string, number>; implausible_24h?: number };
 export type Scalar = string | number | boolean | null;
-export type ListContent = { record_count: number; columns: string[]; records: Array<Record<string, Scalar>> };
+/** record_count counts every record in the window; records is capped. complete is false when the API page may have cut the window short. */
+export type ListContent = { record_count: number; columns: string[]; records: Array<Record<string, Scalar>>; complete?: boolean; within_days?: number };
 export type Entry = {
   id: string; agency: string; title: string; category: string; kind: 'html' | 'bipad-river' | 'bipad-rain' | 'json-list'; url: string;
   status: 'fetched' | 'unreachable' | 'blocked-by-robots' | 'error'; http_status: number | null; checked_at: string; fetched_at?: string | null;

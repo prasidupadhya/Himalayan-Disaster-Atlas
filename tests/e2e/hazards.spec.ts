@@ -134,7 +134,8 @@ test('today section shows the daily official copy per hazard, with status and UN
   const quake = today.locator('[data-source="seismo-earthquakes"]');
   await expect(quake).toHaveAttribute('data-source-status', 'last-known');
   await expect(quake).toContainText('AD: 2026-10-07 · 4.1 ML · SYNTHETIC Place');
-  await expect(today.getByRole('listitem').filter({ hasText: 'Air quality' })).toContainText('Not available in today’s copy');
+  await expect(today.getByRole('listitem').filter({ hasText: 'Alerts' })).toContainText('Not available in today’s copy');
+  await expect(today.getByRole('listitem').filter({ hasText: 'Flood bulletins and weather warnings' })).toContainText('Not available in today’s copy');
 });
 
 test('today section says when no copy exists yet', async ({ page }) => {

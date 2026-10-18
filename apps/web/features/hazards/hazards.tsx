@@ -97,21 +97,22 @@ function Today({ c, lang, state, retry }: { c: HzCopy; lang: Lang; state: Return
   </section>;
 }
 
-/** The first readable text on a copied page, verbatim. */
-const firstText = (page: Page) => page.paragraphs[0] ?? page.headings[0] ?? page.tables[0]?.rows[0]?.join(' · ') ?? null;
 const column = (header: string[], pattern: RegExp) => header.findIndex(h => pattern.test(h));
 
 function TodayCards({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) {
   const t = c.today, s = digest.summary, n = (v: number | null) => v === null ? 'UNKNOWN' : formatNumber(v, lang);
   const river = findEntry(digest, 'bipad-river'), rain = findEntry(digest, 'bipad-rain'), quake = findEntry(digest, 'seismo-earthquakes');
-  const incidents = findEntry(digest, 'bipad-incidents'), weather = findEntry(digest, 'dhm-forecast'), air = findEntry(digest, 'doenv-air');
+  const incidents = findEntry(digest, 'bipad-incidents'), alerts = findEntry(digest, 'bipad-alerts');
+  const bulletins = findEntry(digest, 'dhm-flood-archive'), warnings = findEntry(digest, 'dhm-forecast');
   const riverContent = river?.content as RiverContent | undefined, rainContent = rain?.content as RainContent | undefined;
   const wettest = rainContent?.wettest_24h[0];
   const reported = (content: RiverContent | RainContent) => `${content.current_station_count === undefined ? 'UNKNOWN' : formatNumber(content.current_station_count, lang)} / ${formatNumber(content.station_count, lang)}`;
   const quakeTable = (quake?.content as Page | undefined)?.tables.find(table => column(table.header, /magnitude/i) >= 0);
   const latestQuake = quakeTable?.rows[0] && [/date/i, /magnitude/i, /epicent/i].map(re => quakeTable.rows[0][column(quakeTable.header, re)]).filter(Boolean).join(' · ');
-  const list = incidents?.content as ListContent | undefined;
-  const forecast = weather?.content && firstText(weather.content as Page), airText = air?.content && firstText(air.content as Page);
+  const list = incidents?.content as ListContent | undefined, alertList = alerts?.content as ListContent | undefined;
+  const documents = [...((warnings?.content as Page | undefined)?.links ?? []).slice(0, 1), ...((bulletins?.content as Page | undefined)?.links ?? []).slice(0, 2)];
+  const counted = (content: ListContent) => `${n(content.record_count)}${content.complete === false ? '+' : ''}`;
+  const titleOf = (record: Record<string, unknown>) => String((lang === 'ne' && record.titleNe) || record.title || 'UNKNOWN');
   return <>
     <ul className="hz-cards hz-today">
       <TodayCard entry={river} title={t.rivers} anchor="rivers" c={c} lang={lang}>
@@ -128,13 +129,16 @@ function TodayCards({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang
         {latestQuake && <p>{t.latestQuake} <span className="hz-verbatim">{latestQuake}</span></p>}
       </TodayCard>
       <TodayCard entry={incidents} title={t.disasters} anchor="disasters" c={c} lang={lang}>
-        {list && <p className="hz-figure"><strong>{n(list.record_count)}</strong> {t.records} · <strong>{n(incidents?.changes?.new_records?.length ?? 0)}</strong> {t.newRecords}</p>}
+        {list && <p className="hz-figure"><strong>{counted(list)}</strong> {t.records}</p>}
+        {list?.records.slice(0, 3).map(record => <p key={String(record.id)} className="hz-verbatim">{titleOf(record)}</p>)}
       </TodayCard>
-      <TodayCard entry={weather} title={t.weather} anchor="weather" c={c} lang={lang}>
-        {weather?.content && <p className="hz-verbatim">{forecast ?? t.noText}</p>}
+      <TodayCard entry={alerts} title={t.alerts} anchor="disasters" c={c} lang={lang}>
+        {alertList && <p className="hz-figure"><strong>{counted(alertList)}</strong> {t.activeAlerts}</p>}
+        {alertList?.records.slice(0, 2).map(record => <p key={String(record.id)} className="hz-verbatim">{titleOf(record)}</p>)}
       </TodayCard>
-      <TodayCard entry={air} title={t.air} anchor="air-quality" c={c} lang={lang}>
-        {air?.content && <p className="hz-verbatim">{airText ?? t.noText}</p>}
+      <TodayCard entry={bulletins} title={t.bulletins} anchor="floods" c={c} lang={lang}>
+        {documents.length ? <ul className="hz-documents">{documents.map(doc => <li key={doc.href}><a href={doc.href} rel="noopener noreferrer" target="_blank">{doc.text}</a></li>)}</ul> : bulletins?.content && <p>{t.noText}</p>}
+        {documents.length > 0 && <p className="hz-today-status">{t.asListed}</p>}
       </TodayCard>
     </ul>
     <p className="hz-provenance">{digest.generated_at_nepal} · <a href="/official/">{t.all}</a></p>

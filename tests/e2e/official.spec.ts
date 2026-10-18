@@ -45,3 +45,15 @@ test('river flags from old readings are listed apart and not counted as current'
   await article.getByText('1 station still shows a warning or danger flag from an older reading').click();
   await expect(article.getByRole('row', { name: /SYNTHETIC Old Station/ })).toContainText('12 Nov 2024');
 });
+
+test('incident lists say their window, flag a possibly cut-off window and format dates', async ({ page }) => {
+  const incidents = { id: 'bipad-incidents', agency: 'SYNTHETIC agency', title: 'Disaster incidents, last 7 days', category: 'disasters', kind: 'json-list', url: 'https://example.test/incidents', status: 'fetched', http_status: 200, checked_at: '2026-10-17T00:17:00Z', fetched_at: '2026-10-17T00:17:00Z',
+    content: { record_count: 2, complete: false, within_days: 7, columns: ['id', 'title', 'titleNe', 'incidentOn', 'verified'], records: [{ id: 1, title: 'SYNTHETIC landslide', titleNe: 'SYNTHETIC', incidentOn: '2026-10-16T18:15:00Z', verified: true }, { id: 2, title: 'SYNTHETIC fire', titleNe: null, incidentOn: null, verified: false }] }, changes: {} };
+  await page.route('**/gov/latest.json', route => route.fulfill({ contentType: 'application/json', body: JSON.stringify({ ...digest, sources: [incidents] }) }));
+  await page.goto('/official/');
+  const table = page.getByRole('article', { name: 'Disaster incidents, last 7 days' }).getByRole('table');
+  await expect(table.locator('caption')).toHaveText('2 or more records in the last 7 days; newest 2 shown as published');
+  await expect(table.getByRole('columnheader')).toHaveText(['Title', 'Date', 'Verified']);
+  await expect(table.getByRole('row', { name: /SYNTHETIC landslide/ })).toContainText('17 Oct 2026, 00:00 NPT');
+  await expect(table.getByRole('row', { name: /SYNTHETIC fire/ })).toContainText('UNKNOWN');
+});

@@ -3,7 +3,7 @@
 `/hazards/` gathers hazard context in one bilingual (English/Nepali) page. Each panel is labelled by evidence type (modelled, derived, scenario, gated) and links to its release manifest, methodology and sources. Nothing on the page is a forecast or warning; DHM and NDRRMA/BIPAD are linked as the authorities.
 
 ## Panels
-- **Today from official sources**: the daily [official-source digest](official-sources.md) grouped by hazard — river levels, rainfall, earthquakes, disaster incidents, the weather forecast and air quality. Figures and text are copied as published; each card says when it was copied (or that only the last copy is shown) and links to the agency page and the full copy on `/official/`. Missing values show UNKNOWN. It refreshes with each daily commit, not in the browser.
+- **Today from official sources**: the daily [official-source digest](official-sources.md) grouped by hazard — river levels, rainfall, earthquakes, incidents of the last 7 days, active alerts, and DHM flood bulletins and weather warnings. Figures and text are copied as published; each card says when it was copied (or that only the last copy is shown) and links to the agency page and the full copy on `/official/`. Missing values show UNKNOWN. It refreshes with each daily commit, not in the browser.
 - **Rainfall and snow** (Feature 54) and **Drought and heat** (Feature 55): NASA POWER cells with a month selector over the latest 12 months, map, national SPI-3 area shares and full tables. See [climate context](climate-context.md).
 - **Landslide terrain context** (Feature 53): district steepness map and table. See [terrain steepness](terrain-steepness.md).
 - **Floods/GLOF and earthquakes**: links into the scenario simulator and `/live/`.

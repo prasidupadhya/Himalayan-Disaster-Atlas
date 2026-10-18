@@ -1,7 +1,10 @@
 'use client';
 import { nepalTime, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type River, type RiverContent, type Scalar, type Table } from '../../lib/gov-digest';
 
-const CATEGORIES: Array<[string, string]> = [['weather', 'Weather'], ['floods', 'Floods'], ['rivers', 'River levels'], ['rainfall', 'Rainfall'], ['disasters', 'Disasters and alerts'], ['earthquakes', 'Earthquakes'], ['air-quality', 'Air quality'], ['roads', 'Roads'], ['notices', 'Notices']];
+const CATEGORIES: Array<[string, string]> = [['rivers', 'River levels'], ['rainfall', 'Rainfall'], ['floods', 'Flood bulletins'], ['weather', 'Weather warnings'], ['disasters', 'Incidents and alerts'], ['earthquakes', 'Earthquakes']];
+/** Shown as plain columns; ids and the Nepali title stay in the data but not in the English table. */
+const HIDDEN_COLUMNS = new Set(['id', 'titleNe']);
+const LABELS: Record<string, string> = { title: 'Title', incidentOn: 'Date', verified: 'Verified', source: 'Source', createdOn: 'Issued', expireOn: 'Expires' };
 const UNKNOWN = 'UNKNOWN';
 const num = (value: number | null | undefined, unit: string) => value === null || value === undefined ? UNKNOWN : `${value.toLocaleString('en-US', { maximumFractionDigits: 2 })} ${unit}`;
 const count = (value: number | null) => value === null ? UNKNOWN : value.toLocaleString('en-US');
@@ -62,15 +65,21 @@ function RainView({ content }: { content: RainContent }) {
   </>;
 }
 
-function cell(value: Scalar) { return value === null || value === '' ? UNKNOWN : typeof value === 'boolean' ? (value ? 'yes' : 'no') : String(value); }
+function cell(value: Scalar, column = '') {
+  if (value === null || value === '') return UNKNOWN;
+  if (typeof value === 'boolean') return value ? 'yes' : 'no';
+  return /On$/.test(column) ? time(String(value)) : String(value);
+}
 
 function ListView({ content, entry }: { content: ListContent; entry: Entry }) {
   const fresh = new Set((entry.changes?.new_records ?? []).map(r => JSON.stringify(r.id ?? r)));
-  if (!content.records.length) return <p>The source returned no records in this copy.</p>;
+  const columns = content.columns.filter(c => !HIDDEN_COLUMNS.has(c));
+  const span = content.within_days ? ` in the last ${content.within_days} days` : '';
+  if (!content.records.length) return <p>No records{span} in this copy.</p>;
   return <div className="official-table-wrap"><table>
-    <caption>{content.record_count.toLocaleString('en-US')} records; first {Math.min(content.records.length, 25)} shown as published</caption>
-    <thead><tr>{content.columns.map(c => <th key={c} scope="col">{c}</th>)}</tr></thead>
-    <tbody>{content.records.slice(0, 25).map((r, i) => <tr key={i}>{content.columns.map((c, j) => <td key={c}>{cell(r[c] ?? null)}{j === 0 && fresh.has(JSON.stringify(r.id ?? r)) && <span className="official-new">new</span>}</td>)}</tr>)}</tbody>
+    <caption>{content.record_count.toLocaleString('en-US')}{content.complete === false ? ' or more' : ''} records{span}; newest {Math.min(content.records.length, 25)} shown as published</caption>
+    <thead><tr>{columns.map(c => <th key={c} scope="col">{LABELS[c] ?? c}</th>)}</tr></thead>
+    <tbody>{content.records.slice(0, 25).map((r, i) => <tr key={i}>{columns.map((c, j) => <td key={c}>{cell(r[c] ?? null, c)}{j === 0 && fresh.has(JSON.stringify(r.id ?? r)) && <span className="official-new">new</span>}</td>)}</tr>)}</tbody>
   </table></div>;
 }
 
@@ -107,7 +116,7 @@ export function OfficialSources() {
 
   return <div className="page official-page" data-official-state={state.status}>
     <h1>Official sources today</h1>
-    <p className="intro">A daily, organised copy of public Nepal government pages: weather forecasts, river and rainfall readings, earthquakes and notices. Text is copied as published. The agency websites are authoritative and may have changed since the copy below.</p>
+    <p className="intro">One daily copy of the official sources that answer a hazard question: river levels, rainfall, flood bulletins, weather warnings, incidents and alerts, and earthquakes. Only the parts that matter are kept, copied as published. The agency websites are authoritative and may have changed since this copy.</p>
     <aside className="official-authorities" aria-label="Authoritative sources">
       <p><strong>For warnings and decisions, use the agencies directly:</strong> <a href="https://dhm.gov.np/mfd/" rel="noopener noreferrer" target="_blank">DHM forecasts</a>, <a href="https://ndrrma.gov.np/" rel="noopener noreferrer" target="_blank">NDRRMA</a> and <a href="https://bipadportal.gov.np/" rel="noopener noreferrer" target="_blank">BIPAD</a>.</p>
     </aside>

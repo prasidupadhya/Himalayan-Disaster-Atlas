@@ -8,6 +8,7 @@ from pipelines.gov_feeds.digest import (
     FORMAT,
     build,
     changes,
+    focus_list,
     organise_list,
     organise_rain,
     organise_river,
@@ -49,12 +50,13 @@ class OrganiseTests(unittest.TestCase):
         river = organise_river(RIVER, MOMENT)
         self.assertEqual(river["status_counts"], {"ABOVE DANGER LEVEL": 1, "ABOVE WARNING LEVEL": 1, "BELOW WARNING LEVEL": 1})
         self.assertEqual([s["id"] for s in river["alert_stations"]], ["2", "1"])
-        self.assertIsNone(next(s for s in river["stations"] if s["id"] == "3")["water_level_m"])
+        self.assertEqual(river["statuses"]["3"], ["SYNTHETIC Station C", "BELOW WARNING LEVEL"])
 
     def test_rain_ranks_only_stations_with_a_24h_value(self):
         rain = organise_rain(RAIN, MOMENT)
         self.assertEqual([s["id"] for s in rain["wettest_24h"]], ["11", "10"])
-        self.assertIsNone(next(s for s in rain["stations"] if s["id"] == "12")["rain_24h_mm"])
+        self.assertNotIn("12", [s["id"] for s in rain["wettest_24h"]])
+        self.assertNotIn("stations", rain)
 
     def test_old_readings_keep_their_flag_but_are_not_counted_as_current(self):
         stale = {**RIVER["results"][1], "id": 4, "title": "SYNTHETIC Station D", "waterLevelOn": "2024-11-12T23:10:00+05:45"}
@@ -69,6 +71,19 @@ class OrganiseTests(unittest.TestCase):
         rain = organise_rain({"results": rows}, MOMENT)
         self.assertEqual([s["id"] for s in rain["wettest_24h"]], ["11", "10"])
         self.assertEqual((rain["implausible_24h"], rain["current_status_counts"]["ABOVE WARNING LEVEL"]), (1, 2))
+
+    def test_focused_lists_keep_recent_or_active_records_newest_first(self):
+        listed = organise_list({"results": [
+            {"id": 1, "title": "SYNTHETIC old", "createdOn": "2026-09-01T00:00:00+05:45", "expireOn": None, "hazard": 17},
+            {"id": 2, "title": "SYNTHETIC still active", "createdOn": "2026-09-01T00:00:00+05:45", "expireOn": "2026-10-20T00:00:00+05:45"},
+            {"id": 3, "title": "SYNTHETIC recent", "createdOn": "2026-10-16T09:00:00+05:45", "expireOn": None},
+            {"id": 4, "title": "SYNTHETIC newest", "createdOn": "2026-10-17T05:00:00+05:45", "expireOn": None}]})
+        focused = focus_list(listed, {"fields": ["id", "title"], "date_field": "createdOn", "active_field": "expireOn", "within_days": 3}, MOMENT)
+        self.assertEqual([r["id"] for r in focused["records"]], [4, 3, 2])
+        self.assertEqual(focused["records"][0], {"id": 4, "title": "SYNTHETIC newest"})
+        self.assertTrue(focused["complete"])
+        everything = focus_list(listed, {"fields": ["id"], "date_field": "createdOn", "within_days": 60}, MOMENT)
+        self.assertFalse(everything["complete"])
 
     def test_unknown_api_copies_plain_fields_only_and_reports_new_records(self):
         payload = {"count": 9999999, "results": [{"id": 7, "title": "SYNTHETIC incident", "nested": {"x": 1}, "loss": None}, {"id": 8, "title": "SYNTHETIC second"}]}
@@ -132,7 +147,16 @@ class BuildTests(unittest.TestCase):
 
     def test_rendered_sources_are_marked_in_the_registry(self):
         rendered = {s["id"] for s in json.loads(REGISTRY.read_text())["sources"] if s.get("render")}
-        self.assertEqual(rendered, {"dhm-forecast", "ffd-bulletins", "dhm-flood-archive", "ndrrma-home", "doenv-air"})
+        self.assertEqual(rendered, {"dhm-forecast", "ndrrma-home"})
+
+    def test_registry_keeps_one_focused_source_per_hazard_question(self):
+        sources = json.loads(REGISTRY.read_text())["sources"]
+        self.assertEqual({s["category"] for s in sources}, {"rivers", "rainfall", "floods", "weather", "earthquakes", "disasters"})
+        for source in sources:
+            if source["kind"] in ("html", "json-list"):
+                self.assertIn("focus", source, source["id"])
+            if source["kind"] == "json-list":
+                self.assertIn("id", source["focus"]["fields"], source["id"])
 
 
 @unittest.skipUnless(importlib.util.find_spec("scrapling"), "scrapling is installed only for the digest workflow")
@@ -161,3 +185,13 @@ class HtmlTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+    def test_page_focus_keeps_only_registered_parts_verbatim(self):
+        from pipelines.gov_feeds.digest import extract_html, focus_page
+        page = extract_html(self.PAGE, "https://example.test/mfd/")
+        documents = focus_page(page, {"documents": 3})
+        self.assertEqual(documents["links"], [{"text": "Daily bulletin", "href": "https://example.test/files/bulletin.pdf", "document": True}])
+        self.assertEqual((documents["tables"], documents["paragraphs"], documents["headings"]), ([], [], []))
+        outlook = focus_page(page, {"tables_matching": "today", "rows": 1, "paragraphs_matching": "koshi"})
+        self.assertEqual(outlook["tables"][0]["rows"], [["Koshi", "Light rain"]])
+        self.assertTrue(outlook["paragraphs"][0].startswith("SYNTHETIC: Partly cloudy"))
