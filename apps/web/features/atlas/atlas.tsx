@@ -15,19 +15,10 @@ import { Infrastructure } from '../infrastructure/infrastructure';
 import { Terrain } from '../terrain/terrain';
 import { Rivers } from '../rivers/rivers';
 import { MapKey } from './map-key';
-import { ExposureEngine } from '../exposure-engine/exposure-engine';
-import { ScenarioEngine } from '../scenario-engine/scenario-engine';
 import { SimulationUI } from '../simulation-ui/simulation-ui';
-import { HazardGraph } from '../hazard-graph/hazard-graph';
-import { TimeMachine } from '../time-machine/time-machine';
-import type { TemporalSelection } from '../../../../packages/contracts/temporal';
-import { WaterChange } from '../water-change/water-change';
-import { LocationExplorer } from '../location-explorer/location-explorer';
-import { Search } from '../search/search';
-import type { SearchRecord } from '../../../../packages/contracts/search';
-import { CompareMode } from '../compare-mode/compare-mode';
+import { Earthquakes } from '../earthquakes/earthquakes';
 
-const AdditionalLayers = dynamic(() => import('./additional-layers').then(m => m.AdditionalLayers), { loading: () => <p role="status">Loading additional layer controls…</p> });
+const Glaciers = dynamic(() => import('../glaciers/glaciers').then(m => m.Glaciers), { loading: () => <p role="status">Loading glacier outlines…</p> });
 
 const LEVEL_LABELS = ['Country', 'Provinces', 'Districts', 'Local levels and special areas'] as const;
 
@@ -42,7 +33,7 @@ function frameNepal(map: Map, bbox: [number, number, number, number]) {
   });
 }
 
-export function Atlas({ research = false }: { research?: boolean }) {
+export function Atlas() {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map | null>(null);
   const layerRef = useRef<ReturnType<typeof mountAdministrativeDataset>[]>([]);
@@ -50,12 +41,12 @@ export function Atlas({ research = false }: { research?: boolean }) {
   const [mapError, setMapError] = useState<string | null>(null);
   const [mapReady, setMapReady] = useState(false);
   const [interactiveMap, setInteractiveMap] = useState<Map | null>(null);
-  const [visible, setVisible] = useState([true, research, true, research]);
+  const [visible, setVisible] = useState([true, false, true, false]);
   const visibleRef = useRef(visible);
   const [selected, setSelected] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
-  const [temporal, setTemporal] = useState<TemporalSelection | null>(null);
   const [additionalLayers, setAdditionalLayers] = useState(false);
+  const [glaciers, setGlaciers] = useState(false);
   const [lake, setLake] = useState<LakeChoice | null>(null);
   const [lakeTrace, setLakeTrace] = useState<(LakeChoice & { n: number }) | null>(null);
   const [boundaryQuery, setBoundaryQuery] = useState('');
@@ -185,7 +176,7 @@ export function Atlas({ research = false }: { research?: boolean }) {
   const evidence = datasets?.[feature?.properties.admin_level ?? 1]?.metadata;
 
   useEffect(() => {
-    if (research || !mapReady || !mapRef.current || !feature || (feature.properties.admin_level ?? 0) < 2) return;
+    if (!mapReady || !mapRef.current || !feature || (feature.properties.admin_level ?? 0) < 2) return;
     const p = feature.properties;
     if (p.label_longitude == null || p.label_latitude == null) return;
     let cancelled = false; let marker: Marker | undefined;
@@ -196,11 +187,11 @@ export function Atlas({ research = false }: { research?: boolean }) {
       marker = new Marker({ element: label }).setLngLat([p.label_longitude!, p.label_latitude!]).addTo(mapRef.current);
     });
     return () => { cancelled = true; marker?.remove(); };
-  }, [research, mapReady, feature]);
+  }, [mapReady, feature]);
 
   function selectFeature(id: string) {
     const item = features.find(f => f.id === id);
-    if (!research && item?.properties.label_longitude != null && item.properties.label_latitude != null) {
+    if (item?.properties.label_longitude != null && item.properties.label_latitude != null) {
       mapRef.current?.easeTo({ center: [item.properties.label_longitude, item.properties.label_latitude], zoom: item.properties.admin_level === 3 ? 10 : 7, duration: 0 });
     }
     setSelected(id || null);
@@ -217,58 +208,28 @@ export function Atlas({ research = false }: { research?: boolean }) {
     setMapError(null); setMapReady(false); setInteractiveMap(null); setSelected(null);
     setAttempt(value => value + 1);
   }
-  function focusSearch(record: SearchRecord) {
-    const map = mapRef.current;
-    if (record.type === 'administrative_unit') selectFeature(record.feature_id);
-    if (map) map.easeTo({ center: [record.longitude, record.latitude], zoom: Math.max(map.getZoom(), record.type === 'administrative_unit' ? 7 : 9), duration: 0 });
-  }
-  function focusComparison(a: SearchRecord, b: SearchRecord) {
-    const map = mapRef.current;
-    if (!map) return;
-    const west = Math.min(a.longitude, b.longitude); const east = Math.max(a.longitude, b.longitude);
-    const south = Math.min(a.latitude, b.latitude); const north = Math.max(a.latitude, b.latitude);
-    if (west === east && south === north) map.easeTo({ center: [west, south], zoom: Math.max(map.getZoom(), 9), duration: 0 });
-    else map.fitBounds([[west, south], [east, north]], { padding: 80, maxZoom: 9, duration: 0 });
-  }
-
-  return <div className={research ? 'atlas-workspace' : 'atlas-workspace atlas-mission'}>
+  return <div className="atlas-workspace atlas-mission">
     <aside className="atlas-panel">
       <div className="atlas-panel-header">
-        <p className="eyebrow">Nepal / {research ? 'research atlas' : 'lakes & downstream rivers'}</p>
-        <h1>{research ? 'Explore Nepal’s terrain & boundaries' : 'Explore Nepal’s lakes & rivers'}</h1>
-        <p>{research ? 'Explore the landscape with Copernicus terrain and verified COD-AB v02 administrative records.' : 'Inspect a glacial lake, follow river connections, and explore infrastructure context.'}</p>
+        <p className="eyebrow">Nepal / floods, glacial lakes and earthquakes</p>
+        <h1>Explore Nepal’s lakes, rivers & earthquakes</h1>
+        <p>Pick a glacial lake and follow its water downstream, or read the record of earthquakes around Nepal.</p>
         <DataState state={resource} retry={retry} />
-        <nav className="atlas-shortcuts" aria-label="Atlas controls">{!research && <a href="#lake-controls">Lakes</a>}<a href="#boundary-controls">Boundaries</a><a href="#terrain-controls">Terrain</a><a href="#river-controls">Rivers</a><a href="#additional-controls">{research ? 'More layers' : 'Infrastructure'}</a></nav>
+        <nav className="atlas-shortcuts" aria-label="Atlas controls"><a href="#lake-controls">Lakes</a><a href="#river-controls">Rivers</a><a href="#earthquake-controls">Earthquakes</a><a href="#terrain-controls">Terrain</a><a href="#boundary-controls">Boundaries</a><a href="#additional-controls">Infrastructure</a></nav>
       </div>
-      {!research && <div id="lake-controls" tabIndex={-1} className="atlas-anchor"><GlacialLakes key={`lakes-${attempt}`} map={mapReady ? interactiveMap : null} onSelect={setLake} onTrace={choice => { setLakeTrace(previous => ({ ...choice, n: (previous?.n ?? 0) + 1 })); document.getElementById('downstream-trace')?.scrollIntoView({ block: 'nearest' }); }} /></div>}
+      <div id="lake-controls" tabIndex={-1} className="atlas-anchor"><GlacialLakes key={`lakes-${attempt}`} map={mapReady ? interactiveMap : null} onSelect={setLake} onTrace={choice => { setLakeTrace(previous => ({ ...choice, n: (previous?.n ?? 0) + 1 })); document.getElementById('downstream-trace')?.scrollIntoView({ block: 'nearest' }); }} />
+        <section className="thematic-controls" aria-label="Glacier outlines"><h2>Glaciers</h2><p>Show the glacier outlines that feed the lakes (about 1.3 MB).</p><button type="button" onClick={() => setGlaciers(value => !value)}>{glaciers ? 'Hide glacier outlines' : 'Show glacier outlines'}</button>{glaciers && <Glaciers key={`glaciers-${attempt}`} map={mapReady ? interactiveMap : null} />}</section>
+      </div>
       <section id="boundary-controls" tabIndex={-1} className="layer-controls" aria-label="Map layers"><h2>Boundary levels</h2>
         {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
-      {research && <>
-      <Search onFocus={focusSearch} />
-      <CompareMode onFocus={focusComparison} />
-      <SimulationUI key={`simulation-ui-${attempt}`} map={mapReady ? interactiveMap : null} />
-      <ScenarioEngine key={`scenario-${attempt}`} map={mapReady ? interactiveMap : null} />
-      <HazardGraph key={`hazard-graph-${attempt}`} map={mapReady ? interactiveMap : null} />
-      <TimeMachine value={temporal} onChange={setTemporal} />
-      <LocationExplorer key={`location-explorer-${attempt}`} map={mapReady ? interactiveMap : null} adminDatasets={datasets} />
-      <WaterChange temporal={temporal} key={`water-change-${attempt}`} map={mapReady ? interactiveMap : null} />
-      </>}
       <div id="terrain-controls" tabIndex={-1} className="atlas-anchor"><Terrain key={attempt} map={mapReady ? interactiveMap : null} /></div>
       <div id="river-controls" tabIndex={-1} className="atlas-anchor"><Rivers key={`rivers-${attempt}`} map={mapReady ? interactiveMap : null} snap={lakeTrace} /></div>
-      {research && <ExposureEngine key={`exposure-${attempt}`} map={mapReady ? interactiveMap : null} />}
-      {!research && <section className="thematic-controls" aria-label="GLOF modelling availability"><h2>Lake outburst modelling</h2><p>{lake ? `Selected lake: ${lake.id}. Physical model inputs required.` : 'Select a lake above to identify the modelling subject.'}</p><p>Flood extent and damage: <strong>UNAVAILABLE</strong>.</p><p>A lake point or a downstream river line cannot identify inundated places or destroyed assets. This inventory has no verified lake outlet-to-river connection, breach parameters or validated hydraulic model.</p><p><a href="/methodology/#glof-physical">Physical GLOF project: scope, required inputs and validation</a></p><p>Use river tracing for connectivity only. Infrastructure is geographic context, not a list of affected assets.</p><details onToggle={event => setEducationalSimulation(event.currentTarget.open)}><summary>Educational river simulation</summary>{educationalSimulation && <SimulationUI key={`focused-simulation-${attempt}`} map={mapReady ? interactiveMap : null} />}</details></section>}
+      <div id="earthquake-controls" tabIndex={-1} className="atlas-anchor"><Earthquakes key={`earthquakes-${attempt}`} map={mapReady ? interactiveMap : null} /></div>
+      <section className="thematic-controls" aria-label="GLOF modelling availability"><h2>Lake outburst modelling</h2><p>{lake ? `Selected lake: ${lake.id}. Physical model inputs required.` : 'Select a lake above to identify the modelling subject.'}</p><p>Flood extent and damage: <strong>UNAVAILABLE</strong>.</p><p>A lake point or a downstream river line cannot identify inundated places or destroyed assets. This inventory has no verified lake outlet-to-river connection, breach parameters or validated hydraulic model.</p><p><a href="/methodology/#glof-physical">Physical GLOF project: scope, required inputs and validation</a></p><p>Use river tracing for connectivity only. Infrastructure is geographic context, not a list of affected assets.</p><details onToggle={event => setEducationalSimulation(event.currentTarget.open)}><summary>Educational river simulation</summary>{educationalSimulation && <SimulationUI key={`focused-simulation-${attempt}`} map={mapReady ? interactiveMap : null} />}</details></section>
       <div id="additional-controls" tabIndex={-1} className="atlas-anchor">
-      {research ? <>
-      {!additionalLayers && <section className="thematic-controls mobile-data-gate" aria-label="Additional data loading" data-mobile-data="deferred">
-        <h2>Additional map datasets</h2>
-        <p>To keep the core map responsive, larger secondary thematic datasets are deferred. Mountains, glaciers, lakes, stations, hazards, infrastructure, population, satellite and climate remain available with their full scientific labels and provenance. Rivers/downstream tracing and Exposure remain loaded as core analytical workflows.</p>
-        <button type="button" onClick={() => setAdditionalLayers(true)}>Load additional map datasets</button>
-      </section>}
-      {additionalLayers && <button type="button" onClick={() => setAdditionalLayers(false)}>Unload additional map datasets</button>}
-      {additionalLayers && <AdditionalLayers attempt={attempt} temporal={temporal} map={mapReady ? interactiveMap : null} />}
-      </> : <section className="thematic-controls" aria-label="Infrastructure context"><h2>Infrastructure context</h2><p>Load roads, bridges, facilities and hydropower only when needed. Coverage is incomplete; proximity is not damage.</p><button type="button" onClick={() => setAdditionalLayers(value => !value)}>{additionalLayers ? 'Unload infrastructure context' : 'Load infrastructure context'}</button>{additionalLayers && <><Hydropower key={`hydropower-${attempt}`} map={mapReady ? interactiveMap : null} /><Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? interactiveMap : null} /></>}</section>}
+      <section className="thematic-controls" aria-label="Infrastructure context"><h2>Infrastructure context</h2><p>Load roads, bridges, facilities and hydropower only when needed. Coverage is incomplete; proximity is not damage.</p><button type="button" onClick={() => setAdditionalLayers(value => !value)}>{additionalLayers ? 'Unload infrastructure context' : 'Load infrastructure context'}</button>{additionalLayers && <><Hydropower key={`hydropower-${attempt}`} map={mapReady ? interactiveMap : null} /><Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? interactiveMap : null} /></>}</section>
       </div>
       {evidence && <Evidence metadata={evidence} />}
     </aside>
@@ -277,7 +238,7 @@ export function Atlas({ research = false }: { research?: boolean }) {
         <a className="map-skip-link" href="#accessible-boundary-records">Skip interactive map to boundary records</a>
         <p id="atlas-map-alternative" className="sr-only">The map is a visual navigation surface. Administrative boundaries can also be identified with the labelled boundary selector and textual details immediately after the map. The Atlas panel contains labelled controls and evidence text for thematic layers.</p>
         <div ref={container} className="map" role="region" aria-label="Interactive Nepal administrative boundary map" aria-describedby="atlas-map-alternative" data-map-ready={mapReady} />
-        <div className="map-caption"><span className="boundary-key" /> {temporal ? `Time Machine · ${temporal.date} UTC · unavailable observations hidden` : 'COD-AB v02 · click a boundary to inspect it'}</div>
+        <div className="map-caption"><span className="boundary-key" /> COD-AB v02 · click a boundary to inspect it</div>
         {datasets && !mapReady && !mapError && <div className="map-message" role="status">Preparing the interactive map…</div>}
         {mapError && <div className="map-message" role="alert">{mapError}</div>}
         <button className="reset-map" disabled={!mapReady} onClick={() => {
@@ -286,7 +247,7 @@ export function Atlas({ research = false }: { research?: boolean }) {
           }
         }}>Reset view</button>
       </div>
-      {!research && <MapKey />}
+      <MapKey />
       <p className="muted map-attribution-note">Data attribution: <a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors (ODbL)</a> · <a href="/licenses/">Terrain and all source licences</a></p>
       <section className="feature-list" id="accessible-boundary-records" tabIndex={-1} aria-label="Accessible boundary records">
         <h2>Identify an administrative unit</h2>

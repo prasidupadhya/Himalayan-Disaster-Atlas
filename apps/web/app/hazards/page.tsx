@@ -1,5 +1,4 @@
-import 'maplibre-gl/dist/maplibre-gl.css';
 import './hazards.css';
 import { HazardsLoader } from '../../features/hazards/loader';
-export const metadata = { title: 'Hazard context', description: 'Rainfall, snow, drought, heat and terrain context for Nepal from verified releases, with links to educational scenarios. Context only — not a forecast or warning.' };
+export const metadata = { title: 'Today', description: 'Today’s official river levels, rainfall, flood bulletins, alerts, earthquakes and incidents for Nepal, copied daily from government sources. Not a warning service.' };
 export default function HazardsPage() { return <HazardsLoader />; }

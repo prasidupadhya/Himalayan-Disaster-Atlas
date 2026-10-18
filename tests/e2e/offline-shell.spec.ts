@@ -158,23 +158,24 @@ test('the worker script is served uncached with the shell manifest pinned', asyn
   for (const entry of config.shell.slice(0, 5)) expect((await request.get(entry.url)).ok()).toBe(true);
 });
 
-test('hazards and the simulator work offline after one online visit, from verified cached releases', async ({ page, context }) => {
+test('today and the simulator work offline after one online visit, from stored copies and verified releases', async ({ page, context }) => {
   const network = await serve(context);
   await page.goto('/hazards/');
   await page.evaluate(async () => { await navigator.serviceWorker.ready; });
   await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller), { timeout: 30_000 }).toBe(true);
   await page.reload();
-  await expect(page.locator('section#terrain .hz-bars li')).toHaveCount(10, { timeout: 30_000 });
-  await expect(page.locator('section#climate .hz-legend')).toBeVisible();
+  await expect(page.locator('[data-today-state]')).toHaveAttribute('data-today-state', 'ready', { timeout: 30_000 });
+  const copied = await page.locator('.hz-copied').textContent();
   await page.goto('/simulate/');
   await expect(page.locator('#panel-flood').getByRole('checkbox')).toBeVisible({ timeout: 30_000 });
   await expect.poll(() => page.evaluate(async () => (await (await caches.open('atlas-data-v1')).keys()).length)).toBeGreaterThan(5);
 
   await goOffline(context, network);
   await page.goto('/hazards/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Hazard context for Nepal');
-  await expect(page.locator('section#terrain .hz-bars li')).toHaveCount(10, { timeout: 30_000 });
-  await expect(page.locator('section#climate').getByRole('alert')).toHaveCount(0);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Floods, glacial lakes and earthquakes today');
+  // The stored copy names its own copy time, so offline readers see how old it is.
+  await expect(page.locator('[data-today-state]')).toHaveAttribute('data-today-state', 'ready', { timeout: 30_000 });
+  await expect(page.locator('.hz-copied')).toHaveText(copied!);
   await page.goto('/simulate/');
   await page.locator('#panel-flood').getByRole('checkbox').check();
   await page.locator('#panel-flood').getByRole('button', { name: 'Run scenario' }).click();

@@ -1,375 +1,126 @@
 'use client';
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
-import { parseClimateContext, parseTerrainSteepness, type ClimateContext, type ModelRelease, type TerrainSteepness } from '../../../../packages/contracts/model-release';
-import { ADMIN_MANIFESTS, loadDataset } from '../../lib/datasets';
 import { findEntry, nepalTime, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type RiverContent } from '../../lib/gov-digest';
-import { buildIndex, parseEvidenceCorpus, retrieve, type EvidenceAnswer, type EvidenceIndex } from '../../lib/evidence';
-import {
-  CLIMATE_VIEWS, cellPolygon, classify, freshness, monthLabel, nationalPrecipSeries, SPI_SCALE, spiShare, STEEP_SCALE, steepestDistricts, UNKNOWN_FILL,
-  type ClimateView, type ScaleClass,
-} from '../../lib/hazard-context';
 import { formatNumber, LanguageSwitch, useLanguage, type Lang } from '../../lib/i18n';
-import { loadModelArtifact, loadModelRelease, manifestPath, MODEL_RELEASES, type ModelKey } from '../../lib/model-release';
 import { hz, type HzCopy } from './copy';
-import { ChoroplethMap, type ChoroplethFeature } from './hazards-map';
 
-type Loaded<T> = { release: ModelRelease; data: T };
-type State<T> = { value: Loaded<T> | null; error: string | null; retry: () => void };
+const column = (header: string[], pattern: RegExp) => header.findIndex(h => pattern.test(h));
 
-function useRelease<T>(key: ModelKey, artifact: string, parse: (value: unknown, release: ModelRelease) => T): State<T> {
-  const [value, setValue] = useState<Loaded<T> | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [attempt, setAttempt] = useState(0);
-  useEffect(() => {
-    const controller = new AbortController();
-    (async () => {
-      const release = await loadModelRelease(MODEL_RELEASES[key], controller.signal);
-      return { release, data: parse(await loadModelArtifact(release, artifact, controller.signal), release) };
-    })().then(v => { setValue(v); setError(null); }, reason => { if (!controller.signal.aborted) setError(reason instanceof Error ? reason.message : 'Unavailable'); });
-    return () => controller.abort();
-    // parse is a stable module-level function at every call site
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key, artifact, attempt]);
-  return { value, error, retry: () => { setError(null); setAttempt(a => a + 1); } };
-}
-const parseClimate = (v: unknown, r: ModelRelease) => parseClimateContext(v, r.summary as { cells: number; latest_month: string });
-const parseTerrain = (v: unknown, r: ModelRelease) => parseTerrainSteepness(v, r.summary as { districts: number });
-const parseCorpus = (v: unknown, r: ModelRelease) => buildIndex(parseEvidenceCorpus(v, r.summary as { chunks: number; documents: number }));
-
-const pct = (v: number, lang: Lang, f = 0) => `${formatNumber(v * 100, lang, f)}%`;
-
+/** "Today": the daily official copy, arranged around floods, glacial lakes and earthquakes. */
 export function Hazards() {
   const [lang, setLang] = useLanguage();
   const c = hz(lang);
-  const climate = useRelease('climate', 'context', parseClimate);
-  const terrain = useRelease('terrain', 'steepness', parseTerrain);
-  const corpus = useRelease('evidence', 'corpus', parseCorpus);
-  const [today, retryToday] = useGovDigest();
-  const sections: Array<[string, string]> = [['today', c.today.jump], ['overview', c.overview], ['climate', c.climateTitle], ['terrain', c.terrainTitle], ['gated', c.gatedTitle], ['evidence', c.evidenceTitle]];
+  const [state, retry] = useGovDigest();
+  const digest = state.status === 'ready' ? state.digest : null;
+  const sections: Array<[string, string]> = [['floods', c.floods], ['glacial-lakes', c.glof], ['earthquakes', c.quakes], ['incidents', c.incidents]];
 
-  return <div className="hz-page" lang={lang}>
+  return <div className="hz-page" lang={lang} data-today-state={state.status}>
     <header className="hz-hero">
       <div className="hz-hero-top"><p className="eyebrow">{c.eyebrow}</p><LanguageSwitch lang={lang} onChange={setLang} /></div>
       <h1>{c.title}</h1>
       <p className="intro">{c.intro}</p>
-      <div className="hz-notice" role="note"><span aria-hidden="true">◇</span><div><strong>{c.notice}</strong> {c.authorities} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url} rel="noopener">{a.name}</a></span>)}.</div></div>
+      <p className="hz-authorities">{c.authorities} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url} rel="noopener">{a.name}</a></span>)}</p>
+      {digest && <p className="hz-copied">{c.copiedAt} {digest.generated_at_nepal} · <a href="/official/">{c.all}</a></p>}
       <nav className="hz-jump" aria-label={c.jump}>{sections.map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}</nav>
     </header>
-    <Today c={c} lang={lang} state={today} retry={retryToday} />
-    <Overview c={c} lang={lang} climate={climate.value} terrain={terrain.value} />
-    <Section id="climate" title={c.climateTitle} badge={c.modelled} lead={c.climateLead} state={climate} c={c}>
-      {climate.value && <ClimatePanel loaded={climate.value} c={c} lang={lang} />}
+    {state.status === 'loading' && <p role="status" className="hz-loading">{c.loading}</p>}
+    {state.status === 'missing' && <p role="status">{c.missing}</p>}
+    {state.status === 'error' && <div className="hz-problem" role="alert"><p><strong>{c.failed}</strong> {state.message}</p><button type="button" onClick={retry}>{c.retry}</button></div>}
+
+    <Section id="floods" title={c.floods} lead={c.floodsLead}>
+      {digest && <Floods digest={digest} c={c} lang={lang} />}
+      <p className="hz-actions"><a href="/atlas/#river-controls">{c.toMapRivers}</a><a href="/simulate/">{c.toFloodScenario}</a></p>
     </Section>
-    <Section id="terrain" title={c.terrainTitle} badge={c.derived} lead={c.terrainLead} state={terrain} c={c}>
-      {terrain.value && <TerrainPanel loaded={terrain.value} c={c} lang={lang} />}
+    <Section id="glacial-lakes" title={c.glof} lead={c.glofLead}>
+      <p className="hz-actions"><a className="primary-action" href="/atlas/#lake-controls">{c.toMapLakes}</a><a href="/simulate/">{c.toFloodScenario}</a></p>
     </Section>
-    <section id="gated" className="hz-section" aria-labelledby="gated-title">
-      <div className="hz-section-head"><h2 id="gated-title">{c.gatedTitle}</h2><span className="hz-badge hz-badge-gated">{c.gated}</span></div>
-      <p className="hz-lead">{c.gatedLead}</p>
-      <ul className="hz-gated">{c.gatedCards.map(([title, text], i) => <li key={title}><span className="hz-badge hz-badge-gated">{c.gated} · F{[44, 50, 52][i]}</span><h3>{title}</h3><p>{text}</p></li>)}</ul>
-      <p className="hz-provenance"><a href="/methodology/#hazards-hub-method">{c.methodology}</a> · <a href="https://github.com/prasidupadhya/Himalayan-Disaster-Atlas/blob/main/docs/hazards-hub.md">docs/hazards-hub.md</a></p>
-    </section>
-    <Section id="evidence" title={c.evidenceTitle} badge={c.derived} lead={c.evidenceLead} state={corpus} c={c}>
-      {corpus.value && <EvidencePanel index={corpus.value.data} release={corpus.value.release} c={c} />}
+    <Section id="earthquakes" title={c.quakes} lead={c.quakesLead}>
+      {digest && <Earthquakes entry={findEntry(digest, 'seismo-earthquakes')} c={c} lang={lang} />}
+      <p className="hz-actions"><a href="/atlas/#earthquake-controls">{c.toMapQuakes}</a><a href="/simulate/?tab=earthquake">{c.toQuakeScenario}</a><a href="/live/">{c.toLive}</a></p>
+    </Section>
+    <Section id="incidents" title={c.incidents} lead={c.incidentsLead}>
+      {digest && <Incidents entry={findEntry(digest, 'bipad-incidents')} c={c} lang={lang} />}
     </Section>
   </div>;
 }
 
-function Section<T>({ id, title, badge, lead, state, c, children }: { id: string; title: string; badge: string; lead: string; state: State<T>; c: HzCopy; children: ReactNode }) {
+function Section({ id, title, lead, children }: { id: string; title: string; lead: string; children: ReactNode }) {
   return <section id={id} className="hz-section" aria-labelledby={`${id}-title`}>
-    <div className="hz-section-head"><h2 id={`${id}-title`}>{title}</h2><span className="hz-badge">◇ {badge}</span></div>
+    <div className="hz-section-head"><h2 id={`${id}-title`}>{title}</h2></div>
     <p className="hz-lead">{lead}</p>
-    {state.error ? <div className="hz-problem" role="alert"><p><strong>{c.failed}</strong> {state.error}</p><button type="button" onClick={state.retry}>{c.retry}</button></div>
-      : !state.value ? <p role="status" className="hz-loading">{c.loading}</p> : children}
+    {children}
   </section>;
 }
 
-function Today({ c, lang, state, retry }: { c: HzCopy; lang: Lang; state: ReturnType<typeof useGovDigest>[0]; retry: () => void }) {
-  const t = c.today;
-  return <section id="today" className="hz-section" aria-labelledby="today-title" data-today-state={state.status}>
-    <div className="hz-section-head"><h2 id="today-title">{t.title}</h2><span className="hz-badge">{t.badge}</span></div>
-    <p className="hz-lead">{t.lead}</p>
-    {state.status === 'loading' && <p role="status" className="hz-loading">{t.loading}</p>}
-    {state.status === 'missing' && <p role="status">{t.missing}</p>}
-    {state.status === 'error' && <div className="hz-problem" role="alert"><p><strong>{t.failed}</strong> {state.message}</p><button type="button" onClick={retry}>{c.retry}</button></div>}
-    {state.status === 'ready' && <TodayCards digest={state.digest} c={c} lang={lang} />}
-  </section>;
-}
-
-const column = (header: string[], pattern: RegExp) => header.findIndex(h => pattern.test(h));
-
-function TodayCards({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) {
-  const t = c.today, s = digest.summary, n = (v: number | null) => v === null ? 'UNKNOWN' : formatNumber(v, lang);
-  const river = findEntry(digest, 'bipad-river'), rain = findEntry(digest, 'bipad-rain'), quake = findEntry(digest, 'seismo-earthquakes');
-  const incidents = findEntry(digest, 'bipad-incidents'), alerts = findEntry(digest, 'bipad-alerts');
-  const bulletins = findEntry(digest, 'dhm-flood-archive'), warnings = findEntry(digest, 'dhm-forecast');
-  const riverContent = river?.content as RiverContent | undefined, rainContent = rain?.content as RainContent | undefined;
-  const wettest = rainContent?.wettest_24h[0];
-  const reported = (content: RiverContent | RainContent) => `${content.current_station_count === undefined ? 'UNKNOWN' : formatNumber(content.current_station_count, lang)} / ${formatNumber(content.station_count, lang)}`;
-  const quakeTable = (quake?.content as Page | undefined)?.tables.find(table => column(table.header, /magnitude/i) >= 0);
-  const latestQuake = quakeTable?.rows[0] && [/date/i, /magnitude/i, /epicent/i].map(re => quakeTable.rows[0][column(quakeTable.header, re)]).filter(Boolean).join(' · ');
-  const list = incidents?.content as ListContent | undefined, alertList = alerts?.content as ListContent | undefined;
-  const documents = [...((warnings?.content as Page | undefined)?.links ?? []).slice(0, 1), ...((bulletins?.content as Page | undefined)?.links ?? []).slice(0, 2)];
+function useFormat(lang: Lang) {
+  const n = (v: number | null | undefined) => v === null || v === undefined ? 'UNKNOWN' : formatNumber(v, lang);
   const counted = (content: ListContent) => `${n(content.record_count)}${content.complete === false ? '+' : ''}`;
   const titleOf = (record: Record<string, unknown>) => String((lang === 'ne' && record.titleNe) || record.title || 'UNKNOWN');
-  return <>
-    <ul className="hz-cards hz-today">
-      <TodayCard entry={river} title={t.rivers} anchor="rivers" c={c} lang={lang}>
-        {riverContent && <p className="hz-figure"><strong>{n(s.rivers_above_danger)}</strong> {t.aboveDanger} · <strong>{n(s.rivers_above_warning)}</strong> {t.aboveWarning}</p>}
-        {riverContent && <p>{reported(riverContent)} {t.reported}</p>}
-        {riverContent?.alert_stations.slice(0, 3).map(st => <p key={st.id}>{st.name ?? 'UNKNOWN'}{st.basin ? ` (${st.basin})` : ''}: {st.status.toLowerCase()}</p>)}
-      </TodayCard>
-      <TodayCard entry={rain} title={t.rain} anchor="rainfall" c={c} lang={lang}>
-        {rainContent && <p className="hz-figure"><strong>{n(s.rain_stations_above_warning)}</strong> {t.rainAbove}</p>}
-        {rainContent && <p>{reported(rainContent)} {t.reported}</p>}
-        {wettest && <p>{t.wettest} {wettest.name ?? 'UNKNOWN'}, {wettest.rain_24h_mm === null ? 'UNKNOWN' : `${formatNumber(wettest.rain_24h_mm, lang, 1)} mm`}</p>}
-      </TodayCard>
-      <TodayCard entry={quake} title={t.quake} anchor="earthquakes" c={c} lang={lang}>
-        {latestQuake && <p>{t.latestQuake} <span className="hz-verbatim">{latestQuake}</span></p>}
-      </TodayCard>
-      <TodayCard entry={incidents} title={t.disasters} anchor="disasters" c={c} lang={lang}>
-        {list && <p className="hz-figure"><strong>{counted(list)}</strong> {t.records}</p>}
-        {list?.records.slice(0, 3).map(record => <p key={String(record.id)} className="hz-verbatim">{titleOf(record)}</p>)}
-      </TodayCard>
-      <TodayCard entry={alerts} title={t.alerts} anchor="disasters" c={c} lang={lang}>
-        {alertList && <p className="hz-figure"><strong>{counted(alertList)}</strong> {t.activeAlerts}</p>}
-        {alertList?.records.slice(0, 2).map(record => <p key={String(record.id)} className="hz-verbatim">{titleOf(record)}</p>)}
-      </TodayCard>
-      <TodayCard entry={bulletins} title={t.bulletins} anchor="floods" c={c} lang={lang}>
-        {documents.length ? <ul className="hz-documents">{documents.map(doc => <li key={doc.href}><a href={doc.href} rel="noopener noreferrer" target="_blank">{doc.text}</a></li>)}</ul> : bulletins?.content && <p>{t.noText}</p>}
-        {documents.length > 0 && <p className="hz-today-status">{t.asListed}</p>}
-      </TodayCard>
-    </ul>
-    <p className="hz-provenance">{digest.generated_at_nepal} · <a href="/official/">{t.all}</a></p>
-  </>;
+  return { n, counted, titleOf };
 }
 
-function TodayCard({ entry, title, anchor, c, lang, children }: { entry: Entry | undefined; title: string; anchor: string; c: HzCopy; lang: Lang; children: ReactNode }) {
-  const t = c.today, when = nepalTime(entry?.fetched_at, lang === 'ne' ? 'ne-NP' : 'en-GB');
-  const status = !entry?.content ? t.unavailable : entry.last_known ? `${t.lastKnown} ${when ?? 'UNKNOWN'}` : `${t.copied} ${when ?? 'UNKNOWN'}`;
-  return <li className="hz-card" data-source={entry?.id} data-source-status={!entry?.content ? 'unavailable' : entry.last_known ? 'last-known' : 'fetched'}>
+function Floods({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) {
+  const { n, counted, titleOf } = useFormat(lang);
+  const s = digest.summary;
+  const river = findEntry(digest, 'bipad-river'), rain = findEntry(digest, 'bipad-rain'), alerts = findEntry(digest, 'bipad-alerts');
+  const bulletins = findEntry(digest, 'dhm-flood-archive'), warnings = findEntry(digest, 'dhm-forecast');
+  const riverContent = river?.content as RiverContent | undefined, rainContent = rain?.content as RainContent | undefined;
+  const alertList = alerts?.content as ListContent | undefined;
+  const wettest = rainContent?.wettest_24h[0];
+  const reported = (content: RiverContent | RainContent) => `${n(content.current_station_count)} / ${n(content.station_count)}`;
+  const documents = [...((warnings?.content as Page | undefined)?.links ?? []).slice(0, 1), ...((bulletins?.content as Page | undefined)?.links ?? []).slice(0, 2)];
+  return <ul className="hz-cards hz-today">
+    <TodayCard entry={river} title={c.rivers} anchor="rivers" c={c} lang={lang}>
+      {riverContent && <p className="hz-figure"><strong>{n(s.rivers_above_danger)}</strong> {c.aboveDanger} · <strong>{n(s.rivers_above_warning)}</strong> {c.aboveWarning}</p>}
+      {riverContent && <p>{reported(riverContent)} {c.reported}</p>}
+      {riverContent?.alert_stations.slice(0, 3).map(st => <p key={st.id}>{st.name ?? 'UNKNOWN'}{st.basin ? ` (${st.basin})` : ''}: {st.status.toLowerCase()}</p>)}
+    </TodayCard>
+    <TodayCard entry={rain} title={c.rain} anchor="rainfall" c={c} lang={lang}>
+      {rainContent && <p className="hz-figure"><strong>{n(s.rain_stations_above_warning)}</strong> {c.rainAbove}</p>}
+      {rainContent && <p>{reported(rainContent)} {c.reported}</p>}
+      {wettest && <p>{c.wettest} {wettest.name ?? 'UNKNOWN'}, {wettest.rain_24h_mm === null ? 'UNKNOWN' : `${formatNumber(wettest.rain_24h_mm, lang, 1)} mm`}</p>}
+    </TodayCard>
+    <TodayCard entry={bulletins} title={c.bulletins} anchor="floods" c={c} lang={lang}>
+      {documents.length ? <ul className="hz-documents">{documents.map(doc => <li key={doc.href}><a href={doc.href} rel="noopener noreferrer" target="_blank">{doc.text}</a></li>)}</ul> : bulletins?.content && <p>{c.noText}</p>}
+      {documents.length > 0 && <p className="hz-today-status">{c.asListed}</p>}
+    </TodayCard>
+    <TodayCard entry={alerts} title={c.alerts} anchor="disasters" c={c} lang={lang}>
+      {alertList && <p className="hz-figure"><strong>{counted(alertList)}</strong> {c.activeAlerts}</p>}
+      {alertList?.records.slice(0, 3).map(record => <p key={String(record.id)} className="hz-verbatim">{titleOf(record)}</p>)}
+    </TodayCard>
+  </ul>;
+}
+
+function Earthquakes({ entry, c, lang }: { entry: Entry | undefined; c: HzCopy; lang: Lang }) {
+  const table = (entry?.content as Page | undefined)?.tables.find(t => column(t.header, /magnitude/i) >= 0);
+  const cols = table ? [/date/i, /magnitude/i, /epicent/i].map(re => column(table.header, re)) : [];
+  return <ul className="hz-cards hz-today">
+    <TodayCard entry={entry} title={c.quakeList} anchor="earthquakes" c={c} lang={lang} wide>
+      {table ? <ol className="hz-quakes">{table.rows.slice(0, 6).map((row, i) => <li key={i} className="hz-verbatim">{cols.map(index => row[index]).filter(Boolean).join(' · ')}</li>)}</ol> : entry?.content && <p>{c.noQuakes}</p>}
+    </TodayCard>
+  </ul>;
+}
+
+function Incidents({ entry, c, lang }: { entry: Entry | undefined; c: HzCopy; lang: Lang }) {
+  const { counted, titleOf } = useFormat(lang);
+  const list = entry?.content as ListContent | undefined;
+  return <ul className="hz-cards hz-today">
+    <TodayCard entry={entry} title={c.incidentList} anchor="disasters" c={c} lang={lang} wide>
+      {list && <p className="hz-figure"><strong>{counted(list)}</strong> {c.records}</p>}
+      {list && <ul className="hz-incidents">{list.records.slice(0, 8).map(record => <li key={String(record.id)} className="hz-verbatim">{titleOf(record)}</li>)}</ul>}
+    </TodayCard>
+  </ul>;
+}
+
+function TodayCard({ entry, title, anchor, c, lang, wide, children }: { entry: Entry | undefined; title: string; anchor: string; c: HzCopy; lang: Lang; wide?: boolean; children: ReactNode }) {
+  const when = nepalTime(entry?.fetched_at, lang === 'ne' ? 'ne-NP' : 'en-GB');
+  const status = !entry?.content ? c.unavailable : entry.last_known ? `${c.lastKnown} ${when ?? 'UNKNOWN'}` : `${c.copied} ${when ?? 'UNKNOWN'}`;
+  return <li className={wide ? 'hz-card hz-card-wide' : 'hz-card'} data-source={entry?.id} data-source-status={!entry?.content ? 'unavailable' : entry.last_known ? 'last-known' : 'fetched'}>
     <h3>{title}</h3>
     <p className="hz-today-status">{status}</p>
     {entry?.content ? children : null}
     {entry && <p className="muted">{entry.agency}</p>}
-    <a href={`/official/#official-${anchor}`}>{t.full}</a>
-    {entry && <a href={entry.url} rel="noopener noreferrer" target="_blank">{t.agency}</a>}
+    <p className="hz-card-links"><a href={`/official/#official-${anchor}`}>{c.full}</a>{entry && <a href={entry.url} rel="noopener noreferrer" target="_blank">{c.agency}</a>}</p>
   </li>;
 }
-
-function Overview({ c, lang, climate, terrain }: { c: HzCopy; lang: Lang; climate: Loaded<ClimateContext> | null; terrain: Loaded<TerrainSteepness> | null }) {
-  const latest = climate?.data.national[11];
-  const wet = latest ? latest.spi3_area_share['moderately-wet'] + latest.spi3_area_share['severely-wet'] + latest.spi3_area_share['extremely-wet'] : null;
-  const dry = latest ? latest.spi3_area_share['moderately-dry'] + latest.spi3_area_share['severely-dry'] + latest.spi3_area_share['extremely-dry'] : null;
-  const steep = terrain ? terrain.data.national_slope_class_share['30-45'] + terrain.data.national_slope_class_share['45+'] : null;
-  const card = (key: keyof HzCopy['cards'], href: string, badge: string, figure?: ReactNode) => {
-    const [title, text, action] = c.cards[key];
-    return <li className="hz-card"><span className="hz-badge">{badge}</span><h3>{title}</h3><p>{text}</p>{figure}<a href={href}>{action}</a></li>;
-  };
-  return <section id="overview" className="hz-section" aria-labelledby="overview-title">
-    <div className="hz-section-head"><h2 id="overview-title">{c.overview}</h2></div>
-    <ul className="hz-cards">
-      {card('flood', '/simulate/', c.scenario)}
-      {card('quake', '/simulate/?tab=earthquake', c.scenario)}
-      {card('landslide', '#terrain', c.derived, steep !== null && <p className="hz-figure"><strong>{pct(steep, lang)}</strong> {c.steepShare}</p>)}
-      {card('rain', '#climate', c.modelled, climate && <p className="hz-figure"><strong>{monthLabel(climate.data.latest_month, lang)}</strong> {c.latestMonth}</p>)}
-      {card('drought', '#climate', c.modelled, wet !== null && dry !== null && <p className="hz-figure"><strong>{pct(dry, lang)}</strong> {c.dryShare} · <strong>{pct(wet, lang)}</strong> {c.wetShare}</p>)}
-    </ul>
-  </section>;
-}
-
-function Legend({ scale, lang, c, shares }: { scale: ScaleClass[]; lang: Lang; c: HzCopy; shares?: Record<string, number> }) {
-  return <ul className="hz-legend" aria-label={c.legend}>
-    {scale.map(s => <li key={s.id}><span className="hz-swatch" style={{ background: s.color }} aria-hidden="true" />{s.label[lang]}{shares && <strong> {pct(shares[s.id] ?? 0, lang)}</strong>}</li>)}
-    <li><span className="hz-swatch hz-swatch-unknown" aria-hidden="true" />{c.unknown}</li>
-  </ul>;
-}
-
-function ClimatePanel({ loaded, c, lang }: { loaded: Loaded<ClimateContext>; c: HzCopy; lang: Lang }) {
-  const ctx = loaded.data;
-  const [month, setMonth] = useState(11);
-  const [view, setView] = useState<ClimateView>('spi3');
-  const [selected, setSelected] = useState<string | null>(null);
-  const scale = CLIMATE_VIEWS[view].scale;
-  const features = useMemo<ChoroplethFeature[]>(() => ctx.cells.map(cell => {
-    const cls = classify(scale, CLIMATE_VIEWS[view].value(cell, month));
-    return { id: cell.id, name: cell.id, fill: cls?.color ?? UNKNOWN_FILL, unknown: !cls, geometry: cellPolygon(cell) };
-  }), [ctx, scale, view, month]);
-  const shares = view === 'spi3' ? Object.fromEntries(spiShare(ctx, month).map(s => [s.id, s.share])) : undefined;
-  const cell = ctx.cells.find(x => x.id === selected) ?? null;
-  const status = freshness(loaded.release.metadata.stale_after ?? null);
-  const onSelect = useCallback((id: string) => setSelected(id), []);
-  const coord = (v: number, ax: 'N' | 'E') => `${formatNumber(v, lang, ax === 'E' ? 3 : 2)}°${ax}`;
-  return <>
-    <div className="hz-controls">
-      <label className="hz-field"><span>{c.month}</span>
-        <select value={month} onChange={e => setMonth(Number(e.target.value))}>{ctx.recent_months.map((m, i) => <option key={m} value={i}>{monthLabel(m, lang)}</option>)}</select></label>
-      <fieldset className="hz-segmented"><legend>{c.view}</legend>
-        {(Object.keys(CLIMATE_VIEWS) as ClimateView[]).map(v => <label key={v}><input type="radio" name="hz-view" checked={view === v} onChange={() => setView(v)} /><span>{c.views[v]}</span></label>)}
-      </fieldset>
-      <p className="hz-fresh"><span className={`hz-badge ${status === 'STALE' ? 'hz-badge-stale' : ''}`}>{status}</span> {c.freshness}: {monthLabel(ctx.latest_month, lang)}{status === 'STALE' && <> — {c.staleNote}</>}</p>
-    </div>
-    <p className="hz-view-note">{c.viewNotes[view]}</p>
-    <div className="hz-map-layout">
-      <ChoroplethMap features={features} selected={selected} onSelect={onSelect} label={`${c.climateTitle}: ${c.views[view]}, ${monthLabel(ctx.recent_months[month], lang)}`} messages={{ loading: c.mapLoading, failed: c.mapFailed, noWebgl: c.mapNoWebgl }} />
-      <aside className="hz-side">
-        <Legend scale={scale} lang={lang} c={c} shares={shares} />
-        <div className="hz-detail" aria-live="polite">
-          {cell ? <><h3>{c.selected}: {coord(cell.lat, 'N')}, {coord(cell.lon, 'E')}</h3>
-            <dl>
-              <div><dt>{c.nepalArea}</dt><dd>{formatNumber(cell.nepal_area_km2, lang)} km² / {formatNumber(cell.cell_area_km2, lang)} km²</dd></div>
-              <div><dt>{c.precip}</dt><dd>{formatNumber(cell.recent[month].precip_mm_day, lang, 2)} ({formatNumber(cell.recent[month].precip_percent_of_normal, lang)}{cell.recent[month].precip_percent_of_normal === null ? '' : '%'})</dd></div>
-              <div><dt>{c.spi}</dt><dd>{formatNumber(cell.recent[month].spi3, lang, 2)} · {SPI_SCALE.find(s => s.id === cell.recent[month].spi3_class)!.label[lang]}</dd></div>
-              <div><dt>{c.tmax}</dt><dd>{formatNumber(cell.recent[month].tmax_anomaly_c, lang, 2)} ({formatNumber(cell.recent[month].tmax_c, lang, 1)} °C)</dd></div>
-              <div><dt>{c.snowCover}</dt><dd>{pct(cell.recent[month].snow_cover_fraction, lang, 1)} ({formatNumber(cell.recent[month].snow_cover_anomaly * 100, lang, 1)})</dd></div>
-            </dl></> : <p className="hz-muted">{c.clickHint}</p>}
-        </div>
-      </aside>
-    </div>
-    <div className="hz-charts">
-      <SpiShares ctx={ctx} c={c} lang={lang} month={month} onMonth={setMonth} />
-      <NationalPrecip ctx={ctx} c={c} lang={lang} month={month} />
-    </div>
-    <details className="hz-details"><summary>{c.cellTable} ({monthLabel(ctx.recent_months[month], lang)}, {formatNumber(ctx.cells.length, lang)})</summary>
-      <div className="hz-table-scroll" role="region" aria-label={c.cellTable} tabIndex={0}>
-        <table className="hz-stack" role="table"><thead><tr role="row">{[c.cell, c.nepalArea, c.precip, c.pctNormal, c.spi, c.tmax, c.snowCover].map(h => <th key={h} scope="col" role="columnheader">{h}</th>)}</tr></thead>
-          <tbody>{ctx.cells.map(cl => { const r = cl.recent[month]; return <tr key={cl.id} role="row" aria-selected={cl.id === selected} onClick={() => setSelected(cl.id)}>
-            <th scope="row" role="rowheader"><button type="button" className="hz-link-button" onClick={() => setSelected(cl.id)}>{coord(cl.lat, 'N')}, {coord(cl.lon, 'E')}</button></th>
-            <td role="cell" data-label={c.nepalArea}>{formatNumber(cl.nepal_area_km2, lang)} km²</td>
-            <td role="cell" data-label={c.precip}>{formatNumber(r.precip_mm_day, lang, 2)}</td>
-            <td role="cell" data-label={c.pctNormal}>{r.precip_percent_of_normal === null ? c.unknown : `${formatNumber(r.precip_percent_of_normal, lang)}%`}</td>
-            <td role="cell" data-label={c.spi}>{formatNumber(r.spi3, lang, 2)}</td>
-            <td role="cell" data-label={c.tmax}>{formatNumber(r.tmax_anomaly_c, lang, 2)}</td>
-            <td role="cell" data-label={c.snowCover}>{pct(r.snow_cover_fraction, lang, 1)}</td>
-          </tr>; })}</tbody></table>
-      </div>
-    </details>
-    <Provenance release={loaded.release} anchor="climate-context" c={c} />
-  </>;
-}
-
-function SpiShares({ ctx, c, lang, month, onMonth }: { ctx: ClimateContext; c: HzCopy; lang: Lang; month: number; onMonth: (m: number) => void }) {
-  return <figure className="hz-chart">
-    <figcaption><strong>{c.shareTitle}</strong><span>{c.shareCaption}</span></figcaption>
-    <ol className="hz-share-rows">
-      {ctx.recent_months.map((m, i) => <li key={m} className={i === month ? 'is-current' : undefined}>
-        <button type="button" className="hz-share-month" aria-pressed={i === month} onClick={() => onMonth(i)}>{monthLabel(m, lang)}</button>
-        <span className="hz-share-bar" role="img" aria-label={`${monthLabel(m, lang)}: ${spiShare(ctx, i).filter(s => s.share > 0).map(s => `${SPI_SCALE.find(x => x.id === s.id)!.label[lang]} ${pct(s.share, lang)}`).join(', ')}`}>
-          {spiShare(ctx, i).filter(s => s.share > 0).map(s => <span key={s.id} style={{ width: `${s.share * 100}%`, background: SPI_SCALE.find(x => x.id === s.id)!.color }} title={`${SPI_SCALE.find(x => x.id === s.id)!.label[lang]}: ${pct(s.share, lang, 1)}`} />)}
-        </span>
-      </li>)}
-    </ol>
-  </figure>;
-}
-
-function NationalPrecip({ ctx, c, lang, month }: { ctx: ClimateContext; c: HzCopy; lang: Lang; month: number }) {
-  const series = nationalPrecipSeries(ctx);
-  const max = Math.max(...series.flatMap(s => [s.value, s.normal])) * 1.1;
-  const [hover, setHover] = useState<number | null>(null);
-  const shown = hover ?? month;
-  return <figure className="hz-chart">
-    <figcaption><strong>{c.nationalTitle}</strong><span>{c.nationalCaption}</span></figcaption>
-    <p className="hz-chart-readout" aria-live="polite">{monthLabel(series[shown].month, lang)}: <strong>{formatNumber(series[shown].value, lang, 2)} mm/day</strong> · normal {formatNumber(series[shown].normal, lang, 2)}</p>
-    <div className="hz-columns" onPointerLeave={() => setHover(null)}>
-      {series.map((s, i) => <div key={s.month} className={`hz-column${i === month ? ' is-current' : ''}`} onPointerEnter={() => setHover(i)}>
-        <span className="hz-column-bar" style={{ height: `${(s.value / max) * 100}%` }} />
-        <span className="hz-column-normal" style={{ bottom: `${(s.normal / max) * 100}%` }} aria-hidden="true" />
-        <span className="hz-column-label">{monthLabel(s.month, lang).split(' ')[0].slice(0, 3)}</span>
-      </div>)}
-    </div>
-    <details className="hz-details"><summary>{c.tableView}</summary>
-      <table className="hz-mini"><thead><tr><th scope="col">{c.month}</th><th scope="col">mm/day</th><th scope="col">normal</th></tr></thead>
-        <tbody>{series.map(s => <tr key={s.month}><th scope="row">{monthLabel(s.month, lang)}</th><td>{formatNumber(s.value, lang, 2)}</td><td>{formatNumber(s.normal, lang, 2)}</td></tr>)}</tbody></table>
-    </details>
-  </figure>;
-}
-
-function TerrainPanel({ loaded, c, lang }: { loaded: Loaded<TerrainSteepness>; c: HzCopy; lang: Lang }) {
-  const t = loaded.data;
-  const [geometry, setGeometry] = useState<Map<string, GeoJSON.Geometry> | null>(null);
-  const [selected, setSelected] = useState<string | null>(null);
-  useEffect(() => {
-    const controller = new AbortController();
-    loadDataset(ADMIN_MANIFESTS[2], controller.signal).then(d => setGeometry(new Map(d.collection.features.map(f => [String(f.properties.pcode), f.geometry as GeoJSON.Geometry]))), () => undefined);
-    return () => controller.abort();
-  }, []);
-  const features = useMemo<ChoroplethFeature[]>(() => geometry ? t.districts.filter(d => geometry.has(d.district_id)).map(d => {
-    const cls = classify(STEEP_SCALE, d.share_steeper_than_30_deg);
-    return { id: d.district_id, name: d.name, fill: cls?.color ?? UNKNOWN_FILL, unknown: !cls, geometry: geometry.get(d.district_id)! };
-  }) : [], [geometry, t]);
-  const top = steepestDistricts(t.districts);
-  const district = t.districts.find(d => d.district_id === selected) ?? null;
-  const onSelect = useCallback((id: string) => setSelected(id), []);
-  const sorted = [...t.districts].sort((a, b) => b.share_steeper_than_30_deg - a.share_steeper_than_30_deg);
-  return <>
-    <div className="hz-map-layout">
-      <ChoroplethMap features={features} selected={selected} onSelect={onSelect} label={c.terrainTitle} messages={{ loading: c.mapLoading, failed: c.mapFailed, noWebgl: c.mapNoWebgl }} />
-      <aside className="hz-side">
-        <Legend scale={STEEP_SCALE} lang={lang} c={c} />
-        <div className="hz-detail" aria-live="polite">
-          {district ? <><h3>{district.name} <span className="hz-muted">· {district.province}</span></h3>
-            <dl>
-              <div><dt>{c.steep}</dt><dd>{pct(district.share_steeper_than_30_deg, lang, 1)}</dd></div>
-              <div><dt>{c.meanSlope}</dt><dd>{formatNumber(district.slope_mean_deg, lang, 1)}°</dd></div>
-              <div><dt>{c.elevation}</dt><dd>{formatNumber(district.elevation_mean_m, lang)} m ({formatNumber(district.elevation_min_m, lang)}–{formatNumber(district.elevation_max_m, lang)} m)</dd></div>
-            </dl>
-            <span className="hz-share-bar" role="img" aria-label={Object.entries(district.slope_class_share).map(([k, v]) => `${k}°: ${pct(v, lang)}`).join(', ')}>
-              {Object.entries(district.slope_class_share).map(([k, v], i) => <span key={k} style={{ width: `${v * 100}%`, background: STEEP_SCALE[i].color }} title={`${k}°: ${pct(v, lang, 1)}`} />)}
-            </span></> : <p className="hz-muted">{c.clickHint}</p>}
-        </div>
-      </aside>
-    </div>
-    <figure className="hz-chart">
-      <figcaption><strong>{c.topSteep}</strong></figcaption>
-      <ol className="hz-bars">{top.map(d => <li key={d.district_id}>
-        <button type="button" className="hz-link-button" onClick={() => setSelected(d.district_id)}>{d.name}</button>
-        <span className="hz-bar-track" aria-hidden="true"><span style={{ width: `${d.share_steeper_than_30_deg * 100}%` }} /></span>
-        <strong>{pct(d.share_steeper_than_30_deg, lang)}</strong>
-      </li>)}</ol>
-    </figure>
-    <p className="hz-muted">{c.reportedNote}</p>
-    <details className="hz-details"><summary>{c.districtTable}</summary>
-      <div className="hz-table-scroll" role="region" aria-label={c.districtTable} tabIndex={0}>
-        <table className="hz-stack" role="table"><thead><tr role="row">{[c.district, c.province, c.steep, c.meanSlope, c.elevation].map(h => <th key={h} scope="col" role="columnheader">{h}</th>)}</tr></thead>
-          <tbody>{sorted.map(d => <tr key={d.district_id} role="row" aria-selected={d.district_id === selected}>
-            <th scope="row" role="rowheader"><button type="button" className="hz-link-button" onClick={() => setSelected(d.district_id)}>{d.name}</button></th>
-            <td role="cell" data-label={c.province}>{d.province}</td>
-            <td role="cell" data-label={c.steep}>{pct(d.share_steeper_than_30_deg, lang, 1)}</td>
-            <td role="cell" data-label={c.meanSlope}>{formatNumber(d.slope_mean_deg, lang, 1)}°</td>
-            <td role="cell" data-label={c.elevation}>{formatNumber(d.elevation_mean_m, lang)} m</td>
-          </tr>)}</tbody></table>
-      </div>
-    </details>
-    <Provenance release={loaded.release} anchor="terrain-steepness" c={c} />
-  </>;
-}
-
-function EvidencePanel({ index, release, c }: { index: EvidenceIndex; release: ModelRelease; c: HzCopy }) {
-  const [query, setQuery] = useState('');
-  const [answer, setAnswer] = useState<EvidenceAnswer | null>(null);
-  const ask = (q: string) => { setQuery(q); setAnswer(retrieve(index, q)); };
-  return <>
-    <form className="hz-ask" onSubmit={e => { e.preventDefault(); ask(query); }}>
-      <label className="hz-field"><span>{c.question}</span><input type="search" value={query} maxLength={500} onChange={e => setQuery(e.target.value)} /></label>
-      <button type="submit">{c.ask}</button>
-    </form>
-    <p className="hz-suggest"><span>{c.suggestions}:</span> {c.suggested.map(q => <button key={q} type="button" className="hz-chip" onClick={() => ask(q)} lang="en">{q}</button>)}</p>
-    <div aria-live="polite" className="hz-answer">
-      {answer && <>
-        <p className={`hz-answer-status hz-answer-${answer.status}`}>{answer.status === 'answered' ? c.answered : answer.status === 'partial' ? c.partial : c.insufficient}</p>
-        <ol className="hz-passages">{answer.hits.map(h => <li key={h.chunk.id}>
-          <blockquote lang="en">{h.chunk.text}</blockquote>
-          <p className="hz-cite">{c.source}: <a href={h.chunk.source.includes('@') ? `/data/${h.chunk.source.replace('@', '/')}/manifest.json` : `https://github.com/prasidupadhya/Himalayan-Disaster-Atlas/blob/main/docs/${h.chunk.source}.md${h.chunk.start_line ? `#L${h.chunk.start_line}-L${h.chunk.end_line}` : ''}`}>{h.chunk.title} — {h.chunk.section}</a> <code>{h.chunk.id}</code>{h.missing.length > 0 && <> · {c.missing}: {h.missing.join(', ')}</>}</p>
-        </li>)}</ol>
-      </>}
-    </div>
-    <Provenance release={release} anchor="public-evidence" c={c} />
-  </>;
-}
-
-function Provenance({ release, anchor, c }: { release: ModelRelease; anchor: string; c: HzCopy }) {
-  const m = release.metadata;
-  return <p className="hz-provenance">{c.provenance}: <a href={manifestPath({ id: m.dataset_id, version: m.dataset_version })}>{m.dataset_id}@{m.dataset_version}</a> · {m.license} · <a href={`/methodology/#${anchor}-method`}>{c.methodology}</a> · <a href={`/sources/#${anchor}`}>{c.sources}</a></p>;
-}
-

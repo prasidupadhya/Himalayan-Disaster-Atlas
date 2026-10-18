@@ -32,7 +32,6 @@ jobs:
       - run: .venv/bin/python -m pip install -r requirements.lock
       - run: npx --no-install playwright install --with-deps chromium
       - run: npm run check
-      - run: npm run build:research
       - run: npm run test:e2e
       - run: npm run test:e2e:cloudflare
       - run: npm run build

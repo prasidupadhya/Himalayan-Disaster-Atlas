@@ -1,6 +1,5 @@
 import { SiteNavigation } from '../components/site-navigation';
 import { OfflineShell } from '../components/offline-shell';
-import { isPublicRelease } from '../lib/public-release';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import '@fontsource-variable/archivo/wdth.css';
@@ -14,16 +13,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <header className="site-header"><div className="site-header-inner">
       <Link className="brand" href="/" aria-label="Himalayan Disaster Atlas home">
         <svg className="brand-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 31 16.7 9.5 22 18l4.2-6.7L36 31H4Z" /><path d="m12.7 31 7.4-12 3.1 5 3-4.8L33 31" /></svg>
-        <span className="brand-copy"><strong>Himalayan Disaster Atlas</strong><small>Nepal · evidence-traceable research atlas</small></span>
+        <span className="brand-copy"><strong>Himalayan Disaster Atlas</strong><small>Nepal · floods, glacial lakes & earthquakes</small></span>
       </Link>
       <SiteNavigation />
     </div></header>
     <OfflineShell />
-    <main id="main" tabIndex={-1}>{isPublicRelease ? <aside className="release-banner" aria-label="Public release availability"><div className="release-banner-inner"><details className="release-details"><summary><span className="release-kicker">Public release</span><span>reviewed datasets only</span><span className="release-disclosure">Availability details</span></summary><p><strong>Reviewed datasets only.</strong> BIPAD records, population, exposure, hazard graph, time machine, search, comparison, location summaries and evidence-based analyst features are unavailable pending redistribution review. Boundaries, terrain, rivers, glaciers, imagery, climate, OSM infrastructure, earthquakes and river-only scenarios remain available. <Link href="/licenses/">Availability and source terms</Link>.</p></details></div></aside> : null}{children}</main>
+    <main id="main" tabIndex={-1}>{children}</main>
     <footer className="site-footer"><div className="site-footer-inner">
       <div className="footer-statement"><span className="footer-mark" aria-hidden="true">△</span><p><strong>Himalayan Disaster Atlas</strong><br />Public, read-only and evidence-traceable. Not an official warning service.</p></div>
-      <nav aria-label="Atlas links"><strong>Explore</strong><Link href="/research/">Research atlas</Link><Link href="/atlas/">Atlas</Link><Link href="/live/">Live conditions</Link><Link href="/official/">Official sources today</Link><Link href="/hazards/">Hazard context</Link><Link href="/simulate/">Scenario simulator</Link><Link href="/events/">Events</Link><Link href="/analyst/">Analyst</Link></nav>
-      <nav aria-label="Research links"><strong>Research</strong><Link href="/data-catalog/">Data catalog</Link><Link href="/methodology/">Methodology</Link><Link href="/sources/">Sources</Link><Link href="/licenses/">Licences & attribution</Link></nav>
+      <nav aria-label="Atlas links"><strong>Explore</strong><Link href="/atlas/">Map</Link><Link href="/hazards/">Today</Link><Link href="/simulate/">Scenarios</Link><Link href="/official/">All official sources</Link><Link href="/live/">Earthquake and forecast feeds</Link></nav>
+      <nav aria-label="About links"><strong>About</strong><Link href="/methodology/">Methodology</Link><Link href="/sources/">Sources</Link><Link href="/licenses/">Licences & attribution</Link></nav>
       <p className="footer-evidence">Sources and limitations remain linked with every dataset. UNKNOWN remains distinct from zero.</p>
     </div></footer>
   </body></html>;

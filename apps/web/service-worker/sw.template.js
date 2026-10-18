@@ -8,10 +8,13 @@ const SHELL_CACHE = `${PREFIX}shell-${CONFIG.version}`;
 const STATIC_CACHE = `${PREFIX}static-v1`;
 const LIVE_CACHE = `${PREFIX}live-v1`;
 const DATA_CACHE = `${PREFIX}data-v1`;
-const CURRENT = new Set([SHELL_CACHE, STATIC_CACHE, LIVE_CACHE, DATA_CACHE]);
+const GOV_CACHE = `${PREFIX}gov-v1`;
+const CURRENT = new Set([SHELL_CACHE, STATIC_CACHE, LIVE_CACHE, DATA_CACHE, GOV_CACHE]);
 const LIVE_INDEX = '/live/latest.json';
 const LIVE_ARTIFACT = /^\/data\/live-[a-z0-9-]+\/\d+\.\d+\.\d+\/(?:snapshot|manifest)\.json$/;
 const LIVE_HISTORY = /^\/live\/history\/\d+\.\d+\.\d+\/index\.json$/;
+// The daily official copy names its own copy time, so a stored copy served offline is self-describing.
+const GOV_DIGEST = '/gov/latest.json';
 const STATIC_ASSET = /^\/(?:_next\/static|vendor)\//;
 // Versioned release paths are immutable (a changed release gets a new version), so they are safe to keep.
 // Raster terrain tiles are large, numerous and outside the offline promise, so they never displace release data.
@@ -149,6 +152,17 @@ async function pageData(request) {
   try { return await fetch(request); }
   catch { return (await (await caches.open(SHELL_CACHE)).match(new URL(request.url).pathname, { ignoreSearch: true })) ?? Response.error(); }
 }
+async function networkFirst(request, name) {
+  const { pathname } = new URL(request.url);
+  const cache = await caches.open(name);
+  try {
+    const response = await fetch(request);
+    if (response.ok && response.type === 'basic') await cache.put(pathname, response.clone());
+    return response;
+  } catch {
+    return (await cache.match(pathname)) ?? Response.error();
+  }
+}
 async function cacheFirst(request, name = STATIC_CACHE, limit = CONFIG.staticEntries) {
   const { pathname } = new URL(request.url);
   const shell = await (await caches.open(SHELL_CACHE)).match(pathname);
@@ -195,6 +209,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
   if (url.pathname === LIVE_INDEX || LIVE_ARTIFACT.test(url.pathname) || LIVE_HISTORY.test(url.pathname)) { event.respondWith(liveNetworkFirst(request)); return; }
+  if (url.pathname === GOV_DIGEST) { event.respondWith(networkFirst(request, GOV_CACHE)); return; }
   if (request.mode === 'navigate') { event.respondWith(navigate(request)); return; }
   if (STATIC_ASSET.test(url.pathname)) { event.respondWith(cacheFirst(request)); return; }
   if (IMMUTABLE_DATA.test(url.pathname)) { event.respondWith(cacheFirst(request, DATA_CACHE, CONFIG.dataEntries)); return; }

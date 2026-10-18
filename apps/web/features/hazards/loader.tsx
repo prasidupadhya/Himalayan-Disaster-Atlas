@@ -1,7 +1,7 @@
 'use client';
 import dynamic from 'next/dynamic';
-// Client-only: every panel verifies its release in the browser before rendering.
+// Client-only: the page reads today's official copy in the browser.
 export const HazardsLoader = dynamic(() => import('./hazards').then(m => m.Hazards), {
   ssr: false,
-  loading: () => <div className="hz-page"><p className="eyebrow">Hazards</p><h1>Hazard context for Nepal</h1><p role="status">Loading and verifying releases…</p><p className="hz-notice">Context and educational scenarios only — not a forecast or warning.</p></div>,
+  loading: () => <div className="hz-page"><p className="eyebrow">Today in Nepal</p><h1>Floods, glacial lakes and earthquakes today</h1><p role="status">Loading today’s copy…</p></div>,
 });

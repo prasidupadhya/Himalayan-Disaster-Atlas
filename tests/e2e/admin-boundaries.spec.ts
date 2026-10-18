@@ -38,7 +38,7 @@ test('static navigation, WebGL, boundary controls and accessible identification'
   await page.getByRole('button', { name: 'Reset view' }).click();
   await page.locator('.map-shell').screenshot({ path: 'test-results/admin-boundaries-desktop.png' });
 
-  for (const [name, path] of [['Data catalog', '/data-catalog/'], ['Methodology', '/methodology/'], ['Sources', '/sources/']]) {
+  for (const [name, path] of [['Today', '/hazards/'], ['Scenarios', '/simulate/'], ['About', '/methodology/']]) {
     await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name, exact: true }).click();
     await expect(page).toHaveURL(new RegExp(`${path}$`));
     await expect(page.locator('main h1')).toBeVisible();

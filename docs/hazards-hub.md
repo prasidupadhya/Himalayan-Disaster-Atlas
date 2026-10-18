@@ -1,20 +1,20 @@
-# Hazards hub — Feature 56
+# Today page (`/hazards/`)
 
-`/hazards/` gathers hazard context in one bilingual (English/Nepali) page. Each panel is labelled by evidence type (modelled, derived, scenario, gated) and links to its release manifest, methodology and sources. Nothing on the page is a forecast or warning; DHM and NDRRMA/BIPAD are linked as the authorities.
+The Today page replaced the hazards hub in October 2026. It shows the daily copy of official sources (see [official sources](official-sources.md)) arranged around the three hazards the site is about.
 
-## Panels
-- **Today from official sources**: the daily [official-source digest](official-sources.md) grouped by hazard — river levels, rainfall, earthquakes, incidents of the last 7 days, active alerts, and DHM flood bulletins and weather warnings. Figures and text are copied as published; each card says when it was copied (or that only the last copy is shown) and links to the agency page and the full copy on `/official/`. Missing values show UNKNOWN. It refreshes with each daily commit, not in the browser.
-- **Rainfall and snow** (Feature 54) and **Drought and heat** (Feature 55): NASA POWER cells with a month selector over the latest 12 months, map, national SPI-3 area shares and full tables. See [climate context](climate-context.md).
-- **Landslide terrain context** (Feature 53): district steepness map and table. See [terrain steepness](terrain-steepness.md).
-- **Floods/GLOF and earthquakes**: links into the scenario simulator and `/live/`.
-- **Ask the evidence** (Feature 58): quoted passages from the public evidence corpus. See below.
+## Sections
 
-## Gated features (built disabled)
-| Feature | Shown as | Unlock conditions |
-|---|---|---|
-| 44 DHM / NDRRMA-BIPAD feeds | GATED — link-only | Written redistribution terms or an open licence for the feed; a documented, stable public endpoint; a reviewed adapter that preserves official warning text verbatim. DHM stays link-only until then. |
-| 50 Verified physical flood cases | GATED — no modelled inundation | Reviewed bathymetry and breach parameters for a specific lake, a terrain model suitable for hydraulics, boundary conditions, and validation against an observed event, all with redistributable licences (see `processing/glof/README.md`). |
-| 52 Earthquake damage | GATED — damage UNKNOWN | A reviewed building exposure taxonomy for Nepal, fragility/vulnerability functions appropriate to it, replacement-cost valuation, and validation against a documented event (for example Gorkha 2015) with licences that permit publication. |
+- **Floods**: BIPAD river and rain stations (DHM readings), counting only readings from the 24 hours before the copy; DHM flood bulletins and weather warnings, in the order DHM lists them; BIPAD alerts that are active or were issued in the last 3 days. Links to tracing a river on the map and to flood scenarios.
+- **Glacial lakes**: no agency publishes a daily glacial-lake status, so nothing is copied. The section says so and links to the lake inventory on the map and to outburst scenarios.
+- **Earthquakes**: the newest rows of the NEMRC earthquake table as published, with links to the USGS record on the map, shaking scenarios and the USGS feed on `/live/`.
+- **Reported incidents**: BIPAD incidents of any type with an incident date in the last 7 days; the count carries a "+" when the API page may have cut the window short.
 
-## Evidence analyst (Feature 58)
-`atlas-public-evidence@1.0.0` holds verbatim paragraphs from the public feature documents and the method, uncertainty and limitation fields of the public model releases. The analyst ranks passages with the documented lexical score and shows the top passages with citations; it never generates or paraphrases factual text and calls no external service. Empty results say "insufficient evidence", never "safe" or "no impact". Retrieval works on English source text; suggested questions are offered in both languages.
+Each card states when it was copied, or that it shows the last successful copy, and links to the agency page and to the full copy on `/official/`. Missing values show UNKNOWN. English and Nepali are available; Nepali copy is project-authored and needs native-speaker review.
+
+## Offline
+
+The service worker fetches `/gov/latest.json` network-first and keeps the last good copy. Offline, the page shows that copy with its own copy time.
+
+## Removed
+
+The NASA POWER climate panels, the terrain-steepness panel, the gated-feature cards (Features 44, 50 and 52) and the evidence analyst were removed from the website. Their releases, pipelines and documentation remain: [climate context](climate-context.md), [terrain steepness](terrain-steepness.md), [RAG corpus](rag.md).

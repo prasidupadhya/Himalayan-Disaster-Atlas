@@ -16,9 +16,9 @@ function statusText(entry: Entry) {
   return entry.last_known ? `${reason}; showing the last copy from ${time(entry.fetched_at)}` : `${reason} at ${time(entry.checked_at)}`;
 }
 
-function TableView({ table }: { table: Table }) {
+function TableView({ table, fallbackCaption }: { table: Table; fallbackCaption: string }) {
   return <div className="official-table-wrap"><table>
-    {table.caption && <caption>{table.caption}</caption>}
+    <caption>{table.caption ?? `${fallbackCaption}, as published`}</caption>
     {table.header.length > 0 && <thead><tr>{table.header.map((cell, i) => <th key={i} scope="col">{cell}</th>)}</tr></thead>}
     <tbody>{table.rows.slice(0, 40).map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody>
   </table>{table.rows.length > 40 && <p className="muted">Showing 40 of {table.rows.length} rows. The full table is on the source page.</p>}</div>;
@@ -89,7 +89,7 @@ function PageView({ content, entry }: { content: Page; entry: Entry }) {
   return <>
     {content.headings.length > 0 && <ul className="official-headings">{content.headings.slice(0, 6).map(h => <li key={h}>{h}</li>)}</ul>}
     {content.paragraphs.slice(0, 4).map(p => <p key={p} className="official-quote">{p}</p>)}
-    {content.tables.slice(0, 2).map((table, i) => <TableView key={i} table={table} />)}
+    {content.tables.slice(0, 2).map((table, i) => <TableView key={i} table={table} fallbackCaption={entry.title} />)}
     {links.length > 0 && <ul className="official-links">{links.map(link => <li key={link.href}><a href={link.href} rel="noopener noreferrer" target="_blank">{link.text}</a>{fresh.has(link.href) && <span className="official-new">new</span>}{link.document && <span className="muted"> document</span>}</li>)}</ul>}
   </>;
 }

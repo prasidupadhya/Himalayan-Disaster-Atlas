@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('hydropower inventory exposes capacity and rejects proximity-as-risk semantics', async ({ page }) => {
-  await page.goto('/research/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
+  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load infrastructure context' }).click();
   const section = page.getByRole('region', { name: 'Hydropower', exact: true });
   await expect(section).toHaveAttribute('data-hydropower-state', /ready|stale/, { timeout: 15_000 });
   await expect(section.getByText(/45 mapped plants/i)).toBeVisible();

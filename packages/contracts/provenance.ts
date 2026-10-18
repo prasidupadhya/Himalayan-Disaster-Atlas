@@ -95,7 +95,7 @@ export function buildSourceDirectory(records: ProvenanceRecord[]): SourceDirecto
     if (!entry.attributions.includes(record.attribution)) entry.attributions.push(record.attribution);
     if (!entry.categories.includes(record.category)) entry.categories.push(record.category);
     if (record.access_date && !entry.access_dates.includes(record.access_date)) entry.access_dates.push(record.access_date);
-    entry.datasets.push({ id: record.id, version: record.version, title: record.title, state: record.state, catalog_href: `/data-catalog/?dataset=${encodeURIComponent(record.id)}&version=${encodeURIComponent(record.version)}` });
+    entry.datasets.push({ id: record.id, version: record.version, title: record.title, state: record.state, catalog_href: `/data/${encodeURIComponent(record.id)}/${encodeURIComponent(record.version)}/manifest.json` });
     for (const limitation of record.limitations) if (!entry.limitations.includes(limitation)) entry.limitations.push(limitation);
     groups.set(key, entry);
   }

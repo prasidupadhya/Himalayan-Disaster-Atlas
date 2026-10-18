@@ -1,5 +1,7 @@
 # Foundation architecture
 
+> **October 2026 refocus.** The website now has four destinations: Map (`/atlas/`), Today (`/hazards/`), Scenarios (`/simulate/`) and About (`/methodology/`), plus `/official/`, `/live/`, `/sources/` and `/licenses/`. The research profile (`/research/`, `npm run build:research`), the analyst, evidence browser, event pages, data catalog and hazards-hub context panels were removed from the web app. Sections below that describe those features are historical; their contracts, pipelines and releases remain.
+
 ## Application and feature boundaries
 
 Use React + TypeScript + Next.js App Router with `output: 'export'` and trailing slashes. Routes render at build time; there is no persistent backend, authentication, personal storage, analytics, or private runtime API. Public interaction state exists only in memory. Root navigation includes the working sample and the evidence pages; later feature owners add routes when functionality exists.

@@ -36,7 +36,7 @@ export const COPY = {
     modelled: '◇ MODELLED · HYPOTHETICAL',
     // flood
     releasePoint: 'Release point', onlyVerified: (count: number) => `Only these ${count} verified release points have pre-computed exposure. Other reaches can be explored as network paths in the`,
-    workbench: 'research workbench', exposureUnknown: 'where exposure stays UNKNOWN.',
+    workbench: 'map', exposureUnknown: 'where exposure stays UNKNOWN.',
     type: 'Type', glofType: 'Glacial lake (GLOF release point)', riverType: 'River entry point', lake: 'Lake', mappedExtent: 'Mapped extent', extentNote: '(GLO 2017–2024 maximum)',
     lakeName: 'Lake name', unknownInSource: 'UNKNOWN in source', riverPath: 'River path', reaches: 'reaches',
     stopsAtEdge: (next: string) => `stops at the mapped network edge (next reach ${next} unavailable)`, reachesOutlet: 'reaches a source outlet',
@@ -105,7 +105,7 @@ export const COPY = {
     shareRegion: 'यो परिदृश्य साझा गर्नुहोस्', shareNote: 'लिङ्कमा परिदृश्यका मानहरू मात्र छन्; सर्भरमा केही पनि राखिँदैन।',
     modelled: '◇ मोडेल गरिएको · काल्पनिक',
     releasePoint: 'सुरुवात बिन्दु', onlyVerified: (count: number) => `यी ${digits(String(count), 'ne')} प्रमाणित सुरुवात बिन्दुमा मात्र पूर्व-गणना गरिएको जोखिम छ। अन्य खण्डहरू सञ्जाल मार्गका रूपमा`,
-    workbench: 'अनुसन्धान कार्यस्थल', exposureUnknown: 'मा हेर्न सकिन्छ, जहाँ जोखिम अज्ञात (UNKNOWN) रहन्छ।',
+    workbench: 'नक्सा', exposureUnknown: 'मा हेर्न सकिन्छ, जहाँ जोखिम अज्ञात (UNKNOWN) रहन्छ।',
     type: 'प्रकार', glofType: 'हिमताल (हिमताल विस्फोट सुरुवात बिन्दु)', riverType: 'नदी प्रवेश बिन्दु', lake: 'ताल', mappedExtent: 'नक्सांकित क्षेत्रफल', extentNote: '(GLO २०१७–२०२४ अधिकतम)',
     lakeName: 'तालको नाम', unknownInSource: 'स्रोतमा अज्ञात (UNKNOWN)', riverPath: 'नदी मार्ग', reaches: 'खण्ड',
     stopsAtEdge: (next: string) => `नक्सांकित सञ्जालको किनारमा रोकिन्छ (अर्को खण्ड ${next} उपलब्ध छैन)`, reachesOutlet: 'स्रोतको निकासमा पुग्छ',

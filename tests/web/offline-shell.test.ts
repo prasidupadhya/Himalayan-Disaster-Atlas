@@ -224,6 +224,15 @@ describe('navigation and static assets', () => {
     sw.setNetwork(offline);
     expect(await (await sw.request(path, 'cors', 'reload'))!.text()).toBe('stored');
   });
+  it('serves the daily official copy from the network and keeps the last one for offline use', async () => {
+    let copy = 'monday';
+    const sw = boot({ network: async () => Object.defineProperty(new Response(copy), 'type', { value: 'basic' }) });
+    expect(await (await sw.request('/gov/latest.json'))!.text()).toBe('monday');
+    copy = 'tuesday';
+    expect(await (await sw.request('/gov/latest.json'))!.text()).toBe('tuesday');
+    sw.setNetwork(offline);
+    expect(await (await sw.request('/gov/latest.json'))!.text()).toBe('tuesday');
+  });
   it('leaves unversioned data paths and other origins to the network', async () => {
     const sw = boot({ network: offline });
     expect(await sw.request('/data/README.txt')).toBeUndefined();

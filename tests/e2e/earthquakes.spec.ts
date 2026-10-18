@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('earthquake catalogue exposes magnitude filters and epicenter semantics', async ({ page }) => {
-  await page.goto('/research/'); await page.getByRole('button', { name: 'Load additional map datasets' }).click();
+  await page.goto('/atlas/');
   const section = page.getByRole('region', { name: 'Earthquakes', exact: true });
   await expect(section).toHaveAttribute('data-earthquakes-state', /ready|stale/, { timeout: 15_000 });
   await expect(section.getByText(/not a shaking or damage footprint/i)).toBeVisible();

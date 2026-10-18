@@ -29,6 +29,6 @@ export function Evidence({ metadata: m }: { metadata: Omit<Metadata, 'schema_ver
       <dt>License</dt><dd>{m.license_url ? <a href={m.license_url}>{m.license}</a> : m.license}</dd>
     </dl>
     <details><summary>Transformation, uncertainty & limitations</summary><p><strong>Processing method:</strong> {m.method}</p><p><strong>Uncertainty:</strong> {m.uncertainty}</p><ul>{m.limitations.map(item => <li key={item}>{item}</li>)}</ul><p><strong>Attribution:</strong> {m.attribution}</p></details>
-    <p className="evidence-links"><Link href={`/data-catalog/?dataset=${encodeURIComponent(m.dataset_id)}&version=${encodeURIComponent(m.dataset_version)}`}>Catalog record</Link> · <Link href="/sources/">Source directory</Link> · <Link href="/methodology/">Methodology</Link></p>
+    <p className="evidence-links"><a href={`/data/${encodeURIComponent(m.dataset_id)}/${encodeURIComponent(m.dataset_version)}/manifest.json`}>Release manifest</a> · <Link href="/sources/">Source directory</Link> · <Link href="/methodology/">Methodology</Link></p>
   </section>;
 }

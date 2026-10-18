@@ -327,8 +327,10 @@ export function mountEarthquakeDataset(map: Map, dataset: Dataset) {
   map.addLayer({ id: points, source, type: 'circle', minzoom: 4.5, paint: {
     'circle-radius': ['case', ['boolean', ['feature-state', 'selected'], false], 15,
       ['interpolate', ['exponential', 1.45], ['get', 'magnitude'], 2.5, 3, 4, 4.5, 5, 6.2, 6, 8.8, 7, 12.2, 8, 16]],
-    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#e66767'],
-    'circle-opacity': 0.78, 'circle-stroke-color': '#402218', 'circle-stroke-width': 1.1,
+    // Amber rings: the outline separates earthquakes from filled hydropower and lake dots, and keeps lakes visible beneath.
+    'circle-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#e0a23a'],
+    'circle-opacity': ['case', ['boolean', ['feature-state', 'selected'], false], 0.9, 0.14],
+    'circle-stroke-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#e0a23a'], 'circle-stroke-width': 1.4, 'circle-stroke-opacity': 0.9,
   } });
   const ids = new Set(dataset.collection.features.map(feature => String(feature.id))); let selected: string | null = null;
   return {

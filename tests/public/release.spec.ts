@@ -11,24 +11,18 @@ test('excluded datasets cannot be downloaded and retained data stays available',
   expect(inventory.excluded).toEqual(excludedReleases());
   expect(Object.keys(inventory.files).some(path => prefixes.some(prefix => `/${path}`.startsWith(prefix)))).toBe(false);
 });
-test('public pages explain omissions without requesting excluded artifacts', async ({ page }) => {
+test('public pages never link to or request excluded artifacts', async ({ page }) => {
   const errors: string[] = []; const requests: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   page.on('request', request => requests.push(new URL(request.url()).pathname));
-  await page.goto('/research/');
+  await page.goto('/atlas/');
   await expect(page.locator('[data-map-ready="true"]')).toBeVisible();
-  await expect(page.getByLabel('Public release availability')).toContainText('reviewed datasets only');
-  await expect(page.getByRole('region', { name: 'Scenario Engine', exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'Load additional map datasets' }).click();
-  await expect(page.getByRole('region', { name: 'Mountains', exact: true })).toHaveAttribute('data-mountains-state', /ready|stale/);
-  for (const name of ['Hydrology', 'Rainfall', 'Population', 'Exposure Engine', 'Hazard Graph', 'Global Search']) {
-    await expect(page.getByRole('region', { name, exact: true })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Show glacier outlines' }).click();
+  await expect(page.locator('[data-glaciers-state]')).toHaveAttribute('data-glaciers-state', /ready|stale/);
+  for (const path of ['/research/', '/events/', '/evidence/', '/analyst/', '/data-catalog/']) {
+    expect((await page.request.get(path)).status(), path).toBe(404);
   }
-  for (const path of ['/events/', '/evidence/', '/analyst/']) {
-    await page.goto(path);
-    await expect(page.getByText('This feature is unavailable in this public release', { exact: false })).toBeVisible();
-  }
-  for (const path of ['/data-catalog/', '/sources/', '/licenses/', '/methodology/']) {
+  for (const path of ['/sources/', '/licenses/', '/methodology/']) {
     await page.goto(path);
     const links = await page.locator('a[href^="/data/"]').evaluateAll(anchors => anchors.map(a => a.getAttribute('href')!));
     expect(links.filter(href => prefixes.some(prefix => href.startsWith(prefix)))).toEqual([]);
@@ -38,7 +32,7 @@ test('public pages explain omissions without requesting excluded artifacts', asy
 });
 test('public availability and map controls fit mobile and preserve keyboard access', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const path of ['/atlas/', '/events/', '/analyst/', '/data-catalog/', '/sources/', '/licenses/']) {
+  for (const path of ['/atlas/', '/hazards/', '/simulate/', '/sources/', '/licenses/']) {
     await page.goto(path);
     await expect(page.getByRole('main')).toHaveCount(1);
     await expect(page.getByRole('heading', { level: 1 })).toHaveCount(1);

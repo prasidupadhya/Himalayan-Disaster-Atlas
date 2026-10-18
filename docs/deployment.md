@@ -28,11 +28,11 @@ The supplied 9 September log completed the root build and both security scans. I
 
 Use repository root, Node from `.nvmrc`, `npm ci --include=dev --workspaces --include-workspace-root`, and root `npm run build`. Set the Cloudflare project/Worker name to match `himalayanatlas` in the configuration (or change that non-secret name in a reviewed commit). Use `npm run deploy:cloudflare` to publish a version, or `npm run upload:cloudflare` to upload an unpromoted version. Both invoke the configuration's `npm run release:check` build hook. **The default public export excludes 19 unresolved releases and can pass the publication gate. The full research export remains blocked.** The missing-directory configuration error is fixed; that does not override the documented rights blockers.
 
-A plain `npm run build` produces the reduced public export. `npm run build:research` produces the complete local research export, which cannot pass the deployment gate. Neither command alone proves CI success. `versions upload` creates a version, not a production rollout. Never replace the root build with a direct Next command. Do not pass `--assets` or alternate configs to bypass release checks when publishing.
+`npm run build` produces the public export; it is the only profile (the research profile was retired in October 2026). The build alone does not prove CI success. `versions upload` creates a version, not a production rollout. Never replace the root build with a direct Next command. Do not pass `--assets` or alternate configs to bypass release checks when publishing.
 
 ### Gated production automation
 
-Recommended production path: GitHub's `Atlas quality` workflow. It runs complete checks, builds and tests the research profile on both static runtimes, then rebuilds and tests the reduced public profile through Cloudflare before retaining only that public artifact under the commit SHA. Its deployment job consumes that same artifact only after quality succeeds on a main push. It does not rebuild in the credential-bearing step.
+Recommended production path: GitHub's `Atlas quality` workflow. It runs complete checks, tests the public build on both static runtimes, then rebuilds and tests it through Cloudflare before retaining only that public artifact under the commit SHA. Its deployment job consumes that same artifact only after quality succeeds on a main push. It does not rebuild in the credential-bearing step.
 
 Before enabling automation:
 

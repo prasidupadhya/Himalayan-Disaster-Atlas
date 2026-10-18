@@ -24,8 +24,8 @@ checkSecurity();
 const env = Object.fromEntries(['PATH', 'HOME', 'TMPDIR', 'TEMP', 'TMP', 'SYSTEMROOT'].flatMap(key => process.env[key] ? [[key, process.env[key]]] : []));
 env.NEXT_TELEMETRY_DISABLED = '1';
 env.NODE_ENV = 'production';
-const research = process.argv.includes('--research');
-env.NEXT_PUBLIC_ATLAS_RELEASE = research ? 'research' : 'public';
+// Only the reviewed public profile is built; the research profile was retired in October 2026.
+env.NEXT_PUBLIC_ATLAS_RELEASE = 'public';
 // Never retain chunks or prerenders from a different release profile.
 rmSync('apps/web/.next', { recursive: true, force: true });
 rmSync('apps/web/out', { recursive: true, force: true });
@@ -36,6 +36,6 @@ prepareLiveExport(fileURLToPath(new URL('../apps/web/out', import.meta.url)));
 prepareHosting();
 // The offline shell is pinned before the public inventory hashes every exported byte.
 prepareServiceWorker();
-const excluded = research ? [] : preparePublicExport();
+const excluded = preparePublicExport();
 checkStaticExport(undefined, { excludedReleases: excluded });
 checkSecurity();

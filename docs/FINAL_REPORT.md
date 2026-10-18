@@ -1,5 +1,7 @@
 # Final report — live data, hazard context and scenario simulator (Features 42–58)
 
+> **October 2026 refocus:** the site now centres on floods, glacial-lake outbursts and earthquakes with four destinations (Map, Today, Scenarios, About) and a phone-first layout. The research atlas, analyst, evidence browser, event pages, data catalog, gated cards and hazards-hub context panels were removed from the website; see the README section "What was removed in October 2026".
+
 The Atlas is a static, account-free, read-only public site. Every number comes from a checksum-verified immutable release, and every scenario says it is a scenario. Official forecasts and warnings come only from DHM and NDRRMA/BIPAD, which every live, hazard and scenario page links.
 
 ## Features

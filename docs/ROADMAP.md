@@ -1,5 +1,7 @@
 # Roadmap
 
+> **October 2026 refocus:** the site now centres on floods, glacial-lake outbursts and earthquakes with four destinations (Map, Today, Scenarios, About) and a phone-first layout. The research atlas, analyst, evidence browser, event pages, data catalog, gated cards and hazards-hub context panels were removed from the website; see the README section "What was removed in October 2026".
+
 Status of the public, static, evidence-traceable Atlas. "Gated" features are built in a disabled state with documented unlock conditions; they never show invented values.
 
 | # | Feature | Status | Notes |

@@ -84,7 +84,7 @@ export function FloodPanel({ lang, initial, onScene, onShare, pick, slot }: { la
         </select>
       </label>
       <OriginCard origin={origin} lang={lang} />
-      <p className="sim-muted">{c.onlyVerified(loaded.catalogue.origins.length)} <a href="/research/">{c.workbench}</a>{lang === 'en' ? ', ' : ''}{c.exposureUnknown}</p>
+      <p className="sim-muted">{c.onlyVerified(loaded.catalogue.origins.length)} <a href="/atlas/">{c.workbench}</a>{lang === 'en' ? ', ' : ''}{c.exposureUnknown}</p>
     </section>
 
     <section className="sim-step" aria-labelledby="flood-step-2">

@@ -1,35 +1,35 @@
 import Link from 'next/link';
 import { NepalOverview } from '../components/nepal-overview';
-import { isPublicRelease } from '../lib/public-release';
+import { TodayStrip } from '../components/today-strip';
+
+const HAZARDS = [
+  { id: 'floods', title: 'Floods', text: 'River levels and rainfall from DHM stations, flood bulletins and alerts, copied every morning. Then run a hypothetical flood down a real river.',
+    links: [['/hazards/#floods', 'Today’s river and rain readings'], ['/simulate/', 'Run a flood scenario']] },
+  { id: 'glacial-lakes', title: 'Glacial lakes', text: 'Thousands of glacial lakes sit above Nepal’s valleys. Pick one on the map and follow where its water would go, river by river.',
+    links: [['/atlas/#lake-controls', 'Find a lake on the map'], ['/simulate/', 'Run an outburst scenario']] },
+  { id: 'earthquakes', title: 'Earthquakes', text: 'The latest recorded earthquakes, the historical record around Nepal on the map, and shaking scenarios including a Gorkha 2015 replay.',
+    links: [['/hazards/#earthquakes', 'Latest recorded earthquakes'], ['/simulate/?tab=earthquake', 'Run a shaking scenario']] },
+] as const;
+
 export default function Home() {
   return <div className="home">
     <section className="home-hero page" aria-labelledby="home-title">
       <div className="home-copy">
         <h1 id="home-title"><span>Himalayan</span><span>Disaster Atlas</span></h1>
-        <p className="intro">Explore Nepal’s mountains, water and communities. Follow the geography, inspect the sources, and keep uncertainty in view.</p>
-        <div className="home-actions"><Link className="primary-action" href="/atlas/">Explore Nepal</Link><Link className="text-action" href="/methodology/">Read the methodology</Link></div>
+        <p className="intro">Floods, glacial-lake outbursts and earthquakes in Nepal: today’s official readings, an interactive map, and scenarios you can run yourself.</p>
+        <div className="home-actions"><Link className="primary-action" href="/atlas/">Explore Nepal</Link><Link className="text-action" href="/hazards/">See today</Link></div>
       </div>
       <NepalOverview />
     </section>
-    <section className="home-coverage page" aria-label="Administrative coverage">
-      <div><h2>One landscape.<br />{' '}A shared geographic foundation.</h2><p>Stable identifiers connect the map to its source records.</p></div>
-      <dl className="home-stats"><div><dt>7</dt><dd>Provinces</dd></div><div><dt>77</dt><dd>Districts</dd></div><div><dt>753</dt><dd>Local governments</dd></div></dl>
+    <section className="home-today page" aria-label="Today"><TodayStrip /></section>
+    <section className="home-hazards page" aria-labelledby="hazards-title">
+      <h2 id="hazards-title">Three hazards, one map.</h2>
+      <ul className="hazard-cards">{HAZARDS.map(h => <li key={h.id} className={`hazard-card hazard-${h.id}`}>
+        <h3>{h.title}</h3>
+        <p>{h.text}</p>
+        <p className="hazard-links">{h.links.map(([href, label]) => <Link key={href + label} href={href}>{label}</Link>)}</p>
+      </li>)}</ul>
+      <p className="home-note muted">Every figure is copied from official sources or labelled as a hypothetical scenario. This is not a warning service; for warnings use <a href="https://www.dhm.gov.np/" rel="noopener">DHM</a> and <a href="https://bipadportal.gov.np/" rel="noopener">BIPAD</a>. <Link href="/methodology/">How it works</Link></p>
     </section>
-    <section className="home-pathways page" aria-labelledby="pathways-title">
-      <h2 id="pathways-title">Choose a starting point.</h2>
-      <div className="pathway-layout">
-        <Link className="pathway-primary" href="/atlas/#atlas-map"><span className="pathway-label">Explore the landscape</span><h3>From the mountains<br />to the river network.</h3><p>Find glacial lakes, follow downstream rivers, and explore nearby infrastructure. Source records stay within reach.</p><span className="pathway-destination">Open the map</span></Link>
-        <div className="pathway-secondary">
-          <Link href="/data-catalog/"><h3>Know what powers the map.</h3><p>Find versioned releases, processing history, coverage and download links.</p><span className="pathway-destination">Browse the data catalog</span></Link>
-          <Link href="/methodology/"><h3>Read the method, then the result.</h3><p>Understand how observations, derived data and hypothetical scenarios differ.</p><span className="pathway-destination">Read the methodology</span></Link>
-        </div>
-      </div>
-      <ul className="pathway-tools" aria-label="Context and scenario tools">
-        <li><Link href="/live/"><span className="pathway-label">Periodically updated</span><h3>Live conditions</h3><p>Verified USGS earthquake and NOAA GFS forecast snapshots with freshness on every record.</p><span className="pathway-destination">Open Live</span></Link></li>
-        <li><Link href="/hazards/"><span className="pathway-label">Context, not warnings</span><h3>Hazard context</h3><p>Rainfall, snow, dryness, heat and terrain steepness for Nepal, with the gated features listed openly.</p><span className="pathway-destination">Open Hazards</span></Link></li>
-        <li><Link href="/simulate/"><span className="pathway-label">Educational scenarios</span><h3>Scenario simulator</h3><p>Hypothetical flood, GLOF and earthquake scenarios with every assumption shown before you run.</p><span className="pathway-destination">Open the simulator</span></Link></li>
-      </ul>
-    </section>
-    <section className="home-foundation page" aria-labelledby="foundation-title"><h2 id="foundation-title">Evidence stays in the picture.</h2><p>Explore Nepal’s provinces, districts, 753 local-government units, and 22 protected or special-area pieces from the public COD-AB v02 release. Each record carries a stable P-code and traceable source metadata.</p><p className="muted">{isPublicRelease ? 'This public edition includes reviewed datasets. Some records and dependent research tools are withheld pending redistribution review.' : 'Research tools preserve their source dates, limitations and assumptions. Modelled results are hypothetical, not forecasts.'} Missing measurements remain UNKNOWN.</p><Link href="/licenses/">Availability, licences & attribution</Link></section>
   </div>;
 }

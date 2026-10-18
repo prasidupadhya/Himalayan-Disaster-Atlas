@@ -23,7 +23,7 @@ export default function LicensesPage() {
         <h3>{key}</h3><p><strong>{review.status === 'PERMITTED' && blocked(key) ? 'BLOCKED BY PARENT RIGHTS' : review.status.replaceAll('_', ' ')}</strong> · {record?.license ?? 'Original Atlas metadata'}</p>
         <p>{review.reason}</p><p>{review.obligations}</p>
         {isPublicRelease && !isReleaseIncluded(key) ? <p><strong>Excluded from this public export.</strong> No download is published.</p> : null}
-        {record && isReleaseIncluded(key) ? <p>{record.attribution} <Link href={`/data-catalog/?dataset=${encodeURIComponent(record.id)}&version=${encodeURIComponent(record.version)}`}>Catalog and processing details</Link></p> : null}
+        {record && isReleaseIncluded(key) ? <p>{record.attribution} <a href={`/data/${encodeURIComponent(record.id)}/${encodeURIComponent(record.version)}/manifest.json`}>Release manifest</a></p> : null}
         {notice && isReleaseIncluded(key) ? <p><a href={notice}>Complete source notice</a></p> : null}
         <ul>{review.evidence_urls.map(url => <li key={url}><a href={url}>{url}</a></li>)}</ul>
         {review.parents.length ? <p>Parent reviews: {review.parents.map((parent, i) => <span key={parent}>{i ? ', ' : ''}<a href={`#${parent.replace('@', '-')}`}>{parent}</a></span>)}</p> : null}

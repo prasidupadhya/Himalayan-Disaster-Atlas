@@ -1,17 +1,16 @@
 import { expect, test } from '@playwright/test';
 
-const HEAVY = /\/data\/(nepal-mountains|nepal-glaciers-|nepal-transboundary-glacial-lakes|nepal-hydrology|nepal-rainfall|nepal-region-earthquakes|nepal-reported-|nepal-osm-hydropower|nepal-population|nepal-sentinel|nepal-power-climate)\//;
+// Loaded only on request: glacier outlines (~1.3 MB) and OSM infrastructure/hydropower.
+const DEFERRED = /\/data\/(nepal-glaciers-|nepal-osm-)/;
 
-test('phone layout defers large thematic data and keeps core touch workflows usable', async ({ browser }) => {
+test('phone map loads lakes and earthquakes, defers heavy layers and keeps touch workflows usable', async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
   const page = await context.newPage();
-  const heavyRequests: string[] = [];
-  page.on('request', request => { if (HEAVY.test(request.url())) heavyRequests.push(request.url()); });
-  await page.goto('/research/');
+  const deferred: string[] = [];
+  page.on('request', request => { if (DEFERRED.test(request.url())) deferred.push(request.url()); });
+  await page.goto('/atlas/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
-  const gate = page.getByRole('region', { name: 'Additional data loading' });
-  await expect(gate).toHaveAttribute('data-mobile-data', 'deferred');
-  expect(heavyRequests).toEqual([]);
+  expect(deferred).toEqual([]);
 
   const mapBox = await page.locator('.map-shell').boundingBox();
   expect(mapBox).not.toBeNull();
@@ -22,31 +21,29 @@ test('phone layout defers large thematic data and keeps core touch workflows usa
   expect(zoomBox?.height).toBeGreaterThanOrEqual(44);
   await zoom.tap();
 
-  const search = page.getByLabel('Search the atlas');
-  await search.scrollIntoViewIfNeeded();
-  await search.tap();
-  await search.fill('Everest');
-  await page.getByRole('button', { name: 'Search atlas' }).tap();
-  await expect(page.getByRole('region', { name: 'Global Search' })).toHaveAttribute('data-search-state', 'ready');
-  await expect(page.getByRole('region', { name: 'Global Search' })).toContainText('Mount Everest');
-  expect(await search.evaluate(element => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16);
-
+  const lakeSearch = page.getByLabel('Search lakes');
+  await lakeSearch.scrollIntoViewIfNeeded();
+  await lakeSearch.tap();
+  expect(await lakeSearch.evaluate(element => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
-  await gate.getByRole('button', { name: 'Load additional map datasets' }).tap();
-  await expect(page.locator('[data-mountains-state]')).toBeVisible();
-  await expect.poll(() => heavyRequests.length).toBeGreaterThan(0);
+
+  await page.getByRole('button', { name: 'Show glacier outlines' }).tap();
+  await expect.poll(() => deferred.length).toBeGreaterThan(0);
   await context.close();
 });
 
-test('public scientific pages fit portrait and short landscape mobile viewports', async ({ browser }) => {
+test('every page fits portrait and short landscape phone viewports', async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
   const page = await context.newPage();
-  for (const path of ['/data-catalog/', '/methodology/', '/sources/', '/events/', '/analyst/']) {
+  for (const path of ['/', '/hazards/', '/simulate/', '/official/', '/live/', '/methodology/', '/sources/', '/licenses/']) {
     await page.goto(path);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), path).toBe(true);
+    const nav = page.getByRole('navigation', { name: 'Primary navigation' });
+    await expect(nav.getByRole('link')).toHaveCount(4);
+    for (const box of await nav.getByRole('link').evaluateAll(links => links.map(link => link.getBoundingClientRect().height))) expect(box, path).toBeGreaterThanOrEqual(44);
   }
   await page.setViewportSize({ width: 844, height: 390 });
-  await page.goto('/research/');
+  await page.goto('/atlas/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
   const mapBox = await page.locator('.map-shell').boundingBox();
   expect(mapBox!.height).toBeLessThanOrEqual(390 * .7);

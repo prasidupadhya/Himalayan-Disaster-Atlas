@@ -1,23 +1,14 @@
 import { expect, test } from '@playwright/test';
 
-test('mobile navigation exposes the current route and returns focus on Escape', async ({ page }) => {
+test('phone navigation shows all four destinations and marks the current one', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
-  const menu = page.getByRole('button', { name: 'Menu', exact: true });
   const nav = page.getByRole('navigation', { name: 'Primary navigation' });
-  await expect(nav).toBeHidden();
-  await menu.click();
   await expect(nav).toBeVisible();
-  await nav.getByRole('link', { name: 'Data catalog', exact: true }).focus();
-  await page.keyboard.press('Escape');
-  await expect(menu).toBeFocused();
-  await expect(nav).toBeHidden();
-  await menu.click();
-  await nav.getByRole('link', { name: 'Data catalog', exact: true }).click();
-  await expect(page).toHaveURL(/\/data-catalog\/$/);
-  await expect(nav).toBeHidden();
-  await page.getByRole('button', { name: 'Menu', exact: true }).click();
-  await expect(nav.getByRole('link', { name: 'Data catalog', exact: true })).toHaveAttribute('aria-current', 'page');
+  await expect(nav.getByRole('link')).toHaveText(['Map', 'Today', 'Scenarios', 'About']);
+  await nav.getByRole('link', { name: 'Today', exact: true }).click();
+  await expect(page).toHaveURL(/\/hazards\/$/);
+  await expect(nav.getByRole('link', { name: 'Today', exact: true })).toHaveAttribute('aria-current', 'page');
 });
 
 test('source-backed overview and page chrome reflow without horizontal overflow', async ({ page }) => {
@@ -29,15 +20,6 @@ test('source-backed overview and page chrome reflow without horizontal overflow'
     await page.setViewportSize({ width, height: 900 });
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `overflow at ${width}px`).toBe(true);
     await expect(page.getByRole('link', { name: 'Explore Nepal', exact: true })).toBeInViewport();
-  }
-  const availability = page.getByLabel('Public release availability');
-  if (await availability.count()) {
-    const disclosure = availability.locator('details');
-    await expect(disclosure).not.toHaveAttribute('open');
-    await disclosure.locator('summary').click();
-    await expect(availability.getByRole('link', { name: 'Availability and source terms' })).toBeVisible();
-    await disclosure.locator('summary').click();
-    await expect(disclosure).not.toHaveAttribute('open');
   }
   expect(errors).toEqual([]);
 });
