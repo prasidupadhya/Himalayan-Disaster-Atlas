@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { screenshotMap } from '../helpers/map-screenshot';
 import { readFile } from 'node:fs/promises';
 
 test('traces a selected reach with playback, provenance, download and cleanup', async ({ page }) => {
@@ -37,7 +38,7 @@ test('traces a selected reach with playback, provenance, download and cleanup', 
   expect(result.inputs).toHaveLength(2);
   expect(result.inputs.every((input: { artifact_sha256: string }) => /^[a-f0-9]{64}$/.test(input.artifact_sha256))).toBe(true);
   await trace.getByRole('button', { name: 'Fit trace', exact: true }).click();
-  await page.locator('.map-shell').screenshot({ path: 'test-results/downstream-trace-map.png' });
+  await screenshotMap(page, 'test-results/downstream-trace-map.png');
   await trace.getByRole('button', { name: 'Clear trace', exact: true }).click();
   await expect(trace).toHaveAttribute('data-trace-state', 'idle');
   await trace.getByRole('button', { name: 'Trace downstream', exact: true }).click();

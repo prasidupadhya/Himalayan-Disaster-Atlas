@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { screenshotMap } from '../helpers/map-screenshot';
 
 test('terrain renders locally, toggles and inspects elevation independently of exaggeration', async ({ page, baseURL }) => {
   const errors: string[] = [];
@@ -29,7 +30,7 @@ test('terrain renders locally, toggles and inspects elevation independently of e
   await terrain.getByLabel('Longitude', { exact: true }).fill('0');
   await terrain.getByRole('button', { name: 'Inspect elevation' }).click();
   await expect(terrain.getByText('Elevation: UNKNOWN — outside terrain coverage.')).toBeVisible();
-  await page.locator('.map-shell').screenshot({ path: 'test-results/terrain-desktop.png' });
+  await screenshotMap(page, 'test-results/terrain-desktop.png');
   await page.getByRole('navigation', { name: 'Primary navigation' }).getByRole('link', { name: 'About', exact: true }).click();
   expect(errors).toEqual([]);
   expect(external).toEqual([]);
@@ -69,7 +70,7 @@ test('Asia zoom-out stays bounded with terrain throughout the viewport', async (
   for (let i = 0; i < 10 && !(await zoomOut.isDisabled()); i++) { await zoomOut.click({ force: true }); await page.waitForTimeout(400); }
   await expect(zoomOut).toBeDisabled();
   await expect(page.locator('[data-terrain-state]')).toHaveAttribute('data-terrain-state', 'ready');
-  await page.locator('.map-shell').screenshot({ path: 'test-results/terrain-asia.png' });
+  await screenshotMap(page, 'test-results/terrain-asia.png');
   expect(failedTiles).toEqual([]);
   await page.getByRole('button', { name: 'Reset view' }).click();
   await expect(zoomOut).toBeEnabled();
