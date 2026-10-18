@@ -661,3 +661,18 @@ tbody th { color: var(--ink-strong); }
   .site-header nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; width: calc(100% + 2rem); margin-left: -1rem; padding: 0; }
   .site-header nav a { justify-content: center; min-height: 46px; font-size: .86rem; }
 }
+/* Phones: the map, then the hazard controls; the boundary lookup and attribution follow them. */
+@media (max-width: 800px) {
+  .atlas-mission .map-column { display: contents; }
+  .atlas-mission .map-shell { order: 1; }
+  .atlas-mission .map-key { order: 2; margin: 0; padding: .6rem 1rem; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .atlas-mission .atlas-panel { order: 3; }
+  .atlas-mission .feature-list { order: 4; border-top: 1px solid var(--line-strong); }
+  .atlas-mission .map-attribution-note { order: 5; padding: 0 0 1.5rem; }
+}
+.atlas-fold { margin-top: 1.5rem; border-top: 1px solid var(--line); }
+.atlas-fold > summary { display: flex; align-items: center; justify-content: space-between; gap: .75rem; min-height: 48px; padding: .75rem 0; cursor: pointer; list-style: none; font-weight: 700; color: var(--ink-strong); }
+.atlas-fold > summary::-webkit-details-marker { display: none; }
+.atlas-fold > summary::after { content: '▸'; font-size: .85rem; color: var(--muted-strong); }
+.atlas-fold[open] > summary::after { content: '▾'; }
+.atlas-fold > :not(summary):first-of-type, .atlas-fold > summary + * { margin-top: 0; }

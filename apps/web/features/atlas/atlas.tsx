@@ -14,6 +14,7 @@ import { Hydropower } from '../hydropower/hydropower';
 import { Infrastructure } from '../infrastructure/infrastructure';
 import { Terrain } from '../terrain/terrain';
 import { Rivers } from '../rivers/rivers';
+import { Fold, openFoldFor } from './fold';
 import { MapKey } from './map-key';
 import { SimulationUI } from '../simulation-ui/simulation-ui';
 import { Earthquakes } from '../earthquakes/earthquakes';
@@ -215,23 +216,25 @@ export function Atlas() {
         <h1>Explore Nepal’s lakes, rivers & earthquakes</h1>
         <p>Pick a glacial lake and follow its water downstream, or read the record of earthquakes around Nepal.</p>
         <DataState state={resource} retry={retry} />
-        <nav className="atlas-shortcuts" aria-label="Atlas controls"><a href="#lake-controls">Lakes</a><a href="#river-controls">Rivers</a><a href="#earthquake-controls">Earthquakes</a><a href="#terrain-controls">Terrain</a><a href="#boundary-controls">Boundaries</a><a href="#additional-controls">Infrastructure</a></nav>
+        <nav className="atlas-shortcuts" aria-label="Atlas controls" onClickCapture={event => { const href = (event.target as Element).closest('a')?.getAttribute('href'); if (href?.startsWith('#')) openFoldFor(href.slice(1)); }}><a href="#lake-controls">Lakes</a><a href="#river-controls">Rivers</a><a href="#earthquake-controls">Earthquakes</a><a href="#terrain-controls">Terrain</a><a href="#boundary-controls">Boundaries</a><a href="#additional-controls">Infrastructure</a></nav>
       </div>
       <div id="lake-controls" tabIndex={-1} className="atlas-anchor"><GlacialLakes key={`lakes-${attempt}`} map={mapReady ? interactiveMap : null} onSelect={setLake} onTrace={choice => { setLakeTrace(previous => ({ ...choice, n: (previous?.n ?? 0) + 1 })); document.getElementById('downstream-trace')?.scrollIntoView({ block: 'nearest' }); }} />
         <section className="thematic-controls" aria-label="Glacier outlines"><h2>Glaciers</h2><p>Show the glacier outlines that feed the lakes (about 1.3 MB).</p><button type="button" onClick={() => setGlaciers(value => !value)}>{glaciers ? 'Hide glacier outlines' : 'Show glacier outlines'}</button>{glaciers && <Glaciers key={`glaciers-${attempt}`} map={mapReady ? interactiveMap : null} />}</section>
       </div>
+      <div id="river-controls" tabIndex={-1} className="atlas-anchor"><Rivers key={`rivers-${attempt}`} map={mapReady ? interactiveMap : null} snap={lakeTrace} /></div>
+      <div id="earthquake-controls" tabIndex={-1} className="atlas-anchor"><Earthquakes key={`earthquakes-${attempt}`} map={mapReady ? interactiveMap : null} /></div>
+      <section className="thematic-controls" aria-label="GLOF modelling availability"><h2>Lake outburst modelling</h2><p>{lake ? `Selected lake: ${lake.id}. Physical model inputs required.` : 'Select a lake above to identify the modelling subject.'}</p><p>Flood extent and damage: <strong>UNAVAILABLE</strong>. For a labelled hypothetical corridor with ranges, use the scenario simulator.</p><p><a className="primary-action" href="/simulate/">Run an outburst scenario</a></p><details><summary>Why the map shows no flood extent</summary><p>A lake point or a downstream river line cannot identify inundated places or destroyed assets. This inventory has no verified lake outlet-to-river connection, breach parameters or validated hydraulic model.</p><p>Use river tracing for connectivity only. Infrastructure is geographic context, not a list of affected assets.</p><p><a href="/methodology/#glof-physical">Physical GLOF project: scope, required inputs and validation</a></p></details><details onToggle={event => setEducationalSimulation(event.currentTarget.open)}><summary>Educational river simulation</summary>{educationalSimulation && <SimulationUI key={`focused-simulation-${attempt}`} map={mapReady ? interactiveMap : null} />}</details></section>
+      <Fold title="More layers: terrain, boundaries and infrastructure">
+      <div id="terrain-controls" tabIndex={-1} className="atlas-anchor"><Terrain key={attempt} map={mapReady ? interactiveMap : null} /></div>
       <section id="boundary-controls" tabIndex={-1} className="layer-controls" aria-label="Map layers"><h2>Boundary levels</h2>
         {LEVEL_LABELS.map((label, index) => <label key={label}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
         <p className="muted">Districts appear from zoom 6; local levels from zoom 8. Orange areas are protected or special-area pieces in the source.</p>
       </section>
-      <div id="terrain-controls" tabIndex={-1} className="atlas-anchor"><Terrain key={attempt} map={mapReady ? interactiveMap : null} /></div>
-      <div id="river-controls" tabIndex={-1} className="atlas-anchor"><Rivers key={`rivers-${attempt}`} map={mapReady ? interactiveMap : null} snap={lakeTrace} /></div>
-      <div id="earthquake-controls" tabIndex={-1} className="atlas-anchor"><Earthquakes key={`earthquakes-${attempt}`} map={mapReady ? interactiveMap : null} /></div>
-      <section className="thematic-controls" aria-label="GLOF modelling availability"><h2>Lake outburst modelling</h2><p>{lake ? `Selected lake: ${lake.id}. Physical model inputs required.` : 'Select a lake above to identify the modelling subject.'}</p><p>Flood extent and damage: <strong>UNAVAILABLE</strong>.</p><p>A lake point or a downstream river line cannot identify inundated places or destroyed assets. This inventory has no verified lake outlet-to-river connection, breach parameters or validated hydraulic model.</p><p><a href="/methodology/#glof-physical">Physical GLOF project: scope, required inputs and validation</a></p><p>Use river tracing for connectivity only. Infrastructure is geographic context, not a list of affected assets.</p><details onToggle={event => setEducationalSimulation(event.currentTarget.open)}><summary>Educational river simulation</summary>{educationalSimulation && <SimulationUI key={`focused-simulation-${attempt}`} map={mapReady ? interactiveMap : null} />}</details></section>
       <div id="additional-controls" tabIndex={-1} className="atlas-anchor">
       <section className="thematic-controls" aria-label="Infrastructure context"><h2>Infrastructure context</h2><p>Load roads, bridges, facilities and hydropower only when needed. Coverage is incomplete; proximity is not damage.</p><button type="button" onClick={() => setAdditionalLayers(value => !value)}>{additionalLayers ? 'Unload infrastructure context' : 'Load infrastructure context'}</button>{additionalLayers && <><Hydropower key={`hydropower-${attempt}`} map={mapReady ? interactiveMap : null} /><Infrastructure key={`infrastructure-${attempt}`} map={mapReady ? interactiveMap : null} /></>}</section>
       </div>
-      {evidence && <Evidence metadata={evidence} />}
+      </Fold>
+      {evidence && <Fold title="Sources and evidence for this map"><Evidence metadata={evidence} /></Fold>}
     </aside>
     <div className="map-column">
       <div className="map-shell" id="atlas-map">

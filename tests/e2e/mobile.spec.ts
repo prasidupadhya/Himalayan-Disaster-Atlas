@@ -27,6 +27,14 @@ test('phone map loads lakes and earthquakes, defers heavy layers and keeps touch
   expect(await lakeSearch.evaluate(element => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
 
+  // The hazard controls come straight after the map; secondary layers open from their shortcut.
+  const panelTop = await page.locator('.atlas-panel').boundingBox(), recordsTop = await page.locator('#accessible-boundary-records').boundingBox();
+  expect(panelTop!.y).toBeLessThan(recordsTop!.y);
+  await expect(page.locator('#terrain-controls')).toBeHidden();
+  await page.getByRole('navigation', { name: 'Atlas controls' }).getByRole('link', { name: 'Terrain', exact: true }).tap();
+  await expect(page.locator('#terrain-controls')).toBeVisible();
+  await expect(page.locator('#terrain-controls')).toBeFocused();
+
   await page.getByRole('button', { name: 'Show glacier outlines' }).tap();
   await expect.poll(() => deferred.length).toBeGreaterThan(0);
   await context.close();

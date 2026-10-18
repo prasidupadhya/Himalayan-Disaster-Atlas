@@ -30,6 +30,7 @@ test('physical model remains unavailable for a selected inventory lake', async (
   await expect(modelling).toContainText('Selected lake: GLO_');
   await expect(modelling).toContainText('Physical model inputs required');
   await expect(modelling).toContainText('UNAVAILABLE');
+  await expect(modelling.getByRole('link', { name: 'Run an outburst scenario' })).toHaveAttribute('href', '/simulate/');
   await expect(page.getByRole('region', { name: 'Simulation UI', exact: true })).toHaveCount(0);
 });
 
@@ -40,6 +41,10 @@ test('focused mobile view fits and infrastructure remains opt-in', async ({ page
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: 'test-results/focused-mobile.png' });
   await expect(page.getByRole('region', { name: 'Hydropower', exact: true })).toHaveCount(0);
+  // Secondary layers start folded on a phone, so the hazard controls follow the map directly.
+  const more = page.getByText('More layers: terrain, boundaries and infrastructure');
+  await expect(page.getByRole('button', { name: 'Load infrastructure context', exact: true })).toBeHidden();
+  await more.click();
   await page.getByRole('button', { name: 'Load infrastructure context', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Hydropower', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Unload infrastructure context', exact: true }).click();
