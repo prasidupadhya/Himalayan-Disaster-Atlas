@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { findEntry, useGovDigest, type ListContent, type Page } from '../lib/gov-digest';
+import { findEntry, recentQuakes, useGovDigest, type ListContent } from '../lib/gov-digest';
 
 const count = (value: number | null | undefined) => value === null || value === undefined ? 'UNKNOWN' : value.toLocaleString('en-US');
 
@@ -15,17 +15,14 @@ export function TodayStrip() {
   const { digest } = state;
   const s = digest.summary;
   const incidents = findEntry(digest, 'bipad-incidents')?.content as ListContent | undefined;
-  const quakes = (findEntry(digest, 'seismo-earthquakes')?.content as Page | undefined)?.tables[0];
-  const magnitude = quakes ? quakes.header.findIndex(h => /magnitude/i.test(h)) : -1;
-  const epicentre = quakes ? quakes.header.findIndex(h => /epicent/i.test(h)) : -1;
-  const latest = quakes?.rows[0];
+  const latest = recentQuakes(digest, 1)?.[0];
   const riverAlerts = s.rivers_above_danger === null || s.rivers_above_warning === null ? null : s.rivers_above_danger + s.rivers_above_warning;
   return <aside className="today-strip" aria-label="Today from official sources" data-today-state="ready">
     <dl>
       <div><dt>Rivers above warning or danger</dt><dd>{count(riverAlerts)}</dd><dd className="today-strip-sub">{count(s.rivers_current)} stations reported in 24 h</dd></div>
       <div><dt>Rain stations above warning</dt><dd>{count(s.rain_stations_above_warning)}</dd><dd className="today-strip-sub">{count(s.rain_current)} stations reported in 24 h</dd></div>
       <div><dt>Incidents in the last 7 days</dt><dd>{incidents ? `${count(incidents.record_count)}${incidents.complete === false ? '+' : ''}` : 'UNKNOWN'}</dd><dd className="today-strip-sub">BIPAD, all types</dd></div>
-      <div><dt>Latest earthquake</dt><dd>{latest && magnitude >= 0 ? latest[magnitude] : 'UNKNOWN'}</dd><dd className="today-strip-sub">{latest && epicentre >= 0 ? latest[epicentre] : 'NEMRC'}</dd></div>
+      <div><dt>Latest earthquake</dt><dd>{latest?.magnitude ?? 'UNKNOWN'}</dd><dd className="today-strip-sub">{latest ? [latest.epicentre ?? 'UNKNOWN', latest.date].filter(Boolean).join(', ') : 'NEMRC'}</dd></div>
     </dl>
     <p className="today-strip-note">Official copy of {digest.generated_at_nepal}, as published. Not a warning. <Link href="/hazards/">See today in full</Link></p>
   </aside>;

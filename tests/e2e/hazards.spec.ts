@@ -36,7 +36,15 @@ test('today is arranged around floods, glacial lakes and earthquakes with status
 
   const quake = section(page, 'earthquakes').locator('[data-source="seismo-earthquakes"]');
   await expect(quake).toHaveAttribute('data-source-status', 'last-known');
-  await expect(quake).toContainText('AD: 2026-10-07 · 4.1 ML · SYNTHETIC Place');
+  const row = quake.getByRole('row').nth(1);
+  await expect(quake.getByRole('columnheader')).toHaveText(['Date (AD)', 'Magnitude', 'Epicentre']);
+  await expect(row.getByRole('cell')).toHaveText(['2026-10-0710 days before this copy', '4.1 ML', 'SYNTHETIC Place']);
+
+  const glance = page.getByRole('list', { name: 'At a glance' });
+  await expect(glance.getByRole('link')).toHaveCount(4);
+  await expect(glance).toContainText('Rivers: 1 above danger, UNKNOWN above warning. Rain: UNKNOWN stations above warning.');
+  await expect(glance).toContainText('Latest recorded: 4.1 ML, SYNTHETIC Place, 2026-10-07.');
+  await expect(glance).toContainText('2 recorded by BIPAD in the last 7 days.');
   await expect(section(page, 'earthquakes').getByRole('link', { name: 'Run an earthquake shaking scenario' })).toHaveAttribute('href', '/simulate/?tab=earthquake');
 
   await expect(section(page, 'incidents')).toContainText('2 incidents recorded by BIPAD');

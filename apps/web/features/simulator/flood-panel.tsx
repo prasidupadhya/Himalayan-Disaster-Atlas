@@ -16,7 +16,7 @@ type Loaded = { release: ModelRelease; catalogue: CorridorCatalogue; geometry: G
 /** English label used by the report and exports; the panel renders the localised form. */
 export function originLabel(o: CorridorOrigin, lang: Lang = 'en') {
   const c = simCopy(lang);
-  if (o.kind === 'glof-release-point') return c.glofOption(o.lake!.glo_id, o.lake!.basin, formatNumber(o.lake!.area_km2, lang, 2));
+  if (o.kind === 'glof-release-point') return c.glofOption(o.lake!.glo_id, o.lake!.basin, formatNumber(o.lake!.area_km2, lang, 2), o.gazetteer_hint?.name ?? null);
   return c.riverOption(o.start_reach, o.gazetteer_hint?.name ?? null);
 }
 
@@ -142,6 +142,7 @@ function FloodResult({ scenario, origin, catalogue, release, lang }: { scenario:
   return <section className="sim-step sim-result" aria-labelledby="flood-result" data-sim-result="flood">
     <h2 id="flood-result"><span className="sim-step-number">{digits('3', lang)}</span> {t.step3}</h2>
     <p className="sim-label-row"><span className="sim-badge sim-badge-model">{c.modelled}</span><span className="sim-badge">{t.scenarioNotice}</span></p>
+    <p className="sim-summary">{c.floodSummary(km(last.row.prefix_km), span(last.arrival.front_s), fmtRange(last.range.population.min, last.range.population.max))}</p>
     <div className="sim-result-columns"><div className="sim-result-main">
     <div className="sim-headline">
       <div><span className="sim-kicker">{c.frontReaches(km(rows[0].row.prefix_km))}</span><strong>{span(rows[0].arrival.front_s)}</strong></div>
@@ -172,7 +173,7 @@ function FloodResult({ scenario, origin, catalogue, release, lang }: { scenario:
     </details>
     </div></div>
     <div className="sim-unknown" role="note"><strong>{t.damage}:</strong> {t.notModelled}</div>
-    <p className="sim-provenance">{c.inputs}: <a href={`/data/${release.metadata.dataset_id}/${release.metadata.dataset_version}/manifest.json`}>{release.metadata.dataset_id}@{release.metadata.dataset_version}</a> ({c.parents(release.inputs.length)}) · {c.method} {catalogue.method} · <a href="/methodology/#flood-corridors-method">{c.methodology}</a> · <a href="/data-catalog/">{c.catalog}</a></p>
+    <p className="sim-provenance">{c.inputs}: <a href={`/data/${release.metadata.dataset_id}/${release.metadata.dataset_version}/manifest.json`}>{release.metadata.dataset_id}@{release.metadata.dataset_version}</a> ({c.parents(release.inputs.length)}) · {c.method} {catalogue.method} · <a href="/methodology/#flood-corridors-method">{c.methodology}</a></p>
   </section>;
 }
 

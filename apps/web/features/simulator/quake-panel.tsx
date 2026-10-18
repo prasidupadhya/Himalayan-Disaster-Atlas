@@ -188,6 +188,7 @@ function QuakeResult({ result, loaded, lang }: { result: ShakingResult; loaded: 
   return <section className="sim-step sim-result" aria-labelledby="quake-result" data-sim-result="earthquake">
     <h2 id="quake-result"><span className="sim-step-number">{digits('3', lang)}</span> {t.step3}</h2>
     <p className="sim-label-row"><span className="sim-badge sim-badge-model">{c.modelled}</span><span className="sim-badge">{t.scenarioNotice}</span></p>
+    <p className="sim-summary">{c.quakeSummary(formatNumber(s.magnitude, lang, 1), formatNumber(strong(result.population.central), lang), formatNumber(strong(result.population.low), lang), formatNumber(strong(result.population.high), lang))}</p>
     <div className="sim-headline">
       <div><span className="sim-kicker">{c.strongPeople}</span><strong>{formatNumber(strong(result.population.central), lang)}</strong><span className="sim-muted">−1σ {formatNumber(strong(result.population.low), lang)} · +1σ {formatNumber(strong(result.population.high), lang)}</span></div>
       {kathmandu && <div><span className="sim-kicker">{c.ktm}</span><strong>{kathmandu.median === null ? formatNumber(null, lang) : `${formatNumber(kathmandu.median, lang, 2)} g`}</strong><span className="sim-muted">{kathmandu.median !== null && `±1σ ${formatNumber(kathmandu.low, lang, 2)}–${formatNumber(kathmandu.high, lang, 2)} g · `}R<sub>JB</sub> {formatNumber(kathmandu.rjb, lang)} km</span></div>}

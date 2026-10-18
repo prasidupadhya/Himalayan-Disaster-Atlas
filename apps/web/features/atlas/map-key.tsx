@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 const ENTRIES: Array<{ shape: 'line' | 'dot' | 'ring' | 'area'; colour: string; label: string; detail: string }> = [
   { shape: 'line', colour: '#3987e5', label: 'River reach', detail: 'Click to select; then trace downstream' },
   { shape: 'dot', colour: '#199e70', label: 'Glacial lake, glacier-fed', detail: 'Click to inspect' },
@@ -9,8 +11,11 @@ const ENTRIES: Array<{ shape: 'line' | 'dot' | 'ring' | 'area'; colour: string; 
 ];
 
 export function MapKey() {
+  const details = useRef<HTMLDetailsElement>(null);
+  // Open on wide screens; on a phone the key starts closed so the layer controls follow the map directly.
+  useEffect(() => { if (details.current && window.matchMedia('(max-width: 720px)').matches) details.current.open = false; }, []);
   return <section className="map-key" aria-labelledby="map-key-heading">
-    <details open>
+    <details open ref={details}>
       <summary><h2 id="map-key-heading">Map key</h2></summary>
       <p className="muted map-key-intro">Every layer also has a text description in its panel. Shape and text distinguish layers; colour is a second cue.</p>
       <ul>{ENTRIES.map(entry => <li key={entry.label} title={entry.detail}>

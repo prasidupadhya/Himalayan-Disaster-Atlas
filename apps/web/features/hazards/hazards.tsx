@@ -1,11 +1,9 @@
 'use client';
 import type { ReactNode } from 'react';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
-import { findEntry, nepalTime, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type RiverContent } from '../../lib/gov-digest';
+import { findEntry, nepalTime, recentQuakes, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type RiverContent } from '../../lib/gov-digest';
 import { formatNumber, LanguageSwitch, useLanguage, type Lang } from '../../lib/i18n';
 import { hz, type HzCopy } from './copy';
-
-const column = (header: string[], pattern: RegExp) => header.findIndex(h => pattern.test(h));
 
 /** "Today": the daily official copy, arranged around floods, glacial lakes and earthquakes. */
 export function Hazards() {
@@ -22,6 +20,7 @@ export function Hazards() {
       <p className="intro">{c.intro}</p>
       <p className="hz-authorities">{c.authorities} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url} rel="noopener">{a.name}</a></span>)}</p>
       {digest && <p className="hz-copied">{c.copiedAt} {digest.generated_at_nepal} · <a href="/official/">{c.all}</a></p>}
+      {digest && <Glance digest={digest} c={c} lang={lang} />}
       <nav className="hz-jump" aria-label={c.jump}>{sections.map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}</nav>
     </header>
     {state.status === 'loading' && <p role="status" className="hz-loading">{c.loading}</p>}
@@ -36,7 +35,7 @@ export function Hazards() {
       <p className="hz-actions"><a className="primary-action" href="/atlas/#lake-controls">{c.toMapLakes}</a><a href="/simulate/">{c.toFloodScenario}</a></p>
     </Section>
     <Section id="earthquakes" title={c.quakes} lead={c.quakesLead}>
-      {digest && <Earthquakes entry={findEntry(digest, 'seismo-earthquakes')} c={c} lang={lang} />}
+      {digest && <Earthquakes digest={digest} c={c} lang={lang} />}
       <p className="hz-actions"><a href="/atlas/#earthquake-controls">{c.toMapQuakes}</a><a href="/simulate/?tab=earthquake">{c.toQuakeScenario}</a><a href="/live/">{c.toLive}</a></p>
     </Section>
     <Section id="incidents" title={c.incidents} lead={c.incidentsLead}>
@@ -92,14 +91,51 @@ function Floods({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) 
   </ul>;
 }
 
-function Earthquakes({ entry, c, lang }: { entry: Entry | undefined; c: HzCopy; lang: Lang }) {
-  const table = (entry?.content as Page | undefined)?.tables.find(t => column(t.header, /magnitude/i) >= 0);
-  const cols = table ? [/date/i, /magnitude/i, /epicent/i].map(re => column(table.header, re)) : [];
+/** Whole days between an AD date and the copy's Nepal date; null when either is unreadable. */
+function daysBefore(date: string | null, digest: Digest) {
+  const copy = digest.generated_at_nepal.match(/^\d{4}-\d{2}-\d{2}/)?.[0];
+  if (!date || !copy) return null;
+  const days = Math.round((Date.parse(copy) - Date.parse(date)) / 86_400_000);
+  return Number.isFinite(days) && days >= 0 ? days : null;
+}
+
+function Earthquakes({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) {
+  const entry = findEntry(digest, 'seismo-earthquakes');
+  const quakes = recentQuakes(digest);
   return <ul className="hz-cards hz-today">
     <TodayCard entry={entry} title={c.quakeList} anchor="earthquakes" c={c} lang={lang} wide>
-      {table ? <ol className="hz-quakes">{table.rows.slice(0, 6).map((row, i) => <li key={i} className="hz-verbatim">{cols.map(index => row[index]).filter(Boolean).join(' · ')}</li>)}</ol> : entry?.content && <p>{c.noQuakes}</p>}
+      {quakes?.length ? <div className="hz-table-wrap"><table className="hz-quakes">
+        <caption className="sr-only">{c.quakeList}</caption>
+        <thead><tr><th scope="col">{c.quakeDate}</th><th scope="col">{c.quakeMagnitude}</th><th scope="col">{c.quakeEpicentre}</th></tr></thead>
+        <tbody>{quakes.map((q, i) => {
+          const days = daysBefore(q.date, digest);
+          return <tr key={i} title={q.raw}>
+            <td>{q.date ?? q.raw}{q.time && <span className="hz-sub"> {q.time} {c.localTime}</span>}{days !== null && <span className="hz-sub hz-age">{c.daysBefore(formatNumber(days, lang), days)}</span>}</td>
+            <td className="hz-mag">{q.magnitude ?? 'UNKNOWN'}</td>
+            <td className="hz-verbatim">{q.epicentre ?? 'UNKNOWN'}</td>
+          </tr>;
+        })}</tbody>
+      </table></div> : entry?.content && <p>{c.noQuakes}</p>}
     </TodayCard>
   </ul>;
+}
+
+/** One line per hazard, figures exactly as the copy states them; each links to its section. */
+function Glance({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) {
+  const { n, counted } = useFormat(lang);
+  const s = digest.summary;
+  const incidents = findEntry(digest, 'bipad-incidents')?.content as ListContent | undefined;
+  const latest = recentQuakes(digest, 1)?.[0];
+  const raised = (value: number | null) => value !== null && value > 0;
+  const items: Array<{ id: string; label: string; text: string; raised?: boolean }> = [
+    { id: 'floods', label: c.floods, text: c.glanceRivers(n(s.rivers_above_danger), n(s.rivers_above_warning), n(s.rain_stations_above_warning)), raised: raised(s.rivers_above_danger) || raised(s.rivers_above_warning) || raised(s.rain_stations_above_warning) },
+    { id: 'glacial-lakes', label: c.glof, text: c.glanceLakes },
+    { id: 'earthquakes', label: c.quakes, text: latest ? c.glanceQuake(latest.magnitude ?? 'UNKNOWN', latest.epicentre ?? 'UNKNOWN', latest.date ?? 'UNKNOWN') : 'UNKNOWN' },
+    { id: 'incidents', label: c.incidents, text: incidents ? c.glanceIncidents(counted(incidents)) : 'UNKNOWN' },
+  ];
+  return <ul className="hz-glance" aria-label={c.glance}>{items.map(item => <li key={item.id} data-raised={item.raised ? 'true' : undefined}>
+    <a href={`#${item.id}`}><strong>{item.raised && <span aria-hidden="true">▲ </span>}{item.label}</strong><span>{item.text}</span></a>
+  </li>)}</ul>;
 }
 
 function Incidents({ entry, c, lang }: { entry: Entry | undefined; c: HzCopy; lang: Lang }) {

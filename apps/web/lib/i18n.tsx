@@ -55,7 +55,7 @@ export const UI = {
     glofGroup: 'Glacial lakes (GLOF release points)', riverGroup: 'Rivers entering the mapped network (flood release points)',
     loading: 'Loading and verifying model inputs…', failed: 'Model inputs could not be verified. No result is shown.', retry: 'Try again',
     population: 'Population', assets: 'Mapped assets', distance: 'Distance along path', arrival: 'Front arrival', peak: 'Peak passes', end: 'Pulse ends',
-    damage: 'Inundation depth, flood extent, building damage, casualties and losses', notModelled: 'UNKNOWN — not modelled by this scenario. See Feature 50/52 unlock conditions.',
+    damage: 'Inundation depth, flood extent, building damage, casualties and losses', notModelled: 'UNKNOWN — not modelled by this scenario.',
   },
   ne: {
     scenarioNotice: 'परिदृश्य / शैक्षिक अनुमान — पूर्वानुमान वा चेतावनी होइन',
@@ -70,6 +70,6 @@ export const UI = {
     glofGroup: 'हिमतालहरू (हिमताल विस्फोट सुरुवात बिन्दु)', riverGroup: 'नक्सांकित सञ्जालमा प्रवेश गर्ने नदीहरू (बाढी सुरुवात बिन्दु)',
     loading: 'मोडेल इनपुट लोड र प्रमाणित गर्दै…', failed: 'मोडेल इनपुट प्रमाणित गर्न सकिएन। कुनै नतिजा देखाइएको छैन।', retry: 'फेरि प्रयास गर्नुहोस्',
     population: 'जनसंख्या', assets: 'नक्सांकित संरचना', distance: 'मार्गको दूरी', arrival: 'अग्रभाग आइपुग्ने', peak: 'शिखर पार हुने', end: 'प्रवाह सकिने',
-    damage: 'डुबानको गहिराइ, बाढीको क्षेत्र, भवन क्षति, हताहत र नोक्सानी', notModelled: 'अज्ञात (UNKNOWN) — यस परिदृश्यले मोडेल गर्दैन। सुविधा ५०/५२ खुल्ने सर्तहरू हेर्नुहोस्।',
+    damage: 'डुबानको गहिराइ, बाढीको क्षेत्र, भवन क्षति, हताहत र नोक्सानी', notModelled: 'अज्ञात (UNKNOWN) — यस परिदृश्यले मोडेल गर्दैन।',
   },
 } as const;

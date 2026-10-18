@@ -125,6 +125,7 @@
   .sim-bands li { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .sim-band-track { grid-column: 1 / -1; grid-row: 2; }
   .sim-run { width: 100%; justify-self: stretch; }
+  .sim-map { height: 42vh; min-height: 260px; max-height: 380px; }
   .sim-tabs [role=tab] { flex: 1; }
 }
 @media (prefers-contrast: more) { .sim-step, .sim-badge, .sim-field input, .sim-field select { border-width: 2px; } }
@@ -156,3 +157,4 @@
   .sim-stack td .sim-sub { white-space: normal; }
   .sim-bands li { grid-template-columns: minmax(0, 1fr) auto; }
 }
+.sim-summary { margin: 0; max-width: 70ch; padding: .85rem 1rem; border-left: 4px solid var(--accent-strong); background: var(--surface-muted); font-size: 1.02rem; line-height: 1.55; color: var(--ink-strong); }

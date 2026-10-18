@@ -30,8 +30,7 @@
 .hz-actions .primary-action { margin: 0; }
 .hz-today .hz-today-status { font-size: .8rem; color: var(--muted); }
 .hz-today .hz-verbatim { font-style: italic; overflow-wrap: anywhere; }
-.hz-today .hz-documents, .hz-today .hz-quakes, .hz-today .hz-incidents { margin: 0; padding-left: 1.1rem; display: grid; gap: .3rem; font-size: .9rem; overflow-wrap: anywhere; color: var(--muted-strong); }
-.hz-today .hz-quakes { font-variant-numeric: tabular-nums; }
+.hz-today .hz-documents, .hz-today .hz-incidents { margin: 0; padding-left: 1.1rem; display: grid; gap: .3rem; font-size: .9rem; overflow-wrap: anywhere; color: var(--muted-strong); }
 @media (min-width: 900px) { .hz-today .hz-incidents { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; } }
 @media (max-width: 640px) {
   .hz-page { padding-inline: 1rem; }
@@ -39,3 +38,24 @@
   .hz-hero h1 { font-size: clamp(1.9rem, 8.5vw, 2.4rem); }
 }
 @media print { .hz-jump, .language-switch, .hz-actions { display: none !important; } }
+.hz-glance { list-style: none; margin: .25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); border-block: 1px solid var(--line-strong); }
+.hz-glance li { min-width: 0; border-left: 1px solid var(--line); }
+.hz-glance li:first-child { border-left: 0; }
+.hz-glance a { display: grid; gap: .2rem; height: 100%; padding: .8rem 1rem; color: var(--ink); text-decoration: none; }
+.hz-glance a:hover { background: var(--paper-deep); }
+.hz-glance strong { font-size: .95rem; }
+.hz-glance span { font-size: .86rem; line-height: 1.4; color: var(--muted-strong); }
+.hz-glance [data-raised] strong { color: var(--danger); }
+.hz-table-wrap { overflow-x: auto; }
+.hz-today table.hz-quakes { display: table; padding: 0; width: 100%; border-collapse: collapse; font-size: .9rem; }
+.hz-quakes th { text-align: left; font-size: .78rem; font-weight: 650; color: var(--muted-strong); padding: .3rem .6rem .4rem 0; border-bottom: 1px solid var(--line-strong); }
+.hz-quakes td { padding: .5rem .6rem .5rem 0; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink); }
+.hz-quakes tr:last-child td { border-bottom: 0; }
+.hz-quakes .hz-mag { font-weight: 700; white-space: nowrap; }
+.hz-quakes .hz-sub { color: var(--muted); font-size: .8rem; }
+.hz-quakes .hz-age { display: block; }
+@media (max-width: 640px) {
+  .hz-glance li { border-left: 0; border-top: 1px solid var(--line); }
+  .hz-glance li:first-child { border-top: 0; }
+  .hz-glance a { padding: .7rem 0; }
+}

@@ -20,6 +20,13 @@ export const HZ = {
     full: 'Full copy', agency: 'Open the agency page', all: 'See every official source',
     toMapLakes: 'Find a glacial lake on the map', toMapRivers: 'Trace a river on the map', toMapQuakes: 'See past earthquakes on the map',
     toFloodScenario: 'Run a flood or outburst scenario', toQuakeScenario: 'Run an earthquake shaking scenario', toLive: 'USGS earthquake feed',
+    quakeDate: 'Date (AD)', quakeMagnitude: 'Magnitude', quakeEpicentre: 'Epicentre', localTime: 'local',
+    daysBefore: (n: string, days: number) => days === 0 ? 'on the day of this copy' : `${n} day${days === 1 ? '' : 's'} before this copy`,
+    glance: 'At a glance',
+    glanceRivers: (danger: string, warning: string, rain: string) => `Rivers: ${danger} above danger, ${warning} above warning. Rain: ${rain} stations above warning.`,
+    glanceLakes: 'No daily official status is published.',
+    glanceQuake: (mag: string, place: string, date: string) => `Latest recorded: ${mag}, ${place}, ${date}.`,
+    glanceIncidents: (count: string) => `${count} recorded by BIPAD in the last 7 days.`,
   },
   ne: {
     eyebrow: 'आज नेपालमा', title: 'आज बाढी, हिमताल र भूकम्प',
@@ -41,6 +48,13 @@ export const HZ = {
     full: 'पूरा प्रतिलिपि', agency: 'निकायको पृष्ठ खोल्नुहोस्', all: 'सबै आधिकारिक स्रोत हेर्नुहोस्',
     toMapLakes: 'नक्सामा हिमताल खोज्नुहोस्', toMapRivers: 'नक्सामा नदी पछ्याउनुहोस्', toMapQuakes: 'नक्सामा विगतका भूकम्प हेर्नुहोस्',
     toFloodScenario: 'बाढी वा विस्फोट परिदृश्य चलाउनुहोस्', toQuakeScenario: 'भूकम्प कम्पन परिदृश्य चलाउनुहोस्', toLive: 'USGS भूकम्प फिड',
+    quakeDate: 'मिति (AD)', quakeMagnitude: 'म्याग्निच्युड', quakeEpicentre: 'केन्द्रबिन्दु', localTime: 'स्थानीय',
+    daysBefore: (n: string, days: number) => days === 0 ? 'यही प्रतिलिपिको दिन' : `यो प्रतिलिपिभन्दा ${n} दिन अघि`,
+    glance: 'एक नजरमा',
+    glanceRivers: (danger: string, warning: string, rain: string) => `नदी: ${danger} खतरा तहभन्दा माथि, ${warning} चेतावनी तहभन्दा माथि। वर्षा: ${rain} केन्द्र चेतावनी तहभन्दा माथि।`,
+    glanceLakes: 'कुनै दैनिक आधिकारिक अवस्था प्रकाशित हुँदैन।',
+    glanceQuake: (mag: string, place: string, date: string) => `पछिल्लो दर्ता: ${mag}, ${place}, ${date}।`,
+    glanceIncidents: (count: string) => `पछिल्लो ७ दिनमा BIPAD मा ${count} दर्ता।`,
   },
 } as const;
 export type HzCopy = (typeof HZ)['en'];
