@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { findEntry, nepalTime, recentQuakes, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type RiverContent } from '../../lib/gov-digest';
 import { formatNumber, LanguageSwitch, useLanguage, type Lang } from '../../lib/i18n';
+import { QuakeMap, RainBars, StatusBar, type StatusPart } from '../../components/today-visuals';
 import { hz, type HzCopy } from './copy';
 
 /** "Today": the daily official copy, arranged around floods, glacial lakes and earthquakes. */
@@ -69,7 +70,21 @@ function Floods({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) 
   const wettest = rainContent?.wettest_24h[0];
   const reported = (content: RiverContent | RainContent) => `${n(content.current_station_count)} / ${n(content.station_count)}`;
   const documents = [...((warnings?.content as Page | undefined)?.links ?? []).slice(0, 1), ...((bulletins?.content as Page | undefined)?.links ?? []).slice(0, 2)];
-  return <ul className="hz-cards hz-today">
+  // Only readings from the last 24 h are split by status; the rest of the network is "no reading", never "normal".
+  const parts = (content: RiverContent | RainContent | undefined, danger: boolean): StatusPart[] => {
+    const counts = content?.current_status_counts;
+    const get = (status: string) => counts ? counts[status] ?? 0 : null;
+    const none = content?.current_station_count === undefined ? null : content.station_count - content.current_station_count;
+    return [...(danger ? [{ key: 'danger' as const, label: c.partDanger, count: get('ABOVE DANGER LEVEL') }] : []),
+      { key: 'warning', label: c.partWarning, count: get('ABOVE WARNING LEVEL') }, { key: 'normal', label: c.partNormal, count: get('BELOW WARNING LEVEL') }, { key: 'none', label: c.partNone, count: none }];
+  };
+  return <>
+  {(riverContent || rainContent) && <div className="hz-visuals">
+    {riverContent && <StatusBar title={c.statusRivers} parts={parts(riverContent, true)} />}
+    {rainContent && <StatusBar title={c.statusRain} parts={parts(rainContent, false)} />}
+    {rainContent && <RainBars stations={rainContent.wettest_24h} title={c.wettestTitle} format={mm => `${formatNumber(mm, lang, 1)} mm`} />}
+  </div>}
+  <ul className="hz-cards hz-today">
     <TodayCard entry={river} title={c.rivers} anchor="rivers" c={c} lang={lang}>
       {riverContent && <p className="hz-figure"><strong>{n(s.rivers_above_danger)}</strong> {c.aboveDanger} · <strong>{n(s.rivers_above_warning)}</strong> {c.aboveWarning}</p>}
       {riverContent && <p>{reported(riverContent)} {c.reported}</p>}
@@ -88,7 +103,8 @@ function Floods({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) 
       {alertList && <p className="hz-figure"><strong>{counted(alertList)}</strong> {c.activeAlerts}</p>}
       {alertList?.records.slice(0, 3).map(record => <p key={String(record.id)} className="hz-verbatim">{titleOf(record)}</p>)}
     </TodayCard>
-  </ul>;
+  </ul>
+  </>;
 }
 
 /** Whole days between an AD date and the copy's Nepal date; null when either is unreadable. */
@@ -104,7 +120,7 @@ function Earthquakes({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lan
   const quakes = recentQuakes(digest);
   return <ul className="hz-cards hz-today">
     <TodayCard entry={entry} title={c.quakeList} anchor="earthquakes" c={c} lang={lang} wide>
-      {quakes?.length ? <div className="hz-table-wrap"><table className="hz-quakes">
+      {quakes?.length ? <div className="hz-quake-layout"><QuakeMap quakes={quakes} title={c.quakeMapTitle} newestLabel={c.newest} note={c.quakeMapNote} /><div className="hz-table-wrap"><table className="hz-quakes">
         <caption className="sr-only">{c.quakeList}</caption>
         <thead><tr><th scope="col">{c.quakeDate}</th><th scope="col">{c.quakeMagnitude}</th><th scope="col">{c.quakeEpicentre}</th></tr></thead>
         <tbody>{quakes.map((q, i) => {
@@ -115,7 +131,7 @@ function Earthquakes({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lan
             <td className="hz-verbatim">{q.epicentre ?? 'UNKNOWN'}</td>
           </tr>;
         })}</tbody>
-      </table></div> : entry?.content && <p>{c.noQuakes}</p>}
+      </table></div></div> : entry?.content && <p>{c.noQuakes}</p>}
     </TodayCard>
   </ul>;
 }

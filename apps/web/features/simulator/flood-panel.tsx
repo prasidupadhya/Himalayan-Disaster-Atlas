@@ -6,6 +6,7 @@ import { arrivals, defaultFlood, exposureRange, hydrograph, validateFlood, type 
 import { digits, formatNumber, UI, type Lang } from '../../lib/i18n';
 import { loadModelArtifact, loadModelRelease, MODEL_RELEASES } from '../../lib/model-release';
 import { HydrographChart } from './charts';
+import { FloodJourney } from './journey';
 import { duration, errorText, shortTime, simCopy } from './copy';
 import { revealResult } from './reveal';
 import type { MapScene } from './simulator-map';
@@ -150,6 +151,7 @@ function FloodResult({ scenario, origin, catalogue, release, lang }: { scenario:
       <div><span className="sim-kicker">{c.popCorridors}</span><strong>{fmtRange(last.range.population.min, last.range.population.max)}</strong>{last.range.population.partial && <span className="sim-muted">{c.knownSubtotal(formatNumber(last.range.population.unknownAreaMax, lang, 1))}</span>}</div>
       <div><span className="sim-kicker">{c.assetsFull}</span><strong>{fmtRange(last.range.assets.min, last.range.assets.max)}</strong></div>
     </div>
+    <FloodJourney rows={rows.map(r => r.arrival)} lang={lang} />
     <HydrographChart points={hydro.points} lang={lang} title={c.hydroTitle(formatNumber(scenario.volume_m3, lang))} />
     <p className="sim-muted">{c.volumeCheck}</p>
     </div><div className="sim-result-side">

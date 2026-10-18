@@ -55,7 +55,7 @@ export function nepalTime(value: string | null | undefined, locale = 'en-GB') {
 
 export const findEntry = (digest: Digest, id: string) => digest.sources.find(e => e.id === id);
 
-export type Quake = { date: string | null; time: string | null; magnitude: string | null; epicentre: string | null; raw: string };
+export type Quake = { date: string | null; time: string | null; magnitude: string | null; epicentre: string | null; latitude: number | null; longitude: number | null; raw: string };
 /** Splits NEMRC's published rows into columns. The AD date and local time are picked out of the
  * combined "BS: … AD: …" / "Local: … UTC: …" cells; anything that does not match stays null, and the
  * whole row is kept verbatim in `raw`. */
@@ -63,7 +63,8 @@ export function recentQuakes(digest: Digest, limit = 6): Quake[] | null {
   const table = (findEntry(digest, 'seismo-earthquakes')?.content as Page | undefined)?.tables?.find(t => t.header.some(h => /magnitude/i.test(h)));
   if (!table) return null;
   const at = (pattern: RegExp) => table.header.findIndex(h => pattern.test(h));
-  const [date, time, magnitude, epicentre] = [at(/date/i), at(/time/i), at(/magnitude/i), at(/epicent/i)];
+  const [date, time, magnitude, epicentre, latitude, longitude] = [at(/date/i), at(/time/i), at(/magnitude/i), at(/epicent/i), at(/latitude/i), at(/longitude/i)];
+  const degrees = (row: string[], index: number, min: number, max: number) => { const text = cell(row, index), value = text === null ? NaN : Number(text); return Number.isFinite(value) && value >= min && value <= max ? value : null; };
   const cell = (row: string[], index: number) => (index >= 0 && row[index]?.trim()) || null;
   return table.rows.slice(0, limit).map(row => {
     const d = cell(row, date), t = cell(row, time);
@@ -71,6 +72,7 @@ export function recentQuakes(digest: Digest, limit = 6): Quake[] | null {
       date: d ? d.match(/AD:\s*(\d{4}-\d{2}-\d{2})/)?.[1] ?? (/^\d{4}-\d{2}-\d{2}$/.test(d) ? d : null) : null,
       time: t ? t.match(/Local:\s*(\d{1,2}:\d{2})/)?.[1] ?? null : null,
       magnitude: cell(row, magnitude), epicentre: cell(row, epicentre),
+      latitude: degrees(row, latitude, -90, 90), longitude: degrees(row, longitude, -180, 180),
       raw: [d, t, cell(row, magnitude), cell(row, epicentre)].filter(Boolean).join(' · '),
     };
   });

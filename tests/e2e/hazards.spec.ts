@@ -8,7 +8,7 @@ const digest = {
     { id: 'bipad-river', agency: 'SYNTHETIC agency', title: 'River water levels', category: 'rivers', kind: 'bipad-river', url: 'https://example.test/river', status: 'fetched', http_status: 200, checked_at: '2026-10-17T00:17:00Z', fetched_at: '2026-10-17T00:17:00Z',
       content: { station_count: 3, current_station_count: 2, status_counts: { 'ABOVE DANGER LEVEL': 1 }, alert_stations: [{ id: '2', name: 'SYNTHETIC Station B', basin: 'Gandaki', status: 'ABOVE DANGER LEVEL', water_level_m: 7.2, warning_level_m: 5.5, danger_level_m: null, observed_at: null }] }, changes: {} },
     { id: 'seismo-earthquakes', agency: 'SYNTHETIC seismology centre', title: 'Recent earthquakes', category: 'earthquakes', kind: 'html', url: 'https://example.test/eq', status: 'error', http_status: null, checked_at: '2026-10-17T00:17:00Z', fetched_at: '2026-10-16T00:17:00Z', last_known: true,
-      content: { title: null, headings: [], links: [], paragraphs: [], dates_mentioned: [], tables: [{ caption: null, header: ['Date', 'Magnitude (ML)', 'Epicenter'], rows: [['AD: 2026-10-07', '4.1 ML', 'SYNTHETIC Place']] }] }, changes: {} },
+      content: { title: null, headings: [], links: [], paragraphs: [], dates_mentioned: [], tables: [{ caption: null, header: ['Date', 'Latitude (°)', 'Longitude (°)', 'Magnitude (ML)', 'Epicenter'], rows: [['AD: 2026-10-07', '29.34', '81.27', '4.1 ML', 'SYNTHETIC Place'], ['AD: 2026-10-01', 'n/a', '84.00', '3.9 ML', 'SYNTHETIC Unplaced']] }] }, changes: {} },
     { id: 'bipad-incidents', agency: 'SYNTHETIC agency', title: 'Disaster incidents, last 7 days', category: 'disasters', kind: 'json-list', url: 'https://example.test/incidents', status: 'fetched', http_status: 200, checked_at: '2026-10-17T00:17:00Z', fetched_at: '2026-10-17T00:17:00Z',
       content: { record_count: 2, complete: true, within_days: 7, columns: ['id', 'title', 'titleNe'], records: [{ id: 1, title: 'SYNTHETIC landslide', titleNe: 'SYNTHETIC पहिरो' }, { id: 2, title: 'SYNTHETIC fire', titleNe: null }] }, changes: {} },
   ],
@@ -39,6 +39,14 @@ test('today is arranged around floods, glacial lakes and earthquakes with status
   const row = quake.getByRole('row').nth(1);
   await expect(quake.getByRole('columnheader')).toHaveText(['Date (AD)', 'Magnitude', 'Epicentre']);
   await expect(row.getByRole('cell')).toHaveText(['2026-10-0710 days before this copy', '4.1 ML', 'SYNTHETIC Place']);
+
+  // Only rows with published coordinates inside the frame are drawn; every row stays in the table.
+  await expect(quake.getByRole('img')).toHaveAttribute('aria-label', 'Where the latest recorded earthquakes were: 4.1 ML SYNTHETIC Place 2026-10-07');
+  await expect(quake.getByRole('row')).toHaveCount(3);
+  // Station status counts the copy does not state are UNKNOWN, never zero.
+  const status = section(page, 'floods').getByRole('figure').filter({ hasText: 'River stations by status' });
+  await expect(status).toContainText('UNKNOWN above danger');
+  await expect(status).toContainText('1 no reading in 24 h');
 
   const glance = page.getByRole('list', { name: 'At a glance' });
   await expect(glance.getByRole('link')).toHaveCount(4);

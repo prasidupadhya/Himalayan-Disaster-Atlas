@@ -158,3 +158,28 @@
   .sim-bands li { grid-template-columns: minmax(0, 1fr) auto; }
 }
 .sim-summary { margin: 0; max-width: 70ch; padding: .85rem 1rem; border-left: 4px solid var(--accent-strong); background: var(--surface-muted); font-size: 1.02rem; line-height: 1.55; color: var(--ink-strong); }
+.sim-journey { margin: 0; display: grid; gap: .6rem; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); }
+.sim-journey figcaption { display: grid; gap: .15rem; font-size: .92rem; }
+.sim-journey-plot { position: relative; }
+.sim-journey ol { list-style: none; margin: 0; padding: 0; display: grid; gap: .45rem; }
+.sim-journey li { display: grid; grid-template-columns: 3.6rem minmax(0, 1fr) 3.4rem; align-items: center; gap: .6rem; font-size: .8rem; font-variant-numeric: tabular-nums; }
+.sim-journey-km { font-weight: 700; color: var(--ink-strong); text-align: right; }
+.sim-journey-time { color: var(--muted-strong); }
+.sim-journey-track { position: relative; height: 16px; background: repeating-linear-gradient(90deg, var(--surface-muted) 0 1px, transparent 1px 100%); border-bottom: 1px solid var(--line); }
+.sim-journey-range, .sim-journey-central, .sim-journey-peak { position: absolute; top: 3px; height: 10px; }
+.sim-journey-range { background: #a9c8e8; border-radius: 3px; }
+.sim-journey-central { background: #2c6fb0; border-radius: 3px; }
+.sim-journey-peak { top: 0; width: 3px; height: 16px; margin-left: -1px; background: var(--ink-strong); }
+.sim-journey-axis { position: relative; height: 1.2rem; margin: .2rem 4rem 0 4.2rem; font-size: .7rem; color: var(--muted); }
+.sim-journey-axis span { position: absolute; transform: translateX(-50%); white-space: nowrap; }
+.sim-journey-axis span:first-child { transform: none; }
+.sim-journey-sweep { position: absolute; top: 0; bottom: 1.4rem; left: 4.2rem; width: 2px; background: rgba(44, 111, 176, .55); animation: sim-sweep 9s linear infinite; pointer-events: none; }
+@keyframes sim-sweep { from { transform: translateX(0); } to { transform: translateX(calc(var(--sweep, 100cqw))); } }
+.sim-journey-plot { container-type: inline-size; }
+.sim-journey-sweep { --sweep: calc(100cqw - 8.2rem); }
+@media (prefers-reduced-motion: reduce) { .sim-journey-sweep { display: none; } }
+.sim-journey-key { margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1rem; font-size: .76rem; }
+.sim-journey-key > span { display: inline-flex; align-items: center; gap: .35rem; white-space: nowrap; }
+.sim-journey-swatch { position: static; display: inline-block; width: 18px; height: 10px; }
+.sim-journey-peak-key { width: 3px; height: 14px; background: var(--ink-strong); }
+@media print { .sim-journey-sweep { display: none; } }

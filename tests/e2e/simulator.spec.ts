@@ -43,7 +43,10 @@ test('flood corridor run shows assumptions first, labelled ranges, UNKNOWN impac
   await expect(result.locator('.sim-unknown')).toContainText('UNKNOWN');
   const rows = result.getByRole('region', { name: 'Arrival and exposure by distance' }).locator('tbody tr');
   expect(await rows.count()).toBeGreaterThanOrEqual(2);
-  await expect(result.getByRole('figure').first()).toContainText('Peak');
+  const journey = result.getByRole('figure').filter({ hasText: 'When the declared pulse passes each point' });
+  await expect(journey.locator('li')).toHaveCount(await rows.count());
+  await expect(journey.locator('li').first().locator('[aria-label]')).toHaveAttribute('aria-label', /km: front at .+ \(range .+ to .+\), passes by .+ at the central speed/);
+  await expect(result.getByRole('figure').filter({ hasText: 'Peak' }).first()).toBeVisible();
   await expect(page).toHaveURL(/\?s=/);
   await expect(page.getByRole('link', { name: /Open printable report/ })).toHaveAttribute('href', /\/simulate\/report\/\?s=/);
   await expect(page.locator('.sim-map')).toHaveAttribute('data-map-state', 'ready', { timeout: 20_000 });
