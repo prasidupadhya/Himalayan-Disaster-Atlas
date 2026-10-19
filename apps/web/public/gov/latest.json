@@ -1,7 +1,7 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-10-18T04:33:32Z",
- "generated_at_nepal": "2026-10-18 10:18 NPT",
+ "generated_at": "2026-10-19T04:40:43Z",
+ "generated_at_nepal": "2026-10-19 10:25 NPT",
  "notice": "Verbatim copies of public government pages, organised for reading. The agency websites are authoritative.",
  "summary": {
   "sources_fetched": 8,
@@ -9,11 +9,11 @@
   "sources_unavailable": 0,
   "rivers_above_danger": 0,
   "rivers_above_warning": 0,
-  "rivers_current": 181,
-  "rain_current": 370,
+  "rivers_current": 179,
+  "rain_current": 367,
   "rain_stations_above_warning": 0,
   "new_links": 0,
-  "new_records": 0
+  "new_records": 5
  },
  "sources": [
   {
@@ -23,11 +23,11 @@
    "category": "rivers",
    "kind": "bipad-river",
    "url": "https://bipadportal.gov.np/api/v1/river-stations/?format=json&limit=1000",
-   "checked_at": "2026-10-18T04:33:32Z",
+   "checked_at": "2026-10-19T04:40:43Z",
    "http_status": 200,
-   "sha256": "48aa378efb0be6f7cdbbee1e2bb833818e4cb43ceb2ebc70c797c3f70d4e66cf",
+   "sha256": "2360fe6c6deb26fd26d364d0238c0eaed60d60d7c7246f0c92b701e14e91bfb1",
    "status": "fetched",
-   "fetched_at": "2026-10-18T04:33:32Z",
+   "fetched_at": "2026-10-19T04:40:43Z",
    "content": {
     "station_count": 284,
     "status_counts": {
@@ -36,9 +36,9 @@
      "BELOW WARNING LEVEL": 266
     },
     "fresh_hours": 24,
-    "current_station_count": 181,
+    "current_station_count": 179,
     "current_status_counts": {
-     "BELOW WARNING LEVEL": 181
+     "BELOW WARNING LEVEL": 179
     },
     "alert_stations": [],
     "stale_alert_stations": [
@@ -272,12 +272,12 @@
       "Kali Gandaki at Modi Beni",
       "BELOW WARNING LEVEL"
      ],
-     "134": [
-      "Raughat Khola at Raughat",
-      "BELOW WARNING LEVEL"
-     ],
      "282": [
       "Banara River at EW Highway",
+      "BELOW WARNING LEVEL"
+     ],
+     "134": [
+      "Raughat Khola at Raughat",
       "BELOW WARNING LEVEL"
      ],
      "126": [
@@ -292,6 +292,10 @@
       "Mari at Nayagaon",
       "BELOW WARNING LEVEL"
      ],
+     "27": [
+      "Riew khola (Bankatta)",
+      "BELOW WARNING LEVEL"
+     ],
      "6": [
       "Humla Karnali at Lalighat",
       "BELOW WARNING LEVEL"
@@ -304,10 +308,6 @@
       "Kothi river at Lavani",
       "BELOW WARNING LEVEL"
      ],
-     "238": [
-      "Rawa Khola at Simle Dovan DS",
-      "BELOW WARNING LEVEL"
-     ],
      "150": [
       "Babai at Ghuiyabari",
       "BELOW WARNING LEVEL"
@@ -316,16 +316,16 @@
       "Innosent at Khokana",
       "BELOW WARNING LEVEL"
      ],
-     "27": [
-      "Riew khola (Bankatta)",
-      "BELOW WARNING LEVEL"
-     ],
      "26": [
       "Rapti River at Kusum (Velocity)",
       "BELOW WARNING LEVEL"
      ],
      "146": [
       "Trishuli at Kali Khola (Rainfall)",
+      "BELOW WARNING LEVEL"
+     ],
+     "238": [
+      "Rawa Khola at Simle Dovan DS",
       "BELOW WARNING LEVEL"
      ],
      "275": [
@@ -348,20 +348,16 @@
       "Machheli Khola at Sotyas, Kailali",
       "BELOW WARNING LEVEL"
      ],
-     "221": [
-      "Khado River at East West Highway",
-      "BELOW WARNING LEVEL"
-     ],
      "132": [
       "Singati",
       "BELOW WARNING LEVEL"
      ],
-     "168": [
-      "Kuwadi River at Rigin(209)",
+     "221": [
+      "Khado River at East West Highway",
       "BELOW WARNING LEVEL"
      ],
-     "54": [
-      "Rangoon Khola at Kainepani",
+     "168": [
+      "Kuwadi River at Rigin(209)",
       "BELOW WARNING LEVEL"
      ],
      "125": [
@@ -374,6 +370,10 @@
      ],
      "102": [
       "Mahakali at Parigaon",
+      "BELOW WARNING LEVEL"
+     ],
+     "54": [
+      "Rangoon Khola at Kainepani",
       "BELOW WARNING LEVEL"
      ],
      "18": [
@@ -464,20 +464,20 @@
       "Kandra River at Pahalmanpur",
       "BELOW WARNING LEVEL"
      ],
-     "48": [
-      "KhimtiKhola at Rasnalu",
-      "BELOW WARNING LEVEL"
-     ],
      "101": [
       "Seti at Jyamirebari",
       "BELOW WARNING LEVEL"
      ],
-     "190": [
-      "Khodku Khola at Jharuwarasi",
+     "48": [
+      "KhimtiKhola at Rasnalu",
       "BELOW WARNING LEVEL"
      ],
      "111": [
       "Intake at Kalaiya Taal (Nulsing Gad)",
+      "BELOW WARNING LEVEL"
+     ],
+     "190": [
+      "Khodku Khola at Jharuwarasi",
       "BELOW WARNING LEVEL"
      ],
      "159": [
@@ -488,20 +488,20 @@
       "Mahakali at Darchula (Dattu)",
       "BELOW WARNING LEVEL"
      ],
-     "62": [
-      "Tamakoshi at Gongar/Jagat",
-      "ABOVE WARNING LEVEL"
-     ],
      "187": [
       "Mahakali at Dodhara Chandani (4 Lane Bridge)",
       "BELOW WARNING LEVEL"
      ],
-     "128": [
-      "Kali Gandaki at Purtighat",
-      "BELOW WARNING LEVEL"
-     ],
      "205": [
       "Ratu River at Lalghad",
+      "BELOW WARNING LEVEL"
+     ],
+     "62": [
+      "Tamakoshi at Gongar/Jagat",
+      "ABOVE WARNING LEVEL"
+     ],
+     "128": [
+      "Kali Gandaki at Purtighat",
       "BELOW WARNING LEVEL"
      ],
      "243": [
@@ -520,24 +520,8 @@
       "Mohana River at Malakheti",
       "BELOW WARNING LEVEL"
      ],
-     "153": [
-      "Humla Karnali at Jaur (Sarkegad)",
-      "BELOW WARNING LEVEL"
-     ],
-     "94": [
-      "Nakkhu at Bungmati",
-      "BELOW WARNING LEVEL"
-     ],
-     "186": [
-      "Gandi Gad HS",
-      "BELOW WARNING LEVEL"
-     ],
      "117": [
       "Nagmati River at Sundarijal",
-      "BELOW WARNING LEVEL"
-     ],
-     "79": [
-      "Phalakhu Khola at Betrawati",
       "BELOW WARNING LEVEL"
      ],
      "25": [
@@ -548,16 +532,36 @@
       "Naugra Gad",
       "BELOW WARNING LEVEL"
      ],
+     "153": [
+      "Humla Karnali at Jaur (Sarkegad)",
+      "BELOW WARNING LEVEL"
+     ],
+     "94": [
+      "Nakkhu at Bungmati",
+      "BELOW WARNING LEVEL"
+     ],
      "185": [
       "Nikash Khola HS",
+      "BELOW WARNING LEVEL"
+     ],
+     "186": [
+      "Gandi Gad HS",
       "BELOW WARNING LEVEL"
      ],
      "264": [
       "Pathariya River at Janakinagar",
       "BELOW WARNING LEVEL"
      ],
+     "79": [
+      "Phalakhu Khola at Betrawati",
+      "BELOW WARNING LEVEL"
+     ],
      "232": [
       "Salinadi Sankhu Telemetry",
+      "BELOW WARNING LEVEL"
+     ],
+     "234": [
+      "Babai at Matera-Tulsipur",
       "BELOW WARNING LEVEL"
      ],
      "84": [
@@ -566,14 +570,6 @@
      ],
      "213": [
       "Ninda khola at East West Highway",
-      "BELOW WARNING LEVEL"
-     ],
-     "234": [
-      "Babai at Matera-Tulsipur",
-      "BELOW WARNING LEVEL"
-     ],
-     "75": [
-      "Jagdulla River at Hurikot",
       "BELOW WARNING LEVEL"
      ],
      "236": [
@@ -588,8 +584,8 @@
       "Radha river at EW High Way",
       "BELOW WARNING LEVEL"
      ],
-     "258": [
-      "Rolwaling River at Beding",
+     "75": [
+      "Jagdulla River at Hurikot",
       "BELOW WARNING LEVEL"
      ],
      "252": [
@@ -598,6 +594,10 @@
      ],
      "247": [
       "Rara Daha at Nizar-outlet",
+      "BELOW WARNING LEVEL"
+     ],
+     "258": [
+      "Rolwaling River at Beding",
       "BELOW WARNING LEVEL"
      ],
      "163": [
@@ -624,10 +624,6 @@
       "Bagmati River at Gaurighat",
       "BELOW WARNING LEVEL"
      ],
-     "4": [
-      "Bagmati River at Khokana",
-      "BELOW WARNING LEVEL"
-     ],
      "220": [
       "Khado River at Bishariya",
       "BELOW WARNING LEVEL"
@@ -636,20 +632,16 @@
       "Sunkosi River at Kamphughat",
       "BELOW WARNING LEVEL"
      ],
+     "4": [
+      "Bagmati River at Khokana",
+      "BELOW WARNING LEVEL"
+     ],
      "68": [
       "Ankhu Khola at Ankhu Bagar",
       "BELOW WARNING LEVEL"
      ],
      "38": [
       "Tamakoshi at Singati",
-      "BELOW WARNING LEVEL"
-     ],
-     "265": [
-      "Jogbudha at Mayapuri",
-      "BELOW WARNING LEVEL"
-     ],
-     "122": [
-      "Rolwaling River at Bedding",
       "BELOW WARNING LEVEL"
      ],
      "99": [
@@ -664,12 +656,20 @@
       "Deumai Khola at Aangdang",
       "BELOW WARNING LEVEL"
      ],
-     "57": [
-      "Sano Bheri at Simlighat",
+     "265": [
+      "Jogbudha at Mayapuri",
       "BELOW WARNING LEVEL"
      ],
      "90": [
       "Bagmati River at Rai Gaon",
+      "BELOW WARNING LEVEL"
+     ],
+     "122": [
+      "Rolwaling River at Bedding",
+      "BELOW WARNING LEVEL"
+     ],
+     "57": [
+      "Sano Bheri at Simlighat",
       "BELOW WARNING LEVEL"
      ],
      "61": [
@@ -748,6 +748,10 @@
       "Bagmati at Samanpur",
       "BELOW WARNING LEVEL"
      ],
+     "276": [
+      "Banganga at Pawara",
+      "BELOW WARNING LEVEL"
+     ],
      "43": [
       "Bishnumati Khola at Gongabu Buspark",
       "ABOVE DANGER LEVEL"
@@ -756,29 +760,25 @@
       "Banganga at Bargadhaghat",
       "BELOW WARNING LEVEL"
      ],
-     "276": [
-      "Banganga at Pawara",
-      "BELOW WARNING LEVEL"
-     ],
      "277": [
       "Bel Nadi at Buddhabhumi",
-      "BELOW WARNING LEVEL"
-     ],
-     "183": [
-      "Bandi Gad HS",
       "BELOW WARNING LEVEL"
      ],
      "45": [
       "Chepe Khola at Garambesi",
       "BELOW WARNING LEVEL"
      ],
-     "170": [
-      "Bhote Koshi at Kodari",
-      "ABOVE WARNING LEVEL"
+     "183": [
+      "Bandi Gad HS",
+      "BELOW WARNING LEVEL"
      ],
      "115": [
       "Chingar River at Simlekhet(274)",
       "BELOW WARNING LEVEL"
+     ],
+     "170": [
+      "Bhote Koshi at Kodari",
+      "ABOVE WARNING LEVEL"
      ],
      "78": [
       "Daaram Khola at Wamitaksar",
@@ -832,6 +832,10 @@
       "Doda (Machheli) River at East West Highway",
       "BELOW WARNING LEVEL"
      ],
+     "103": [
+      "Likhu Khola at Sangutar",
+      "ABOVE DANGER LEVEL"
+     ],
      "98": [
       "Dordi Khola at Sherabeshi( Ambote bazar)",
       "BELOW WARNING LEVEL"
@@ -843,10 +847,6 @@
      "148": [
       "Dumre Khola at Kalimati",
       "BELOW WARNING LEVEL"
-     ],
-     "103": [
-      "Likhu Khola at Sangutar",
-      "ABOVE DANGER LEVEL"
      ],
      "70": [
       "East Rapti at Rajaiya",
@@ -888,12 +888,12 @@
       "Hanumante Khola at Kausaltar",
       "BELOW WARNING LEVEL"
      ],
-     "152": [
-      "Humla Karnali at Bihichhada",
-      "BELOW WARNING LEVEL"
-     ],
      "71": [
       "Hinwa Khola at Pipletar",
+      "BELOW WARNING LEVEL"
+     ],
+     "152": [
+      "Humla Karnali at Bihichhada",
       "BELOW WARNING LEVEL"
      ],
      "240": [
@@ -912,13 +912,13 @@
       "Kakrighat River",
       "BELOW WARNING LEVEL"
      ],
-     "47": [
-      "Kali Gandaki at Tatopani (Ratopani)",
-      "ABOVE WARNING LEVEL"
-     ],
      "193": [
       "Kalanga Gad",
       "BELOW WARNING LEVEL"
+     ],
+     "47": [
+      "Kali Gandaki at Tatopani (Ratopani)",
+      "ABOVE WARNING LEVEL"
      ],
      "8": [
       "Kali Gandaki at Jomsom",
@@ -948,20 +948,16 @@
       "Tsho Rolpa Lake at Outlet",
       "BELOW WARNING LEVEL"
      ],
-     "219": [
-      "Balan Khola Bridge",
-      "BELOW WARNING LEVEL"
-     ],
      "140": [
       "Balefi at Jalbire",
       "BELOW WARNING LEVEL"
      ],
-     "195": [
-      "Balkhu Khola at Balambu",
+     "219": [
+      "Balan Khola Bridge",
       "BELOW WARNING LEVEL"
      ],
-     "42": [
-      "Barun River at Syaksila",
+     "195": [
+      "Balkhu Khola at Balambu",
       "BELOW WARNING LEVEL"
      ],
      "82": [
@@ -970,6 +966,10 @@
      ],
      "64": [
       "Tamor River at Mulghat",
+      "BELOW WARNING LEVEL"
+     ],
+     "42": [
+      "Barun River at Syaksila",
       "BELOW WARNING LEVEL"
      ],
      "206": [
@@ -1008,16 +1008,16 @@
       "Karnali at Chisapani Bridge",
       "BELOW WARNING LEVEL"
      ],
-     "223": [
-      "Khatyad Khola",
-      "BELOW WARNING LEVEL"
-     ],
      "177": [
       "Kateni River at Ratanpur",
       "BELOW WARNING LEVEL"
      ],
      "210": [
       "Keshaliya Khola at East West Highway",
+      "BELOW WARNING LEVEL"
+     ],
+     "223": [
+      "Khatyad Khola",
       "BELOW WARNING LEVEL"
      ],
      "173": [
@@ -1052,13 +1052,13 @@
       "Mugu Karnali at Dhain",
       "BELOW WARNING LEVEL"
      ],
-     "207": [
-      "Biring River at East West Highway",
-      "BELOW WARNING LEVEL"
-     ],
      "100": [
       "Budhi Gandaki at Aarughat",
       "ABOVE DANGER LEVEL"
+     ],
+     "207": [
+      "Biring River at East West Highway",
+      "BELOW WARNING LEVEL"
      ],
      "233": [
       "Budhi Khola at Geruwa Intake",
@@ -1084,20 +1084,20 @@
       "Chandi Khola at Chapur",
       "BELOW WARNING LEVEL"
      ],
-     "174": [
-      "Chaudhar River at Daiji",
-      "BELOW WARNING LEVEL"
-     ],
      "211": [
       "Lohandra Khola at East West Highway",
       "BELOW WARNING LEVEL"
      ],
-     "267": [
-      "Likhu Khola at Pattawari",
+     "174": [
+      "Chaudhar River at Daiji",
       "BELOW WARNING LEVEL"
      ],
      "212": [
       "Lohandra Khola at Shisbeni",
+      "BELOW WARNING LEVEL"
+     ],
+     "267": [
+      "Likhu Khola at Pattawari",
       "BELOW WARNING LEVEL"
      ],
      "73": [
@@ -1180,12 +1180,12 @@
       "Marin Khola at Kusuntar",
       "BELOW WARNING LEVEL"
      ],
-     "263": [
-      "Marsyangdi River at Dharapani",
-      "BELOW WARNING LEVEL"
-     ],
      "149": [
       "Marsyangdi at Bhakundabesi",
+      "BELOW WARNING LEVEL"
+     ],
+     "263": [
+      "Marsyangdi River at Dharapani",
       "BELOW WARNING LEVEL"
      ],
      "52": [
@@ -1194,6 +1194,10 @@
      ],
      "270": [
       "Roshi Khola at Kavre",
+      "BELOW WARNING LEVEL"
+     ],
+     "141": [
+      "Melamchi at Nakote",
       "BELOW WARNING LEVEL"
      ],
      "56": [
@@ -1210,10 +1214,6 @@
      ],
      "260": [
       "Sailigad River(259.1)",
-      "BELOW WARNING LEVEL"
-     ],
-     "141": [
-      "Melamchi at Nakote",
       "BELOW WARNING LEVEL"
      ],
      "92": [
@@ -1244,6 +1244,10 @@
       "Sunkoshi River at Hampachuwar",
       "BELOW WARNING LEVEL"
      ],
+     "194": [
+      "Sirsagad River",
+      "BELOW WARNING LEVEL"
+     ],
      "60": [
       "Sunkoshi at Khurkot",
       "BELOW WARNING LEVEL"
@@ -1254,10 +1258,6 @@
      ],
      "63": [
       "Tamor River at Majhitar",
-      "BELOW WARNING LEVEL"
-     ],
-     "194": [
-      "Sirsagad River",
       "BELOW WARNING LEVEL"
      ],
      "181": [
@@ -1328,13 +1328,13 @@
       "Tadi at Belkot",
       "BELOW WARNING LEVEL"
      ],
-     "261": [
-      "Trishuli at Furke Khola(Malekhu)",
-      "ABOVE DANGER LEVEL"
-     ],
      "175": [
       "West Rapti River at Raptisonari",
       "BELOW WARNING LEVEL"
+     ],
+     "261": [
+      "Trishuli at Furke Khola(Malekhu)",
+      "ABOVE DANGER LEVEL"
      ],
      "66": [
       "West Rapti at Bagasoti",
@@ -1356,12 +1356,16 @@
       "West Seti at Dipayal",
       "BELOW WARNING LEVEL"
      ],
+     "67": [
+      "Trishuli River at Kali Khola",
+      "BELOW WARNING LEVEL"
+     ],
      "137": [
       "Trishuli at Betrawati",
       "BELOW WARNING LEVEL"
      ],
-     "67": [
-      "Trishuli River at Kali Khola",
+     "109": [
+      "Thulo Bheri at Rimna",
       "BELOW WARNING LEVEL"
      ],
      "257": [
@@ -1370,10 +1374,6 @@
      ],
      "160": [
       "Thuli Gad at Khanayatal",
-      "BELOW WARNING LEVEL"
-     ],
-     "109": [
-      "Thulo Bheri at Rimna",
       "BELOW WARNING LEVEL"
      ],
      "34": [
@@ -1388,18 +1388,18 @@
       "Tinau at Butwal",
       "BELOW WARNING LEVEL"
      ],
-     "105": [
-      "Trishuli Khola at Dhunche",
-      "BELOW WARNING LEVEL"
-     ],
      "35": [
       "Trishuli River at Bhorle",
+      "BELOW WARNING LEVEL"
+     ],
+     "105": [
+      "Trishuli Khola at Dhunche",
       "BELOW WARNING LEVEL"
      ]
     }
    },
    "changes": {
-    "compared_with": null
+    "status_changes": []
    }
   },
   {
@@ -1409,11 +1409,11 @@
    "category": "rainfall",
    "kind": "bipad-rain",
    "url": "https://bipadportal.gov.np/api/v1/rain-stations/?format=json&limit=1000",
-   "checked_at": "2026-10-18T04:33:32Z",
+   "checked_at": "2026-10-19T04:40:43Z",
    "http_status": 200,
-   "sha256": "61213f66f3fb73b93398ad275ababebd896b8eefd05bacae8abbc124cad872b3",
+   "sha256": "70f99ccf8ad8cca4c0dd561c3aaa27f6a39c53500889a0b6b68dc9f97f3455c8",
    "status": "fetched",
-   "fetched_at": "2026-10-18T04:33:32Z",
+   "fetched_at": "2026-10-19T04:40:43Z",
    "content": {
     "station_count": 664,
     "status_counts": {
@@ -1421,30 +1421,20 @@
      "BELOW WARNING LEVEL": 653
     },
     "fresh_hours": 24,
-    "current_station_count": 370,
+    "current_station_count": 367,
     "current_status_counts": {
-     "BELOW WARNING LEVEL": 370
+     "BELOW WARNING LEVEL": 367
     },
     "implausible_24h": 0,
     "wettest_24h": [
      {
-      "id": "116",
-      "name": "Chandragadi Airport",
-      "basin": "Mechi",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 7.6,
-      "observed_at": "2026-10-18T10:15:07.998109+05:45",
-      "current": true
-     },
-     {
-      "id": "582",
-      "name": "Yangjakot",
+      "id": "499",
+      "name": "Taal",
       "basin": null,
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
-      "rain_24h_mm": 4.8,
-      "observed_at": "2026-10-18T10:15:18.416051+05:45",
+      "rain_24h_mm": 4.0,
+      "observed_at": "2026-10-19T10:15:16.333067+05:45",
       "current": true
      },
      {
@@ -1453,135 +1443,143 @@
       "basin": null,
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
-      "rain_24h_mm": 1.73,
-      "observed_at": "2026-10-18T10:15:17.731550+05:45",
-      "current": true
-     },
-     {
-      "id": "620",
-      "name": "Malepatan (Pokhara)",
-      "basin": "Narayani",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 1.6,
-      "observed_at": "2026-10-18T10:15:13.829687+05:45",
-      "current": true
-     },
-     {
-      "id": "346",
-      "name": "Bhorleni",
-      "basin": "Bagmati",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 1.0,
-      "observed_at": "2026-10-18T10:15:07.461380+05:45",
-      "current": true
-     },
-     {
-      "id": "412",
-      "name": "Khadbari",
-      "basin": "Koshi",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.8,
-      "observed_at": "2026-10-18T10:15:12.512361+05:45",
+      "observed_at": "2026-10-19T10:15:16.655854+05:45",
       "current": true
      },
      {
-      "id": "144",
-      "name": "Lumle",
+      "id": "102",
+      "name": "Darbang",
       "basin": "Narayani",
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.6,
-      "observed_at": "2026-10-18T10:15:13.535908+05:45",
+      "observed_at": "2026-10-19T10:15:07.602937+05:45",
       "current": true
      },
      {
-      "id": "561",
-      "name": "Bhujung",
+      "id": "83",
+      "name": "Barpak",
       "basin": "Narayani",
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.6,
-      "observed_at": "2026-10-18T10:15:07.557422+05:45",
+      "observed_at": "2026-10-19T10:15:05.919122+05:45",
       "current": true
      },
      {
-      "id": "155",
-      "name": "Pokhara_AWOS_04",
-      "basin": "Narayani",
+      "id": "308",
+      "name": "Kanyam Tea State",
+      "basin": "Mechi",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": null,
+      "rain_24h_mm": 0.4,
+      "observed_at": "2026-10-19T10:15:10.988162+05:45",
+      "current": true
+     },
+     {
+      "id": "553",
+      "name": "Himali Gaun",
+      "basin": "Koshi",
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.4,
-      "observed_at": "2026-10-18T10:15:15.386056+05:45",
+      "observed_at": "2026-10-19T10:15:09.927809+05:45",
       "current": true
      },
      {
-      "id": "371",
-      "name": "Aurahikhola at Godana",
-      "basin": "Karnali",
+      "id": "478",
+      "name": "Bahundangi",
+      "basin": "Mechi",
       "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": null,
-      "rain_24h_mm": 0.2,
-      "observed_at": "2026-10-18T10:15:06.155355+05:45",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.4,
+      "observed_at": "2026-10-19T10:15:05.399195+05:45",
       "current": true
      },
      {
-      "id": "303",
-      "name": "Ghalekharka",
-      "basin": "Narayani",
+      "id": "453",
+      "name": "Baliya",
+      "basin": "Mohana",
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.2,
-      "observed_at": "2026-10-18T10:15:10.168746+05:45",
+      "observed_at": "2026-10-19T10:15:05.644576+05:45",
       "current": true
      },
      {
-      "id": "435",
-      "name": "Dhunge",
-      "basin": "Koshi",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 0.2,
-      "observed_at": "2026-10-18T10:15:09.199854+05:45",
-      "current": true
-     },
-     {
-      "id": "641",
-      "name": "Dumkibas",
+      "id": "552",
+      "name": "Chandragiri",
       "basin": null,
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.2,
-      "observed_at": "2026-10-18T10:15:09.538607+05:45",
+      "observed_at": "2026-10-19T10:15:07.035688+05:45",
       "current": true
      },
      {
-      "id": "62",
-      "name": "Gaighat",
+      "id": "524",
+      "name": "Bargadaha",
+      "basin": null,
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-10-19T10:15:05.884860+05:45",
+      "current": true
+     },
+     {
+      "id": "466",
+      "name": "Bolde",
       "basin": "Koshi",
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.2,
-      "observed_at": "2026-10-18T10:15:09.763278+05:45",
+      "observed_at": "2026-10-19T10:15:06.805633+05:45",
       "current": true
      },
      {
-      "id": "467",
-      "name": "Garbha Durbar",
+      "id": "583",
+      "name": "Hanspur",
+      "basin": "West Rapti",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-10-19T10:15:09.749674+05:45",
+      "current": true
+     },
+     {
+      "id": "302",
+      "name": "Chaurbandale",
+      "basin": "Mahakali",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.2,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-10-19T10:15:07.184871+05:45",
+      "current": true
+     },
+     {
+      "id": "78",
+      "name": "Danda Gaun.",
       "basin": "Karnali",
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.2,
-      "observed_at": "2026-10-18T10:15:10.003586+05:45",
+      "observed_at": "2026-10-19T10:15:07.526003+05:45",
+      "current": true
+     },
+     {
+      "id": "261",
+      "name": "Bhairahawa_AWOS_10",
+      "basin": "Tinau",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-10-19T10:15:06.322840+05:45",
       "current": true
      }
     ]
    },
-   "changes": {
-    "compared_with": null
-   }
+   "changes": {}
   },
   {
    "id": "dhm-flood-archive",
@@ -1590,62 +1588,22 @@
    "category": "floods",
    "kind": "html",
    "url": "https://dms2.dhm.gov.np/",
-   "checked_at": "2026-10-18T04:33:32Z",
+   "checked_at": "2026-10-19T04:40:43Z",
    "http_status": 200,
-   "sha256": "105fa57b0e7f1cb62c16b3e2620251321554bb972fab394542d0503e7715b74e",
+   "sha256": "d001b469bc009de8f6276ed40eb7471d75591f3cc332c1855f6dc65025d3f0de",
    "status": "fetched",
-   "fetched_at": "2026-10-18T04:33:32Z",
+   "fetched_at": "2026-10-19T04:40:43Z",
    "content": {
     "title": "Hydrology",
     "headings": [],
     "tables": [],
-    "links": [
-     {
-      "text": "Flood_Bulletin_23_June_2026_8AM_(असार_९)",
-      "href": "https://hydrology.gov.np/cm/files/Flood_Bulletin_23_June_2026_8AM_(असार_९)_1782182870661.pdf",
-      "document": true
-     },
-     {
-      "text": "२४ घण्टे बाढी पुर्वानुमान तथा पूर्वसुचना सेवा स्थगन सम्बन्धमा_२०८३",
-      "href": "https://hydrology.gov.np/cm/files/२४ घण्टे सेवा स्थगन सम्बन्धमा_२०८३_1791974662496.pdf",
-      "document": true
-     },
-     {
-      "text": "Flood_Bulletin_14_Oct_2026_8AM_(असोज _२८)",
-      "href": "https://hydrology.gov.np/cm/files/Flood_Bulletin_14_Oct_2026_8AM_(असोज _२८) _1791950530137.pdf",
-      "document": true
-     },
-     {
-      "text": "Flood_Bulletin_13_Oct_2026_8AM_(असोज _२७)",
-      "href": "https://hydrology.gov.np/cm/files/Flood_Bulletin_13_Oct_2026_8AM_(असोज _२७) _1791864559702.pdf",
-      "document": true
-     },
-     {
-      "text": "Situation_Report_1_Budhi_Gandaki_Flood_11Oct Final",
-      "href": "https://hydrology.gov.np/cm/files/Situation_Report_1_Budhi_Gandaki_Flood_11Oct Final_1791789244527.pdf",
-      "document": true
-     },
-     {
-      "text": "Flood_Bulletin_12_Oct_2026_8AM_(असोज _२६)",
-      "href": "https://hydrology.gov.np/cm/files/Flood_Bulletin_12_Oct_2026_8AM_(असोज _२६) _1791774687153.pdf",
-      "document": true
-     },
-     {
-      "text": "Flood_Bulletin_11_Oct_2026_8AM_(असोज _२५)",
-      "href": "https://hydrology.gov.np/cm/files/Flood_Bulletin_11_Oct_2026_8AM_(असोज _२५) _1791695725990.pdf",
-      "document": true
-     },
-     {
-      "text": "Flood_Bulletin_10_Oct_2026_8AM_(असोज _२४)",
-      "href": "https://hydrology.gov.np/cm/files/Flood_Bulletin_10_Oct_2026_8AM_(असोज _२४) _1791598737220.pdf",
-      "document": true
-     }
-    ],
+    "links": [],
     "paragraphs": [],
     "dates_mentioned": []
    },
    "changes": {
-    "compared_with": null
+    "new_links": [],
+    "new_table_rows": []
    }
   },
   {
@@ -1655,11 +1613,11 @@
    "category": "weather",
    "kind": "html",
    "url": "https://dhm.gov.np/mfd/",
-   "checked_at": "2026-10-18T04:33:32Z",
+   "checked_at": "2026-10-19T04:40:43Z",
    "http_status": 200,
-   "sha256": "c672c68c41e86c9159046ffa8a2a6a136e4b8944e3e07d7a8f31eaeb26546534",
+   "sha256": "29e6e750922a0849f0640a2bc63fbc24aebf735b6b9f8eb3a8fa81c9c04a3da5",
    "status": "fetched",
-   "fetched_at": "2026-10-18T04:33:32Z",
+   "fetched_at": "2026-10-19T04:40:43Z",
    "content": {
     "title": "Meteorological Forecast Division",
     "headings": [],
@@ -1675,7 +1633,8 @@
     "dates_mentioned": []
    },
    "changes": {
-    "compared_with": null
+    "new_links": [],
+    "new_table_rows": []
    }
   },
   {
@@ -1685,11 +1644,11 @@
    "category": "earthquakes",
    "kind": "html",
    "url": "https://seismonepal.gov.np/en/earthquakes",
-   "checked_at": "2026-10-18T04:33:32Z",
+   "checked_at": "2026-10-19T04:40:43Z",
    "http_status": 200,
-   "sha256": "5179f07172547a7b1241f6384b29f8144f2896b0ada086a29079a03e5bf7db87",
+   "sha256": "85597e67d1d09e7c1d3d76e37369fd84959cf6a7466a7533c72051ca4ab77ba7",
    "status": "fetched",
-   "fetched_at": "2026-10-18T04:33:32Z",
+   "fetched_at": "2026-10-19T04:40:43Z",
    "content": {
     "title": "National Earthquake Monitoring and Research Center",
     "headings": [],
@@ -1815,7 +1774,8 @@
     "dates_mentioned": []
    },
    "changes": {
-    "compared_with": null
+    "new_links": [],
+    "new_table_rows": []
    }
   },
   {
@@ -1825,14 +1785,14 @@
    "category": "disasters",
    "kind": "json-list",
    "url": "https://bipadportal.gov.np/api/v1/incident/?format=json&limit=200&ordering=-incident_on",
-   "checked_at": "2026-10-18T04:33:32Z",
+   "checked_at": "2026-10-19T04:40:43Z",
    "http_status": 200,
-   "sha256": "6906181f35443463653076bb3def5892c2619d0a8974e76139d103a8670b8441",
+   "sha256": "3ec244adad4c5db65e843774d79be0f3e4154638658a08417094dd293e7b3931",
    "status": "fetched",
-   "fetched_at": "2026-10-18T04:33:32Z",
+   "fetched_at": "2026-10-19T04:40:43Z",
    "content": {
-    "record_count": 100,
-    "complete": false,
+    "record_count": 89,
+    "complete": true,
     "within_days": 7,
     "columns": [
      "id",
@@ -1842,13 +1802,6 @@
      "verified"
     ],
     "records": [
-     {
-      "id": 95832,
-      "title": "Landslide at Barahtal Rural Municipality-8",
-      "titleNe": "कर्णाली, सुर्खेत, बराहताल-८ मा पहिरो",
-      "incidentOn": "2026-10-18T00:00:00+05:45",
-      "verified": true
-     },
      {
       "id": 95838,
       "title": "Fire at Gauriganga Municipality-9",
@@ -1864,16 +1817,16 @@
       "verified": true
      },
      {
-      "id": 95814,
-      "title": "Landslide at Bhumikasthan Municipality-7",
-      "titleNe": "लुम्बिनी, अर्घाखाॉची, भूमिकास्थान-७ मा पहिरो",
-      "incidentOn": "2026-10-17T00:00:00+05:45",
+      "id": 95832,
+      "title": "Landslide at Barahtal Rural Municipality-8",
+      "titleNe": "कर्णाली, सुर्खेत, बराहताल-८ मा पहिरो",
+      "incidentOn": "2026-10-18T00:00:00+05:45",
       "verified": true
      },
      {
-      "id": 95835,
-      "title": "Landslide at Raghuganga Rural Municipality-8",
-      "titleNe": "गण्डकी, म्याग्दी, रघुगंगा-८ मा पहिरो",
+      "id": 95833,
+      "title": "Fire at Haripur Municipality-3",
+      "titleNe": "मधेश, सर्लाही, हरिपुर-३ मा आगलागी",
       "incidentOn": "2026-10-17T00:00:00+05:45",
       "verified": true
      },
@@ -1885,37 +1838,9 @@
       "verified": true
      },
      {
-      "id": 95834,
-      "title": "Snake Bite at Barahtal Rural Municipality-8",
-      "titleNe": "कर्णाली, सुर्खेत, बराहताल-८ मा सर्पदंश",
-      "incidentOn": "2026-10-17T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95842,
-      "title": "Fire at Buddhabhumi Municipality-8",
-      "titleNe": "लुम्बिनी, कपिलवस्तु, बुद्धभूमि-८ मा आगलागी",
-      "incidentOn": "2026-10-17T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95837,
-      "title": "Snake Bite at Barahtal Rural Municipality-8",
-      "titleNe": "कर्णाली, सुर्खेत, बराहताल-८ मा सर्पदंश",
-      "incidentOn": "2026-10-17T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95841,
-      "title": "Fire at Buddhabhumi Municipality-8",
-      "titleNe": "लुम्बिनी, कपिलवस्तु, बुद्धभूमि-८ मा आगलागी",
-      "incidentOn": "2026-10-17T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95833,
-      "title": "Fire at Haripur Municipality-3",
-      "titleNe": "मधेश, सर्लाही, हरिपुर-३ मा आगलागी",
+      "id": 95831,
+      "title": "Snake Bite at Gaumul Rural Municipality-1",
+      "titleNe": "सुदुरपश्चिम, बाजुरा, गौमुल-१ मा सर्पदंश",
       "incidentOn": "2026-10-17T00:00:00+05:45",
       "verified": true
      },
@@ -1927,9 +1852,51 @@
       "verified": true
      },
      {
-      "id": 95831,
-      "title": "Snake Bite at Gaumul Rural Municipality-1",
-      "titleNe": "सुदुरपश्चिम, बाजुरा, गौमुल-१ मा सर्पदंश",
+      "id": 95835,
+      "title": "Landslide at Raghuganga Rural Municipality-8",
+      "titleNe": "गण्डकी, म्याग्दी, रघुगंगा-८ मा पहिरो",
+      "incidentOn": "2026-10-17T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95837,
+      "title": "Snake Bite at Barahtal Rural Municipality-8",
+      "titleNe": "कर्णाली, सुर्खेत, बराहताल-८ मा सर्पदंश",
+      "incidentOn": "2026-10-17T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95843,
+      "title": "Landslide at Barahtal Rural Municipality-8",
+      "titleNe": "कर्णाली, सुर्खेत, बराहताल-८ मा पहिरो",
+      "incidentOn": "2026-10-17T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95841,
+      "title": "Fire at Buddhabhumi Municipality-8",
+      "titleNe": "लुम्बिनी, कपिलवस्तु, बुद्धभूमि-८ मा आगलागी",
+      "incidentOn": "2026-10-17T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95842,
+      "title": "Fire at Buddhabhumi Municipality-8",
+      "titleNe": "लुम्बिनी, कपिलवस्तु, बुद्धभूमि-८ मा आगलागी",
+      "incidentOn": "2026-10-17T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95834,
+      "title": "Snake Bite at Barahtal Rural Municipality-8",
+      "titleNe": "कर्णाली, सुर्खेत, बराहताल-८ मा सर्पदंश",
+      "incidentOn": "2026-10-17T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95814,
+      "title": "Landslide at Bhumikasthan Municipality-7",
+      "titleNe": "लुम्बिनी, अर्घाखाॉची, भूमिकास्थान-७ मा पहिरो",
       "incidentOn": "2026-10-17T00:00:00+05:45",
       "verified": true
      },
@@ -1941,72 +1908,9 @@
       "verified": true
      },
      {
-      "id": 95825,
-      "title": "Fire at Inaruwa Municipality-8",
-      "titleNe": "कोशी, सुनसरी, इनरुवा-८ मा आगलागी",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95813,
-      "title": "Snake Bite at Buddhabhumi Municipality-8",
-      "titleNe": "लुम्बिनी, कपिलवस्तु, बुद्धभूमि-८ मा सर्पदंश",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95827,
-      "title": "Snake Bite at Siraha Municipality-21",
-      "titleNe": "मधेश, सिराहा, सिरहा-२१ मा सर्पदंश",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95810,
-      "title": "Fire at Ainselukhark Rural Municipality-5",
-      "titleNe": "कोशी, खोटाङ्ग, ऐसेलुखर्क-५ मा आगलागी",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95817,
-      "title": "Fire at Dhanusadham Municipality-3",
-      "titleNe": "मधेश, धनुषा, धनुषाधाम-३ मा आगलागी",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95820,
-      "title": "Snake Bite at Rhishing Rural Municipality-1",
-      "titleNe": "गण्डकी, तनहुँ, ऋषिङ्ग-१ मा सर्पदंश",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95829,
-      "title": "Fire at Dhanusadham Municipality-3",
-      "titleNe": "मधेश, धनुषा, धनुषाधाम-३ मा आगलागी",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95830,
-      "title": "Snake Bite at Shuklaphanta National Park National Park-99",
-      "titleNe": "सुदुरपश्चिम, कन्चनपुर, शुक्लाफाँटा राष्ट्रिय निकुन्ज-९९ मा सर्पदंश",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95815,
-      "title": "Snake Bite at Kushma Municipality-10",
-      "titleNe": "गण्डकी, पर्वत, कुश्मा-१० मा सर्पदंश",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95823,
-      "title": "Fire at Golbazar Municipality-13",
-      "titleNe": "मधेश, सिराहा, गोलबजार-१३ मा आगलागी",
+      "id": 95821,
+      "title": "Fire at Aurahi Municipality-2",
+      "titleNe": "मधेश, महोत्तरी, औरही-२ मा आगलागी",
       "incidentOn": "2026-10-16T00:00:00+05:45",
       "verified": true
      },
@@ -2018,23 +1922,16 @@
       "verified": true
      },
      {
-      "id": 95812,
-      "title": "Snake Bite at Janakpurdham Submetropolitan City-19",
-      "titleNe": "मधेश, धनुषा, जनकपुरधाम-१९ मा सर्पदंश",
+      "id": 95825,
+      "title": "Fire at Inaruwa Municipality-8",
+      "titleNe": "कोशी, सुनसरी, इनरुवा-८ मा आगलागी",
       "incidentOn": "2026-10-16T00:00:00+05:45",
       "verified": true
      },
      {
-      "id": 95818,
-      "title": "Snake Bite at Jitpur Simara Submetropolitan City-8",
-      "titleNe": "मधेश, बारा, जीतपुर सिमरा-८ मा सर्पदंश",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95809,
-      "title": "Snake Bite at Shuklaphanta National Park National Park-99",
-      "titleNe": "सुदुरपश्चिम, कन्चनपुर, शुक्लाफाँटा राष्ट्रिय निकुन्ज-९९ मा सर्पदंश",
+      "id": 95820,
+      "title": "Snake Bite at Rhishing Rural Municipality-1",
+      "titleNe": "गण्डकी, तनहुँ, ऋषिङ्ग-१ मा सर्पदंश",
       "incidentOn": "2026-10-16T00:00:00+05:45",
       "verified": true
      },
@@ -2046,23 +1943,9 @@
       "verified": true
      },
      {
-      "id": 95819,
-      "title": "Animal Incidents at Kalimati Rural Municipality-7",
-      "titleNe": "कर्णाली, सल्यान, कालिमाटी-७ मा जनावर आक्रमण",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95828,
-      "title": "Fire at Molung Rural Municipality-1",
-      "titleNe": "कोशी, ओखलढुङ्गा, मोलुङ-१ मा आगलागी",
-      "incidentOn": "2026-10-16T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95821,
-      "title": "Fire at Aurahi Municipality-2",
-      "titleNe": "मधेश, महोत्तरी, औरही-२ मा आगलागी",
+      "id": 95829,
+      "title": "Fire at Dhanusadham Municipality-3",
+      "titleNe": "मधेश, धनुषा, धनुषाधाम-३ मा आगलागी",
       "incidentOn": "2026-10-16T00:00:00+05:45",
       "verified": true
      },
@@ -2074,51 +1957,93 @@
       "verified": true
      },
      {
-      "id": 95824,
-      "title": "Snake Bite at Biratnagar Metropolitan City-13",
-      "titleNe": "कोशी, मोरङ्ग, विराटनगर-१३ मा सर्पदंश",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "id": 95815,
+      "title": "Snake Bite at Kushma Municipality-10",
+      "titleNe": "गण्डकी, पर्वत, कुश्मा-१० मा सर्पदंश",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
       "verified": true
      },
      {
-      "id": 95792,
-      "title": "Snake Bite at Golbazar Municipality-13",
-      "titleNe": "मधेश, सिराहा, गोलबजार-१३ मा सर्पदंश",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "id": 95817,
+      "title": "Fire at Dhanusadham Municipality-3",
+      "titleNe": "मधेश, धनुषा, धनुषाधाम-३ मा आगलागी",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
       "verified": true
      },
      {
-      "id": 95826,
-      "title": "Landslide at Narpa Bhoomi Rural Municipality-3",
-      "titleNe": "गण्डकी, मनाङ्ग, नार्पा भूमि-३ मा पहिरो",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "id": 95810,
+      "title": "Fire at Ainselukhark Rural Municipality-5",
+      "titleNe": "कोशी, खोटाङ्ग, ऐसेलुखर्क-५ मा आगलागी",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
       "verified": true
      },
      {
-      "id": 95798,
-      "title": "Fire at Brindaban Municipality-6",
-      "titleNe": "मधेश, रौतहट, बृन्दावन-६ मा आगलागी",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95793,
-      "title": "Fire at Arjundhara Municipality-6",
-      "titleNe": "कोशी, झापा, अर्जुनधारा-६ मा आगलागी",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95777,
+      "id": 95809,
       "title": "Snake Bite at Shuklaphanta National Park National Park-99",
       "titleNe": "सुदुरपश्चिम, कन्चनपुर, शुक्लाफाँटा राष्ट्रिय निकुन्ज-९९ मा सर्पदंश",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
       "verified": true
      },
      {
-      "id": 95775,
-      "title": "Fire at Thori Rural Municipality-5",
-      "titleNe": "मधेश, पर्सा, ठोरी-५ मा आगलागी",
+      "id": 95819,
+      "title": "Animal Incidents at Kalimati Rural Municipality-7",
+      "titleNe": "कर्णाली, सल्यान, कालिमाटी-७ मा जनावर आक्रमण",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95818,
+      "title": "Snake Bite at Jitpur Simara Submetropolitan City-8",
+      "titleNe": "मधेश, बारा, जीतपुर सिमरा-८ मा सर्पदंश",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95823,
+      "title": "Fire at Golbazar Municipality-13",
+      "titleNe": "मधेश, सिराहा, गोलबजार-१३ मा आगलागी",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95812,
+      "title": "Snake Bite at Janakpurdham Submetropolitan City-19",
+      "titleNe": "मधेश, धनुषा, जनकपुरधाम-१९ मा सर्पदंश",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95827,
+      "title": "Snake Bite at Siraha Municipality-21",
+      "titleNe": "मधेश, सिराहा, सिरहा-२१ मा सर्पदंश",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95830,
+      "title": "Snake Bite at Shuklaphanta National Park National Park-99",
+      "titleNe": "सुदुरपश्चिम, कन्चनपुर, शुक्लाफाँटा राष्ट्रिय निकुन्ज-९९ मा सर्पदंश",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95813,
+      "title": "Snake Bite at Buddhabhumi Municipality-8",
+      "titleNe": "लुम्बिनी, कपिलवस्तु, बुद्धभूमि-८ मा सर्पदंश",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95828,
+      "title": "Fire at Molung Rural Municipality-1",
+      "titleNe": "कोशी, ओखलढुङ्गा, मोलुङ-१ मा आगलागी",
+      "incidentOn": "2026-10-16T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95799,
+      "title": "Fire at Phaktanglung Rural Municipality-6",
+      "titleNe": "कोशी, ताप्लेजुङ्ग, फक्ताङलुङ-६ मा आगलागी",
       "incidentOn": "2026-10-15T00:00:00+05:45",
       "verified": true
      },
@@ -2130,51 +2055,9 @@
       "verified": true
      },
      {
-      "id": 95796,
-      "title": "Animal Incidents at Khumbu Pasanglhamu Rural Municipality-3",
-      "titleNe": "कोशी, सोलुखुम्बु, खुम्वु पासाङल्हामु-३ मा जनावर आक्रमण",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95801,
-      "title": "Snake Bite at Rupani Rural Municipality-6",
-      "titleNe": "मधेश, सप्तरी, रुपनी-६ मा सर्पदंश",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95802,
-      "title": "Snake Bite at Shuklaphanta Municipality-11",
-      "titleNe": "सुदुरपश्चिम, कन्चनपुर, शुक्लाफाँटा-११ मा सर्पदंश",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95800,
-      "title": "Snake Bite at Barhadashi Rural Municipality-7",
-      "titleNe": "कोशी, झापा, बाह्रदशी-७ मा सर्पदंश",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95776,
-      "title": "Fire at Biratnagar Metropolitan City-10",
-      "titleNe": "कोशी, मोरङ्ग, विराटनगर-१० मा आगलागी",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95804,
-      "title": "Fire at Itahari Submetropolitan City-20",
-      "titleNe": "कोशी, सुनसरी, इटहरी-२० मा आगलागी",
-      "incidentOn": "2026-10-15T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95799,
-      "title": "Fire at Phaktanglung Rural Municipality-6",
-      "titleNe": "कोशी, ताप्लेजुङ्ग, फक्ताङलुङ-६ मा आगलागी",
+      "id": 95793,
+      "title": "Fire at Arjundhara Municipality-6",
+      "titleNe": "कोशी, झापा, अर्जुनधारा-६ मा आगलागी",
       "incidentOn": "2026-10-15T00:00:00+05:45",
       "verified": true
      },
@@ -2193,6 +2076,90 @@
       "verified": true
      },
      {
+      "id": 95804,
+      "title": "Fire at Itahari Submetropolitan City-20",
+      "titleNe": "कोशी, सुनसरी, इटहरी-२० मा आगलागी",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95801,
+      "title": "Snake Bite at Rupani Rural Municipality-6",
+      "titleNe": "मधेश, सप्तरी, रुपनी-६ मा सर्पदंश",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95792,
+      "title": "Snake Bite at Golbazar Municipality-13",
+      "titleNe": "मधेश, सिराहा, गोलबजार-१३ मा सर्पदंश",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95777,
+      "title": "Snake Bite at Shuklaphanta National Park National Park-99",
+      "titleNe": "सुदुरपश्चिम, कन्चनपुर, शुक्लाफाँटा राष्ट्रिय निकुन्ज-९९ मा सर्पदंश",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95775,
+      "title": "Fire at Thori Rural Municipality-5",
+      "titleNe": "मधेश, पर्सा, ठोरी-५ मा आगलागी",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95798,
+      "title": "Fire at Brindaban Municipality-6",
+      "titleNe": "मधेश, रौतहट, बृन्दावन-६ मा आगलागी",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95796,
+      "title": "Animal Incidents at Khumbu Pasanglhamu Rural Municipality-3",
+      "titleNe": "कोशी, सोलुखुम्बु, खुम्वु पासाङल्हामु-३ मा जनावर आक्रमण",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95824,
+      "title": "Snake Bite at Biratnagar Metropolitan City-13",
+      "titleNe": "कोशी, मोरङ्ग, विराटनगर-१३ मा सर्पदंश",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95802,
+      "title": "Snake Bite at Shuklaphanta Municipality-11",
+      "titleNe": "सुदुरपश्चिम, कन्चनपुर, शुक्लाफाँटा-११ मा सर्पदंश",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95826,
+      "title": "Landslide at Narpa Bhoomi Rural Municipality-3",
+      "titleNe": "गण्डकी, मनाङ्ग, नार्पा भूमि-३ मा पहिरो",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95800,
+      "title": "Snake Bite at Barhadashi Rural Municipality-7",
+      "titleNe": "कोशी, झापा, बाह्रदशी-७ मा सर्पदंश",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95776,
+      "title": "Fire at Biratnagar Metropolitan City-10",
+      "titleNe": "कोशी, मोरङ्ग, विराटनगर-१० मा आगलागी",
+      "incidentOn": "2026-10-15T00:00:00+05:45",
+      "verified": true
+     },
+     {
       "id": 95795,
       "title": "Fire at Mugum Karmarong Rural Municipality-7",
       "titleNe": "कर्णाली, मुगु, मुगूम कार्मारोङ-७ मा आगलागी",
@@ -2207,37 +2174,16 @@
       "verified": true
      },
      {
-      "id": 95791,
-      "title": "Landslide at Darna , Kamalbazar Municipality-7",
-      "titleNe": "सुदुरपश्चिम, अछाम, कमलबजार-७ मा पहिरो",
+      "id": 95783,
+      "title": "Fire at Marsyangdi Rural Municipality-7",
+      "titleNe": "गण्डकी, लमजुङ्ग, मर्स्याङदी-७ मा आगलागी",
       "incidentOn": "2026-10-14T00:00:00+05:45",
       "verified": true
      },
      {
-      "id": 95790,
-      "title": "Fire at Pachaljharana Rural Municipality-3",
-      "titleNe": "कर्णाली, कालिकोट, पचालझरना-३ मा आगलागी",
-      "incidentOn": "2026-10-14T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95787,
-      "title": "Snake Bite at Itahari Submetropolitan City-16",
-      "titleNe": "कोशी, सुनसरी, इटहरी-१६ मा सर्पदंश",
-      "incidentOn": "2026-10-14T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95788,
-      "title": "Fire at Aurahi Municipality-2",
-      "titleNe": "मधेश, महोत्तरी, औरही-२ मा आगलागी",
-      "incidentOn": "2026-10-14T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95785,
-      "title": "Snake Bite at Inaruwa Municipality-8",
-      "titleNe": "कोशी, सुनसरी, इनरुवा-८ मा सर्पदंश",
+      "id": 95773,
+      "title": "Snake Bite at Shuklaphanta Municipality-11",
+      "titleNe": "सुदुरपश्चिम, कन्चनपुर, शुक्लाफाँटा-११ मा सर्पदंश",
       "incidentOn": "2026-10-14T00:00:00+05:45",
       "verified": true
      },
@@ -2249,9 +2195,9 @@
       "verified": true
      },
      {
-      "id": 95783,
-      "title": "Fire at Marsyangdi Rural Municipality-7",
-      "titleNe": "गण्डकी, लमजुङ्ग, मर्स्याङदी-७ मा आगलागी",
+      "id": 95772,
+      "title": "Animal Incidents at Dordi Rural Municipality-8",
+      "titleNe": "गण्डकी, लमजुङ्ग, दोर्दी-८ मा जनावर आक्रमण",
       "incidentOn": "2026-10-14T00:00:00+05:45",
       "verified": true
      },
@@ -2261,11 +2207,54 @@
       "titleNe": "बाग्मती, भक्तपुर, भक्तपुर-९ मा आगलागी",
       "incidentOn": "2026-10-14T00:00:00+05:45",
       "verified": true
+     },
+     {
+      "id": 95789,
+      "title": "Fire at Rupani Rural Municipality-6",
+      "titleNe": "मधेश, सप्तरी, रुपनी-६ मा आगलागी",
+      "incidentOn": "2026-10-14T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95790,
+      "title": "Fire at Pachaljharana Rural Municipality-3",
+      "titleNe": "कर्णाली, कालिकोट, पचालझरना-३ मा आगलागी",
+      "incidentOn": "2026-10-14T00:00:00+05:45",
+      "verified": true
      }
     ]
    },
    "changes": {
-    "compared_with": null
+    "new_records": [
+     {
+      "id": 95843,
+      "title": "Landslide at Barahtal Rural Municipality-8",
+      "titleNe": "कर्णाली, सुर्खेत, बराहताल-८ मा पहिरो",
+      "incidentOn": "2026-10-17T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95773,
+      "title": "Snake Bite at Shuklaphanta Municipality-11",
+      "titleNe": "सुदुरपश्चिम, कन्चनपुर, शुक्लाफाँटा-११ मा सर्पदंश",
+      "incidentOn": "2026-10-14T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95772,
+      "title": "Animal Incidents at Dordi Rural Municipality-8",
+      "titleNe": "गण्डकी, लमजुङ्ग, दोर्दी-८ मा जनावर आक्रमण",
+      "incidentOn": "2026-10-14T00:00:00+05:45",
+      "verified": true
+     },
+     {
+      "id": 95789,
+      "title": "Fire at Rupani Rural Municipality-6",
+      "titleNe": "मधेश, सप्तरी, रुपनी-६ मा आगलागी",
+      "incidentOn": "2026-10-14T00:00:00+05:45",
+      "verified": true
+     }
+    ]
    }
   },
   {
@@ -2275,13 +2264,13 @@
    "category": "disasters",
    "kind": "json-list",
    "url": "https://bipadportal.gov.np/api/v1/alert/?format=json&limit=200&ordering=-created_on",
-   "checked_at": "2026-10-18T04:33:32Z",
+   "checked_at": "2026-10-19T04:40:43Z",
    "http_status": 200,
-   "sha256": "5e9108da329abb35a930358c485329730701cbe248b03c05e9d2a4b104a07c3d",
+   "sha256": "d2c0ea86e09573a8bd25316b0c9bfa43c23cceb7dd64409807a05f311db7902c",
    "status": "fetched",
-   "fetched_at": "2026-10-18T04:33:32Z",
+   "fetched_at": "2026-10-19T04:40:43Z",
    "content": {
-    "record_count": 2,
+    "record_count": 1,
     "complete": true,
     "within_days": 3,
     "columns": [
@@ -2294,25 +2283,26 @@
     ],
     "records": [
      {
-      "id": 46413,
-      "title": "Pollution Alert at Jitpur Simara-4, Bara",
-      "titleNe": "जीतपुर सिमरा-४, बारामा वातावरणीय प्रदुषण",
+      "id": 46426,
+      "title": "Pollution Alert at Rapti-3, Dang",
+      "titleNe": "राप्ती-३, दाङमा वातावरणीय प्रदुषण",
       "source": "doe",
-      "createdOn": "2026-10-18T09:09:05.190931+05:45",
-      "expireOn": null
-     },
-     {
-      "id": 46410,
-      "title": "Pollution Alert at Ghorahi-2, Dang",
-      "titleNe": "घोराही-२, दाङमा वातावरणीय प्रदुषण",
-      "source": "doe",
-      "createdOn": "2026-10-18T08:09:04.634518+05:45",
+      "createdOn": "2026-10-19T05:09:04.448632+05:45",
       "expireOn": null
      }
     ]
    },
    "changes": {
-    "compared_with": null
+    "new_records": [
+     {
+      "id": 46426,
+      "title": "Pollution Alert at Rapti-3, Dang",
+      "titleNe": "राप्ती-३, दाङमा वातावरणीय प्रदुषण",
+      "source": "doe",
+      "createdOn": "2026-10-19T05:09:04.448632+05:45",
+      "expireOn": null
+     }
+    ]
    }
   },
   {
@@ -2322,25 +2312,26 @@
    "category": "disasters",
    "kind": "html",
    "url": "https://ndrrma.gov.np/",
-   "checked_at": "2026-10-18T04:33:32Z",
+   "checked_at": "2026-10-19T04:40:43Z",
    "http_status": 200,
-   "sha256": "d69fa03d95756c8b15efe43e1d32baf449a44050736307a4cad86a677f6008c8",
+   "sha256": "3ae1f6c58ef498c19bb479b941e49af8c982310b999441df865b8a17f186976b",
    "status": "fetched",
-   "fetched_at": "2026-10-18T04:33:32Z",
+   "fetched_at": "2026-10-19T04:40:43Z",
    "content": {
     "title": "NDRRMA",
     "headings": [],
     "tables": [],
     "links": [],
     "paragraphs": [
+     "पछिल्लो चौबिस घण्टामा देशका विभिन्न जिल्लामा गरी सर्पदंश, पहिरो र आगलागी गरी १२ वटा विपद्का घटना घटेका छन्। यी घटनाबाट ६ जना घाईते भएका छन् ।",
      "पछिल्लो चौबिस घण्टामा देशका विभिन्न जिल्लामा गरी सर्पदंश, पहिरो, आगलागी र जनावर आक्रमणका गरी २३ वटा विपद्का घटना घटेका छन्। यी घटनाबाट २ जनाको मृत्यु, ८ जना घाईते भएका छन् ।",
-     "पछिल्लो चौबिस घण्टामा देशका विभिन्न जिल्लामा गरी सर्पदंश, आगलागी र जनावर आक्रमणका गरी १५ वटा विपद्का घटना घटेका छन्। यी घटनाबाट २ जनाको मृत्यु, ७ जना घाईते भएका छन् ।",
-     "पछिल्लो चौबिस घण्टामा देशका विभिन्न जिल्लामा गरी सर्पदंश, पहिरो, आगलागी र जनावर आक्रमणका गरी २३ वटा विपद्का घटना घटेका छन्। यी घटनाबाट १३ जना घाईते भएका छन् ।"
+     "पछिल्लो चौबिस घण्टामा देशका विभिन्न जिल्लामा गरी सर्पदंश, आगलागी र जनावर आक्रमणका गरी १५ वटा विपद्का घटना घटेका छन्। यी घटनाबाट २ जनाको मृत्यु, ७ जना घाईते भएका छन् ।"
     ],
     "dates_mentioned": []
    },
    "changes": {
-    "compared_with": null
+    "new_links": [],
+    "new_table_rows": []
    }
   }
  ]
