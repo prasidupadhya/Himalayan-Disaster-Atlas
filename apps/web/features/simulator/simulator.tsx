@@ -62,6 +62,17 @@ export function Simulator() {
         <div role="tabpanel" id="panel-earthquake" aria-labelledby="tab-earthquake" hidden={tab !== 'earthquake'}>
           <QuakePanel lang={lang} initial={initial?.kind === 'earthquake' ? initial as QuakeScenario : null} onScene={onQuakeScene} onShare={share} pick={pick} slot={quakeSlot} />
         </div>
+        {/* Results sit under the form, beside the sticky map, so the 3D playback stays in view while they are read. */}
+        <div className="sim-results">
+          <div ref={setFloodSlot} hidden={tab !== 'flood'} />
+          <div ref={setQuakeSlot} hidden={tab !== 'earthquake'} />
+          {shared && shared.kind === (tab === 'flood' ? 'flood' : 'earthquake') && <div className="sim-actions" aria-label={c.shareRegion}>
+            <button type="button" onClick={() => { void navigator.clipboard?.writeText(link).then(() => setCopied(true), () => setCopied(false)); }}>{copied ? t.copied : t.share}</button>
+            <button type="button" onClick={download}>{t.download}</button>
+            <a className="sim-report-link" href={`/simulate/report/?s=${encodeScenario(shared)}`}>{t.report}</a>
+            <p className="sim-muted">{c.shareNote}</p>
+          </div>}
+        </div>
       </div>
       <aside className="sim-map-column" aria-label={c.mapRegion}>
         <a className="map-skip-link" href="#sim-after-map">{c.skipMap}</a>
@@ -70,16 +81,6 @@ export function Simulator() {
         <p className="sim-map-note">{tab === 'flood' ? c.mapNoteFlood : c.mapNoteQuake}</p>
         <span id="sim-after-map" tabIndex={-1} />
       </aside>
-    </div>
-    <div className="sim-results">
-      <div ref={setFloodSlot} hidden={tab !== 'flood'} />
-      <div ref={setQuakeSlot} hidden={tab !== 'earthquake'} />
-      {shared && shared.kind === (tab === 'flood' ? 'flood' : 'earthquake') && <div className="sim-actions" aria-label={c.shareRegion}>
-        <button type="button" onClick={() => { void navigator.clipboard?.writeText(link).then(() => setCopied(true), () => setCopied(false)); }}>{copied ? t.copied : t.share}</button>
-        <button type="button" onClick={download}>{t.download}</button>
-        <a className="sim-report-link" href={`/simulate/report/?s=${encodeScenario(shared)}`}>{t.report}</a>
-        <p className="sim-muted">{c.shareNote}</p>
-      </div>}
     </div>
   </div>;
 }

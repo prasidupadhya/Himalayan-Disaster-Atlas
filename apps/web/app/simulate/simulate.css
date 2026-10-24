@@ -12,7 +12,8 @@
 .sim-tabs [role=tab][aria-selected=true] { background: var(--surface); border-color: var(--line); color: var(--ink-strong); box-shadow: inset 0 3px 0 var(--accent); margin-bottom: -1px; }
 .sim-tabs [role=tab] span { margin-right: .3rem; }
 
-.sim-layout { display: grid; grid-template-columns: minmax(360px, 520px) minmax(0, 1fr); gap: clamp(1rem, 2.5vw, 2rem); align-items: start; }
+.sim-layout { display: grid; grid-template-columns: minmax(380px, 1fr) minmax(0, 1.15fr); gap: clamp(1rem, 2.5vw, 2rem); align-items: start; }
+.sim-controls { display: grid; gap: 1.25rem; min-width: 0; }
 .sim-controls { display: grid; gap: 1.25rem; min-width: 0; }
 .sim-map-column { position: sticky; top: 1rem; display: grid; gap: .5rem; }
 .sim-map { position: relative; height: calc(100vh - 6rem); max-height: 820px; min-height: 420px; border-radius: var(--radius-lg); overflow: hidden; background: #14262f; border: 1px solid #0b1d22; }
@@ -59,7 +60,8 @@
 .sim-result { border-color: var(--ink-strong); box-shadow: var(--shadow-low); scroll-margin-top: 1rem; }
 .sim-result h2:focus { outline: none; }
 .sim-result h2:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
-.sim-result-columns { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 1.25rem; align-items: start; }
+/* Results sit in the left column beside the map, so their parts stack. */
+.sim-result-columns { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.25rem; align-items: start; }
 .sim-result-main, .sim-result-side { display: grid; gap: .9rem; min-width: 0; }
 .sim-sub { display: block; font-size: .78rem; font-weight: 400; white-space: nowrap; }
 .sim-table-scroll td strong { font-variant-numeric: tabular-nums; }
@@ -180,13 +182,11 @@
 .sim-journey-peak-key { width: 3px; height: 14px; background: var(--ink-strong); }
 @media print { .sim-journey-sweep { display: none; } }
 /* 3D playback: a compact overlay on the map; every value it shows is also in the result tables. */
-.sim-player { position: absolute; left: .75rem; right: 3.6rem; bottom: .75rem; display: grid; gap: .45rem; padding: .7rem .8rem; border-radius: var(--radius-md); background: #08161cd9; color: #eef6f7; box-shadow: 0 10px 30px rgba(0, 0, 0, .35); backdrop-filter: blur(6px); }
 .sim-player p { margin: 0; }
 .sim-player-badge { font-size: .76rem; color: #bcd0d4; }
 .sim-player-badge strong { display: inline-block; margin-right: .35rem; padding: .05rem .4rem; border: 1px solid #ffd27a; border-radius: 3px; color: #ffe2a3; font-size: .68rem; letter-spacing: .02em; }
 .sim-player-status { font-size: .88rem; line-height: 1.4; font-variant-numeric: tabular-nums; }
 .sim-player-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; }
-.sim-player-controls button, .sim-player-controls select { min-height: 40px; padding: .3rem .7rem; border: 1px solid #47636b; border-radius: var(--radius-sm); background: #12262e; color: #eef6f7; font-size: .82rem; font-weight: 650; }
 .sim-player-controls button[aria-pressed=true] { background: #e6f2f4; color: #08161c; border-color: #e6f2f4; }
 .sim-player-play { min-width: 6.5rem; background: #2f86a6 !important; border-color: #2f86a6 !important; color: #fff !important; }
 .sim-player-scrub { flex: 1 1 10rem; display: flex; }
@@ -194,13 +194,6 @@
 .sim-checkpoint-label { transition: background-color .3s ease, color .3s ease; }
 .sim-checkpoint-label.reached { background: #4cc3ff; color: #06202b; }
 @media (max-width: 640px) {
-  .sim-player { left: .4rem; right: .4rem; bottom: .4rem; padding: .5rem .55rem; gap: .35rem; }
-  .sim-player-badge span { display: none; }
-  .sim-player-status { font-size: .78rem; }
-  .sim-player-controls button, .sim-player-controls select { min-height: 44px; padding: .25rem .55rem; font-size: .76rem; }
-  .sim-player-scrub { order: 5; flex-basis: 100%; }
-  /* A phone gets a taller map while a playback is on it, so the overlay never hides the scene. */
-  .sim-map:has(.sim-player) { height: 72svh; max-height: 640px; }
 }
 .sim-watch { justify-self: start; display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; }
 @media (prefers-reduced-motion: reduce) { .sim-checkpoint-label { transition: none; } }
@@ -240,3 +233,47 @@
   .sim-player-where { font-size: .74rem; }
 }
 @media (prefers-reduced-motion: reduce) { .sim-label { transition: none; } }
+
+/* ---- Scenario stage: the map with its playback dock underneath (never on top of the scene) ---- */
+.sim-stage { display: flex; flex-direction: column; height: calc(100vh - 4.5rem); max-height: 980px; min-height: 540px; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid #0b1d22; background: #08161c; }
+.sim-stage .sim-map { flex: 1 1 auto; height: auto; max-height: none; min-height: 280px; border: 0; border-radius: 0; }
+.sim-player { position: static; display: grid; gap: .5rem; padding: .75rem .9rem .85rem; background: #08161c; color: #eef6f7; border-top: 1px solid #1f3a43; }
+.sim-player-status { font-size: .95rem; line-height: 1.45; }
+.sim-player-controls { gap: .5rem; }
+.sim-player-controls button, .sim-player-controls select, .sim-player-view button { min-height: 44px; padding: .3rem .8rem; border: 1px solid #47636b; border-radius: var(--radius-sm); background: #12262e; color: #eef6f7; font-size: .84rem; font-weight: 650; }
+.sim-player-view { display: flex; flex-wrap: wrap; gap: .5rem; }
+.sim-player-view button[aria-pressed=true] { background: #e6f2f4; color: #08161c; border-color: #e6f2f4; }
+.sim-player-view button span[aria-hidden] { margin-right: .25rem; }
+.sim-player-hint { font-size: .74rem; color: #93a9ae; }
+/* Full screen: the stage covers the page and the tab bar; map on top, dock below, notch and home indicator respected. */
+.sim-stage.is-expanded { position: fixed; inset: 0; z-index: 100; height: 100dvh; max-height: none; min-height: 0; border-radius: 0; border: 0;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) 0 env(safe-area-inset-left, 0px); }
+.sim-stage.is-expanded .sim-player { padding-bottom: calc(.85rem + env(safe-area-inset-bottom, 0px)); }
+@media (max-width: 1080px) {
+  .sim-stage { height: auto; max-height: none; min-height: 0; }
+  .sim-stage .sim-map { flex: none; height: 62svh; min-height: 300px; max-height: 620px; }
+}
+@media (max-width: 640px) {
+  .sim-stage { margin-inline: -.75rem; border-radius: 0; border-inline: 0; }
+  .sim-stage .sim-map { height: 58svh; min-height: 280px; }
+  .sim-player { padding: .65rem .75rem .75rem; }
+  .sim-player-status { font-size: .86rem; }
+  .sim-player-scrub { order: 5; flex-basis: 100%; }
+  .sim-player-view { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sim-player-view button { width: 100%; }
+  .sim-stage.is-expanded .sim-map { flex: 1 1 auto; height: auto; max-height: none; }
+  .sim-stage.is-expanded .sim-player-hint, .sim-stage.is-expanded .sim-player-route { display: none; }
+}
+@media print { .sim-stage { height: auto; } .sim-player { display: none; } }
+.sim-player-bar { display: grid; gap: .5rem; }
+@media (min-width: 1081px) {
+  /* Wide screens: transport and camera controls share one row so the map keeps its height. */
+  .sim-player-bar { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .75rem; }
+  .sim-player-bar .sim-player-controls { flex: 1 1 22rem; }
+}
+.sim-label.is-colliding, .sim-checkpoint-label.is-colliding { visibility: hidden; }
+.sim-stage.is-expanded { margin: 0 !important; width: auto; }
+/* Map buttons stay above place labels, so zoom and the compass are always reachable. */
+.sim-map .maplibregl-ctrl-top-right, .sim-map .maplibregl-ctrl-bottom-right { z-index: 5; }
+/* On wide screens the map is already beside the results. */
+@media (min-width: 1081px) { .sim-watch { display: none !important; } }

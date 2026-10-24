@@ -4,7 +4,7 @@ import type { GeoJSONSource, Map } from 'maplibre-gl';
 import { formatNumber, useLanguage } from '../../lib/i18n';
 import { shortTime } from './copy';
 import { circle, floodPlaybackSeconds, haversineKm, headingAt, measure, pointAt, pulseAt, slice, type LonLat } from './scene-3d';
-import { markLabels, useMapLabels, type MapLabel } from './map-labels';
+import { markLabels, useLabelCollisions, useMapLabels, type MapLabel } from './map-labels';
 import { districtSequence, whereAt, type Route } from './route';
 import { PROVINCE_NE, useGazetteer, useRoute, type Gazetteer } from './route-data';
 import { contains } from './route';
@@ -38,7 +38,8 @@ const COPY = {
     floodDone: (t: string) => `${t}: the declared pulse has passed the end of the mapped path.`,
     quakeStatus: (t: string, s: string, p: string) => `${t} after rupture: strong-shaking front (S wave, ~3.5 km/s) about ${s} km out; first tremor (P wave, ~6 km/s) about ${p} km.`,
     reached: (km: string, t: string) => `Front reaches ${km} km at ${t}`,
-    relief: 'relief ×1.5',
+    relief: 'relief ×1.5', view: 'Camera', overview: 'Whole scenario', full: 'Full screen', exitFull: 'Exit full screen',
+    hint: 'Pinch, scroll or use + and − to zoom; drag to look around. Follow keeps your zoom.',
     start: 'Start', end: 'Mapped path ends', leaves: 'Nepal border', outside: 'outside Nepal', province: (n: string) => `${n} Province`,
     now: 'Now passing', near: 'near', river: (n: string) => `named stream point ${n}`, route: 'Route through districts', epicentre: 'Epicentre',
     loadingNames: 'Loading place and river names…',
@@ -53,7 +54,8 @@ const COPY = {
     floodDone: (t: string) => `${t}: घोषित बहाव नक्सांकित मार्गको अन्त्यबाट पार भयो।`,
     quakeStatus: (t: string, s: string, p: string) => `फुटानपछि ${t}: बलियो कम्पनको अग्रभाग (S तरङ्ग, ~३.५ km/s) करिब ${s} km; पहिलो कम्पन (P तरङ्ग, ~६ km/s) करिब ${p} km।`,
     reached: (km: string, t: string) => `अग्रभाग ${km} km मा ${t} मा पुग्छ`,
-    relief: 'उचाइ ×१.५',
+    relief: 'उचाइ ×१.५', view: 'क्यामेरा', overview: 'पूरा परिदृश्य', full: 'पूरा स्क्रिन', exitFull: 'पूरा स्क्रिनबाट निस्कनुहोस्',
+    hint: 'जुम गर्न चिमोट्नुहोस्, स्क्रोल गर्नुहोस् वा + र − थिच्नुहोस्; वरिपरि हेर्न तान्नुहोस्। पछ्याउँदा तपाईंको जुम रहन्छ।',
     start: 'सुरु', end: 'नक्सांकित मार्गको अन्त्य', leaves: 'नेपालको सिमाना', outside: 'नेपाल बाहिर', province: (n: string) => `${n} प्रदेश`,
     now: 'अहिले', near: 'नजिक', river: (n: string) => `नाम भएको खोला बिन्दु ${n}`, route: 'जिल्लागत मार्ग', epicentre: 'केन्द्रबिन्दु',
     loadingNames: 'ठाउँ र नदीका नाम लोड हुँदैछन्…',
@@ -61,7 +63,9 @@ const COPY = {
 } as const;
 
 /** Plays a scenario on the 3D map. Owns its own sources and layers; the map and its terrain belong to SimulatorMap. */
-export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play: Play; threeD: boolean; onThreeD: (on: boolean) => void; shell: RefObject<HTMLElement | null> }) {
+export function Player({ map, play, threeD, onThreeD, shell, expanded, onExpanded }: {
+  map: Map; play: Play; threeD: boolean; onThreeD: (on: boolean) => void; shell: RefObject<HTMLElement | null>; expanded: boolean; onExpanded: (on: boolean) => void;
+}) {
   const [lang] = useLanguage();
   const c = COPY[lang];
   const flood = play.kind === 'flood' ? play : null, quake = play.kind === 'quake' ? play : null;
@@ -74,12 +78,15 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [route, names, flood, measured, quake, lang]);
   useMapLabels(map, labels);
+  useLabelCollisions(map, shell);
   const total = flood ? floodPlaybackSeconds(flood.celerity, flood.duration_s, flood.pathKm) : (quake!.reachKm / S_KM_S);
   const [t, setT] = useState(() => reducedMotion() ? total : 0);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState<(typeof SPEEDS)[number]>(SPEEDS[1]);
   const [follow, setFollow] = useState(true);
-  const clock = useRef({ t, speed: SPEEDS[1] as number, follow: true, heading: 0 });
+  // Follow steers only where the camera is and which way it faces. Zoom and tilt ease to a default once when
+  // following starts (`zoomTo`, `pitchTo`), then belong to the viewer: pinch, scroll or the buttons are never overridden.
+  const clock = useRef({ t, speed: SPEEDS[1] as number, follow: true, heading: 0, zoomTo: null as number | null, pitchTo: null as number | null });
   useEffect(() => { clock.current.speed = speed; clock.current.follow = follow; }, [speed, follow]);
   const reveal = useRef<HTMLCanvasElement | null>(null);
 
@@ -136,9 +143,7 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
           const target = headingAt(measured, mid.head * scale);
           const delta = ((target - clock.current.heading + 540) % 360) - 180;
           clock.current.heading = (clock.current.heading + delta * 0.06 + 360) % 360;
-          // A narrow screen sees less of the valley floor, so it looks down more steeply from a little higher.
-          const narrow = map.getContainer().clientWidth < 640;
-          map.jumpTo({ center: pointAt(measured, mid.head * scale), bearing: clock.current.heading, pitch: threeD ? (narrow ? 52 : 66) : 0, zoom: narrow ? 9.6 : 10.3 });
+          map.jumpTo({ center: pointAt(measured, mid.head * scale), bearing: clock.current.heading, ...settle(map, clock.current) });
         }
       } else if (quake) {
         const s = Math.min(quake.reachKm, time * S_KM_S), p = Math.min(quake.reachKm * 1.6, time * P_KM_S);
@@ -160,16 +165,31 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
             ctx.closePath(); ctx.clip(); ctx.drawImage(quake.shaking.canvas, 0, 0); ctx.restore();
           }
         }
-        if (camera && clock.current.follow) map.jumpTo({ bearing: (map.getBearing() + 0.18) % 360 });
+        if (camera && clock.current.follow) map.jumpTo({ bearing: (map.getBearing() + 0.18) % 360, ...settle(map, clock.current) });
       }
     };
-  }, [map, flood, quake, measured, shell, threeD]);
+  }, [map, flood, quake, measured, shell]);
+
+  /** The whole scenario in view: the full river path, or the strongest shaking around the epicentre. */
+  const overview = useMemo(() => (duration = reducedMotion() ? 0 : 900) => {
+    const ring = flood ? flood.line : circle(quake!.epicentre, Math.min(220, quake!.reachKm * 0.55), 24);
+    const lons = ring.map(p => p[0]), lats = ring.map(p => p[1]);
+    map.fitBounds([[Math.min(...lons), Math.min(...lats)], [Math.max(...lons), Math.max(...lats)]],
+      { padding: 40, maxZoom: 10, pitch: threeD ? 55 : 0, bearing: flood && measured ? headingAt(measured, 0, 20) : map.getBearing(), duration });
+  }, [map, flood, quake, measured, threeD]);
+  /** Starts following the front again, easing back to the default zoom and tilt for this screen. */
+  const startFollow = () => {
+    const narrow = map.getContainer().clientWidth < 640;
+    clock.current.zoomTo = flood ? (narrow ? 9.6 : 10.3) : null;
+    clock.current.pitchTo = threeD ? (flood ? (narrow ? 52 : 64) : 55) : 0;
+    setFollow(true);
+    if (!playing) draw(clock.current.t, true);
+  };
 
   // Frames the scene when it first appears.
   useEffect(() => {
-    const ring = flood ? flood.line : circle(quake!.epicentre, Math.min(220, quake!.reachKm * 0.55), 24);
-    const lons = ring.map(p => p[0]), lats = ring.map(p => p[1]);
-    map.fitBounds([[Math.min(...lons), Math.min(...lats)], [Math.max(...lons), Math.max(...lats)]], { padding: 50, maxZoom: 10, pitch: threeD ? 62 : 0, bearing: flood && measured ? headingAt(measured, 0, 20) : 0, duration: reducedMotion() ? 0 : 1200 });
+    overview(reducedMotion() ? 0 : 1200);
+    if (!reducedMotion()) { clock.current.zoomTo = flood ? (map.getContainer().clientWidth < 640 ? 9.6 : 10.3) : null; clock.current.pitchTo = threeD ? 60 : 0; }
     if (flood && measured) clock.current.heading = headingAt(measured, 0, 20);
     clock.current.t = reducedMotion() ? total : 0;
     setT(clock.current.t); draw(clock.current.t, false);
@@ -196,10 +216,26 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
       frame = requestAnimationFrame(tick);
     };
     frame = requestAnimationFrame(tick);
-    const stopFollow = () => setFollow(false);
-    map.on('dragstart', stopFollow);
-    return () => { cancelAnimationFrame(frame); map.off('dragstart', stopFollow); };
+    return () => cancelAnimationFrame(frame);
   }, [playing, draw, total, map]);
+
+  // The viewer's own gestures always win. Zooming (pinch, scroll, +/−) keeps following at the new zoom; dragging
+  // with one finger or the mouse, or rotating, hands the camera over until Follow is pressed again.
+  useEffect(() => {
+    type Gesture = { originalEvent?: Event };
+    const zoomed = (e: Gesture) => { if (e.originalEvent) clock.current.zoomTo = null; };
+    const tilted = (e: Gesture) => { if (e.originalEvent) clock.current.pitchTo = null; };
+    const took = (e: Gesture) => {
+      const touches = (e.originalEvent as TouchEvent | undefined)?.touches;
+      if (e.originalEvent && !(touches && touches.length > 1)) setFollow(false);
+    };
+    map.on('zoomstart', zoomed); map.on('pitchstart', tilted); map.on('dragstart', took); map.on('rotatestart', took);
+    return () => { map.off('zoomstart', zoomed); map.off('pitchstart', tilted); map.off('dragstart', took); map.off('rotatestart', took); };
+  }, [map]);
+
+  // When a playback finishes, the camera pulls back to show the whole scenario.
+  const ended = t >= total;
+  useEffect(() => { if (ended && clock.current.follow && !reducedMotion()) { setFollow(false); overview(); } }, [ended, overview]);
 
   // A short spoken summary when a checkpoint is reached, not every frame.
   const midHead = flood ? pulseAt(t, flood.celerity[1], flood.duration_s, flood.pathKm).head : 0;
@@ -226,8 +262,9 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
     {quake && epicentreUnit && <p className="sim-player-where"><strong>{c.epicentre}:</strong> {epicentreUnit}</p>}
     {sequence.length > 1 && <ol className="sim-player-route" aria-label={c.route}>{sequence.map((d, i) => <li key={`${d.district}-${i}`} data-state={midHead >= d.toKm ? 'passed' : midHead >= d.fromKm ? 'current' : 'ahead'}>{d.district ?? '—'}</li>)}</ol>}
     <p className="sr-only" role="status" aria-live="polite">{announce}</p>
+    <div className="sim-player-bar">
     <div className="sim-player-controls">
-      <button type="button" className="sim-player-play" onClick={() => { if (t >= total) { clock.current.t = 0; setT(0); draw(0, true); } setFollow(true); setPlaying(p => !p); }}>
+      <button type="button" className="sim-player-play" onClick={() => { if (t >= total) { clock.current.t = 0; setT(0); draw(0, true); } if (!playing) startFollow(); setPlaying(p => !p); }}>
         <span aria-hidden="true">{playing ? '❚❚' : '▶'}</span> {playing ? c.pause : t >= total ? c.replay : c.play}
       </button>
       <label className="sim-player-scrub"><span className="sr-only">{flood ? c.time : c.quakeTime}</span>
@@ -236,9 +273,15 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
       <label className="sim-player-speed"><span className="sr-only">{c.speed}</span>
         <select value={speed} onChange={event => setSpeed(Number(event.target.value) as (typeof SPEEDS)[number])}>{SPEEDS.map(s => <option key={s} value={s}>{c.seconds(s)}</option>)}</select>
       </label>
-      <button type="button" aria-pressed={follow} onClick={() => setFollow(f => !f)}>{c.follow}</button>
-      <button type="button" aria-pressed={threeD} onClick={() => onThreeD(!threeD)} title={c.relief}>{threeD ? c.threeD : c.flat}</button>
     </div>
+    <div className="sim-player-view" role="group" aria-label={c.view}>
+      <button type="button" aria-pressed={follow} onClick={() => follow ? setFollow(false) : startFollow()}><span aria-hidden="true">◎</span> {c.follow}</button>
+      <button type="button" onClick={() => { setFollow(false); overview(); }}><span aria-hidden="true">⤢</span> {c.overview}</button>
+      <button type="button" aria-pressed={threeD} onClick={() => onThreeD(!threeD)} title={c.relief}>{threeD ? c.threeD : c.flat}</button>
+      <button type="button" aria-pressed={expanded} onClick={() => onExpanded(!expanded)}><span aria-hidden="true">{expanded ? '✕' : '⛶'}</span> {expanded ? c.exitFull : c.full}</button>
+    </div>
+    </div>
+    <p className="sim-player-hint">{c.hint}</p>
   </div>;
 }
 
@@ -278,4 +321,20 @@ function buildLabels({ route, names, flood, measured, quake, lang, c, provinceNa
     }
   }
   return labels;
+}
+
+/** One frame of easing towards the follow framing; a target is dropped once reached or when the viewer takes over. */
+function settle(map: Map, camera: { zoomTo: number | null; pitchTo: number | null }) {
+  const out: { zoom?: number; pitch?: number } = {};
+  if (camera.zoomTo !== null) {
+    const z = map.getZoom(), next = z + (camera.zoomTo - z) * 0.1;
+    out.zoom = Math.abs(camera.zoomTo - next) < 0.01 ? camera.zoomTo : next;
+    if (out.zoom === camera.zoomTo) camera.zoomTo = null;
+  }
+  if (camera.pitchTo !== null) {
+    const p = map.getPitch(), next = p + (camera.pitchTo - p) * 0.1;
+    out.pitch = Math.abs(camera.pitchTo - next) < 0.2 ? camera.pitchTo : next;
+    if (out.pitch === camera.pitchTo) camera.pitchTo = null;
+  }
+  return out;
 }

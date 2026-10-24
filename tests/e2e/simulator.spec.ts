@@ -147,6 +147,22 @@ test('a flood run plays back in 3D on verified terrain, and the scrubber moves t
   await expect(player.locator('.sim-player-where')).toContainText('Now passing:');
   await expect(page.locator('.sim-label-start')).toHaveCount(1);
   await expect(page.locator('.sim-label-province')).toHaveCount(7);
+  // The controls sit below the map, never over it, and the camera is the viewer's to move.
+  const mapBox = (await page.locator('.sim-map').boundingBox())!, dockBox = (await player.boundingBox())!;
+  expect(dockBox.y).toBeGreaterThanOrEqual(mapBox.y + mapBox.height - 1);
+  await expect(page.locator('.maplibregl-ctrl-zoom-in')).toBeVisible();
+  await expect(player).toContainText('Pinch, scroll or use + and − to zoom');
+  await player.getByRole('button', { name: /Whole scenario/ }).click();
+  await expect(player.getByRole('button', { name: /Follow/ })).toHaveAttribute('aria-pressed', 'false');
+  await player.getByRole('button', { name: /Follow/ }).click();
+  await expect(player.getByRole('button', { name: /Follow/ })).toHaveAttribute('aria-pressed', 'true');
+  await player.getByRole('button', { name: /Full screen/ }).click();
+  await expect(page.locator('.sim-stage')).toHaveAttribute('data-expanded', 'true');
+  const full = (await page.locator('.sim-stage').boundingBox())!;
+  expect(Math.round(full.width)).toBe(page.viewportSize()!.width);
+  expect(Math.round(full.height)).toBe(page.viewportSize()!.height);
+  await page.keyboard.press('Escape');
+  await expect(page.locator('.sim-stage')).not.toHaveAttribute('data-expanded', 'true');
   await expect(player.getByRole('button', { name: '3D' })).toHaveAttribute('aria-pressed', 'true');
   await player.getByRole('button', { name: '3D' }).click();
   await expect(player.getByRole('button', { name: '2D' })).toHaveAttribute('aria-pressed', 'false');
@@ -205,6 +221,25 @@ test('Nepali interface covers the run, keeps numbers in Devanagari and the notic
   await expect(result.locator('.sim-unknown')).toContainText('अज्ञात (UNKNOWN)');
   await page.reload();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('परिदृश्य सिमुलेटर');
+});
+
+test('on a phone the playback controls sit under the map, and full screen covers the tab bar', async ({ page }) => {
+  test.slow(); // 3D terrain in CI's software renderer
+  await page.setViewportSize({ width: 390, height: 844 });
+  await open(page);
+  await runFlood(page);
+  const player = page.getByRole('group', { name: '3D scenario playback' });
+  await expect(player).toBeVisible({ timeout: 20_000 });
+  const mapBox = (await page.locator('.sim-map').boundingBox())!, dockBox = (await player.boundingBox())!;
+  expect(dockBox.y).toBeGreaterThanOrEqual(mapBox.y + mapBox.height - 1);
+  for (const button of await player.getByRole('button').all()) expect((await button.boundingBox())!.height).toBeGreaterThanOrEqual(47.5);
+  await player.getByRole('button', { name: /Full screen/ }).click();
+  // The bottom of the screen now belongs to the playback, not the site's tab bar.
+  const topAtBottom = await page.evaluate(() => document.elementFromPoint(innerWidth / 2, innerHeight - 10)?.closest('.sim-stage, #primary-navigation')?.className ?? '');
+  expect(topAtBottom).toContain('sim-stage');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(0);
+  await player.getByRole('button', { name: /Exit full screen/ }).click();
+  await expect(page.locator('.sim-stage')).not.toHaveAttribute('data-expanded', 'true');
 });
 
 for (const width of [320, 390]) test(`mobile ${width}px has no sideways scroll before or after a run`, async ({ page }) => {

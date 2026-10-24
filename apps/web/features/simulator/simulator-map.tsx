@@ -36,6 +36,7 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
   const [instance, setInstance] = useState<Map | null>(null);
   const [threeD, setThreeD] = useState(true);
   const shell = useRef<HTMLDivElement>(null);
+  const [expanded, setExpanded] = useState(false);
   useEffect(() => { handlers.current = { onPick, onOrigin }; }, [onPick, onOrigin]);
 
   useEffect(() => {
@@ -54,7 +55,8 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
           pixelRatio: Math.min(window.devicePixelRatio || 1, 1.5),
         });
         mapRef.current = map;
-        map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
+        // Zoom buttons plus a compass that resets rotation and tilt; pinch, scroll and keyboard zoom work too.
+        map.addControl(new NavigationControl({ showCompass: true, visualizePitch: true }), 'top-right');
         let loaded = false;
         // Only a failure before the first render is fatal; later source errors are non-blocking.
         map.on('error', () => { if (!loaded && !controller.signal.aborted) setFailure('failed'); });
@@ -141,10 +143,27 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
     if (!scene.play || !threeD) map.easeTo({ pitch: 0, duration: 400 });
   }, [ready, terrain, threeD, scene.play]);
 
-  return <div ref={shell} className="sim-map" data-map-state={failure ? 'unavailable' : ready ? 'ready' : 'loading'} data-terrain={terrain ? 'ready' : 'none'}>
-    <div ref={container} className="map" role="region" aria-label={label} />
-    {ready && !failure && scene.play && instance && <Player key={scene.play.kind} map={instance} play={scene.play} threeD={threeD && !!terrain} onThreeD={setThreeD} shell={shell} />}
-    {!ready && !failure && <p className="sim-map-status" role="status">{messages.loading}</p>}
-    {failure && <p className="sim-map-status sim-map-failure" role="status">{messages[failure]}</p>}
+  // Full screen is a CSS state, not the Fullscreen API, so it also works on iPhone; the map is resized to match,
+  // the page behind stops scrolling, and Escape leaves it.
+  useEffect(() => {
+    instance?.resize();
+    if (!expanded) return;
+    const root = document.documentElement, before = root.style.overflow;
+    root.style.overflow = 'hidden';
+    const key = (event: KeyboardEvent) => { if (event.key === 'Escape') setExpanded(false); };
+    window.addEventListener('keydown', key);
+    return () => { root.style.overflow = before; window.removeEventListener('keydown', key); };
+  }, [expanded, instance]);
+  const playing = ready && !failure && !!scene.play && !!instance;
+
+  return <div className={expanded ? 'sim-stage is-expanded' : 'sim-stage'} data-expanded={expanded ? 'true' : undefined}>
+    <div ref={shell} className="sim-map" data-map-state={failure ? 'unavailable' : ready ? 'ready' : 'loading'} data-terrain={terrain ? 'ready' : 'none'}>
+      <div ref={container} className="map" role="region" aria-label={label} />
+      {!ready && !failure && <p className="sim-map-status" role="status">{messages.loading}</p>}
+      {failure && <p className="sim-map-status sim-map-failure" role="status">{messages[failure]}</p>}
+    </div>
+    {/* The playback controls sit below the map, never on top of it, so the scene and its labels stay visible. */}
+    {playing && <Player key={scene.play!.kind} map={instance!} play={scene.play!} threeD={threeD && !!terrain} onThreeD={setThreeD} shell={shell}
+      expanded={expanded} onExpanded={setExpanded} />}
   </div>;
 }

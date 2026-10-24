@@ -35,3 +35,38 @@ export function markLabels(root: ParentNode | null | undefined, attribute: 'km' 
     el.classList.toggle('near', Math.abs(at - value) <= nearKm);
   });
 }
+
+// Which label survives when two overlap: start/end pins, then provinces, districts and distance markers, towns,
+// stream points, villages.
+const PRIORITY: Array<[string, number]> = [['sim-label-start', 0], ['sim-label-end', 0], ['sim-label-province', 1], ['sim-label-district', 2],
+  ['sim-checkpoint-label', 2], ['sim-label-city', 3], ['sim-label-town', 3], ['sim-label-river', 4], ['sim-label-village', 5]];
+const rank = (el: Element) => PRIORITY.find(([cls]) => el.classList.contains(cls))?.[1] ?? 6;
+
+/** Hides labels that would overlap a more important one, re-checking as the camera moves (at most ~7 times a second). */
+export function useLabelCollisions(map: Map, root: { current: HTMLElement | null }) {
+  useEffect(() => {
+    let queued = 0, last = 0;
+    const solve = () => {
+      queued = 0; last = performance.now();
+      const labels = [...(root.current?.querySelectorAll<HTMLElement>('.sim-label, .sim-checkpoint-label') ?? [])].sort((a, b) => rank(a) - rank(b));
+      const kept: DOMRect[] = [];
+      for (const el of labels) {
+        el.classList.remove('is-colliding');
+        const box = el.getBoundingClientRect();
+        if (box.width === 0 || getComputedStyle(el).opacity === '0' || getComputedStyle(el).display === 'none') continue;
+        const hit = kept.some(k => box.left < k.right + 4 && box.right > k.left - 4 && box.top < k.bottom + 2 && box.bottom > k.top - 2);
+        if (hit) el.classList.add('is-colliding'); else kept.push(box);
+      }
+    };
+    const schedule = () => { if (queued) return; queued = window.setTimeout(solve, Math.max(0, 140 - (performance.now() - last))); };
+    map.on('move', schedule); map.on('moveend', schedule); map.on('idle', schedule);
+    // Re-check when labels are added or their state changes, but not for the collision flag this hook sets itself.
+    const withoutFlag = (value: string | null) => (value ?? '').split(' ').filter(c => c && c !== 'is-colliding').sort().join(' ');
+    const observer = new MutationObserver(records => {
+      if (records.some(r => r.type === 'childList' || withoutFlag(r.oldValue) !== withoutFlag((r.target as Element).getAttribute('class')))) schedule();
+    });
+    if (root.current) observer.observe(root.current, { subtree: true, attributes: true, attributeFilter: ['class'], attributeOldValue: true, childList: true });
+    schedule();
+    return () => { map.off('move', schedule); map.off('moveend', schedule); map.off('idle', schedule); observer.disconnect(); window.clearTimeout(queued); };
+  }, [map, root]);
+}
