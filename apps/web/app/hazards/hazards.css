@@ -65,3 +65,4 @@
 .hz-visuals { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1.25rem 2rem; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); }
 .hz-quake-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1rem 1.5rem; align-items: start; }
 @media (max-width: 760px) { .hz-quake-layout { grid-template-columns: minmax(0, 1fr); } }
+.hz-stale { margin: 0; max-width: 78ch; padding: .7rem .9rem; border-left: 4px solid var(--warning); background: #fbf1e3; color: var(--ink-strong); font-size: .92rem; border-radius: var(--radius-sm); }

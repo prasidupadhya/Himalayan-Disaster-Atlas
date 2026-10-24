@@ -23,6 +23,8 @@ test('today is arranged around floods, glacial lakes and earthquakes with status
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Floods, glacial lakes and earthquakes today');
   await expect(page.getByRole('navigation', { name: 'On this page' }).getByRole('link')).toHaveText(['Floods', 'Glacial lakes', 'Earthquakes', 'Reported incidents']);
   await expect(page.getByText('Copied 2026-10-17 06:02 NPT')).toBeVisible();
+  // A source that could not be reached today is called out once at the top, with the oldest copy's date.
+  await expect(page.getByRole('note').filter({ hasText: 'could not be reached' })).toContainText('1 of 3 official sources could not be reached for today’s copy');
 
   const rivers = section(page, 'floods').locator('[data-source="bipad-river"]');
   await expect(rivers).toContainText('1 stations above danger level');

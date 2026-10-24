@@ -15,7 +15,9 @@ concurrency:
 jobs:
   digest:
     if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-24.04
+    # Nepal's government data centre has refused GitHub's runners since 22 October 2026 (see docs/official-sources.md).
+    # Set the repository variable GOV_RUNNER to the label of a self-hosted runner in Nepal to run there instead.
+    runs-on: ${{ vars.GOV_RUNNER || 'ubuntu-24.04' }}
     # The digest gives up on silent hosts and stops starting sources after 10 minutes, so it always
     # reaches the commit step; sources it could not read keep their last copy, marked as such.
     timeout-minutes: 30
@@ -37,6 +39,9 @@ jobs:
         run: .gov/bin/python -m unittest tests.python.test_gov_feeds -v
       - name: Fetch and organise official pages
         timeout-minutes: 18
+        env:
+          # Optional: a proxy on a network Nepal's government hosts accept; used for *.gov.np requests only.
+          GOV_PROXY: ${{ secrets.GOV_PROXY }}
         run: .gov/bin/python -m pipelines.gov_feeds.digest ${{ github.event_name == 'schedule' && github.event.schedule != '17 0 * * *' && '--retry' || '' }}
       - name: Commit as the repository owner
         id: commit

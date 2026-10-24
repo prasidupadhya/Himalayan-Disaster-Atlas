@@ -6,10 +6,12 @@ permissions:
   contents: read
 jobs:
   probe:
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.GOV_RUNNER || 'ubuntu-24.04' }}
     timeout-minutes: 15
     steps:
       - name: Probe hosts
+        env:
+          GOV_PROXY: ${{ secrets.GOV_PROXY }}
         run: |
           UA="HimalayanDisasterAtlas/1.0 (+https://github.com/prasidupadhya/Himalayan-Disaster-Atlas; reachability probe)"
           for url in \
@@ -31,5 +33,9 @@ jobs:
               curl $fam -sS -o /dev/null -A "$UA" --connect-timeout 12 --max-time 25 \
                 -w "curl $fam: http=%{http_code} ip=%{remote_ip} connect=%{time_connect}s tls=%{time_appconnect}s total=%{time_total}s\n" "$url" 2>&1 | tail -1
             done
+            if [ -n "$GOV_PROXY" ]; then
+              # Through the configured proxy; curl's errors can name the proxy, so they are not printed.
+              curl -sS -o /dev/null -A "$UA" --proxy "$GOV_PROXY" --connect-timeout 12 --max-time 25 -w "via proxy: http=%{http_code} total=%{time_total}s\n" "$url" 2>/dev/null || echo "via proxy: failed"
+            fi
           done
           echo "=== runner egress"; curl -sS --max-time 10 https://api.ipify.org; echo

@@ -13,7 +13,9 @@ from pipelines.gov_feeds.digest import (
     organise_list,
     organise_rain,
     organise_river,
+    proxy_for,
     robots_allows,
+    scrub,
 )
 from pipelines.gov_feeds.digest import SOURCES as REGISTRY
 
@@ -185,6 +187,20 @@ class BuildTests(unittest.TestCase):
         self.assertFalse(improves(same, morning))
         self.assertTrue(improves(better, morning))
         self.assertTrue(improves(tomorrow, morning))
+
+    def test_the_proxy_carries_only_government_hosts_and_never_appears_in_text(self):
+        from unittest import mock
+        secret = "http://SYNTHETIC-user:SYNTHETIC-pass@proxy.example.test:3128"
+        with mock.patch.dict("os.environ", {"GOV_PROXY": secret}):
+            self.assertEqual(proxy_for("https://bipadportal.gov.np/api/v1/alert/"), secret)
+            self.assertEqual(proxy_for("https://dhm.gov.np/mfd/"), secret)
+            self.assertIsNone(proxy_for("https://example.test/gov.np"))
+            self.assertIsNone(proxy_for("https://notgov.np.example.test/"))
+            text = scrub(f"ProxyError: could not connect to {secret} (SYNTHETIC-user:SYNTHETIC-pass@proxy.example.test:3128)")
+            self.assertNotIn("SYNTHETIC-pass", text)
+            self.assertNotIn("proxy.example.test", text)
+        with mock.patch.dict("os.environ", {"GOV_PROXY": ""}):
+            self.assertIsNone(proxy_for("https://dhm.gov.np/"))
 
     def test_pages_built_by_javascript_use_the_browser(self):
         source = {**SOURCES[0], "render": True}

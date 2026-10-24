@@ -21,6 +21,7 @@ export function Hazards() {
       <p className="intro">{c.intro}</p>
       <p className="hz-authorities">{c.authorities} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url} rel="noopener">{a.name}</a></span>)}</p>
       {digest && <p className="hz-copied">{c.copiedAt} {digest.generated_at_nepal} · <a href="/official/">{c.all}</a></p>}
+      {digest && <StaleNote digest={digest} c={c} lang={lang} />}
       {digest && <Glance digest={digest} c={c} lang={lang} />}
       <nav className="hz-jump" aria-label={c.jump}>{sections.map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}</nav>
     </header>
@@ -175,4 +176,13 @@ function TodayCard({ entry, title, anchor, c, lang, wide, children }: { entry: E
     {entry && <p className="muted">{entry.agency}</p>}
     <p className="hz-card-links"><a href={`/official/#official-${anchor}`}>{c.full}</a>{entry && <a href={entry.url} rel="noopener noreferrer" target="_blank">{c.agency}</a>}</p>
   </li>;
+}
+
+/** Says plainly when today's copy could not reach some agencies, and how old the oldest copy shown is. */
+function StaleNote({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) {
+  const old = digest.sources.filter(e => e.last_known);
+  if (!old.length) return null;
+  const oldest = old.map(e => e.fetched_at).filter((v): v is string => !!v).sort()[0];
+  const since = nepalTime(oldest, lang === 'ne' ? 'ne-NP' : 'en-GB') ?? 'UNKNOWN';
+  return <p className="hz-stale" role="note"><span aria-hidden="true">⚠ </span>{c.staleNote(formatNumber(old.length, lang), formatNumber(digest.sources.length, lang), since)}</p>;
 }

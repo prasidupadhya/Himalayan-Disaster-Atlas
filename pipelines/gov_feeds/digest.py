@@ -9,6 +9,7 @@ import argparse
 import gzip
 import hashlib
 import json
+import os
 import re
 import time
 from datetime import datetime, timedelta, timezone
@@ -56,14 +57,35 @@ def clean(text, limit=LIMITS["text"]):
 
 # ---- fetching ---------------------------------------------------------------------------------
 
+def proxy_for(url):
+    """The proxy for a request, if any. Since 22 October 2026 Nepal's government data centre has not accepted
+    connections from cloud servers abroad (GitHub's runners included); setting GOV_PROXY to a proxy the owner controls
+    on a network it accepts routes only *.gov.np requests through it. Everything else goes direct."""
+    proxy = os.environ.get("GOV_PROXY", "").strip()
+    host = urlparse(url).hostname or ""
+    return proxy if proxy and (host == "gov.np" or host.endswith(".gov.np")) else None
+
+
+def scrub(text):
+    """Removes the proxy address and its credentials from anything that is logged or published."""
+    proxy = os.environ.get("GOV_PROXY", "").strip()
+    if not proxy:
+        return text
+    parsed = urlparse(proxy if "://" in proxy else f"http://{proxy}")
+    for secret in {proxy, parsed.netloc, parsed.password or "", parsed.username or "", parsed.hostname or ""} - {""}:
+        text = text.replace(secret, "[proxy]")
+    return text
+
+
 def fetch(url):
     """Returns (status, body bytes, final url, content type). Raises on transport failure."""
     from scrapling.fetchers import Fetcher
 
     # BIPAD's REST API answers an HTML browse page unless JSON is asked for.
     headers = {"User-Agent": USER_AGENT, "Accept": "application/json, text/html;q=0.9, */*;q=0.8", "Accept-Language": "en,ne;q=0.8"}
-    response = Fetcher.get(url, headers=headers,
-                           timeout=25, retries=2, follow_redirects=True, stealthy_headers=False)
+    proxy = proxy_for(url)
+    response = Fetcher.get(url, headers=headers, timeout=25, retries=2, follow_redirects=True, stealthy_headers=False,
+                           **({"proxy": proxy} if proxy else {}))
     body = response.body if isinstance(response.body, bytes) else str(response.body).encode("utf-8")
     headers = getattr(response, "headers", {}) or {}
     content_type = next((v for k, v in headers.items() if k.lower() == "content-type"), "") if hasattr(headers, "items") else ""
@@ -72,14 +94,14 @@ def fetch(url):
 
 def render(url):
     """Like fetch, for pages built by JavaScript in the browser: loads them in headless Chromium."""
-    import os
-
     from scrapling.fetchers import DynamicFetcher
 
     options = {"headless": True, "network_idle": True, "timeout": 45_000, "useragent": USER_AGENT,
                "extra_headers": {"Accept-Language": "en,ne;q=0.8"}, "disable_resources": True, "retries": 1, "google_search": False}
     if os.environ.get("GOV_BROWSER_PATH"):
         options["executable_path"] = os.environ["GOV_BROWSER_PATH"]
+    if proxy_for(url):
+        options["proxy"] = proxy_for(url)
     response = DynamicFetcher.fetch(url, **options)
     body = response.body if isinstance(response.body, bytes) else str(response.body).encode("utf-8")
     return int(getattr(response, "status", 0) or 0), body[: LIMITS["body"]], str(getattr(response, "url", url) or url), "text/html"
@@ -411,7 +433,7 @@ def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None, r
                     raw[source["id"]] = body
         except Exception as error:  # Transport or parse failure is recorded, never hidden.
             entry["status"] = "error"
-            entry["error"] = clean(f"{type(error).__name__}: {error}", 300)
+            entry["error"] = clean(scrub(f"{type(error).__name__}: {error}"), 300)
         if entry["status"] != "fetched" and prior and prior.get("content"):
             entry.update({"content": prior["content"], "fetched_at": prior.get("fetched_at"), "sha256": prior.get("sha256"),
                           "last_known": True, "changes": {}})
@@ -466,6 +488,7 @@ def main(argv=None):
         print("Retry read no more sources than today's copy; keeping it.")
     if not args.dry_run and not keep:
         write(digest, raw)
+    print("Government hosts via proxy:", "yes" if os.environ.get("GOV_PROXY", "").strip() else "no")
     print(json.dumps(digest["summary"], indent=1))
     for entry in digest["sources"]:
         print(f"{entry['id']}: {entry['status']} (HTTP {entry['http_status']})")
