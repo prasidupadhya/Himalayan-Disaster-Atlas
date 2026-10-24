@@ -17,7 +17,8 @@ test('static navigation, WebGL, boundary controls and accessible identification'
   await page.goto('/');
   await page.getByRole('link', { name: 'Explore Nepal', exact: true }).click();
   const map = page.getByRole('region', { name: 'Interactive Nepal administrative boundary map' });
-  await expect(map).toHaveAttribute('data-map-ready', 'true');
+  // Often the first test of a run: the static server and WebGL start cold.
+  await expect(map).toHaveAttribute('data-map-ready', 'true', { timeout: 20_000 });
   await expect(page.locator('canvas')).toBeVisible();
   await expect(page.locator('.admin-map-label')).toHaveCount(7);
   const attribution = page.locator('.maplibregl-ctrl-attrib');
