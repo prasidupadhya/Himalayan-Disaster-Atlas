@@ -3,12 +3,16 @@ import { useEffect, useMemo, useRef, useState, type RefObject } from 'react';
 import type { GeoJSONSource, Map } from 'maplibre-gl';
 import { formatNumber, useLanguage } from '../../lib/i18n';
 import { shortTime } from './copy';
-import { circle, floodPlaybackSeconds, headingAt, measure, pointAt, pulseAt, slice, type LonLat } from './scene-3d';
+import { circle, floodPlaybackSeconds, haversineKm, headingAt, measure, pointAt, pulseAt, slice, type LonLat } from './scene-3d';
+import { markLabels, useMapLabels, type MapLabel } from './map-labels';
+import { districtSequence, whereAt, type Route } from './route';
+import { PROVINCE_NE, useGazetteer, useRoute, type Gazetteer } from './route-data';
+import { contains } from './route';
 import type { Corners } from './simulator-map';
 
 /** The declared flood pulse, as the scenario defines it: it moves along the river line at three declared celerities. */
 export interface FloodPlay {
-  kind: 'flood'; line: LonLat[]; pathKm: number; celerity: [number, number, number]; duration_s: number;
+  kind: 'flood'; id: string; line: LonLat[]; pathKm: number; celerity: [number, number, number]; duration_s: number;
   checkpoints: Array<{ km: number }>;
 }
 /** An earthquake scenario: modelled shaking (BSSA14) revealed behind an illustrative S-wave front. */
@@ -35,6 +39,9 @@ const COPY = {
     quakeStatus: (t: string, s: string, p: string) => `${t} after rupture: strong-shaking front (S wave, ~3.5 km/s) about ${s} km out; first tremor (P wave, ~6 km/s) about ${p} km.`,
     reached: (km: string, t: string) => `Front reaches ${km} km at ${t}`,
     relief: 'relief ×1.5',
+    start: 'Start', end: 'Mapped path ends', leaves: 'Nepal border', outside: 'outside Nepal', province: (n: string) => `${n} Province`,
+    now: 'Now passing', near: 'near', river: (n: string) => `named stream point ${n}`, route: 'Route through districts', epicentre: 'Epicentre',
+    loadingNames: 'Loading place and river names…',
   },
   ne: {
     label: '३D परिदृश्य प्रदर्शन', play: 'चलाउनुहोस्', pause: 'रोक्नुहोस्', replay: 'फेरि चलाउनुहोस्', time: 'बहावपछिको समय', quakeTime: 'फुटानपछिको समय',
@@ -47,6 +54,9 @@ const COPY = {
     quakeStatus: (t: string, s: string, p: string) => `फुटानपछि ${t}: बलियो कम्पनको अग्रभाग (S तरङ्ग, ~३.५ km/s) करिब ${s} km; पहिलो कम्पन (P तरङ्ग, ~६ km/s) करिब ${p} km।`,
     reached: (km: string, t: string) => `अग्रभाग ${km} km मा ${t} मा पुग्छ`,
     relief: 'उचाइ ×१.५',
+    start: 'सुरु', end: 'नक्सांकित मार्गको अन्त्य', leaves: 'नेपालको सिमाना', outside: 'नेपाल बाहिर', province: (n: string) => `${n} प्रदेश`,
+    now: 'अहिले', near: 'नजिक', river: (n: string) => `नाम भएको खोला बिन्दु ${n}`, route: 'जिल्लागत मार्ग', epicentre: 'केन्द्रबिन्दु',
+    loadingNames: 'ठाउँ र नदीका नाम लोड हुँदैछन्…',
   },
 } as const;
 
@@ -56,6 +66,14 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
   const c = COPY[lang];
   const flood = play.kind === 'flood' ? play : null, quake = play.kind === 'quake' ? play : null;
   const measured = useMemo(() => flood ? measure(flood.line) : null, [flood]);
+  const { route, gazetteer: floodNames } = useRoute(flood?.id ?? null, flood?.line ?? null, flood?.pathKm ?? null);
+  const quakeNames = useGazetteer(!!quake);
+  const names = floodNames ?? quakeNames;
+  const provinceName = (en: string | null, code: string | null) => en ? c.province(lang === 'ne' && code && PROVINCE_NE[code] ? PROVINCE_NE[code] : en) : c.outside;
+  const labels = useMemo(() => buildLabels({ route, names, flood, measured, quake, lang, c, provinceName }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [route, names, flood, measured, quake, lang]);
+  useMapLabels(map, labels);
   const total = flood ? floodPlaybackSeconds(flood.celerity, flood.duration_s, flood.pathKm) : (quake!.reachKm / S_KM_S);
   const [t, setT] = useState(() => reducedMotion() ? total : 0);
   const [playing, setPlaying] = useState(false);
@@ -113,7 +131,7 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
         set('play-range', line(slice(measured, Math.min(fast.tail, slow.tail) * scale, fast.head * scale)));
         const done = mid.tail >= flood.pathKm;
         set('play-head', point(done ? null : pointAt(measured, mid.head * scale)));
-        shell.current?.querySelectorAll<HTMLElement>('.sim-checkpoint-label').forEach(el => el.classList.toggle('reached', Number(el.dataset.km) <= mid.head + 1e-6));
+        markLabels(shell.current, 'km', mid.head);
         if (camera && clock.current.follow && !done) {
           const target = headingAt(measured, mid.head * scale);
           const delta = ((target - clock.current.heading + 540) % 360) - 180;
@@ -127,6 +145,7 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
         set('play-s', line(s > 0.5 ? circle(quake.epicentre, s) : []));
         set('play-p', line(p > 0.5 ? circle(quake.epicentre, p) : []));
         set('play-head', point(quake.epicentre));
+        markLabels(shell.current, 'dist', s, 40);
         const canvas = reveal.current;
         if (canvas && quake.shaking) {
           const ctx = canvas.getContext('2d')!;
@@ -194,9 +213,18 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
     return mid.tail >= flood.pathKm ? c.floodDone(shortTime(t, lang)) : c.floodStatus(shortTime(t, lang), formatNumber(mid.head, lang, 0), formatNumber(slow.head, lang, 0), formatNumber(fast.head, lang, 0));
   })() : c.quakeStatus(`${formatNumber(Math.round(t), lang)} s`, formatNumber(Math.min(quake!.reachKm, t * S_KM_S), lang, 0), formatNumber(Math.min(quake!.reachKm * 1.6, t * P_KM_S), lang, 0));
 
+  const here = flood && route ? whereAt(route, midHead) : null;
+  const sequence = route ? districtSequence(route).filter(d => d.inNepal) : [];
+  const epicentreUnit = quake && names ? unitAt(names, quake.epicentre) : null;
   return <div className="sim-player" role="group" aria-label={c.label} data-player-state={playing ? 'playing' : t >= total ? 'ended' : 'paused'}>
     <p className="sim-player-badge"><strong>{c.modelled}</strong> <span>{flood ? c.floodNote : c.quakeNote}</span></p>
     <p className="sim-player-status" data-player-time={Math.round(t)}>{status}</p>
+    {flood && (here?.stretch ? <p className="sim-player-where" data-where-district={here.stretch.unit.district ?? ''}>
+      <strong>{c.now}:</strong> {[here.river ? c.river(here.river.name) : null, here.place ? `${c.near} ${here.place.name}` : null,
+        here.stretch.unit.inNepal ? [here.stretch.unit.local, here.stretch.unit.district, provinceName(here.stretch.unit.province, here.stretch.unit.provinceCode)].filter(Boolean).join(', ') : c.outside].filter(Boolean).join(' · ')}
+    </p> : <p className="sim-player-where">{c.loadingNames}</p>)}
+    {quake && epicentreUnit && <p className="sim-player-where"><strong>{c.epicentre}:</strong> {epicentreUnit}</p>}
+    {sequence.length > 1 && <ol className="sim-player-route" aria-label={c.route}>{sequence.map((d, i) => <li key={`${d.district}-${i}`} data-state={midHead >= d.toKm ? 'passed' : midHead >= d.fromKm ? 'current' : 'ahead'}>{d.district ?? '—'}</li>)}</ol>}
     <p className="sr-only" role="status" aria-live="polite">{announce}</p>
     <div className="sim-player-controls">
       <button type="button" className="sim-player-play" onClick={() => { if (t >= total) { clock.current.t = 0; setT(0); draw(0, true); } setFollow(true); setPlaying(p => !p); }}>
@@ -212,4 +240,42 @@ export function Player({ map, play, threeD, onThreeD, shell }: { map: Map; play:
       <button type="button" aria-pressed={threeD} onClick={() => onThreeD(!threeD)} title={c.relief}>{threeD ? c.threeD : c.flat}</button>
     </div>
   </div>;
+}
+
+type Copy = (typeof COPY)[keyof typeof COPY];
+/** The administrative units at a point, joined for display ("local level, district, province"). */
+function unitAt(names: Gazetteer, at: LonLat) {
+  const district = names.districts.find(a => contains(a, at)), local = district ? names.locals.find(a => contains(a, at)) : undefined;
+  const province = names.provinces.find(a => contains(a, at));
+  return [local?.name, district?.name, province?.name].filter(Boolean).join(', ') || null;
+}
+
+/** Map labels for a playback: provinces always; for a flood its start, end, districts, candidate river names and
+ * nearby places; for an earthquake the epicentre and every district, lit as the front reaches it. */
+function buildLabels({ route, names, flood, measured, quake, lang, c, provinceName }: {
+  route: Route | null; names: Gazetteer | null; flood: FloodPlay | null; measured: ReturnType<typeof measure> | null; quake: QuakePlay | null;
+  lang: 'en' | 'ne'; c: Copy; provinceName: (en: string | null, code: string | null) => string;
+}): MapLabel[] {
+  if (!names) return [];
+  const labels: MapLabel[] = names.provinceLabels.map(p => ({ id: `province-${p.pcode}`, text: provinceName(p.name, p.pcode), at: p.at, className: 'sim-label-province', anchor: 'center' }));
+  if (flood && route && measured) {
+    const scale = measured.length / flood.pathKm, at = (km: number) => pointAt(measured, km * scale);
+    const start = route.start, end = route.end;
+    labels.push({ id: 'start', text: `${c.start} · ${[start.local, start.district].filter(Boolean).join(', ') || c.outside}`, at: at(0), className: 'sim-label-start', anchor: 'bottom', km: 0 });
+    if (route.leavesNepalKm !== null) labels.push({ id: 'leaves', text: `${c.leaves} · ${formatNumber(route.leavesNepalKm, lang, 0)} km`, at: at(route.leavesNepalKm), className: 'sim-label-end', anchor: 'bottom', km: route.leavesNepalKm });
+    else labels.push({ id: 'end', text: `${c.end} · ${[end.district, provinceName(end.province, end.provinceCode)].filter(Boolean).join(', ')}`, at: at(flood.pathKm), className: 'sim-label-end', anchor: 'bottom', km: flood.pathKm });
+    for (const d of districtSequence(route)) if (d.inNepal && d.district && d.toKm - d.fromKm >= 2) labels.push({ id: `district-${d.district}-${d.fromKm}`, text: d.district, at: at((d.fromKm + d.toKm) / 2), className: 'sim-label-district', km: d.fromKm });
+    for (const r of route.rivers) labels.push({ id: `river-${r.name}-${r.fromKm}`, text: r.name, at: r.at, className: 'sim-label-river', km: r.fromKm, title: 'GeoNames named stream point near the path; orientation only, not the name of the river the path follows' });
+    const villages = route.places.filter(p => p.kind === 'village').sort((a, b) => a.offKm - b.offKm).slice(0, 18);
+    for (const p of route.places) if (p.kind !== 'village' || villages.includes(p)) labels.push({ id: `place-${p.name}-${p.km}`, text: p.name, at: p.coordinates, className: `sim-label-place sim-label-${p.kind}`, km: p.km, title: 'OpenStreetMap settlement near the path line' });
+  }
+  if (quake) {
+    labels.push({ id: 'epicentre', text: c.epicentre, at: quake.epicentre, className: 'sim-label-start', anchor: 'bottom', dist: 0 });
+    // Districts near the epicentre, where the modelled shaking is strongest, each named as the front reaches it.
+    for (const d of names.districtLabels) {
+      const dist = haversineKm(quake.epicentre, d.at);
+      if (dist <= 130) labels.push({ id: `district-${d.name}`, text: d.name, at: d.at, className: 'sim-label-district sim-label-quake', dist });
+    }
+  }
+  return labels;
 }

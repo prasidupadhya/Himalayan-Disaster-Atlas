@@ -2,7 +2,8 @@
 import { useEffect, useRef, useState } from 'react';
 import type { GeoJSONSource, Map } from 'maplibre-gl';
 import { ADMIN_MANIFESTS, loadDataset } from '../../lib/datasets';
-import { FORECAST_CLASSES, gridCellPolygon, type EarthquakeRow, type ForecastCell, type Freshness } from '../../lib/live-conditions';
+import { useLanguage } from '../../lib/i18n';
+import { FORECAST_CLASSES, formatValue, gridCellPolygon, localDigits, type EarthquakeRow, type ForecastCell, type Freshness, type Lang } from '../../lib/live-conditions';
 
 export interface LiveMapLayer<T> { rows: T[]; freshness: Freshness }
 export interface LiveMapProps {
@@ -13,6 +14,20 @@ export interface LiveMapProps {
 
 const SOURCES = { outline: 'live-nepal-outline', forecast: 'live-forecast-cells', earthquakes: 'live-earthquakes' } as const;
 const STALE_OPACITY = 0.35;
+type Failure = 'render' | 'webgl';
+const FAILURES: Record<Failure, Record<Lang, string>> = {
+  render: { en: 'The interactive map could not render. Every verified record remains listed in the tables below.', ne: 'अन्तरक्रियात्मक नक्सा देखाउन सकिएन। सबै प्रमाणित अभिलेखहरू तलका तालिकाहरूमा सूचीबद्ध नै छन्।' },
+  webgl: { en: 'Interactive mapping is unavailable in this browser (WebGL could not start). Every verified record remains listed in the tables below.', ne: 'यस ब्राउजरमा अन्तरक्रियात्मक नक्सा उपलब्ध छैन (WebGL सुरु हुन सकेन)। सबै प्रमाणित अभिलेखहरू तलका तालिकाहरूमा सूचीबद्ध नै छन्।' },
+};
+/** Popup text for a reported epicentre; source label, magnitude type and time stay as published. */
+function popupText(properties: Record<string, unknown>, lang: Lang) {
+  const magnitude = properties.magnitude ?? null, type = properties.type ?? '', observed = properties.observed ?? null;
+  if (lang === 'ne') return {
+    title: (properties.label as string) || 'स्थानको नाम अज्ञात (UNKNOWN)',
+    detail: `प्रतिवेदित (REPORTED) · म्याग्निच्युड ${magnitude === null ? 'अज्ञात (UNKNOWN)' : typeof magnitude === 'number' ? formatValue(magnitude, 'ne') : localDigits(String(magnitude), 'ne')} ${type} · ${observed === null ? 'समय अज्ञात (UNKNOWN)' : localDigits(String(observed), 'ne')}`,
+  };
+  return { title: (properties.label as string) || 'Location label UNKNOWN', detail: `REPORTED · magnitude ${magnitude ?? 'UNKNOWN'} ${type} · ${observed ?? 'time UNKNOWN'}` };
+}
 
 function forecastCollection(layer: LiveMapLayer<ForecastCell> | null): GeoJSON.FeatureCollection {
   return { type: 'FeatureCollection', features: (layer?.rows ?? []).filter(cell => cell.coordinates).map(cell => ({ type: 'Feature', id: cell.id, properties: { id: cell.id, value: cell.value, unknown: cell.value === null }, geometry: { type: 'Polygon', coordinates: gridCellPolygon(cell.coordinates!) } })) };
@@ -25,7 +40,10 @@ export function LiveMap({ earthquakes, forecast, visible }: LiveMapProps) {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map | null>(null);
   const [ready, setReady] = useState(false);
-  const [failure, setFailure] = useState<string | null>(null);
+  const [failure, setFailure] = useState<Failure | null>(null);
+  const [lang] = useLanguage();
+  const langRef = useRef(lang);
+  useEffect(() => { langRef.current = lang; }, [lang]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -44,7 +62,7 @@ export function LiveMap({ earthquakes, forecast, visible }: LiveMapProps) {
         });
         mapRef.current = map;
         map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
-        map.on('error', () => { if (!controller.signal.aborted) setFailure('The interactive map could not render. Every verified record remains listed in the tables below.'); });
+        map.on('error', () => { if (!controller.signal.aborted) setFailure('render'); });
         map.on('load', () => {
           if (controller.signal.aborted || !map) return;
           map.addSource(SOURCES.forecast, { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
@@ -63,8 +81,9 @@ export function LiveMap({ earthquakes, forecast, visible }: LiveMapProps) {
             if (!properties || !map) return;
             const element = document.createElement('div');
             element.className = 'live-map-popup';
-            const title = document.createElement('strong'); title.textContent = properties.label || 'Location label UNKNOWN';
-            const detail = document.createElement('p'); detail.textContent = `REPORTED · magnitude ${properties.magnitude ?? 'UNKNOWN'} ${properties.type ?? ''} · ${properties.observed ?? 'time UNKNOWN'}`;
+            const text = popupText(properties, langRef.current);
+            const title = document.createElement('strong'); title.textContent = text.title;
+            const detail = document.createElement('p'); detail.textContent = text.detail;
             element.append(title, detail);
             new Popup({ closeButton: true, maxWidth: '260px' }).setLngLat(event.lngLat).setDOMContent(element).addTo(map);
           });
@@ -79,7 +98,7 @@ export function LiveMap({ earthquakes, forecast, visible }: LiveMapProps) {
           }).catch(() => undefined);
         });
       } catch {
-        if (!controller.signal.aborted) setFailure('Interactive mapping is unavailable in this browser (WebGL could not start). Every verified record remains listed in the tables below.');
+        if (!controller.signal.aborted) setFailure('webgl');
       }
     }
     void init();
@@ -100,8 +119,8 @@ export function LiveMap({ earthquakes, forecast, visible }: LiveMapProps) {
   }, [ready, earthquakes, forecast, visible]);
 
   return <div className="live-map-shell" data-map-state={failure ? 'unavailable' : ready ? 'ready' : 'loading'}>
-    <div ref={container} className="map" role="region" aria-label="Map of verified live layers. All mapped records are listed in the tables below." />
-    {!ready && !failure && <p className="live-map-status" role="status">Loading map…</p>}
-    {failure && <p className="live-map-status live-map-failure" role="status">{failure}</p>}
+    <div ref={container} className="map" role="region" aria-label={lang === 'ne' ? 'प्रमाणित प्रत्यक्ष तहहरूको नक्सा। नक्सामा देखाइएका सबै अभिलेख तलका तालिकाहरूमा सूचीबद्ध छन्।' : 'Map of verified live layers. All mapped records are listed in the tables below.'} />
+    {!ready && !failure && <p className="live-map-status" role="status">{lang === 'ne' ? 'नक्सा लोड हुँदैछ…' : 'Loading map…'}</p>}
+    {failure && <p className="live-map-status live-map-failure" role="status">{FAILURES[failure][lang]}</p>}
   </div>;
 }

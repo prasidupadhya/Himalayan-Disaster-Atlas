@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { screenshotMap } from '../helpers/map-screenshot';
 
 test('terrain renders locally, toggles and inspects elevation independently of exaggeration', async ({ page, baseURL }) => {
+  test.slow(); // many 3D terrain redraws in CI's software renderer
   const errors: string[] = [];
   const tiles: string[] = [];
   const external: string[] = [];

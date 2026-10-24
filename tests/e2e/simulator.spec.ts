@@ -138,6 +138,15 @@ test('a flood run plays back in 3D on verified terrain, and the scrubber moves t
   await scrub.fill(String(Math.round(Number(await scrub.getAttribute('max')) / 2)));
   await expect(player.locator('.sim-player-status')).toContainText(/after release: front about \d+ km downstream at the central speed \(range \d+–\d+ km\)/);
   expect(await page.locator('.sim-checkpoint-label.reached').count()).toBeGreaterThan(0);
+  // Where the path runs: start, districts in order, border or end, all from verified boundaries and names.
+  const route = page.getByRole('region', { name: 'Where the path runs' });
+  await expect(route).toContainText('Starts in:', { timeout: 30_000 });
+  expect(Number(await route.getAttribute('data-route-districts'))).toBeGreaterThan(0);
+  await expect(route).toContainText('Near the line does not mean affected');
+  await expect(route).toContainText('does not name the river the path follows');
+  await expect(player.locator('.sim-player-where')).toContainText('Now passing:');
+  await expect(page.locator('.sim-label-start')).toHaveCount(1);
+  await expect(page.locator('.sim-label-province')).toHaveCount(7);
   await expect(player.getByRole('button', { name: '3D' })).toHaveAttribute('aria-pressed', 'true');
   await player.getByRole('button', { name: '3D' }).click();
   await expect(player.getByRole('button', { name: '2D' })).toHaveAttribute('aria-pressed', 'false');
@@ -150,6 +159,8 @@ test('an earthquake run reveals the modelled shaking behind an illustrative wave
   const player = page.getByRole('group', { name: '3D scenario playback' });
   await expect(player).toHaveAttribute('data-player-state', 'ended', { timeout: 30_000 });
   await expect(player).toContainText('Wave timing is approximate');
+  await expect(player.locator('.sim-player-where')).toContainText(/Epicentre: .+, .+/, { timeout: 30_000 });
+  await expect(page.locator('.sim-label-province')).toHaveCount(7);
   await player.getByRole('slider').fill('10');
   await expect(player.locator('.sim-player-status')).toContainText('10 s after rupture: strong-shaking front (S wave, ~3.5 km/s) about 35 km out; first tremor (P wave, ~6 km/s) about 60 km.');
 });

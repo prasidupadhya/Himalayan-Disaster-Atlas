@@ -7,6 +7,7 @@ import { digits, formatNumber, UI, type Lang } from '../../lib/i18n';
 import { loadModelArtifact, loadModelRelease, MODEL_RELEASES } from '../../lib/model-release';
 import { HydrographChart } from './charts';
 import { FloodJourney } from './journey';
+import { RouteList } from './route-list';
 import { lineCoordinates } from './scene-3d';
 import { duration, errorText, shortTime, simCopy } from './copy';
 import { revealResult } from './reveal';
@@ -59,7 +60,7 @@ export function FloodPanel({ lang, initial, onScene, onShare, pick, slot }: { la
       corridors: result ? loaded.catalogue.widths_m.map(w => ({ width: w, geometry: loaded.geometry.corridors[result.id][String(w)] })) : [],
       checkpoints: result ? result.checkpoints.map(row => ({ label: `${digits(row.prefix_km.toFixed(0), lang)} km`, coordinates: row.end_coordinates, km: row.prefix_km })) : [],
       fit: selected ? bounds(selected.line) : null,
-      play: result && run ? { kind: 'flood', line: lineCoordinates(result.line), pathKm: result.path_length_km, celerity: run.celerity_m_s, duration_s: run.duration_s,
+      play: result && run ? { kind: 'flood', id: result.id, line: lineCoordinates(result.line), pathKm: result.path_length_km, celerity: run.celerity_m_s, duration_s: run.duration_s,
         checkpoints: result.checkpoints.map(row => ({ km: row.prefix_km })) } : null,
     };
     onScene(scene);
@@ -156,6 +157,7 @@ function FloodResult({ scenario, origin, catalogue, release, lang }: { scenario:
       <div><span className="sim-kicker">{c.assetsFull}</span><strong>{fmtRange(last.range.assets.min, last.range.assets.max)}</strong></div>
     </div>
     <FloodJourney rows={rows.map(r => r.arrival)} lang={lang} />
+    <RouteList id={origin.id} line={lineCoordinates(origin.line)} pathKm={origin.path_length_km} centralCelerity={scenario.celerity_m_s[1]} lang={lang} />
     <HydrographChart points={hydro.points} lang={lang} title={c.hydroTitle(formatNumber(scenario.volume_m3, lang))} />
     <p className="sim-muted">{c.volumeCheck}</p>
     </div><div className="sim-result-side">

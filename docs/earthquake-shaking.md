@@ -23,3 +23,6 @@ Building damage, casualties, repair costs and economic loss (gated Feature 52: n
 ## 3D playback
 
 After a run the BSSA14 shaking image for that run is drawn on the 3D terrain and revealed behind an illustrative S-wave front expanding at about 3.5 km/s, with a dashed P-wave front at about 6 km/s, while the camera slowly orbits the epicentre. These standard crustal speeds only pace the picture; the shaking values are exactly those of the run and are listed in the band table. Reduced motion opens at the end state; without WebGL the tables carry every value.
+
+The playback names the epicentre's local level, district and province (COD-AB v02), labels all seven provinces, and names districts within 130 km of the epicentre as the illustrative S-wave front reaches them.
+

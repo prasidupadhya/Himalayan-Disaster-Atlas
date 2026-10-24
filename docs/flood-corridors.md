@@ -26,3 +26,13 @@ Real lake volumes (no bathymetry), breach mechanics, inundation depth and extent
 ## 3D playback
 
 After a run the simulator map raises the checksum-verified Copernicus terrain (relief ×1.5, hypsometric tint showing height only) and plays the declared pulse down the mapped river line (`apps/web/features/simulator/player.tsx`, geometry in `scene-3d.ts`). The bright band is the pulse at the central celerity, from its tail (`c·(t − duration)`) to its head (`c·t`); the faint band spans the fastest and slowest declared fronts; checkpoints light up at their central arrival time. Model kilometres are mapped onto the drawn line in proportion, so the picture agrees with the arrival table. The camera follows the head along the direction of travel and can be released by dragging or with *Follow*. Playback starts once the map is on screen, never under reduced motion (which opens at the end state), and is absent without WebGL; the tables remain the full record. It shows no inundation extent, depth or damage.
+
+### Names along the path
+
+The playback and the result's *Where the path runs* section name what the path crosses (`features/simulator/route.ts`, `route-data.ts`), from checksum-verified releases only: COD-AB v02 country, province, district and local-level boundaries; GeoNames named stream points (CC BY 4.0); OpenStreetMap settlements (ODbL). The path is walked in 0.5 km steps:
+- **Units:** each step is placed in its province, district and local level (the local level within its own district). Where a river forms a district boundary and the path crosses back and forth in stretches under 5 km, both districts are listed together ("Gorkha / Tanahun") and marked as a boundary. The first step outside the country outline is reported as reaching the Nepal border.
+- **Stream names:** GeoNames points within 1.5 km of the line are listed at their own position, with the km where the path passes them, once they hold for 2 km. The release warns that a point may be a mouth or other reference location and that nearby streams must not inherit its name, so no stretch of the path is named after one; these are for orientation only. A stray combining dot after "i" (U+0307, from lowercasing "İ") is dropped for display.
+- **Places:** cities and towns within 4 km of the line, and villages within 1 km, each listed once at its closest point. Near the line is not affected; this scenario has no flood extent.
+
+On the map, all seven provinces are named; the path shows its start, the Nepal border or the end of the mapped path, districts (lit as the pulse enters), stream points and places (villages only while the pulse is near). Text labels are DOM markers, because the static site ships no map fonts.
+

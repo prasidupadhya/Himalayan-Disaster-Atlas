@@ -1,12 +1,14 @@
 'use client';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import offline from '../../../packages/contracts/offline-shell-policy.json';
+import { useLanguage } from '../lib/i18n';
 
 const subscribe = (update: () => void) => { window.addEventListener('online', update); window.addEventListener('offline', update); return () => { window.removeEventListener('online', update); window.removeEventListener('offline', update); }; };
 
 /** Registers the offline shell, announces offline state and offers an explicit reload when an update is ready. */
 export function OfflineShell() {
   const online = useSyncExternalStore(subscribe, () => navigator.onLine, () => true);
+  const [lang] = useLanguage();
   const [waiting, setWaiting] = useState<ServiceWorker | null>(null);
   const requested = useRef(false);
   useEffect(() => {
@@ -27,12 +29,12 @@ export function OfflineShell() {
   }, []);
   return <>
     {!online && <div className="offline-banner" role="status" aria-live="polite" data-offline="true">
-      <p lang="en"><strong><span aria-hidden="true">{offline.last_known.glyph}</span> Offline.</strong> {offline.copy.en.offline_banner.replace(/^You are offline\. /, '')}</p>
+      {lang !== 'ne' && <p lang="en"><strong><span aria-hidden="true">{offline.last_known.glyph}</span> Offline.</strong> {offline.copy.en.offline_banner.replace(/^You are offline\. /, '')}</p>}
       <p lang="ne">{offline.copy.ne.offline_banner}</p>
     </div>}
     {waiting && <div className="update-banner" role="status" aria-live="polite">
-      <p>{offline.copy.en.update_ready}</p>
-      <button type="button" onClick={() => { requested.current = true; waiting.postMessage({ type: 'ATLAS_SKIP_WAITING' }); }}>{offline.copy.en.update_action}</button>
+      <p>{offline.copy[lang].update_ready}</p>
+      <button type="button" onClick={() => { requested.current = true; waiting.postMessage({ type: 'ATLAS_SKIP_WAITING' }); }}>{offline.copy[lang].update_action}</button>
     </div>}
   </>;
 }
