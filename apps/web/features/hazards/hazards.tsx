@@ -23,6 +23,7 @@ export function Hazards() {
       {digest && <p className="hz-copied">{c.copiedAt} {digest.generated_at_nepal} · <a href="/official/">{c.all}</a></p>}
       {digest && <StaleNote digest={digest} c={c} lang={lang} />}
       {digest && <Glance digest={digest} c={c} lang={lang} />}
+      {state.status === 'loading' && <div className="hz-glance-placeholder" aria-hidden="true" />}
       <nav className="hz-jump" aria-label={c.jump}>{sections.map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}</nav>
     </header>
     {state.status === 'loading' && <p role="status" className="hz-loading">{c.loading}</p>}
@@ -121,13 +122,13 @@ function Earthquakes({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lan
   const quakes = recentQuakes(digest);
   return <ul className="hz-cards hz-today">
     <TodayCard entry={entry} title={c.quakeList} anchor="earthquakes" c={c} lang={lang} wide>
-      {quakes?.length ? <div className="hz-quake-layout"><QuakeMap quakes={quakes} title={c.quakeMapTitle} newestLabel={c.newest} note={c.quakeMapNote} /><div className="hz-table-wrap"><table className="hz-quakes">
+      {quakes?.length ? <div className="hz-quake-layout"><QuakeMap quakes={quakes} title={c.quakeMapTitle} newestLabel={c.newest} note={c.quakeMapNote} /><div className="hz-table-wrap"><table className="hz-quakes stack-mobile">
         <caption className="sr-only">{c.quakeList}</caption>
         <thead><tr><th scope="col">{c.quakeDate}</th><th scope="col">{c.quakeMagnitude}</th><th scope="col">{c.quakeEpicentre}</th></tr></thead>
         <tbody>{quakes.map((q, i) => {
           const days = daysBefore(q.date, digest);
           return <tr key={i} title={q.raw}>
-            <td>{q.date ?? q.raw}{q.time && <span className="hz-sub"> {q.time} {c.localTime}</span>}{days !== null && <span className="hz-sub hz-age">{c.daysBefore(formatNumber(days, lang), days)}</span>}</td>
+            <td><span>{q.date ?? q.raw}{q.time && <span className="hz-sub"> {q.time} {c.localTime}</span>}{days !== null && <span className="hz-sub hz-age">{c.daysBefore(formatNumber(days, lang), days)}</span>}</span></td>
             <td className="hz-mag">{q.magnitude ?? 'UNKNOWN'}</td>
             <td className="hz-verbatim">{q.epicentre ?? 'UNKNOWN'}</td>
           </tr>;

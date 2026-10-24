@@ -233,7 +233,7 @@ function EarthquakeTable({ view }: { view: FeedView | undefined }) {
     <h3 id="live-quake-table"><PurposeLabel purpose="reported_event" lang={lang} /> {t('Earthquake summaries', 'भूकम्प सारांश')}</h3>
     {!view?.snapshot ? <p className="live-callout">{view?.state === 'error' ? t('UNAVAILABLE — verification failed; content withheld.', copy('ne', 'error')) : t('UNAVAILABLE — no verified snapshot.', copy('ne', 'unavailable'))}</p>
       : !rows.length ? <p className="live-callout">{t('Valid empty snapshot: no USGS-network summaries were retained for this query. This is not a failed fetch or an all-clear.', 'मान्य खाली स्न्यापसट: यस खोजमा USGS नेटवर्कको कुनै सारांश राखिएको छैन। यो असफल डाउनलोड होइन, सबै सुरक्षित छ भन्ने सूचना पनि होइन।')}</p>
-        : <div className="live-table-scroll" role="region" aria-label={t('Earthquake summaries table', 'भूकम्प सारांश तालिका')} tabIndex={0}><table>
+        : <div className="live-table-scroll" role="region" aria-label={t('Earthquake summaries table', 'भूकम्प सारांश तालिका')} tabIndex={0}><table className="stack-mobile">
           <thead><tr><th scope="col">{t('Event', 'घटना')}</th><th scope="col">{t('Magnitude', 'म्याग्निच्युड')}</th><th scope="col">{t('Depth (km)', 'गहिराइ (km)')}</th><th scope="col">{t('Observed (origin time)', 'अवलोकन (उत्पत्ति समय)')}</th><th scope="col">{t('Source revision', 'स्रोत संशोधन (revision)')}</th><th scope="col">{t('Source', 'स्रोत')}</th><th scope="col">{t('fetched_at', 'डाउनलोड गरिएको समय (fetched_at)')}</th><th scope="col">{t('Freshness', 'ताजापन')}</th></tr></thead>
           <tbody>{rows.map(row => <tr key={row.id}>
             <th scope="row">{row.url ? <a href={row.url}>{row.label ?? row.id}</a> : row.label ?? row.id}</th>
@@ -259,7 +259,7 @@ function ForecastTable({ view }: { view: FeedView | undefined }) {
     {!view?.snapshot ? <p className="live-callout">{view?.state === 'error' ? t('UNAVAILABLE — verification failed; content withheld.', copy('ne', 'error')) : t('UNAVAILABLE — no verified snapshot.', copy('ne', 'unavailable'))}</p>
       : !cells.length ? <p className="live-callout">{t('Valid empty snapshot: no grid cells. This is not a forecast of no precipitation.', 'मान्य खाली स्न्यापसट: कुनै ग्रिड कक्ष छैन। यसको अर्थ वर्षा नहुने पूर्वानुमान होइन।')}</p>
         : <>
-          <div className="live-table-scroll" role="region" aria-label={t('Model precipitation grid table', 'मोडेल वर्षा ग्रिड तालिका')} tabIndex={0}><table>
+          <div className="live-table-scroll" role="region" aria-label={t('Model precipitation grid table', 'मोडेल वर्षा ग्रिड तालिका')} tabIndex={0}><table className="stack-mobile">
             <thead><tr><th scope="col">{t('Cell centre (lon, lat)', 'कक्षको केन्द्र (देशान्तर, अक्षांश)')}</th><th scope="col">{t('6-hour accumulation (mm)', '६ घण्टे सञ्चित वर्षा (mm)')}</th><th scope="col">{t('Issued (model cycle)', 'जारी (मोडेल चक्र)')}</th><th scope="col">{t('Valid window', 'मान्य अवधि')}</th><th scope="col">{t('Source', 'स्रोत')}</th><th scope="col">{t('fetched_at', 'डाउनलोड गरिएको समय (fetched_at)')}</th><th scope="col">{t('Freshness', 'ताजापन')}</th></tr></thead>
             <tbody>{visible.map(cell => <tr key={cell.id}>
               <th scope="row">{cell.coordinates ? localDigits(`${cell.coordinates[0].toFixed(2)}°E, ${cell.coordinates[1].toFixed(2)}°N`, lang) : policy.copy[lang].unknown}</th>

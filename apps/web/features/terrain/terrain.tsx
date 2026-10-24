@@ -135,8 +135,8 @@ export function Terrain({ map }: { map: Map | null }) {
     <label>{t('Vertical exaggeration: ', 'ठाडो अतिरञ्जन (vertical exaggeration): ')}{digits(String(exaggeration), lang)}×<input type="range" min="1" max="2" step="0.25" value={exaggeration} disabled={!dataset || !threeD} onChange={event => setExaggeration(Number(event.target.value))} /></label>
     <p className="muted">{t('Hillshade and 3D are derived views. Exaggeration changes appearance only. Includes vegetation and buildings. Finest display pixels are about 270 m here; zooming closer adds no detail.', 'पहाडी छायाँ र 3D व्युत्पन्न दृश्य हुन्। अतिरञ्जनले देखावट मात्र बदल्छ। यसमा वनस्पति र भवनहरू पनि समावेश छन्। यहाँ सबैभन्दा सानो प्रदर्शन पिक्सेल करिब २७० m को छ; अझ नजिक जुम गर्दा थप विवरण आउँदैन।')}</p>
     <form id="terrain-inspect">
-      <label>{t('Longitude', 'देशान्तर')}<input name="longitude" type="number" min="-180" max="180" step="any" required value={longitude} onChange={event => setLongitude(event.target.value)} /></label>
-      <label>{t('Latitude', 'अक्षांश')}<input name="latitude" type="number" min="-85" max="85" step="any" required value={latitude} onChange={event => setLatitude(event.target.value)} /></label>
+      <label>{t('Longitude', 'देशान्तर')}<input name="longitude" type="number" inputMode="decimal" autoComplete="off" enterKeyHint="done" min="-180" max="180" step="any" required value={longitude} onChange={event => setLongitude(event.target.value)} /></label>
+      <label>{t('Latitude', 'अक्षांश')}<input name="latitude" type="number" inputMode="decimal" autoComplete="off" enterKeyHint="done" min="-85" max="85" step="any" required value={latitude} onChange={event => setLatitude(event.target.value)} /></label>
       <button disabled={!dataset} type="submit">{t('Inspect elevation', 'उचाइ हेर्नुहोस्')}</button>
     </form>
     <p role="status">{sampleText}</p>

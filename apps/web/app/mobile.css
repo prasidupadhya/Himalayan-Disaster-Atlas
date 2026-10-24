@@ -1,0 +1,109 @@
+/* Native-app behaviour on phones. Loaded after the other stylesheets so these rules are the last word.
+ * Scientific content is unchanged; only placement, sizing and input behaviour adapt. */
+
+:root {
+  --tabbar-h: 64px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --touch: 48px;
+}
+
+/* Every width: no sideways page scroll, no double-tap zoom delay, no grey tap flash. `clip` (unlike `hidden`)
+ * keeps position: sticky working; browsers without it fall back to `hidden`. */
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; touch-action: manipulation; overflow-x: hidden; overflow-x: clip; }
+body { overflow-x: hidden; overflow-x: clip; -webkit-tap-highlight-color: transparent; overscroll-behavior-x: none; }
+a, button, select, summary, label, input, [role="tab"] { touch-action: manipulation; }
+.nav-icon { display: none; }
+
+@media (max-width: 800px) {
+  /* ---- App shell: top bar with brand and language; the four destinations in a bottom tab bar ---- */
+  body { padding-bottom: calc(var(--tabbar-h) + var(--safe-bottom)); }
+  .site-header { padding-top: var(--safe-top); padding-left: var(--safe-left); padding-right: var(--safe-right); }
+  .site-header .site-header-inner { gap: .5rem; padding-block: .5rem; min-height: 60px; }
+  body .site-header nav.site-navigation {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0;
+    width: 100%; margin: 0; padding: 0 var(--safe-right) var(--safe-bottom) var(--safe-left);
+    border-top: 1px solid var(--line); background: rgb(255 255 255 / .97);
+    box-shadow: 0 -8px 24px rgb(12 34 39 / .1); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+  }
+  body .site-header nav.site-navigation a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    min-height: var(--tabbar-h); padding: 6px 2px 4px; border: 0; color: var(--muted-strong);
+    font-size: .72rem; font-weight: 650; line-height: 1.1; text-decoration: none;
+  }
+  body .site-header nav.site-navigation a[aria-current="page"] { color: var(--accent-strong); border: 0; box-shadow: inset 0 3px 0 var(--accent-strong); font-weight: 800; }
+  body .site-header nav.site-navigation a:active { background: var(--accent-soft); }
+  .nav-icon { display: block; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .site-footer { padding-bottom: .5rem; }
+
+  /* ---- Touch targets: at least 48 × 48 px, at least 8 px apart ----
+   * !important is deliberate and confined to phones: page stylesheets load after this one and set smaller controls. */
+  button, select, summary, .primary-action, .text-action, [role="tab"],
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]), textarea { min-height: var(--touch) !important; }
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea { font-size: 16px !important; }
+  input[type="checkbox"], input[type="radio"] { width: 24px; height: 24px; flex: 0 0 auto; }
+  label:has(> input[type="checkbox"]), label:has(> input[type="radio"]) { display: flex; align-items: center; gap: .6rem; min-height: var(--touch); }
+  input[type="range"] { min-height: var(--touch); }
+  .language-switch button { min-width: var(--touch); }
+  .maplibregl-ctrl-group button { width: var(--touch) !important; height: var(--touch) !important; }
+  .maplibregl-ctrl-attrib-button { min-width: var(--touch); min-height: var(--touch); background-position: center; }
+  /* Stand-alone links (not links inside running text) are full-size targets with room between them. */
+  .hz-actions, .hz-card-links, .hazard-links, .home-actions, .atlas-shortcuts, .sim-actions, .sim-label-row, .report-actions,
+  .official-jump, .official-nav, .methodology-toc, .source-toc, .site-footer nav, .sim-player-controls, .sim-tabs { gap: .5rem 1rem !important; }
+  .hz-actions a, .hz-card-links a, .hazard-links a, .home-actions a, .atlas-shortcuts a, .sim-actions a, .sim-actions button,
+  .today-strip-note a, .methodology-toc a, .source-toc a, .site-footer nav a, .hz-documents a, .sim-watch,
+  .official-jump a, .official-nav a, nav[aria-label]:not(.site-navigation) > a, .sim-notice a, .hz-authorities a, .hz-copied a {
+    display: inline-flex !important; align-items: center; justify-content: center; min-height: var(--touch) !important; min-width: var(--touch);
+  }
+  .site-footer nav { display: grid; }
+  .site-footer nav a { justify-content: flex-start; }
+  .sim-player-controls button, .sim-player-controls select { min-height: var(--touch); }
+
+  /* ---- Horizontal carousels snap card by card ---- */
+  .hazard-cards { display: grid; grid-auto-flow: column; grid-auto-columns: min(84%, 340px); grid-template-columns: none; gap: .75rem;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 1rem;
+    margin-inline: -1rem; padding: .25rem 1rem 1rem; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .hazard-cards::-webkit-scrollbar, .sim-player-route::-webkit-scrollbar { display: none; }
+  .hazard-cards > li { scroll-snap-align: start; scroll-snap-stop: always; }
+  .sim-player-route { scroll-snap-type: x proximity; scrollbar-width: none; }
+  .sim-player-route li { scroll-snap-align: center; }
+
+  /* ---- Tables become stacks of cards: each row a card, each cell labelled by its column (components/table-labels) ---- */
+  body table.stack-mobile, body table.stack-mobile caption, body table.stack-mobile tbody, body table.stack-mobile tr,
+  body table.stack-mobile td, body table.stack-mobile tbody th { display: block; width: 100%; min-width: 0; }
+  body table.stack-mobile { border: 0; background: none; font-size: .9rem; }
+  body table.stack-mobile caption { padding: 0 0 .5rem; text-align: left; }
+  body table.stack-mobile thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  body table.stack-mobile tbody tr { margin: 0 0 .6rem; padding: .7rem .85rem; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); }
+  /* The value flows normally (mixed text and tags stay together); its column name sits in the left indent. */
+  body table.stack-mobile td, body table.stack-mobile tbody th {
+    position: relative; padding: .3rem 0 .3rem min(40%, 9rem); min-height: 1.6rem; border: 0; text-align: left; overflow-wrap: anywhere;
+  }
+  body table.stack-mobile td::before, body table.stack-mobile tbody th::before {
+    content: attr(data-label); position: absolute; left: 0; top: .3rem; width: calc(min(40%, 9rem) - .75rem);
+    color: var(--muted); font-size: .78rem; font-weight: 650; font-style: normal; line-height: 1.35;
+  }
+  body table.stack-mobile td:not([data-label]), body table.stack-mobile tbody th:not([data-label]) { padding-left: 0; }
+  body table.stack-mobile td:not([data-label])::before, body table.stack-mobile tbody th:not([data-label])::before { content: none; }
+  body table.stack-mobile tbody th { font-weight: 700; color: var(--ink-strong); }
+  body .hz-table-wrap, body .live-table-scroll, body .official-table-wrap { overflow: visible; border: 0; background: none; }
+}
+
+/* Short landscape phones: a slimmer tab bar leaves room for the content. */
+@media (max-width: 950px) and (max-height: 500px) and (orientation: landscape) {
+  :root { --tabbar-h: 52px; }
+}
+
+/* Reserved space for content that arrives after load, so the page does not jump (CLS). */
+.today-strip[data-today-state="loading"] { min-height: 9.5rem; }
+.hz-page[data-today-state="loading"] .hz-loading { min-height: 40vh; }
+.sim-loading { min-height: 12rem; }
+/* The at-a-glance list on Today is four lines on a phone and one row on wide screens. */
+.hz-glance-placeholder { min-height: 5.5rem; border-block: 1px solid var(--line); }
+@media (max-width: 640px) { .hz-glance-placeholder { min-height: 15.5rem; } }
+
+@media (prefers-reduced-motion: reduce) { .hazard-cards { scroll-behavior: auto; } }
+@media print { body .site-header nav.site-navigation { display: none; } body { padding-bottom: 0; } }

@@ -187,7 +187,7 @@ function FloodResult({ scenario, origin, catalogue, release, lang }: { scenario:
 
 export function NumberField({ label, unit, value, step, onChange, hint }: { label: string; unit: string; value: number; step: number; onChange: (v: number) => void; hint?: string }) {
   return <label className="sim-field"><span>{label} <span className="sim-unit">({unit})</span></span>
-    <input type="number" inputMode="decimal" value={Number.isFinite(value) ? value : ''} step={step} onChange={event => onChange(event.target.value === '' ? NaN : Number(event.target.value))} />
+    <input type="number" inputMode="decimal" autoComplete="off" enterKeyHint="done" value={Number.isFinite(value) ? value : ''} step={step} onChange={event => onChange(event.target.value === '' ? NaN : Number(event.target.value))} />
     {hint && <span className="sim-hint">{hint}</span>}
   </label>;
 }

@@ -80,7 +80,7 @@ export function ScenarioReport() {
     {!report && !error && scenario && <p role="status">{r.recomputing}</p>}
     {report && <>
       <section><h2>{r.inputs}</h2>
-        <table><thead><tr><th scope="col">{r.release}</th><th scope="col">{r.hash}</th></tr></thead>
+        <table className="stack-mobile"><thead><tr><th scope="col">{r.release}</th><th scope="col">{r.hash}</th></tr></thead>
           <tbody>{report.inputs.map(i => <tr key={i.id}><th scope="row"><a href={i.manifest}>{i.id}@{i.version}</a></th><td className="report-hash">{i.sha256}</td></tr>)}</tbody></table>
         <pre className="report-json">{JSON.stringify(report.scenario, null, 2)}</pre>
       </section>
@@ -112,7 +112,7 @@ function FloodReport({ body, lang }: { body: FloodBody; lang: Lang }) {
   return <section><h2>{r.results}</h2>
     <p><strong>{r.releasePoint}:</strong> {originLabel(origin, lang)} · {r.path} {n(origin.path_length_km, 1)} km ({origin.termination.replace('_', ' ')}).</p>
     <p><strong>{r.hydrograph}:</strong> {r.hydroText(body.scenario.shape, n(body.scenario.volume_m3), duration(body.scenario.duration_s, lang), n(h.peak_m3_s, 1), n(hydrographVolume(h.points)))}</p>
-    <table><caption>{r.floodCaption(list(body.scenario.celerity_m_s), list(body.catalogue.widths_m))}</caption>
+    <table className="stack-mobile"><caption>{r.floodCaption(list(body.scenario.celerity_m_s), list(body.catalogue.widths_m))}</caption>
       <thead><tr><th scope="col">{r.distance}</th><th scope="col">{r.front}</th><th scope="col">{r.ends}</th><th scope="col">{r.popRange}</th><th scope="col">{r.assetRange}</th></tr></thead>
       <tbody>{origin.checkpoints.map(row => { const a = arrivals(body.scenario, row.prefix_km); const x = exposureRange(row.by_width, body.catalogue.widths_m); return <tr key={row.prefix_km}>
         <th scope="row">{n(row.prefix_km, 1)} km</th><td>{duration(a.front_s[0], lang)} – {duration(a.front_s[2], lang)}</td><td>{duration(a.end_s[0], lang)} – {duration(a.end_s[2], lang)}</td>
@@ -128,7 +128,7 @@ function QuakeReport({ body, lang }: { body: QuakeBody; lang: Lang }) {
   const n = (v: number | null, f = 0) => formatNumber(v, lang, f);
   return <section><h2>{r.results}</h2>
     <p><strong>{r.scenario}:</strong> M{n(s.magnitude, 1)} {s.mechanism} · {n(s.longitude, 3)}°E, {n(s.latitude, 3)}°N; {s.rupture.type === 'point' ? r.point : r.line(n(s.rupture.length_km), n(s.rupture.strike_deg))}; {r.uniform} V<sub>S30</sub> {n(s.vs30)} m/s. {r.model} {body.model.model} (doi:{body.model.doi}).</p>
-    <table><caption>{r.bandCaption}</caption><thead><tr><th scope="col">{r.band}</th><th scope="col">{r.median}</th><th scope="col">−1σ</th><th scope="col">+1σ</th></tr></thead>
+    <table className="stack-mobile"><caption>{r.bandCaption}</caption><thead><tr><th scope="col">{r.band}</th><th scope="col">{r.median}</th><th scope="col">−1σ</th><th scope="col">+1σ</th></tr></thead>
       <tbody>{PGA_BANDS.map((b, i) => <tr key={b.label}><th scope="row">{b.label}</th><td>{n(Math.round(body.result.population.central[i]))}</td><td>{n(Math.round(body.result.population.low[i]))}</td><td>{n(Math.round(body.result.population.high[i]))}</td></tr>)}</tbody></table>
     <p>{r.beyond(n(Math.round(body.result.population.beyond)))}</p>
   </section>;

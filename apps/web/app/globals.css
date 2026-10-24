@@ -20,8 +20,11 @@
   --warning: #9a4b12;
   --danger: #962e28;
   --focus: #c2610c;
-  --font-display: "Archivo Variable", "Noto Sans Devanagari Variable", "Segoe UI", system-ui, sans-serif;
-  --font-ui: "Archivo Variable", "Noto Sans Devanagari Variable", "Segoe UI", system-ui, -apple-system, sans-serif;
+  /* Body text uses the device's own fonts so it renders instantly (Devanagari included: Kohinoor on Apple, Noto on
+   * Android and Windows). Only headings use the self-hosted Archivo, swapped in when it arrives. */
+  --font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", "Kohinoor Devanagari", "Nirmala UI", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Archivo Variable", var(--font-system);
+  --font-ui: var(--font-system);
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   --page-max: 1320px;
   --gutter: clamp(1rem, 4vw, 3rem);

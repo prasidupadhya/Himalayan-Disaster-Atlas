@@ -224,6 +224,9 @@ export function SimulationUI({ map }: { map: Map | null }) {
                 aria-invalid={Boolean(error)}
                 aria-describedby={`${spec.key}-help${error ? ` ${spec.key}-error` : ''}`}
                 type="number"
+                inputMode="decimal"
+                autoComplete="off"
+                enterKeyHint="done"
                 min={spec.minimum}
                 max={spec.maximum}
                 step={spec.step}
@@ -288,7 +291,7 @@ export function SimulationUI({ map }: { map: Map | null }) {
           </div>
           {comparisonA && <section className="simulation-comparison">
             <h3>{t('Compatible scenario comparison', 'मिल्दो परिदृश्यको तुलना')}</h3>
-            {comparison?.compatible ? <table className="compare-table"><caption>{t('Comparison A versus current run B — no better/worse ranking', 'तुलना A र हालको रन B — राम्रो/नराम्रो भनी क्रम दिइएको छैन')}</caption><thead><tr><th scope="col">{t('Metric', 'मापक')}</th><th scope="col">A</th><th scope="col">B</th></tr></thead><tbody>
+            {comparison?.compatible ? <table className="compare-table stack-mobile"><caption>{t('Comparison A versus current run B — no better/worse ranking', 'तुलना A र हालको रन B — राम्रो/नराम्रो भनी क्रम दिइएको छैन')}</caption><thead><tr><th scope="col">{t('Metric', 'मापक')}</th><th scope="col">A</th><th scope="col">B</th></tr></thead><tbody>
               {comparison.rows.map(row => <tr key={row.label}><th scope="row">{lang === 'ne' ? COMPARISON_ROWS_NE[row.label] ?? row.label : row.label}</th><td>{format(row.a, 3, lang)} {row.unit}</td><td>{format(row.b, 3, lang)} {row.unit}</td></tr>)}
             </tbody></table> : <p className="data-state error">{lang === 'ne' ? <>तुलना गर्न मिल्दैन (NOT COMPARABLE) — {(() => { const reason = comparison?.reason ?? 'Run another scenario to compare with A.'; return REASONS_NE[reason] ?? reason; })()}</> : <>NOT COMPARABLE — {comparison?.reason ?? 'Run another scenario to compare with A.'}</>}</p>}
           </section>}

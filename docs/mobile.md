@@ -2,15 +2,22 @@
 
 The mobile Atlas preserves the same scientific meanings, evidence labels and provenance as desktop. Responsive presentation must not hide limitations, convert UNKNOWN to zero, or remove “modelled / not forecast” labels merely to save space.
 
-## Touch and layout
+## Touch and layout (native-app contract, `apps/web/app/mobile.css`)
 
-- Primary navigation is horizontally scrollable rather than clipped.
-- Interactive controls retain at least a 44 px touch target where practical, including MapLibre zoom controls.
-- Form controls use a 16 px mobile font size to avoid browser text-field zoom and remain labelled for touch keyboards.
-- On phone-width layouts, the map is shown before the long layer panel and is capped to part of the viewport so it cannot trap the entire page.
-- Portrait and short landscape layouts have separate map-height caps.
-- Tables remain semantic tables but receive horizontal overflow rather than shrinking text below readable sizes.
-- Event pages, catalog details, Sources, Methodology, Analyst, evidence filters, comparison and simulation controls collapse to one-column layouts without dropping scientific content.
+Base layout is designed at 375–430 px and scales up; the rules below apply at 800 px and narrower unless noted. `tests/e2e/mobile-app.spec.ts` enforces them on every page.
+
+- **Bottom tab bar.** Map, Today, Scenarios and About sit in a fixed bottom bar (64 px plus the home-indicator inset) with an icon and a text label each; the current page is marked with `aria-current` and a top indicator. The top bar keeps only the brand and the English/नेपाली switch. The body is padded so content never ends under the bar. Landscape phones get a 52 px bar.
+- **Safe areas and app chrome.** `viewport-fit=cover` with `env(safe-area-inset-*)` padding, a theme colour, and a web app manifest (`app/manifest.ts`, `display: standalone`) so the atlas can be added to the home screen.
+- **Touch targets.** Buttons, fields, selects, disclosures, tabs, map controls and stand-alone links are at least 48 × 48 px, with at least 8 px between neighbours. Checkboxes and radios are 24 px with their whole label row (48 px) as the target. Links inside running text keep text size, as WCAG 2.5.8 allows. The phone rules use `!important` on minimum sizes because page stylesheets load later.
+- **No sideways scroll.** `overflow-x: clip` (falling back to `hidden`) on `html` and `body`, so sticky elements keep working.
+- **Snappy taps.** `touch-action: manipulation` removes the double-tap zoom delay; the grey tap flash is suppressed. Map canvases keep their own gesture handling.
+- **Carousels.** The home page's three hazard cards are a horizontal carousel that snaps card by card (`scroll-snap-type: x mandatory`); the district strip in the 3D playback snaps too.
+- **Tables as cards.** Data tables with the `stack-mobile` class (official sources, live records, Today's earthquakes, scenario reports, river-simulation comparison) become one card per row. `components/table-labels.tsx` copies each column heading onto its cells (`data-label`), so every value is labelled, in the current language. The table stays a semantic table for screen readers.
+- **Keyboards.** Number fields use `inputmode="decimal"` and `enterkeyhint="done"`; search fields use `autocapitalize="none"`, `autocorrect="off"`, `spellcheck="false"` and `enterkeyhint="search"` (IDs like `GLO_87.08…` are never "corrected"); fields use 16 px text so iOS does not zoom.
+- **Layout stability.** Space is reserved for content that arrives after load (Today's at-a-glance block, the home strip, loading panels); maps have fixed heights.
+- **Fonts.** Body text uses the device's own fonts for instant rendering (system UI fonts, with Kohinoor/Noto Devanagari for Nepali); only headings use the self-hosted Archivo, swapped in when it arrives.
+- On phone-width layouts, the map is shown before the long layer panel and is capped to part of the viewport so it cannot trap the entire page. Portrait and short landscape layouts have separate map-height caps.
+- Simulation, Sources and Methodology collapse to one column without dropping scientific content.
 
 ## Mobile bandwidth
 

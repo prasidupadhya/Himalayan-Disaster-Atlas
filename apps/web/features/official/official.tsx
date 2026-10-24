@@ -31,7 +31,7 @@ function statusText(entry: Entry, lang: Lang) {
 
 function TableView({ table, fallbackCaption }: { table: Table; fallbackCaption: string }) {
   const [lang] = useLanguage();
-  return <div className="official-table-wrap"><table>
+  return <div className="official-table-wrap"><table className="stack-mobile">
     <caption>{table.caption ?? (lang === 'ne' ? `${fallbackCaption}, प्रकाशित रूपमा` : `${fallbackCaption}, as published`)}</caption>
     {table.header.length > 0 && <thead><tr>{table.header.map((cell, i) => <th key={i} scope="col">{cell}</th>)}</tr></thead>}
     <tbody>{table.rows.slice(0, 40).map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody>
@@ -54,7 +54,7 @@ const freshness = (content: RiverContent | RainContent, lang: Lang) => lang === 
 function RiverRows({ stations, caption }: { stations: River[]; caption: string }) {
   const [lang] = useLanguage();
   const ne = lang === 'ne';
-  return <div className="official-table-wrap"><table>
+  return <div className="official-table-wrap"><table className="stack-mobile">
     <caption>{caption}</caption>
     <thead><tr><th scope="col">{ne ? 'स्टेसन' : 'Station'}</th><th scope="col">{ne ? 'नदी बेसिन' : 'Basin'}</th><th scope="col">{ne ? 'अवस्था' : 'Status'}</th><th scope="col">{ne ? 'जलसतह' : 'Water level'}</th><th scope="col">{ne ? 'चेतावनी तह' : 'Warning'}</th><th scope="col">{ne ? 'खतरा तह' : 'Danger'}</th><th scope="col">{ne ? 'मापन समय' : 'Reading time'}</th></tr></thead>
     <tbody>{stations.map(s => <tr key={s.id} data-status={s.status}><th scope="row">{s.name ?? unknown(lang)}</th><td>{s.basin ?? unknown(lang)}</td><td>{status(s.status, lang)}</td><td>{num(s.water_level_m, 'm', lang)}</td><td>{num(s.warning_level_m, 'm', lang)}</td><td>{num(s.danger_level_m, 'm', lang)}</td><td>{time(s.observed_at, lang)}</td></tr>)}</tbody>
@@ -85,7 +85,7 @@ function RainView({ content }: { content: RainContent }) {
   return <>
     <p className="muted">{freshness(content, lang)}{implausible}</p>
     <Counts counts={content.current_status_counts ?? content.status_counts} />
-    {content.wettest_24h.length ? <div className="official-table-wrap"><table>
+    {content.wettest_24h.length ? <div className="official-table-wrap"><table className="stack-mobile">
       <caption>{ne ? 'पछिल्लो २४ घण्टामा सबैभन्दा बढी वर्षा भएका स्टेसनहरू' : 'Wettest stations, last 24 hours'}</caption>
       <thead><tr><th scope="col">{ne ? 'स्टेसन' : 'Station'}</th><th scope="col">{ne ? 'नदी बेसिन' : 'Basin'}</th><th scope="col">{ne ? '२४ घण्टा' : '24 h'}</th><th scope="col">{ne ? '१ घण्टा' : '1 h'}</th><th scope="col">{ne ? 'अवस्था' : 'Status'}</th><th scope="col">{ne ? 'मापन समय' : 'Reading time'}</th></tr></thead>
       <tbody>{content.wettest_24h.map(s => <tr key={s.id}><th scope="row">{s.name ?? unknown(lang)}</th><td>{s.basin ?? unknown(lang)}</td><td>{num(s.rain_24h_mm, 'mm', lang)}</td><td>{num(s.rain_1h_mm, 'mm', lang)}</td><td>{status(s.status, lang)}</td><td>{time(s.observed_at, lang)}</td></tr>)}</tbody>
@@ -109,7 +109,7 @@ function ListView({ content, entry }: { content: ListContent; entry: Entry }) {
   // In Nepali the agency's own Nepali title (titleNe) is shown where it was published; otherwise the published title.
   const value = (r: Record<string, Scalar>, c: string) => ne && c === 'title' && typeof r.titleNe === 'string' && r.titleNe ? r.titleNe : r[c] ?? null;
   if (!content.records.length) return <p>{ne ? `यस प्रतिमा ${spanNe}कुनै अभिलेख छैन।` : <>No records{span} in this copy.</>}</p>;
-  return <div className="official-table-wrap"><table>
+  return <div className="official-table-wrap"><table className="stack-mobile">
     <caption>{ne ? `${spanNe}${formatNumber(content.record_count, lang)}${content.complete === false ? ' वा बढी' : ''} अभिलेख; नयाँ ${digits(String(Math.min(content.records.length, 25)), lang)} वटा प्रकाशित रूपमा देखाइएका` : <>{content.record_count.toLocaleString('en-US')}{content.complete === false ? ' or more' : ''} records{span}; newest {Math.min(content.records.length, 25)} shown as published</>}</caption>
     <thead><tr>{columns.map(c => <th key={c} scope="col">{(ne ? LABELS_NE[c] : LABELS[c]) ?? c}</th>)}</tr></thead>
     <tbody>{content.records.slice(0, 25).map((r, i) => <tr key={i}>{columns.map((c, j) => <td key={c}>{cell(value(r, c), c, lang)}{j === 0 && fresh.has(JSON.stringify(r.id ?? r)) && <span className="official-new">{ne ? 'नयाँ' : 'new'}</span>}</td>)}</tr>)}</tbody>
