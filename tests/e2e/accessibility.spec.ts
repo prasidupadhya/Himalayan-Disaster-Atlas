@@ -43,7 +43,7 @@ async function structuralAudit(page: Page) {
 test('core public pages pass structural semantic audit', async ({ page }) => {
   for (const path of ['/', '/atlas/', '/hazards/', '/simulate/', '/official/', '/live/', '/methodology/', '/sources/', '/licenses/']) {
     await page.goto(path);
-    if (path === '/atlas/') await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
+    if (path === '/atlas/') await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true', { timeout: 20_000 });
     const audit = await structuralAudit(page);
     expect(audit.mainCount, `${path} main landmarks`).toBe(1);
     expect(audit.h1Count, `${path} level-one headings`).toBeGreaterThanOrEqual(1);

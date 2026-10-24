@@ -7,6 +7,7 @@ import { digits, formatNumber, UI, type Lang } from '../../lib/i18n';
 import { loadModelArtifact, loadModelRelease, MODEL_RELEASES } from '../../lib/model-release';
 import { HydrographChart } from './charts';
 import { FloodJourney } from './journey';
+import { lineCoordinates } from './scene-3d';
 import { duration, errorText, shortTime, simCopy } from './copy';
 import { revealResult } from './reveal';
 import type { MapScene } from './simulator-map';
@@ -56,11 +57,13 @@ export function FloodPanel({ lang, initial, onScene, onShare, pick, slot }: { la
       origins: loaded.catalogue.origins.map(o => ({ id: o.id, label: originLabel(o), coordinates: o.lake ? [o.lake.longitude, o.lake.latitude] : o.start_coordinates, kind: o.kind === 'glof-release-point' ? 'glof' : 'river', selected: o.id === selected?.id })),
       path: selected?.line ?? null,
       corridors: result ? loaded.catalogue.widths_m.map(w => ({ width: w, geometry: loaded.geometry.corridors[result.id][String(w)] })) : [],
-      checkpoints: result ? result.checkpoints.map(row => ({ label: `${digits(row.prefix_km.toFixed(0), lang)} km`, coordinates: row.end_coordinates })) : [],
+      checkpoints: result ? result.checkpoints.map(row => ({ label: `${digits(row.prefix_km.toFixed(0), lang)} km`, coordinates: row.end_coordinates, km: row.prefix_km })) : [],
       fit: selected ? bounds(selected.line) : null,
+      play: result && run ? { kind: 'flood', line: lineCoordinates(result.line), pathKm: result.path_length_km, celerity: run.celerity_m_s, duration_s: run.duration_s,
+        checkpoints: result.checkpoints.map(row => ({ km: row.prefix_km })) } : null,
     };
     onScene(scene);
-  }, [loaded, origin, result, onScene, lang]);
+  }, [loaded, origin, result, run, onScene, lang]);
 
   if (error) return <div className="sim-problem" role="alert"><p><strong>{t.failed}</strong> {error}</p><button type="button" onClick={() => { setError(null); setAttempt(a => a + 1); }}>{t.retry}</button></div>;
   if (!loaded || !draft || !origin) return <p role="status" className="sim-loading">{t.loading}</p>;
@@ -144,6 +147,7 @@ function FloodResult({ scenario, origin, catalogue, release, lang }: { scenario:
     <h2 id="flood-result"><span className="sim-step-number">{digits('3', lang)}</span> {t.step3}</h2>
     <p className="sim-label-row"><span className="sim-badge sim-badge-model">{c.modelled}</span><span className="sim-badge">{t.scenarioNotice}</span></p>
     <p className="sim-summary">{c.floodSummary(km(last.row.prefix_km), span(last.arrival.front_s), fmtRange(last.range.population.min, last.range.population.max))}</p>
+    <button type="button" className="sim-watch" onClick={() => document.querySelector('.sim-map')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}><span aria-hidden="true">▶</span> {c.watch3d}</button>
     <div className="sim-result-columns"><div className="sim-result-main">
     <div className="sim-headline">
       <div><span className="sim-kicker">{c.frontReaches(km(rows[0].row.prefix_km))}</span><strong>{span(rows[0].arrival.front_s)}</strong></div>

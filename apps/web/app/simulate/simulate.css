@@ -179,3 +179,29 @@
 .sim-journey-swatch { position: static; display: inline-block; width: 18px; height: 10px; }
 .sim-journey-peak-key { width: 3px; height: 14px; background: var(--ink-strong); }
 @media print { .sim-journey-sweep { display: none; } }
+/* 3D playback: a compact overlay on the map; every value it shows is also in the result tables. */
+.sim-player { position: absolute; left: .75rem; right: 3.6rem; bottom: .75rem; display: grid; gap: .45rem; padding: .7rem .8rem; border-radius: var(--radius-md); background: #08161cd9; color: #eef6f7; box-shadow: 0 10px 30px rgba(0, 0, 0, .35); backdrop-filter: blur(6px); }
+.sim-player p { margin: 0; }
+.sim-player-badge { font-size: .76rem; color: #bcd0d4; }
+.sim-player-badge strong { display: inline-block; margin-right: .35rem; padding: .05rem .4rem; border: 1px solid #ffd27a; border-radius: 3px; color: #ffe2a3; font-size: .68rem; letter-spacing: .02em; }
+.sim-player-status { font-size: .88rem; line-height: 1.4; font-variant-numeric: tabular-nums; }
+.sim-player-controls { display: flex; flex-wrap: wrap; align-items: center; gap: .45rem; }
+.sim-player-controls button, .sim-player-controls select { min-height: 40px; padding: .3rem .7rem; border: 1px solid #47636b; border-radius: var(--radius-sm); background: #12262e; color: #eef6f7; font-size: .82rem; font-weight: 650; }
+.sim-player-controls button[aria-pressed=true] { background: #e6f2f4; color: #08161c; border-color: #e6f2f4; }
+.sim-player-play { min-width: 6.5rem; background: #2f86a6 !important; border-color: #2f86a6 !important; color: #fff !important; }
+.sim-player-scrub { flex: 1 1 10rem; display: flex; }
+.sim-player-scrub input { width: 100%; accent-color: #4cc3ff; min-height: 32px; }
+.sim-checkpoint-label { transition: background-color .3s ease, color .3s ease; }
+.sim-checkpoint-label.reached { background: #4cc3ff; color: #06202b; }
+@media (max-width: 640px) {
+  .sim-player { left: .4rem; right: .4rem; bottom: .4rem; padding: .5rem .55rem; gap: .35rem; }
+  .sim-player-badge span { display: none; }
+  .sim-player-status { font-size: .78rem; }
+  .sim-player-controls button, .sim-player-controls select { min-height: 44px; padding: .25rem .55rem; font-size: .76rem; }
+  .sim-player-scrub { order: 5; flex-basis: 100%; }
+  /* A phone gets a taller map while a playback is on it, so the overlay never hides the scene. */
+  .sim-map:has(.sim-player) { height: 72svh; max-height: 640px; }
+}
+.sim-watch { justify-self: start; display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; }
+@media (prefers-reduced-motion: reduce) { .sim-checkpoint-label { transition: none; } }
+@media print { .sim-player { display: none; } }

@@ -441,14 +441,30 @@ def write(digest, raw):
         (ARCHIVE / "raw" / f"{source_id}.gz").write_bytes(gzip.compress(body, mtime=0))
 
 
+def fetched_count(digest):
+    return sum(1 for e in (digest or {}).get("sources", []) if e.get("status") == "fetched")
+
+
+def improves(digest, previous):
+    """A retry replaces today's copy only when it read more sources; another day's copy is always replaced."""
+    if not previous or previous.get("generated_at_nepal", "")[:10] != digest["generated_at_nepal"][:10]:
+        return True
+    return fetched_count(digest) > fetched_count(previous)
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dry-run", action="store_true", help="print the summary without writing files")
+    parser.add_argument("--retry", action="store_true",
+                        help="a later attempt the same day: write only if it read more sources than today's copy")
     args = parser.parse_args(argv)
     sources = json.loads(SOURCES.read_text())["sources"]
     previous = json.loads(PUBLIC.read_text()) if PUBLIC.exists() else None
     digest, raw = build(sources, previous)
-    if not args.dry_run:
+    keep = args.retry and not improves(digest, previous)
+    if keep:
+        print("Retry read no more sources than today's copy; keeping it.")
+    if not args.dry_run and not keep:
         write(digest, raw)
     print(json.dumps(digest["summary"], indent=1))
     for entry in digest["sources"]:

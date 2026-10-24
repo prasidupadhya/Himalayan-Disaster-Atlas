@@ -9,6 +9,7 @@ from pipelines.gov_feeds.digest import (
     build,
     changes,
     focus_list,
+    improves,
     organise_list,
     organise_rain,
     organise_river,
@@ -174,6 +175,16 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(river["status"], "fetched")
         self.assertEqual((rain["status"], rain["last_known"]), ("error", True))
         self.assertIn("budget", rain["error"])
+
+    def test_a_retry_replaces_todays_copy_only_when_it_read_more(self):
+        both = fetcher_for({"https://example.test/river": (200, RIVER), "https://example.test/rain": (200, RAIN)})
+        morning, _ = build(SOURCES, None, fetcher_for({"https://example.test/river": (200, RIVER)}), allow, MOMENT)
+        same, _ = build(SOURCES, morning, fetcher_for({"https://example.test/river": (200, RIVER)}), allow, MOMENT)
+        better, _ = build(SOURCES, morning, both, allow, MOMENT)
+        tomorrow, _ = build(SOURCES, morning, fetcher_for({}), allow, datetime(2026, 10, 18, 0, 30, tzinfo=timezone.utc))
+        self.assertFalse(improves(same, morning))
+        self.assertTrue(improves(better, morning))
+        self.assertTrue(improves(tomorrow, morning))
 
     def test_pages_built_by_javascript_use_the_browser(self):
         source = {**SOURCES[0], "render": True}

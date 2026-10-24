@@ -2,19 +2,24 @@
 import { useEffect, useRef, useState } from 'react';
 import type { GeoJSONSource, Map, Marker } from 'maplibre-gl';
 import { ADMIN_MANIFESTS, loadDataset } from '../../lib/datasets';
+import { addVerifiedTerrain } from '../../lib/terrain-source';
+import { Player, type Play } from './player';
 
 export type Corners = [[number, number], [number, number], [number, number], [number, number]];
 export interface MapScene {
   origins?: Array<{ id: string; label: string; coordinates: [number, number]; kind: 'glof' | 'river' | 'event'; selected: boolean }>;
   corridors?: Array<{ width: number; geometry: GeoJSON.Geometry }>;
   path?: GeoJSON.Geometry | null;
-  checkpoints?: Array<{ label: string; coordinates: [number, number] }>;
+  checkpoints?: Array<{ label: string; coordinates: [number, number]; km?: number }>;
   /** Canvas raster (no data: URL fetch, which the site CSP forbids). Corners are linear in web-mercator. */
   shaking?: { canvas: HTMLCanvasElement; coordinates: Corners } | null;
   epicentre?: [number, number] | null;
   rupture?: [number, number][] | null;
   fit?: [number, number, number, number] | null;
+  /** A finished run to play back in 3D. */
+  play?: Play | null;
 }
+const EXAGGERATION = 1.5;
 const EMPTY: GeoJSON.FeatureCollection = { type: 'FeatureCollection', features: [] };
 const CORRIDOR_SHADES = ['#9fd7e4', '#5fb3cb', '#2f86a6'];
 const SOURCES = ['sim-corridors', 'sim-path', 'sim-origins', 'sim-epicentre', 'sim-rupture'] as const;
@@ -27,11 +32,16 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
   const markers = useRef<Marker[]>([]);
   const [ready, setReady] = useState(false);
   const [failure, setFailure] = useState<'failed' | 'noWebgl' | null>(null);
+  const [terrain, setTerrain] = useState<string | null>(null);
+  const [instance, setInstance] = useState<Map | null>(null);
+  const [threeD, setThreeD] = useState(true);
+  const shell = useRef<HTMLDivElement>(null);
   useEffect(() => { handlers.current = { onPick, onOrigin }; }, [onPick, onOrigin]);
 
   useEffect(() => {
     const controller = new AbortController();
     let map: Map | undefined;
+    let disposeTerrain: (() => void) | undefined;
     async function init() {
       try {
         const { Map: MapLibre, NavigationControl, setWorkerUrl, getVersion } = await import('maplibre-gl');
@@ -40,7 +50,7 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
         map = new MapLibre({
           container: container.current, attributionControl: false, renderWorldCopies: false,
           style: { version: 8, sources: {}, layers: [{ id: 'background', type: 'background', paint: { 'background-color': '#14262f' } }] },
-          bounds: [[79.6, 25.9], [88.6, 30.7]], fitBoundsOptions: { padding: 12 }, minZoom: 3, maxZoom: 12, maxBounds: [[66, 15], [102, 40]],
+          bounds: [[79.6, 25.9], [88.6, 30.7]], fitBoundsOptions: { padding: 12 }, minZoom: 3, maxZoom: 12, maxPitch: 76, maxBounds: [[66, 15], [102, 40]],
           pixelRatio: Math.min(window.devicePixelRatio || 1, 1.5),
         });
         mapRef.current = map;
@@ -69,6 +79,14 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
           map.on('mouseenter', 'sim-origins', () => { map!.getCanvas().style.cursor = 'pointer'; });
           map.on('mouseleave', 'sim-origins', () => { map!.getCanvas().style.cursor = ''; });
           setReady(true);
+          setInstance(map);
+          // Verified relief for the 3D playback; without it the scenario still plays on the flat map.
+          void addVerifiedTerrain(map, controller.signal, () => setTerrain(null), 'sim-corridors').then(added => {
+            if (!map || controller.signal.aborted) { added.dispose(); return; }
+            disposeTerrain = added.dispose;
+            map.setSky({ 'sky-color': '#7fa9c0', 'horizon-color': '#dbe7ea', 'fog-color': '#c9d8dc', 'sky-horizon-blend': 0.55, 'horizon-fog-blend': 0.7, 'fog-ground-blend': 0.25, 'atmosphere-blend': 0.6 });
+            setTerrain(added.id);
+          }).catch(() => undefined);
           // Verified administrative context; the simulation does not depend on it.
           void Promise.all([loadDataset(ADMIN_MANIFESTS[0], controller.signal), loadDataset(ADMIN_MANIFESTS[1], controller.signal)]).then(([country, provinces]) => {
             if (!map || controller.signal.aborted) return;
@@ -83,7 +101,7 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
       }
     }
     void init();
-    return () => { controller.abort(); markers.current.forEach(m => m.remove()); map?.remove(); mapRef.current = null; };
+    return () => { controller.abort(); markers.current.forEach(m => m.remove()); disposeTerrain?.(); map?.remove(); mapRef.current = null; };
   }, []);
 
   useEffect(() => {
@@ -98,7 +116,8 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
     set('sim-rupture', { type: 'FeatureCollection', features: scene.rupture && scene.rupture.length > 1 ? [{ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: scene.rupture } }] : [] });
     if (map.getLayer('sim-shaking')) map.removeLayer('sim-shaking');
     if (map.getSource('sim-shaking')) map.removeSource('sim-shaking');
-    if (scene.shaking) {
+    // During an earthquake playback the player draws the shaking itself, revealed behind the wave front.
+    if (scene.shaking && scene.play?.kind !== 'quake') {
       map.addSource('sim-shaking', { type: 'canvas', canvas: scene.shaking.canvas, coordinates: scene.shaking.coordinates, animate: false });
       map.addLayer({ id: 'sim-shaking', type: 'raster', source: 'sim-shaking', paint: { 'raster-opacity': 0.82, 'raster-resampling': 'nearest', 'raster-fade-duration': 0 } }, map.getLayer('sim-provinces') ? 'sim-provinces' : 'sim-corridors');
     }
@@ -107,14 +126,24 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
       if (mapRef.current !== map) return;
       markers.current = scene.checkpoints!.map(c => {
         const el = document.createElement('span'); el.className = 'sim-checkpoint-label'; el.textContent = c.label;
+        if (c.km !== undefined) el.dataset.km = String(c.km);
         return new Marker({ element: el, anchor: 'left', offset: [8, 0] }).setLngLat(c.coordinates).addTo(map);
       });
     });
-    if (scene.fit) map.fitBounds([[scene.fit[0], scene.fit[1]], [scene.fit[2], scene.fit[3]]], { padding: 40, maxZoom: 9, duration: 0 });
+    if (scene.fit && !scene.play) map.fitBounds([[scene.fit[0], scene.fit[1]], [scene.fit[2], scene.fit[3]]], { padding: 40, maxZoom: 9, duration: 0, pitch: 0, bearing: 0 });
   }, [ready, scene]);
 
-  return <div className="sim-map" data-map-state={failure ? 'unavailable' : ready ? 'ready' : 'loading'}>
+  // Relief is raised only for a playback, so choosing a release point or epicentre stays a flat, precise click.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!ready || !map || !terrain) return;
+    map.setTerrain(scene.play && threeD ? { source: terrain, exaggeration: EXAGGERATION } : null);
+    if (!scene.play || !threeD) map.easeTo({ pitch: 0, duration: 400 });
+  }, [ready, terrain, threeD, scene.play]);
+
+  return <div ref={shell} className="sim-map" data-map-state={failure ? 'unavailable' : ready ? 'ready' : 'loading'} data-terrain={terrain ? 'ready' : 'none'}>
     <div ref={container} className="map" role="region" aria-label={label} />
+    {ready && !failure && scene.play && instance && <Player key={scene.play.kind} map={instance} play={scene.play} threeD={threeD && !!terrain} onThreeD={setThreeD} shell={shell} />}
     {!ready && !failure && <p className="sim-map-status" role="status">{messages.loading}</p>}
     {failure && <p className="sim-map-status sim-map-failure" role="status">{messages[failure]}</p>}
   </div>;

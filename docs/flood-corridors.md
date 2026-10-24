@@ -22,3 +22,7 @@ Real lake volumes (no bathymetry), breach mechanics, inundation depth and extent
 
 ## Tests
 `tests/python/test_model_releases.py` (tampering, unknown-area totals, width monotonicity), `tests/web/simulator.test.ts` (volume conservation, arrival ordering, validation, share links) and `tests/e2e/simulator.spec.ts`.
+
+## 3D playback
+
+After a run the simulator map raises the checksum-verified Copernicus terrain (relief ×1.5, hypsometric tint showing height only) and plays the declared pulse down the mapped river line (`apps/web/features/simulator/player.tsx`, geometry in `scene-3d.ts`). The bright band is the pulse at the central celerity, from its tail (`c·(t − duration)`) to its head (`c·t`); the faint band spans the fastest and slowest declared fronts; checkpoints light up at their central arrival time. Model kilometres are mapped onto the drawn line in proportion, so the picture agrees with the arrival table. The camera follows the head along the direction of travel and can be released by dragging or with *Follow*. Playback starts once the map is on screen, never under reduced motion (which opens at the end state), and is absent without WebGL; the tables remain the full record. It shows no inundation extent, depth or damage.

@@ -1,5 +1,9 @@
 import { expect, test, type Page } from '@playwright/test';
 
+// Scenario runs start a 3D playback by themselves; the software renderer used in CI cannot animate terrain at speed,
+// so these tests read the playback through its reduced-motion end state and scrubber. One test checks autoplay itself.
+test.use({ reducedMotion: 'reduce' });
+
 const NOTICE = 'Scenario / educational estimate, not a forecast or warning';
 const b64 = (value: unknown) => Buffer.from(JSON.stringify(value)).toString('base64url');
 const GORKHA = { kind: 'earthquake', version: 1, preset: 'us20002926', longitude: 84.7314, latitude: 28.2305, magnitude: 7.8, mechanism: 'unspecified', rupture: { type: 'point' }, vs30: 760 };
@@ -113,6 +117,51 @@ test('without WebGL the map says so and every result remains in the tables', asy
   await expect(page.locator('.sim-map')).toContainText('WebGL');
   const result = await runFlood(page);
   await expect(result.locator('tbody tr').first()).toBeVisible();
+  await expect(page.getByRole('group', { name: '3D scenario playback' })).toHaveCount(0);
+});
+
+test('a flood run plays back in 3D on verified terrain, and the scrubber moves the declared pulse', async ({ page }) => {
+  test.slow(); // 3D terrain in CI's software renderer
+  await open(page);
+  await runFlood(page);
+  const player = page.getByRole('group', { name: '3D scenario playback' });
+  // Reduced motion shows the end state at once and never starts by itself.
+  await expect(player).toHaveAttribute('data-player-state', 'ended', { timeout: 20_000 });
+  await expect(player).toContainText('MODELLED · HYPOTHETICAL');
+  await expect(player).toContainText('It does not show where water would spread');
+  await expect(player.locator('.sim-player-status')).toContainText('the declared pulse has passed the end of the mapped path');
+  await expect(page.locator('.sim-map')).toHaveAttribute('data-terrain', 'ready', { timeout: 30_000 });
+  const scrub = player.getByRole('slider');
+  await scrub.fill('0');
+  await expect(player.locator('.sim-player-status')).toContainText('0m after release: front about 0 km downstream');
+  await expect(page.locator('.sim-checkpoint-label.reached')).toHaveCount(0);
+  await scrub.fill(String(Math.round(Number(await scrub.getAttribute('max')) / 2)));
+  await expect(player.locator('.sim-player-status')).toContainText(/after release: front about \d+ km downstream at the central speed \(range \d+–\d+ km\)/);
+  expect(await page.locator('.sim-checkpoint-label.reached').count()).toBeGreaterThan(0);
+  await expect(player.getByRole('button', { name: '3D' })).toHaveAttribute('aria-pressed', 'true');
+  await player.getByRole('button', { name: '3D' }).click();
+  await expect(player.getByRole('button', { name: '2D' })).toHaveAttribute('aria-pressed', 'false');
+});
+
+test('an earthquake run reveals the modelled shaking behind an illustrative wave front', async ({ page }) => {
+  test.slow(); // 3D terrain in CI's software renderer
+  await open(page);
+  await runQuake(page);
+  const player = page.getByRole('group', { name: '3D scenario playback' });
+  await expect(player).toHaveAttribute('data-player-state', 'ended', { timeout: 30_000 });
+  await expect(player).toContainText('Wave timing is approximate');
+  await player.getByRole('slider').fill('10');
+  await expect(player.locator('.sim-player-status')).toContainText('10 s after rupture: strong-shaking front (S wave, ~3.5 km/s) about 35 km out; first tremor (P wave, ~6 km/s) about 60 km.');
+});
+
+test('with motion allowed the playback starts by itself once the map is on screen', async ({ page }) => {
+  test.slow(); // 3D terrain in CI's software renderer
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await open(page);
+  await runFlood(page);
+  const player = page.getByRole('group', { name: '3D scenario playback' });
+  await expect(player).toHaveAttribute('data-player-state', 'playing', { timeout: 20_000 });
+  await expect.poll(async () => Number(await player.locator('.sim-player-status').getAttribute('data-player-time')), { timeout: 20_000 }).toBeGreaterThan(0);
 });
 
 test('keyboard-only run moves focus to the result heading', async ({ page }) => {

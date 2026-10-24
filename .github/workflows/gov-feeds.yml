@@ -1,8 +1,11 @@
 name: Daily official-source digest
 on:
   schedule:
-    # 00:17 UTC is 06:02 Nepal time.
+    # 00:17 UTC is 06:02 Nepal time. The two later runs retry hosts that did not answer in the morning;
+    # they publish only if they read more sources than the morning copy.
     - cron: '17 0 * * *'
+    - cron: '17 6 * * *'
+    - cron: '17 12 * * *'
   workflow_dispatch:
 permissions:
   contents: read
@@ -34,7 +37,7 @@ jobs:
         run: .gov/bin/python -m unittest tests.python.test_gov_feeds -v
       - name: Fetch and organise official pages
         timeout-minutes: 18
-        run: .gov/bin/python -m pipelines.gov_feeds.digest
+        run: .gov/bin/python -m pipelines.gov_feeds.digest ${{ github.event_name == 'schedule' && github.event.schedule != '17 0 * * *' && '--retry' || '' }}
       - name: Commit as the repository owner
         id: commit
         env:

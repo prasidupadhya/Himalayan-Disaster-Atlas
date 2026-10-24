@@ -166,6 +166,7 @@ test('today and the simulator work offline after one online visit, from stored c
   await page.reload();
   await expect(page.locator('[data-today-state]')).toHaveAttribute('data-today-state', 'ready', { timeout: 30_000 });
   const copied = await page.locator('.hz-copied').textContent();
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/simulate/');
   await expect(page.locator('#panel-flood').getByRole('checkbox')).toBeVisible({ timeout: 30_000 });
   await expect.poll(() => page.evaluate(async () => (await (await caches.open('atlas-data-v1')).keys()).length)).toBeGreaterThan(5);

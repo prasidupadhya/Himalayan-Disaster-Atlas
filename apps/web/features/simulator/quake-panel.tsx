@@ -8,6 +8,7 @@ import { computeShaking, PGA_BANDS, ruptureLine, validateScenario, type Asset, t
 import { digits, formatNumber, UI, type Lang } from '../../lib/i18n';
 import { loadModelArtifact, loadModelRelease, MODEL_RELEASES } from '../../lib/model-release';
 import { BandBars } from './charts';
+import { haversineKm } from './scene-3d';
 import type { Corners, MapScene } from './simulator-map';
 import { revealResult } from './reveal';
 import { errorText, simCopy } from './copy';
@@ -108,7 +109,10 @@ export function QuakePanel({ lang, initial, onScene, onShare, pick, slot }: { la
   useEffect(() => {
     if (!draft) return;
     const line = draft.rupture.type === 'line' ? ruptureLine(draft) : null;
+    // The playback reaches the farthest corner of the modelled shaking grid, so every modelled cell is revealed.
+    const reachKm = result && image ? Math.max(...image.coordinates.map(corner => haversineKm([draft.longitude, draft.latitude], corner))) : 0;
     onScene({ epicentre: [draft.longitude, draft.latitude], rupture: line, shaking: result && image ? image : null,
+      play: result && image ? { kind: 'quake', epicentre: [draft.longitude, draft.latitude], reachKm, shaking: image } : null,
       origins: [], fit: [Math.max(79.6, draft.longitude - 3.2), Math.max(25.9, draft.latitude - 2.2), Math.min(88.6, draft.longitude + 3.2), Math.min(30.7, draft.latitude + 2.2)] });
   }, [draft, result, image, onScene]);
 
@@ -189,6 +193,7 @@ function QuakeResult({ result, loaded, lang }: { result: ShakingResult; loaded: 
     <h2 id="quake-result"><span className="sim-step-number">{digits('3', lang)}</span> {t.step3}</h2>
     <p className="sim-label-row"><span className="sim-badge sim-badge-model">{c.modelled}</span><span className="sim-badge">{t.scenarioNotice}</span></p>
     <p className="sim-summary">{c.quakeSummary(formatNumber(s.magnitude, lang, 1), formatNumber(strong(result.population.central), lang), formatNumber(strong(result.population.low), lang), formatNumber(strong(result.population.high), lang))}</p>
+    <button type="button" className="sim-watch" onClick={() => document.querySelector('.sim-map')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}><span aria-hidden="true">▶</span> {c.watch3d}</button>
     <div className="sim-headline">
       <div><span className="sim-kicker">{c.strongPeople}</span><strong>{formatNumber(strong(result.population.central), lang)}</strong><span className="sim-muted">−1σ {formatNumber(strong(result.population.low), lang)} · +1σ {formatNumber(strong(result.population.high), lang)}</span></div>
       {kathmandu && <div><span className="sim-kicker">{c.ktm}</span><strong>{kathmandu.median === null ? formatNumber(null, lang) : `${formatNumber(kathmandu.median, lang, 2)} g`}</strong><span className="sim-muted">{kathmandu.median !== null && `±1σ ${formatNumber(kathmandu.low, lang, 2)}–${formatNumber(kathmandu.high, lang, 2)} g · `}R<sub>JB</sub> {formatNumber(kathmandu.rjb, lang)} km</span></div>}
