@@ -1,0 +1,35 @@
+name: Official-source reachability probe
+# Manual diagnostic: which agency hosts answer GitHub's runners, over IPv4 and IPv6, and how.
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Probe hosts
+        run: |
+          UA="HimalayanDisasterAtlas/1.0 (+https://github.com/prasidupadhya/Himalayan-Disaster-Atlas; reachability probe)"
+          for url in \
+            https://bipadportal.gov.np/robots.txt \
+            "https://bipadportal.gov.np/api/v1/alert/?format=json&limit=1" \
+            https://dms2.dhm.gov.np/ \
+            https://dhm.gov.np/ \
+            https://www.dhm.gov.np/ \
+            https://dhm.gov.np/mfd/ \
+            https://hydrology.gov.np/ \
+            https://ndrrma.gov.np/ \
+            https://seismonepal.gov.np/robots.txt \
+            http://bipadportal.gov.np/robots.txt \
+            http://dhm.gov.np/ ; do
+            host=$(echo "$url" | awk -F/ '{print $3}')
+            echo "=== $url"
+            echo "dns A: $(dig +short A "$host" | tr '\n' ' ') | AAAA: $(dig +short AAAA "$host" | tr '\n' ' ')"
+            for fam in -4 -6; do
+              curl $fam -sS -o /dev/null -A "$UA" --connect-timeout 12 --max-time 25 \
+                -w "curl $fam: http=%{http_code} ip=%{remote_ip} connect=%{time_connect}s tls=%{time_appconnect}s total=%{time_total}s\n" "$url" 2>&1 | tail -1
+            done
+          done
+          echo "=== runner egress"; curl -sS --max-time 10 https://api.ipify.org; echo
