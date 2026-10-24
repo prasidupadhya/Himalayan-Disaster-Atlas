@@ -10,6 +10,7 @@ import gzip
 import hashlib
 import json
 import re
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from urllib.parse import urlparse
@@ -23,6 +24,9 @@ FORMAT = "atlas-gov-digest@1"
 NEPAL = timezone(timedelta(hours=5, minutes=45))
 USER_AGENT = "HimalayanDisasterAtlas/1.0 (+https://github.com/prasidupadhya/Himalayan-Disaster-Atlas; daily public-page digest)"
 LIMITS = {"tables": 8, "rows": 200, "links": 120, "paragraphs": 40, "headings": 40, "text": 600, "body": 5_000_000}
+# One morning run must finish well inside the workflow's limit even when hosts stop answering:
+# after this many seconds no further source is started, and those left keep their last copy.
+RUN_BUDGET_S = 600
 # A station reading counts as current only if it was observed within this window before the copy.
 FRESH_HOURS = 24
 # The world-record 24-hour rainfall (Foc-Foc, La Réunion, 1966, WMO); larger totals are instrument faults.
@@ -59,7 +63,7 @@ def fetch(url):
     # BIPAD's REST API answers an HTML browse page unless JSON is asked for.
     headers = {"User-Agent": USER_AGENT, "Accept": "application/json, text/html;q=0.9, */*;q=0.8", "Accept-Language": "en,ne;q=0.8"}
     response = Fetcher.get(url, headers=headers,
-                           timeout=45, retries=2, follow_redirects=True, stealthy_headers=False)
+                           timeout=25, retries=2, follow_redirects=True, stealthy_headers=False)
     body = response.body if isinstance(response.body, bytes) else str(response.body).encode("utf-8")
     headers = getattr(response, "headers", {}) or {}
     content_type = next((v for k, v in headers.items() if k.lower() == "content-type"), "") if hasattr(headers, "items") else ""
@@ -72,8 +76,8 @@ def render(url):
 
     from scrapling.fetchers import DynamicFetcher
 
-    options = {"headless": True, "network_idle": True, "timeout": 60_000, "useragent": USER_AGENT,
-               "extra_headers": {"Accept-Language": "en,ne;q=0.8"}, "disable_resources": True, "retries": 2, "google_search": False}
+    options = {"headless": True, "network_idle": True, "timeout": 45_000, "useragent": USER_AGENT,
+               "extra_headers": {"Accept-Language": "en,ne;q=0.8"}, "disable_resources": True, "retries": 1, "google_search": False}
     if os.environ.get("GOV_BROWSER_PATH"):
         options["executable_path"] = os.environ["GOV_BROWSER_PATH"]
     response = DynamicFetcher.fetch(url, **options)
@@ -345,19 +349,58 @@ def summarise(entries):
 
 # ---- run --------------------------------------------------------------------------------------
 
-def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None, renderer=render):
+class HostDown(Exception):
+    """A host failed at the network level earlier in this run, so it is not asked again until tomorrow."""
+
+
+def guard(dead, transport):
+    """Wraps a fetcher so that one network failure (timeout, refused connection) skips the host for the rest of the run.
+    HTTP error statuses are answers, not failures, and do not count."""
+    def guarded(url):
+        host = urlparse(url).netloc
+        if host in dead:
+            raise HostDown(f"{host} did not answer earlier in this run; not asked again")
+        try:
+            return transport(url)
+        except Exception:
+            dead.add(host)
+            raise
+    return guarded
+
+
+def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None, renderer=render, budget_s=RUN_BUDGET_S, clock=time.monotonic):
     moment = moment or now_utc()
     before = {e["id"]: e for e in (previous or {}).get("sources", [])}
     entries, raw = [], {}
+    dead, robots_copies = set(), {}
+    get, show = guard(dead, fetcher), guard(dead, renderer)
+
+    def robots_once(url):
+        # Each host's robots.txt is fetched once per run; every page is still checked against its own path.
+        # A failed robots.txt alone does not mark the host down: some hosts refuse plain clients but serve the browser.
+        if urlparse(url).netloc in dead:
+            raise HostDown(f"{urlparse(url).netloc} did not answer earlier in this run; not asked again")
+        if url not in robots_copies:
+            try:
+                robots_copies[url] = fetcher(url)
+            except Exception as error:
+                robots_copies[url] = error
+        if isinstance(robots_copies[url], Exception):
+            raise robots_copies[url]
+        return robots_copies[url]
+
+    started = clock()
     for source in sources:
         prior = before.get(source["id"])
         entry = {key: source[key] for key in ("id", "agency", "title", "category", "kind", "url")}
         entry.update({"checked_at": iso(moment), "http_status": None, "sha256": None})
         try:
-            if not robots(source["url"], fetcher):
+            if clock() - started > budget_s:
+                raise TimeoutError(f"Not attempted: the run's {budget_s}-second budget was spent on hosts that did not answer")
+            if not robots(source["url"], robots_once):
                 entry["status"] = "blocked-by-robots"
             else:
-                status, body, final_url, _ = (renderer if source.get("render") else fetcher)(source["url"])
+                status, body, final_url, _ = (show if source.get("render") else get)(source["url"])
                 entry["http_status"] = status
                 if status >= 400:
                     entry["status"] = "unreachable"

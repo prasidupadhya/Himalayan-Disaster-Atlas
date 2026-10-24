@@ -12,6 +12,7 @@ from pipelines.gov_feeds.digest import (
     organise_list,
     organise_rain,
     organise_river,
+    robots_allows,
 )
 from pipelines.gov_feeds.digest import SOURCES as REGISTRY
 
@@ -138,6 +139,41 @@ class BuildTests(unittest.TestCase):
         self.assertNotIn("content", digest["sources"][0])
         self.assertEqual(digest["summary"]["rivers_above_danger"], None)
         self.assertEqual(digest["summary"]["sources_unavailable"], 1)
+
+    def test_a_host_that_stops_answering_is_asked_once_and_its_sources_keep_their_last_copy(self):
+        first, _ = build(SOURCES, None, fetcher_for({"https://example.test/river": (200, RIVER), "https://example.test/rain": (200, RAIN)}), allow, MOMENT)
+        asked = []
+        def silent(url):
+            asked.append(url)
+            raise TimeoutError("SYNTHETIC timeout")
+        second, raw = build(SOURCES, first, silent, allow, MOMENT)
+        self.assertEqual(asked, ["https://example.test/river"])
+        river, rain = second["sources"]
+        self.assertEqual((river["status"], rain["status"]), ("error", "error"))
+        self.assertIn("did not answer earlier in this run", rain["error"])
+        self.assertTrue(river["last_known"] and rain["last_known"])
+        self.assertEqual(rain["content"], first["sources"][1]["content"])
+        self.assertEqual(raw, {})
+
+    def test_robots_txt_is_read_once_per_host_and_checked_per_page(self):
+        asked = []
+        payloads = {"https://example.test/robots.txt": (200, b"User-agent: *\nDisallow: /rain"), "https://example.test/river": (200, RIVER)}
+        def fetcher(url):
+            asked.append(url)
+            return fetcher_for(payloads)(url)
+        digest, _ = build(SOURCES, None, fetcher, robots_allows, MOMENT)
+        self.assertEqual(asked.count("https://example.test/robots.txt"), 1)
+        self.assertEqual([e["status"] for e in digest["sources"]], ["fetched", "blocked-by-robots"])
+
+    def test_sources_past_the_run_budget_are_not_attempted_and_keep_their_last_copy(self):
+        first, _ = build(SOURCES, None, fetcher_for({"https://example.test/river": (200, RIVER), "https://example.test/rain": (200, RAIN)}), allow, MOMENT)
+        ticks = iter([0, 0, 700])
+        second, _ = build(SOURCES, first, fetcher_for({"https://example.test/river": (200, RIVER), "https://example.test/rain": (200, RAIN)}), allow, MOMENT,
+                          budget_s=600, clock=lambda: next(ticks))
+        river, rain = second["sources"]
+        self.assertEqual(river["status"], "fetched")
+        self.assertEqual((rain["status"], rain["last_known"]), ("error", True))
+        self.assertIn("budget", rain["error"])
 
     def test_pages_built_by_javascript_use_the_browser(self):
         source = {**SOURCES[0], "render": True}

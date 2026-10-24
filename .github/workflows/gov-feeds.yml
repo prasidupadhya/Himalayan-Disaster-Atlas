@@ -13,7 +13,9 @@ jobs:
   digest:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    # The digest gives up on silent hosts and stops starting sources after 10 minutes, so it always
+    # reaches the commit step; sources it could not read keep their last copy, marked as such.
+    timeout-minutes: 30
     permissions:
       contents: write
       actions: write
@@ -31,6 +33,7 @@ jobs:
       - name: Test the digest
         run: .gov/bin/python -m unittest tests.python.test_gov_feeds -v
       - name: Fetch and organise official pages
+        timeout-minutes: 18
         run: .gov/bin/python -m pipelines.gov_feeds.digest
       - name: Commit as the repository owner
         id: commit
