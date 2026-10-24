@@ -9,6 +9,8 @@ import { loadModelArtifact, loadModelRelease, manifestPath, MODEL_RELEASES } fro
 import { originLabel } from './flood-panel';
 import { duration, REPORT } from './copy';
 import { formatNumber, UI, useLanguage, type Lang } from '../../lib/i18n';
+import { RouteList } from './route-list';
+import { lineCoordinates } from './scene-3d';
 import { loadAssets } from './quake-panel';
 
 const NOTICE = 'Scenario / educational estimate, not a forecast or warning';
@@ -116,6 +118,7 @@ function FloodReport({ body, lang }: { body: FloodBody; lang: Lang }) {
         <th scope="row">{n(row.prefix_km, 1)} km</th><td>{duration(a.front_s[0], lang)} – {duration(a.front_s[2], lang)}</td><td>{duration(a.end_s[0], lang)} – {duration(a.end_s[2], lang)}</td>
         <td>{x.population.min === null ? n(null) : `${n(Math.round(x.population.min))}–${n(Math.round(x.population.max!))}`}{x.population.partial ? ` ${r.partial}` : ''}</td>
         <td>{n(x.assets.min)}–{n(x.assets.max)}</td></tr>; })}</tbody></table>
+    <RouteList id={origin.id} line={lineCoordinates(origin.line)} pathKm={origin.path_length_km} centralCelerity={body.scenario.celerity_m_s[1]} lang={lang} />
   </section>;
 }
 

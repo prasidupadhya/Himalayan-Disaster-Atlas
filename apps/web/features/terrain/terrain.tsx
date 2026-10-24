@@ -58,6 +58,10 @@ export function Terrain({ map }: { map: Map | null }) {
         map.addSource(id, { type: 'raster-dem', tiles: [`${protocol}://{z}/{x}/{y}.png`],
           tileSize: 256, minzoom: 1, maxzoom: 9, encoding: 'mapbox',
           bounds: context.manifest.metadata.spatial_coverage.bbox, attribution: escapeAttribution(data.manifest.metadata.attribution + ' | ' + context.manifest.metadata.attribution) });
+        // In 3D, a hypsometric tint from the same verified elevations (height only, not land cover or snow).
+        map.addLayer({ id: `${id}-relief`, type: 'color-relief', source: id, layout: { visibility: 'none' }, paint: { 'color-relief-opacity': 0.85, 'color-relief-color': ['interpolate', ['linear'], ['elevation'],
+          0, '#4e7a55', 600, '#6f9460', 1500, '#a3a96f', 2500, '#a8875c', 3800, '#8f7b6c', 4800, '#c9c6c2', 5600, '#f3f6f8', 8850, '#ffffff'] } },
+          map.getStyle().layers.find(layer => layer.type !== 'background')?.id);
         map.addLayer({ id: `${id}-hillshade`, type: 'hillshade', source: id, paint: {
           'hillshade-shadow-color': '#172a30', 'hillshade-highlight-color': '#e4e8d3',
           'hillshade-accent-color': '#78917b', 'hillshade-exaggeration': 0.65,
@@ -69,6 +73,7 @@ export function Terrain({ map }: { map: Map | null }) {
           if (map.getStyle()) {
             map.setTerrain(null);
             if (map.getLayer(`${id}-hillshade`)) map.removeLayer(`${id}-hillshade`);
+            if (map.getLayer(`${id}-relief`)) map.removeLayer(`${id}-relief`);
             if (map.getSource(id)) map.removeSource(id);
           }
           removeProtocol(protocol);
@@ -85,7 +90,9 @@ export function Terrain({ map }: { map: Map | null }) {
     if (!map || !source.current || !dataset) return;
     map.setLayoutProperty(`${source.current}-hillshade`, 'visibility', hillshade ? 'visible' : 'none');
     map.setTerrain(threeD ? { source: source.current, exaggeration } : null);
-    map.easeTo({ pitch: threeD ? 50 : 0, duration: 0 });
+    map.setLayoutProperty(`${source.current}-relief`, 'visibility', threeD ? 'visible' : 'none');
+    map.setSky(threeD ? { 'sky-color': '#7fa9c0', 'horizon-color': '#dbe7ea', 'fog-color': '#c9d8dc', 'sky-horizon-blend': 0.55, 'horizon-fog-blend': 0.7, 'fog-ground-blend': 0.25, 'atmosphere-blend': 0.6 } : {});
+    map.easeTo({ pitch: threeD ? 60 : 0, duration: 0 });
   }, [map, dataset, hillshade, threeD, exaggeration]);
 
   useEffect(() => {
