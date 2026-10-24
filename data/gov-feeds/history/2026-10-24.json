@@ -1,6 +1,6 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-10-24T08:27:08Z",
+ "generated_at": "2026-10-24T14:36:07Z",
  "summary": {
   "sources_fetched": 1,
   "sources_last_known": 7,
@@ -47,7 +47,7 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "03de3c9f219ff960366667f0186c2f00533900a30397e7862433509984440738"
+   "sha256": "8046940ab0022b558ab48eae3f48a416a495a6b5bf45fa7d82d83d33477c3700"
   },
   {
    "id": "bipad-incidents",
