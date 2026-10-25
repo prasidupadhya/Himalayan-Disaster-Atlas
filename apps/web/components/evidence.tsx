@@ -1,7 +1,8 @@
 'use client';
 import Link from 'next/link';
 import type { DataStatus, EvidenceType, Metadata } from '../../../packages/contracts';
-import { useLanguage, type Lang } from '../lib/i18n';
+import { useCopy, useLanguage, type Lang } from '../lib/i18n';
+import { EVIDENCE } from './copy';
 
 /** Nepali names for the controlled status and evidence codes; the code itself stays visible in brackets. */
 const STATUS_NE: Record<DataStatus, string> = {
@@ -15,41 +16,41 @@ const EVIDENCE_NE: Record<EvidenceType, string> = {
 };
 
 function resolution(m: Omit<Metadata, 'schema_version' | 'artifact'>, lang: Lang) {
-  if (m.spatial_resolution.value === null) return lang === 'ne' ? 'अज्ञात (UNKNOWN) / स्रोत अनुसार फरक' : 'UNKNOWN / source-specific';
+  if (m.spatial_resolution.value === null) return EVIDENCE[lang].resolutionUnknown;
   return `${m.spatial_resolution.value.toLocaleString('en-US')} ${m.spatial_resolution.unit}`;
 }
 
 function temporalCoverage(m: Omit<Metadata, 'schema_version' | 'artifact'>, lang: Lang) {
   if (m.temporal_coverage.start) return `${m.temporal_coverage.start} → ${m.temporal_coverage.end}`;
-  return lang === 'ne' ? 'अज्ञात (UNKNOWN) / लागू हुँदैन' : 'UNKNOWN / not applicable';
+  return EVIDENCE[lang].temporalUnknown;
 }
 
 export function Evidence({ metadata: m }: { metadata: Omit<Metadata, 'schema_version' | 'artifact'> }) {
   const [lang] = useLanguage();
   const ne = lang === 'ne';
-  const t = (en: string, np: string) => ne ? np : en;
-  const unknown = t('UNKNOWN', 'अज्ञात (UNKNOWN)');
+  const c = useCopy(EVIDENCE);
+  const unknown = c.unknown;
   const status = ne ? STATUS_NE[m.status] ?? m.status : m.status;
   const evidenceType = ne ? EVIDENCE_NE[m.evidence_type] ?? m.evidence_type : m.evidence_type;
-  return <section className="evidence" aria-label={t('Dataset evidence', 'डेटासेटको प्रमाण')}>
-    <div className="badges">{m.is_fixture && <span className="badge fixture">{t('Synthetic fixture', 'कृत्रिम नमुना (synthetic fixture)')}</span>}<span className="badge">{status}</span><span className={`badge evidence-label evidence-${m.evidence_type}`}>{t('Evidence', 'प्रमाण')}: {evidenceType}</span></div>
-    <h3>{t('Evidence & provenance', 'प्रमाण र उत्पत्ति')}</h3>
+  return <section className="evidence" aria-label={c.region}>
+    <div className="badges">{m.is_fixture && <span className="badge fixture">{c.fixture}</span>}<span className="badge">{status}</span><span className={`badge evidence-label evidence-${m.evidence_type}`}>{c.evidence}: {evidenceType}</span></div>
+    <h3>{c.title}</h3>
     <dl>
-      <dt>{t('Dataset', 'डेटासेट')}</dt><dd>{m.dataset_name}</dd>
-      <dt>{t('Source', 'स्रोत')}</dt><dd>{m.source_url ? <a href={m.source_url}>{m.source}</a> : m.source}</dd>
-      <dt>{t('Dataset version', 'डेटासेट संस्करण')}</dt><dd>{m.dataset_version}</dd>
-      <dt>{t('Observation date', 'अवलोकन मिति')}</dt><dd>{m.observation_date ?? unknown}</dd>
-      <dt>{t('Publication date', 'प्रकाशन मिति')}</dt><dd>{m.publication_date ?? unknown}</dd>
-      <dt>{t('Access date', 'प्राप्त गरेको मिति')}</dt><dd>{m.retrieval_date}</dd>
-      <dt>{t('Processing date', 'प्रशोधन मिति')}</dt><dd>{m.processing_date}</dd>
-      <dt>{t('Processing version', 'प्रशोधन संस्करण')}</dt><dd>{m.processing_version}</dd>
-      <dt>{t('Resolution', 'रिजोल्युसन (resolution)')}</dt><dd>{resolution(m, lang)}</dd>
-      <dt>{t('Spatial coverage', 'भौगोलिक दायरा')}</dt><dd>{m.spatial_coverage.description}</dd>
-      <dt>{t('Temporal coverage', 'समय दायरा')}</dt><dd>{temporalCoverage(m, lang)}</dd>
-      <dt>{t('Evidence type', 'प्रमाणको प्रकार')}</dt><dd>{evidenceType} — {status}</dd>
-      <dt>{t('License', 'इजाजतपत्र (licence)')}</dt><dd>{m.license_url ? <a href={m.license_url}>{m.license}</a> : m.license}</dd>
+      <dt>{c.dataset}</dt><dd>{m.dataset_name}</dd>
+      <dt>{c.source}</dt><dd>{m.source_url ? <a href={m.source_url}>{m.source}</a> : m.source}</dd>
+      <dt>{c.version}</dt><dd>{m.dataset_version}</dd>
+      <dt>{c.observation}</dt><dd>{m.observation_date ?? unknown}</dd>
+      <dt>{c.publication}</dt><dd>{m.publication_date ?? unknown}</dd>
+      <dt>{c.access}</dt><dd>{m.retrieval_date}</dd>
+      <dt>{c.processingDate}</dt><dd>{m.processing_date}</dd>
+      <dt>{c.processingVersion}</dt><dd>{m.processing_version}</dd>
+      <dt>{c.resolution}</dt><dd>{resolution(m, lang)}</dd>
+      <dt>{c.spatial}</dt><dd>{m.spatial_coverage.description}</dd>
+      <dt>{c.temporal}</dt><dd>{temporalCoverage(m, lang)}</dd>
+      <dt>{c.evidenceType}</dt><dd>{evidenceType} — {status}</dd>
+      <dt>{c.licence}</dt><dd>{m.license_url ? <a href={m.license_url}>{m.license}</a> : m.license}</dd>
     </dl>
-    <details><summary>{t('Transformation, uncertainty & limitations', 'रूपान्तरण, अनिश्चितता र सीमाहरू')}</summary><p><strong>{t('Processing method:', 'प्रशोधन विधि:')}</strong> {m.method}</p><p><strong>{t('Uncertainty:', 'अनिश्चितता:')}</strong> {m.uncertainty}</p><ul>{m.limitations.map(item => <li key={item}>{item}</li>)}</ul><p><strong>{t('Attribution:', 'श्रेय (attribution):')}</strong> {m.attribution}</p></details>
-    <p className="evidence-links"><a href={`/data/${encodeURIComponent(m.dataset_id)}/${encodeURIComponent(m.dataset_version)}/manifest.json`}>{t('Release manifest', 'रिलिज म्यानिफेस्ट (manifest)')}</a> · <Link href="/sources/">{t('Source directory', 'स्रोत निर्देशिका')}</Link> · <Link href="/methodology/">{t('Methodology', 'विधि')}</Link></p>
+    <details><summary>{c.transformation}</summary><p><strong>{c.method}</strong> {m.method}</p><p><strong>{c.uncertainty}</strong> {m.uncertainty}</p><ul>{m.limitations.map(item => <li key={item}>{item}</li>)}</ul><p><strong>{c.attribution}</strong> {m.attribution}</p></details>
+    <p className="evidence-links"><a href={`/data/${encodeURIComponent(m.dataset_id)}/${encodeURIComponent(m.dataset_version)}/manifest.json`}>{c.manifest}</a> · <Link href="/sources/">{c.directory}</Link> · <Link href="/methodology/">{c.methodology}</Link></p>
   </section>;
 }

@@ -1,36 +1,14 @@
 'use client';
 import { formatNumber, type Lang } from '../../lib/i18n';
-import { shortTime } from './copy';
+import { shortTime, ROUTE } from './copy';
 import { districtSequence } from './route';
 import { PROVINCE_NE, useRoute } from './route-data';
 import type { LonLat } from './scene-3d';
 
-const COPY = {
-  en: {
-    title: 'Where the path runs', loading: 'Loading boundaries, river and place names…', failed: 'Place names could not be verified; the distances above still hold.',
-    starts: 'Starts in', ends: 'The mapped path ends in', leaves: (km: string, t: string) => `Reaches the Nepal border about ${km} km downstream; the central front would get there after ${t}.`,
-    districts: 'Districts in order, with the stretch of path in each and when the central front would enter it',
-    stretch: (from: string, to: string, t: string) => `km ${from}–${to} · front from ${t}`,
-    rivers: 'Named stream points the path passes', riversNote: 'GeoNames points within 1.5 km of the path line, with the km where the path passes them. A point can mark a mouth or another reference location, so this is for orientation only and does not name the river the path follows.',
-    places: 'Cities and towns near the path line', placesNote: (n: string) => `OpenStreetMap settlements within 4 km of the line (villages within 1 km: ${n}). Near the line does not mean affected: this scenario has no flood extent.`,
-    none: 'None found', province: (n: string) => `${n} Province`, outside: 'outside Nepal', stop: '.', boundary: 'the river forms the district boundary here',
-    source: 'Boundaries: COD-AB v02 (Survey Department of Nepal, UN OCHA). Settlements: © OpenStreetMap contributors (ODbL). Stream names: GeoNames (CC BY 4.0).',
-  },
-  ne: {
-    title: 'मार्ग कहाँबाट जान्छ', loading: 'सीमा, नदी र ठाउँका नाम लोड हुँदैछन्…', failed: 'ठाउँका नाम प्रमाणित गर्न सकिएन; माथिका दूरी यथावत् छन्।',
-    starts: 'सुरु हुने ठाउँ', ends: 'नक्सांकित मार्ग यहाँ सकिन्छ', leaves: (km: string, t: string) => `करिब ${km} km तल नेपालको सिमानामा पुग्छ; केन्द्रीय अग्रभाग ${t} पछि त्यहाँ पुग्नेछ।`,
-    districts: 'क्रमअनुसार जिल्लाहरू, हरेकमा पर्ने मार्गको भाग र केन्द्रीय अग्रभाग प्रवेश गर्ने समय',
-    stretch: (from: string, to: string, t: string) => `km ${from}–${to} · अग्रभाग ${t} देखि`,
-    rivers: 'मार्गले पार गर्ने नाम भएका खोला बिन्दुहरू', riversNote: 'मार्ग रेखाबाट १.५ km भित्रका GeoNames बिन्दुहरू, मार्गले तिनलाई पार गर्ने km सहित। बिन्दुले दोभान वा अन्य सन्दर्भ स्थान जनाउन सक्छ, त्यसैले यो दिशानिर्देशका लागि मात्र हो; मार्गले पछ्याउने नदीको नाम होइन।',
-    places: 'मार्ग रेखा नजिकका सहर र नगर', placesNote: (n: string) => `रेखाबाट ४ km भित्रका OpenStreetMap बस्तीहरू (१ km भित्रका गाउँ: ${n})। रेखा नजिक हुनु प्रभावित हुनु होइन: यस परिदृश्यमा बाढी फैलावट छैन।`,
-    none: 'भेटिएन', province: (n: string) => `${n} प्रदेश`, outside: 'नेपाल बाहिर', stop: '।', boundary: 'यहाँ नदीले जिल्ला सिमाना बनाउँछ',
-    source: 'सीमा: COD-AB v02 (नापी विभाग, UN OCHA)। बस्ती: © OpenStreetMap योगदानकर्ता (ODbL)। खोला नाम: GeoNames (CC BY 4.0)।',
-  },
-} as const;
 
 /** The route of a corridor path in words: start, districts in order with arrival times, candidate rivers, nearby towns, and where it leaves Nepal. */
 export function RouteList({ id, line, pathKm, centralCelerity, lang }: { id: string; line: LonLat[]; pathKm: number; centralCelerity: number; lang: Lang }) {
-  const c = COPY[lang];
+  const c = ROUTE[lang];
   const { route, failed } = useRoute(id, line, pathKm);
   if (failed) return <section className="sim-route" aria-labelledby="sim-route-title"><h3 id="sim-route-title">{c.title}</h3><p className="sim-muted">{c.failed}</p></section>;
   if (!route) return <section className="sim-route" aria-labelledby="sim-route-title"><h3 id="sim-route-title">{c.title}</h3><p className="sim-muted" role="status">{c.loading}</p></section>;

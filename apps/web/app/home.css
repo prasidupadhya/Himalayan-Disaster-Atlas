@@ -1,3 +1,6 @@
+@layer reset, tokens, vendor, base, components, layout, pages, utilities;
+
+@layer pages {
 /* Source-backed cartography and restrained editorial layout for the landing page. */
 .home { min-height: 80vh; }
 .home-hero { width: min(var(--page-max), 100%); display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.15fr); align-items: center; gap: clamp(2rem, 4vw, 4.5rem); padding: clamp(3rem, 6vw, 6rem) var(--gutter) 3.5rem; }
@@ -8,15 +11,15 @@
 .home-actions .primary-action { margin: 0; min-width: 11rem; font-size: .92rem; min-height: 48px; justify-content: center; text-align: center; }
 .text-action { display: inline-flex; align-items: center; min-height: 44px; font-weight: 650; font-size: .82rem; }
 .nepal-overview { margin: 0; min-width: 0; }
-.overview-heading { display: flex; justify-content: space-between; gap: 1rem; padding: .7rem 0; border-top: 1px solid var(--line-strong); font-size: .72rem; color: var(--muted); }
+.overview-heading { display: flex; justify-content: space-between; gap: 1rem; padding: .7rem 0; border-top: 1px solid var(--line-2); font-size: .72rem; color: var(--ink-3); }
 .overview-heading span:first-child { font-weight: 750; color: var(--ink); }
 .nepal-overview svg { display: block; width: 100%; height: auto; overflow: visible; }
 .overview-graticule line { stroke: var(--line); stroke-width: .6; stroke-dasharray: 3 6; }
-.overview-graticule text { font-family: var(--font-mono); font-size: 12px; fill: var(--muted); }
-.overview-provinces path { fill: rgba(169, 207, 218, .1); stroke: var(--ice); stroke-width: .9; stroke-linejoin: round; transition: fill 150ms ease; }
-.overview-provinces path:hover { fill: rgba(169, 207, 218, .24); }
-.overview-labels text { fill: var(--ink-strong); font-family: var(--font-ui); font-size: 18px; font-weight: 650; text-anchor: middle; paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; }
-.nepal-overview figcaption { display: flex; flex-wrap: wrap; gap: .35rem 1rem; justify-content: space-between; border-top: 1px solid var(--line); padding-top: .8rem; color: var(--muted); font-size: .65rem; line-height: 1.6; }
+.overview-graticule text { font-family: var(--font-mono); font-size: 12px; fill: var(--ink-3); }
+.overview-provinces path { fill: color-mix(in srgb, var(--on-stage-2) 10%, transparent); stroke: var(--on-stage-2); stroke-width: .9; stroke-linejoin: round; transition: fill 150ms ease; }
+.overview-provinces path:hover { fill: color-mix(in srgb, var(--on-stage-2) 24%, transparent); }
+.overview-labels text { fill: var(--ink); font-family: var(--font-text); font-size: 18px; font-weight: 650; text-anchor: middle; paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }
+.nepal-overview figcaption { display: flex; flex-wrap: wrap; gap: .35rem 1rem; justify-content: space-between; border-top: 1px solid var(--line); padding-top: .8rem; color: var(--ink-3); font-size: .65rem; line-height: 1.6; }
 .nepal-overview figcaption a { min-height: 32px; }
 @media (max-width: 1000px) {
   .home-hero { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; padding-bottom: 2.5rem; }
@@ -40,20 +43,20 @@
 }
 
 /* The hero is the one bold moment: real province geometry on a survey-night plate. */
-.home-hero { position: relative; color: #e9f1f3; background: var(--night); box-shadow: 0 0 0 100vmax var(--night); clip-path: inset(0 -100vmax); }
-.home-hero h1 { color: #f5f7f8; font-stretch: 122%; font-weight: 600; letter-spacing: -.01em; }
-.home-hero .intro { color: #b6c8cd; }
-.home-hero .text-action { color: var(--ice); }
-.home-hero .text-action:hover { color: #ffffff; }
-.home-hero .primary-action { background: #f5f7f8; border-color: #f5f7f8; color: var(--night); }
-.home-hero .primary-action:hover { background: var(--ice); border-color: var(--ice); color: var(--night); }
-.home-hero .overview-heading { border-top-color: rgba(169, 207, 218, .35); color: #8fa5ab; }
-.home-hero .overview-heading span:first-child { color: #e9f1f3; }
-.home-hero .overview-graticule line { stroke: rgba(169, 207, 218, .16); }
-.home-hero .overview-graticule text { fill: #7f979d; font-family: var(--font-ui); }
-.home-hero .overview-labels text { fill: #f5f7f8; stroke: var(--night); }
-.home-hero .nepal-overview figcaption { border-top-color: rgba(169, 207, 218, .2); color: #8fa5ab; }
-.home-hero .nepal-overview figcaption a { color: var(--ice); }
+.home-hero { position: relative; color: var(--on-stage); background: var(--stage); box-shadow: 0 0 0 100vmax var(--stage); clip-path: inset(0 -100vmax); }
+.home-hero h1 { color: var(--on-stage); font-stretch: 122%; font-weight: 600; letter-spacing: -.01em; }
+.home-hero .intro { color: var(--on-stage-2); }
+.home-hero .text-action { color: var(--on-stage-2); }
+.home-hero .text-action:hover { color: var(--on-stage); }
+.home-hero .primary-action { background: var(--on-stage); border-color: var(--on-stage); color: var(--stage); }
+.home-hero .primary-action:hover { background: var(--on-stage-2); border-color: var(--on-stage-2); color: var(--stage); }
+.home-hero .overview-heading { border-top-color: color-mix(in srgb, var(--on-stage-2) 35%, transparent); color: var(--on-stage-2); }
+.home-hero .overview-heading span:first-child { color: var(--on-stage); }
+.home-hero .overview-graticule line { stroke: color-mix(in srgb, var(--on-stage-2) 16%, transparent); }
+.home-hero .overview-graticule text { fill: var(--on-stage-2); font-family: var(--font-text); }
+.home-hero .overview-labels text { fill: var(--on-stage); stroke: var(--stage); }
+.home-hero .nepal-overview figcaption { border-top-color: color-mix(in srgb, var(--on-stage-2) 20%, transparent); color: var(--on-stage-2); }
+.home-hero .nepal-overview figcaption a { color: var(--on-stage-2); }
 @media (max-width: 420px) {
   .home-hero h1 { font-stretch: 100%; font-size: clamp(2.2rem, 11vw, 2.7rem); }
   .home h1 span { white-space: normal; }
@@ -61,27 +64,27 @@
 /* Today strip: official headline figures directly under the hero. */
 .home-today { width: min(var(--page-max), 100%); padding: 1.5rem var(--gutter) 0; }
 .today-strip { display: grid; gap: .75rem; }
-.today-strip dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0; border-block: 1px solid var(--line-strong); }
+.today-strip dl { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 0; border-block: 1px solid var(--line-2); }
 .today-strip dl > div { display: grid; gap: .15rem; align-content: start; padding: 1rem 1.1rem; border-left: 1px solid var(--line); }
 .today-strip dl > div:first-child { border-left: 0; padding-left: 0; }
-.today-strip dt { font-size: .82rem; color: var(--muted-strong); font-weight: 600; }
-.today-strip dd { margin: 0; font: 650 clamp(1.6rem, 3vw, 2.2rem)/1.1 var(--font-display); font-stretch: 112%; font-variant-numeric: tabular-nums; color: var(--ink-strong); }
-.today-strip dd.today-strip-sub { font: 400 .8rem/1.35 var(--font-ui); color: var(--muted); }
-.today-strip-note { margin: 0; font-size: .85rem; color: var(--muted-strong); }
+.today-strip dt { font-size: .82rem; color: var(--ink-2); font-weight: 600; }
+.today-strip dd { margin: 0; font: 650 clamp(1.6rem, 3vw, 2.2rem)/1.1 var(--font-display); font-stretch: 112%; font-variant-numeric: tabular-nums; color: var(--ink); }
+.today-strip dd.today-strip-sub { font: 400 .8rem/1.35 var(--font-text); color: var(--ink-3); }
+.today-strip-note { margin: 0; font-size: .85rem; color: var(--ink-2); }
 .today-strip-note a { font-weight: 700; }
 /* The three hazards. */
 .home-hazards { width: min(var(--page-max), 100%); padding: 3rem var(--gutter) 4rem; display: grid; gap: 1.25rem; }
 .home-hazards > h2 { margin: 0; font-size: clamp(1.8rem, 3.4vw, 2.8rem); }
 .hazard-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-.hazard-card { display: grid; gap: .6rem; align-content: start; padding: 1.4rem 1.3rem 1.2rem; border-radius: var(--radius-lg); background: var(--night); color: #dbe7ea; border-top: 4px solid var(--hazard-accent, var(--ice)); }
-.hazard-floods { --hazard-accent: #3987e5; }
-.hazard-glacial-lakes { --hazard-accent: #7fd1b5; }
-.hazard-earthquakes { --hazard-accent: #e0a23a; }
-.hazard-card h3 { margin: 0; color: #f5f7f8; font-size: clamp(1.35rem, 2.2vw, 1.7rem); }
+.hazard-card { display: grid; gap: .6rem; align-content: start; padding: 1.4rem 1.3rem 1.2rem; border-radius: var(--r-3); background: var(--stage); color: var(--on-stage); border-top: 4px solid var(--hazard-accent, var(--on-stage-2)); }
+.hazard-floods { --hazard-accent: var(--hz-flood); }
+.hazard-glacial-lakes { --hazard-accent: var(--hz-glof); }
+.hazard-earthquakes { --hazard-accent: var(--hz-quake); }
+.hazard-card h3 { margin: 0; color: var(--on-stage); font-size: clamp(1.35rem, 2.2vw, 1.7rem); }
 .hazard-card p { margin: 0; font-size: .95rem; line-height: 1.55; }
-.hazard-links { display: grid; gap: .1rem; margin-top: .3rem !important; }
-.hazard-links a { color: var(--ice); font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; }
-.hazard-links a:hover { color: #fff; }
+.hazard-links { display: grid; gap: .1rem; margin-top: .3rem ; }
+.hazard-links a { color: var(--on-stage-2); font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; }
+.hazard-links a:hover { color: var(--on-stage); }
 .home-note { margin: 0; max-width: 72ch; font-size: .88rem; }
 @media (max-width: 900px) {
   .hazard-cards { grid-template-columns: minmax(0, 1fr); }
@@ -91,3 +94,14 @@
 }
 @media (max-width: 420px) { .today-strip dl > div { padding: .85rem .7rem; } .today-strip dl > div:nth-child(odd) { padding-left: 0; } }
 @media (forced-colors: active) { .hazard-card { border: 1px solid CanvasText; } }
+/* Phones: the hazard cards are a carousel that snaps card by card. */
+@media (max-width: 800px) {
+  .hazard-cards { display: grid; grid-auto-flow: column; grid-auto-columns: min(84%, 340px); grid-template-columns: none; gap: var(--s-3);
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: var(--s-4);
+    margin-inline: calc(-1 * var(--s-4)); padding: var(--s-1) var(--s-4) var(--s-4); scrollbar-width: none; }
+  .hazard-cards::-webkit-scrollbar { display: none; }
+  .hazard-cards > li { scroll-snap-align: start; scroll-snap-stop: always; }
+}
+/* Space reserved for figures that arrive after load, so the page does not jump. */
+.today-strip[data-today-state="loading"] { min-height: 9.5rem; }
+}

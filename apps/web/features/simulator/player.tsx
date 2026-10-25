@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState, type RefObject } from 'react';
 import type { GeoJSONSource, Map } from 'maplibre-gl';
 import { formatNumber, useLanguage } from '../../lib/i18n';
-import { shortTime } from './copy';
+import { shortTime, PLAYER } from './copy';
 import { circle, floodPlaybackSeconds, haversineKm, headingAt, measure, pointAt, pulseAt, slice, type LonLat } from './scene-3d';
 import { markLabels, useLabelCollisions, useMapLabels, type MapLabel } from './map-labels';
 import { districtSequence, whereAt, type Route } from './route';
@@ -27,47 +27,13 @@ const line = (coords: LonLat[]): GeoJSON.FeatureCollection => ({ type: 'FeatureC
 const point = (p: LonLat | null): GeoJSON.FeatureCollection => ({ type: 'FeatureCollection', features: p ? [{ type: 'Feature', properties: {}, geometry: { type: 'Point', coordinates: p } }] : [] });
 const reducedMotion = () => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-const COPY = {
-  en: {
-    label: '3D scenario playback', play: 'Play', pause: 'Pause', replay: 'Replay', time: 'Time after release', quakeTime: 'Time after rupture',
-    speed: 'Playback length', seconds: (s: number) => `${s} s`, follow: 'Follow', threeD: '3D', flat: '2D',
-    modelled: 'MODELLED · HYPOTHETICAL',
-    floodNote: 'The declared pulse moving along the river line. It does not show where water would spread.',
-    quakeNote: 'Modelled shaking revealed behind an illustrative wave front. Wave timing is approximate.',
-    floodStatus: (t: string, km: string, lo: string, hi: string) => `${t} after release: front about ${km} km downstream at the central speed (range ${lo}–${hi} km).`,
-    floodDone: (t: string) => `${t}: the declared pulse has passed the end of the mapped path.`,
-    quakeStatus: (t: string, s: string, p: string) => `${t} after rupture: strong-shaking front (S wave, ~3.5 km/s) about ${s} km out; first tremor (P wave, ~6 km/s) about ${p} km.`,
-    reached: (km: string, t: string) => `Front reaches ${km} km at ${t}`,
-    relief: 'relief ×1.5', view: 'Camera', overview: 'Whole scenario', full: 'Full screen', exitFull: 'Exit full screen',
-    hint: 'Pinch, scroll or use + and − to zoom; drag to look around. Follow keeps your zoom.',
-    start: 'Start', end: 'Mapped path ends', leaves: 'Nepal border', outside: 'outside Nepal', province: (n: string) => `${n} Province`,
-    now: 'Now passing', near: 'near', river: (n: string) => `named stream point ${n}`, route: 'Route through districts', epicentre: 'Epicentre',
-    loadingNames: 'Loading place and river names…',
-  },
-  ne: {
-    label: '३D परिदृश्य प्रदर्शन', play: 'चलाउनुहोस्', pause: 'रोक्नुहोस्', replay: 'फेरि चलाउनुहोस्', time: 'बहावपछिको समय', quakeTime: 'फुटानपछिको समय',
-    speed: 'प्रदर्शन अवधि', seconds: (s: number) => `${formatNumber(s, 'ne')} सेकेन्ड`, follow: 'पछ्याउनुहोस्', threeD: '३D', flat: '२D',
-    modelled: 'मोडेल गरिएको · काल्पनिक',
-    floodNote: 'घोषित बहाव नदी रेखामा अघि बढ्दै। पानी कहाँ फैलिन्छ भन्ने यसले देखाउँदैन।',
-    quakeNote: 'उदाहरणात्मक तरङ्ग अग्रभागपछि मोडेल गरिएको कम्पन देखाइएको। तरङ्गको समय अनुमानित हो।',
-    floodStatus: (t: string, km: string, lo: string, hi: string) => `बहावपछि ${t}: केन्द्रीय गतिमा अग्रभाग करिब ${km} km तल (दायरा ${lo}–${hi} km)।`,
-    floodDone: (t: string) => `${t}: घोषित बहाव नक्सांकित मार्गको अन्त्यबाट पार भयो।`,
-    quakeStatus: (t: string, s: string, p: string) => `फुटानपछि ${t}: बलियो कम्पनको अग्रभाग (S तरङ्ग, ~३.५ km/s) करिब ${s} km; पहिलो कम्पन (P तरङ्ग, ~६ km/s) करिब ${p} km।`,
-    reached: (km: string, t: string) => `अग्रभाग ${km} km मा ${t} मा पुग्छ`,
-    relief: 'उचाइ ×१.५', view: 'क्यामेरा', overview: 'पूरा परिदृश्य', full: 'पूरा स्क्रिन', exitFull: 'पूरा स्क्रिनबाट निस्कनुहोस्',
-    hint: 'जुम गर्न चिमोट्नुहोस्, स्क्रोल गर्नुहोस् वा + र − थिच्नुहोस्; वरिपरि हेर्न तान्नुहोस्। पछ्याउँदा तपाईंको जुम रहन्छ।',
-    start: 'सुरु', end: 'नक्सांकित मार्गको अन्त्य', leaves: 'नेपालको सिमाना', outside: 'नेपाल बाहिर', province: (n: string) => `${n} प्रदेश`,
-    now: 'अहिले', near: 'नजिक', river: (n: string) => `नाम भएको खोला बिन्दु ${n}`, route: 'जिल्लागत मार्ग', epicentre: 'केन्द्रबिन्दु',
-    loadingNames: 'ठाउँ र नदीका नाम लोड हुँदैछन्…',
-  },
-} as const;
 
 /** Plays a scenario on the 3D map. Owns its own sources and layers; the map and its terrain belong to SimulatorMap. */
 export function Player({ map, play, threeD, onThreeD, shell, expanded, onExpanded }: {
   map: Map; play: Play; threeD: boolean; onThreeD: (on: boolean) => void; shell: RefObject<HTMLElement | null>; expanded: boolean; onExpanded: (on: boolean) => void;
 }) {
   const [lang] = useLanguage();
-  const c = COPY[lang];
+  const c = PLAYER[lang];
   const flood = play.kind === 'flood' ? play : null, quake = play.kind === 'quake' ? play : null;
   const measured = useMemo(() => flood ? measure(flood.line) : null, [flood]);
   const { route, gazetteer: floodNames } = useRoute(flood?.id ?? null, flood?.line ?? null, flood?.pathKm ?? null);
@@ -285,7 +251,7 @@ export function Player({ map, play, threeD, onThreeD, shell, expanded, onExpande
   </div>;
 }
 
-type Copy = (typeof COPY)[keyof typeof COPY];
+type Copy = (typeof PLAYER)[keyof typeof PLAYER];
 /** The administrative units at a point, joined for display ("local level, district, province"). */
 function unitAt(names: Gazetteer, at: LonLat) {
   const district = names.districts.find(a => contains(a, at)), local = district ? names.locals.find(a => contains(a, at)) : undefined;

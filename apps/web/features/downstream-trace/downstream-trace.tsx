@@ -1,14 +1,18 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import type { Map } from 'maplibre-gl';
 import type { Dataset } from '../../../../packages/contracts';
 import { buildRiverNetwork, traceDownstream, type DownstreamResult } from '../../../../packages/contracts/downstream';
 import { fitTrace, mountDownstreamTrace } from '../../lib/downstream-layer';
-import { digits, useLanguage } from '../../lib/i18n';
+import { digits, useLanguage, useCopy } from '../../lib/i18n';
+import { TRACE } from './copy';
 
 /** The parent keys this session by selection/retry so old routes and animation are disposed. */
-export function DownstreamTrace({ map, datasets, start, autoRun = false }: { map: Map | null; datasets: Dataset[] | null; start: string | undefined; autoRun?: boolean }) {
+/** `beforePlay` runs before the animation starts (the page uses it to bring the map into view); `statusSlot` is where the
+ * map's live status line is drawn, so the trace announces itself on the map rather than in the panel. */
+export function DownstreamTrace({ map, datasets, start, autoRun = false, beforePlay, statusSlot }: { map: Map | null; datasets: Dataset[] | null; start: string | undefined; autoRun?: boolean; beforePlay?: (play: () => void) => void; statusSlot?: HTMLElement | null }) {
   const graph = useMemo(() => {
     if (!datasets) return null;
     try { return { network: buildRiverNetwork(datasets) }; }
@@ -23,7 +27,7 @@ export function DownstreamTrace({ map, datasets, start, autoRun = false }: { map
   const overlay = useRef<ReturnType<typeof mountDownstreamTrace> | null>(null);
   const progressRef = useRef(0);
   const [lang] = useLanguage();
-  const t = (en: string, ne: string) => lang === 'ne' ? ne : en;
+  const c = useCopy(TRACE);
   const num = (value: number, fraction?: number) => digits(value.toLocaleString('en-US', fraction === undefined ? undefined : { maximumFractionDigits: fraction }), lang);
 
   useEffect(() => {
@@ -70,8 +74,10 @@ export function DownstreamTrace({ map, datasets, start, autoRun = false }: { map
       const next = traceDownstream(network, start);
       const animate = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       progressRef.current = animate ? 0 : next.reach_ids.length;
-      setProgress(progressRef.current); setPlaying(animate); setPage(0); setError(null); setResult(next);
+      setProgress(progressRef.current); setPlaying(false); setPage(0); setError(null); setResult(next);
       if (map) fitTrace(map, network, next.reach_ids);
+      // The animation waits until the map is in view, so nobody has to scroll to watch it; focus follows to the map's status.
+      (beforePlay ?? (play => play()))(() => { if (animate) setPlaying(true); window.requestAnimationFrame(() => document.getElementById('trace-map-status')?.focus({ preventScroll: true })); });
     } catch (failure) { setError(failure instanceof Error ? failure.message : 'Trace failed.'); }
   }
 
@@ -83,53 +89,56 @@ export function DownstreamTrace({ map, datasets, start, autoRun = false }: { map
     setTimeout(() => URL.revokeObjectURL(url), 0);
   }
 
-  return <section id="downstream-trace" className="trace-controls" aria-label={t('Downstream trace', 'तलतिरको मार्ग')} data-trace-state={result ? 'ready' : graph?.error || error ? 'error' : !network ? 'unavailable' : 'idle'}>
-    <h2>{t('Downstream trace', 'तलतिरको मार्ग')}</h2>
-    <p>{t('Follow connected river reaches from the selected HYRIV record.', 'छानिएको HYRIV अभिलेखबाट जोडिएका नदी खण्डहरू पछ्याउनुहोस्।')}</p>
-    <p className="muted">{t('Network connectivity only. This does not show flooding, travel time or confirmed exposure.', 'सञ्जालको जडान मात्र। यसले बाढी, पानी पुग्ने समय वा पुष्टि भएको जोखिममा पर्ने अवस्था (exposure) देखाउँदैन।')}</p>
-    {!datasets && <p>{t('Tracing needs both river partitions. Load or retry the river network above.', 'मार्ग पछ्याउन नदीका दुवै भाग चाहिन्छन्। माथि नदी सञ्जाल लोड गर्नुहोस् वा फेरि प्रयास गर्नुहोस्।')}</p>}
+  return <section id="downstream-trace" className="trace-controls" aria-label={c.downstreamTrace} data-trace-state={result ? 'ready' : graph?.error || error ? 'error' : !network ? 'unavailable' : 'idle'}>
+    <h2>{c.downstreamTrace}</h2>
+    <p>{c.followConnectedRiverReaches}</p>
+    <p className="muted">{c.networkConnectivityOnlyDoes}</p>
+    {!datasets && <p>{c.tracingNeedsBothRiver}</p>}
     {(graph?.error || error) && <p role="alert">{graph?.error ?? error}</p>}
-    <p>{start ? t(`Start: HYRIV ${start} (whole reach)`, `सुरुवात: HYRIV ${start} (पूरै खण्ड)`) : t('Select a river reach above or click a river on the map.', 'माथिबाट नदी खण्ड छान्नुहोस् वा नक्सामा नदीमा क्लिक गर्नुहोस्।')}</p>
-    <button disabled={!network || !start} onClick={run}>{t('Trace downstream', 'तलतिर पछ्याउनुहोस्')}</button>
+    <p>{start ? c.start(start) : c.selectRiverReachAbove}</p>
+    <button disabled={!network || !start} onClick={run}>{c.traceDownstream}</button>
     {result && network && <>
       <div className="trace-actions">
-        <button onClick={() => { setPlaying(false); setResult(null); setProgress(0); }}>{t('Clear trace', 'मार्ग हटाउनुहोस्')}</button>
-        <button onClick={() => { if (map) fitTrace(map, network, result.reach_ids); }} disabled={!map}>{t('Fit trace', 'मार्ग नक्सामा मिलाउनुहोस्')}</button>
-        <button onClick={download}>{t('Download trace JSON', 'मार्ग JSON डाउनलोड गर्नुहोस्')}</button>
-        <a href="#exposure-engine">{t('Explore prepared exposure scenarios', 'तयार पारिएका जोखिम-सम्पर्क (exposure) परिदृश्य हेर्नुहोस्')}</a>
+        <button onClick={() => { setPlaying(false); setResult(null); setProgress(0); }}>{c.clearTrace}</button>
+        <button onClick={() => { if (map) fitTrace(map, network, result.reach_ids); }} disabled={!map}>{c.fitTrace}</button>
+        <button onClick={download}>{c.downloadTraceJson}</button>
+        <a href="#exposure-engine">{c.explorePreparedExposureScenarios}</a>
       </div>
       <div className="selection" aria-live="polite">
-        <p className="eyebrow">{t('ATLAS DERIVED · network analysis', 'एटलसद्वारा व्युत्पन्न (ATLAS DERIVED) · सञ्जाल विश्लेषण')}</p>
-        <dl><dt>{t('Connected reaches', 'जोडिएका खण्डहरू')}</dt><dd>{num(result.reach_ids.length)}</dd>
-          <dt>{t('Summed source reach length', 'स्रोत खण्डहरूको जम्मा लम्बाइ')}</dt><dd>{num(result.total_length_km, 3)} km</dd>
-          <dt>{t('Trace end', 'मार्गको अन्त्य')}</dt><dd>{result.termination === 'coverage_boundary' ? t(`Coverage boundary — next HYRIV ${result.next_reach_id} is outside this release. Downstream continuation is unavailable.`, `दायराको सीमा — अर्को HYRIV ${result.next_reach_id} यस रिलिजभन्दा बाहिर छ। तलतिरको निरन्तरता उपलब्ध छैन।`) : t('Source outlet — no downstream connection is recorded; this may be an inland sink or an ocean outlet.', 'स्रोतको निकास — तलतिरको कुनै जडान अभिलेखित छैन; यो भित्री निकासविहीन क्षेत्र (inland sink) वा समुद्री निकास हुन सक्छ।')}</dd>
+        <p className="eyebrow">{c.atlasDerivedNetworkAnalysis}</p>
+        <dl><dt>{c.connectedReaches}</dt><dd>{num(result.reach_ids.length)}</dd>
+          <dt>{c.summedSourceReachLength}</dt><dd>{num(result.total_length_km, 3)} km</dd>
+          <dt>{c.traceEnd}</dt><dd>{result.termination === 'coverage_boundary' ? c.coverageBoundary(String(result.next_reach_id)) : c.sourceOutletNoDownstream}</dd>
         </dl>
       </div>
-      <p>{t('Gold lines mark the traced network. Distance includes the entire selected reach and every retained downstream reach.', 'सुनौला रेखाले पछ्याइएको सञ्जाल देखाउँछन्। दूरीमा छानिएको पूरै खण्ड र तलतिर समावेश गरिएका सबै खण्डहरू पर्छन्।')}</p>
+      <p>{c.goldLinesMarkTraced}</p>
       <div className="trace-actions">
         <button onClick={() => {
           if (playing) { setPlaying(false); return; }
           if (progress >= result.reach_ids.length) { progressRef.current = 0; setProgress(0); }
           setPlaying(true);
-        }}>{playing ? t('Pause trace animation', 'मार्ग एनिमेसन रोक्नुहोस्') : progress >= result.reach_ids.length ? t('Replay trace animation', 'मार्ग एनिमेसन फेरि चलाउनुहोस्') : t('Resume trace animation', 'मार्ग एनिमेसन जारी राख्नुहोस्')}</button>
-        <button onClick={() => { setPlaying(false); setProgress(result.reach_ids.length); }}>{t('Show entire trace', 'पूरै मार्ग देखाउनुहोस्')}</button>
+        }}>{playing ? c.pauseTraceAnimation : progress >= result.reach_ids.length ? c.replayTraceAnimation : c.resumeTraceAnimation}</button>
+        <button onClick={() => { setPlaying(false); setProgress(result.reach_ids.length); }}>{c.showEntireTrace}</button>
       </div>
-      <p className="muted" data-trace-progress={progress}>{lang === 'ne' ? `${num(result.reach_ids.length)} मध्ये ${num(progress)} खण्ड देखाइँदै। प्लेब्याकको गति उदाहरणका लागि मात्र हो; कम गति (reduced-motion) सेटिङमा पूरै मार्ग तुरुन्तै देखाइन्छ।` : <>Showing {progress} of {result.reach_ids.length} reaches. Playback speed is illustrative; reduced-motion settings show the entire trace immediately.</>}</p>
-      <details><summary>{t('Ordered downstream reaches', 'क्रमबद्ध तलतिरका खण्डहरू')} ({num(result.reach_ids.length)})</summary>
+      <p className="muted" data-trace-progress={progress}>{c.progress(num(progress), num(result.reach_ids.length))}</p>
+      <details><summary>{c.orderedDownstreamReaches} ({num(result.reach_ids.length)})</summary>
         <ol start={page * 50 + 1}>{result.reach_ids.slice(page * 50, (page + 1) * 50).map(id => <li key={id}>
           HYRIV {id} · {lang === 'ne' ? digits(String(network.reaches.get(id)!.properties.length_km), lang) : network.reaches.get(id)!.properties.length_km} km{' '}
-          <button disabled={!map} aria-label={t(`Locate HYRIV ${id}`, `HYRIV ${id} नक्सामा देखाउनुहोस्`)} onClick={() => { if (map) fitTrace(map, network, [id]); }}>{t('Locate', 'देखाउनुहोस्')}</button>
+          <button disabled={!map} aria-label={c.locateReach(id)} onClick={() => { if (map) fitTrace(map, network, [id]); }}>{c.locate}</button>
         </li>)}</ol>
-        <div className="trace-actions"><button disabled={page === 0} onClick={() => setPage(value => value - 1)}>{t('Previous reaches', 'अघिल्ला खण्डहरू')}</button>
-          <button disabled={(page + 1) * 50 >= result.reach_ids.length} onClick={() => setPage(value => value + 1)}>{t('Next reaches', 'अर्का खण्डहरू')}</button></div>
+        <div className="trace-actions"><button disabled={page === 0} onClick={() => setPage(value => value - 1)}>{c.previousReaches}</button>
+          <button disabled={(page + 1) * 50 >= result.reach_ids.length} onClick={() => setPage(value => value + 1)}>{c.nextReaches}</button></div>
       </details>
-      <details><summary>{t('Trace method, inputs & limitations', 'मार्ग पछ्याउने विधि, इनपुट र सीमाहरू')}</summary>
-        <p>{result.method} · OGC:CRS84 · {t('lengths in km. Follows NEXT_DOWN across both verified partitions. No geometry is joined across gaps.', 'लम्बाइ km मा। प्रमाणित दुवै भागमा NEXT_DOWN पछ्याउँछ। खाली ठाउँहरूमा कुनै ज्यामिति (geometry) जोडिँदैन।')}</p>
+      <details><summary>{c.traceMethodInputsLimitations}</summary>
+        <p>{result.method} · OGC:CRS84 · {c.lengthsKmFollowsNext}</p>
         <ul>{result.inputs.map(input => <li key={input.dataset_id}>{input.dataset_id} / {input.dataset_version}<br /><span className="trace-hash">SHA-256: {input.artifact_sha256}</span></li>)}</ul>
         <ul>{result.limitations.map(item => <li key={item}>{item}</li>)}</ul>
-        <a href="/methodology/#downstream-method">{t('Downstream methodology', 'तलतिरको मार्ग विधि')}</a>
+        <a href="/methodology/#downstream-method">{c.downstreamMethodology}</a>
       </details>
     </>}
-    <p className="muted">{t('Glacier and lake outlets: UNKNOWN in the current inventories. Settlements, infrastructure and population intersections await their source layers and the exposure feature.', 'हिमनदी र तालका निकास: हालका अभिलेखमा अज्ञात (UNKNOWN)। बस्ती, पूर्वाधार र जनसंख्यासँगको प्रतिच्छेदन तिनका स्रोत तह र जोखिम-सम्पर्क (exposure) सुविधा आएपछि मात्र उपलब्ध हुनेछ।')}</p>
+    {result && statusSlot && createPortal(<p id="trace-map-status" className="map-status" role="status" tabIndex={-1}>
+      <span aria-hidden="true">{playing ? '▶' : '■'}</span> {c.mapStatus(num(progress), num(result.reach_ids.length), result.start_reach_id)}
+    </p>, statusSlot)}
+    <p className="muted">{c.glacierLakeOutletsUnknown}</p>
   </section>;
 }

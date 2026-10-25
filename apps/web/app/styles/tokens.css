@@ -1,0 +1,196 @@
+@layer reset, tokens, vendor, base, components, layout, pages, utilities;
+
+/* Design tokens: the only place colours are defined, apart from map styles (lib/map-layers.ts, terrain and the
+ * scenario stage), which encode data and stay identical in both themes.
+ * Colour roles, not hues: surfaces, ink, lines, the accent, the dark map stage, three hazard identities, four
+ * station statuses and the "modelled / hypothetical" mark. Every status colour is always paired with a glyph and a
+ * text label in the markup, so meaning never rests on colour alone. */
+@layer tokens {
+  :root {
+    color-scheme: light;
+    /* Surfaces: cool snow-white page, white cards, two sunken greys. */
+    --bg: #f2f5f6;
+    --surface: #ffffff;
+    --surface-2: #e9eef0;
+    --surface-3: #dbe3e6;
+    /* Ink: slate, readable at every size against every surface above. */
+    --ink: #13212a;
+    --ink-2: #364750;
+    --ink-3: #56666e;
+    --line: #d0d9dd;
+    --line-2: #93a6ae;
+    /* Accent: river blue. Water is the thread through every page. */
+    --accent: #1d5fb8;
+    --accent-ink: #164b91;
+    --accent-soft: #e1ebf8;
+    --on-accent: #ffffff;
+    --focus: #c2570c;
+    /* The map stage: a dark plate behind every interactive map, in both themes. */
+    --stage: #0d1b23;
+    --stage-2: #152a34;
+    --stage-line: #2c4650;
+    --on-stage: #e9f2f4;
+    --on-stage-2: #a3b8be;
+    /* Hazard identities (cards, tabs, legend keys). Never used for status. */
+    --hz-flood: #2c6fcf;
+    --hz-glof: #11867a;
+    --hz-quake: #b06d08;
+    /* Station and source status. */
+    --danger: #ad2a20;
+    --danger-soft: #fae8e6;
+    --warning: #8a5300;
+    --warning-soft: #fcf0dc;
+    --normal: #1d7650;
+    --normal-soft: #e1f1e8;
+    --none: #7d8b91;
+    /* Modelled / hypothetical / scenario output. Always with the ◇ glyph and a written label. */
+    --model: #87460f;
+    --model-soft: #fbefe2;
+    --shadow: 14 28 36;
+
+    /* Type: device fonts for text (instant, Devanagari included); self-hosted Archivo, a variable width family, for
+     * headings. Figures are tabular wherever they are compared. */
+    --font-text: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", "Kohinoor Devanagari", "Nirmala UI", "Helvetica Neue", Arial, sans-serif;
+    --font-display: "Archivo Variable", var(--font-text);
+    --font-mono: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    /* A 1.25 modular scale from a 16 px base. */
+    --step--2: .7rem;
+    --step--1: .82rem;
+    --step-0: 1rem;
+    --step-1: 1.2rem;
+    --step-2: 1.5rem;
+    --step-3: clamp(1.7rem, 1.2rem + 1.6vw, 2.2rem);
+    --step-4: clamp(2.1rem, 1.3rem + 3vw, 3.4rem);
+    --step-5: clamp(2.5rem, 1.4rem + 4.4vw, 4.6rem);
+    --leading: 1.6;
+    --leading-tight: 1.12;
+    --measure: 68ch;
+
+    /* Space: a 4 px base. */
+    --s-1: 4px;
+    --s-2: 8px;
+    --s-3: 12px;
+    --s-4: 16px;
+    --s-5: 24px;
+    --s-6: 32px;
+    --s-7: 48px;
+    --s-8: 64px;
+    --s-9: 96px;
+    --gutter: clamp(16px, 4vw, 48px);
+    --page-max: 1320px;
+    --touch: 48px;
+
+    --r-1: 6px;
+    --r-2: 10px;
+    --r-3: 16px;
+    --r-pill: 999px;
+    --elev-1: 0 1px 2px rgb(var(--shadow) / .06), 0 2px 8px rgb(var(--shadow) / .06);
+    --elev-2: 0 6px 24px rgb(var(--shadow) / .12);
+    --elev-3: 0 18px 48px rgb(var(--shadow) / .22);
+
+    /* Motion: one vocabulary. Short for feedback, medium for panels, long for the one camera move. */
+    --ease-out: cubic-bezier(.2, .7, .2, 1);
+    --ease-in-out: cubic-bezier(.65, 0, .35, 1);
+    --t-fast: 120ms;
+    --t-med: 220ms;
+    --t-slow: 420ms;
+
+    /* Layers. */
+    --z-map-ui: 5;
+    --z-sticky: 20;
+    --z-sheet: 40;
+    --z-tabbar: 60;
+    --z-toast: 80;
+    --z-stage-full: 100;
+
+    --header-h: 64px;
+    --tabbar-h: 0px;
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+  }
+
+  /* Dark: chosen, not inverted. The page sinks to the stage's slate so maps sit in the page instead of on it;
+   * accents and statuses lift to keep AA contrast on dark surfaces. */
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #0e1a21;
+    --surface: #14232b;
+    --surface-2: #1a2c35;
+    --surface-3: #22363f;
+    --ink: #e5edf0;
+    --ink-2: #b9c8ce;
+    --ink-3: #8fa2a9;
+    --line: #2a3e47;
+    --line-2: #4b636d;
+    --accent: #7fb2f2;
+    --accent-ink: #a2c7f6;
+    --accent-soft: #1b3150;
+    --on-accent: #06121d;
+    --focus: #f5a04f;
+    --stage: #09141a;
+    --stage-2: #112129;
+    --stage-line: #27404a;
+    --hz-flood: #6ea4ee;
+    --hz-glof: #4cc2b2;
+    --hz-quake: #e6a64a;
+    --danger: #ff9a8f;
+    --danger-soft: #3b1e1b;
+    --warning: #f1b862;
+    --warning-soft: #392a13;
+    --normal: #78d3a5;
+    --normal-soft: #133022;
+    --none: #8a989e;
+    --model: #f1aa66;
+    --model-soft: #35240f;
+    --shadow: 0 0 0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #0e1a21;
+      --surface: #14232b;
+      --surface-2: #1a2c35;
+      --surface-3: #22363f;
+      --ink: #e5edf0;
+      --ink-2: #b9c8ce;
+      --ink-3: #8fa2a9;
+      --line: #2a3e47;
+      --line-2: #4b636d;
+      --accent: #7fb2f2;
+      --accent-ink: #a2c7f6;
+      --accent-soft: #1b3150;
+      --on-accent: #06121d;
+      --focus: #f5a04f;
+      --stage: #09141a;
+      --stage-2: #112129;
+      --stage-line: #27404a;
+      --hz-flood: #6ea4ee;
+      --hz-glof: #4cc2b2;
+      --hz-quake: #e6a64a;
+      --danger: #ff9a8f;
+      --danger-soft: #3b1e1b;
+      --warning: #f1b862;
+      --warning-soft: #392a13;
+      --normal: #78d3a5;
+      --normal-soft: #133022;
+      --none: #8a989e;
+      --model: #f1aa66;
+      --model-soft: #35240f;
+      --shadow: 0 0 0;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    :root { --ink-2: var(--ink); --ink-3: #2f3f47; --line: #75899a; --line-2: #4c606a; }
+    :root[data-theme="dark"] { --ink-3: #c5d2d7; --line: #6c828c; --line-2: #9fb3bb; }
+  }
+
+  @media (max-width: 800px) {
+    :root { --tabbar-h: 64px; --header-h: 56px; }
+  }
+  @media (max-width: 950px) and (max-height: 500px) and (orientation: landscape) {
+    :root { --tabbar-h: 52px; }
+  }
+}

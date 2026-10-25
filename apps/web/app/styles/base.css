@@ -1,0 +1,91 @@
+@layer reset, tokens, vendor, base, components, layout, pages, utilities;
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  body { margin: 0; }
+  img, svg, canvas, video { display: block; max-width: 100%; }
+  svg { overflow: visible; }
+  button, input, select, textarea { font: inherit; color: inherit; }
+  table { border-collapse: collapse; }
+  fieldset { min-width: 0; }
+}
+
+@layer base {
+  /* No sideways page scroll, no double-tap zoom delay, no grey tap flash. `clip` keeps position: sticky working;
+   * browsers without it fall back to `hidden`. */
+  html { touch-action: manipulation; overflow-x: hidden; overflow-x: clip; scroll-padding-top: calc(var(--header-h) + var(--s-4)); }
+  body {
+    min-height: 100svh; overflow-x: hidden; overflow-x: clip; overscroll-behavior-x: none;
+    background: var(--bg); color: var(--ink); font: 400 var(--step-0)/var(--leading) var(--font-text);
+    text-rendering: optimizeLegibility; -webkit-tap-highlight-color: transparent;
+    padding-bottom: calc(var(--tabbar-h) + var(--safe-bottom));
+  }
+  a, button, select, summary, label, input, [role="tab"] { touch-action: manipulation; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+  h1, h2, h3, h4 { margin: 0; color: var(--ink); line-height: var(--leading-tight); text-wrap: balance; }
+  h1 { font: 650 var(--step-5)/1.04 var(--font-display); font-stretch: 116%; letter-spacing: -.02em; }
+  h2 { font: 640 var(--step-3)/1.1 var(--font-display); font-stretch: 108%; letter-spacing: -.012em; }
+  h3 { font: 650 var(--step-1)/1.25 var(--font-display); font-stretch: 102%; }
+  h4 { font-size: var(--step-0); font-weight: 700; }
+  /* Devanagari needs room above and below the headline: no condensed tracking, looser leading. */
+  :lang(ne) :is(h1, h2, h3) { letter-spacing: 0; line-height: 1.3; font-stretch: 100%; }
+  p { margin: 0 0 var(--s-3); }
+  p:last-child { margin-bottom: 0; }
+  ul, ol { padding-left: 1.25em; margin: 0 0 var(--s-3); }
+  li + li { margin-top: var(--s-1); }
+  small { font-size: var(--step--1); }
+  strong { font-weight: 700; }
+  sub { line-height: 0; }
+
+  a { color: var(--accent-ink); text-decoration-thickness: 1px; text-underline-offset: .2em; }
+  a:hover { color: var(--ink); text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
+  :focus:not(:focus-visible) { outline: none; }
+
+  code, pre, kbd { font-family: var(--font-mono); font-size: .9em; }
+  code { overflow-wrap: anywhere; }
+  pre { overflow-x: auto; }
+  hr { border: 0; border-top: 1px solid var(--line); margin: var(--s-5) 0; }
+
+  dl { display: grid; grid-template-columns: minmax(7rem, 1fr) minmax(0, 2fr); gap: var(--s-2) var(--s-4); margin: 0; font-size: var(--step--1); }
+  dt { color: var(--ink-3); }
+  dd { margin: 0; overflow-wrap: anywhere; color: var(--ink); }
+
+  /* Tables: hairlines, tabular figures, captions on top and left aligned. */
+  table { width: 100%; font-variant-numeric: tabular-nums; font-size: var(--step--1); }
+  caption { caption-side: top; padding: 0 0 var(--s-2); text-align: left; font-weight: 700; color: var(--ink); }
+  th, td { padding: var(--s-2) var(--s-3) var(--s-2) 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  thead th { border-bottom: 2px solid var(--ink); color: var(--ink-2); font-weight: 650; font-size: var(--step--1); }
+  tbody th { font-weight: 650; color: var(--ink); }
+
+  /* Form controls. A bare <button> is the secondary button; variants live in components. */
+  button {
+    display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+    min-height: 44px; padding: 0 var(--s-4); border: 1px solid var(--line-2); border-radius: var(--r-1);
+    background: var(--surface); color: var(--ink); font-weight: 650; font-size: var(--step--1); line-height: 1.2;
+    cursor: pointer; transition: background-color var(--t-fast) var(--ease-out), border-color var(--t-fast) var(--ease-out), color var(--t-fast) var(--ease-out), transform var(--t-fast) var(--ease-out);
+  }
+  button:hover:not(:disabled) { border-color: var(--ink); background: var(--surface-2); }
+  button:active:not(:disabled) { transform: translateY(1px); }
+  button:disabled { opacity: .5; cursor: not-allowed; }
+  button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea {
+    width: 100%; min-height: 44px; padding: var(--s-2) var(--s-3); border: 1px solid var(--line-2); border-radius: var(--r-1);
+    background: var(--surface); color: var(--ink); font-weight: 400;
+  }
+  input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 1px; border-color: var(--accent); }
+  input[aria-invalid="true"] { border: 2px solid var(--danger); }
+  input[type="checkbox"], input[type="radio"] { width: 20px; height: 20px; margin: 0; flex: 0 0 auto; accent-color: var(--accent); }
+  input[type="range"] { width: 100%; accent-color: var(--accent); }
+  label { cursor: pointer; }
+  ::placeholder { color: var(--ink-3); opacity: 1; }
+
+  details > summary { cursor: pointer; font-weight: 650; color: var(--ink); }
+  details > summary::marker { color: var(--accent); }
+
+  ::selection { background: var(--accent-soft); color: var(--ink); }
+
+}

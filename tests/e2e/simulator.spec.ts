@@ -230,7 +230,8 @@ test('on a phone the playback controls sit under the map, and full screen covers
   await runFlood(page);
   const player = page.getByRole('group', { name: '3D scenario playback' });
   await expect(player).toBeVisible({ timeout: 20_000 });
-  const mapBox = (await page.locator('.sim-map').boundingBox())!, dockBox = (await player.boundingBox())!;
+  // Both boxes are read in one frame, so a scroll in progress cannot shift one and not the other.
+  const [mapBox, dockBox] = await page.evaluate(() => ['.sim-map', '.sim-player'].map(s => { const b = document.querySelector(s)!.getBoundingClientRect(); return { y: b.y, height: b.height }; }));
   expect(dockBox.y).toBeGreaterThanOrEqual(mapBox.y + mapBox.height - 1);
   for (const button of await player.getByRole('button').all()) expect((await button.boundingBox())!.height).toBeGreaterThanOrEqual(47.5);
   await player.getByRole('button', { name: /Full screen/ }).click();

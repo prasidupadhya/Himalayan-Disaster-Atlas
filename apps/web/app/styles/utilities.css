@@ -1,0 +1,47 @@
+@layer reset, tokens, vendor, base, components, layout, pages, utilities;
+
+/* Utilities sit in the last layer, so they win over components and pages without !important. */
+@layer utilities {
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); clip-path: inset(50%); white-space: nowrap; border: 0; }
+  [hidden] { display: none; }
+  .nowrap { white-space: nowrap; }
+  .tabular { font-variant-numeric: tabular-nums; }
+  .map-skip-link { position: absolute; left: var(--s-3); top: -200px; z-index: calc(var(--z-map-ui) + 3); padding: var(--s-3) var(--s-4); border-radius: var(--r-1); background: var(--surface); color: var(--ink); opacity: 0; pointer-events: none; }
+  .map-skip-link:focus { top: var(--s-3); opacity: 1; pointer-events: auto; }
+
+  /* Touch targets on phones: every control and every stand-alone link (not links inside running text) is at least
+   * 48 × 48 px with room between neighbours, and fields use 16 px text so iOS does not zoom in. This lives in the last
+   * layer so no page or component style can shrink a target. */
+  @media (max-width: 800px) {
+    button, select, summary, [role="tab"], a.btn, .text-action, .primary-action, .seg > button,
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="hidden"]), textarea { min-height: var(--touch); }
+    .seg > button, .language-switch > button { min-width: var(--touch); }
+    input:not([type="checkbox"]):not([type="radio"]):not([type="range"]), select, textarea { font-size: 16px; }
+    input[type="checkbox"], input[type="radio"] { width: 24px; height: 24px; }
+    label:has(> input[type="checkbox"]), label:has(> input[type="radio"]) { display: flex; align-items: center; gap: var(--s-3); min-height: var(--touch); }
+    input[type="range"] { min-height: var(--touch); }
+    summary { padding-block: var(--s-3); }
+    .brand { min-height: var(--touch); }
+    .maplibregl-ctrl-group button { width: var(--touch); height: var(--touch); }
+    .maplibregl-ctrl-attrib-button { min-width: var(--touch); min-height: var(--touch); }
+    .hz-actions, .hz-card-links, .hazard-links, .home-actions, .atlas-shortcuts, .sim-actions, .sim-label-row, .report-actions,
+    .official-jump, .methodology-toc, .source-toc, .sim-player-controls, .sim-tabs, .trace-actions, .evidence-links { gap: var(--s-2) var(--s-4); }
+    .hz-actions a, .hz-card-links a, .hazard-links a, .home-actions a, .atlas-shortcuts a, .sim-actions a, .sim-actions button,
+    .today-strip-note a, .methodology-toc a, .source-toc a, .hz-documents a, .sim-watch, .official-jump a,
+    nav[aria-label]:not(.site-navigation) > a, .sim-notice a, .hz-authorities a, .hz-copied a, .evidence-links a, .live-links a {
+      display: inline-flex; align-items: center; min-height: var(--touch); min-width: var(--touch);
+    }
+  }
+
+  /* Reduced motion: the one documented use of !important, because it must override inline and third-party
+   * animations as well as our own. */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  }
+
+  @media print {
+    .site-header, .site-footer, .site-navigation, .skip-link, .offline-banner, .update-banner, .language-switch, .theme-menu, .no-print { display: none; }
+    body { padding: 0; background: white; color: black; }
+    a { color: black; }
+  }
+}
