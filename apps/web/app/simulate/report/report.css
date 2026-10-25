@@ -1,25 +1,48 @@
 @layer reset, tokens, vendor, base, components, layout, pages, utilities;
 
+/* Scenario report: a document first. On screen it reads like a printed page on the canvas; printed, it is A4 with the
+ * scenario notice on every copy, links spelled out, tables that break between rows, never inside one. */
 @layer pages {
-.report-page { width: min(980px, 100%); margin: 0 auto; padding: clamp(1.5rem, 4vw, 3rem) clamp(1rem, 3vw, 2rem) 4rem; display: grid; gap: 1.5rem; }
-.report-page h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); }
-.report-page h2 { margin: 0 0 .6rem; font-size: 1.25rem; }
-.report-page section { padding-top: 1rem; border-top: 1px solid var(--line); }
-.report-notice { padding: .8rem 1rem; border: 2px solid var(--model); border-radius: var(--r-1); background: var(--model-soft); }
-.report-meta { color: var(--ink-3); font-size: .85rem; }
-.report-actions { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
-.report-actions button { min-height: 44px; }
-.report-hash { font-family: var(--font-mono); font-size: .75rem; overflow-wrap: anywhere; }
-.report-json { overflow-x: auto; padding: .8rem; border-radius: var(--r-1); background: var(--surface-3); font-size: .78rem; }
-.report-page table { font-size: .86rem; }
-.report-page caption { caption-side: top; text-align: left; padding-bottom: .4rem; font-weight: 600; }
-@media print {
-  .site-header, .site-footer, .release-banner, .report-actions, .skip-link, .offline-banner, .update-banner { display: none ; }
-  .report-page { padding: 0; }
-  .report-page a::after { content: " (" attr(href) ")"; font-size: .75em; color: inherit; }
-  .report-notice { break-inside: avoid; }
-  table { break-inside: auto; } tr { break-inside: avoid; }
-}
-.report-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .75rem; }
-@media print { .report-top .language-switch { display: none; } }
+  .report-page { display: grid; gap: var(--s-5); width: min(980px, calc(100% - 2 * var(--gutter))); margin: clamp(var(--s-5), 4vw, var(--s-7)) auto var(--s-8); padding: clamp(var(--s-5), 4vw, var(--s-7)); border: 1px solid var(--line); border-radius: var(--r-2); background: var(--surface); box-shadow: var(--elev-1); }
+  .report-header { display: grid; gap: var(--s-3); padding-bottom: var(--s-4); border-bottom: 2px solid var(--ink); }
+  .report-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-3); }
+  .report-top .eyebrow { margin: 0; }
+  .report-page h1 { margin: 0; font-size: var(--step-4); }
+  .report-page h2 { margin: 0 0 var(--s-3); font-size: var(--step-1); }
+  .report-page section { padding-top: var(--s-4); border-top: 1px solid var(--line); }
+  .report-notice { margin: 0; padding: var(--s-3) var(--s-4); border: 2px dashed var(--model); border-radius: var(--r-1); background: var(--model-soft); }
+  .report-notice strong::before { content: "◇ "; color: var(--model); }
+  .report-meta { margin: 0; color: var(--ink-3); font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+  .report-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
+  .report-actions button { min-height: 44px; }
+  .report-hash { font-family: var(--font-mono); font-size: var(--step--2); overflow-wrap: anywhere; }
+  .report-json { margin: var(--s-3) 0 0; padding: var(--s-3); overflow-x: auto; border: 1px solid var(--line); border-radius: var(--r-1); background: var(--surface-2); font-size: var(--step--2); }
+  .report-page table { width: 100%; border-collapse: collapse; font-size: var(--step--1); font-variant-numeric: tabular-nums; }
+  .report-page caption { padding-bottom: var(--s-2); font-weight: 600; text-align: left; caption-side: top; }
+  .report-page th, .report-page td { padding: var(--s-2) var(--s-3) var(--s-2) 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .report-page thead th { border-bottom: 1px solid var(--ink-3); color: var(--ink-2); font-size: var(--step--2); }
+  .report-loading { display: grid; gap: var(--s-3); }
+  .report-loading .skeleton { height: 1.2rem; }
+  .report-loading .skeleton:nth-child(2) { width: 70%; }
+  .report-loading .skeleton.report-skeleton-table { height: 9rem; }
+
+  @media (max-width: 640px) {
+    .report-page { width: 100%; margin: 0; padding: var(--s-5) var(--s-4) var(--s-7); border: 0; border-radius: 0; box-shadow: none; }
+    .report-page h1 { font-size: var(--step-3); }
+  }
+
+  @media print {
+    @page { size: A4; margin: 16mm 15mm 18mm; }
+    .site-header, .site-footer, .site-navigation, .release-banner, .report-actions, .skip-link, .offline-banner, .update-banner, .report-top .language-switch, .toast { display: none; }
+    .report-page { width: auto; margin: 0; padding: 0; border: 0; box-shadow: none; gap: 6mm; font-size: 10.5pt; }
+    .report-page h1 { font-size: 20pt; }
+    .report-page h2 { font-size: 13pt; break-after: avoid; }
+    .report-page a { color: inherit; }
+    .report-page a::after { content: " (" attr(href) ")"; font-size: .8em; color: inherit; overflow-wrap: anywhere; }
+    .report-notice { border: 1.5pt dashed currentColor; background: none; break-inside: avoid; }
+    .report-json { border: .5pt solid currentColor; background: none; white-space: pre-wrap; }
+    .report-page section { break-inside: auto; }
+    table { break-inside: auto; } thead { display: table-header-group; } tr { break-inside: avoid; }
+    .report-page th, .report-page td { border-bottom: .5pt solid currentColor; }
+  }
 }

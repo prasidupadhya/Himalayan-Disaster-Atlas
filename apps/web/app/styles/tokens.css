@@ -113,40 +113,43 @@
 
   /* Dark: chosen, not inverted. The page sinks to the stage's slate so maps sit in the page instead of on it;
    * accents and statuses lift to keep AA contrast on dark surfaces. */
-  :root[data-theme="dark"] {
-    color-scheme: dark;
-    --bg: #0e1a21;
-    --surface: #14232b;
-    --surface-2: #1a2c35;
-    --surface-3: #22363f;
-    --ink: #e5edf0;
-    --ink-2: #b9c8ce;
-    --ink-3: #8fa2a9;
-    --line: #2a3e47;
-    --line-2: #4b636d;
-    --accent: #7fb2f2;
-    --accent-ink: #a2c7f6;
-    --accent-soft: #1b3150;
-    --on-accent: #06121d;
-    --focus: #f5a04f;
-    --stage: #09141a;
-    --stage-2: #112129;
-    --stage-line: #27404a;
-    --hz-flood: #6ea4ee;
-    --hz-glof: #4cc2b2;
-    --hz-quake: #e6a64a;
-    --danger: #ff9a8f;
-    --danger-soft: #3b1e1b;
-    --warning: #f1b862;
-    --warning-soft: #392a13;
-    --normal: #78d3a5;
-    --normal-soft: #133022;
-    --none: #8a989e;
-    --model: #f1aa66;
-    --model-soft: #35240f;
-    --shadow: 0 0 0;
+  /* Dark is a screen theme only: paper always gets the light tokens. */
+  @media screen {
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0e1a21;
+      --surface: #14232b;
+      --surface-2: #1a2c35;
+      --surface-3: #22363f;
+      --ink: #e5edf0;
+      --ink-2: #b9c8ce;
+      --ink-3: #8fa2a9;
+      --line: #2a3e47;
+      --line-2: #4b636d;
+      --accent: #7fb2f2;
+      --accent-ink: #a2c7f6;
+      --accent-soft: #1b3150;
+      --on-accent: #06121d;
+      --focus: #f5a04f;
+      --stage: #09141a;
+      --stage-2: #112129;
+      --stage-line: #27404a;
+      --hz-flood: #6ea4ee;
+      --hz-glof: #4cc2b2;
+      --hz-quake: #e6a64a;
+      --danger: #ff9a8f;
+      --danger-soft: #3b1e1b;
+      --warning: #f1b862;
+      --warning-soft: #392a13;
+      --normal: #78d3a5;
+      --normal-soft: #133022;
+      --none: #8a989e;
+      --model: #f1aa66;
+      --model-soft: #35240f;
+      --shadow: 0 0 0;
+    }
   }
-  @media (prefers-color-scheme: dark) {
+  @media screen and (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
       --bg: #0e1a21;
