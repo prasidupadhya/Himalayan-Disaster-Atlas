@@ -10,7 +10,7 @@ import { FloodJourney } from './journey';
 import { RouteList } from './route-list';
 import { lineCoordinates } from './scene-3d';
 import { duration, errorText, shortTime, simCopy } from './copy';
-import { revealResult } from './reveal';
+import { Assumptions, RunControls, Step } from './steps';
 import type { MapScene } from './simulator-map';
 
 type Geometry = { format: string; corridors: Record<string, Record<string, GeoJSON.Geometry>> };
@@ -23,7 +23,7 @@ export function originLabel(o: CorridorOrigin, lang: Lang = 'en') {
   return c.riverOption(o.start_reach, o.gazetteer_hint?.name ?? null);
 }
 
-export function FloodPanel({ lang, initial, onScene, onShare, pick, slot }: { lang: Lang; initial: FloodScenario | null; onScene: (scene: MapScene) => void; onShare: (s: FloodScenario) => void; pick: { id: string; n: number } | null; slot: HTMLElement | null }) {
+export function FloodPanel({ lang, initial, onScene, onShare, pick, slot, onRun, onProgress }: { lang: Lang; initial: FloodScenario | null; onScene: (scene: MapScene) => void; onShare: (s: FloodScenario) => void; pick: { id: string; n: number } | null; slot: HTMLElement | null; onRun: () => void; onProgress: (step: number) => void }) {
   const t = UI[lang], c = simCopy(lang);
   const [loaded, setLoaded] = useState<Loaded | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -66,6 +66,9 @@ export function FloodPanel({ lang, initial, onScene, onShare, pick, slot }: { la
     onScene(scene);
   }, [loaded, origin, result, run, onScene, lang]);
 
+  // Where the reader is in the sequence: choosing (0), ready to run (1), reading a result (2).
+  useEffect(() => { onProgress(run ? 2 : ack ? 1 : 0); }, [run, ack, onProgress]);
+
   if (error) return <div className="sim-problem" role="alert"><p><strong>{t.failed}</strong> {error}</p><button type="button" onClick={() => { setError(null); setAttempt(a => a + 1); }}>{t.retry}</button></div>;
   if (!loaded || !draft || !origin) return <p role="status" className="sim-loading">{t.loading}</p>;
   const update = (patch: Partial<FloodScenario>) => { setDraft({ ...draft, ...patch }); setAck(false); };
@@ -79,8 +82,7 @@ export function FloodPanel({ lang, initial, onScene, onShare, pick, slot }: { la
   });
 
   return <div className="sim-panel" data-sim="flood">
-    <section className="sim-step" aria-labelledby="flood-step-1">
-      <h2 id="flood-step-1"><span className="sim-step-number">{digits('1', lang)}</span> {t.step1}</h2>
+    <Step n={1} id="flood-step-1" title={t.step1} lang={lang}>
       <label className="sim-field"><span>{c.releasePoint}</span>
         <select value={draft.origin} onChange={event => update({ origin: event.target.value })}>
           {groups.map(([kind, label]) => <optgroup key={kind} label={label}>
@@ -90,10 +92,9 @@ export function FloodPanel({ lang, initial, onScene, onShare, pick, slot }: { la
       </label>
       <OriginCard origin={origin} lang={lang} />
       <p className="sim-muted">{c.onlyVerified(loaded.catalogue.origins.length)} <a href="/atlas/">{c.workbench}</a>{c.workbenchJoin}{c.exposureUnknown}</p>
-    </section>
+    </Step>
 
-    <section className="sim-step" aria-labelledby="flood-step-2">
-      <h2 id="flood-step-2"><span className="sim-step-number">{digits('2', lang)}</span> {t.step2}</h2>
+    <Step n={2} id="flood-step-2" title={t.step2} lang={lang}>
       <fieldset className="sim-fieldset"><legend>{c.shape}</legend>
         {(['triangular', 'rectangular'] as const).map(shape => <label key={shape} className="sim-radio"><input type="radio" name="flood-shape" checked={draft.shape === shape} onChange={() => update({ shape })} /> {shape === 'triangular' ? c.triangular : c.rectangular}</label>)}
       </fieldset>
@@ -109,14 +110,10 @@ export function FloodPanel({ lang, initial, onScene, onShare, pick, slot }: { la
         </div>
       </fieldset>
       {errors.length > 0 && <ul className="sim-errors" role="alert">{errors.map(e => <li key={e}>{errorText(e, lang)}</li>)}</ul>}
-      <div className="sim-assumptions">
-        <h3>{t.assumptions}</h3>
-        <ul>{assumptions.map(text => <li key={text}>{text}</li>)}</ul>
-        <details><summary>{t.limitations}</summary><ul lang="en">{loaded.release.metadata.limitations.map(l => <li key={l}>{l}</li>)}</ul></details>
-      </div>
-      <label className="sim-ack"><input type="checkbox" checked={ack} onChange={event => setAck(event.target.checked)} /> <span>{t.acknowledge}</span></label>
-      <button type="button" className="sim-run" disabled={!ack || errors.length > 0} onClick={() => { setRun(draft); onShare(draft); revealResult('flood-result'); }}>{t.run}</button>
-    </section>
+      <Assumptions title={t.assumptions} items={assumptions} limitationsTitle={t.limitations} limitations={loaded.release.metadata.limitations} />
+      <RunControls acknowledged={ack} onAcknowledge={setAck} acknowledgement={t.acknowledge} label={t.run} disabled={errors.length > 0}
+        onRun={() => { setRun(draft); onShare(draft); onRun(); }} />
+    </Step>
 
     {run && result && slot && createPortal(<FloodResult scenario={run} origin={result} catalogue={loaded.catalogue} release={loaded.release} lang={lang} />, slot)}
   </div>;
@@ -144,11 +141,9 @@ function FloodResult({ scenario, origin, catalogue, release, lang }: { scenario:
   const short = (s: [number, number, number]) => `${shortTime(s[0], lang)}–${shortTime(s[2], lang)}`;
   const km = (v: number) => formatNumber(v, lang, 0);
   const slash = (values: number[]) => values.map(v => formatNumber(v, lang, v % 1 ? 1 : 0)).join('/');
-  return <section className="sim-step sim-result" aria-labelledby="flood-result" data-sim-result="flood">
-    <h2 id="flood-result"><span className="sim-step-number">{digits('3', lang)}</span> {t.step3}</h2>
+  return <Step n={3} id="flood-result" title={t.step3} lang={lang} className="sim-result" data-sim-result="flood">
     <p className="sim-label-row"><span className="sim-badge sim-badge-model">{c.modelled}</span><span className="sim-badge">{t.scenarioNotice}</span></p>
     <p className="sim-summary">{c.floodSummary(km(last.row.prefix_km), span(last.arrival.front_s), fmtRange(last.range.population.min, last.range.population.max))}</p>
-    <button type="button" className="sim-watch" onClick={() => document.querySelector('.sim-map')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}><span aria-hidden="true">▶</span> {c.watch3d}</button>
     <div className="sim-result-columns"><div className="sim-result-main">
     <div className="sim-headline">
       <div><span className="sim-kicker">{c.frontReaches(km(rows[0].row.prefix_km))}</span><strong>{span(rows[0].arrival.front_s)}</strong></div>
@@ -182,7 +177,7 @@ function FloodResult({ scenario, origin, catalogue, release, lang }: { scenario:
     </div></div>
     <div className="sim-unknown" role="note"><strong>{t.damage}:</strong> {t.notModelled}</div>
     <p className="sim-provenance">{c.inputs}: <a href={`/data/${release.metadata.dataset_id}/${release.metadata.dataset_version}/manifest.json`}>{release.metadata.dataset_id}@{release.metadata.dataset_version}</a> ({c.parents(release.inputs.length)}) · {c.method} {catalogue.method} · <a href="/methodology/#flood-corridors-method">{c.methodology}</a></p>
-  </section>;
+  </Step>;
 }
 
 export function NumberField({ label, unit, value, step, onChange, hint }: { label: string; unit: string; value: number; step: number; onChange: (v: number) => void; hint?: string }) {

@@ -5,12 +5,12 @@ import { parsePopulationGrid, type ModelRelease, type PopulationCells } from '..
 import type { Dataset } from '../../../../packages/contracts';
 import { ADMIN_MANIFESTS, loadDataset } from '../../lib/datasets';
 import { computeShaking, PGA_BANDS, ruptureLine, validateScenario, type Asset, type GmpeModel, type Mechanism, type QuakeScenario, type ShakingResult } from '../../lib/earthquake';
-import { digits, formatNumber, UI, type Lang } from '../../lib/i18n';
+import { formatNumber, UI, type Lang } from '../../lib/i18n';
 import { loadModelArtifact, loadModelRelease, MODEL_RELEASES } from '../../lib/model-release';
 import { BandBars } from './charts';
 import { haversineKm } from './scene-3d';
 import type { Corners, MapScene } from './simulator-map';
-import { revealResult } from './reveal';
+import { Assumptions, RunControls, Step } from './steps';
 import { errorText, simCopy } from './copy';
 import { NumberField } from './flood-panel';
 
@@ -67,7 +67,7 @@ function shakingImage(result: ShakingResult, cells: PopulationCells): { canvas: 
   return { canvas, coordinates: [[west, north], [east, north], [east, south], [west, south]] };
 }
 
-export function QuakePanel({ lang, initial, onScene, onShare, pick, slot }: { lang: Lang; initial: QuakeScenario | null; onScene: (scene: MapScene) => void; onShare: (s: QuakeScenario) => void; pick: { lon: number; lat: number; n: number } | null; slot: HTMLElement | null }) {
+export function QuakePanel({ lang, initial, onScene, onShare, pick, slot, onRun, onProgress }: { lang: Lang; initial: QuakeScenario | null; onScene: (scene: MapScene) => void; onShare: (s: QuakeScenario) => void; pick: { lon: number; lat: number; n: number } | null; slot: HTMLElement | null; onRun: () => void; onProgress: (step: number) => void }) {
   const t = UI[lang], c = simCopy(lang);
   const [loaded, setLoaded] = useState<Loaded | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -116,6 +116,8 @@ export function QuakePanel({ lang, initial, onScene, onShare, pick, slot }: { la
       origins: [], fit: [Math.max(79.6, draft.longitude - 3.2), Math.max(25.9, draft.latitude - 2.2), Math.min(88.6, draft.longitude + 3.2), Math.min(30.7, draft.latitude + 2.2)] });
   }, [draft, result, image, onScene]);
 
+  useEffect(() => { onProgress(result ? 2 : ack ? 1 : 0); }, [result, ack, onProgress]);
+
   if (error) return <div className="sim-problem" role="alert"><p><strong>{t.failed}</strong> {error}</p><button type="button" onClick={() => { setError(null); setAttempt(a => a + 1); }}>{t.retry}</button></div>;
   if (!loaded || !draft) return <p role="status" className="sim-loading">{t.loading}</p>;
   const update = (patch: Partial<QuakeScenario>) => { setDraft({ ...draft, ...patch }); setAck(false); };
@@ -129,14 +131,13 @@ export function QuakePanel({ lang, initial, onScene, onShare, pick, slot }: { la
       const sites = loaded.districts.collection.features.filter(f => f.properties.label_longitude != null)
         .map(f => ({ label: String(f.properties.name), longitude: f.properties.label_longitude as number, latitude: f.properties.label_latitude as number }));
       const next = computeShaking(loaded.model, draft, loaded.population, assets, sites);
-      setResult(next); setImage(shakingImage(next, loaded.population)); onShare(draft); revealResult('quake-result');
+      setResult(next); setImage(shakingImage(next, loaded.population)); onShare(draft); onRun();
     } catch (reason) { setError(reason instanceof Error ? reason.message : 'Calculation failed'); }
     finally { setBusy(false); }
   }
 
   return <div className="sim-panel" data-sim="earthquake">
-    <section className="sim-step" aria-labelledby="quake-step-1">
-      <h2 id="quake-step-1"><span className="sim-step-number">{digits('1', lang)}</span> {c.chooseQuake}</h2>
+    <Step n={1} id="quake-step-1" title={c.chooseQuake} lang={lang}>
       <label className="sim-field"><span>{c.replay}</span>
         <select value={draft.preset ?? 'custom'} onChange={event => { const p = loaded.presets.find(x => x.id === event.target.value); update(p ? defaultQuake(p) : { preset: null }); }}>
           {loaded.presets.map(p => <option key={p.id} value={p.id}>{p.label}</option>)}
@@ -149,9 +150,8 @@ export function QuakePanel({ lang, initial, onScene, onShare, pick, slot }: { la
         <NumberField label={c.magnitude} unit="Mw" value={draft.magnitude} step={0.1} onChange={v => update({ magnitude: v, preset: draft.preset && preset && v === preset.magnitude ? draft.preset : null })} />
       </div>
       {preset && <p className="sim-muted">{c.presetNote(preset.id, preset.magnitudeType, preset.time, preset.depth)}</p>}
-    </section>
-    <section className="sim-step" aria-labelledby="quake-step-2">
-      <h2 id="quake-step-2"><span className="sim-step-number">{digits('2', lang)}</span> {t.step2}</h2>
+    </Step>
+    <Step n={2} id="quake-step-2" title={t.step2} lang={lang}>
       <div className="sim-grid-2">
         <label className="sim-field"><span>{c.mechanism}</span>
           <select value={draft.mechanism} onChange={event => update({ mechanism: event.target.value as Mechanism })}>
@@ -171,14 +171,9 @@ export function QuakePanel({ lang, initial, onScene, onShare, pick, slot }: { la
         </div>}
       </fieldset>
       {errors.length > 0 && <ul className="sim-errors" role="alert">{errors.map(e => <li key={e}>{errorText(e, lang)}</li>)}</ul>}
-      <div className="sim-assumptions">
-        <h3>{t.assumptions}</h3>
-        <ul>{c.quakeAssumptions(draft.rupture.type === 'point', draft.vs30).map(text => <li key={text}>{text}</li>)}</ul>
-        <details><summary>{t.limitations}</summary><ul lang="en">{loaded.release.metadata.limitations.map(l => <li key={l}>{l}</li>)}</ul></details>
-      </div>
-      <label className="sim-ack"><input type="checkbox" checked={ack} onChange={event => setAck(event.target.checked)} /> <span>{t.acknowledge}</span></label>
-      <button type="button" className="sim-run" disabled={!ack || errors.length > 0 || busy} onClick={() => void run()}>{busy ? t.running : t.run}</button>
-    </section>
+      <Assumptions title={t.assumptions} items={c.quakeAssumptions(draft.rupture.type === 'point', draft.vs30)} limitationsTitle={t.limitations} limitations={loaded.release.metadata.limitations} />
+      <RunControls acknowledged={ack} onAcknowledge={setAck} acknowledgement={t.acknowledge} label={t.run} busy={busy} busyLabel={t.running} disabled={errors.length > 0} onRun={() => void run()} />
+    </Step>
     {result && slot && createPortal(<QuakeResult result={result} loaded={loaded} lang={lang} />, slot)}
   </div>;
 }
@@ -189,11 +184,9 @@ function QuakeResult({ result, loaded, lang }: { result: ShakingResult; loaded: 
   const strong = (counts: number[]) => counts.slice(3).reduce((a, b) => a + b, 0);
   const topSites = [...result.sites].sort((a, b) => (b.median ?? -1) - (a.median ?? -1)).slice(0, 12);
   const kathmandu = result.sites.find(site => /kathmandu/i.test(site.label));
-  return <section className="sim-step sim-result" aria-labelledby="quake-result" data-sim-result="earthquake">
-    <h2 id="quake-result"><span className="sim-step-number">{digits('3', lang)}</span> {t.step3}</h2>
+  return <Step n={3} id="quake-result" title={t.step3} lang={lang} className="sim-result" data-sim-result="earthquake">
     <p className="sim-label-row"><span className="sim-badge sim-badge-model">{c.modelled}</span><span className="sim-badge">{t.scenarioNotice}</span></p>
     <p className="sim-summary">{c.quakeSummary(formatNumber(s.magnitude, lang, 1), formatNumber(strong(result.population.central), lang), formatNumber(strong(result.population.low), lang), formatNumber(strong(result.population.high), lang))}</p>
-    <button type="button" className="sim-watch" onClick={() => document.querySelector('.sim-map')?.scrollIntoView({ behavior: 'smooth', block: 'center' })}><span aria-hidden="true">▶</span> {c.watch3d}</button>
     <div className="sim-headline">
       <div><span className="sim-kicker">{c.strongPeople}</span><strong>{formatNumber(strong(result.population.central), lang)}</strong><span className="sim-muted">−1σ {formatNumber(strong(result.population.low), lang)} · +1σ {formatNumber(strong(result.population.high), lang)}</span></div>
       {kathmandu && <div><span className="sim-kicker">{c.ktm}</span><strong>{kathmandu.median === null ? formatNumber(null, lang) : `${formatNumber(kathmandu.median, lang, 2)} g`}</strong><span className="sim-muted">{kathmandu.median !== null && `±1σ ${formatNumber(kathmandu.low, lang, 2)}–${formatNumber(kathmandu.high, lang, 2)} g · `}R<sub>JB</sub> {formatNumber(kathmandu.rjb, lang)} km</span></div>}
@@ -224,6 +217,6 @@ function QuakeResult({ result, loaded, lang }: { result: ShakingResult; loaded: 
     </div>}
     <div className="sim-unknown" role="note"><strong>{c.quakeUnknownLead}</strong> {c.quakeUnknown}</div>
     <p className="sim-provenance">{c.model} <a href={`/data/${loaded.release.metadata.dataset_id}/${loaded.release.metadata.dataset_version}/manifest.json`}>{loaded.release.metadata.dataset_id}@{loaded.release.metadata.dataset_version}</a> (doi:{loaded.model.doi}) · {c.population} <a href={`/data/${loaded.populationRelease.metadata.dataset_id}/${loaded.populationRelease.metadata.dataset_version}/manifest.json`}>{loaded.populationRelease.metadata.dataset_id}@{loaded.populationRelease.metadata.dataset_version}</a> · <a href="/methodology/#earthquake-shaking-method">{c.methodology}</a></p>
-  </section>;
+  </Step>;
 }
 

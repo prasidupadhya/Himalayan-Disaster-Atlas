@@ -191,7 +191,7 @@ test('with motion allowed the playback starts by itself once the map is on scree
   await expect.poll(async () => Number(await player.locator('.sim-player-status').getAttribute('data-player-time')), { timeout: 20_000 }).toBeGreaterThan(0);
 });
 
-test('keyboard-only run moves focus to the result heading', async ({ page }) => {
+test('keyboard-only run moves focus to the playback status, then See results to the result heading', async ({ page }) => {
   await open(page);
   const ack = flood(page).getByRole('checkbox');
   await expect(ack).toBeVisible({ timeout: 20_000 });
@@ -200,6 +200,10 @@ test('keyboard-only run moves focus to the result heading', async ({ page }) => 
   await expect(ack).toBeChecked();
   await page.keyboard.press('Tab');
   await expect(flood(page).getByRole('button', { name: 'Run scenario' })).toBeFocused();
+  await page.keyboard.press('Enter');
+  // The run brings the stage into view and focuses its status line; "See results" moves on to the result.
+  await expect(page.locator('.sim-player-status')).toBeFocused({ timeout: 10_000 });
+  await page.getByRole('link', { name: 'See results' }).focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#flood-result')).toBeFocused();
   await page.getByRole('tab', { name: /Flood/ }).focus();

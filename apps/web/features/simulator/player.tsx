@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState, type RefObject } from 'react';
 import type { GeoJSONSource, Map } from 'maplibre-gl';
 import { formatNumber, useLanguage } from '../../lib/i18n';
+import { revealMapThenPlay } from '../../lib/reveal';
 import { shortTime, PLAYER } from './copy';
 import { circle, floodPlaybackSeconds, haversineKm, headingAt, measure, pointAt, pulseAt, slice, type LonLat } from './scene-3d';
 import { markLabels, useLabelCollisions, useMapLabels, type MapLabel } from './map-labels';
@@ -29,8 +30,11 @@ const reducedMotion = () => typeof window !== 'undefined' && window.matchMedia('
 
 
 /** Plays a scenario on the 3D map. Owns its own sources and layers; the map and its terrain belong to SimulatorMap. */
-export function Player({ map, play, threeD, onThreeD, shell, expanded, onExpanded }: {
-  map: Map; play: Play; threeD: boolean; onThreeD: (on: boolean) => void; shell: RefObject<HTMLElement | null>; expanded: boolean; onExpanded: (on: boolean) => void;
+/** `request` is a pending Run: the player brings the stage into view, then starts, then moves focus to its status line
+ * (`onHandled` clears the request). `resultsId` is the heading the "See results" link moves to. */
+export function Player({ map, play, threeD, onThreeD, shell, stage, expanded, onExpanded, request, onHandled, resultsId }: {
+  map: Map; play: Play; threeD: boolean; onThreeD: (on: boolean) => void; shell: RefObject<HTMLElement | null>; stage: RefObject<HTMLElement | null>;
+  expanded: boolean; onExpanded: (on: boolean) => void; request: number | null; onHandled: () => void; resultsId: string;
 }) {
   const [lang] = useLanguage();
   const c = PLAYER[lang];
@@ -168,6 +172,29 @@ export function Player({ map, play, threeD, onThreeD, shell, expanded, onExpande
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, play]);
 
+  // A Run brings the stage into view first and only then plays, so the animation never runs off screen; focus moves to
+  // the status line on the stage (not to an off-screen heading) and the start is announced.
+  const statusRef = useRef<HTMLParagraphElement>(null);
+  // The start is spoken first; checkpoint announcements take over once a new checkpoint is reached.
+  const [spoken, setSpoken] = useState({ text: '', over: '' });
+  const announced = useRef('');
+  // The pending reveal outlives the request (which is cleared at once); a newer Run or unmounting cancels it.
+  const cancelReveal = useRef<(() => void) | null>(null);
+  useEffect(() => () => cancelReveal.current?.(), []);
+  useEffect(() => {
+    if (!request) return;
+    onHandled();
+    cancelReveal.current?.();
+    cancelReveal.current = revealMapThenPlay(stage.current, () => {
+      cancelReveal.current = null;
+      if (!reducedMotion()) setPlaying(true);
+      setSpoken({ text: flood ? c.playingFlood(formatNumber(flood.pathKm, lang, 0)) : c.playingQuake, over: announced.current });
+      statusRef.current?.focus({ preventScroll: true });
+    });
+    // The request is the trigger; the rest is read at that moment.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [request]);
+
   // The animation loop; the HUD is refreshed a few times a second, the map every frame.
   useEffect(() => {
     if (!playing) return;
@@ -208,6 +235,7 @@ export function Player({ map, play, threeD, onThreeD, shell, expanded, onExpande
   const reachedCount = flood ? flood.checkpoints.filter(k => k.km <= midHead + 1e-6).length : 0;
   const lastReached = flood && reachedCount ? flood.checkpoints[reachedCount - 1] : null;
   const announce = flood && lastReached ? c.reached(formatNumber(lastReached.km, lang, 0), shortTime(lastReached.km * 1000 / flood.celerity[1], lang)) : '';
+  useEffect(() => { announced.current = announce; }, [announce]);
 
   const scrub = (value: number) => { setPlaying(false); clock.current.t = value; setT(value); draw(value, true); };
   const status = flood ? (() => {
@@ -220,14 +248,26 @@ export function Player({ map, play, threeD, onThreeD, shell, expanded, onExpande
   const epicentreUnit = quake && names ? unitAt(names, quake.epicentre) : null;
   return <div className="sim-player" role="group" aria-label={c.label} data-player-state={playing ? 'playing' : t >= total ? 'ended' : 'paused'}>
     <p className="sim-player-badge"><strong>{c.modelled}</strong> <span>{flood ? c.floodNote : c.quakeNote}</span></p>
-    <p className="sim-player-status" data-player-time={Math.round(t)}>{status}</p>
+    <div className="sim-player-head">
+      <p ref={statusRef} className="sim-player-status" tabIndex={-1} data-player-time={Math.round(t)}>{status}</p>
+  <a className="sim-see-results" href={`#${resultsId}`} onClick={event => {
+        const heading = document.getElementById(resultsId);
+        if (!heading) return;
+        event.preventDefault();
+        heading.setAttribute('tabindex', '-1');
+        heading.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', block: 'start' });
+        heading.focus({ preventScroll: true });
+      }}>{c.seeResults} <span aria-hidden="true">↓</span></a>
+    </div>
     {flood && (here?.stretch ? <p className="sim-player-where" data-where-district={here.stretch.unit.district ?? ''}>
       <strong>{c.now}:</strong> {[here.river ? c.river(here.river.name) : null, here.place ? `${c.near} ${here.place.name}` : null,
         here.stretch.unit.inNepal ? [here.stretch.unit.local, here.stretch.unit.district, provinceName(here.stretch.unit.province, here.stretch.unit.provinceCode)].filter(Boolean).join(', ') : c.outside].filter(Boolean).join(' · ')}
     </p> : <p className="sim-player-where">{c.loadingNames}</p>)}
     {quake && epicentreUnit && <p className="sim-player-where"><strong>{c.epicentre}:</strong> {epicentreUnit}</p>}
-    {sequence.length > 1 && <ol className="sim-player-route" aria-label={c.route}>{sequence.map((d, i) => <li key={`${d.district}-${i}`} data-state={midHead >= d.toKm ? 'passed' : midHead >= d.fromKm ? 'current' : 'ahead'}>{d.district ?? '—'}</li>)}</ol>}
-    <p className="sr-only" role="status" aria-live="polite">{announce}</p>
+    {/* The route row keeps its place while the names load, so the dock does not jump under the reader's finger. */}
+    {sequence.length > 1 ? <ol className="sim-player-route" aria-label={c.route}>{sequence.map((d, i) => <li key={`${d.district}-${i}`} data-state={midHead >= d.toKm ? 'passed' : midHead >= d.fromKm ? 'current' : 'ahead'}>{d.district ?? '—'}</li>)}</ol>
+      : flood && <div className="sim-player-route" aria-hidden="true" />}
+    <p className="sr-only" role="status" aria-live="polite">{t >= total && spoken.text ? c.ended : spoken.text && announce === spoken.over ? spoken.text : announce || spoken.text}</p>
     <div className="sim-player-bar">
     <div className="sim-player-controls">
       <button type="button" className="sim-player-play" onClick={() => { if (t >= total) { clock.current.t = 0; setT(0); draw(0, true); } if (!playing) startFollow(); setPlaying(p => !p); }}>
