@@ -3,12 +3,13 @@ import dynamic from 'next/dynamic';
 import { UI, useLanguage } from '../../lib/i18n';
 import { simCopy } from './copy';
 
-/** Shown while the simulator loads; it holds a screen's height so the footer does not flash up and jump away. */
+/** Shown while the simulator loads: the page's own heading and intro (so they paint at once), holding a screen's height
+ * so the footer does not flash up and jump away. */
 function SimulatorLoading() {
   const [lang] = useLanguage();
   const t = UI[lang], c = simCopy(lang);
   return <div className="sim-page sim-page-loading" lang={lang}>
-    <header className="sim-hero"><p className="eyebrow">{c.eyebrow}</p><h1>{t.simTitle}</h1><p role="status">{c.loadingSimulator}</p></header>
+    <header className="sim-hero"><p className="eyebrow">{c.eyebrow}</p><h1>{t.simTitle}</h1><p className="intro">{t.simIntro}</p><p role="status">{c.loadingSimulator}</p></header>
     <p className="sim-notice notice notice-model"><span aria-hidden="true">◇</span> {t.scenarioNotice}.</p>
   </div>;
 }

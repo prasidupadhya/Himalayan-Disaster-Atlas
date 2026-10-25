@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { NepalOverview } from '../components/nepal-overview';
+import { NepalOverviewLoader } from '../features/hazards/loader';
 import { TodayStrip } from '../components/today-strip';
 import { bilingual } from '../lib/copy';
 import { HOME } from './copy';
@@ -24,7 +24,7 @@ export default function Home() {
           <p className="intro">{t('intro')}</p>
           <div className="home-actions"><Link className="primary-action" href="/atlas/">{t('explore')}</Link><Link className="text-action" href="/hazards/">{t('today')}</Link></div>
         </div>
-        <div className="home-map"><NepalOverview /></div>
+        <div className="home-map"><NepalOverviewLoader /></div>
       </div>
       <div className="home-today"><TodayStrip /></div>
     </section>

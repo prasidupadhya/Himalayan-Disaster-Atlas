@@ -204,7 +204,7 @@ export function errorText(message: string, lang: Lang) {
 export const REPORT = {
   en: {
     eyebrow: 'Scenario report', quakeTitle: 'Educational earthquake shaking scenario', floodTitle: 'Educational flood / GLOF corridor scenario',
-    official: 'Official forecasts and warnings:', generated: (t: string) => `Generated ${t} (viewer clock) · Himalayan Disaster Atlas · recomputed from verified static releases`,
+    official: 'Official forecasts and warnings:', loadingReport: 'Loading the report…', generated: (t: string) => `Generated ${t} (viewer clock) · Himalayan Disaster Atlas · recomputed from verified static releases`,
     print: 'Print / save as PDF', json: 'Download report JSON', back: 'Back to the simulator',
     invalid: 'No valid scenario was supplied in the link. Run a scenario in the simulator first.', recomputing: 'Recomputing the scenario from verified inputs…',
     inputs: 'Inputs and data versions', release: 'Release', hash: 'Manifest SHA-256', results: 'Results', limitations: 'Limitations', limitationsLang: 'Limitations are quoted from each release in English.',
@@ -219,7 +219,7 @@ export const REPORT = {
   },
   ne: {
     eyebrow: 'परिदृश्य प्रतिवेदन', quakeTitle: 'शैक्षिक भूकम्पीय कम्पन परिदृश्य', floodTitle: 'शैक्षिक बाढी / हिमताल विस्फोट करिडोर परिदृश्य',
-    official: 'आधिकारिक पूर्वानुमान र चेतावनी:', generated: (t: string) => `${t} मा तयार (हेर्नेको घडी) · हिमालयन डिजास्टर एटलस · प्रमाणित स्थिर रिलिजबाट पुनर्गणना`,
+    official: 'आधिकारिक पूर्वानुमान र चेतावनी:', loadingReport: 'प्रतिवेदन लोड हुँदैछ…', generated: (t: string) => `${t} मा तयार (हेर्नेको घडी) · हिमालयन डिजास्टर एटलस · प्रमाणित स्थिर रिलिजबाट पुनर्गणना`,
     print: 'छाप्नुहोस् / PDF बनाउनुहोस्', json: 'प्रतिवेदन JSON डाउनलोड', back: 'सिमुलेटरमा फर्कनुहोस्',
     invalid: 'लिङ्कमा कुनै मान्य परिदृश्य छैन। पहिले सिमुलेटरमा परिदृश्य चलाउनुहोस्।', recomputing: 'प्रमाणित इनपुटबाट परिदृश्य पुनर्गणना गर्दै…',
     inputs: 'इनपुट र डाटा संस्करण', release: 'रिलिज', hash: 'म्यानिफेस्ट SHA-256', results: 'नतिजा', limitations: 'सीमाहरू', limitationsLang: 'सीमाहरू हरेक रिलिजबाट अंग्रेजीमा उद्धृत छन्।',

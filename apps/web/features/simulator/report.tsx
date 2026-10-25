@@ -8,11 +8,12 @@ import { arrivals, decodeScenario, exposureRange, hydrograph, hydrographVolume, 
 import { loadModelArtifact, loadModelRelease, manifestPath, MODEL_RELEASES } from '../../lib/model-release';
 import { originLabel } from './flood-panel';
 import { duration, REPORT } from './copy';
-import { formatNumber, UI, useLanguage, type Lang } from '../../lib/i18n';
+import { formatNumber, useLanguage, type Lang } from '../../lib/i18n';
 import { RouteList } from './route-list';
 import { lineCoordinates } from './scene-3d';
 import { loadAssets } from './quake-panel';
 import { Skeleton } from '../../components/ui';
+import { ReportNotice } from './report-notice';
 
 const NOTICE = 'Scenario / educational estimate, not a forecast or warning';
 type InputRecord = { id: string; version: string; manifest: string; sha256: string };
@@ -73,7 +74,7 @@ export function ScenarioReport() {
     <header className="report-header">
       <div className="report-top"><p className="eyebrow">{r.eyebrow}</p></div>
       <h1>{scenario?.kind === 'earthquake' ? r.quakeTitle : r.floodTitle}</h1>
-      <p className="report-notice"><strong>{UI[lang].scenarioNotice}.</strong> {r.official} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url}>{a.name}</a> ({a.url})</span>)}.</p>
+      <ReportNotice lang={lang} />
       <p className="report-meta">{r.generated(generated)}</p>
       <div className="report-actions"><button type="button" onClick={() => window.print()} disabled={!report}>{r.print}</button><button type="button" onClick={json} disabled={!report}>{r.json}</button><a href={scenario ? `/simulate/?s=${new URLSearchParams(window.location.search).get('s')}` : '/simulate/'}>{r.back}</a></div>
     </header>

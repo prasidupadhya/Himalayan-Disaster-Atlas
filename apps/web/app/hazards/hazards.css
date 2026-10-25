@@ -39,7 +39,6 @@
   .hz-section-head h2::before { content: ''; flex: 0 0 auto; width: .5rem; height: 1.1em; border-radius: 2px; background: var(--hazard); }
   .hz-lead { margin: 0; max-width: 78ch; color: var(--ink-2); }
   .hz-loading { margin: 0; color: var(--ink-2); }
-  .hz-page[data-today-state="loading"] .hz-loading { min-height: 40vh; }
   .hz-problem { padding: var(--s-3) var(--s-4); border-left: 4px solid var(--danger); border-radius: var(--r-1); background: var(--danger-soft); }
   .hz-problem p { margin: 0 0 var(--s-2); }
   .hz-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-5); margin: 0; }

@@ -16,6 +16,7 @@
 
   .home-map { min-width: 0; }
   .nepal-overview { margin: 0; }
+  .nepal-overview-placeholder { aspect-ratio: 900 / 560; }
   .overview-heading { display: flex; justify-content: space-between; gap: var(--s-4); padding: var(--s-2) 0; border-top: 1px solid color-mix(in srgb, var(--on-stage-2) 35%, transparent); color: var(--on-stage-2); font-size: var(--step--2); }
   .overview-heading span:first-child { color: var(--on-stage); font-weight: 700; }
   .nepal-overview svg { display: block; width: 100%; height: auto; overflow: visible; }

@@ -88,8 +88,14 @@ export const TODAY_STRIP: { en: typeof todayEn; ne: typeof todayEn } = {
   },
 };
 
-const overviewEn = { nepal: 'Nepal', geography: 'Administrative geography', source: 'Source' };
-export const OVERVIEW: { en: typeof overviewEn; ne: typeof overviewEn } = { en: overviewEn, ne: { nepal: 'नेपाल', geography: 'प्रशासनिक भूगोल', source: 'स्रोत' } };
+const overviewEn = {
+  nepal: 'Nepal', geography: 'Administrative geography', source: 'Source', title: 'Nepal’s seven provinces', limitations: 'COD-AB v02 · source & limitations',
+  description: (names: string) => `Province boundaries and source label positions from Nepal COD-AB v02, displayed in Web Mercator: ${names}. This overview is for orientation, not measurement or a statement on disputed boundaries.`,
+};
+export const OVERVIEW: { en: typeof overviewEn; ne: typeof overviewEn } = { en: overviewEn, ne: {
+  nepal: 'नेपाल', geography: 'प्रशासनिक भूगोल', source: 'स्रोत', title: 'नेपालका सात प्रदेश', limitations: 'COD-AB v02 · स्रोत र सीमाहरू',
+  description: names => `नेपाल COD-AB v02 बाट प्रदेशका सीमाना र स्रोतका नाम राखिने स्थान, वेब मर्केटरमा देखाइएको: ${names}। यो सिंहावलोकन दिशा बुझ्नका लागि हो, मापन वा विवादित सीमानाबारे कथनका लागि होइन।`,
+} };
 
 const longformEn = { onThisPage: 'On this page', backToTop: 'Back to top' };
 export const LONGFORM: { en: typeof longformEn; ne: typeof longformEn } = { en: longformEn, ne: { onThisPage: 'यस पृष्ठमा', backToTop: 'माथि फर्कनुहोस्' } };
