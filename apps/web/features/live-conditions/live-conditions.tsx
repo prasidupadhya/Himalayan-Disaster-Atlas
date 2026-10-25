@@ -146,7 +146,7 @@ export function LiveConditions() {
       <section className="live-map-section" aria-labelledby="live-map-heading">
         <h2 id="live-map-heading">{c.map}</h2>
         {/* The skip link's accessible name stays English in both languages: keyboard tests reach it by this name after switching to Nepali. */}
-        <a className="map-skip-link" href="#live-records">Skip map to record tables</a>
+        <a className="map-skip-link" href="#live-records">{c.skipMap}</a>
         <fieldset className="live-layer-controls">
           <legend>{c.layers}</legend>
           <label><input type="checkbox" checked={visible.earthquakes} onChange={event => setVisible(value => ({ ...value, earthquakes: event.target.checked }))} /> <span>{c.reportedEarthquakeEpicentres}</span> {usgs && <FreshnessLabel freshness={usgs.freshness} lastKnown={usgs.lastKnown} lang={lang} />}</label>

@@ -33,10 +33,11 @@
 .live-health-head { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; align-items: center; justify-content: space-between; }
 .live-health-head button { min-height: 44px; }
 .live-announcement { margin: .6rem 0 0; font-size: .9rem; color: var(--ink-2); }
-.live-health-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; margin: 1rem 0 0; border: 1px solid var(--line); border-radius: var(--r-2); overflow: hidden; background: var(--line); font-size: .88rem; }
-.live-health-grid > div { padding: .8rem .95rem; background: var(--surface-2); }
-.live-health-grid dt { margin-bottom: .2rem; font-size: .72rem; letter-spacing: 0; font-weight: 750; }
-.live-health-grid dd { margin: 0; }
+/* Workflow health as stat tiles; the badge inside each carries the state word and glyph. */
+.live-health-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-3); margin: var(--s-4) 0 0; font-size: var(--step--1); }
+.live-health-grid > div { display: grid; gap: var(--s-1); align-content: start; min-width: 0; padding: var(--s-3) var(--s-4); border: 1px solid var(--line); border-radius: var(--r-2); background: var(--surface-2); overflow-wrap: anywhere; }
+.live-health-grid dt { color: var(--ink-2); font-size: var(--step--2); font-weight: 700; }
+.live-health-grid dd { margin: 0; color: var(--ink); font-variant-numeric: tabular-nums; }
 .live-problem { margin-top: 1rem; padding: .9rem 1rem; border: 1px solid var(--danger); border-left-width: 5px; border-radius: var(--r-1); background: var(--danger-soft); }
 .live-problem p { margin: 0 0 .6rem; }
 .live-callout { margin: 1rem 0 0; padding: .8rem 1rem; border-left: 4px solid var(--line-2); background: var(--surface-2); }
