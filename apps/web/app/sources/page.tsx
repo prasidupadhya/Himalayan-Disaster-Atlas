@@ -5,6 +5,7 @@ import { T } from '../../lib/i18n';
 import { bilingual } from '../../lib/copy';
 import { SOURCES } from './copy';
 import { SourceToc } from './source-toc';
+import { BackToTop } from '../../components/longform';
 import catalogJson from '../../public/data/atlas-provenance/1.8.0/manifest.json';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { buildSourceDirectory, currentProductionRecords, parseProvenanceCatalog, type ProvenanceRecord } from '../../../../packages/contracts/provenance';
@@ -43,7 +44,7 @@ export default function SourcesPage() {
   const records = currentProductionRecords(catalog).filter(record => isReleaseIncluded(record.key));
   const directory = buildSourceDirectory(catalog.records.filter(record => isReleaseIncluded(record.key)));
   const byKey = new Map(records.map(record => [record.key, record]));
-  return <div className="page sources-page">
+  return <div className="page sources-page longform">
     <p className="eyebrow">{t('sources')}</p><h1>{t('traceEveryProductionLayer')}</h1>
     <p className="intro">{t('officialProvidersAcquisitionEndpoints')}</p>
    
@@ -83,5 +84,6 @@ export default function SourcesPage() {
       </section>;
     })}
     <section className="source-section"><h2>{t('attributionLicenceDiscipline')}</h2><p>{t('datasetRedistributionReviewSoftware')}</p><p>{t('atlasPreservesLicenceAttribution')}</p><p>{t('sourceLinksNotCredentials')}</p></section>
+    <BackToTop />
   </div>;
 }

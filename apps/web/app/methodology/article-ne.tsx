@@ -1,19 +1,19 @@
 import Link from 'next/link';
+import { BackToTop, PageToc } from '../../components/longform';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 
 /** The methodology in Nepali (project-authored; needs native-speaker review before operational reliance). Both articles keep the same section ids. */
 export function MethodologyNe() {
   const authorities = LIVE_AUTHORITIES.map((authority, i) => <span key={authority.name}>{i > 0 && ' · '}<a href={authority.url}>{authority.name}</a></span>);
-  return <article className="page prose" lang="ne">
+  return <article className="page prose longform" lang="ne">
     <p className="eyebrow">कार्यविधि</p><h1>व्याख्याभन्दा पहिले प्रमाण।</h1>
     <p>प्रत्येक प्रकाशित डेटासेटसँग यसको स्रोत, संस्करण, मितिहरू, इजाजतपत्र (license), प्रशोधन विधि, समेटिएको क्षेत्र (coverage), सीमाहरू र अनिश्चितता रहन्छन्। नभएका मापनहरू अज्ञात (UNKNOWN) नै रहन्छन्।</p>
 
-    <nav className="methodology-toc" aria-label="Methodology sections">
-      <strong>यस पृष्ठमा</strong>
+    <PageToc className="methodology-toc" label="पद्धतिका खण्डहरू">
       <a href="#today-method">आजको पृष्ठ</a><a href="#glacial-lakes-method">हिमताल</a><a href="#rivers-method">नदी</a><a href="#downstream-method">तल्लो तटीय मार्ग (downstream trace)</a>
       <a href="#earthquake-catalogue-method">भूकम्प सूची</a><a href="#flood-corridors-method">बाढी र हिमताल विस्फोट (GLOF) परिदृश्य</a><a href="#earthquake-shaking-method">कम्पन परिदृश्य</a><a href="#glof-physical">भौतिक GLOF परियोजना</a>
       <a href="#glaciers-method">हिमनदी</a><a href="#terrain-method">भू-आकृति</a><a href="#administrative-method">प्रशासनिक सीमाना</a><a href="#infrastructure-method">पूर्वाधार</a><a href="#pipeline-method">डेटा पाइपलाइन र CRS</a>
-    </nav>
+    </PageToc>
 
     <h2 id="pipeline-method">समग्र डेटा पाइपलाइन, CRS र प्रमाणको अर्थ</h2>
     <p><>स्रोत सङ्कलन अफलाइन हुन्छ। पाइपलाइनहरूले ठ्याक्कै स्रोत वस्तु वा API प्रतिक्रिया पिन (pin) गर्छन्, पहिचान र आवश्यक फिल्ड प्रमाणीकरण गर्छन्, स्रोतका इजाजतपत्र/मितिहरू जोगाउँछन्, दस्तावेजीकृत फिचरलाई चाहिने कुरा मात्र रूपान्तरण गर्छन्, अनि SHA-256 चेकसमसहित अपरिवर्तनीय ब्राउजर फाइल (artifact) प्रकाशित गर्छन्। सार्वजनिक साइटले ती स्थानीय फाइलहरू पढ्छ; आगन्तुक आएका बेला तेस्रो पक्षका API चुपचाप ताजा गर्दैन। <a href="/sources/">स्रोत निर्देशिका</a>मा हरेक रिलिज, त्यसको संस्करण र इजाजतपत्र सूचीबद्ध छन्।</></p>
@@ -160,5 +160,6 @@ export function MethodologyNe() {
   <p><>जिल्लाका प्रदर्शन नामहरू सन्दर्भ गरिएको जिल्ला सूचीअनुसार छन्; पूर्वी रुकुम र पश्चिमी रुकुमले स्रोतका रूप Rukum East र Rukum West कायम राख्छन्। 753 स्थानीय तहका नामहरू सरकारी निर्देशिकासँग तुलना गरिएका छन्; Manang Ngisyang ले आफ्नो पालिकाको पूरा नाम प्रयोग गर्छ, जबकि Dodhara Chandani ले आफ्नो जिल्ला प्रशासनलाई पछ्याउँछ। स्थानीय तहहरू सहर वा बस्तीहरूको पूर्ण सूची होइनन्।</></p>
   <p>नाम भएका नदी स्थानहरू 22 September 2026 को GeoNames Nepal स्न्यापसटबाट लिइएका हुन्। मूल नाम र वैकल्पिक हिज्जेहरू देखिइरहन्छन्। यी बिन्दुहरू HydroRIVERS सँगको नाम मिलान तालिका (crosswalk) होइनन्: नजिकका नदी खण्ड र सम्पूर्ण तल्लो तटीय शृङ्खलाले नाम पाउँदैनन्। नभएका नदी खण्ड पहिचान अज्ञात (UNKNOWN) नै रहन्छन्।</p>
   <p><><a href="https://ec.nsonepal.gov.np/html/admin_code.html">सरकारी स्थानीय तह निर्देशिका</a> · <a href="https://www.geonames.org/export/">GeoNames स्रोत र श्रेय</a>।</></p>
+    <BackToTop />
   </article>;
 }

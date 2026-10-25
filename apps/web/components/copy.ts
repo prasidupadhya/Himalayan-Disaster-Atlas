@@ -90,3 +90,6 @@ export const TODAY_STRIP: { en: typeof todayEn; ne: typeof todayEn } = {
 
 const overviewEn = { nepal: 'Nepal', geography: 'Administrative geography', source: 'Source' };
 export const OVERVIEW: { en: typeof overviewEn; ne: typeof overviewEn } = { en: overviewEn, ne: { nepal: 'नेपाल', geography: 'प्रशासनिक भूगोल', source: 'स्रोत' } };
+
+const longformEn = { onThisPage: 'On this page', backToTop: 'Back to top' };
+export const LONGFORM: { en: typeof longformEn; ne: typeof longformEn } = { en: longformEn, ne: { onThisPage: 'यस पृष्ठमा', backToTop: 'माथि फर्कनुहोस्' } };

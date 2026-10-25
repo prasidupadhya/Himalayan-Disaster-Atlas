@@ -1,19 +1,19 @@
 import Link from 'next/link';
+import { BackToTop, PageToc } from '../../components/longform';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 
 /** The methodology in English. Both articles keep the same section ids. */
 export function MethodologyEn() {
   const authorities = LIVE_AUTHORITIES.map((authority, i) => <span key={authority.name}>{i > 0 && ' · '}<a href={authority.url}>{authority.name}</a></span>);
-  return <article className="page prose" lang="en">
+  return <article className="page prose longform" lang="en">
     <p className="eyebrow">Methodology</p><h1>Evidence before interpretation.</h1>
     <p>Every published dataset carries its source, version, dates, license, processing method, coverage, limitations, and uncertainty. Missing measurements remain UNKNOWN.</p>
 
-    <nav className="methodology-toc" aria-label="Methodology sections">
-      <strong>On this page</strong>
+    <PageToc className="methodology-toc" label="Methodology sections">
       <a href="#today-method">Today page</a><a href="#glacial-lakes-method">Glacial lakes</a><a href="#rivers-method">Rivers</a><a href="#downstream-method">Downstream trace</a>
       <a href="#earthquake-catalogue-method">Earthquake catalogue</a><a href="#flood-corridors-method">Flood and GLOF scenarios</a><a href="#earthquake-shaking-method">Shaking scenarios</a><a href="#glof-physical">Physical GLOF project</a>
       <a href="#glaciers-method">Glaciers</a><a href="#terrain-method">Terrain</a><a href="#administrative-method">Boundaries</a><a href="#infrastructure-method">Infrastructure</a><a href="#pipeline-method">Data pipeline & CRS</a>
-    </nav>
+    </PageToc>
 
     <h2 id="pipeline-method">Overall data pipeline, CRS and evidence semantics</h2>
     <p><>Source acquisition happens offline. Pipelines pin exact source objects or API responses, validate identity and required fields, preserve source licences/dates, transform only what the documented feature requires, then publish immutable browser artifacts with SHA-256 checksums. The public site reads those local artifacts; it does not silently refresh third-party APIs at visitor time. <a href="/sources/">The source directory</a> lists every release, its version and licence.</></p>
@@ -160,5 +160,6 @@ export function MethodologyEn() {
   <p><>District display names follow the referenced district list; Eastern Rukum and Western Rukum retain the source variants Rukum East and Rukum West. The 753 local-government names were compared with the government directory; Manang Ngisyang uses its municipality’s full name, while Dodhara Chandani follows its district administration. Local governments are not an exhaustive inventory of cities or settlements.</></p>
   <p>Named river locations come from the GeoNames Nepal snapshot of 22 September 2026. Original names and alternate spellings remain visible. These points are not a name crosswalk to HydroRIVERS: nearby reaches and entire downstream chains do not inherit a name. Missing reach identities remain UNKNOWN.</p>
   <p><><a href="https://ec.nsonepal.gov.np/html/admin_code.html">Government local-level directory</a> · <a href="https://www.geonames.org/export/">GeoNames source and attribution</a>.</></p>
+    <BackToTop />
   </article>;
 }
