@@ -55,7 +55,8 @@
   .boundary-key { position: relative; display: inline-block; flex: 0 0 auto; width: 14px; height: 10px; border: 1.5px solid var(--on-stage-2); border-radius: 2px; }
   .map-controls-end { right: var(--s-3); bottom: var(--s-6); }
   .reset-map { gap: var(--s-2); padding: 0 var(--s-3); }
-  .map-status-slot { position: absolute; z-index: var(--z-map-ui); left: 50%; bottom: var(--s-4); transform: translateX(-50%); width: min(30rem, calc(100% - 2 * var(--s-4))); pointer-events: none; }
+  /* The trace status sits at the top of the map, under the caption, clear of the map key and the controls. */
+  .map-status-slot { position: absolute; z-index: var(--z-map-ui); left: var(--s-3); top: calc(var(--s-3) + 2.6rem); width: min(30rem, calc(100% - 6rem)); pointer-events: none; }
   .map-status { display: flex; gap: var(--s-2); align-items: flex-start; margin: 0; padding: var(--s-2) var(--s-3); border: 1px solid rgb(249 214 108 / .45); border-radius: var(--r-2); background: rgb(13 27 35 / .9); color: var(--on-stage); font-size: var(--step--1); line-height: 1.4; box-shadow: 0 8px 24px rgb(0 0 0 / .3); pointer-events: auto; }
   .map-status > span[aria-hidden] { color: var(--map-trace); }
   .admin-map-label, .country-overview-label { padding: 1px 6px; border-radius: 3px; background: rgb(13 27 35 / .8); color: var(--on-stage); font-size: .68rem; font-weight: 700; white-space: nowrap; pointer-events: none; text-shadow: 0 1px 1px rgb(0 0 0 / .8); }
@@ -116,7 +117,6 @@
     .map-caption { max-width: calc(100% - 5rem); }
     .map-controls-end { bottom: var(--s-6); }
     .map-key { bottom: var(--s-6); }
-    .map-status-slot { bottom: calc(var(--s-6) + 48px + var(--s-2)); }
   }
   /* Short landscape phones: the sheet becomes a side panel again, so the map keeps its height. */
   @media (max-width: 1000px) and (orientation: landscape) and (max-height: 560px) {
