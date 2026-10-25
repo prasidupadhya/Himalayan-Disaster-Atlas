@@ -71,3 +71,33 @@ Full Nepal vector exposure is benchmarked separately against the published asset
 `npm run check` retains all security and immutable-release checks. Unit tests cover lazy-validator errors, byte-cache eviction/copy isolation, shared cancellation, failed/cancelled fetches, full Nepal input immutability and repeated exact trace results. Browser tests cover the core request budget, optional loading/disposal, raster-byte reuse, elevation invariance, corruption handling, no-WebGL fallback, mobile/accessibility and the existing thematic/analytical workflows. Thematic tests explicitly opt into the new gate before inspecting their original scientific assertions.
 
 Feature 41 production follow-up: browser schema compilation has been replaced by AJV standalone code generated offline to support CSP without `unsafe-eval`. This supersedes the runtime lazy-compilation portion above; opt-in datasets, worker queue, cache bounds and immutable scientific data remain unchanged. The measurements above describe feature 38's original implementation; production verification records follow-up measurements separately.
+
+## October 2026 redesign (`feat/redefine`)
+
+Measured with `scripts/ui-audit.mjs` on a throttled phone (390 × 844, 150 ms latency, 1.6 Mbps down, 4× CPU slowdown), first visits, the build served gzip-compressed. Each figure is the median of three runs. `main` and `feat/redefine` were measured back to back on the same machine: [`redefine/audit-main-rerun.json`](redefine/audit-main-rerun.json) and [`redefine/audit-after.json`](redefine/audit-after.json). INP is the language switch. Single runs vary by a few hundred milliseconds; Home's LCP, for one, measured both 0.62 s and 1.42 s on the same build.
+
+| Route | LCP ms | CLS | INP ms | Map usable ms | Transfer kB (JS) |
+|---|---:|---:|---:|---:|---:|
+| `/` | 1216 → 1424 | 0 → 0 | 864 → 56 | — | 568 (252) → 580 (386) |
+| `/atlas/` | 1144 → 896 | 0.181 → 0.039 | 728 → 312 | 16 141 → 16 619 | 4629 (509) → 4637 (600) |
+| `/hazards/` | 1732 → 508 | 0.418 → 0 | 472 → 56 | — | 553 (317) → 538 (389) |
+| `/simulate/` | 2816 → 592 | 0.383 → 0 | 416 → 56 | 7516 → 7952 | 2985 (574) → 2961 (637) |
+| `/simulate/report/` | 2468 → 528 | 0.807 → 0 | 216 → 40 | — | 537 (310) → 511 (371) |
+| `/live/` | 804 → 668 | 0.033 → 0.038 | 576 → 136 | — | 782 (554) → 778 (633) |
+| `/official/` | 684 → 500 | 0.186 → 0 | 536 → 56 | — | 493 (260) → 502 (352) |
+| `/methodology/` | 888 → 604 | 0 → 0 | 704 → 56 | — | 525 (252) → 497 (343) |
+| `/sources/` | 828 → 596 | 0 → 0 | 488 → 56 | — | 506 (255) → 512 (343) |
+| `/licenses/` | 852 → 684 | 0 → 0 | 456 → 64 | — | 516 (255) → 524 (346) |
+| `/offline/` | 708 → 544 | 0 → 0 | 224 → 56 | — | 554 (301) → 548 (381) |
+
+What moved the numbers:
+
+- **INP.** The language switch renders at low priority, and copy comes from typed modules, so the tap paints at once.
+- **CLS.** Loading screens hold their final size; `main` is at least a screen tall, so the footer never flashes up; the Atlas map key starts folded, and attribution text appears only on request.
+- **LCP.** Loading screens show the page's own heading, intro or scenario notice, so these paint with the first frame, not when the page's code arrives.
+- **Weight.** Total transfer is level. Initial JS (the scripts in each page's HTML) is about 10 kB gzip above `main` (196 kB against 186 kB on Home and Today), mostly the theme menu and UI primitives. Measured JS is higher, about 90–130 kB, because Next prefetches the methodology text, which now ships as a script instead of flight data. That text is fetched once and shared; the offline shell shrank because of it.
+- **Map readiness** is unchanged within noise (Atlas about 16.6 s and Scenarios about 8 s on this profile); it is dominated by MapLibre and the verified data, which the redesign did not change.
+
+One fix was tried and reverted: preloading the Archivo heading font made largest paint slightly *later* on most routes, because it competed with the stylesheet.
+
+Guards in CI: `tests/e2e/budgets.spec.ts` holds every route to CLS ≤ 0.1 and ≤ 240 kB of page HTML on a phone; `tests/e2e/axe.spec.ts` requires zero axe violations on every route in both languages and both themes. The offline shell is 3.21 MiB of its 4 MiB budget, down from 4.00 MiB on `main`, under the unchanged policy `1.1.0`.

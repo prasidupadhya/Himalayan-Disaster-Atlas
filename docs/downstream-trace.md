@@ -6,6 +6,8 @@ Feature 8 lives on `feat/downstream-trace`, based on merged main `c90d1ac` (feat
 
 Select a river on the map, or search its HYRIV ID in Rivers, then choose **Trace downstream**. The map frames the retained route and reveals whole reaches in downstream order. Pause/resume, replay, show-all, fit, clear, a paginated ordered reach list and per-reach locate controls support mouse and keyboard use. Reduced-motion preferences show the full route immediately. Changing the selected river clears the previous route. Source river visibility does not hide the derived route.
 
+The controls sit in the Atlas **Rivers** tab. On a phone, Trace lowers the controls sheet to its smallest height and brings the map into view before the animation starts (`lib/reveal.ts`), then focuses the trace status line, which is shown on the map ("Tracing downstream from HYRIV …: n of N connected reaches shown. Network connectivity only, not a flood."). The last few reaches drawn carry a soft glow so the eye can follow the trace; it is display only and adds no quantity.
+
 The displayed length sums source `LENGTH_KM` for complete reaches, including the selected reach, rounded to 0.001 km for stable numerical output. This precision reflects stored source values, not accuracy. Clicking partway along a reach does not prorate its length. Geometry remains OGC:CRS84; MapLibre handles the display projection. No distance is measured in screen pixels or degrees.
 
 ## Topology and failure handling

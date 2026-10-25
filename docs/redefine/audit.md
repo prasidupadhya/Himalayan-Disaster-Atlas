@@ -7,10 +7,11 @@ Baseline: `main` at `edb768e` (25 October 2026), built with the root build and s
 **Accessibility** was checked with axe-core 4.13 (WCAG 2.0 / 2.1 / 2.2 A and AA, plus best practice) on every route, in English and Nepali, at 390 and 1440 px.
 
 Raw data:
-- `audit-before.json`
+- `audit-before.json` (the baseline below)
 - [`screens/before/`](screens/before)
+- After the redesign: `audit-after.json`, `audit-main-rerun.json` (`main` re-measured back to back, as the fair comparison) and [`screens/after/`](screens/after), every route in English and Nepali, light and dark, at 390 and 1440 px
 
-The script is reproducible (the redesign keeps it in `scripts/ui-audit.cjs`).
+The script is reproducible (the redesign keeps it in `scripts/ui-audit.mjs`).
 
 Findings are ranked by user impact. Each one has a **Plan**, written before the redesign. The final section records what was actually done.
 
@@ -211,3 +212,40 @@ Findings are ranked by user impact. Each one has a **Plan**, written before the 
 - No route bundle grows (budget test).
 - The theme and UI primitives are small and shared.
 - **Deferred:** splitting MapLibre further, because its worker and main bundle are already separate, and the remaining weight is the library itself.
+
+## What was done
+
+Each finding, as delivered on `feat/redefine`. Where the work differs from its plan, the difference is stated. Measurements are in the next section.
+
+1. **Run and Trace on phones — fixed.** `lib/reveal.ts` (`revealMapThenPlay`) is shared by both. It scrolls the map under the header (offset for the header and the tab bar) until at least 60% is visible, then plays. It waits for an `IntersectionObserver` threshold, `scrollend`, or a 1.2 s timeout. Scenarios focus the playback status line on the stage, announce the start, and offer **See results**. The Atlas lowers its sheet to peek, then focuses a trace status line drawn on the map. Reduced motion: the jump is instant and Scenarios stay at their end state with Play available. Differences from plan: the path is not re-framed before playing, because the player already frames it when the scene loads. Scenarios also keep their old autoplay-when-visible, so behaviour on a wide screen is unchanged. Tests: `redefine › phones › *`.
+2. **Layout shift — fixed.** Today 0.418 → 0, Report 0.807 → 0, Scenarios 0.383 → 0, Official 0.186 → 0, Atlas 0.181 → 0.039. Loaders hold their final size: the report shows skeletons, Today and Official reserve their summaries, the scenario loading screen holds a screen's height, and `main` is at least a screen tall, so the footer never flashes up and jumps away. The Atlas map key now starts folded, and the attribution text stays hidden until it is asked for. Test: `budgets › *` holds every route to CLS ≤ 0.1 on a phone.
+3. **Slow taps — fixed.** INP 216–864 ms → 40–136 ms on the throttled phone (median of three runs; the Atlas measured between 64 and 312 ms across runs). The language switch renders at low priority (`useDeferredValue`) while the pressed state updates at once. Copy is read from typed modules. Difference from plan: long-form pages ship one client article per language instead of swapping visibility, which also shrank the offline shell.
+4. **Offline shell headroom — fixed without a new policy.** 4.00 MiB → 3.21 MiB of the 4 MiB budget. The Nepal overview and the methodology text moved into client modules, so they ship once in a script instead of being repeated in HTML, inline flight data and prefetch files. `atlas-live-offline-shell@1.1.0` is unchanged.
+5. **Styling system — done.** `app/styles/tokens.css` defines the colour roles, including a chosen dark theme and a high-contrast variant (see `design-system.md`). Cascade layers: `reset, tokens, vendor, base, components, layout, pages, utilities`. MapLibre's CSS is generated into the `vendor` layer. There is one `!important`, the documented reduced-motion override. `globals.css` and `mobile.css` are gone, and with them the dead selectors.
+6. **Copy — done.** Every feature reads typed `{ en, ne }` copy from its own module (`useCopy` in client components, `bilingual` in server ones). Official sources, which still had about 30 inline language ternaries, moved to `features/official/copy.tsx` word for word. The Live map's skip link and the Nepali methodology's contents label were English-only, and are now translated.
+7. **Atlas panel — done.** Five tabs (Lakes, Rivers, Terrain, Boundaries, Infrastructure) keep their old anchors, so `/atlas/#lake-controls` opens the Lakes tab. Desktop has a side panel. Phones get a bottom sheet with peek, half and full heights under a map that always keeps the rest of the screen. Short landscape phones get a side panel. Reset joined the map control cluster. Difference from plan: the map key is a chip on the map rather than opening from the cluster; it holds the same entries and text.
+8. **Scenario flow — done.** Shared `Step`, `Assumptions` and `RunControls` pieces and a three-step progress indicator (choose → set and confirm → watch and read). The notice is compact. On phones the stage comes first with its dock underneath, and the dock keeps a fixed layout while it plays. "Watch in 3D" is gone; Run brings the stage into view.
+9. **Map labels — kept as DOM, collision made cheaper.** The collision pass now reads every label box, then writes only the flags that changed: one layout pass instead of one per label. Difference from plan: labels are still measured with `getBoundingClientRect` (once each) and are not hidden during fast camera moves. The batched pass already re-solves at most seven times a second, so hiding them would only make them flicker.
+10. **Hierarchy — done.** Today, Official and Live share stat tiles and status badges with a glyph. Official's summary is five tiles; a raised figure takes the tone of its word. Tab names are unchanged.
+11. **States — done.** One `DataState` look, skeletons sized to their content (Report, Official, Today), and an offline badge in the top bar.
+12. **Contrast — done.** axe reports no violations on any route, in English with the light theme at 390 px and in Nepali with the dark theme at 1440 px (`axe › *`, 22 runs). The audit script also runs all four language and theme combinations at both widths.
+13. **Nepali typography — done** with `:lang(ne)` heading rules.
+14. **Print — done.** Report: A4 with the notice kept together, links spelled out, header rows repeated, and rows never split. Dark tokens apply to screens only, so paper always gets light ink.
+15. **Standalone — done.** The boot script owns the one `theme-color` meta and sets it from the resolved theme before paint (React had been duplicating the server-rendered meta). The header pads for `safe-area-inset-top`.
+16. **Bundle — met, with one trade-off.** Total transfer is level with `main`, and initial JS is about 10 kB (gzip) above it (theme menu and UI primitives). Next prefetches the methodology text, which now ships as a script, so measured JS is about 90–130 kB higher while flight data shrank by the same amount. Along the way, the 40 kB province outline had slipped into a chunk every page loaded; it now loads only on Home and Today. Loading screens show each page's heading and intro, so largest paint came down: Today 1.73 → 0.51 s, Scenarios 2.82 → 0.59 s, Report 2.47 → 0.53 s. Home was 1.22 → 1.42 s in the final back-to-back run and 0.62 s in the run before, within its spread. Page HTML is held to 240 kB per route (`budgets › *`). Deferred, as planned: splitting MapLibre further.
+
+Also found and fixed during the work:
+- The scenario dock's height changed as the status text changed, so "See results" moved under the reader's finger.
+- The phone header's `backdrop-filter` stopped the tab bar from staying fixed.
+- MapLibre's attribution button was partly covered by Reset and by the sheet edge.
+- MapLibre's canvas name duplicated the Live map section's name.
+- Hazard-relief shading was deliberately left unchanged, because re-tuning it would change how steepness reads.
+
+## Measured after
+
+Median of three throttled phone runs, `main` and `feat/redefine` measured back to back. The full table, and what moved each number, is in [`docs/performance.md`](../performance.md#october-2026-redesign-featredefine).
+
+- **axe:** no violations in 88 runs (every route; English and Nepali; light and dark; 390 and 1440 px). Before: `color-contrast` on the Atlas and `landmark-unique` on Live.
+- **CLS:** at most 0.039 on any route, against up to 0.807 before.
+- **INP:** 40–136 ms, with one Atlas run at 312 ms, against 216–864 ms.
+- **Offline shell:** 3.21 MiB, against 4.00 MiB.

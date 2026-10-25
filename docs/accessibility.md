@@ -41,4 +41,13 @@ Playwright performs a structural audit over the core public routes for:
 
 Keyboard E2E additionally verifies the global skip link, map skip link, Search result focus, Data Catalog detail focus and Simulation-result focus. A forced-colors check verifies evidence remains text-labelled with visible borders.
 
+`tests/e2e/axe.spec.ts` runs axe-core (WCAG 2.0/2.1/2.2 A and AA plus best practice) on every route twice: in English, light theme, at phone width, and in Nepali, dark theme, at desktop width. Every run must report no violations. The redesign fixed the two the October 2026 audit found (contrast of the Atlas map caption; a Live map canvas whose name duplicated its section) and three it introduced along the way (the attribution button partly covered by the Reset button and by the sheet edge; scrolling table wrappers on Official that no longer need to scroll).
+
+## Themes, motion and focus after an action
+
+- Light, dark or the device setting, chosen from the theme menu in the header and remembered. Dark is its own palette, checked by axe, and applies to screens only: print always uses the light tokens.
+- Status words carry a glyph as well as a colour (▲ danger, △ warning, ● normal, ○ none, ◇ modelled, ⓘ information).
+- After Run or Trace on a phone, focus moves to the status line on the map, not to a heading that is off screen; the start of playback is announced in a polite live region. Reduced motion switches the reveal to an instant jump and leaves playback paused at its end state.
+- Atlas tabs follow the ARIA tabs pattern (arrow keys, Home, End). Links to an old panel anchor such as `/atlas/#lake-controls` open the right tab and focus it.
+
 These automated checks complement manual screen-reader, zoom/reflow, contrast and keyboard review; they are not a claim of universal WCAG conformance.
