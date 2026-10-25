@@ -24,18 +24,22 @@ test('source-backed overview and page chrome reflow without horizontal overflow'
   expect(errors).toEqual([]);
 });
 
-test('map shortcuts focus the requested controls without recreating the map', async ({ page }) => {
+test('map control tabs and anchors show the requested controls without recreating the map', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/atlas/');
   const map = page.locator('[data-map-ready="true"]');
   await expect(map).toBeVisible();
-  const controls = page.getByRole('navigation', { name: 'Atlas controls' });
-  const terrain = controls.getByRole('link', { name: 'Terrain', exact: true });
-  await terrain.focus(); await page.keyboard.press('Enter');
-  await expect(page.locator('#terrain-controls')).toBeFocused();
+  const controls = page.getByRole('tablist', { name: 'Atlas controls' });
+  const terrain = controls.getByRole('tab', { name: 'Terrain', exact: true });
+  await controls.getByRole('tab', { selected: true }).focus();
+  await page.keyboard.press('ArrowRight'); await page.keyboard.press('ArrowRight');
+  await expect(terrain).toBeFocused();
+  await expect(terrain).toHaveAttribute('aria-selected', 'true');
   await expect(page.locator('#terrain-controls').getByRole('heading', { name: 'Terrain', exact: true })).toBeInViewport();
-  await controls.getByRole('link', { name: 'Rivers', exact: true }).click();
+  // Links to a panel's long-standing anchor open its tab and focus the controls.
+  await page.evaluate(() => { location.hash = 'river-controls'; });
   await expect(page.locator('#river-controls')).toBeFocused();
+  await expect(controls.getByRole('tab', { name: 'Rivers', exact: true })).toHaveAttribute('aria-selected', 'true');
   await expect(page.locator('#river-controls').getByRole('heading', { name: 'Rivers', exact: true })).toBeInViewport();
   await expect(map).toHaveCount(1);
 });

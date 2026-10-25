@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { screenshotMap } from '../helpers/map-screenshot';
+import { openAtlasTab } from './atlas-tabs';
 
 test('terrain renders locally, toggles and inspects elevation independently of exaggeration', async ({ page, baseURL }) => {
   test.slow(); // many 3D terrain redraws in CI's software renderer
@@ -12,6 +13,7 @@ test('terrain renders locally, toggles and inspects elevation independently of e
     if (new URL(request.url()).origin !== new URL(baseURL!).origin && !request.url().startsWith('blob:')) external.push(request.url());
   });
   await page.goto('/atlas/');
+  await openAtlasTab(page, 'Terrain');
   const terrain = page.getByRole('region', { name: 'Terrain', exact: true });
   await expect(terrain).toHaveAttribute('data-terrain-state', 'ready');
   await expect.poll(() => tiles.length).toBeGreaterThan(0);
@@ -41,6 +43,7 @@ test('missing terrain can retry without disabling boundary records', async ({ pa
   let fail = true;
   await page.route('**/data/nepal-terrain/1.0.0/manifest.json', route => fail ? route.fulfill({ status: 404 }) : route.continue());
   await page.goto('/atlas/');
+  await openAtlasTab(page, 'Terrain');
   const terrain = page.getByRole('region', { name: 'Terrain', exact: true });
   await expect(terrain).toHaveAttribute('data-terrain-state', 'unavailable');
   await expect(page.locator('.record-picker select')).toBeEnabled();
@@ -52,6 +55,7 @@ test('missing terrain can retry without disabling boundary records', async ({ pa
 test('corrupt terrain tiles are rejected', async ({ page }) => {
   await page.route('**/data/nepal-terrain/1.0.0/**/*.png', route => route.fulfill({ body: 'corrupt', contentType: 'image/png' }));
   await page.goto('/atlas/');
+  await openAtlasTab(page, 'Terrain');
   const terrain = page.getByRole('region', { name: 'Terrain', exact: true });
   await expect(terrain).toHaveAttribute('data-terrain-state', 'error');
   await expect(terrain.getByRole('checkbox', { name: '3D terrain' })).toBeDisabled();

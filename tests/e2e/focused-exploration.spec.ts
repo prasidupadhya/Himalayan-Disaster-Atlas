@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { openAtlasTab } from './atlas-tabs';
 test('focused exploration loads lakes and names without historical or unrelated datasets', async ({ page }) => {
   const requests: string[] = [];
   page.on('request', r => requests.push(r.url()));
@@ -8,12 +9,14 @@ test('focused exploration loads lakes and names without historical or unrelated 
   await expect(page.getByRole('region', { name: 'GLOF modelling availability' })).toContainText('UNAVAILABLE');
   await expect(page.getByRole('region', { name: 'Earthquakes', exact: true })).toHaveCount(0);
   expect(requests.filter(url => /\/data\/nepal-(region-earthquakes|disaster-events|reported-|population|rainfall|hydrology|mountains|glaciers-)/.test(url))).toEqual([]);
+  await openAtlasTab(page, 'Rivers');
   await page.getByLabel('Find a river or reach').fill('Trishuli');
   const names = page.getByLabel('River or reach', { exact: true });
   await expect(names).toContainText('Trishuli');
   await names.selectOption('name:geonames-1282639');
   await expect(page.locator('.river-name-label')).toContainText('named location');
   await expect(page.getByRole('region', { name: 'Rivers', exact: true })).toContainText('candidate for tracing, not a verified identity');
+  await openAtlasTab(page, 'Boundaries');
   await page.getByLabel('Find a district or municipality').fill('Manang Ngisyang');
   await page.getByRole('combobox', { name: 'Boundary record', exact: true }).selectOption('np0438401');
   await expect(page.getByRole('heading', { name: 'Manang Ngisyang', exact: true })).toBeVisible();
@@ -41,10 +44,9 @@ test('focused mobile view fits and infrastructure remains opt-in', async ({ page
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.screenshot({ path: 'test-results/focused-mobile.png' });
   await expect(page.getByRole('region', { name: 'Hydropower', exact: true })).toHaveCount(0);
-  // Secondary layers start folded on a phone, so the hazard controls follow the map directly.
-  const more = page.getByText('More layers: terrain, boundaries and infrastructure');
+  // Secondary layers sit in their own tab, so the hazard controls come first.
   await expect(page.getByRole('button', { name: 'Load infrastructure context', exact: true })).toBeHidden();
-  await more.click();
+  await openAtlasTab(page, 'Infrastructure');
   await page.getByRole('button', { name: 'Load infrastructure context', exact: true }).click();
   await expect(page.getByRole('region', { name: 'Hydropower', exact: true })).toBeVisible();
   await page.getByRole('button', { name: 'Unload infrastructure context', exact: true }).click();
@@ -58,7 +60,9 @@ test('a selected lake traces water downstream from its nearest mapped reach, sta
   const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
   const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
   await expect(lakes).toHaveAttribute('data-glacial-lakes-state', /ready|stale/, { timeout: 15_000 });
+  await openAtlasTab(page, 'Rivers');
   await expect(rivers).toHaveAttribute('data-rivers-state', 'ready', { timeout: 15_000 });
+  await openAtlasTab(page, 'Lakes');
   const select = lakes.getByLabel('Lake record');
   await select.selectOption((await select.locator('option').nth(1).getAttribute('value'))!);
   await expect(lakes).toContainText('The real outlet is UNKNOWN');

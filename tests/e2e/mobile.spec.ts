@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { openAtlasTab } from './atlas-tabs';
 
 // Loaded only on request: glacier outlines (~1.3 MB) and OSM infrastructure/hydropower.
 const DEFERRED = /\/data\/(nepal-glaciers-|nepal-osm-)/;
@@ -27,13 +28,14 @@ test('phone map loads lakes, defers heavy layers and keeps touch workflows usabl
   expect(await lakeSearch.evaluate(element => Number.parseFloat(getComputedStyle(element).fontSize))).toBeGreaterThanOrEqual(16);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
 
-  // The hazard controls come straight after the map; secondary layers open from their shortcut.
-  const panelTop = await page.locator('.atlas-panel').boundingBox(), recordsTop = await page.locator('#accessible-boundary-records').boundingBox();
-  expect(panelTop!.y).toBeLessThan(recordsTop!.y);
+  // The hazard controls sit in a sheet directly under the map; secondary layers open from their tab.
+  const panelBox = await page.locator('.atlas-panel').boundingBox();
+  expect(panelBox!.y).toBeGreaterThanOrEqual(mapBox!.y + mapBox!.height - 24);
+  await expect(page.locator('#lake-controls')).toBeVisible();
   await expect(page.locator('#terrain-controls')).toBeHidden();
-  await page.getByRole('navigation', { name: 'Atlas controls' }).getByRole('link', { name: 'Terrain', exact: true }).tap();
+  await page.getByRole('tablist', { name: 'Atlas controls' }).getByRole('tab', { name: 'Terrain', exact: true }).tap();
   await expect(page.locator('#terrain-controls')).toBeVisible();
-  await expect(page.locator('#terrain-controls')).toBeFocused();
+  await openAtlasTab(page, 'Lakes');
 
   await page.getByRole('button', { name: 'Show glacier outlines' }).tap();
   await expect.poll(() => deferred.length).toBeGreaterThan(0);
@@ -53,8 +55,10 @@ test('every page fits portrait and short landscape phone viewports', async ({ br
   await page.setViewportSize({ width: 844, height: 390 });
   await page.goto('/atlas/');
   await expect(page.locator('.map')).toHaveAttribute('data-map-ready', 'true');
-  const mapBox = await page.locator('.map-shell').boundingBox();
-  expect(mapBox!.height).toBeLessThanOrEqual(390 * .7);
+  // Short landscape: the controls move beside the map, which keeps the whole height above the tab bar.
+  const mapBox = await page.locator('.map-shell').boundingBox(), sideBox = await page.locator('.atlas-panel').boundingBox();
+  expect(sideBox!.x + sideBox!.width).toBeLessThanOrEqual(mapBox!.x + 1);
+  expect(mapBox!.y + mapBox!.height).toBeLessThanOrEqual(390);
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBe(true);
   await context.close();
 });

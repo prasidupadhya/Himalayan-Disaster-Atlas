@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { openAtlasTab } from './atlas-tabs';
 
 test('home leads with the three hazards, today’s official figures and a direct path to the map', async ({ page }) => {
   await page.goto('/');
@@ -28,11 +29,14 @@ test('desktop map stays dominant while the side panel remains independently usab
 
 test('evidence and scenario states retain explicit non-color cues', async ({ page }) => {
   await page.goto('/atlas/');
-  const badge = page.locator('.evidence-label').first();
+  await openAtlasTab(page, 'Boundaries');
+  await page.getByText('Sources and evidence for this map').click();
+  const badge = page.locator('.evidence-label:visible').first();
   await expect(badge).toBeVisible();
   const marker = await badge.evaluate(element => getComputedStyle(element, '::before').content);
   expect(marker).not.toBe('none');
   expect(marker).not.toBe('normal');
+  await openAtlasTab(page, 'Rivers');
   await page.getByText('Educational river simulation').click();
   const warning = page.locator('.simulation-warning').first();
   await expect(warning).toContainText('MODELLED SCENARIO — NOT AN OFFICIAL FORECAST');

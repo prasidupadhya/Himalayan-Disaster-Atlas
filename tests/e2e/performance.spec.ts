@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { openAtlasTab } from './atlas-tabs';
 
 test('desktop initial map stays bounded and optional datasets mount and dispose on demand', async ({ page }) => {
   const requests: string[] = [];
@@ -19,6 +20,7 @@ test('repeated elevation samples reuse verified raster bytes and preserve measur
   const tiles: string[] = [];
   page.on('request', r => { if (/\/nepal-terrain\/1.0.0\/9\//.test(r.url())) tiles.push(r.url()); });
   await page.goto('/atlas/');
+  await openAtlasTab(page, 'Terrain');
   const terrain = page.getByRole('region', { name: 'Terrain', exact: true });
   await expect(terrain).toHaveAttribute('data-terrain-state', 'ready');
   await terrain.getByRole('button', { name: 'Inspect elevation' }).click();
