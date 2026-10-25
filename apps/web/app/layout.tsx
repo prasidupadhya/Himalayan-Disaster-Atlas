@@ -17,7 +17,7 @@ import './styles/utilities.css';
 import './home.css';
 // Phones: draw under the notch and home indicator (safe-area insets are padded in CSS) and tint the browser chrome.
 // The theme colour follows the light or dark theme (set before paint by THEME_BOOT); both schemes are supported.
-export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', themeColor: '#ffffff', colorScheme: 'light dark' };
+export const viewport: Viewport = { width: 'device-width', initialScale: 1, viewportFit: 'cover', colorScheme: 'light dark' };
 export const metadata: Metadata = { title: { default: 'Himalayan Disaster Atlas', template: '%s | Himalayan Disaster Atlas' }, description: 'An evidence-traceable, Nepal-focused geospatial atlas connecting mountains, water, hazards, infrastructure, communities and labelled research scenarios.',
   appleWebApp: { capable: true, title: 'Disaster Atlas', statusBarStyle: 'default' }, formatDetection: { telephone: false } };
 const t = bilingual(SHELL);

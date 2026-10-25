@@ -67,6 +67,8 @@ test('data tables become labelled cards on a phone', async ({ page }) => {
   for (let i = 0; i < await cells.count(); i++) await expect(cells.nth(i)).toHaveAttribute('data-label', headings[i].trim());
   // Labels follow the language switch.
   await page.getByRole('button', { name: 'नेपाली' }).click();
+  // The switch renders at low priority; read the heading once it has changed.
+  await expect(table.locator('thead th').first()).not.toHaveText(headings[0]);
   await expect(cells.first()).toHaveAttribute('data-label', (await table.locator('thead th').first().textContent())!.trim());
 });
 
