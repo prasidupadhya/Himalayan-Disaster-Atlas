@@ -1,5 +1,5 @@
 'use client';
-import { useCallback, useEffect, useSyncExternalStore, type ReactNode } from 'react';
+import { createContext, useCallback, useContext, useDeferredValue, useEffect, useSyncExternalStore, type ReactNode } from 'react';
 
 /** Interface language shared by every page, chosen once in the site header. Text copied from a source stays in its source language. */
 export type Lang = 'en' | 'ne';
@@ -14,14 +14,25 @@ function subscribe(listener: () => void) {
   window.addEventListener('storage', storage);
   return () => { listeners.delete(listener); window.removeEventListener('storage', storage); };
 }
-export function useLanguage(): [Lang, (lang: Lang) => void] {
-  const lang = useSyncExternalStore(subscribe, read, () => 'en' as Lang);
-  const set = useCallback((next: Lang) => {
-    try { window.localStorage.setItem(KEY, next); } catch { /* per-device convenience only */ }
-    listeners.forEach(listener => listener());
-  }, []);
-  return [lang, set];
+function setLanguage(next: Lang) {
+  try { window.localStorage.setItem(KEY, next); } catch { /* per-device convenience only */ }
+  listeners.forEach(listener => listener());
 }
+/** The stored choice, updated at once (for the switch's own pressed state). */
+export function useLanguageNow(): Lang { return useSyncExternalStore(subscribe, read, () => 'en' as Lang); }
+
+// Pages read a deferred copy of the language, so a tap on the switch paints immediately and the page's text is
+// swapped in a low-priority render that never blocks input.
+const LanguageContext = createContext<Lang>('en');
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const lang = useDeferredValue(useLanguageNow());
+  return <LanguageContext.Provider value={lang}>{children}</LanguageContext.Provider>;
+}
+export function useLanguage(): [Lang, (lang: Lang) => void] {
+  return [useContext(LanguageContext), setLanguage];
+}
+/** Picks the copy for the current language from a { en, ne } module. */
+export function useCopy<C>(copy: { en: C; ne: C }): C { return copy[useContext(LanguageContext)]; }
 
 const NE_DIGITS = '०१२३४५६७८९';
 export const digits = (text: string, lang: Lang) => lang === 'ne' ? text.replace(/[0-9]/g, d => NE_DIGITS[Number(d)]) : text;
@@ -34,7 +45,7 @@ export function formatNumber(value: number | null, lang: Lang, fraction = 0) {
 }
 
 export function LanguageSwitch({ lang, onChange, label = 'Language / भाषा' }: { lang: Lang; onChange: (lang: Lang) => void; label?: string }) {
-  return <div className="language-switch" role="group" aria-label={label}>
+  return <div className="language-switch seg" role="group" aria-label={label}>
     <button type="button" lang="en" aria-pressed={lang === 'en'} onClick={() => onChange('en')}>English</button>
     <button type="button" lang="ne" aria-pressed={lang === 'ne'} onClick={() => onChange('ne')}>नेपाली</button>
   </div>;
@@ -48,15 +59,16 @@ export function T({ en, ne }: { en: ReactNode; ne: ReactNode }) {
 }
 /** Picks the English or Nepali value of anything (strings, labels, lists) for the current language. */
 export function useT() {
-  const [lang] = useLanguage();
+  const lang = useContext(LanguageContext);
   return useCallback(<V,>(en: V, ne: V) => lang === 'ne' ? ne : en, [lang]);
 }
 
 /** The one language control, in the site header. It also keeps the document's lang attribute in step. */
 export function SiteLanguage() {
-  const [lang, setLang] = useLanguage();
-  useEffect(() => { document.documentElement.lang = lang; }, [lang]);
-  return <LanguageSwitch lang={lang} onChange={setLang} />;
+  const now = useLanguageNow();
+  const [shown] = useLanguage();
+  useEffect(() => { document.documentElement.lang = shown; }, [shown]);
+  return <LanguageSwitch lang={now} onChange={setLanguage} />;
 }
 
 /** Project-authored Nepali interface copy; requires native-speaker review before operational reliance. */

@@ -25,7 +25,12 @@ const CORRIDOR_SHADES = ['#9fd7e4', '#5fb3cb', '#2f86a6'];
 const SOURCES = ['sim-corridors', 'sim-path', 'sim-origins', 'sim-epicentre', 'sim-rupture'] as const;
 
 export interface MapMessages { loading: string; failed: string; noWebgl: string }
-export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { scene: MapScene; onPick?: (lon: number, lat: number) => void; onOrigin?: (id: string) => void; label: string; messages: MapMessages }) {
+/** `request` is a pending Run for the player (see Player); `onState` reports whether the map can play at all, so a Run
+ * without WebGL moves to the results instead. */
+export function SimulatorMap({ scene, onPick, onOrigin, label, messages, request, onHandled, resultsId, onState }: {
+  scene: MapScene; onPick?: (lon: number, lat: number) => void; onOrigin?: (id: string) => void; label: string; messages: MapMessages;
+  request: number | null; onHandled: () => void; resultsId: string; onState?: (state: 'loading' | 'ready' | 'unavailable') => void;
+}) {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<Map | null>(null);
   const handlers = useRef({ onPick, onOrigin });
@@ -36,6 +41,7 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
   const [instance, setInstance] = useState<Map | null>(null);
   const [threeD, setThreeD] = useState(true);
   const shell = useRef<HTMLDivElement>(null);
+  const stage = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
   useEffect(() => { handlers.current = { onPick, onOrigin }; }, [onPick, onOrigin]);
 
@@ -155,15 +161,17 @@ export function SimulatorMap({ scene, onPick, onOrigin, label, messages }: { sce
     return () => { root.style.overflow = before; window.removeEventListener('keydown', key); };
   }, [expanded, instance]);
   const playing = ready && !failure && !!scene.play && !!instance;
+  const mapState = failure ? 'unavailable' : ready ? 'ready' : 'loading';
+  useEffect(() => { onState?.(mapState); }, [mapState, onState]);
 
-  return <div className={expanded ? 'sim-stage is-expanded' : 'sim-stage'} data-expanded={expanded ? 'true' : undefined}>
+  return <div ref={stage} className={expanded ? 'sim-stage is-expanded' : 'sim-stage'} data-expanded={expanded ? 'true' : undefined}>
     <div ref={shell} className="sim-map" data-map-state={failure ? 'unavailable' : ready ? 'ready' : 'loading'} data-terrain={terrain ? 'ready' : 'none'}>
       <div ref={container} className="map" role="region" aria-label={label} />
       {!ready && !failure && <p className="sim-map-status" role="status">{messages.loading}</p>}
       {failure && <p className="sim-map-status sim-map-failure" role="status">{messages[failure]}</p>}
     </div>
     {/* The playback controls sit below the map, never on top of it, so the scene and its labels stay visible. */}
-    {playing && <Player key={scene.play!.kind} map={instance!} play={scene.play!} threeD={threeD && !!terrain} onThreeD={setThreeD} shell={shell}
-      expanded={expanded} onExpanded={setExpanded} />}
+    {playing && <Player key={scene.play!.kind} map={instance!} play={scene.play!} threeD={threeD && !!terrain} onThreeD={setThreeD} shell={shell} stage={stage}
+      expanded={expanded} onExpanded={setExpanded} request={request} onHandled={onHandled} resultsId={resultsId} />}
   </div>;
 }

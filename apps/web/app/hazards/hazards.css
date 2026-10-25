@@ -1,68 +1,125 @@
-.hz-page { width: min(var(--page-max), 100%); margin: 0 auto; padding: clamp(2rem, 4vw, 3.5rem) var(--gutter) 4rem; display: grid; gap: clamp(1.5rem, 3vw, 2.5rem); }
-.hz-hero { display: grid; gap: .8rem; max-width: 1040px; }
-.hz-hero-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; }
-.hz-hero .eyebrow, .hz-hero h1, .hz-hero .intro { margin: 0; }
-.hz-hero h1 { font-size: clamp(2.3rem, 4.4vw, 4rem); }
-.hz-jump { display: flex; flex-wrap: wrap; gap: .4rem .5rem; }
-.hz-jump a { display: inline-flex; align-items: center; min-height: 40px; padding: .35rem .8rem; border: 1px solid var(--line-strong); border-radius: var(--radius-sm); background: var(--surface); color: var(--ink); font-size: .86rem; font-weight: 650; text-decoration: none; }
-.hz-jump a:hover { border-color: var(--ink); background: var(--paper-deep); }
-.hz-section { display: grid; gap: 1rem; padding: clamp(1.5rem, 3vw, 2.25rem) 0 0; border-top: 1px solid var(--line-strong); min-width: 0; scroll-margin-top: 1rem; }
-.hz-section-head { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1rem; }
-.hz-section-head h2 { margin: 0; font-size: clamp(1.35rem, 2.2vw, 1.8rem); }
-.hz-lead { margin: 0; max-width: 78ch; color: var(--muted-strong); }
-.hz-loading { margin: 0; color: var(--muted-strong); }
-.hz-problem { padding: .8rem 1rem; border-left: 4px solid var(--danger); background: #f7e6e4; border-radius: var(--radius-sm); }
-.hz-problem p { margin: 0 0 .5rem; }
-.hz-cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: .9rem; }
-.hz-card { display: grid; gap: .45rem; align-content: start; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface-muted); }
-.hz-card h3 { margin: 0; font-size: 1.1rem; }
-.hz-card p { margin: 0; font-size: .9rem; color: var(--muted-strong); }
-.hz-card .hz-badge { justify-self: start; }
-.hz-card > a { font-weight: 700; margin-top: .2rem; }
-.hz-figure strong { font-size: 1.15rem; color: var(--ink-strong); font-variant-numeric: tabular-nums; }
-.hz-authorities, .hz-copied { margin: 0; font-size: .9rem; color: var(--muted-strong); }
-.hz-copied { font-variant-numeric: tabular-nums; }
-.hz-card-wide { grid-column: 1 / -1; }
-.hz-card-links { display: flex; flex-wrap: wrap; gap: .25rem 1rem; margin-top: .2rem !important; }
-.hz-card-links a { font-weight: 700; min-height: 32px; display: inline-flex; align-items: center; }
-.hz-actions { display: flex; flex-wrap: wrap; gap: .6rem 1.25rem; align-items: center; margin: 0; }
-.hz-actions a { font-weight: 700; min-height: 44px; display: inline-flex; align-items: center; }
-.hz-actions .primary-action { margin: 0; }
-.hz-today .hz-today-status { font-size: .8rem; color: var(--muted); }
-.hz-today .hz-verbatim { font-style: italic; overflow-wrap: anywhere; }
-.hz-today .hz-documents, .hz-today .hz-incidents { margin: 0; padding-left: 1.1rem; display: grid; gap: .3rem; font-size: .9rem; overflow-wrap: anywhere; color: var(--muted-strong); }
-@media (min-width: 900px) { .hz-today .hz-incidents { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 2rem; } }
-@media (max-width: 640px) {
-  .hz-page { padding-inline: 1rem; }
-  .hz-section { padding: 1.25rem 0 0; }
-  .hz-hero h1 { font-size: clamp(1.9rem, 8.5vw, 2.4rem); }
-  /* The glance list already links to every section on a phone. */
-  .hz-glance + .hz-jump { display: none; }
-  .tv-rain li { grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr) auto; }
+@layer reset, tokens, vendor, base, components, layout, pages, utilities;
+
+/* Today: the daily official copy. A glance row of four tiles (one per hazard), then a section per hazard whose cards
+ * lead with the copy's status badge and its figures. Every value is the agency's own; colour only repeats a word. */
+@layer pages {
+  .hz-page { display: grid; gap: clamp(var(--s-5), 3vw, var(--s-7)); width: min(var(--page-max), 100%); margin: 0 auto; padding: clamp(var(--s-6), 4vw, var(--s-8)) var(--gutter) var(--s-8); }
+  #floods, .hz-glance [data-hazard=floods] { --hazard: var(--hz-flood); }
+  #glacial-lakes, .hz-glance [data-hazard=glacial-lakes] { --hazard: var(--hz-glof); }
+  #earthquakes, .hz-glance [data-hazard=earthquakes] { --hazard: var(--hz-quake); }
+  #incidents, .hz-glance [data-hazard=incidents] { --hazard: var(--ink-3); }
+
+  /* Hero. */
+  .hz-hero { display: grid; gap: var(--s-3); max-width: 1040px; }
+  .hz-hero-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s-3); }
+  .hz-hero .eyebrow, .hz-hero h1, .hz-hero .intro { margin: 0; }
+  .hz-hero h1 { font-size: var(--step-5); }
+  .hz-authorities, .hz-copied { margin: 0; color: var(--ink-2); font-size: var(--step--1); }
+  .hz-copied { font-variant-numeric: tabular-nums; }
+  .hz-stale { margin: 0; max-width: 78ch; padding: var(--s-3) var(--s-4); border-left: 4px solid var(--warning); border-radius: var(--r-1); background: var(--warning-soft); color: var(--ink); font-size: var(--step--1); }
+  .hz-jump { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .hz-jump a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--s-3); border: 1px solid var(--line-2); border-radius: var(--r-pill); background: var(--surface); color: var(--ink); font-size: var(--step--1); font-weight: 650; text-decoration: none; }
+  .hz-jump a:hover { border-color: var(--ink); background: var(--surface-3); }
+
+  /* The glance: four stat tiles, each with its hazard's hue as a top rule. */
+  .hz-glance { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: var(--s-3); margin: var(--s-1) 0 0; padding: 0; list-style: none; }
+  .hz-glance li { min-width: 0; margin: 0; }
+  .hz-glance a { display: grid; gap: var(--s-1); align-content: start; height: 100%; padding: var(--s-4); border: 1px solid var(--line); border-top: 4px solid var(--hazard); border-radius: var(--r-2); background: var(--surface); color: var(--ink); text-decoration: none; transition: border-color var(--t-fast) var(--ease-out), box-shadow var(--t-fast) var(--ease-out); }
+  .hz-glance a:hover { border-color: var(--line-2); border-top-color: var(--hazard); box-shadow: var(--elev-1); }
+  .hz-glance strong { font-size: var(--step-0); }
+  .hz-glance span { color: var(--ink-2); font-size: var(--step--1); line-height: 1.45; }
+  .hz-glance [data-raised] a { border-color: var(--danger); border-top-color: var(--danger); background: var(--danger-soft); }
+  .hz-glance [data-raised] strong { color: var(--danger); }
+  .hz-glance-placeholder { min-height: 7.5rem; border-radius: var(--r-2); background: var(--surface-2); }
+
+  /* Sections. */
+  .hz-section { display: grid; gap: var(--s-4); min-width: 0; padding: clamp(var(--s-5), 3vw, var(--s-6)) 0 0; border-top: 1px solid var(--line-2); scroll-margin-top: calc(var(--header-h) + var(--s-3)); }
+  .hz-section-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-4); }
+  .hz-section-head h2 { display: flex; align-items: center; gap: var(--s-3); margin: 0; font-size: var(--step-3); }
+  .hz-section-head h2::before { content: ''; flex: 0 0 auto; width: .5rem; height: 1.1em; border-radius: 2px; background: var(--hazard); }
+  .hz-lead { margin: 0; max-width: 78ch; color: var(--ink-2); }
+  .hz-loading { margin: 0; color: var(--ink-2); }
+  .hz-problem { padding: var(--s-3) var(--s-4); border-left: 4px solid var(--danger); border-radius: var(--r-1); background: var(--danger-soft); }
+  .hz-problem p { margin: 0 0 var(--s-2); }
+  .hz-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-5); margin: 0; }
+  .hz-actions a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
+  .hz-actions .primary-action { margin: 0; }
+
+  /* Cards: status badge first, then the figures as the copy states them, then where they come from. */
+  .hz-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--s-3); margin: 0; padding: 0; list-style: none; }
+  .hz-card { display: grid; gap: var(--s-2); align-content: start; margin: 0; padding: var(--s-4); border: 1px solid var(--line); border-radius: var(--r-2); background: var(--surface); }
+  .hz-card-wide { grid-column: 1 / -1; }
+  .hz-card h3 { margin: 0; font-size: var(--step-1); }
+  .hz-card p { margin: 0; color: var(--ink-2); font-size: var(--step--1); }
+  .hz-card > a { margin-top: var(--s-1); font-weight: 700; }
+  .hz-today .hz-today-status { order: -1; margin: 0; }
+  .hz-today .hz-today-status .badge { font-size: var(--step--2); font-weight: 650; }
+  .hz-card[data-source-status=unavailable] { border-style: dashed; background: var(--surface-2); }
+  .hz-figure { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--s-1); }
+  .hz-figure strong { color: var(--ink); font: 650 var(--step-3)/1.05 var(--font-display); font-stretch: 110%; font-variant-numeric: tabular-nums; }
+  .hz-card-links { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-4); margin-top: var(--s-1); padding-top: var(--s-2); border-top: 1px solid var(--line); }
+  .hz-card-links a { display: inline-flex; align-items: center; min-height: 32px; font-weight: 700; }
+  .hz-today .hz-verbatim { font-style: italic; overflow-wrap: anywhere; }
+  .hz-today .hz-documents, .hz-today .hz-incidents { display: grid; gap: var(--s-1); margin: 0; padding-left: 1.1rem; color: var(--ink-2); font-size: var(--step--1); overflow-wrap: anywhere; }
+  @media (min-width: 900px) { .hz-today .hz-incidents { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-6); } }
+
+  /* Earthquake table and map. */
+  .hz-quake-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: var(--s-4) var(--s-5); align-items: start; }
+  .hz-table-wrap { overflow-x: auto; }
+  .hz-today table.hz-quakes { display: table; width: 100%; padding: 0; border-collapse: collapse; font-size: var(--step--1); }
+  .hz-quakes th { padding: var(--s-1) var(--s-2) var(--s-2) 0; border-bottom: 1px solid var(--line-2); color: var(--ink-2); font-size: var(--step--2); font-weight: 650; text-align: left; }
+  .hz-quakes td { padding: var(--s-2) var(--s-2) var(--s-2) 0; border-bottom: 1px solid var(--line); color: var(--ink); vertical-align: top; }
+  .hz-quakes tr:last-child td { border-bottom: 0; }
+  .hz-quakes .hz-mag { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .hz-quakes .hz-sub { color: var(--ink-3); font-size: var(--step--2); }
+  .hz-quakes .hz-age { display: block; }
+
+  /* Today visuals: redraw only stated figures; text labels carry every value. */
+  .hz-visuals { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: var(--s-5) var(--s-6); padding: var(--s-4) var(--s-5); border: 1px solid var(--line); border-radius: var(--r-2); background: var(--surface); }
+  .tv-quake-map { margin: 0; min-width: 0; }
+  .tv-quake-map svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .tv-quake-map figcaption { color: var(--ink-3); font-size: var(--step--2); }
+  .tv-provinces path { fill: var(--surface-2); stroke: var(--line-2); stroke-width: .8; stroke-linejoin: round; }
+  .tv-quake circle { fill: color-mix(in srgb, var(--hz-quake) 16%, transparent); stroke: var(--hz-quake); stroke-width: 2; }
+  .tv-quake .tv-dot { fill: var(--hz-quake); stroke: none; }
+  .tv-quake-newest > circle:not(.tv-dot):not(.tv-pulse) { fill: color-mix(in srgb, var(--hz-quake) 30%, transparent); stroke: var(--hz-quake); stroke-width: 3; }
+  .tv-quake text { fill: var(--ink); font: 650 15px var(--font-text); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; }
+  .tv-pulse { fill: none; stroke: var(--hz-quake); stroke-width: 2; transform-box: fill-box; transform-origin: center; animation: tv-pulse 2.4s ease-out infinite; }
+  @keyframes tv-pulse { from { opacity: .8; transform: scale(1); } to { opacity: 0; transform: scale(2.4); } }
+  .tv-status, .tv-rain { display: grid; gap: var(--s-2); align-content: start; min-width: 0; margin: 0; }
+  .tv-status figcaption, .tv-rain figcaption { color: var(--ink); font-size: var(--step--1); font-weight: 700; }
+  .tv-status-bar { display: flex; gap: 2px; height: 16px; overflow: hidden; border-radius: 4px; background: var(--surface); }
+  .tv-status-bar span { min-width: 3px; }
+  .tv-danger { background: var(--danger); }
+  .tv-warning { background: var(--warning); }
+  .tv-normal { background: var(--normal); }
+  .tv-none { background: repeating-linear-gradient(135deg, var(--line-2) 0 4px, var(--surface-2) 4px 8px); }
+  .tv-status-legend { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-4); margin: 0; padding: 0; list-style: none; color: var(--ink-2); font-size: var(--step--1); }
+  .tv-status-legend li { display: inline-flex; align-items: center; gap: var(--s-1); }
+  .tv-status-legend strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+  .tv-swatch { flex: 0 0 auto; width: 12px; height: 12px; border-radius: 3px; }
+  .tv-rain ol { display: grid; gap: var(--s-1); margin: 0; padding: 0; list-style: none; }
+  .tv-rain li { display: grid; grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) auto; align-items: center; gap: var(--s-2); font-size: var(--step--1); }
+  .tv-rain-name { overflow: hidden; color: var(--ink); text-overflow: ellipsis; white-space: nowrap; }
+  .tv-rain-name small { color: var(--ink-3); }
+  .tv-rain-track { height: 10px; border-radius: 0 4px 4px 0; background: var(--surface-3); }
+  .tv-rain-track span { display: block; height: 100%; min-width: 2px; border-radius: 0 4px 4px 0; background: var(--hz-flood); }
+  .tv-rain-value { color: var(--ink); font-weight: 650; font-variant-numeric: tabular-nums; }
+
+  @media (max-width: 760px) { .hz-quake-layout { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 640px) {
+    .hz-page { padding-inline: var(--s-4); }
+    .hz-section { padding: var(--s-5) 0 0; }
+    .hz-hero h1 { font-size: var(--step-4); }
+    /* The glance already links to every section on a phone. */
+    .hz-glance + .hz-jump { display: none; }
+    .hz-glance { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-2); }
+    .hz-glance a { padding: var(--s-3); }
+    .hz-glance-placeholder { min-height: 15.5rem; }
+    .tv-rain li { grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr) auto; }
+  }
+  @media (max-width: 360px) { .hz-glance { grid-template-columns: minmax(0, 1fr); } }
+  @media (prefers-reduced-motion: reduce) { .tv-pulse { display: none; animation: none; } }
+  @media (forced-colors: active) { .tv-status-bar span, .tv-swatch, .tv-rain-track span { forced-color-adjust: none; border: 1px solid CanvasText; } .hz-glance a { border: 1px solid CanvasText; } }
+  @media print { .hz-jump, .language-switch, .hz-actions { display: none; } .hz-glance a { box-shadow: none; } }
 }
-@media print { .hz-jump, .language-switch, .hz-actions { display: none !important; } }
-.hz-glance { list-style: none; margin: .25rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); border-block: 1px solid var(--line-strong); }
-.hz-glance li { min-width: 0; border-left: 1px solid var(--line); }
-.hz-glance li:first-child { border-left: 0; }
-.hz-glance a { display: grid; gap: .2rem; height: 100%; padding: .8rem 1rem; color: var(--ink); text-decoration: none; }
-.hz-glance a:hover { background: var(--paper-deep); }
-.hz-glance strong { font-size: .95rem; }
-.hz-glance span { font-size: .86rem; line-height: 1.4; color: var(--muted-strong); }
-.hz-glance [data-raised] strong { color: var(--danger); }
-.hz-table-wrap { overflow-x: auto; }
-.hz-today table.hz-quakes { display: table; padding: 0; width: 100%; border-collapse: collapse; font-size: .9rem; }
-.hz-quakes th { text-align: left; font-size: .78rem; font-weight: 650; color: var(--muted-strong); padding: .3rem .6rem .4rem 0; border-bottom: 1px solid var(--line-strong); }
-.hz-quakes td { padding: .5rem .6rem .5rem 0; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink); }
-.hz-quakes tr:last-child td { border-bottom: 0; }
-.hz-quakes .hz-mag { font-weight: 700; white-space: nowrap; }
-.hz-quakes .hz-sub { color: var(--muted); font-size: .8rem; }
-.hz-quakes .hz-age { display: block; }
-@media (max-width: 640px) {
-  .hz-glance li { border-left: 0; border-top: 1px solid var(--line); }
-  .hz-glance li:first-child { border-top: 0; }
-  .hz-glance a { padding: .7rem 0; }
-}
-.hz-visuals { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1.25rem 2rem; padding: 1rem; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--surface); }
-.hz-quake-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 1rem 1.5rem; align-items: start; }
-@media (max-width: 760px) { .hz-quake-layout { grid-template-columns: minmax(0, 1fr); } }
-.hz-stale { margin: 0; max-width: 78ch; padding: .7rem .9rem; border-left: 4px solid var(--warning); background: #fbf1e3; color: var(--ink-strong); font-size: .92rem; border-radius: var(--radius-sm); }

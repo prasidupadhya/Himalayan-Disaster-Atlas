@@ -1,7 +1,8 @@
 import { expect, test } from '@playwright/test';
+import { openAtlasTab } from './atlas-tabs';
 
 test('infrastructure loads on demand with independent evidence-traceable classes', async ({ page }) => {
-  await page.goto('/atlas/'); await page.getByRole('button', { name: 'Load infrastructure context' }).click();
+  await page.goto('/atlas/'); await openAtlasTab(page, 'Infrastructure'); await page.getByRole('button', { name: 'Load infrastructure context' }).click();
   const section = page.getByRole('region', { name: 'Infrastructure', exact: true });
   await expect(section).toHaveAttribute('data-infrastructure-state', 'idle');
   await section.getByLabel('Load infrastructure inventory').check();

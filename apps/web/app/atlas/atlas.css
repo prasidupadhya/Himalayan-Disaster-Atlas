@@ -1,0 +1,134 @@
+@layer reset, tokens, vendor, base, components, layout, pages, utilities;
+
+/* The map page. Wide screens: the control panel on the left, the map filling the rest of the screen.
+ * Phones: the map on top, the controls in a bottom sheet under it (peek, half, full); the map resizes to the space
+ * left above the sheet, so it is never hidden behind the controls. */
+@layer pages {
+  /* Cartographic colour of a traced path, shared by the river trace, its label and the map status line. */
+  .atlas { --panel-w: clamp(360px, 30vw, 440px); --map-trace: #f9d66c; background: var(--stage); }
+  .atlas-stage { position: relative; display: grid; grid-template-columns: var(--panel-w) minmax(0, 1fr); height: calc(100svh - var(--header-h)); min-height: 520px; }
+  .atlas-stage .map-shell { grid-column: 2; grid-row: 1; }
+  .atlas-panel { grid-column: 1; grid-row: 1; height: 100%; overflow-y: auto; scrollbar-gutter: stable; border-right: 1px solid var(--line); background: var(--surface); }
+  .atlas-panel .sheet-body { overflow: visible; padding: 0 var(--s-5) var(--s-7); }
+  .atlas-panel-header { position: sticky; top: 0; z-index: 5; display: grid; gap: var(--s-2); padding: var(--s-5) var(--s-5) var(--s-3); border-bottom: 1px solid var(--line); background: var(--surface); }
+  .atlas-panel-header h1 { font-size: var(--step-2); line-height: 1.15; }
+  .atlas-lede { margin: 0; color: var(--ink-2); font-size: var(--step--1); }
+  .atlas-panel-header .tabs { margin-top: var(--s-2); }
+  .atlas-panel-header .tabs [role="tab"] { flex: 1 1 auto; padding: 0 var(--s-3); font-size: var(--step--1); }
+  .atlas-tabpanel:focus-visible { outline-offset: -3px; }
+  .atlas-anchor { scroll-margin-top: 200px; }
+  .atlas-anchor:focus { outline: none; }
+  .atlas-anchor:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+
+  /* Panel sections: a heading, the source line, controls, then the selected record. */
+  .layer-controls, .thematic-controls, .terrain-controls, .trace-controls, .feature-list { display: grid; gap: var(--s-3); padding: var(--s-5) 0; border-top: 1px solid var(--line); font-size: var(--step--1); }
+  .atlas-tabpanel [data-atlas-tab] > :first-child, .atlas-tabpanel [data-atlas-tab] > .atlas-anchor:first-child > :first-child { border-top: 0; }
+  .layer-controls > h2, .thematic-controls > h2, .terrain-controls > h2, .trace-controls > h2, .feature-list > h2 { font-size: var(--step-1); }
+  .thematic-controls > p:first-of-type, .terrain-controls > p:first-of-type, .rivers-controls > p:first-of-type { margin-top: calc(-1 * var(--s-2)); color: var(--ink-3); }
+  .layer-controls label, .thematic-controls > label, .terrain-controls > label { display: flex; gap: var(--s-3); align-items: center; min-height: 40px; font-weight: 600; }
+  .terrain-controls form { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2); align-items: end; }
+  .terrain-controls form label { display: grid; gap: var(--s-1); font-weight: 650; }
+  .terrain-controls form button { grid-column: 1 / -1; }
+  .terrain-controls [role="status"] { padding: var(--s-2) var(--s-3); border-radius: var(--r-1); background: var(--surface-2); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .thematic-picker, .record-picker { display: grid; gap: var(--s-1); font-weight: 650; }
+  .selection { display: grid; gap: var(--s-2); padding: var(--s-4); border: 1px solid var(--line); border-radius: var(--r-2); background: var(--surface-2); overflow-wrap: anywhere; }
+  .selection:focus { outline-offset: 4px; }
+  .selection > p:only-child { margin: 0; color: var(--ink-2); }
+  .selection h3 { font-size: var(--step-1); }
+  .selection dl { padding-top: var(--s-2); border-top: 1px solid var(--line); }
+  .selection [role="note"] { padding: var(--s-2) var(--s-3); border-left: 3px solid var(--warning); background: var(--warning-soft); }
+  .trace-actions { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+  .trace-controls > button:not(.trace-actions button) { justify-self: start; }
+  .trace-lake { margin-top: var(--s-2); }
+  .trace-hash { font-family: var(--font-mono); font-size: var(--step--2); overflow-wrap: anywhere; }
+  .trace-controls ol { padding-left: 1.6rem; }
+  .trace-controls ol li { display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: center; }
+  .atlas-educational { margin: var(--s-4) 0; }
+  .compare-table caption { font-size: var(--step--1); }
+  .feature-list .record-picker { max-width: none; }
+  .map-attribution-note { margin: var(--s-5) 0 0; padding-top: var(--s-4); border-top: 1px solid var(--line); font-size: var(--step--2); }
+
+  /* The map stage. */
+  .map-shell { position: relative; min-width: 0; min-height: 0; background: var(--stage); overflow: hidden; }
+  .map-shell .map { position: absolute; inset: 0; }
+  .map-caption { position: absolute; z-index: var(--z-map-ui); left: var(--s-3); top: var(--s-3); display: inline-flex; align-items: center; gap: var(--s-2); max-width: calc(100% - 7rem); padding: var(--s-2) var(--s-3); border: 1px solid rgb(255 255 255 / .14); border-radius: var(--r-pill); background: rgb(13 27 35 / .86); color: var(--on-stage); font-size: var(--step--2); font-weight: 600; pointer-events: none; -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .boundary-key { position: relative; display: inline-block; flex: 0 0 auto; width: 14px; height: 10px; border: 1.5px solid var(--on-stage-2); border-radius: 2px; }
+  /* Above the attribution button, which sits in the bottom-right corner. */
+  .map-controls-end { right: var(--s-3); bottom: calc(var(--s-3) + 2.75rem); }
+  .reset-map { gap: var(--s-2); padding: 0 var(--s-3); }
+  /* The trace status sits at the top of the map, under the caption, clear of the map key and the controls. */
+  .map-status-slot { position: absolute; z-index: var(--z-map-ui); left: var(--s-3); top: calc(var(--s-3) + 2.6rem); width: min(30rem, calc(100% - 6rem)); pointer-events: none; }
+  .map-status { display: flex; gap: var(--s-2); align-items: flex-start; margin: 0; padding: var(--s-2) var(--s-3); border: 1px solid rgb(249 214 108 / .45); border-radius: var(--r-2); background: rgb(13 27 35 / .9); color: var(--on-stage); font-size: var(--step--1); line-height: 1.4; box-shadow: 0 8px 24px rgb(0 0 0 / .3); pointer-events: auto; }
+  .map-status > span[aria-hidden] { color: var(--map-trace); }
+  .admin-map-label, .country-overview-label { padding: 1px 6px; border-radius: 3px; background: rgb(13 27 35 / .8); color: var(--on-stage); font-size: .68rem; font-weight: 700; white-space: nowrap; pointer-events: none; text-shadow: 0 1px 1px rgb(0 0 0 / .8); }
+  .river-name-label, .administrative-name-label { max-width: 16rem; padding: var(--s-1) var(--s-2); border: 1px solid var(--map-trace); border-radius: var(--r-1); background: rgb(13 27 35 / .92); color: var(--on-stage); font-size: var(--step--1); font-weight: 650; pointer-events: none; }
+  .map-shell .map-message { top: 3.6rem; }
+  /* MapLibre opens the compact attribution expanded, and re-expands it as sources load, before the page folds it; keep
+   * its text out until the reader opens it with the attribution button, so the corner never jumps. */
+  .map:not([data-attribution-open]) .maplibregl-ctrl-attrib-inner { display: none; }
+
+  /* The map key: a chip on the map that opens upward. */
+  .map-key { position: absolute; z-index: var(--z-map-ui); left: var(--s-3); bottom: var(--s-6); max-width: min(18rem, calc(100% - 6rem)); margin: 0; color: var(--on-stage); }
+  .map-key details { border: 1px solid rgb(255 255 255 / .14); border-radius: var(--r-2); background: rgb(13 27 35 / .9); box-shadow: 0 8px 24px rgb(0 0 0 / .3); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
+  .map-key summary { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); min-height: 40px; padding: 0 var(--s-3); list-style: none; color: var(--on-stage); }
+  .map-key summary::-webkit-details-marker { display: none; }
+  .map-key summary::after { content: ''; width: 7px; height: 7px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(-135deg) translate(-2px, -2px); }
+  .map-key details[open] summary::after { transform: rotate(45deg); }
+  .map-key summary h2 { color: var(--on-stage); font: 650 var(--step--1)/1.2 var(--font-text); }
+  .map-key ul { display: grid; gap: var(--s-2); margin: 0; padding: 0 var(--s-3) var(--s-3); list-style: none; }
+  .map-key li { display: flex; gap: var(--s-2); align-items: center; margin: 0; font-size: var(--step--2); line-height: 1.35; }
+  .map-key li strong { font-weight: 600; }
+  .map-key-intro { margin: 0; padding: 0 var(--s-3) var(--s-2); color: var(--on-stage-2); font-size: var(--step--2); }
+  .map-key-detail { color: var(--on-stage-2); }
+  .map-key details[open] { max-height: min(60svh, 26rem); overflow-y: auto; }
+  .map-key-swatch { flex: 0 0 auto; display: inline-block; width: 1.1rem; height: .9rem; }
+  .map-key-dot { width: .8rem; height: .8rem; border-radius: 50%; background: var(--swatch); border: 1px solid var(--stage); box-shadow: 0 0 0 1px rgb(255 255 255 / .2); }
+  .map-key-line { width: 1.4rem; height: .28rem; border-radius: .2rem; background: var(--swatch); }
+  .map-key-area { border-radius: .15rem; background: color-mix(in srgb, var(--swatch) 45%, transparent); border: 1.5px dashed var(--swatch); }
+
+  /* Educational river simulation workbench (in the Rivers tab). */
+  .simulation-warning { display: grid; gap: var(--s-1); padding: var(--s-3); border: 2px solid var(--model); border-left-width: 5px; border-radius: var(--r-1); background: var(--model-soft); color: var(--ink); }
+  .simulation-warning strong { display: flex; gap: var(--s-2); font-size: var(--step--1); }
+  .simulation-warning strong::before { content: "◇"; color: var(--model); }
+  .simulation-levels, .simulation-parameters { display: grid; gap: var(--s-3); margin: 0; padding: var(--s-3); border: 1px solid var(--line-2); border-radius: var(--r-1); background: var(--surface-2); }
+  .simulation-levels legend, .simulation-parameters legend { padding-inline: var(--s-1); font-weight: 700; }
+  .simulation-levels label { display: flex; gap: var(--s-3); align-items: flex-start; min-height: 52px; padding-block: var(--s-1); border-bottom: 1px solid var(--line); }
+  .simulation-levels label:last-child { border-bottom: 0; }
+  .simulation-levels label span, .simulation-parameters label { display: grid; gap: 2px; }
+  .simulation-levels small, .simulation-parameters small { color: var(--ink-3); line-height: 1.35; }
+  .simulation-unavailable { opacity: .65; }
+  .simulation-before-run { padding: var(--s-3) var(--s-4); border-left: 2px solid var(--accent); background: var(--surface-2); }
+  .simulation-error { color: var(--danger); font-weight: 700; }
+  .simulation-run { width: 100%; }
+  .simulation-result { display: grid; gap: var(--s-3); margin-top: var(--s-3); padding: var(--s-4); border: 1px solid var(--model); border-top-width: 4px; border-radius: var(--r-1); background: var(--model-soft); }
+  .simulation-result .simulation-warning { border-left-width: 2px; background: transparent; }
+  .simulation-map-controls, .simulation-compare-actions { display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: center; }
+  .simulation-evidence-key p { position: relative; padding-left: var(--s-4); }
+  .simulation-evidence-key p::before { content: "◆"; position: absolute; left: 0; color: var(--ink-3); }
+  .simulation-evidence-key p:nth-of-type(2)::before { content: "◇"; color: var(--model); }
+  .simulation-evidence-key p:nth-of-type(3)::before { content: "?"; }
+
+  /* Phones and small tablets: map above, bottom sheet below; the map takes whatever the sheet leaves. */
+  @media (max-width: 1000px) {
+    .atlas-stage { display: flex; flex-direction: column; height: calc(100svh - var(--header-h) - var(--tabbar-h) - var(--safe-bottom)); min-height: 440px; }
+    .atlas-stage .map-shell { flex: 1 1 auto; }
+    .atlas-panel { position: relative; flex: 0 0 auto; height: var(--sheet-drag, var(--sheet-h)); overflow: hidden; border-right: 0; border-radius: var(--r-3) var(--r-3) 0 0; margin-top: calc(-1 * var(--r-3)); }
+    .atlas-panel .sheet-body { overflow-y: auto; padding: 0 var(--s-4) var(--s-6); }
+    .atlas-panel-header { position: static; padding: 0 var(--s-4) var(--s-2); }
+    .atlas-panel-header .eyebrow, .atlas-lede { display: none; }
+    .atlas-panel-header h1 { font-size: var(--step-1); }
+    .atlas-anchor { scroll-margin-top: var(--s-3); }
+    .map-caption { max-width: calc(100% - 5rem); }
+    /* The sheet's rounded top overlaps the map by its radius; keep the attribution button clear of it. */
+    .atlas-stage .maplibregl-ctrl-bottom-right { bottom: var(--r-3); }
+    .map-key { bottom: var(--s-6); }
+  }
+  /* Short landscape phones: the sheet becomes a side panel again, so the map keeps its height. */
+  @media (max-width: 1000px) and (orientation: landscape) and (max-height: 560px) {
+    .atlas-stage { display: grid; grid-template-columns: minmax(260px, 44%) minmax(0, 1fr); min-height: 0; }
+    .atlas-panel { grid-column: 1; height: 100%; margin-top: 0; border-radius: 0; border-right: 1px solid var(--line); }
+    .atlas-panel .sheet-handle { display: none; }
+    .atlas-stage .map-shell { grid-column: 2; }
+  }
+  @media print { .atlas-stage { display: block; height: auto; } .map-shell { display: none; } .atlas-panel { height: auto; overflow: visible; } }
+}

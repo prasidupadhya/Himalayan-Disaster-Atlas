@@ -1,0 +1,38 @@
+/** Licences page copy. Nepali is project-authored and needs native-speaker review before operational reliance. */
+const en = {
+  licencesAttribution: 'Licences and attribution',
+  rightsStayEachSource: 'Rights stay with each source.',
+  originalAtlasSoftwareDocumentation: <>Original Atlas software and documentation use the <a href="/legal/LICENSE.txt">MIT licence</a>. Data, imagery, third-party code and source excerpts retain their own terms. The Atlas does not imply endorsement by any provider.</>,
+  thirdPartySoftwareNotices: 'Third-party software notices',
+  lockedSoftwareInventory: 'Locked software inventory',
+  sourceDirectory: 'Source directory',
+  dataDownloadsProcessingHistory: 'Data downloads and processing history',
+  datasetRedistributionReview: 'Dataset redistribution review',
+  reviewed9September2026: 'Reviewed 9 September 2026. PERMITTED is subject to the listed obligations. REVIEW REQUIRED means public redistribution has not been cleared; it does not mean the data is prohibited. Derived products also inherit unresolved parent rights. Public exports exclude unresolved releases and their dependent features; the complete research export cannot be deployed. Local research availability is not permission to republish.',
+  blockedParentRights: 'BLOCKED BY PARENT RIGHTS',
+  originalAtlasMetadata: 'Original Atlas metadata',
+  excludedFromPublicExport: <><strong>Excluded from this public export.</strong> No download is published.</>,
+  releaseManifest: 'Release manifest',
+  completeSourceNotice: 'Complete source notice',
+  parentReviews: 'Parent reviews:',
+};
+export const LICENCES: { en: typeof en; ne: typeof en } = {
+  en,
+  ne: {
+    licencesAttribution: 'इजाजतपत्र र श्रेय',
+    rightsStayEachSource: 'अधिकार हरेक स्रोतमै रहन्छ।',
+    originalAtlasSoftwareDocumentation: <>एटलसका मौलिक सफ्टवेयर र कागजातहरूले <a href="/legal/LICENSE.txt">MIT इजाजतपत्र</a> प्रयोग गर्छन्। डाटा, चित्र, तेस्रो पक्षको कोड र स्रोतका उद्धरणहरूमा तिनका आफ्नै सर्तहरू लागू रहन्छन्। एटलसले कुनै पनि प्रदायकको समर्थन (endorsement) जनाउँदैन।</>,
+    thirdPartySoftwareNotices: 'तेस्रो पक्ष सफ्टवेयर सूचनाहरू',
+    lockedSoftwareInventory: 'निश्चित (locked) सफ्टवेयर सूची',
+    sourceDirectory: 'स्रोत निर्देशिका',
+    dataDownloadsProcessingHistory: 'डाटा डाउनलोड र प्रशोधन इतिहास',
+    datasetRedistributionReview: 'डाटासेट पुनर्वितरण समीक्षा',
+    reviewed9September2026: 'समीक्षा मिति: 9 September 2026। अनुमति प्राप्त (PERMITTED) भन्नाले सूचीकृत दायित्वहरूको अधीनमा रहेर भन्ने बुझिन्छ। समीक्षा आवश्यक (REVIEW REQUIRED) भन्नाले सार्वजनिक पुनर्वितरणको स्वीकृति भइसकेको छैन भन्ने हो; यसको अर्थ डाटा निषेधित छ भन्ने होइन। व्युत्पन्न उत्पादनहरूले मूल (parent) स्रोतका नटुंगिएका अधिकार पनि विरासतमा पाउँछन्। सार्वजनिक निर्यातबाट नटुंगिएका रिलिज र तिनमा निर्भर फिचरहरू हटाइन्छन्; पूर्ण अनुसन्धान निर्यात तैनाथ (deploy) गर्न सकिँदैन। स्थानीय अनुसन्धानका लागि उपलब्ध हुनु पुनःप्रकाशनको अनुमति होइन।',
+    blockedParentRights: 'मूल स्रोतको अधिकारले रोकिएको (BLOCKED BY PARENT RIGHTS)',
+    originalAtlasMetadata: 'एटलसको मौलिक मेटाडाटा',
+    excludedFromPublicExport: <><strong>यस सार्वजनिक निर्यातबाट हटाइएको।</strong> कुनै डाउनलोड प्रकाशित गरिएको छैन।</>,
+    releaseManifest: 'रिलिज म्यानिफेस्ट',
+    completeSourceNotice: 'स्रोतको पूर्ण सूचना',
+    parentReviews: 'मूल स्रोत समीक्षाहरू:',
+  },
+};

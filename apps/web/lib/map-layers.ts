@@ -135,27 +135,38 @@ export function mountRiverDataset(map: Map, dataset: Dataset) {
   })) };
   map.addSource(source, { type: 'geojson', data, promoteId: '__atlas_id', attribution: escapeAttribution(dataset.metadata.attribution) });
   const line = `${source}-line`;
+  const glow = `${source}-glow`;
   const minzoom = dataset.metadata.dataset_id.endsWith('headwaters') ? 6.5 : 4.5;
   const width: ExpressionSpecification = ['interpolate', ['linear'], ['get', 'flow_order'], 3, 4.2, 4, 3.2, 5, 2.1, 6, 1.4, 7, 0.9, 8, 0.6];
-  map.addLayer({ id: line, source, type: 'line', minzoom, paint: {
-    'line-color': ['case', ['boolean', ['feature-state', 'selected'], false], '#ffffff', '#3987e5'],
-    'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 5, width],
-    'line-opacity': ['case', ['boolean', ['feature-state', 'selected'], false], 1, 0.82],
+  const selectedState: ExpressionSpecification = ['boolean', ['feature-state', 'selected'], false];
+  const round = { 'line-cap': 'round', 'line-join': 'round' } as const;
+  // A soft halo under the main stems and the selected reach, so water reads against terrain and dark boundaries.
+  // Display only: it is never clickable and its width follows the same flow-order ranking as the line itself.
+  map.addLayer({ id: glow, source, type: 'line', minzoom, layout: round, filter: ['<=', ['get', 'flow_order'], 5], paint: {
+    'line-color': ['case', selectedState, '#ffffff', '#7cc4ff'],
+    'line-width': ['case', selectedState, 14, ['*', width, 3]],
+    'line-blur': ['case', selectedState, 6, 4],
+    'line-opacity': ['case', selectedState, 0.55, 0.22],
+  } });
+  map.addLayer({ id: line, source, type: 'line', minzoom, layout: round, paint: {
+    'line-color': ['case', selectedState, '#ffffff', '#3987e5'],
+    'line-width': ['case', selectedState, 5, width],
+    'line-opacity': ['case', selectedState, 1, 0.82],
   } });
   const ids = new Set(dataset.collection.features.map(feature => String(feature.id)));
   let selected: string | null = null;
   return {
     source,
-    layers: [line],
+    layers: [glow, line],
     interactiveLayers: [line],
-    setVisible(visible: boolean) { map.setLayoutProperty(line, 'visibility', visible ? 'visible' : 'none'); },
+    setVisible(visible: boolean) { for (const layer of [glow, line]) map.setLayoutProperty(layer, 'visibility', visible ? 'visible' : 'none'); },
     setSelected(id: string | null) {
       if (selected && ids.has(selected)) map.setFeatureState({ source, id: selected }, { selected: false });
       selected = id && ids.has(id) ? id : null;
       if (selected) map.setFeatureState({ source, id: selected }, { selected: true });
     },
     dispose() {
-      if (map.getLayer(line)) map.removeLayer(line);
+      for (const layer of [line, glow]) if (map.getLayer(layer)) map.removeLayer(layer);
       if (map.getSource(source)) map.removeSource(source);
     },
   };

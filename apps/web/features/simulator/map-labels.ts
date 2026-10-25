@@ -49,14 +49,16 @@ export function useLabelCollisions(map: Map, root: { current: HTMLElement | null
     const solve = () => {
       queued = 0; last = performance.now();
       const labels = [...(root.current?.querySelectorAll<HTMLElement>('.sim-label, .sim-checkpoint-label') ?? [])].sort((a, b) => rank(a) - rank(b));
+      // Read every box first, then write only the flags that change: one layout pass instead of one per label. The
+      // flag sets `visibility`, which never changes a box, so reading before clearing it gives the same answer.
+      const boxes = labels.map(el => { const style = getComputedStyle(el); return style.opacity === '0' || style.display === 'none' ? null : el.getBoundingClientRect(); });
       const kept: DOMRect[] = [];
-      for (const el of labels) {
-        el.classList.remove('is-colliding');
-        const box = el.getBoundingClientRect();
-        if (box.width === 0 || getComputedStyle(el).opacity === '0' || getComputedStyle(el).display === 'none') continue;
-        const hit = kept.some(k => box.left < k.right + 4 && box.right > k.left - 4 && box.top < k.bottom + 2 && box.bottom > k.top - 2);
-        if (hit) el.classList.add('is-colliding'); else kept.push(box);
-      }
+      labels.forEach((el, i) => {
+        const box = boxes[i];
+        const hit = !!box && box.width > 0 && kept.some(k => box.left < k.right + 4 && box.right > k.left - 4 && box.top < k.bottom + 2 && box.bottom > k.top - 2);
+        if (box && box.width > 0 && !hit) kept.push(box);
+        if (el.classList.contains('is-colliding') !== hit) el.classList.toggle('is-colliding', hit);
+      });
     };
     const schedule = () => { if (queued) return; queued = window.setTimeout(solve, Math.max(0, 140 - (performance.now() - last))); };
     map.on('move', schedule); map.on('moveend', schedule); map.on('idle', schedule);

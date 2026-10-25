@@ -1,0 +1,756 @@
+{
+  "label": "feat/redefine",
+  "note": "Median of 3 throttled phone runs per route (scripts/ui-audit.mjs --runs 3). axe: every route in en/ne, light/dark, 390/1440 px (88 runs), with no violations.",
+  "metrics": [
+    {
+      "route": "/",
+      "runs": 3,
+      "lcp": 1424,
+      "fcp": 1424,
+      "cls": 0,
+      "inp": 56,
+      "mapMs": null,
+      "kb": 580,
+      "jsKb": 386,
+      "cssKb": 32
+    },
+    {
+      "route": "/atlas/",
+      "runs": 3,
+      "lcp": 896,
+      "fcp": 684,
+      "cls": 0.039,
+      "inp": 312,
+      "mapMs": 16619,
+      "kb": 4637,
+      "jsKb": 600,
+      "cssKb": 32
+    },
+    {
+      "route": "/hazards/",
+      "runs": 3,
+      "lcp": 508,
+      "fcp": 508,
+      "cls": 0,
+      "inp": 56,
+      "mapMs": null,
+      "kb": 538,
+      "jsKb": 389,
+      "cssKb": 32
+    },
+    {
+      "route": "/simulate/",
+      "runs": 3,
+      "lcp": 592,
+      "fcp": 592,
+      "cls": 0,
+      "inp": 56,
+      "mapMs": 7952,
+      "kb": 2961,
+      "jsKb": 637,
+      "cssKb": 32
+    },
+    {
+      "route": "/simulate/report/",
+      "runs": 3,
+      "lcp": 528,
+      "fcp": 528,
+      "cls": 0,
+      "inp": 40,
+      "mapMs": null,
+      "kb": 511,
+      "jsKb": 371,
+      "cssKb": 33
+    },
+    {
+      "route": "/live/",
+      "runs": 3,
+      "lcp": 668,
+      "fcp": 668,
+      "cls": 0.038,
+      "inp": 136,
+      "mapMs": null,
+      "kb": 778,
+      "jsKb": 633,
+      "cssKb": 34
+    },
+    {
+      "route": "/official/",
+      "runs": 3,
+      "lcp": 500,
+      "fcp": 500,
+      "cls": 0,
+      "inp": 56,
+      "mapMs": null,
+      "kb": 502,
+      "jsKb": 352,
+      "cssKb": 33
+    },
+    {
+      "route": "/methodology/",
+      "runs": 3,
+      "lcp": 604,
+      "fcp": 604,
+      "cls": 0,
+      "inp": 56,
+      "mapMs": null,
+      "kb": 497,
+      "jsKb": 343,
+      "cssKb": 32
+    },
+    {
+      "route": "/sources/",
+      "runs": 3,
+      "lcp": 596,
+      "fcp": 596,
+      "cls": 0,
+      "inp": 56,
+      "mapMs": null,
+      "kb": 512,
+      "jsKb": 343,
+      "cssKb": 32
+    },
+    {
+      "route": "/licenses/",
+      "runs": 3,
+      "lcp": 684,
+      "fcp": 684,
+      "cls": 0,
+      "inp": 64,
+      "mapMs": null,
+      "kb": 524,
+      "jsKb": 346,
+      "cssKb": 32
+    },
+    {
+      "route": "/offline/",
+      "runs": 3,
+      "lcp": 544,
+      "fcp": 544,
+      "cls": 0,
+      "inp": 56,
+      "mapMs": null,
+      "kb": 548,
+      "jsKb": 381,
+      "cssKb": 35
+    }
+  ],
+  "audits": [
+    {
+      "route": "/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/atlas/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/atlas/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/atlas/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/atlas/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/atlas/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/atlas/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/atlas/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/atlas/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/hazards/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/hazards/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/hazards/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/hazards/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/hazards/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/hazards/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/hazards/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/hazards/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/simulate/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/simulate/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/simulate/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/simulate/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/simulate/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/simulate/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/simulate/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/simulate/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/simulate/report/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/simulate/report/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/simulate/report/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/simulate/report/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/simulate/report/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/simulate/report/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/simulate/report/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/simulate/report/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/live/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/live/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/live/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/live/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/live/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/live/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/live/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/live/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/official/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/official/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/official/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/official/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/official/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/official/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/official/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/official/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/methodology/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/methodology/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/methodology/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/methodology/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/methodology/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/methodology/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/methodology/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/methodology/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/sources/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/sources/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/sources/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/sources/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/sources/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/sources/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/sources/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/sources/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/licenses/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/licenses/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/licenses/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/licenses/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/licenses/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/licenses/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/licenses/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/licenses/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/offline/",
+      "lang": "en",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/offline/",
+      "lang": "en",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/offline/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/offline/",
+      "lang": "en",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/offline/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/offline/",
+      "lang": "ne",
+      "theme": "light",
+      "width": 1440,
+      "violations": []
+    },
+    {
+      "route": "/offline/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 390,
+      "violations": []
+    },
+    {
+      "route": "/offline/",
+      "lang": "ne",
+      "theme": "dark",
+      "width": 1440,
+      "violations": []
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 'use client';
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import offline from '../../../packages/contracts/offline-shell-policy.json';
-import { useLanguage } from '../lib/i18n';
+import { useCopy, useLanguage } from '../lib/i18n';
+import { OfflineBadge } from './ui/feedback';
+import { THEME } from './copy';
 
 const subscribe = (update: () => void) => { window.addEventListener('online', update); window.addEventListener('offline', update); return () => { window.removeEventListener('online', update); window.removeEventListener('offline', update); }; };
 
@@ -37,4 +39,10 @@ export function OfflineShell() {
       <button type="button" onClick={() => { requested.current = true; waiting.postMessage({ type: 'ATLAS_SKIP_WAITING' }); }}>{offline.copy[lang].update_action}</button>
     </div>}
   </>;
+}
+
+/** The top bar's offline mark: everything on screen is a saved copy until the connection returns. */
+export function OfflineMark() {
+  const c = useCopy(THEME);
+  return <OfflineBadge label={c.offline} />;
 }

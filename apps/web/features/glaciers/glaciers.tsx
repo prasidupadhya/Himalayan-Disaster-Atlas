@@ -8,9 +8,12 @@ import { Evidence } from '../../components/evidence';
 import { GLACIER_MANIFESTS, loadDataset, UnavailableError } from '../../lib/datasets';
 import { mountGlacierDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
-import { digits, useLanguage, useT } from '../../lib/i18n';
+import { digits, useLanguage, useCopy } from '../../lib/i18n';
+import { GLACIERS } from './copy';
 
-export function Glaciers({ map }: { map: Map | null }) {
+export function Glaciers({ map, onReveal }: { map: Map | null; onReveal?: () => void }) {
+  const reveal = useRef(onReveal);
+  useEffect(() => { reveal.current = onReveal; });
   const [resource, setResource] = useState<Resource<Dataset[]>>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
   const [visible, setVisible] = useState(true);
@@ -19,7 +22,7 @@ export function Glaciers({ map }: { map: Map | null }) {
   const mounted = useRef<ReturnType<typeof mountGlacierDataset>[]>([]);
   const datasets = 'data' in resource ? resource.data : null;
   const [lang] = useLanguage();
-  const t = useT();
+  const c = useCopy(GLACIERS);
   const num = (value: number | null | undefined, fraction: number) => value === null || value === undefined ? undefined : digits(value.toLocaleString('en-US', { maximumFractionDigits: fraction }), lang);
 
   useEffect(() => {
@@ -40,6 +43,7 @@ export function Glaciers({ map }: { map: Map | null }) {
           const value = String(id);
           setSelected(value);
           handles.forEach(handle => handle.setSelected(value));
+          reveal.current?.();
         };
         map.on('click', handles.flatMap(handle => handle.interactiveLayers), onClick);
         setResource({
@@ -85,33 +89,33 @@ export function Glaciers({ map }: { map: Map | null }) {
     if (lon !== undefined && lat !== undefined) map.easeTo({ center: [lon, lat], zoom: Math.max(map.getZoom(), 9), duration: 0 });
   }
 
-  return <section className="thematic-controls glaciers-controls" aria-label={t('Glaciers', 'हिमनदीहरू')} data-glaciers-state={resource.status}>
-    <h2>{t('Glaciers', 'हिमनदीहरू')}</h2>
-    <p>Randolph Glacier Inventory 7.0 · {t('source-dated outlines', 'स्रोतमा मिति उल्लेख भएका रूपरेखा')}</p>
-    {map ? <DataState state={resource} retry={() => { setResource({ status: 'loading' }); setSelected(''); setAttempt(value => value + 1); }} /> : <p className="muted">{t('Glacier controls require the interactive map.', 'हिमनदी नियन्त्रणका लागि अन्तरक्रियात्मक नक्सा चाहिन्छ।')}</p>}
-    <label><input type="checkbox" checked={visible} disabled={!datasets} onChange={event => setVisible(event.target.checked)} /> {t('Show glacier inventory', 'हिमनदी अभिलेख (inventory) देखाउनुहोस्')}</label>
-    <p className="muted">{t('These are RGI inventory outlines, not 2026 glacier margins. Individual source dates range from 1992 to 2010 and are shown per glacier.', 'यी RGI अभिलेखका रूपरेखा हुन्, सन् २०२६ का हिमनदी किनारा होइनन्। स्रोतका मितिहरू हिमनदी अनुसार १९९२ देखि २०१० सम्मका छन् र प्रत्येक हिमनदीसँग देखाइएका छन्।')}</p>
-    <label className="thematic-picker">{t('Search glaciers', 'हिमनदी खोज्नुहोस्')}<input type="search" autoComplete="off" autoCapitalize="none" autoCorrect="off" spellCheck={false} enterKeyHint="search" value={query} disabled={!datasets} placeholder="Imja, Barun, RGI ID, GLIMS ID…" onChange={event => setQuery(event.target.value)} /></label>
-    <label className="thematic-picker">{t('Glacier record', 'हिमनदी अभिलेख')}<select value={selected} disabled={!datasets} onChange={event => choose(event.target.value)}>
-      <option value="">{t('Select a glacier…', 'हिमनदी छान्नुहोस्…')}</option>
+  return <section className="thematic-controls glaciers-controls" aria-label={c.glaciers} data-glaciers-state={resource.status}>
+    <h2>{c.glaciers}</h2>
+    <p>Randolph Glacier Inventory 7.0 · {c.sourceDatedOutlines}</p>
+    {map ? <DataState state={resource} retry={() => { setResource({ status: 'loading' }); setSelected(''); setAttempt(value => value + 1); }} /> : <p className="muted">{c.glacierControlsRequireInteractive}</p>}
+    <label><input type="checkbox" checked={visible} disabled={!datasets} onChange={event => setVisible(event.target.checked)} /> {c.showGlacierInventory}</label>
+    <p className="muted">{c.theseRgiInventoryOutlines}</p>
+    <label className="thematic-picker">{c.searchGlaciers}<input type="search" autoComplete="off" autoCapitalize="none" autoCorrect="off" spellCheck={false} enterKeyHint="search" value={query} disabled={!datasets} placeholder="Imja, Barun, RGI ID, GLIMS ID…" onChange={event => setQuery(event.target.value)} /></label>
+    <label className="thematic-picker">{c.glacierRecord}<select value={selected} disabled={!datasets} onChange={event => choose(event.target.value)}>
+      <option value="">{c.selectGlacier}</option>
       {matches.map(item => <option key={String(item.id)} value={String(item.id)}>{item.properties.glacier_name ?? item.properties.source_id} · {num(item.properties.area_km2, 2)} km²</option>)}
     </select></label>
     <div className="selection" aria-live="polite">{feature ? <>
-      <p className="eyebrow">{t('glacier inventory outline', 'हिमनदी अभिलेखको रूपरेखा')}</p><h3>{feature.properties.glacier_name ?? t('Unnamed glacier', 'नाम नभएको हिमनदी')}</h3>
+      <p className="eyebrow">{c.glacierInventoryOutline}</p><h3>{feature.properties.glacier_name ?? c.unnamedGlacier}</h3>
       <dl>
         <dt>RGI ID</dt><dd>{feature.properties.source_id}</dd>
         <dt>GLIMS ID</dt><dd>{feature.properties.glims_id}</dd>
-        <dt>{t('Name', 'नाम')}</dt><dd>{feature.properties.glacier_name ?? t('UNKNOWN', 'अज्ञात (UNKNOWN)')}</dd>
-        <dt>{t('Source area', 'स्रोतको क्षेत्रफल')}</dt><dd>{num(feature.properties.area_km2, 3)} km²</dd>
-        <dt>{t('Outline date', 'रूपरेखाको मिति')}</dt><dd>{feature.properties.outline_date}</dd>
-        <dt>{t('Mean elevation', 'औसत उचाइ')}</dt><dd>{num(feature.properties.elevation_mean_m, 0)} m</dd>
-        <dt>{t('Elevation range', 'उचाइको दायरा')}</dt><dd>{num(feature.properties.elevation_min_m, 0)}–{num(feature.properties.elevation_max_m, 0)} m</dd>
-        <dt>{t('DEM source', 'DEM स्रोत')}</dt><dd>{feature.properties.dem_source}</dd>
-        <dt>{t('Inventory region', 'अभिलेख क्षेत्र')}</dt><dd>{feature.properties.inventory_region}</dd>
-        <dt>{t('Display repair', 'प्रदर्शनका लागि मर्मत')}</dt><dd>{feature.properties.display_geometry_repaired ? t('Yes — source WFS display geometry was repaired for rendering', 'हो — देखाउनका लागि स्रोत WFS को प्रदर्शन ज्यामिति (geometry) मर्मत गरिएको') : t('No', 'होइन')}</dd>
-        <dt>{t('Downstream trace', 'तलतिरको मार्ग')}</dt><dd>{t('UNKNOWN — this inventory does not identify a river outlet. ', 'अज्ञात (UNKNOWN) — यो अभिलेखले नदीको निकास पहिचान गर्दैन। ')}<a href="#downstream-trace">{t('Trace a separately selected river reach', 'छुट्टै छानिएको नदी खण्डको मार्ग पछ्याउनुहोस्')}</a>{t('.', '।')}</dd>
+        <dt>{c.name}</dt><dd>{feature.properties.glacier_name ?? c.unknown}</dd>
+        <dt>{c.sourceArea}</dt><dd>{num(feature.properties.area_km2, 3)} km²</dd>
+        <dt>{c.outlineDate}</dt><dd>{feature.properties.outline_date}</dd>
+        <dt>{c.meanElevation}</dt><dd>{num(feature.properties.elevation_mean_m, 0)} m</dd>
+        <dt>{c.elevationRange}</dt><dd>{num(feature.properties.elevation_min_m, 0)}–{num(feature.properties.elevation_max_m, 0)} m</dd>
+        <dt>{c.demSource}</dt><dd>{feature.properties.dem_source}</dd>
+        <dt>{c.inventoryRegion}</dt><dd>{feature.properties.inventory_region}</dd>
+        <dt>{c.displayRepair}</dt><dd>{feature.properties.display_geometry_repaired ? c.yesSourceWfsDisplay : c.no}</dd>
+        <dt>{c.downstreamTrace}</dt><dd>{c.unknownInventoryDoesNot}<a href="#downstream-trace">{c.traceSeparatelySelectedRiver}</a>{c.text}</dd>
       </dl>
-    </> : <p>{t('Select a glacier to inspect its stable RGI/GLIMS identity, dated outline, source area and inventory metadata.', 'हिमनदीको स्थिर RGI/GLIMS पहिचान, मिति सहितको रूपरेखा, स्रोतको क्षेत्रफल र अभिलेखको मेटाडाटा हेर्न हिमनदी छान्नुहोस्।')}</p>}</div>
-    {evidence && <details><summary>{t('Glacier source & limitations', 'हिमनदीको स्रोत र सीमाहरू')}</summary><Evidence metadata={evidence} /></details>}
+    </> : <p>{c.selectGlacierInspectIts}</p>}</div>
+    {evidence && <details><summary>{c.glacierSourceLimitations}</summary><Evidence metadata={evidence} /></details>}
   </section>;
 }

@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { openAtlasTab } from '../e2e/atlas-tabs';
 
 for (const target of ['body', 'h1'] as const) {
   test(`extension attributes on ${target}: ${target === 'body' ? 'tolerated' : 'diagnostics retained'}`, async ({ page }) => {
@@ -24,6 +25,7 @@ for (const target of ['body', 'h1'] as const) {
     }, target);
     await page.goto('/atlas/');
     await expect(page.locator('[data-map-ready="true"]')).toBeVisible();
+    await openAtlasTab(page, 'Boundaries');
     await page.locator('.record-picker select').selectOption('np01');
     await expect(page.getByRole('heading', { name: 'Koshi' })).toBeVisible();
     const hydrationErrors = errors.filter(message => /hydrated|hydration|didn't match/i.test(message));

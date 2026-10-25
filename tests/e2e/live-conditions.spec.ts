@@ -154,7 +154,8 @@ test('keyboard-only users can switch the bulletin to Nepali and reach the record
   await expect(body).toContainText('११:०० UTC (१६:४५ नेपाली समय)');
   await expect(body.locator('[data-section="warnings"]')).toContainText('आधिकारिक चेतावनी');
   expect(await body.innerText()).not.toMatch(/real[\s-]?time|वास्तविक समय/i);
-  const skip = page.getByRole('link', { name: 'Skip map to record tables' });
+  // The page is in Nepali here, and so is the skip link.
+  const skip = page.getByRole('link', { name: 'नक्सा छाडेर अभिलेख तालिकामा जानुहोस्' });
   for (let i = 0; i < 20 && !(await skip.evaluate(element => element === document.activeElement)); i++) await page.keyboard.press('Tab');
   await expect(skip).toBeFocused();
   await page.keyboard.press('Enter');

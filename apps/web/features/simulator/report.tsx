@@ -8,10 +8,12 @@ import { arrivals, decodeScenario, exposureRange, hydrograph, hydrographVolume, 
 import { loadModelArtifact, loadModelRelease, manifestPath, MODEL_RELEASES } from '../../lib/model-release';
 import { originLabel } from './flood-panel';
 import { duration, REPORT } from './copy';
-import { formatNumber, UI, useLanguage, type Lang } from '../../lib/i18n';
+import { formatNumber, useLanguage, type Lang } from '../../lib/i18n';
 import { RouteList } from './route-list';
 import { lineCoordinates } from './scene-3d';
 import { loadAssets } from './quake-panel';
+import { Skeleton } from '../../components/ui';
+import { ReportNotice } from './report-notice';
 
 const NOTICE = 'Scenario / educational estimate, not a forecast or warning';
 type InputRecord = { id: string; version: string; manifest: string; sha256: string };
@@ -72,12 +74,13 @@ export function ScenarioReport() {
     <header className="report-header">
       <div className="report-top"><p className="eyebrow">{r.eyebrow}</p></div>
       <h1>{scenario?.kind === 'earthquake' ? r.quakeTitle : r.floodTitle}</h1>
-      <p className="report-notice"><strong>{UI[lang].scenarioNotice}.</strong> {r.official} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url}>{a.name}</a> ({a.url})</span>)}.</p>
+      <ReportNotice lang={lang} />
       <p className="report-meta">{r.generated(generated)}</p>
       <div className="report-actions"><button type="button" onClick={() => window.print()} disabled={!report}>{r.print}</button><button type="button" onClick={json} disabled={!report}>{r.json}</button><a href={scenario ? `/simulate/?s=${new URLSearchParams(window.location.search).get('s')}` : '/simulate/'}>{r.back}</a></div>
     </header>
     {(error || !scenario) && <p className="sim-problem" role="alert">{error ?? r.invalid}</p>}
-    {!report && !error && scenario && <p role="status">{r.recomputing}</p>}
+    {!report && !error && scenario && <div className="report-loading"><p role="status">{r.recomputing}</p>
+      <Skeleton height="1.2rem" /><Skeleton height="1.2rem" width="70%" /><Skeleton height="9rem" className="report-skeleton-table" /></div>}
     {report && <>
       <section><h2>{r.inputs}</h2>
         <table className="stack-mobile"><thead><tr><th scope="col">{r.release}</th><th scope="col">{r.hash}</th></tr></thead>
@@ -109,7 +112,7 @@ function FloodReport({ body, lang }: { body: FloodBody; lang: Lang }) {
   const h = hydrograph(body.scenario);
   const n = (v: number | null, f = 0) => formatNumber(v, lang, f);
   const list = (vs: number[]) => vs.map(v => n(v, v % 1 ? 1 : 0)).join('/');
-  return <section><h2>{r.results}</h2>
+  return <section className="report-results"><h2>{r.results}</h2>
     <p><strong>{r.releasePoint}:</strong> {originLabel(origin, lang)} · {r.path} {n(origin.path_length_km, 1)} km ({origin.termination.replace('_', ' ')}).</p>
     <p><strong>{r.hydrograph}:</strong> {r.hydroText(body.scenario.shape, n(body.scenario.volume_m3), duration(body.scenario.duration_s, lang), n(h.peak_m3_s, 1), n(hydrographVolume(h.points)))}</p>
     <table className="stack-mobile"><caption>{r.floodCaption(list(body.scenario.celerity_m_s), list(body.catalogue.widths_m))}</caption>
@@ -126,7 +129,7 @@ function QuakeReport({ body, lang }: { body: QuakeBody; lang: Lang }) {
   const r = REPORT[lang];
   const s = body.scenario;
   const n = (v: number | null, f = 0) => formatNumber(v, lang, f);
-  return <section><h2>{r.results}</h2>
+  return <section className="report-results"><h2>{r.results}</h2>
     <p><strong>{r.scenario}:</strong> M{n(s.magnitude, 1)} {s.mechanism} · {n(s.longitude, 3)}°E, {n(s.latitude, 3)}°N; {s.rupture.type === 'point' ? r.point : r.line(n(s.rupture.length_km), n(s.rupture.strike_deg))}; {r.uniform} V<sub>S30</sub> {n(s.vs30)} m/s. {r.model} {body.model.model} (doi:{body.model.doi}).</p>
     <table className="stack-mobile"><caption>{r.bandCaption}</caption><thead><tr><th scope="col">{r.band}</th><th scope="col">{r.median}</th><th scope="col">−1σ</th><th scope="col">+1σ</th></tr></thead>
       <tbody>{PGA_BANDS.map((b, i) => <tr key={b.label}><th scope="row">{b.label}</th><td>{n(Math.round(body.result.population.central[i]))}</td><td>{n(Math.round(body.result.population.low[i]))}</td><td>{n(Math.round(body.result.population.high[i]))}</td></tr>)}</tbody></table>

@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { GeoJSONSource, Map } from 'maplibre-gl';
 import { ADMIN_MANIFESTS, loadDataset } from '../../lib/datasets';
+import { LIVE } from './copy';
 import { useLanguage } from '../../lib/i18n';
 import { FORECAST_CLASSES, formatValue, gridCellPolygon, localDigits, type EarthquakeRow, type ForecastCell, type Freshness, type Lang } from '../../lib/live-conditions';
 
@@ -15,18 +16,13 @@ export interface LiveMapProps {
 const SOURCES = { outline: 'live-nepal-outline', forecast: 'live-forecast-cells', earthquakes: 'live-earthquakes' } as const;
 const STALE_OPACITY = 0.35;
 type Failure = 'render' | 'webgl';
-const FAILURES: Record<Failure, Record<Lang, string>> = {
-  render: { en: 'The interactive map could not render. Every verified record remains listed in the tables below.', ne: 'अन्तरक्रियात्मक नक्सा देखाउन सकिएन। सबै प्रमाणित अभिलेखहरू तलका तालिकाहरूमा सूचीबद्ध नै छन्।' },
-  webgl: { en: 'Interactive mapping is unavailable in this browser (WebGL could not start). Every verified record remains listed in the tables below.', ne: 'यस ब्राउजरमा अन्तरक्रियात्मक नक्सा उपलब्ध छैन (WebGL सुरु हुन सकेन)। सबै प्रमाणित अभिलेखहरू तलका तालिकाहरूमा सूचीबद्ध नै छन्।' },
-};
 /** Popup text for a reported epicentre; source label, magnitude type and time stay as published. */
 function popupText(properties: Record<string, unknown>, lang: Lang) {
-  const magnitude = properties.magnitude ?? null, type = properties.type ?? '', observed = properties.observed ?? null;
-  if (lang === 'ne') return {
-    title: (properties.label as string) || 'स्थानको नाम अज्ञात (UNKNOWN)',
-    detail: `प्रतिवेदित (REPORTED) · म्याग्निच्युड ${magnitude === null ? 'अज्ञात (UNKNOWN)' : typeof magnitude === 'number' ? formatValue(magnitude, 'ne') : localDigits(String(magnitude), 'ne')} ${type} · ${observed === null ? 'समय अज्ञात (UNKNOWN)' : localDigits(String(observed), 'ne')}`,
-  };
-  return { title: (properties.label as string) || 'Location label UNKNOWN', detail: `REPORTED · magnitude ${magnitude ?? 'UNKNOWN'} ${type} · ${observed ?? 'time UNKNOWN'}` };
+  const c = LIVE[lang];
+  const magnitude = properties.magnitude ?? null, type = String(properties.type ?? ''), observed = properties.observed ?? null;
+  const shownMagnitude = magnitude === null ? c.popupUnknownMagnitude : lang === 'ne' ? (typeof magnitude === 'number' ? formatValue(magnitude, 'ne') : localDigits(String(magnitude), 'ne')) : String(magnitude);
+  const shownTime = observed === null ? c.popupUnknownTime : lang === 'ne' ? localDigits(String(observed), 'ne') : String(observed);
+  return { title: (properties.label as string) || c.popupUnknownPlace, detail: c.popupDetail(shownMagnitude, type, shownTime) };
 }
 
 function forecastCollection(layer: LiveMapLayer<ForecastCell> | null): GeoJSON.FeatureCollection {
@@ -118,9 +114,12 @@ export function LiveMap({ earthquakes, forecast, visible }: LiveMapProps) {
     map.setLayoutProperty('live-earthquakes', 'visibility', visible.earthquakes && earthquakes ? 'visible' : 'none');
   }, [ready, earthquakes, forecast, visible]);
 
+  // MapLibre names its canvas "Map", the same as the section around it; give it its own name in the page language.
+  useEffect(() => { if (ready) mapRef.current?.getCanvas().setAttribute('aria-label', LIVE[lang].mapCanvas); }, [ready, lang]);
+
   return <div className="live-map-shell" data-map-state={failure ? 'unavailable' : ready ? 'ready' : 'loading'}>
-    <div ref={container} className="map" role="region" aria-label={lang === 'ne' ? 'प्रमाणित प्रत्यक्ष तहहरूको नक्सा। नक्सामा देखाइएका सबै अभिलेख तलका तालिकाहरूमा सूचीबद्ध छन्।' : 'Map of verified live layers. All mapped records are listed in the tables below.'} />
-    {!ready && !failure && <p className="live-map-status" role="status">{lang === 'ne' ? 'नक्सा लोड हुँदैछ…' : 'Loading map…'}</p>}
-    {failure && <p className="live-map-status live-map-failure" role="status">{FAILURES[failure][lang]}</p>}
+    <div ref={container} className="map" role="region" aria-label={LIVE[lang].mapRegion} />
+    {!ready && !failure && <p className="live-map-status" role="status">{LIVE[lang].mapLoading}</p>}
+    {failure && <p className="live-map-status live-map-failure" role="status">{LIVE[lang].mapFailures[failure]}</p>}
   </div>;
 }

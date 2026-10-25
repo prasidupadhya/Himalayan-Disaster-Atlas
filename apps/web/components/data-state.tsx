@@ -1,5 +1,6 @@
 'use client';
-import { useT } from '../lib/i18n';
+import { useCopy, useLanguage } from '../lib/i18n';
+import { DATA_STATE } from './copy';
 import type { Resource } from '../lib/resource';
 
 /** Nepali for the fixed status messages that loaders and map layers report; any other diagnostic stays as written. */
@@ -19,18 +20,12 @@ const KNOWN_MESSAGES_NE: Record<string, string> = {
 };
 
 export function DataState({ state, retry }: { state: Resource<unknown>; retry?: () => void }) {
-  const t = useT();
+  const [lang] = useLanguage();
+  const c = useCopy(DATA_STATE);
   if (state.status === 'ready') return null;
-  const messages = {
-    loading: t('Loading and validating dataset…', 'डेटासेट लोड र प्रमाणीकरण गर्दै…'),
-    empty: t('No features are available in this dataset.', 'यस डेटासेटमा कुनै विशेषता (feature) उपलब्ध छैन।'),
-    stale: t('This dataset has passed its update deadline. The archived data remains available.', 'यो डेटासेट अद्यावधिक गर्ने समयसीमा नाघिसकेको छ। संग्रहित डेटा भने उपलब्ध छ।'),
-    error: t('The dataset could not be validated.', 'डेटासेट प्रमाणित गर्न सकिएन।'),
-    unavailable: t('The dataset is currently unavailable.', 'डेटासेट हाल उपलब्ध छैन।'),
-  };
   return <div className={`data-state ${state.status}`} role={state.status === 'error' ? 'alert' : 'status'} aria-live={state.status === 'error' ? 'assertive' : 'polite'} aria-atomic="true">
-    <p>{messages[state.status]}</p>
-    {'message' in state && <p>{t(state.message, KNOWN_MESSAGES_NE[state.message] ?? state.message)}</p>}
-    {retry && (state.status === 'error' || state.status === 'unavailable') && <button onClick={retry}>{t('Try again', 'फेरि प्रयास गर्नुहोस्')}</button>}
+    <p>{c[state.status]}</p>
+    {'message' in state && <p>{lang === 'ne' ? KNOWN_MESSAGES_NE[state.message] ?? state.message : state.message}</p>}
+    {retry && (state.status === 'error' || state.status === 'unavailable') && <button onClick={retry}>{c.retry}</button>}
   </div>;
 }

@@ -4,6 +4,7 @@ import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import { findEntry, nepalTime, recentQuakes, useGovDigest, type Digest, type Entry, type ListContent, type Page, type RainContent, type RiverContent } from '../../lib/gov-digest';
 import { formatNumber, useLanguage, type Lang } from '../../lib/i18n';
 import { QuakeMap, RainBars, StatusBar, type StatusPart } from '../../components/today-visuals';
+import { Badge } from '../../components/ui';
 import { hz, type HzCopy } from './copy';
 
 /** "Today": the daily official copy, arranged around floods, glacial lakes and earthquakes. */
@@ -151,7 +152,7 @@ function Glance({ digest, c, lang }: { digest: Digest; c: HzCopy; lang: Lang }) 
     { id: 'earthquakes', label: c.quakes, text: latest ? c.glanceQuake(latest.magnitude ?? 'UNKNOWN', latest.epicentre ?? 'UNKNOWN', latest.date ?? 'UNKNOWN') : 'UNKNOWN' },
     { id: 'incidents', label: c.incidents, text: incidents ? c.glanceIncidents(counted(incidents)) : 'UNKNOWN' },
   ];
-  return <ul className="hz-glance" aria-label={c.glance}>{items.map(item => <li key={item.id} data-raised={item.raised ? 'true' : undefined}>
+  return <ul className="hz-glance" aria-label={c.glance}>{items.map(item => <li key={item.id} data-hazard={item.id} data-raised={item.raised ? 'true' : undefined}>
     <a href={`#${item.id}`}><strong>{item.raised && <span aria-hidden="true">▲ </span>}{item.label}</strong><span>{item.text}</span></a>
   </li>)}</ul>;
 }
@@ -170,9 +171,11 @@ function Incidents({ entry, c, lang }: { entry: Entry | undefined; c: HzCopy; la
 function TodayCard({ entry, title, anchor, c, lang, wide, children }: { entry: Entry | undefined; title: string; anchor: string; c: HzCopy; lang: Lang; wide?: boolean; children: ReactNode }) {
   const when = nepalTime(entry?.fetched_at, lang === 'ne' ? 'ne-NP' : 'en-GB');
   const status = !entry?.content ? c.unavailable : entry.last_known ? `${c.lastKnown} ${when ?? 'UNKNOWN'}` : `${c.copied} ${when ?? 'UNKNOWN'}`;
+  // The copy's state as a badge: copied today, an older (last known) copy, or nothing available.
+  const tone = !entry?.content ? 'none' : entry.last_known ? 'warning' : 'info';
   return <li className={wide ? 'hz-card hz-card-wide' : 'hz-card'} data-source={entry?.id} data-source-status={!entry?.content ? 'unavailable' : entry.last_known ? 'last-known' : 'fetched'}>
     <h3>{title}</h3>
-    <p className="hz-today-status">{status}</p>
+    <p className="hz-today-status"><Badge tone={tone}>{status}</Badge></p>
     {entry?.content ? children : null}
     {entry && <p className="muted">{entry.agency}</p>}
     <p className="hz-card-links"><a href={`/official/#official-${anchor}`}>{c.full}</a>{entry && <a href={entry.url} rel="noopener noreferrer" target="_blank">{c.agency}</a>}</p>

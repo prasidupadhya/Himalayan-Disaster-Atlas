@@ -1,36 +1,71 @@
-.official-page .intro { max-width: 46rem; color: var(--muted-strong); font-size: 1.05rem; }
-.official-authorities { max-width: 46rem; margin: 1.25rem 0 2rem; padding: .85rem 1rem; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
-.official-authorities p { margin: 0; }
-.official-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 0; margin: 0 0 1rem; border-block: 1px solid var(--line-strong); }
-.official-summary > div { padding: 1rem 1.1rem 1rem 0; }
-.official-summary > div + div { padding-left: 1.1rem; border-left: 1px solid var(--line); }
-.official-summary dt { color: var(--muted); font-size: .84rem; }
-.official-summary dd { margin: .3rem 0 0; font: 620 1.6rem/1.15 var(--font-display); font-stretch: 112%; font-variant-numeric: tabular-nums; color: var(--ink-strong); }
-.official-jump { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; margin: 1rem 0 0; }
-.official-jump a { min-height: 44px; display: inline-flex; align-items: center; }
-.official-section { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line-strong); scroll-margin-top: 1rem; }
-.official-section > h2 { margin: 0 0 1rem; font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
-.official-entry { display: grid; gap: .65rem; padding: 1.1rem 0 1.4rem; border-bottom: 1px solid var(--line); min-width: 0; }
-.official-entry header { display: grid; gap: .15rem; }
-.official-entry h3 { margin: 0; font-size: 1.15rem; }
-.official-entry header p { margin: 0; }
-.official-status { font-size: .88rem; font-weight: 560; color: var(--muted-strong); }
-.official-status-last-known, .official-status-unreachable, .official-status-error, .official-status-blocked-by-robots { color: var(--warning); }
-.official-quote { max-width: 46rem; margin: 0; padding-left: .9rem; border-left: 2px solid var(--line-strong); }
-.official-headings { margin: 0; padding-left: 1.1rem; max-width: 46rem; }
-.official-counts { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin: 0; }
-.official-counts > div { display: flex; gap: .45rem; align-items: baseline; }
-.official-counts dt::first-letter { text-transform: uppercase; }
-.official-counts dd { margin: 0; font-weight: 650; font-variant-numeric: tabular-nums; }
-.official-table-wrap { max-width: 100%; overflow-x: auto; }
-.official-table-wrap table { border-collapse: collapse; min-width: 32rem; font-size: .9rem; }
-.official-table-wrap caption { text-align: left; font-weight: 620; padding-bottom: .4rem; }
-.official-table-wrap th, .official-table-wrap td { padding: .45rem .7rem .45rem 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-.official-table-wrap td { font-variant-numeric: tabular-nums; }
-.official-table-wrap tr[data-status="ABOVE DANGER LEVEL"] th::before { content: '▲ '; color: var(--danger); }
-.official-links { margin: 0; padding-left: 1.1rem; display: grid; gap: .3rem; }
-.official-new { margin-left: .5rem; padding: .05rem .4rem; border: 1px solid var(--accent); border-radius: var(--radius-sm); color: var(--accent-strong); font-size: .75rem; font-weight: 650; }
-.official-change { color: var(--muted-strong); font-size: .9rem; }
-@media (max-width: 700px) { .official-summary > div + div { padding-left: 0; border-left: 0; } .official-summary > div { border-bottom: 1px solid var(--line); } }
-.official-stale { margin-top: .8rem; }
-.official-stale summary { cursor: pointer; font-weight: 600; }
+@layer reset, tokens, vendor, base, components, layout, pages, utilities;
+
+/* Official sources: a summary row of stat tiles, then one card per agency page. Each card leads with its copy status as a
+ * badge; station statuses appear as badges with the published word. Copied text is never restyled into something else. */
+@layer pages {
+  .official-hero { display: grid; gap: var(--s-3); margin-bottom: var(--s-5); }
+  .official-hero h1 { margin: 0; }
+  .official-page .intro { max-width: 46rem; margin: 0; color: var(--ink-2); font-size: var(--step-0); }
+  .official-authorities { max-width: 46rem; margin: var(--s-2) 0 0; padding: var(--s-3) var(--s-4); border-left: 3px solid var(--accent); border-radius: 0 var(--r-1) var(--r-1) 0; background: var(--accent-soft); }
+  .official-authorities p { margin: 0; }
+
+  /* Summary: stat tiles; a raised figure gets the tone of its word (danger, warning). */
+  .official-summary { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); gap: var(--s-3); margin: 0 0 var(--s-4); }
+  .official-summary > div { display: grid; gap: var(--s-1); align-content: start; padding: var(--s-4); border: 1px solid var(--line); border-radius: var(--r-2); background: var(--surface); }
+  .official-summary > div[data-tone=danger] { border-color: var(--danger); background: var(--danger-soft); }
+  .official-summary > div[data-tone=warning] { border-color: var(--warning); background: var(--warning-soft); }
+  .official-summary dt { color: var(--ink-2); font-size: var(--step--1); }
+  .official-summary dd { margin: 0; color: var(--ink); font: 650 var(--step-3)/1.1 var(--font-display); font-stretch: 110%; font-variant-numeric: tabular-nums; }
+  .official-summary > div:first-child dd { font-size: var(--step-1); }
+  /* While today's copy loads, the page holds a screen's height so the footer does not flash up and jump away. */
+  .official-page[data-official-state=loading] { min-height: calc(100svh - var(--header-h)); }
+  .official-summary-placeholder { min-height: 7rem; border-radius: var(--r-2); background: var(--surface-2); }
+  .official-change { margin: 0; color: var(--ink-2); font-size: var(--step--1); }
+  .official-jump { position: sticky; top: var(--header-h); z-index: 3; display: flex; flex-wrap: wrap; gap: var(--s-2); margin: var(--s-4) 0 0; padding: var(--s-2) 0; background: var(--bg); }
+  .official-jump a { display: inline-flex; align-items: center; min-height: 40px; padding: 0 var(--s-3); border: 1px solid var(--line-2); border-radius: var(--r-pill); background: var(--surface); color: var(--ink); font-size: var(--step--1); font-weight: 650; text-decoration: none; }
+  .official-jump a:hover { border-color: var(--ink); }
+
+  /* Sections and entries. */
+  .official-section { display: grid; gap: var(--s-3); margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--line-2); scroll-margin-top: calc(var(--header-h) + 4rem); }
+  .official-section > h2 { margin: 0; font-size: var(--step-3); }
+  .official-entry { display: grid; gap: var(--s-3); min-width: 0; padding: var(--s-4) var(--s-5); border: 1px solid var(--line); border-radius: var(--r-2); background: var(--surface); }
+  .official-entry[data-source-status=last-known] { border-color: var(--warning); }
+  .official-entry:not([data-source-status=fetched]):not([data-source-status=last-known]) { border-style: dashed; background: var(--surface-2); }
+  .official-entry header { display: grid; gap: var(--s-1); }
+  .official-entry h3 { margin: 0; font-size: var(--step-1); }
+  .official-entry header p { margin: 0; }
+  .official-status { order: -1; }
+  .official-status .badge { font-size: var(--step--2); font-weight: 650; white-space: normal; }
+  .official-quote { max-width: 46rem; margin: 0; padding-left: var(--s-3); border-left: 2px solid var(--line-2); }
+  .official-headings { max-width: 46rem; margin: 0; padding-left: 1.1rem; }
+  .official-counts { display: flex; flex-wrap: wrap; gap: var(--s-2); margin: 0; }
+  .official-counts > div { display: inline-flex; align-items: baseline; gap: var(--s-2); padding: var(--s-1) var(--s-3); border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--surface-2); font-size: var(--step--1); }
+  .official-counts > div[data-tone=danger] { border-color: var(--danger); background: var(--danger-soft); }
+  .official-counts > div[data-tone=warning] { border-color: var(--warning); background: var(--warning-soft); }
+  .official-counts > div[data-tone=normal] { border-color: var(--normal); background: var(--normal-soft); }
+  .official-counts dt::first-letter { text-transform: uppercase; }
+  .official-counts dd { margin: 0; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .official-table-wrap { max-width: 100%; overflow-x: auto; }
+  .official-table-wrap table { min-width: 32rem; border-collapse: collapse; font-size: var(--step--1); }
+  .official-table-wrap caption { padding-bottom: var(--s-2); font-weight: 650; text-align: left; }
+  .official-table-wrap th, .official-table-wrap td { padding: var(--s-2) var(--s-3) var(--s-2) 0; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  .official-table-wrap td { font-variant-numeric: tabular-nums; }
+  .official-table-wrap .badge { font-size: var(--step--2); }
+  .official-links { display: grid; gap: var(--s-1); margin: 0; padding-left: 1.1rem; }
+  .official-new { margin-left: var(--s-2); padding: 0 var(--s-1); border: 1px solid var(--accent); border-radius: var(--r-1); color: var(--accent-ink); font-size: var(--step--2); font-weight: 650; }
+  .official-agency { margin: 0; padding-top: var(--s-2); border-top: 1px solid var(--line); font-weight: 700; }
+  .official-stale { margin-top: var(--s-2); }
+  .official-stale summary { font-weight: 600; cursor: pointer; }
+
+  @media (max-width: 700px) {
+    .official-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-2); }
+    .official-summary > div:first-child { grid-column: 1 / -1; }
+    .official-summary > div { padding: var(--s-3); }
+    .official-entry { padding: var(--s-4); }
+    .official-jump { position: static; }
+    /* Tables are labelled cards here, so the wrapper no longer scrolls sideways. */
+    .official-table-wrap { overflow-x: visible; }
+    .official-table-wrap table { min-width: 0; }
+  }
+  @media print { .official-jump { position: static; } .official-entry { break-inside: avoid; } }
+}

@@ -1,5 +1,6 @@
 import { expect, test } from '@playwright/test';
 import { screenshotMap } from '../helpers/map-screenshot';
+import { openAtlasTab } from './atlas-tabs';
 import { readFile } from 'node:fs/promises';
 
 test('traces a selected reach with playback, provenance, download and cleanup', async ({ page }) => {
@@ -7,6 +8,7 @@ test('traces a selected reach with playback, provenance, download and cleanup', 
   page.on('pageerror', error => errors.push(error.message));
   page.on('request', request => { if (/nepal-rivers-.*features\.geojson\.gz/.test(request.url())) artifacts.push(request.url()); });
   await page.goto('/atlas/');
+  await openAtlasTab(page, 'Rivers');
   const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
   const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
   await expect(rivers).toHaveAttribute('data-rivers-state', 'ready', { timeout: 15_000 });
@@ -53,6 +55,7 @@ test('traces a selected reach with playback, provenance, download and cleanup', 
 test('requires the full network and supports retry after a missing partition', async ({ page }) => {
   await page.route('**/nepal-rivers-headwaters/1.0.0/manifest.json', route => route.fulfill({ status: 503, body: '' }), { times: 1 });
   await page.goto('/atlas/');
+  await openAtlasTab(page, 'Rivers');
   const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
   const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
   await expect(rivers).toHaveAttribute('data-rivers-state', 'unavailable');
@@ -66,6 +69,7 @@ test('supports reduced motion and narrow screens without overflow', async ({ pag
   await page.setViewportSize({ width: 375, height: 812 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/atlas/');
+  await openAtlasTab(page, 'Rivers');
   const rivers = page.getByRole('region', { name: 'Rivers', exact: true });
   const trace = page.getByRole('region', { name: 'Downstream trace', exact: true });
   await expect(rivers).toHaveAttribute('data-rivers-state', 'ready', { timeout: 15_000 });

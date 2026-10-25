@@ -16,6 +16,8 @@ Every figure is either copied from an official source, with its date, or labelle
 
 Supporting pages: `/official/` (every official source in full) and `/live/` (USGS earthquakes and NOAA GFS forecast feeds).
 
+The interface runs on one design system: colour, type, spacing and motion tokens with a light and a dark theme (chosen in the header, or following the device), CSS cascade layers, and shared UI pieces (buttons, tabs, stat tiles, badges, notices, skeletons, a bottom sheet). All interface text sits in per-feature English/Nepali copy modules. On the map, the controls are tabs in a side panel on wide screens and a bottom sheet on phones; on a phone, Run and Trace bring the map into view before they play. See [design system](docs/redefine/design-system.md); the living reference page is `/design/`.
+
 ## How data gets in
 
 - **Daily official copy.** `.github/workflows/gov-feeds.yml` runs at 00:17 UTC (about 06:02 Nepal time). It reads eight DHM, BIPAD and NEMRC sources ([`pipelines/gov_feeds`](pipelines/gov_feeds)) and commits `apps/web/public/gov/latest.json`, which redeploys the site. A source that fails keeps its last copy, labelled as such. See [official sources](docs/official-sources.md).
@@ -38,10 +40,10 @@ npm run dev            # http://127.0.0.1:3000
 
 ```bash
 npm run check          # data contracts, Python + Vitest tests, typecheck, lint, security checks, static build
-npm run test:e2e       # Playwright: pages, phone layouts, offline, accessibility, corrupted/missing data, no-WebGL
+npm run test:e2e       # Playwright: pages, phone layouts, offline, axe on every route, layout budgets, corrupted/missing data, no-WebGL
 ```
 
-CI runs both on every push and pull request ([CI/CD](docs/ci-cd.md)). `npm run build` writes the static export to `apps/web/out`. Deployment to Cloudflare is described in [deployment](docs/deployment.md).
+CI runs both on every push and pull request ([CI/CD](docs/ci-cd.md)). `node scripts/ui-audit.mjs <label> <dir>` measures a build on a throttled phone (LCP, CLS, INP, bytes) and runs axe; results are in [performance](docs/performance.md). `npm run build` writes the static export to `apps/web/out`. Deployment to Cloudflare is described in [deployment](docs/deployment.md).
 
 ## Layout
 

@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { screenshotMap } from '../helpers/map-screenshot';
+import { openAtlasTab } from './atlas-tabs';
 import { createHash } from 'node:crypto';
 import { gzipSync, gunzipSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
@@ -28,6 +29,7 @@ test('static navigation, WebGL, boundary controls and accessible identification'
   await expect(attribution).toHaveClass(/maplibregl-compact-show/);
   await expect(attribution.locator('.maplibregl-ctrl-attrib-inner')).toBeVisible();
 
+  await openAtlasTab(page, 'Boundaries');
   await page.locator('.record-picker select').selectOption('np01');
   await expect(page.getByRole('heading', { name: 'Koshi' })).toBeVisible();
   await expect(page.getByText('NP01', { exact: true })).toBeVisible();
@@ -53,6 +55,7 @@ test('mobile boundary map and records fit the viewport', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/atlas/');
   await expect(page.getByRole('region', { name: 'Interactive Nepal administrative boundary map' })).toHaveAttribute('data-map-ready', 'true');
+  await openAtlasTab(page, 'Boundaries');
   await page.locator('.record-picker select').selectOption('np0101301');
   await expect(page.getByRole('heading', { name: 'Phungling' })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
@@ -106,6 +109,7 @@ test('WebGL unavailable preserves accessible boundary records', async ({ page })
   });
   await page.goto('/atlas/');
   await expect(page.getByText(/Interactive mapping is unavailable/)).toBeVisible();
+  await openAtlasTab(page, 'Boundaries');
   await page.locator('.record-picker select').selectOption('np04');
   await expect(page.getByRole('heading', { name: 'Gandaki' })).toBeVisible();
 });

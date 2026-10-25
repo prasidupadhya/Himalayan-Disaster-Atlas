@@ -7,7 +7,8 @@ import { Evidence } from '../../components/evidence';
 import { INFRASTRUCTURE_MANIFESTS, loadDataset, UnavailableError } from '../../lib/datasets';
 import { mountInfrastructureDataset } from '../../lib/map-layers';
 import type { Resource } from '../../lib/resource';
-import { digits, useLanguage, useT } from '../../lib/i18n';
+import { digits, useLanguage, useCopy } from '../../lib/i18n';
+import { INFRA } from './copy';
 
 type InfrastructureClass = 'road' | 'bridge' | 'school' | 'health' | 'emergency' | 'settlement';
 const CLASSES: { value: InfrastructureClass; label: string; ne: string }[] = [
@@ -27,7 +28,9 @@ function centerOf(feature: Dataset['collection']['features'][number]): [number, 
   return null;
 }
 
-export function Infrastructure({ map }: { map: Map | null }) {
+export function Infrastructure({ map, onReveal }: { map: Map | null; onReveal?: () => void }) {
+  const reveal = useRef(onReveal);
+  useEffect(() => { reveal.current = onReveal; });
   const [enabled, setEnabled] = useState(false);
   const [resource, setResource] = useState<Resource<Dataset[]>>({ status: 'loading' });
   const [attempt, setAttempt] = useState(0);
@@ -36,7 +39,7 @@ export function Infrastructure({ map }: { map: Map | null }) {
   const mounted = useRef<ReturnType<typeof mountInfrastructureDataset>[]>([]);
   const datasets = 'data' in resource ? resource.data : null;
   const [lang] = useLanguage();
-  const t = useT();
+  const c = useCopy(INFRA);
 
   useEffect(() => {
     if (!map || !enabled) return;
@@ -47,7 +50,7 @@ export function Infrastructure({ map }: { map: Map | null }) {
         if (controller.signal.aborted) return;
         handles.push(...data.map(dataset => mountInfrastructureDataset(map, dataset))); mounted.current = handles;
         handles.forEach(handle => handle.setVisible(visible[handle.klass as InfrastructureClass]));
-        click = event => { const id = event.features?.[0]?.id; if (id !== undefined) choose(String(id), data); };
+        click = event => { const id = event.features?.[0]?.id; if (id !== undefined) { choose(String(id), data); reveal.current?.(); } };
         map.on('click', handles.flatMap(handle => handle.interactiveLayers), click);
         setResource({ status: data.some(dataset => isStale(dataset.metadata)) ? 'stale' : data.every(dataset => dataset.collection.features.length) ? 'ready' : 'empty', data });
       } catch (error) {
@@ -75,19 +78,19 @@ export function Infrastructure({ map }: { map: Map | null }) {
     if (center && map) map.easeTo({ center, zoom: Math.max(map.getZoom(), item?.properties.infrastructure_class === 'road' ? 8 : 10), duration: 0 });
   }
 
-  return <section className="thematic-controls" aria-label={t('Infrastructure', 'पूर्वाधार')} data-infrastructure-state={enabled ? resource.status : 'idle'}>
-    <h2>{t('Infrastructure', 'पूर्वाधार')}</h2><p>{t('OpenStreetMap national infrastructure inventory', 'OpenStreetMap राष्ट्रिय पूर्वाधार अभिलेख')}</p>
-    <label><input type="checkbox" checked={enabled} disabled={!map} onChange={event => { setEnabled(event.target.checked); if (event.target.checked) setResource({ status: 'loading' }); }} /> {t('Load infrastructure inventory', 'पूर्वाधार अभिलेख लोड गर्नुहोस्')}</label>
+  return <section className="thematic-controls" aria-label={c.infrastructure} data-infrastructure-state={enabled ? resource.status : 'idle'}>
+    <h2>{c.infrastructure}</h2><p>{c.openstreetmapNationalInfrastructureInventory}</p>
+    <label><input type="checkbox" checked={enabled} disabled={!map} onChange={event => { setEnabled(event.target.checked); if (event.target.checked) setResource({ status: 'loading' }); }} /> {c.loadInfrastructureInventory}</label>
     {enabled && <><DataState state={resource} retry={() => { setResource({ status: 'loading' }); setAttempt(value => value + 1); }} />
       {CLASSES.map(item => <label key={item.value}><input type="checkbox" checked={visible[item.value]} disabled={!datasets} onChange={event => setVisible(current => ({ ...current, [item.value]: event.target.checked }))} /> {lang === 'ne' ? item.ne : item.label}{datasets ? ` (${digits(counts[item.value].toLocaleString('en-US'), lang)})` : ''}</label>)}
-      <p className="muted">{t('Major roads are motorway/trunk/primary classes and links. Major bridges are bridges on motorway through tertiary roads. OSM completeness varies; an absent feature does not prove an asset is absent.', 'मुख्य सडक भन्नाले motorway/trunk/primary वर्गका सडक र तिनका जोड सडक (link) बुझिन्छ। मुख्य पुल भन्नाले motorway देखि tertiary सम्मका सडकमा रहेका पुल बुझिन्छ। OSM को पूर्णता ठाउँअनुसार फरक हुन्छ; नक्सामा नदेखिनुले त्यो संरचना वास्तवमै छैन भन्ने प्रमाणित गर्दैन।')}</p>
-      <label className="thematic-picker">{t('Class', 'वर्ग')}<select value={klass} disabled={!datasets} onChange={event => setKlass(event.target.value as InfrastructureClass | '')}><option value="">{t('All infrastructure', 'सबै पूर्वाधार')}</option>{CLASSES.map(item => <option key={item.value} value={item.value}>{lang === 'ne' ? item.ne : item.label}</option>)}</select></label>
-      <label className="thematic-picker">{t('Search infrastructure', 'पूर्वाधार खोज्नुहोस्')}<input type="search" autoComplete="off" autoCapitalize="none" autoCorrect="off" spellCheck={false} enterKeyHint="search" value={query} disabled={!datasets} placeholder="name, road ref, OSM way/…, operator…" onChange={event => setQuery(event.target.value)} /></label>
-      <label className="thematic-picker">{t('Asset', 'संरचना')}<select value={selected} disabled={!datasets} onChange={event => choose(event.target.value)}><option value="">{t('Select an asset…', 'संरचना छान्नुहोस्…')}</option>{matches.map(item => <option key={String(item.id)} value={String(item.id)}>{item.properties.asset_name ?? item.properties.source_id} · {lang === 'ne' ? classNe(item.properties.infrastructure_class) : item.properties.infrastructure_class}</option>)}</select></label>
-      <div className="selection" aria-live="polite">{feature ? <><p className="eyebrow">OSM {lang === 'ne' ? classNe(feature.properties.infrastructure_class) : feature.properties.infrastructure_class}</p><h3>{feature.properties.asset_name ?? t('Name UNKNOWN', 'नाम अज्ञात (UNKNOWN)')}</h3><dl>
-        <dt>{t('Subtype', 'उपप्रकार')}</dt><dd>{feature.properties.asset_subtype}</dd><dt>OSM ID</dt><dd>{feature.properties.source_id}</dd><dt>{t('Reference', 'सन्दर्भ (ref)')}</dt><dd>{feature.properties.asset_ref ?? t('UNKNOWN', 'अज्ञात (UNKNOWN)')}</dd><dt>{t('Operator', 'सञ्चालक')}</dt><dd>{feature.properties.operator_name ?? t('UNKNOWN', 'अज्ञात (UNKNOWN)')}</dd><dt>{t('Surface', 'सतह')}</dt><dd>{feature.properties.surface ?? t('UNKNOWN', 'अज्ञात (UNKNOWN)')}</dd><dt>{t('Position/geometry', 'स्थिति/ज्यामिति')}</dt><dd>{feature.properties.position_basis}</dd><dt>{t('Display simplified', 'प्रदर्शनका लागि सरलीकृत')}</dt><dd>{feature.properties.display_geometry_simplified ? t('yes', 'हो') : t('no', 'होइन')}</dd><dt>{t('OSM snapshot', 'OSM स्न्यापसट')}</dt><dd>{feature.properties.osm_source_timestamp}</dd>
-      </dl></> : <p>{t('Select an asset to inspect source identity and mapping attributes. This layer is inventory context, not an exposure, vulnerability, damage, or risk result.', 'स्रोत पहिचान र नक्सांकनका विशेषताहरू हेर्न संरचना छान्नुहोस्। यो तह अभिलेखको सन्दर्भ मात्र हो; जोखिममा परेको (exposure), संवेदनशीलता (vulnerability), क्षति वा जोखिमको नतिजा होइन।')}</p>}</div>
-      {evidence && <details><summary>{t('Infrastructure source & limitations', 'पूर्वाधारको स्रोत र सीमाहरू')}</summary><Evidence metadata={evidence} /></details>}
+      <p className="muted">{c.majorRoadsMotorwayTrunk}</p>
+      <label className="thematic-picker">{c.class}<select value={klass} disabled={!datasets} onChange={event => setKlass(event.target.value as InfrastructureClass | '')}><option value="">{c.allInfrastructure}</option>{CLASSES.map(item => <option key={item.value} value={item.value}>{lang === 'ne' ? item.ne : item.label}</option>)}</select></label>
+      <label className="thematic-picker">{c.searchInfrastructure}<input type="search" autoComplete="off" autoCapitalize="none" autoCorrect="off" spellCheck={false} enterKeyHint="search" value={query} disabled={!datasets} placeholder="name, road ref, OSM way/…, operator…" onChange={event => setQuery(event.target.value)} /></label>
+      <label className="thematic-picker">{c.asset}<select value={selected} disabled={!datasets} onChange={event => choose(event.target.value)}><option value="">{c.selectAsset}</option>{matches.map(item => <option key={String(item.id)} value={String(item.id)}>{item.properties.asset_name ?? item.properties.source_id} · {lang === 'ne' ? classNe(item.properties.infrastructure_class) : item.properties.infrastructure_class}</option>)}</select></label>
+      <div className="selection" aria-live="polite">{feature ? <><p className="eyebrow">OSM {lang === 'ne' ? classNe(feature.properties.infrastructure_class) : feature.properties.infrastructure_class}</p><h3>{feature.properties.asset_name ?? c.nameUnknown}</h3><dl>
+        <dt>{c.subtype}</dt><dd>{feature.properties.asset_subtype}</dd><dt>OSM ID</dt><dd>{feature.properties.source_id}</dd><dt>{c.reference}</dt><dd>{feature.properties.asset_ref ?? c.unknown}</dd><dt>{c.operator}</dt><dd>{feature.properties.operator_name ?? c.unknown}</dd><dt>{c.surface}</dt><dd>{feature.properties.surface ?? c.unknown}</dd><dt>{c.positionGeometry}</dt><dd>{feature.properties.position_basis}</dd><dt>{c.displaySimplified}</dt><dd>{feature.properties.display_geometry_simplified ? c.yes : c.no}</dd><dt>{c.osmSnapshot}</dt><dd>{feature.properties.osm_source_timestamp}</dd>
+      </dl></> : <p>{c.selectAssetInspectSource}</p>}</div>
+      {evidence && <details><summary>{c.infrastructureSourceLimitations}</summary><Evidence metadata={evidence} /></details>}
     </>}
   </section>;
 }
