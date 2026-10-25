@@ -7,6 +7,7 @@
   .sim-stage, .sim-map { --map-water: #4cc3ff; --map-water-soft: #bfe6ff; --map-water-deep: #2f86a6; --map-highlight: #ffd27a; --map-highlight-soft: #ffe2a3; --map-chip: #f8faf7; --map-label-bg: rgb(11 29 34 / .78); --map-label-strong: rgb(255 255 255 / .85); }
 
   .sim-page { display: grid; gap: var(--s-5); width: min(var(--page-max), 100%); margin: 0 auto; padding: var(--s-6) var(--gutter) var(--s-8); }
+  .sim-page-loading { min-height: calc(100svh - var(--header-h)); align-content: start; }
   .sim-hero { display: grid; gap: var(--s-3); max-width: 62rem; }
   .sim-hero h1 { font-size: var(--step-4); }
   .sim-hero .intro { font-size: var(--step-0); max-width: 60ch; }

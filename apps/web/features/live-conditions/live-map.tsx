@@ -114,6 +114,9 @@ export function LiveMap({ earthquakes, forecast, visible }: LiveMapProps) {
     map.setLayoutProperty('live-earthquakes', 'visibility', visible.earthquakes && earthquakes ? 'visible' : 'none');
   }, [ready, earthquakes, forecast, visible]);
 
+  // MapLibre names its canvas "Map", the same as the section around it; give it its own name in the page language.
+  useEffect(() => { if (ready) mapRef.current?.getCanvas().setAttribute('aria-label', LIVE[lang].mapCanvas); }, [ready, lang]);
+
   return <div className="live-map-shell" data-map-state={failure ? 'unavailable' : ready ? 'ready' : 'loading'}>
     <div ref={container} className="map" role="region" aria-label={LIVE[lang].mapRegion} />
     {!ready && !failure && <p className="live-map-status" role="status">{LIVE[lang].mapLoading}</p>}

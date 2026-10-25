@@ -143,7 +143,7 @@ export function Atlas() {
           const attribution = container.current?.querySelector<HTMLElement>('.maplibregl-ctrl-attrib');
           const collapseAttribution = () => attribution?.classList.remove('maplibregl-compact-show');
           let attributionOpened = false;
-          attribution?.querySelector('.maplibregl-ctrl-attrib-button')?.addEventListener('click', () => { attributionOpened = true; }, { once: true });
+          attribution?.querySelector('.maplibregl-ctrl-attrib-button')?.addEventListener('click', () => { attributionOpened = true; container.current?.setAttribute('data-attribution-open', 'true'); }, { once: true });
           collapseAttribution();
           map.on('error', event => {
             const sourceId = 'sourceId' in event ? String(event.sourceId) : '';

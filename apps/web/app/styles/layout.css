@@ -43,7 +43,9 @@
   .update-banner { border-color: var(--accent); background: var(--accent-soft); }
 
   /* Page frames. */
-  main { display: block; min-height: 60svh; }
+  /* At least a screen tall, so the footer starts below the fold and content arriving after load never pushes it
+   * out of view (a layout shift on every data page). */
+  main { display: block; min-height: calc(100svh - var(--header-h)); }
   main:focus { outline: none; }
   .page { width: min(var(--page-max), 100%); margin: 0 auto; padding: var(--s-7) var(--gutter) var(--s-8); }
   .page-head { display: grid; gap: var(--s-3); max-width: 60rem; margin-bottom: var(--s-6); }

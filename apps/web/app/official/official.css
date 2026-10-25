@@ -17,6 +17,8 @@
   .official-summary dt { color: var(--ink-2); font-size: var(--step--1); }
   .official-summary dd { margin: 0; color: var(--ink); font: 650 var(--step-3)/1.1 var(--font-display); font-stretch: 110%; font-variant-numeric: tabular-nums; }
   .official-summary > div:first-child dd { font-size: var(--step-1); }
+  /* While today's copy loads, the page holds a screen's height so the footer does not flash up and jump away. */
+  .official-page[data-official-state=loading] { min-height: calc(100svh - var(--header-h)); }
   .official-summary-placeholder { min-height: 7rem; border-radius: var(--r-2); background: var(--surface-2); }
   .official-change { margin: 0; color: var(--ink-2); font-size: var(--step--1); }
   .official-jump { position: sticky; top: var(--header-h); z-index: 3; display: flex; flex-wrap: wrap; gap: var(--s-2); margin: var(--s-4) 0 0; padding: var(--s-2) 0; background: var(--bg); }
@@ -61,6 +63,9 @@
     .official-summary > div { padding: var(--s-3); }
     .official-entry { padding: var(--s-4); }
     .official-jump { position: static; }
+    /* Tables are labelled cards here, so the wrapper no longer scrolls sideways. */
+    .official-table-wrap { overflow-x: visible; }
+    .official-table-wrap table { min-width: 0; }
   }
   @media print { .official-jump { position: static; } .official-entry { break-inside: avoid; } }
 }

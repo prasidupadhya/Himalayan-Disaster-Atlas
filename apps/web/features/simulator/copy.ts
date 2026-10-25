@@ -26,7 +26,7 @@ export function shortTime(seconds: number, lang: Lang) {
 
 export const COPY = {
   en: {
-    eyebrow: 'Simulate · educational scenarios', tablist: 'Scenario type', mapRegion: 'Scenario map', skipMap: 'Skip map',
+    eyebrow: 'Simulate · educational scenarios', loadingSimulator: 'Loading the simulator…', tablist: 'Scenario type', mapRegion: 'Scenario map', skipMap: 'Skip map',
     mapLabel: 'Scenario map. Every result is also listed in the tables.',
     mapNoteFlood: 'Shaded bands: 250 / 500 / 1,000 m corridors (sensitivity variants, not flood extents). Dashed line: source river path. Click a point to select it.',
     mapNoteQuake: 'Colours: median PGA band (legend in results), computed only on Nepal population cells — no shading outside Nepal. Click the map to move a custom epicentre.',
@@ -102,7 +102,7 @@ export const COPY = {
     model: 'Model', population: 'population',
   },
   ne: {
-    eyebrow: 'सिमुलेसन · शैक्षिक परिदृश्य', tablist: 'परिदृश्यको प्रकार', mapRegion: 'परिदृश्य नक्सा', skipMap: 'नक्सा छोड्नुहोस्',
+    eyebrow: 'सिमुलेसन · शैक्षिक परिदृश्य', loadingSimulator: 'सिमुलेटर लोड हुँदैछ…', tablist: 'परिदृश्यको प्रकार', mapRegion: 'परिदृश्य नक्सा', skipMap: 'नक्सा छोड्नुहोस्',
     mapLabel: 'परिदृश्य नक्सा। सबै नतिजा तालिकामा पनि छन्।',
     mapNoteFlood: 'छायाँ पट्टी: २५० / ५०० / १,००० मिटर करिडोर (संवेदनशीलता विकल्प, बाढीको क्षेत्र होइन)। धर्का रेखा: स्रोत नदी मार्ग। छान्न बिन्दुमा क्लिक गर्नुहोस्।',
     mapNoteQuake: 'रङ: मध्य PGA समूह (नतिजामा सूची), नेपालका जनसंख्या कोषमा मात्र गणना — नेपालबाहिर छायाँ छैन। आफ्नै केन्द्रबिन्दु सार्न नक्सामा क्लिक गर्नुहोस्।',
