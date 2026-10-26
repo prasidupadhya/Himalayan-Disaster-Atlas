@@ -1,7 +1,7 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-10-26T04:47:08Z",
- "generated_at_nepal": "2026-10-26 10:32 NPT",
+ "generated_at": "2026-10-26T18:43:45Z",
+ "generated_at_nepal": "2026-10-27 00:28 NPT",
  "notice": "Verbatim copies of public government pages, organised for reading. The agency websites are authoritative.",
  "summary": {
   "sources_fetched": 1,
@@ -23,7 +23,7 @@
    "category": "rivers",
    "kind": "bipad-river",
    "url": "https://bipadportal.gov.np/api/v1/river-stations/?format=json&limit=1000",
-   "checked_at": "2026-10-26T04:47:08Z",
+   "checked_at": "2026-10-26T18:43:45Z",
    "http_status": null,
    "sha256": "d23123ac5a3fa9de91c060da494d6dda19ade648429f37f1225caa0224eb1485",
    "status": "error",
@@ -1409,7 +1409,7 @@
    "category": "rainfall",
    "kind": "bipad-rain",
    "url": "https://bipadportal.gov.np/api/v1/rain-stations/?format=json&limit=1000",
-   "checked_at": "2026-10-26T04:47:08Z",
+   "checked_at": "2026-10-26T18:43:45Z",
    "http_status": null,
    "sha256": "6d1bea22a2779260051b5025037848b4b4df78a57f76da3a2f0dfebef1b8d3e3",
    "status": "error",
@@ -1590,7 +1590,7 @@
    "category": "floods",
    "kind": "html",
    "url": "https://dms2.dhm.gov.np/",
-   "checked_at": "2026-10-26T04:47:08Z",
+   "checked_at": "2026-10-26T18:43:45Z",
    "http_status": null,
    "sha256": "d001b469bc009de8f6276ed40eb7471d75591f3cc332c1855f6dc65025d3f0de",
    "status": "error",
@@ -1614,7 +1614,7 @@
    "category": "weather",
    "kind": "html",
    "url": "https://dhm.gov.np/mfd/",
-   "checked_at": "2026-10-26T04:47:08Z",
+   "checked_at": "2026-10-26T18:43:45Z",
    "http_status": null,
    "sha256": "86a0356a87adb45e03f0c89689201d7900cc67b5f7cd54525556c2cd4776039b",
    "status": "error",
@@ -1644,11 +1644,11 @@
    "category": "earthquakes",
    "kind": "html",
    "url": "https://seismonepal.gov.np/en/earthquakes",
-   "checked_at": "2026-10-26T04:47:08Z",
+   "checked_at": "2026-10-26T18:43:45Z",
    "http_status": 200,
-   "sha256": "6ee7888bb9424ba5e8198c82ae4c2fda1e027339a924c16d4aa2f36959e71266",
+   "sha256": "bdf93fb656e79884ad4f04c3e10f508eb849c4a18454bf355e18ad78a8e09a2e",
    "status": "fetched",
-   "fetched_at": "2026-10-26T04:47:08Z",
+   "fetched_at": "2026-10-26T18:43:45Z",
    "content": {
     "title": "National Earthquake Monitoring and Research Center",
     "headings": [],
@@ -1668,6 +1668,16 @@
       "rows": [
        [
         "1",
+        "BS: 2083-07-08 AD: 2026-10-25",
+        "Local: 13:06:00 UTC: 07:21:00",
+        "29.58",
+        "80.69",
+        "4.2 ML",
+        "Baitadi",
+        "Did you feel it?"
+       ],
+       [
+        "2",
         "BS: 2083-06-21 AD: 2026-10-07",
         "Local: 21:37:00 UTC: 15:52:00",
         "29.34",
@@ -1677,7 +1687,7 @@
         "Did you feel it?"
        ],
        [
-        "2",
+        "3",
         "BS: 2083-05-31 AD: 2026-09-15",
         "Local: 04:28:00 UTC: 22:43:00",
         "29.59",
@@ -1687,7 +1697,7 @@
         "Did you feel it?"
        ],
        [
-        "3",
+        "4",
         "BS: 2083-05-31 AD: 2026-09-15",
         "Local: 01:51:00 UTC: 20:06:00",
         "29.60",
@@ -1697,7 +1707,7 @@
         "Did you feel it?"
        ],
        [
-        "4",
+        "5",
         "BS: 2083-05-24 AD: 2026-09-09",
         "Local: 19:54:00 UTC: 14:09:00",
         "28.94",
@@ -1707,7 +1717,7 @@
         "Did you feel it?"
        ],
        [
-        "5",
+        "6",
         "BS: 2083-05-23 AD: 2026-09-08",
         "Local: 21:53:34 UTC: 16:08:34",
         "29.15",
@@ -1717,7 +1727,7 @@
         "Did you feel it?"
        ],
        [
-        "6",
+        "7",
         "BS: 2083-05-03 AD: 2026-08-18",
         "Local: 01:44:00 UTC: 19:59:00",
         "28.36",
@@ -1727,7 +1737,7 @@
         "Did you feel it?"
        ],
        [
-        "7",
+        "8",
         "BS: 2083-04-26 AD: 2026-08-11",
         "Local: 09:08:00 UTC: 03:23:00",
         "28.89",
@@ -1737,7 +1747,7 @@
         "Did you feel it?"
        ],
        [
-        "8",
+        "9",
         "BS: 2083-04-18 AD: 2026-08-02",
         "Local: 03:07:00 UTC: 21:22:00",
         "28.48",
@@ -1747,23 +1757,13 @@
         "Did you feel it?"
        ],
        [
-        "9",
+        "10",
         "BS: 2083-03-11 AD: 2026-06-25",
         "Local: 05:36:00 UTC: 23:51:00",
         "N/A",
         "N/A",
         "4.1 ML",
         "Jumla",
-        "Did you feel it?"
-       ],
-       [
-        "10",
-        "BS: 2083-03-07 AD: 2026-06-21",
-        "Local: 14:32:00 UTC: 08:47:00",
-        "N/A",
-        "N/A",
-        "4.1 ML",
-        "Humla",
         "Did you feel it?"
        ]
       ]
@@ -1775,7 +1775,108 @@
    },
    "changes": {
     "new_links": [],
-    "new_table_rows": []
+    "new_table_rows": [
+     [
+      "1",
+      "BS: 2083-07-08 AD: 2026-10-25",
+      "Local: 13:06:00 UTC: 07:21:00",
+      "29.58",
+      "80.69",
+      "4.2 ML",
+      "Baitadi",
+      "Did you feel it?"
+     ],
+     [
+      "2",
+      "BS: 2083-06-21 AD: 2026-10-07",
+      "Local: 21:37:00 UTC: 15:52:00",
+      "29.34",
+      "81.27",
+      "4.1 ML",
+      "Bajura",
+      "Did you feel it?"
+     ],
+     [
+      "3",
+      "BS: 2083-05-31 AD: 2026-09-15",
+      "Local: 04:28:00 UTC: 22:43:00",
+      "29.59",
+      "81.96",
+      "4.2 ML",
+      "Mugu",
+      "Did you feel it?"
+     ],
+     [
+      "4",
+      "BS: 2083-05-31 AD: 2026-09-15",
+      "Local: 01:51:00 UTC: 20:06:00",
+      "29.60",
+      "81.95",
+      "4.5 ML",
+      "Mugu",
+      "Did you feel it?"
+     ],
+     [
+      "5",
+      "BS: 2083-05-24 AD: 2026-09-09",
+      "Local: 19:54:00 UTC: 14:09:00",
+      "28.94",
+      "83.94",
+      "4.0 ML",
+      "Mustang",
+      "Did you feel it?"
+     ],
+     [
+      "6",
+      "BS: 2083-05-23 AD: 2026-09-08",
+      "Local: 21:53:34 UTC: 16:08:34",
+      "29.15",
+      "84.01",
+      "5.3 ML",
+      "Mustang",
+      "Did you feel it?"
+     ],
+     [
+      "7",
+      "BS: 2083-05-03 AD: 2026-08-18",
+      "Local: 01:44:00 UTC: 19:59:00",
+      "28.36",
+      "83.96",
+      "4.4 ML",
+      "Kaski",
+      "Did you feel it?"
+     ],
+     [
+      "8",
+      "BS: 2083-04-26 AD: 2026-08-11",
+      "Local: 09:08:00 UTC: 03:23:00",
+      "28.89",
+      "82.16",
+      "4.1 ML",
+      "Jajarkot",
+      "Did you feel it?"
+     ],
+     [
+      "9",
+      "BS: 2083-04-18 AD: 2026-08-02",
+      "Local: 03:07:00 UTC: 21:22:00",
+      "28.48",
+      "82.49",
+      "4.4 ML",
+      "Rolpa",
+      "Did you feel it?"
+     ],
+     [
+      "10",
+      "BS: 2083-03-11 AD: 2026-06-25",
+      "Local: 05:36:00 UTC: 23:51:00",
+      "N/A",
+      "N/A",
+      "4.1 ML",
+      "Jumla",
+      "Did you feel it?"
+     ]
+    ]
    }
   },
   {
@@ -1785,7 +1886,7 @@
    "category": "disasters",
    "kind": "json-list",
    "url": "https://bipadportal.gov.np/api/v1/incident/?format=json&limit=200&ordering=-incident_on",
-   "checked_at": "2026-10-26T04:47:08Z",
+   "checked_at": "2026-10-26T18:43:45Z",
    "http_status": null,
    "sha256": "132aa91272ab1d348a196e3561758f677730a80c5ad52aff6846770d5c8abc05",
    "status": "error",
@@ -2235,7 +2336,7 @@
    "category": "disasters",
    "kind": "json-list",
    "url": "https://bipadportal.gov.np/api/v1/alert/?format=json&limit=200&ordering=-created_on",
-   "checked_at": "2026-10-26T04:47:08Z",
+   "checked_at": "2026-10-26T18:43:45Z",
    "http_status": null,
    "sha256": "c19bc7e115c1e7904cf476134c14bac174bee96719814bd9e56cb8fc45871630",
    "status": "error",
@@ -2265,7 +2366,7 @@
    "category": "disasters",
    "kind": "html",
    "url": "https://ndrrma.gov.np/",
-   "checked_at": "2026-10-26T04:47:08Z",
+   "checked_at": "2026-10-26T18:43:45Z",
    "http_status": null,
    "sha256": "c8c262d93dd91b2a8c2841bc0d66fb57a26db44e0404bc22612717cad32a05a5",
    "status": "error",
