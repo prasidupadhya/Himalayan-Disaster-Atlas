@@ -1,11 +1,11 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-10-27T05:04:26Z",
- "generated_at_nepal": "2026-10-27 10:49 NPT",
+ "generated_at": "2026-10-28T05:41:43Z",
+ "generated_at_nepal": "2026-10-28 11:26 NPT",
  "notice": "Verbatim copies of public government pages, organised for reading. The agency websites are authoritative.",
  "summary": {
-  "sources_fetched": 5,
-  "sources_last_known": 3,
+  "sources_fetched": 1,
+  "sources_last_known": 7,
   "sources_unavailable": 0,
   "rivers_above_danger": 0,
   "rivers_above_warning": 0,
@@ -13,7 +13,7 @@
   "rain_current": 0,
   "rain_stations_above_warning": 0,
   "new_links": 0,
-  "new_records": 2
+  "new_records": 0
  },
  "sources": [
   {
@@ -23,11 +23,11 @@
    "category": "rivers",
    "kind": "bipad-river",
    "url": "https://bipadportal.gov.np/api/v1/river-stations/?format=json&limit=1000",
-   "checked_at": "2026-10-27T05:04:26Z",
-   "http_status": 200,
+   "checked_at": "2026-10-28T05:41:43Z",
+   "http_status": null,
    "sha256": "69f9fc1f76d6838cb6531f85a9aaf51425c657b0088ae2030af7ae6abbfef2e0",
-   "status": "fetched",
-   "fetched_at": "2026-10-27T05:04:26Z",
+   "status": "error",
+   "error": "Timeout: Failed to perform, curl: (28) Connection timed out after 25001 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
    "content": {
     "station_count": 284,
     "status_counts": {
@@ -1396,9 +1396,9 @@
      ]
     }
    },
-   "changes": {
-    "status_changes": []
-   }
+   "fetched_at": "2026-10-27T05:04:26Z",
+   "last_known": true,
+   "changes": {}
   },
   {
    "id": "bipad-rain",
@@ -1407,11 +1407,11 @@
    "category": "rainfall",
    "kind": "bipad-rain",
    "url": "https://bipadportal.gov.np/api/v1/rain-stations/?format=json&limit=1000",
-   "checked_at": "2026-10-27T05:04:26Z",
-   "http_status": 200,
+   "checked_at": "2026-10-28T05:41:43Z",
+   "http_status": null,
    "sha256": "983289c10ceaf576bcb420b0b7a341cd613fb2c6c6a583227a7a1188e4f8e24e",
-   "status": "fetched",
-   "fetched_at": "2026-10-27T05:04:26Z",
+   "status": "error",
+   "error": "HostDown: bipadportal.gov.np did not answer earlier in this run; not asked again",
    "content": {
     "station_count": 664,
     "status_counts": {
@@ -1424,6 +1424,8 @@
     "implausible_24h": 0,
     "wettest_24h": []
    },
+   "fetched_at": "2026-10-27T05:04:26Z",
+   "last_known": true,
    "changes": {}
   },
   {
@@ -1433,7 +1435,7 @@
    "category": "floods",
    "kind": "html",
    "url": "https://dms2.dhm.gov.np/",
-   "checked_at": "2026-10-27T05:04:26Z",
+   "checked_at": "2026-10-28T05:41:43Z",
    "http_status": null,
    "sha256": "d001b469bc009de8f6276ed40eb7471d75591f3cc332c1855f6dc65025d3f0de",
    "status": "error",
@@ -1457,7 +1459,7 @@
    "category": "weather",
    "kind": "html",
    "url": "https://dhm.gov.np/mfd/",
-   "checked_at": "2026-10-27T05:04:26Z",
+   "checked_at": "2026-10-28T05:41:43Z",
    "http_status": null,
    "sha256": "86a0356a87adb45e03f0c89689201d7900cc67b5f7cd54525556c2cd4776039b",
    "status": "error",
@@ -1487,11 +1489,11 @@
    "category": "earthquakes",
    "kind": "html",
    "url": "https://seismonepal.gov.np/en/earthquakes",
-   "checked_at": "2026-10-27T05:04:26Z",
+   "checked_at": "2026-10-28T05:41:43Z",
    "http_status": 200,
-   "sha256": "b3477255a2654fa34a2cd47d84a3c8603f1103f49a6acc61efe07ea344470ec7",
+   "sha256": "cdc4fe64f85c931013112662d2464c8559f0863e0810c82448ca97f5dfb2f0a0",
    "status": "fetched",
-   "fetched_at": "2026-10-27T05:04:26Z",
+   "fetched_at": "2026-10-28T05:41:43Z",
    "content": {
     "title": "National Earthquake Monitoring and Research Center",
     "headings": [],
@@ -1628,11 +1630,11 @@
    "category": "disasters",
    "kind": "json-list",
    "url": "https://bipadportal.gov.np/api/v1/incident/?format=json&limit=200&ordering=-incident_on",
-   "checked_at": "2026-10-27T05:04:26Z",
-   "http_status": 200,
+   "checked_at": "2026-10-28T05:41:43Z",
+   "http_status": null,
    "sha256": "1409e8359bccb5aad87882abfbc12c3c538ba091c95c24d14f20e57592103212",
-   "status": "fetched",
-   "fetched_at": "2026-10-27T05:04:26Z",
+   "status": "error",
+   "error": "HostDown: bipadportal.gov.np did not answer earlier in this run; not asked again",
    "content": {
     "record_count": 4,
     "complete": true,
@@ -1675,24 +1677,9 @@
      }
     ]
    },
-   "changes": {
-    "new_records": [
-     {
-      "id": 95906,
-      "title": "Snake Bite at Belbari Municipality-8",
-      "titleNe": "कोशी, मोरङ्ग, बेलबारी-८ मा सर्पदंश",
-      "incidentOn": "2026-10-21T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 95905,
-      "title": "Fire at Budhanilkantha Municipality-5",
-      "titleNe": "बाग्मती, काठमाण्डौ, बुढानीलकण्ठ-५ मा आगलागी",
-      "incidentOn": "2026-10-21T00:00:00+05:45",
-      "verified": true
-     }
-    ]
-   }
+   "fetched_at": "2026-10-27T05:04:26Z",
+   "last_known": true,
+   "changes": {}
   },
   {
    "id": "bipad-alerts",
@@ -1701,11 +1688,11 @@
    "category": "disasters",
    "kind": "json-list",
    "url": "https://bipadportal.gov.np/api/v1/alert/?format=json&limit=200&ordering=-created_on",
-   "checked_at": "2026-10-27T05:04:26Z",
-   "http_status": 200,
+   "checked_at": "2026-10-28T05:41:43Z",
+   "http_status": null,
    "sha256": "25bb8403f1fd8915c125a08228d85aefcb62c7e5a6861ffa8d82a4948488d310",
-   "status": "fetched",
-   "fetched_at": "2026-10-27T05:04:26Z",
+   "status": "error",
+   "error": "HostDown: bipadportal.gov.np did not answer earlier in this run; not asked again",
    "content": {
     "record_count": 0,
     "complete": true,
@@ -1720,9 +1707,9 @@
     ],
     "records": []
    },
-   "changes": {
-    "new_records": []
-   }
+   "fetched_at": "2026-10-27T05:04:26Z",
+   "last_known": true,
+   "changes": {}
   },
   {
    "id": "ndrrma-home",
@@ -1731,7 +1718,7 @@
    "category": "disasters",
    "kind": "html",
    "url": "https://ndrrma.gov.np/",
-   "checked_at": "2026-10-27T05:04:26Z",
+   "checked_at": "2026-10-28T05:41:43Z",
    "http_status": null,
    "sha256": "c8c262d93dd91b2a8c2841bc0d66fb57a26db44e0404bc22612717cad32a05a5",
    "status": "error",
