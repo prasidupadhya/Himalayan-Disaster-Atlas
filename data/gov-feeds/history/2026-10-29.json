@@ -1,6 +1,6 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-10-28T18:24:06Z",
+ "generated_at": "2026-10-29T05:47:48Z",
  "summary": {
   "sources_fetched": 2,
   "sources_last_known": 6,
@@ -40,14 +40,14 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "d81316962b38e1717e2f8a955af3b2acc2c3f09e8348f483c41d3ad96982e2d5"
+   "sha256": "ca76bfd54f0a0a919bac4eca12b04d0d341451137d326052f3b520bdbacab91a"
   },
   {
    "id": "seismo-earthquakes",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "2df787e8502f1254cf8f5c908786f2be7223157d68fea059efbeb7c0cddc0fa3"
+   "sha256": "e77d6cb969f6e357e2d36a6702958dfb68618f02724ebc4a3ff0ba9f0b3ff62b"
   },
   {
    "id": "bipad-incidents",
