@@ -1,14 +1,14 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-11-04T19:52:29Z",
+ "generated_at": "2026-11-05T06:45:24Z",
  "summary": {
   "sources_fetched": 7,
   "sources_last_known": 1,
   "sources_unavailable": 0,
-  "rivers_above_danger": 0,
+  "rivers_above_danger": 1,
   "rivers_above_warning": 0,
   "rivers_current": 179,
-  "rain_current": 309,
+  "rain_current": 307,
   "rain_stations_above_warning": 0,
   "new_links": 0,
   "new_records": 9
@@ -19,14 +19,14 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "843dc11af94e88caa1e4c9a11c2c065bfe103e90ea4b70ec4f21be6880ed222b"
+   "sha256": "997d8e6726214b0ad6d1cc3098be8fae9d234468e208972d36f8d368542bc1ef"
   },
   {
    "id": "bipad-rain",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "e0e659b848313632208d7d72ab69f2335d3f140db5fbae4ed513393c5d3a2e9d"
+   "sha256": "a1b69ccb8b284a77f3bcd1707f0f876e6522c5f50e25ec81b7a7489869640427"
   },
   {
    "id": "dhm-flood-archive",
@@ -40,35 +40,35 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "86a0af4ee73cd2c10fa21816ccba689b44a6731e07a5a8d140d0b8795eb4742e"
+   "sha256": "236011166c47625b0613e7c7462e426a7d0593e1d81ea2377dee61b3390d554b"
   },
   {
    "id": "seismo-earthquakes",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "acdd02c9de30854ce0ccbeb730ae9b6247aa834ba5a078307deaa96f2748b3db"
+   "sha256": "4bd99f13c82c1087f63b6bcead643c4bc461c6a5d8f237f3a8e99d8a39a6b0d9"
   },
   {
    "id": "bipad-incidents",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "19af74546e72900a1a7f66f6d5738de9d9ea3201a12a613ee9b1288b073bf5fd"
+   "sha256": "3ed7f96b641160817fc75c39657eedf367ed87bcc21e7c3cedf5d0178bb77c8c"
   },
   {
    "id": "bipad-alerts",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "7074b586e386dcf01cba3ff220e64a47a39303be704aea870eb24080eb9ac9ce"
+   "sha256": "203ab8bdbed51929e9be5a9eec8cdee3c94dcb4ff428645b508f1d15c23be3f1"
   },
   {
    "id": "ndrrma-home",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "dfbc9e1eab6a587ca4e2c2bc054d0164cdf5022c42b64eeea5474bf911e46989"
+   "sha256": "fe15834dd47be9d047c03ef7ee1e06904fedb594c14a02af83a5bb856f6031bb"
   }
  ]
 }
