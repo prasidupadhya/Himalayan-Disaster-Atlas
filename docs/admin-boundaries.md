@@ -27,3 +27,14 @@ Verified on 2026-09-07 with the root commands:
 - 2 development hydration tests passed: extension attributes on `<body>` are tolerated while application-content mismatches still report a diagnostic.
 - Release/public-copy validation, type checking, ESLint, Ruff, source/output security scans, and the static production build passed.
 - The pinned source pipeline was rerun without changing the immutable release bytes. Desktop and 390 px mobile screenshots were inspected.
+
+## Source re-check, 10 November 2026
+
+The release's `stale_after` (30 October 2026) is the review date HDX itself lists for this dataset. On 10 November 2026 the source was checked again:
+
+- HDX still lists the dataset as last modified on 14 August 2026, before the Atlas retrieval of 7 September 2026, with the review date of 30 October 2026 passed and no newer version published.
+- The GeoJSON archive downloaded that day has the pinned SHA-256 (`9f6713c4…46b6707`), so the published 2.0.1 release still matches the newest source.
+
+The release therefore stays as published and is correctly shown as past its review date. The notice now appears with the boundary controls (the Boundaries tab) instead of above the whole map, because it concerns boundaries only. A new release is due when HDX publishes a new version.
+
+The browser test for the empty and stale states sets its own date, so it no longer depends on the day it runs.

@@ -277,7 +277,8 @@ export function Atlas() {
           <p className="eyebrow">{c.nepalGlacialLakesRivers}</p>
           <h1>{c.exploreNepalSGlacial}</h1>
           <p className="atlas-lede">{c.pickGlacialLakeFollow}</p>
-          <DataState state={resource} retry={retry} />
+          {/* A passed review date concerns the boundaries only, so it is shown with them (Boundaries tab), not over the whole map. */}
+          {resource.status !== 'stale' && <DataState state={resource} retry={retry} />}
           <Tabs label={c.atlasControls} idPrefix="atlas" value={tab} onChange={next => show(next)}
             items={TABS.map(item => ({ value: item.value, label: tabLabels[item.value], hue: 'hue' in item ? item.hue : undefined }))} />
         </div>}>
@@ -295,6 +296,7 @@ export function Atlas() {
         {panel('terrain', <div id="terrain-controls" tabIndex={-1} className="atlas-anchor"><Terrain key={attempt} map={mapReady ? interactiveMap : null} /></div>)}
         {panel('boundaries', <>
           <section id="boundary-controls" tabIndex={-1} className="layer-controls" aria-label={c.mapLayers}><h2>{c.boundaryLevels}</h2>
+            {resource.status === 'stale' && <DataState state={resource} />}
             {c.levels.map((label, index) => <label key={index}><input type="checkbox" checked={visible[index]} onChange={() => toggle(index)} disabled={!datasets} /> {label}</label>)}
             <p className="muted">{c.districtsAppearFromZoom}</p>
           </section>

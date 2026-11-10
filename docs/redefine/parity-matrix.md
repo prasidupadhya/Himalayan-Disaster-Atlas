@@ -4,7 +4,7 @@ The acceptance checklist for `feat/redefine`. Every route, module and user-visib
 
 Test names are abbreviated as `file › test`. All files are under `tests/e2e/`.
 
-Legend: ✅ verified on the final commit (`npm run check` and all 127 Playwright tests passing) · ⚠ verified with a pre-existing caveat, stated in the row.
+Legend: ✅ verified on the final commit (`npm run check` and all 127 Playwright tests passing).
 
 ## Routes
 
@@ -36,7 +36,7 @@ Legend: ✅ verified on the final commit (`npm run check` and all 127 Playwright
 | S8 | Manifest, theme colour, safe areas, `viewport-fit=cover` | `app/manifest.ts`, `app/layout.tsx` | `mobile-app › phones get an app shell…` | Same, with a theme colour per scheme | ✅ |
 | S9 | Forced colours and high contrast keep text cues | `globals.css` | `ui-polish › evidence and scenario states retain explicit non-color cues` | Tokens provide forced-colours and contrast variants | ✅ |
 | S10 | Footer with Explore / About links and the evidence statement | `app/layout.tsx` | `mobile-app › every page…` (targets) | Same | ✅ |
-| S11 | Hydration robustness against extension attributes | `app/layout.tsx` | `playwright.hydration.config.ts` suite | Same. The h1 case passes; the body case fails identically on `main`, because the dev server has no `/sw.js` (a 404 the test counts as an error). Not run in CI | ⚠ |
+| S11 | Hydration robustness against extension attributes | `app/layout.tsx` | `playwright.hydration.config.ts` suite | Same. Both cases pass: the service worker is registered by the production build only, so the dev server no longer reports a missing `/sw.js`. Not run in CI | ✅ |
 
 ## Map (`/atlas/`)
 

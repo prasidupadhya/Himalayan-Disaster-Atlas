@@ -88,13 +88,18 @@ test('empty and stale boundary states are explicit', async ({ page }) => {
   emptyManifest.artifact.byte_size = emptyArtifact.byteLength;
   await page.route(provinceManifestURL, route => route.fulfill({ json: emptyManifest }));
   await page.route(provinceArtifactURL, route => route.fulfill({ body: emptyArtifact, contentType: 'application/gzip' }));
+  // Both states depend on the date, so the test sets it: before the release's review date, then after it.
+  await page.clock.install({ time: new Date('2026-10-01T00:00:00Z') });
   await page.goto('/atlas/');
   await expect(page.getByText('No features are available in this dataset.')).toBeVisible();
 
   await page.unroute(provinceArtifactURL);
   await page.unroute(provinceManifestURL);
-  await page.clock.install({ time: new Date('2026-11-01T00:00:00Z') });
+  await page.clock.setSystemTime(new Date('2026-11-01T00:00:00Z'));
   await page.reload();
+  // The notice sits with the boundaries it describes, and the map's header stays clear of it.
+  await expect(page.locator('.atlas-panel-header').getByText(/passed its update deadline/)).toHaveCount(0);
+  await openAtlasTab(page, 'Boundaries');
   await expect(page.getByText(/passed its update deadline/)).toBeVisible();
   await expect(page.locator('option[value="np01"]')).toHaveCount(1);
 });
