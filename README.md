@@ -22,6 +22,7 @@ The interface runs on one design system: colour, type, spacing and motion tokens
 
 - **Daily official copy.** `.github/workflows/gov-feeds.yml` runs at 00:17 UTC (about 06:02 Nepal time). It reads eight DHM, BIPAD and NEMRC sources ([`pipelines/gov_feeds`](pipelines/gov_feeds)) and commits `apps/web/public/gov/latest.json`, which redeploys the site. A source that fails keeps its last copy, labelled as such. See [official sources](docs/official-sources.md).
 - **Map and scenario data.** These are versioned, immutable releases built offline by the Python pipelines in [`pipelines/`](pipelines). Each one carries its source, licence, coverage and limitations, plus a SHA-256 checksum that the browser verifies before use. See [provenance](docs/provenance.md).
+- **Live conditions.** `.github/workflows/live-feeds.yml` runs every three hours. It reads USGS earthquake summaries and one NOAA GFS rainfall field, publishes them to the data-only `live-data` branch, and pins that publication in `data/live-pin.json`, which redeploys the site. See [live feeds](docs/live-open-feeds.md).
 - **Offline.** A service worker keeps a checksum-pinned shell. Stored live data is shown as LAST KNOWN and deleted after seven days. See [offline shell](docs/offline-shell.md).
 
 No credentials reach the browser. Acquisition jobs run in GitHub Actions or locally.

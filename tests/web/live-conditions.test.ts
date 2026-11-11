@@ -45,6 +45,25 @@ describe('static /live/ route beside the live data index', () => {
       expect(() => verifyLiveExport(directory)).toThrow('Unregistered');
     } finally { rmSync(directory, { recursive: true, force: true }); }
   });
+  it('reads the pinned live-data commit only as a full SHA, and a deployment without a usable pin still publishes the unavailable index', async () => {
+    const { mkdtempSync, mkdirSync, copyFileSync, writeFileSync, rmSync } = await import('node:fs');
+    const { tmpdir } = await import('node:os');
+    const { pinnedLiveCommit, prepareLiveExport } = await import('../../scripts/live-publication.mjs');
+    const directory = mkdtempSync(`${tmpdir()}/atlas-live-pin-`);
+    try {
+      expect(pinnedLiveCommit(`${directory}/absent.json`)).toBeNull();
+      writeFileSync(`${directory}/pin.json`, JSON.stringify({ commit: 'a'.repeat(40) }));
+      expect(pinnedLiveCommit(`${directory}/pin.json`)).toBe('a'.repeat(40));
+      writeFileSync(`${directory}/pin.json`, JSON.stringify({ commit: 'main' }));
+      expect(() => pinnedLiveCommit(`${directory}/pin.json`)).toThrow('full commit SHA');
+      // An ordinary build (no deployment signal) never imports live data, whatever is pinned.
+      mkdirSync(`${directory}/live`);
+      copyFileSync('apps/web/public/live/latest.json', `${directory}/live/latest.json`);
+      vi.stubEnv('WORKERS_CI', ''); vi.stubEnv('ATLAS_LIVE_PIN', ''); vi.stubEnv('ATLAS_LIVE_DATA_COMMIT', '');
+      prepareLiveExport(directory);
+      expect(parseLiveIndex(JSON.parse(readFileSync(`${directory}/live/latest.json`, 'utf8'))).workflow.status).toBe('not_configured');
+    } finally { vi.unstubAllEnvs(); rmSync(directory, { recursive: true, force: true }); }
+  });
 });
 
 describe('freshness states and non-colour labels', () => {

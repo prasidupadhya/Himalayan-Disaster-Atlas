@@ -115,7 +115,7 @@ export function LiveConditions() {
         <div><dt>{c.lastSuccessfulFetch}</dt><dd><Time value={publication.index.workflow.last_successful_fetch_at} lang={lang} /></dd></div>
         <div><dt>{c.lastAttempt}</dt><dd><Time value={publication.index.workflow.last_attempt_at} lang={lang} /> · {publication.index.workflow.status.replace('_', ' ').toUpperCase()}</dd></div>
         <div><dt>{c.publicationGenerated}</dt><dd><Time value={publication.index.generated_at} lang={lang} /></dd></div>
-        <div><dt>{c.updateSchedule}</dt><dd>{c.noAutomaticScheduleActive}</dd></div>
+        <div><dt>{c.updateSchedule}</dt><dd>{publication.index.workflow.status === 'not_configured' ? c.noAutomaticScheduleActive : c.scheduleActive}</dd></div>
         <div><dt>{c.workflowRun}</dt><dd>{publication.index.workflow.run_url ? <a href={publication.index.workflow.run_url}>{c.acquisitionWorkflowRun}</a> : <span className="unknown">{policy.copy[lang].unknown}</span>}</dd></div>
       </dl>}
       {publication?.index.workflow.status === 'not_configured' && <p className="live-callout">{c.notConfigured}</p>}

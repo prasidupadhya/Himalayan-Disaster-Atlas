@@ -1,5 +1,8 @@
-name: Manual live feed publication
+name: Live feed publication
 on:
+  schedule:
+    # Every three hours, off the hour. USGS summaries are shown as fresh for six hours and the GFS field for twelve.
+    - cron: '17 */3 * * *'
   workflow_dispatch:
 permissions:
   contents: read
@@ -37,8 +40,34 @@ jobs:
       - name: Acquire and atomically validate source snapshots
         run: npm run live:fetch -- --run-url "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
       - name: Publish data branch only
+        id: publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           export GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=http.https://github.com/.extraheader GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
           node scripts/publish-live-branch.mjs
+      # The site is static: a publication becomes visible when a deployment build imports it. Committing the
+      # publication's commit SHA to main records exactly which data each deployment shows and starts that build.
+      - name: Pin the publication on main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LIVE_SHA: ${{ steps.publish.outputs.sha }}
+          GIT_AUTHOR_NAME: Prasid
+          GIT_AUTHOR_EMAIL: 91832812+prasidupadhya@users.noreply.github.com
+          GIT_COMMITTER_NAME: Prasid
+          GIT_COMMITTER_EMAIL: 91832812+prasidupadhya@users.noreply.github.com
+        run: |
+          export GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=http.https://github.com/.extraheader GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          [[ "$LIVE_SHA" =~ ^[a-f0-9]{40}$ ]] || { echo "No publication to pin."; exit 1; }
+          # Main may have moved (the daily digest also commits); retry on the newest main rather than fail.
+          for attempt in 1 2 3; do
+            git fetch --no-tags --depth 1 origin main
+            git checkout --quiet --detach FETCH_HEAD
+            printf '{\n  "commit": "%s"\n}\n' "$LIVE_SHA" > data/live-pin.json
+            git add data/live-pin.json
+            if git diff --cached --quiet; then echo "This publication is already pinned."; exit 0; fi
+            git commit --quiet -m "Update live conditions for $(date -u '+%F %H:%M') UTC"
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 5))
+          done
+          echo "Could not pin the publication on main."; exit 1

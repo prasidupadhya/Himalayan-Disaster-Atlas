@@ -43,8 +43,10 @@ describe('open feed delivery and exact source review', () => {
     expect(() => parseLiveSnapshot(f.snapshot)).toThrow('Revision'); expect(() => runtime.parseLiveSnapshot(f.snapshot)).toThrow('Revision');
     expect(parseLiveIndex(f.index)).toEqual(runtime.parseLiveIndex(f.index));
   });
-  it('ships dispatch only, no cron/main publisher, and default unconfigured source index', () => {
-    const workflow = readFileSync('.github/workflows/live-feeds.yml', 'utf8'); expect(workflow).toContain('workflow_dispatch:'); expect(workflow).not.toMatch(/\bschedule:|\bcron:/); expect(workflow).toContain('persist-credentials: false');
+  it('publishes on the reviewed three-hour schedule: data to live-data, only the pin to main, and a default unconfigured source index', () => {
+    const workflow = readFileSync('.github/workflows/live-feeds.yml', 'utf8'); expect(workflow).toContain('workflow_dispatch:'); expect(workflow).toContain("cron: '17 */3 * * *'"); expect(workflow).toContain('persist-credentials: false');
+    // Main receives one file, the pinned commit; the data itself never lands there.
+    expect(workflow).toContain('git add data/live-pin.json'); expect(workflow.match(/git add /g)).toHaveLength(1);
     expect(readFileSync('scripts/publish-live-branch.mjs', 'utf8')).toContain('HEAD:refs/heads/live-data');
     const index = parseLiveIndex(JSON.parse(readFileSync('apps/web/public/live/latest.json', 'utf8'))); expect(index.workflow.last_successful_fetch_at).toBeNull();
   });

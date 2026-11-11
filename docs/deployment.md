@@ -82,3 +82,5 @@ Cloudflare Git integration requires no new environment setting: keep build comma
 ## Manual live publication
 
 Feature 43 uses a data-only live-data branch. Run the manual live workflow on reviewed main, then pin its full commit SHA with `ATLAS_LIVE_DATA_COMMIT` in the next root static build. No live-data commit becomes visible until a validated Cloudflare export is deployed. No active cron, main bot or deployment trigger is added. The default build ships an unconfigured index. [Trade-offs, bounded import and rollback](live-open-feeds.md).
+
+Since 12 November 2026 the live workflow runs every three hours and pins each publication in `data/live-pin.json` on main; Cloudflare's build imports that pin. See [scheduled publication](live-open-feeds.md#scheduled-publication-from-12-november-2026).

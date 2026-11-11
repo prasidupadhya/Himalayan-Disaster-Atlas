@@ -33,3 +33,16 @@ The manual Action restores the previous data branch, runs the same local runner,
 Tests use explicit synthetic USGS values and a hash-pinned archived NOAA GRIB decoder fixture (see `tests/fixtures/live-open-feeds/gfs-source.json`); neither is published as current data. Python covers interval/grid/null/zero, malformed/empty/failed, retained snapshots, corrupt prior releases, reviewed terms, immutable conflict and pointer staging failure. Vitest covers Node/TS/Python contract agreement, exact source policy, corrupted/absent/oversized delivery and inactive scheduling. Playwright covers normal, empty, failed, unavailable, stale, corrupt/retry, no-WebGL/mobile and keyboard-only delivery.
 
 Before PR: `npm run check`, `npm run test:e2e:public`, `npm run release:check`. Review source interface and terms changes through a new source policy version; old immutable releases are not silently relicensed. Physical inundation, destroyed buildings, casualties, repair costs, hydropower downtime and economic loss remain UNKNOWN. [DHM](https://www.dhm.gov.np/index.php), [NDRRMA](https://ndrrma.gov.np/) and [BIPAD](https://bipadportal.gov.np/) remain official warning authorities.
+
+## Scheduled publication (from 12 November 2026)
+
+This replaces the "manual only" statements above; the acquisition, validation and data-branch design are unchanged.
+
+- **Schedule.** `.github/workflows/live-feeds.yml` runs at minute 17 of every third hour (`17 */3 * * *`) and can still be started by hand. It runs only the code on `main`.
+- **Data** goes to the `live-data` branch as before: only `live/` indexes and versioned `data/live-*/` snapshots, never code.
+- **Pin.** After publishing, the workflow commits one file to `main`, `data/live-pin.json`, holding the full SHA of the publication. That commit is authored as the repository owner, like the daily digest. It records exactly which data a deployment shows and starts the deployment build. Nothing else from the acquisition reaches `main`.
+- **Import.** A deployment build (Cloudflare Workers Builds, which sets `WORKERS_CI`; or any build with `ATLAS_LIVE_PIN=1`) imports the pinned commit through the same bounded, hash-checked import as `ATLAS_LIVE_DATA_COMMIT`, which still takes precedence. If the pinned commit cannot be fetched or verified, the build publishes the unavailable index instead of failing, so a bad pin cannot stop the site from deploying.
+- **Tests stay deterministic.** Local and CI builds set neither signal, so they ship the checked-in unavailable index and never depend on today's feeds.
+- **What a visitor sees.** Readings can appear some minutes after the fetch time shown, because a deployment has to finish. Freshness still comes from the sources' own times (six hours for USGS, twelve for GFS), so a missed run shows as STALE, never as current.
+- **To pause it,** remove the `schedule` block from the workflow. To go back to no readings, delete `data/live-pin.json`.
+- **Cost.** About eight one-line commits a day on `main`, each starting a deployment. They are pushed with the workflow token, so they do not start the quality workflow.

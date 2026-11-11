@@ -71,13 +71,32 @@ export function verifyLiveExport(output) {
   if (!names.length) throw new Error('Missing live publication index');
   return verifyLiveFiles(name => readFileSync(resolve(output, name)), names);
 }
+/** The live-data commit the scheduled workflow last pinned on main (data/live-pin.json), or null. */
+export function pinnedLiveCommit(path = resolve(root, 'data/live-pin.json')) {
+  if (!existsSync(path)) return null;
+  const commit = JSON.parse(readFileSync(path, 'utf8')).commit;
+  requireValue(typeof commit === 'string' && /^[a-f0-9]{40}$/.test(commit), 'data/live-pin.json must hold a full commit SHA');
+  return commit;
+}
 export function prepareLiveExport(output) {
-  const commit = process.env.ATLAS_LIVE_DATA_COMMIT;
-  if (!commit) {
+  const explicit = process.env.ATLAS_LIVE_DATA_COMMIT;
+  // Deployment builds (Cloudflare Workers Builds sets WORKERS_CI) import the pinned publication. Local and CI builds
+  // stay on the checked-in unavailable index, so tests never depend on today's feeds.
+  const pinned = !explicit && (process.env.WORKERS_CI || process.env.ATLAS_LIVE_PIN === '1') ? pinnedLiveCommit() : null;
+  if (!explicit && !pinned) {
     // No fetch is fabricated. The checked-in unavailable index is the default.
     verifyLiveExport(output);
     return;
   }
+  if (explicit) { importLiveCommit(output, explicit); return; }
+  // A pin that cannot be fetched or verified must not stop the site from deploying: nothing has been written yet,
+  // so the unavailable index is published instead and the page says so.
+  try { importLiveCommit(output, pinned); } catch (error) {
+    console.warn(`Pinned live publication ${pinned} was not imported (${error instanceof Error ? error.message.split('\n')[0] : error}); publishing the unavailable index.`);
+    verifyLiveExport(output);
+  }
+}
+function importLiveCommit(output, commit) {
   requireValue(/^[a-f0-9]{40}$/.test(commit), 'ATLAS_LIVE_DATA_COMMIT must be a full reviewed commit SHA');
   // Only acquisition-branch bytes are imported. Never execute scripts from that branch.
   execFileSync('git', ['fetch', '--no-tags', '--filter=blob:none', 'origin', 'live-data'], { cwd: root, stdio: 'pipe', timeout: 60000 });
