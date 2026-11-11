@@ -1,6 +1,6 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-11-10T19:51:15Z",
+ "generated_at": "2026-11-11T06:17:48Z",
  "summary": {
   "sources_fetched": 7,
   "sources_last_known": 1,
@@ -8,10 +8,10 @@
   "rivers_above_danger": 0,
   "rivers_above_warning": 0,
   "rivers_current": 169,
-  "rain_current": 303,
+  "rain_current": 304,
   "rain_stations_above_warning": 0,
   "new_links": 0,
-  "new_records": 17
+  "new_records": 13
  },
  "sources": [
   {
@@ -19,14 +19,14 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "40e3ebde3324ec9dc9a626a237826a466484eeaf59a3654838bd55234f228028"
+   "sha256": "de72349a78e126a82db03bc901126a02a6424f0b0dc80a6b68db9930a472a23e"
   },
   {
    "id": "bipad-rain",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "56c5a349d3c000182ecf72807323fee1b327aa4caf91563c2f51559720bdcee8"
+   "sha256": "8f42509e0b66553d51c88bafd1ac7c0506774f5f691b417da1168b2292b40618"
   },
   {
    "id": "dhm-flood-archive",
@@ -40,21 +40,21 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "dc8480298d9cc2b1ada4f25ec3bc31343fa0cc7b188686f913dd06e015a3924d"
+   "sha256": "c49d9c49879f55834f2a8dea725145fedfbe4f3b8edd3e437685739b65c52e2c"
   },
   {
    "id": "seismo-earthquakes",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "c1007c204c220b1e65e04b0135bfc459b9cbf0132cbb566964bf1400c6cd30bd"
+   "sha256": "79cfa54b2bf4ae1e5ad11834bbca4b1572b02d3316bc906841a2151b38d42465"
   },
   {
    "id": "bipad-incidents",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "3070b63b8c28fdb006070f416dbe09d72f192d29e9cceb6e8b2a64a875fc0d51"
+   "sha256": "91c8cd368fc847b268c3644349d941e03827d303586f91b1b360b9a57640f9e0"
   },
   {
    "id": "bipad-alerts",
@@ -68,7 +68,7 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "c4bf2018d6733ca0136833d99812eb5d50e42491bd0be204f321ef8128ad2b5d"
+   "sha256": "833a433813f6ae8153814732d480fe3320967d6180e857cdbfb88c0130c5db8c"
   }
  ]
 }
