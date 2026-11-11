@@ -13,7 +13,8 @@ jobs:
   quality:
     name: Quality and static browser tests
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    # The full job takes about 45 minutes; at a 45-minute limit a passing run was cancelled while saving its export.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:

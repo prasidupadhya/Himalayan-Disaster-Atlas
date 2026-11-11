@@ -26,7 +26,8 @@ test('terrain renders locally, toggles and inspects elevation independently of e
   await terrain.getByRole('checkbox', { name: '3D terrain' }).check();
   await terrain.getByRole('slider').fill('2');
   await terrain.getByRole('button', { name: 'Inspect elevation' }).click();
-  await expect(terrain.getByText(sample!, { exact: true })).toBeVisible();
+  // With 3D on, the software renderer can take longer than the default 5 s to return the sample.
+  await expect(terrain.getByText(sample!, { exact: true })).toBeVisible({ timeout: 15_000 });
   await terrain.getByRole('checkbox', { name: '3D terrain' }).uncheck();
   await terrain.getByRole('checkbox', { name: 'Hillshade' }).uncheck();
   await terrain.getByRole('checkbox', { name: 'Hillshade' }).check();
