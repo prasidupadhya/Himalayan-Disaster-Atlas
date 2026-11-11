@@ -20,11 +20,12 @@ export function Hazards() {
       <div className="hz-hero-top"><p className="eyebrow">{c.eyebrow}</p></div>
       <h1>{c.title}</h1>
       <p className="intro">{c.intro}</p>
-      <p className="hz-authorities">{c.authorities} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url} rel="noopener">{a.name}</a></span>)}</p>
-      {digest && <p className="hz-copied">{c.copiedAt} {digest.generated_at_nepal} · <a href="/official/">{c.all}</a></p>}
-      {digest && <StaleNote digest={digest} c={c} lang={lang} />}
+      {/* Today's figures come first; where they come from and who to follow for warnings sit right under them. */}
       {digest && <Glance digest={digest} c={c} lang={lang} />}
       {state.status === 'loading' && <div className="hz-glance-placeholder" aria-hidden="true" />}
+      {digest && <StaleNote digest={digest} c={c} lang={lang} />}
+      {digest && <p className="hz-copied">{c.copiedAt} {digest.generated_at_nepal} · <a href="/official/">{c.all}</a></p>}
+      <p className="hz-authorities">{c.authorities} {LIVE_AUTHORITIES.map((a, i) => <span key={a.name}>{i > 0 && ' · '}<a href={a.url} rel="noopener">{a.name}</a></span>)}</p>
       <nav className="hz-jump" aria-label={c.jump}>{sections.map(([id, label]) => <a key={id} href={`#${id}`}>{label}</a>)}</nav>
     </header>
     {state.status === 'loading' && <p role="status" className="hz-loading">{c.loading}</p>}

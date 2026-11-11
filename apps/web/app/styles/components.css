@@ -150,7 +150,10 @@
   .maplibregl-popup-tip { border-top-color: var(--surface); }
   @media (max-width: 800px) {
     .maplibregl-ctrl-group button { width: var(--touch); height: var(--touch); }
-    .maplibregl-ctrl-attrib-button { min-width: var(--touch); min-height: var(--touch); background-position: center; }
+    /* MapLibre draws a 24 px button inside a 24 px pill; as a 48 px touch target that turned into a misshapen blob.
+     * Folded, the pill is only the target, with the information mark drawn at its usual size in the middle. */
+    .maplibregl-ctrl-attrib.maplibregl-compact:not(.maplibregl-compact-show) { min-width: var(--touch); min-height: var(--touch); padding: 0; background: none; }
+    .maplibregl-ctrl-attrib-button { min-width: var(--touch); min-height: var(--touch); border-radius: 50%; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='13' fill='%23fff'/%3E%3Ccircle cx='14' cy='8.6' r='1.7' fill='%2313212a'/%3E%3Crect x='12.5' y='12' width='3' height='9' rx='1.2' fill='%2313212a'/%3E%3C/svg%3E") center / 28px 28px no-repeat; }
   }
 
   /* ---- Evidence and provenance ---- */

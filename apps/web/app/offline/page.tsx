@@ -6,7 +6,7 @@ import { OFFLINE } from './copy';
 import { LIVE_AUTHORITIES } from '../../../../packages/contracts/live';
 import offline from '../../../../packages/contracts/offline-shell-policy.json';
 export const metadata = { title: 'Offline', robots: { index: false } };
-const PAGES: Record<string, [string, string]> = { '/': ['Home', 'गृहपृष्ठ'], '/live/': ['Live conditions (last known copy)', 'प्रत्यक्ष अवस्था (पछिल्लो ज्ञात प्रति)'], '/methodology/': ['Methodology', 'विधि'], '/sources/': ['Sources', 'स्रोतहरू'] };
+const PAGES: Record<string, [string, string]> = { '/': ['Home', 'गृहपृष्ठ'], '/live/': ['Live conditions (last known copy)', 'प्रत्यक्ष अवस्था (पछिल्लो ज्ञात प्रति)'], '/hazards/': ['Today', 'आज'], '/simulate/': ['Scenarios', 'परिदृश्य'], '/simulate/report/': ['Scenario report', 'परिदृश्य प्रतिवेदन'], '/methodology/': ['Methodology', 'विधि'], '/sources/': ['Sources', 'स्रोतहरू'] };
 const t = bilingual(OFFLINE);
 export default function OfflinePage() {
   return <div className="page prose offline-page">

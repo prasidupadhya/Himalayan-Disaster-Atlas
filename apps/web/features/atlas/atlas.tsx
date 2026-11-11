@@ -261,7 +261,7 @@ export function Atlas() {
         <a className="map-skip-link" href="#accessible-boundary-records" onClick={() => show('boundaries', 'full')}>{c.skipInteractiveMapBoundary}</a>
         <p id="atlas-map-alternative" className="sr-only">{c.mapVisualNavigationSurface}</p>
         <div ref={container} className="map" role="region" aria-label={c.interactiveNepalAdministrativeBoundary} aria-describedby="atlas-map-alternative" data-map-ready={mapReady} />
-        <div className="map-caption"><span className="boundary-key" aria-hidden="true" /> COD-AB v02 · {c.clickBoundaryInspect}</div>
+        <div className="map-caption"><span className="boundary-key" aria-hidden="true" /><span className="map-caption-text">COD-AB v02 · {c.clickBoundaryInspect}</span></div>
         {datasets && !mapReady && !mapError && <div className="map-message" role="status">{c.preparingInteractiveMap}</div>}
         {mapError && <div className="map-message" role="alert">{c.mapErrors[mapError]}</div>}
         <div className="map-controls map-controls-end">

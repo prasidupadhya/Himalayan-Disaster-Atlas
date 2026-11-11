@@ -140,17 +140,21 @@ export function mountRiverDataset(map: Map, dataset: Dataset) {
   const width: ExpressionSpecification = ['interpolate', ['linear'], ['get', 'flow_order'], 3, 4.2, 4, 3.2, 5, 2.1, 6, 1.4, 7, 0.9, 8, 0.6];
   const selectedState: ExpressionSpecification = ['boolean', ['feature-state', 'selected'], false];
   const round = { 'line-cap': 'round', 'line-join': 'round' } as const;
+  // At country scale the whole network would merge into one blue mass, so lines thin out with the zoom and reach their
+  // full width from zoom 8. Display only: the ranking by flow order and the selected reach's width are unchanged.
+  const byZoom = (selected: number, normal: ExpressionSpecification): ExpressionSpecification => ['interpolate', ['linear'], ['zoom'],
+    4.5, ['case', selectedState, selected, ['*', 0.3, normal]], 8, ['case', selectedState, selected, normal]];
   // A soft halo under the main stems and the selected reach, so water reads against terrain and dark boundaries.
   // Display only: it is never clickable and its width follows the same flow-order ranking as the line itself.
   map.addLayer({ id: glow, source, type: 'line', minzoom, layout: round, filter: ['<=', ['get', 'flow_order'], 5], paint: {
     'line-color': ['case', selectedState, '#ffffff', '#7cc4ff'],
-    'line-width': ['case', selectedState, 14, ['*', width, 3]],
+    'line-width': byZoom(14, ['*', width, 3]),
     'line-blur': ['case', selectedState, 6, 4],
     'line-opacity': ['case', selectedState, 0.55, 0.22],
   } });
   map.addLayer({ id: line, source, type: 'line', minzoom, layout: round, paint: {
     'line-color': ['case', selectedState, '#ffffff', '#3987e5'],
-    'line-width': ['case', selectedState, 5, width],
+    'line-width': byZoom(5, width),
     'line-opacity': ['case', selectedState, 1, 0.82],
   } });
   const ids = new Set(dataset.collection.features.map(feature => String(feature.id)));

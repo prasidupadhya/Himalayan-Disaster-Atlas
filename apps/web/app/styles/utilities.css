@@ -29,7 +29,7 @@
     .hz-actions a, .hz-card-links a, .hazard-links a, .home-actions a, .atlas-shortcuts a, .sim-actions a, .sim-actions button,
     .today-strip-note a, .methodology-toc a, .source-toc a, .hz-documents a, .sim-watch, .official-jump a,
     nav[aria-label]:not(.site-navigation) > a, .sim-notice a, .hz-authorities a, .hz-copied a, .evidence-links a, .live-links a {
-      display: inline-flex; align-items: center; min-height: var(--touch); min-width: var(--touch);
+      display: inline-flex; align-items: center; justify-content: center; min-height: var(--touch); min-width: var(--touch);
     }
   }
 

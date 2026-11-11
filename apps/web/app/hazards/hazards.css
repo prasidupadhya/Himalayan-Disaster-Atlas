@@ -112,7 +112,7 @@
     .hz-section { padding: var(--s-5) 0 0; }
     .hz-hero h1 { font-size: var(--step-4); }
     /* The glance already links to every section on a phone. */
-    .hz-glance + .hz-jump { display: none; }
+    .hz-hero:has(.hz-glance) .hz-jump { display: none; }
     .hz-glance { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-2); }
     .hz-glance a { padding: var(--s-3); }
     .hz-glance-placeholder { min-height: 15.5rem; }

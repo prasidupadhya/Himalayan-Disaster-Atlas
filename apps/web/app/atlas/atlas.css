@@ -14,7 +14,10 @@
   .atlas-panel-header h1 { font-size: var(--step-2); line-height: 1.15; }
   .atlas-lede { margin: 0; color: var(--ink-2); font-size: var(--step--1); }
   .atlas-panel-header .tabs { margin-top: var(--s-2); }
-  .atlas-panel-header .tabs [role="tab"] { flex: 1 1 auto; padding: 0 var(--s-3); font-size: var(--step--1); }
+  /* Five tabs must fit the panel in both languages: tight padding, and the row scrolls if a label still cannot fit. */
+  .atlas-panel-header { container-type: inline-size; }
+  .atlas-panel-header .tabs { gap: 2px; scroll-snap-type: x proximity; }
+  .atlas-panel-header .tabs [role="tab"] { flex: 1 1 auto; padding: 0 .9cqi; font-size: clamp(11px, 3.55cqi, var(--step--1)); scroll-snap-align: center; }
   .atlas-tabpanel:focus-visible { outline-offset: -3px; }
   .atlas-anchor { scroll-margin-top: 200px; }
   .atlas-anchor:focus { outline: none; }
@@ -78,8 +81,9 @@
   .map-key ul { display: grid; gap: var(--s-2); margin: 0; padding: 0 var(--s-3) var(--s-3); list-style: none; }
   .map-key li { display: flex; gap: var(--s-2); align-items: center; margin: 0; font-size: var(--step--2); line-height: 1.35; }
   .map-key li strong { font-weight: 600; }
-  .map-key-intro { margin: 0; padding: 0 var(--s-3) var(--s-2); color: var(--on-stage-2); font-size: var(--step--2); }
-  .map-key-detail { color: var(--on-stage-2); }
+  /* The key stays small so it does not cover the country: names and swatches are shown; the longer notes are kept
+   * for assistive technology and as tooltips, and every layer is described in full in its own panel. */
+  .map-key-intro, .map-key-detail { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .map-key details[open] { max-height: min(60svh, 26rem); overflow-y: auto; }
   .map-key-swatch { flex: 0 0 auto; display: inline-block; width: 1.1rem; height: .9rem; }
   .map-key-dot { width: .8rem; height: .8rem; border-radius: 50%; background: var(--swatch); border: 1px solid var(--stage); box-shadow: 0 0 0 1px rgb(255 255 255 / .2); }
@@ -118,7 +122,9 @@
     .atlas-panel-header .eyebrow, .atlas-lede { display: none; }
     .atlas-panel-header h1 { font-size: var(--step-1); }
     .atlas-anchor { scroll-margin-top: var(--s-3); }
-    .map-caption { max-width: calc(100% - 5rem); }
+    /* Leave room for the zoom buttons (two 48 px targets) beside the caption. */
+    .map-caption { max-width: calc(100% - 2 * var(--touch) - 3 * var(--s-3)); }
+    .map-caption-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     /* The sheet's rounded top overlaps the map by its radius; keep the attribution button clear of it. */
     .atlas-stage .maplibregl-ctrl-bottom-right { bottom: var(--r-3); }
     .map-key { bottom: var(--s-6); }
