@@ -12,7 +12,8 @@ try {
   git('worktree', 'add', '--detach', temp, 'HEAD');
   const run = (...args) => execFileSync('git', ['-C', temp, ...args], { encoding: 'utf8' }).trim();
   const remote = git('ls-remote', '--heads', 'origin', 'live-data');
-  if (remote) { git('fetch', '--no-tags', 'origin', 'live-data'); run('checkout', '-B', 'live-data', 'FETCH_HEAD'); }
+  // FETCH_HEAD is per worktree, so fetch into a shared remote-tracking ref the temporary worktree can see.
+  if (remote) { git('fetch', '--no-tags', 'origin', '+refs/heads/live-data:refs/remotes/origin/live-data'); run('checkout', '-B', 'live-data', 'refs/remotes/origin/live-data'); }
   else { run('checkout', '--orphan', 'live-data'); run('rm', '-rf', '.'); }
   // Data branch is data-only; no source code is copied into its tree.
   cpSync(resolve(output, 'live'), resolve(temp, 'live'), { recursive: true });
