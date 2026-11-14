@@ -28,19 +28,26 @@ export async function baseMap(container, attribution) {
   map.dragRotate.disable(); map.touchZoomRotate.disableRotation();
   await new Promise(r => map.once('load', r));
   map.getContainer().querySelector('.maplibregl-compact-show')?.classList.remove('maplibregl-compact-show');
-  const [country, provinces] = await Promise.all(['country', 'provinces'].map(n => load(`/data/nepal-admin-${n}/2.0.1/features.geojson.gz`)));
+  // Borders are context: if one fails to load, the map still works without it.
+  const [country, provinces] = await Promise.all(['country', 'provinces'].map(n => load(`/data/nepal-admin-${n}/2.0.1/features.geojson.gz`).catch(() => ({ type: 'FeatureCollection', features: [] }))));
   map.addSource('country', { type: 'geojson', data: country });
   map.addSource('provinces', { type: 'geojson', data: provinces });
+  // One-degree graticule, as on a survey sheet.
+  const line = coordinates => ({ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates } });
+  map.addSource('graticule', { type: 'geojson', data: { type: 'FeatureCollection', features: [
+    ...Array.from({ length: 13 }, (_, i) => line([[78 + i, 24], [78 + i, 33]])), ...Array.from({ length: 10 }, (_, i) => line([[76, 24 + i], [92, 24 + i]]))] } });
   map.addLayer({ id: 'relief', type: 'color-relief', source: 'dem', paint: { 'color-relief-opacity': 0.85, 'color-relief-color': ['interpolate', ['linear'], ['elevation'],
     0, '#5f8a62', 800, '#86a26b', 2000, '#ab9f72', 3500, '#9c8670', 4800, '#c8c4c0', 6000, '#f4f6f8'] } });
   map.addLayer({ id: 'hillshade', type: 'hillshade', source: 'dem', paint: { 'hillshade-exaggeration': 0.6, 'hillshade-shadow-color': '#0b1a22', 'hillshade-highlight-color': '#ffffff' } });
+  map.addLayer({ id: 'graticule', type: 'line', source: 'graticule', paint: { 'line-color': '#18232a', 'line-opacity': 0.18, 'line-width': 0.7 } });
   map.addLayer({ id: 'provinces', type: 'line', source: 'provinces', paint: { 'line-color': '#fff', 'line-opacity': 0.7, 'line-width': 1, 'line-dasharray': [3, 2] } });
-  map.addLayer({ id: 'country', type: 'line', source: 'country', paint: { 'line-color': '#13212b', 'line-width': 2 } });
+  map.addLayer({ id: 'country', type: 'line', source: 'country', paint: { 'line-color': '#18232a', 'line-width': 2 } });
   const theme = () => {
     const d = dark();
     map.setPaintProperty('bg', 'background-color', color('--sunk'));
     map.setPaintProperty('relief', 'color-relief-opacity', d ? 0.45 : 0.85);
-    map.setPaintProperty('country', 'line-color', d ? '#e4ebee' : '#13212b');
+    map.setPaintProperty('country', 'line-color', d ? '#e3e7e1' : '#18232a');
+    map.setPaintProperty('graticule', 'line-color', d ? '#e3e7e1' : '#18232a');
   };
   theme(); addEventListener('themechange', theme); matchMedia('(prefers-color-scheme: dark)').addEventListener('change', theme);
   return map;

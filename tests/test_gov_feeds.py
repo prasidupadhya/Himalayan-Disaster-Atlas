@@ -54,7 +54,8 @@ class OrganiseTests(unittest.TestCase):
         river = organise_river(RIVER, MOMENT)
         self.assertEqual(river["status_counts"], {"ABOVE DANGER LEVEL": 1, "ABOVE WARNING LEVEL": 1, "BELOW WARNING LEVEL": 1})
         self.assertEqual([s["id"] for s in river["alert_stations"]], ["2", "1"])
-        self.assertEqual(river["statuses"]["3"], ["SYNTHETIC Station C", "BELOW WARNING LEVEL"])
+        self.assertEqual(river["statuses"]["3"][:2], ["SYNTHETIC Station C", "BELOW WARNING LEVEL"])
+        self.assertIsInstance(river["statuses"]["3"][2], bool)
 
     def test_rain_ranks_only_stations_with_a_24h_value(self):
         rain = organise_rain(RAIN, MOMENT)

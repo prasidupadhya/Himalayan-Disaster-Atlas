@@ -9,7 +9,7 @@ export function validateFlood(s) {
   const e = [], within = (v, [a, b]) => Number.isFinite(v) && v >= a && v <= b, L = FLOOD_LIMITS;
   if (!within(s.volume_m3, L.volume_m3)) e.push('volume');
   if (!within(s.duration_s, L.duration_s)) e.push('duration');
-  if (!within(s.peak_fraction, L.peak_fraction)) e.push('peak');
+  if (s.shape !== 'rectangular' && !within(s.peak_fraction, L.peak_fraction)) e.push('peak');
   const [lo, mid, hi] = s.celerity_m_s;
   if (![lo, mid, hi].every(v => within(v, L.celerity_m_s)) || !(lo <= mid && mid <= hi)) e.push('celerity');
   return e;
@@ -82,9 +82,9 @@ export function groundMotion(model, imt, M, r, vs30, mechanism) {
     const m = M - c.Mh, fe = c[model.mechanisms[mechanism]] + (M <= c.Mh ? c.e4 * m + c.e5 * m * m : c.e6 * m), d = Math.hypot(r, c.h);
     return fe + (c.c1 + c.c2 * (M - K.Mref)) * Math.log(d / K.Rref) + (c.c3 + c.Dc3) * (d - K.Rref);
   };
-  const c = model.coefficients[imt], rock = Math.exp(base(model.coefficients.pga));
+  const c = model.coefficients[imt], rockLn = base(model.coefficients.pga), rock = Math.exp(rockLn);
   const f2 = c.f4 * (Math.exp(c.f5 * (Math.min(vs30, 760) - 360)) - Math.exp(c.f5 * 400));
-  const lnMedian = base(c) + c.c * Math.log(Math.min(vs30, c.Vc) / K.Vref) + K.f1 + f2 * Math.log((rock + K.f3) / K.f3);
+  const lnMedian = (imt === 'pga' ? rockLn : base(c)) + c.c * Math.log(Math.min(vs30, c.Vc) / K.Vref) + K.f1 + f2 * Math.log((rock + K.f3) / K.f3);
   const between = (a, b) => M <= 4.5 ? a : M >= 5.5 ? b : a + (b - a) * (M - 4.5);
   const tau = between(c.tau1, c.tau2);
   let phi = between(c.phi1, c.phi2);

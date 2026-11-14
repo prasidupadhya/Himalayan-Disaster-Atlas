@@ -57,9 +57,9 @@ for (const device of Object.keys(DEVICES)) for (const [lang, theme] of [['en', '
   });
 }
 
-test('Today shows the four headline tiles and the source of each section', async () => {
+test('Today shows the four headline readings and the source of each section', async () => {
   const { page, close } = await open('phone', '/');
-  assert.equal(await page.locator('.tile').count(), 4);
+  assert.equal(await page.locator('.reading').count(), 4);
   assert.ok(await page.locator('.src').count() >= 4);
   await close();
 });

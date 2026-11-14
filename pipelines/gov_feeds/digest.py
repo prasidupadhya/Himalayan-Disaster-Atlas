@@ -218,7 +218,7 @@ def organise_river(payload, moment=None):
             "current_station_count": len(current), "current_status_counts": tally(current),
             "alert_stations": sorted((s for s in current if s["status"] in ALERTS), key=alert_order),
             "stale_alert_stations": sorted((s for s in stations if not s["current"] and s["status"] in ALERTS), key=alert_order),
-            "statuses": {s["id"]: [s["name"], s["status"]] for s in stations}}
+            "statuses": {s["id"]: [s["name"], s["status"], s["current"]] for s in stations}}
 
 
 def organise_rain(payload, moment=None):
@@ -347,7 +347,7 @@ def changes(kind, previous, current):
     # Copies before October 2026 kept full station lists; later ones keep {id: [name, status]}.
     old = {k: v[1] for k, v in previous.get("statuses", {}).items()} or {s["id"]: s["status"] for s in previous.get("stations", [])}
     return {"status_changes": [{"id": k, "name": name, "from": old[k], "to": status}
-                               for k, (name, status) in current["statuses"].items() if k in old and old[k] != status][:60]}
+                               for k, (name, status, *_) in current["statuses"].items() if k in old and old[k] != status][:60]}
 
 
 def summarise(entries):
