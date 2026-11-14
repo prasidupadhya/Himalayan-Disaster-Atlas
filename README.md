@@ -52,7 +52,7 @@ python -m unittest tests.test_gov_feeds
 npx playwright install chromium && npm run e2e   # every page on phone and laptop, English and Nepali, light and dark, axe, main flows
 ```
 
-CI runs all of these on every push and pull request. Cloudflare serves `site/` (see `wrangler.jsonc`); its build step runs `npm test`, so a checksum or model failure stops the deploy.
+CI runs all of these on every push and pull request. Cloudflare serves `site/` (see `wrangler.jsonc`); its build step runs `npm run build` (the model and checksum tests), so a failure stops the deploy.
 
 ## Licences
 
