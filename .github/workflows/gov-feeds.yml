@@ -31,7 +31,7 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
-          python-version-file: .python-version
+          python-version: '3.12.14'
       - run: python -m venv .gov && .gov/bin/pip install -r pipelines/gov_feeds/requirements.txt
       - name: Install the browser for pages built by JavaScript
         run: .gov/bin/python -m playwright install --with-deps chromium
