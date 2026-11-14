@@ -44,7 +44,7 @@ async function flood(run) {
   const label = o => o.lake ? `${o.lake.basin}, ${num(o.lake.area_km2, 2)} km², ${num(o.lake.elevation_mean_m)} m${near(o)}` : `${c.reach(o.start_reach)}${near(o)}`;
   const group = (name, list) => `<optgroup label="${esc(name)}">${list.map(x => `<option value="${esc(x.id)}"${x.id === s.origin ? ' selected' : ''}>${esc(label(x))}</option>`).join('')}</optgroup>`;
   form.innerHTML = `<label class="field"><span>${esc(c.origin)}</span><select name="origin">${group(c.lakeOrigins, cat.origins.filter(o => o.lake))}${group(c.riverOrigins, cat.origins.filter(o => !o.lake))}</select></label>`
-    + `<div class="row2">${field('v', `${c.volume}, m³`, q.get('v') ?? 1e7)}${field('h', `${c.duration}, h`, q.get('h') ?? 3)}</div>`
+    + `<div class="row2">${field('v', `${c.volume}, m³`, Number.isFinite(s.volume_m3) ? s.volume_m3.toLocaleString('en-US') : (q.get('v') ?? ''))}${field('h', `${c.duration}, h`, q.get('h') ?? 3)}</div>`
     + select('shape', c.shape, [['triangular', c.triangular], ['rectangular', c.rectangular]], s.shape)
     + field('p', `${c.peakAt}, %`, q.get('p') ?? 25, s.shape === 'rectangular' ? 'disabled' : '')
     + `<fieldset class="field" style="border:0;padding:0;margin:0 0 14px"><legend>${esc(c.speed)}, m/s</legend><div class="row3">${[0, 1, 2].map(i => `<input name="c${i}" value="${esc(speeds[i] ?? '')}" inputmode="decimal" aria-label="${esc(c.speeds[i])}">`).join('')}</div></fieldset>`
@@ -109,7 +109,7 @@ async function quake(run) {
   const r = M.peopleByBand(model, s, cells);
   const sites = districts.map(f => ({ name: f.properties.name, p: M.pgaAt(model, s, f.properties.label_longitude, f.properties.label_latitude) })).filter(x => x.p).sort((a, b) => b.p[1] - a.p[1]).slice(0, 8);
   const g = v => num(v, v < 0.1 ? 3 : 2), bands = M.PGA_BANDS.map((_, i) => i).reverse();
-  out.innerHTML = `<h2>${esc(c.pgaTitle)}</h2><div class="legend">${bands.filter(i => i > 0).map(i => `<span><i style="background:${BAND_COLORS[i]}"></i>${bandLabel(i)}</span>`).join('')}<span><i style="background:transparent;border:1px solid var(--rule)"></i>${esc(c.notShaded)}</span><span><i style="background:${BEYOND}"></i>${esc(c.beyondShade)}</span></div>
+  out.innerHTML = `<h2>${esc(c.pgaTitle)}</h2><div class="legend">${bands.filter(i => i > 0).map(i => `<span><i style="background:${BAND_COLORS[i]}"></i>${bandLabel(i)}</span>`).join('')}<span><i style="background:transparent;border:1px solid var(--color-rule)"></i>${esc(c.notShaded)}</span><span><i style="background:${BEYOND}"></i>${esc(c.beyondShade)}</span></div>
     <div class="scroll" tabindex="0"><table><caption>${esc(c.peopleBand)}</caption><thead><tr><th>${esc(c.band)}</th><th class="n">${esc(c.pLow)}</th><th class="n">${esc(c.pMid)}</th><th class="n">${esc(c.pHigh)}</th></tr></thead><tbody>
     ${bands.map(i => `<tr><td>${bandLabel(i)}</td><td class="n">${num(r.low[i])}</td><td class="n"><strong>${num(r.median[i])}</strong></td><td class="n">${num(r.high[i])}</td></tr>`).join('')}
     ${r.beyond ? `<tr><td>${esc(c.beyond)}</td><td class="n" colspan="3">${num(r.beyond)}</td></tr>` : ''}</tbody></table></div>

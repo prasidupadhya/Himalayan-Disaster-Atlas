@@ -1,6 +1,6 @@
 // Offline: pages and code are cached on install; everything is fetched fresh when online and served from cache when not.
-const CACHE = 'atlas-v1';
-const SHELL = ['/', '/map/', '/scenarios/', '/about/', '/app.css', '/app.js', '/copy.js', '/models.js', '/basemap.js', '/today.js', '/map.js', '/scenarios.js', '/about.js',
+const CACHE = 'atlas-v2';
+const SHELL = ['/', '/map/', '/scenarios/', '/about/', '/tokens.css', '/base.css', '/app.css', '/app.js', '/copy.js', '/models.js', '/basemap.js', '/today.js', '/map.js', '/scenarios.js', '/about.js',
   '/icon.svg', '/data/gov/latest.json', '/vendor/maplibre-gl/maplibre-gl.mjs', '/vendor/maplibre-gl/maplibre-gl-shared.mjs', '/vendor/maplibre-gl/maplibre-gl-worker.mjs', '/vendor/maplibre-gl/maplibre-gl.css'];
 self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())));
 self.addEventListener('activate', e => e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())));

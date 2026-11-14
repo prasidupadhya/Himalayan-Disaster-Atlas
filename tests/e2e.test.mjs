@@ -30,7 +30,8 @@ async function open(device, path, { lang = 'en', theme = 'light' } = {}) {
   await ctx.addInitScript(([l, t]) => { if (!localStorage.getItem('lang')) { localStorage.setItem('lang', l); localStorage.setItem('theme', t); } }, [lang, theme]);
   const page = await ctx.newPage(), errors = [];
   page.on('pageerror', e => errors.push(e.message));
-  page.on('console', m => m.type() === 'error' && !/fonts\.|ERR_FAILED/.test(m.text()) && errors.push(m.text()));
+  page.on('requestfinished', async r => { const s = (await r.response())?.status(); if (s >= 400) errors.push(`HTTP ${s} ${r.url()} from ${r.headers().referer}`); });
+  page.on('console', m => m.type() === 'error' && !/fonts\.|ERR_FAILED/.test(m.text()) && errors.push(`${m.text()} ${m.location().url}`));
   await page.goto(base + path);
   if (path === '/map/' || path.startsWith('/scenarios/')) await page.waitForSelector('#map[data-ready=true]', { timeout: 30000 });
   else await page.waitForLoadState('networkidle');

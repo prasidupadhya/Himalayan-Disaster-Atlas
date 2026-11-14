@@ -4,15 +4,13 @@ import { c, esc, when, load } from './app.js';
 const DATASETS = ['nepal-admin-country/2.0.1', 'nepal-admin-provinces/2.0.1', 'nepal-admin-districts/2.0.1', 'nepal-terrain/1.0.0', 'nepal-rivers-primary/1.0.0',
   'nepal-transboundary-glacial-lakes/1.0.0', 'nepal-glaciers-west/1.0.0', 'nepal-glaciers-central/1.0.0', 'nepal-glaciers-east/1.0.0', 'nepal-hydrology-stations/1.0.0', 'nepal-rainfall-stations/1.0.0', 'nepal-region-earthquakes/1.0.0',
   'nepal-reported-floods/1.0.0', 'nepal-reported-landslides/1.0.0', 'nepal-hrsl-population/1.0.0', 'atlas-gmpe-bssa14/1.0.0', 'atlas-flood-corridors/1.0.0'];
-const list = items => `<ul>${items.map(i => `<li>${esc(i)}</li>`).join('')}</ul>`;
 const box = document.getElementById('about');
-
-box.innerHTML = `<h1>${esc(c.aboutTitle)}</h1><p class="lead">${esc(c.aboutIntro)}</p>
-<h2>${esc(c.howTitle)}</h2>${list(c.how)}
-<h2>${esc(c.modelsTitle)}</h2>${c.models.map(p => `<p>${esc(p)}</p>`).join('')}
-<h2>${esc(c.limitsTitle)}</h2>${list(c.limits)}
-<h2>${esc(c.sourcesTitle)}</h2><div id="sources"><p>${esc(c.loading)}</p></div>
-<h2>${esc(c.softwareTitle)}</h2><p>${esc(c.software)} <a href="https://github.com/prasidupadhya/Himalayan-Disaster-Atlas" rel="noopener">${esc(c.codeLink)}</a></p>`;
+// A long document: one column, inline heads, the one action a link inside the opening paragraph.
+const block = (title, paras) => `<section><h2 class="inline">${esc(title)}.</h2> ${paras.map(p => `<p>${esc(p)}</p>`).join('')}</section>`;
+box.innerHTML = `<h1>${esc(c.aboutTitle)}</h1><p class="lede">${esc(c.aboutIntro)} <a href="/map/">${esc(c.exploreMap)}</a></p>
+${block(c.howTitle, c.how)}${block(c.modelsTitle, c.models)}${block(c.limitsTitle, [c.limits.join(' ')])}
+<section class="wide-block"><h2>${esc(c.sourcesTitle)}</h2><div id="sources"><p>${esc(c.loading)}</p></div></section>
+${block(c.softwareTitle, [c.software])}<p><a href="https://github.com/prasidupadhya/Himalayan-Disaster-Atlas" rel="noopener">${esc(c.codeLink)}</a></p>`;
 
 const rows = await Promise.all(DATASETS.map(async d => {
   try {

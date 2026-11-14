@@ -13,11 +13,11 @@ const quakeInfo = p => [`M ${num(p.magnitude, 1)}, ${p.place_name ?? c.unknown}`
 
 /** Each layer: its data, how it is drawn, its legend symbol and what its popup says. */
 const LAYERS = [
-  { id: 'rivers', key: 'riverNet', on: true, sym: ['line', '--water'], data: () => load(D('nepal-rivers-primary/1.0.0')), type: 'line',
-    paint: () => ({ 'line-color': color('--water'), 'line-width': ['interpolate', ['linear'], ['get', 'flow_order'], 3, 0.6, 5, 1.4, 8, 3.5] }),
+  { id: 'rivers', key: 'riverNet', on: true, sym: ['line', '--color-water'], data: () => load(D('nepal-rivers-primary/1.0.0')), type: 'line',
+    paint: () => ({ 'line-color': color('--color-water'), 'line-opacity': 0.6, 'line-width': ['interpolate', ['linear'], ['get', 'flow_order'], 3, 0.4, 5, 1, 8, 2.6] }),
     info: p => [c.reach(p.source_id), [[c.flow, `${num(p.average_discharge_m3s, 1)} m³/s`], [c.order, num(p.flow_order)]]] },
-  { id: 'lakes', key: 'lakes', on: true, sym: ['dot', '--lake'], data: () => load(D('nepal-transboundary-glacial-lakes/1.0.0')), type: 'circle',
-    paint: () => ({ 'circle-color': color('--lake'), 'circle-stroke-color': '#fff', 'circle-stroke-width': 0.6, 'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, ['interpolate', ['linear'], ['get', 'area_km2'], 0, 1.5, 1, 5], 10, ['interpolate', ['linear'], ['get', 'area_km2'], 0, 4, 1, 14]] }),
+  { id: 'lakes', key: 'lakes', on: true, sym: ['dot', '--color-lake'], data: () => load(D('nepal-transboundary-glacial-lakes/1.0.0')), type: 'circle',
+    paint: () => ({ 'circle-color': color('--color-lake'), 'circle-stroke-color': '#fff', 'circle-stroke-width': 0.6, 'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, ['interpolate', ['linear'], ['get', 'area_km2'], 0, 1.5, 1, 5], 10, ['interpolate', ['linear'], ['get', 'area_km2'], 0, 4, 1, 14]] }),
     info: p => [p.lake_name ?? `${c.lake} ${p.source_id}`, [[c.area, `${num(p.area_km2, 3)} km²`], [c.elevation, `${num(p.elevation_mean_m)} m`], [c.connectivity, p.connectivity], [c.basin, p.basin], [c.country, p.country]]] },
   // A station is coloured only when the copy marks its reading as current; any other reading is grey.
   { id: 'riverStations', key: 'riverStations', on: true, sym: ['ring', STATUS_COLORS['BELOW WARNING LEVEL']], type: 'circle',
@@ -27,13 +27,13 @@ const LAYERS = [
         f.properties.st = s?.[1] ?? null; f.properties.fill = live.get(id) ? STATUS_COLORS[live.get(id)] : s?.[2] === true ? STATUS_COLORS[s[1]] ?? OLD : OLD;
         f.properties.current = live.has(id) || s?.[2] === true; });
       return fc; },
-    paint: () => ({ 'circle-color': ['get', 'fill'], 'circle-radius': 6, 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5 }),
+    paint: () => ({ 'circle-color': ['get', 'fill'], 'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 3, 8, 7], 'circle-stroke-color': '#fff', 'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 5, 0.8, 8, 1.5] }),
     info: p => [p.station_name, [[c.basin, p.basin], [c.status, p.st ? `${c[STATUS_TEXT[p.st]] ?? p.st}${p.current ? '' : ` (${c.oldReading})`}` : c.unknown]]] },
-  { id: 'rainStations', key: 'rainStations', on: false, sym: ['ring', '--water'], type: 'circle',
+  { id: 'rainStations', key: 'rainStations', on: false, sym: ['ring', '--color-water'], type: 'circle',
     data: async () => { const [fc, g] = await Promise.all([load(D('nepal-rainfall-stations/1.0.0')), gov]);
       const wet = Object.fromEntries((g['bipad-rain']?.wettest_24h ?? []).map(s => [s.id, s]));
       return { type: 'FeatureCollection', features: fc.features.filter(f => wet[f.properties.source_id]).map(f => ({ ...f, properties: { ...f.properties, mm: wet[f.properties.source_id].rain_24h_mm } })) }; },
-    paint: () => ({ 'circle-color': color('--water'), 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5, 'circle-radius': ['interpolate', ['linear'], ['get', 'mm'], 0, 4, 100, 14] }),
+    paint: () => ({ 'circle-color': color('--color-water'), 'circle-stroke-color': '#fff', 'circle-stroke-width': 1.5, 'circle-radius': ['interpolate', ['linear'], ['get', 'mm'], 0, 4, 100, 14] }),
     info: p => [p.station_name, [[c.basin, p.basin], [c.h24, `${num(p.mm, 1)} mm`]]] },
   { id: 'quakesRecent', key: 'quakesRecent', on: true, sym: ['dot', '#d93a2b'], type: 'circle',
     data: async () => { const fc = await load(USGS, { signal: AbortSignal.timeout(10000) });
@@ -47,7 +47,7 @@ const LAYERS = [
   { id: 'glaciers', key: 'glaciers', on: false, sym: ['area', '#ffffff'], type: 'fill', paint: () => ({ 'fill-color': '#ffffff', 'fill-opacity': 0.75, 'fill-outline-color': '#7fb6d1' }),
     data: async () => ({ type: 'FeatureCollection', features: (await Promise.all(['west', 'central', 'east'].map(r => load(D(`nepal-glaciers-${r}/1.0.0`))))).flatMap(fc => fc.features) }),
     info: p => [p.glacier_name ?? p.source_id, [[c.area, `${num(p.area_km2, 2)} km²`], [c.elevation, `${num(p.elevation_min_m)}–${num(p.elevation_max_m)} m`]]] },
-  { id: 'districts', key: 'districts', on: false, sym: ['line', '--muted'], data: () => load(D('nepal-admin-districts/2.0.1')), type: 'line', paint: () => ({ 'line-color': '#fff', 'line-width': 0.8, 'line-opacity': 0.8 }) },
+  { id: 'districts', key: 'districts', on: false, sym: ['line', '--color-muted'], data: () => load(D('nepal-admin-districts/2.0.1')), type: 'line', paint: () => ({ 'line-color': '#fff', 'line-width': 0.8, 'line-opacity': 0.8 }) },
 ];
 
 /** The legend symbol drawn the way the map draws the layer. */

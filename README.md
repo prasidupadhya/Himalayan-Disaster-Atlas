@@ -30,6 +30,8 @@ data/gov-feeds/       its daily history and raw archives
 tests/                models + data checksums, scraper tests, browser tests
 ```
 
+Design: a plain-black public notice. White paper and hueless ink in light mode, re-derived for dark; Epilogue with Anek Devanagari for Nepali; hairline-ruled lists; teal only for state; DHM's red and amber only for published hazard status. Tokens are in `site/tokens.css`.
+
 No framework and no runtime dependencies besides MapLibre. About 1,000 lines of site code.
 
 ## How data gets in

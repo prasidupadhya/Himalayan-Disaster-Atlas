@@ -6,3 +6,4 @@ __pycache__/
 test-results/
 .wrangler/
 .DS_Store
+.hallmark/

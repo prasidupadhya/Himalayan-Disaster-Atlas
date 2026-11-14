@@ -7,11 +7,13 @@ export const c = COPY[lang];
 const locale = lang === 'ne' ? 'ne-NP-u-nu-deva' : 'en-GB';
 
 export const esc = v => String(v ?? '').replace(/[&<>"']/g, ch => `&#${ch.charCodeAt(0)};`);
+/** Devanagari digits even where the browser has no Nepali locale data. */
+const deva = s => lang === 'ne' ? s.replace(/[0-9]/g, d => '०१२३४५६७८९'[d]) : s;
 export const num = (v, digits = 0) => v === null || v === undefined || v === '' || !Number.isFinite(+v) ? c.unknown
-  : new Intl.NumberFormat(locale, { maximumFractionDigits: digits, minimumFractionDigits: 0 }).format(v);
+  : deva(new Intl.NumberFormat(locale, { maximumFractionDigits: digits, minimumFractionDigits: 0 }).format(v));
 export const when = (iso, opts = { dateStyle: 'medium', timeStyle: 'short' }) => {
   const d = new Date(iso);
-  return isNaN(d) ? c.unknown : new Intl.DateTimeFormat(locale, { ...opts, timeZone: 'Asia/Kathmandu' }).format(d);
+  return isNaN(d) ? c.unknown : deva(new Intl.DateTimeFormat(locale, { ...opts, timeZone: 'Asia/Kathmandu' }).format(d));
 };
 export const duration = s => {
   const m = Math.round(s / 60), h = Math.floor(m / 60);
@@ -45,7 +47,7 @@ document.querySelectorAll('[data-t]').forEach(n => { n.textContent = c[n.dataset
 
 const nav = PAGES.map(([href, key, d]) => `<a href="${href}"${href === here ? ' aria-current="page"' : ''}>${icon(d)}<span>${esc(c[key])}</span></a>`).join('');
 document.body.insertAdjacentHTML('afterbegin', `<a class="skip" href="#main">${esc(c.skip)}</a>
-<header class="top"><a class="brand" href="/"><svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M2 27 12 9l5 8 4-5 9 15z" fill="none" style="stroke:var(--ink)" stroke-width="2" stroke-linejoin="round"/><path d="M5 23c5-2 9 2 14 0s7-1 9 0" fill="none" style="stroke:var(--water)" stroke-width="2" stroke-linecap="round"/></svg><span><b>${esc(c.site)}</b><small>${esc(c.extent)}</small></span></a>
+<header class="top"><a class="brand" href="/"><svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><path d="M2 27 12 9l5 8 4-5 9 15z" fill="none" style="stroke:var(--color-ink)" stroke-width="2" stroke-linejoin="round"/><path d="M5 23c5-2 9 2 14 0s7-1 9 0" fill="none" style="stroke:var(--color-water)" stroke-width="2" stroke-linecap="round"/></svg><span><b>${esc(c.site)}</b><small>${esc(c.extent)}</small></span></a>
 <nav class="nav" aria-label="${esc(c.site)}">${nav}</nav>
 <div class="tools"><button type="button" id="lang" lang="${lang === 'en' ? 'ne' : 'en'}" aria-label="${esc(c.langLabel)}">${esc(c.langSwitch)}</button>
 <button type="button" id="theme" aria-label="${esc(c.themeLabel)}">${icon('M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z')}</button></div></header>`);
