@@ -53,7 +53,7 @@ async function flood() {
   out.innerHTML = `<div class="tiles"><div class="tile"><span class="label">${esc(c.peakFlow)}</span><span class="big">${num(hg.peak_m3_s)}</span><span>m³/s</span></div>
     <div class="tile"><span class="label">${esc(c.pathLen)}</span><span class="big">${num(o.path_length_km)}</span><span>km</span></div></div>
     <p id="clock" class="muted" aria-hidden="true"></p>
-    <div class="scroll"><table><thead><tr><th class="n">${esc(c.checkpoint)}</th><th>${esc(c.arrives)}</th><th class="wide">${esc(c.peaks)}</th><th class="wide">${esc(c.ends)}</th><th class="n">${esc(c.people)}</th><th class="n">${esc(c.assets)}</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>
+    <div class="scroll" tabindex="0"><table><thead><tr><th class="n">${esc(c.checkpoint)}</th><th>${esc(c.arrives)}</th><th class="wide">${esc(c.peaks)}</th><th class="wide">${esc(c.ends)}</th><th class="n">${esc(c.people)}</th><th class="n">${esc(c.assets)}</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>
     <p class="src">${esc(c.range)} ${o.checkpoints.some(cp => M.exposureRange(cp.by_width).partial) ? esc(c.partial) : ''}</p><p class="note">${esc(c.floodLimits)}</p>`;
 
   const line = o.line.coordinates;
@@ -103,10 +103,10 @@ async function quake() {
   const sites = districts.map(f => ({ name: f.properties.name, p: M.pgaAt(model, s, f.properties.label_longitude, f.properties.label_latitude) })).filter(x => x.p).sort((a, b) => b.p[1] - a.p[1]).slice(0, 8);
   const g = v => num(v, v < 0.1 ? 3 : 2);
   out.innerHTML = `<h2>${esc(c.pgaTitle)}</h2><div class="legend">${M.PGA_BANDS.map((_, i) => `<span><i style="background:${BAND_COLORS[i]}"></i>${bandLabel(i)}</span>`).join('')}</div>
-    <div class="scroll"><table><caption>${esc(c.peopleBand)}</caption><thead><tr><th>${esc(c.band)}</th><th class="n">${esc(c.pLow)}</th><th class="n">${esc(c.pMid)}</th><th class="n">${esc(c.pHigh)}</th></tr></thead><tbody>
+    <div class="scroll" tabindex="0"><table><caption>${esc(c.peopleBand)}</caption><thead><tr><th>${esc(c.band)}</th><th class="n">${esc(c.pLow)}</th><th class="n">${esc(c.pMid)}</th><th class="n">${esc(c.pHigh)}</th></tr></thead><tbody>
     ${M.PGA_BANDS.map((_, i) => `<tr><td>${bandLabel(i)}</td><td class="n">${num(r.low[i])}</td><td class="n"><strong>${num(r.median[i])}</strong></td><td class="n">${num(r.high[i])}</td></tr>`).reverse().join('')}
     ${r.beyond ? `<tr><td>${esc(c.beyond)}</td><td class="n" colspan="3">${num(r.beyond)}</td></tr>` : ''}</tbody></table></div>
-    <div class="scroll" style="margin-top:12px"><table><caption>${esc(c.strongest)}</caption><thead><tr><th>${esc(c.district)}</th><th class="n">${esc(c.pga)}</th></tr></thead><tbody>
+    <div class="scroll" tabindex="0" style="margin-top:12px"><table><caption>${esc(c.strongest)}</caption><thead><tr><th>${esc(c.district)}</th><th class="n">${esc(c.pga)}</th></tr></thead><tbody>
     ${sites.map(x => `<tr><td>${esc(x.name)}</td><td class="n"><strong>${g(x.p[1])}</strong> <small>(${g(x.p[0])}–${g(x.p[2])})</small></td></tr>`).join('')}</tbody></table></div>
     <p class="note">${esc(c.quakeLimits)}</p>`;
 

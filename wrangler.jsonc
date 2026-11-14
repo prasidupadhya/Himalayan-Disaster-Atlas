@@ -1,0 +1,11 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "himalayanatlas",
+  "compatibility_date": "2026-09-09",
+  "workers_dev": true,
+  "send_metrics": false,
+  "preview_urls": true,
+  // The site is plain files; the build step only checks models and data checksums before deploying.
+  "build": { "command": "npm test" },
+  "assets": { "directory": "./site", "html_handling": "force-trailing-slash", "not_found_handling": "404-page" }
+}

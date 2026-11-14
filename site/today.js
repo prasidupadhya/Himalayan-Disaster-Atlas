@@ -3,7 +3,7 @@ import { c, lang, esc, num, when, load, failed } from './app.js';
 const box = document.getElementById('today');
 const STATE = { 'ABOVE DANGER LEVEL': ['bad', 'aboveDanger'], 'ABOVE WARNING LEVEL': ['warn', 'aboveWarning'] };
 const chip = s => STATE[s] ? `<span class="chip ${STATE[s][0]}">${esc(c[STATE[s][1]])}</span>` : `<span class="chip">${esc(s)}</span>`;
-const table = (caption, head, rows) => `<div class="scroll"><table><caption>${esc(caption)}</caption><thead><tr>${head.map(h => `<th class="${h.n ? 'n' : ''} ${h.w ? 'wide' : ''}">${esc(h.t ?? h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
+const table = (caption, head, rows) => `<div class="scroll" tabindex="0"><table><caption>${esc(caption)}</caption><thead><tr>${head.map(h => `<th class="${h.n ? 'n' : ''} ${h.w ? 'wide' : ''}">${esc(h.t ?? h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
 /** First few items, the rest behind a toggle. */
 const more = (items, n = 6) => items.length <= n ? items.join('') : `${items.slice(0, n).join('')}<li><details><summary>${esc(c.showAll(num(items.length)))}</summary><ul class="plain">${items.slice(n).join('')}</ul></details></li>`;
 

@@ -21,4 +21,4 @@ const rows = await Promise.all(DATASETS.map(async d => {
     return `<tr><td>${esc(x.dataset_name ?? x.dataset_id ?? d)}</td><td>${link(x.source, x.source_url)}<br><small>${esc(x.attribution ?? '')}</small></td><td>${link(x.license, x.license_url)}</td><td>${esc(x.dataset_version ?? d.split('/')[1])}</td><td>${x.retrieval_date ? esc(when(x.retrieval_date, { dateStyle: 'medium' })) : esc(c.unknown)}</td></tr>`;
   } catch { return `<tr><td>${esc(d)}</td><td colspan="4">${esc(c.failed)}</td></tr>`; }
 }));
-document.getElementById('sources').innerHTML = `<div class="scroll"><table><thead><tr><th>${esc(c.dataset)}</th><th>${esc(c.source)}</th><th>${esc(c.licence)}</th><th>${esc(c.version)}</th><th>${esc(c.retrieved)}</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
+document.getElementById('sources').innerHTML = `<div class="scroll" tabindex="0"><table><thead><tr><th>${esc(c.dataset)}</th><th>${esc(c.source)}</th><th>${esc(c.licence)}</th><th>${esc(c.version)}</th><th>${esc(c.retrieved)}</th></tr></thead><tbody>${rows.join('')}</tbody></table></div>`;
