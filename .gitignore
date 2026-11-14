@@ -1,0 +1,8 @@
+node_modules/
+.venv/
+.gov/
+__pycache__/
+*.py[cod]
+test-results/
+.wrangler/
+.DS_Store

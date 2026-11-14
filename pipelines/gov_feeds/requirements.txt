@@ -1,0 +1,2 @@
+# Daily official-source digest only; kept out of requirements.lock so the atlas build is unchanged.
+scrapling[fetchers]==0.4.15
