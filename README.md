@@ -9,8 +9,8 @@ Every number is either copied from an official source with its date, or labelled
 | Page | What it shows |
 |---|---|
 | **Today** `/` | The daily copy of DHM, BIPAD and NEMRC: rivers above warning or danger level, the wettest rain stations, recent earthquakes, incidents, alerts and bulletins. Each section says when it was read. |
-| **Map** `/map/` | Rivers, glacial lakes, today's river and rain stations, earthquakes (live from USGS, and since 2000), reported floods and landslides, glaciers and districts, on Copernicus terrain with an optional 3D view. Tap a river reach to trace it downstream. |
-| **Scenarios** `/scenarios/` | A flood or lake-outburst pulse down 18 verified river paths (arrival times and people in 250–1,000 m corridors), and BSSA14 earthquake shaking with people per shaking band, starting from Gorkha 2015, one of the ten largest events in the region since 2000, or any point you tap. Inputs live in the link, so a run can be shared. |
+| **Map** `/map/` | Rivers, glacial lakes, glaciers and district borders on Copernicus terrain, with an optional 3D view. Tap a river reach to trace it downstream. |
+| **Scenarios** `/scenarios/` | Two tabs in three steps: choose, set and run, read the results. Flood or lake outburst: pick one of 18 verified release points (10 glacial lakes, 8 river points) from the list or the map, set the release and wave speeds, and get arrival times, people in 250–1,000 m corridors and the release hydrograph, with the pulse played along the path. Earthquake: start from Gorkha 2015, one of the ten largest events in the region since 2000, or any point you tap; BSSA14 shaking with people per shaking band. Inputs live in the link, so a run can be shared. |
 | **About** `/about/` | Methods, limits, and every dataset with its source, licence, version and date, read from its manifest. |
 
 ## How it is built
@@ -37,7 +37,6 @@ No framework and no runtime dependencies besides MapLibre. About 1,000 lines of 
 ## How data gets in
 
 - **Daily official copy.** `.github/workflows/gov-feeds.yml` runs at 00:17 UTC (about 06:02 Nepal time) on `main`, reads eight DHM, BIPAD and NEMRC pages, and commits `site/data/gov/latest.json`. A source that fails keeps its last copy, labelled with its date. Nepal's government hosts have refused GitHub's runners since October 2026; set the repository variable `GOV_RUNNER` to a self-hosted runner in Nepal, or the secret `GOV_PROXY`, to fix that.
-- **Recent earthquakes** come from the public USGS feed in the browser when the map opens. If it cannot be reached, the map says so.
 - **Map and model data** are fixed, versioned releases in `site/data/<dataset>/<version>/`, each with a manifest giving source, licence, method, coverage and limitations, and a SHA-256 for every file. Published versions are never overwritten; a new version gets a new folder.
 
 ## Run and test

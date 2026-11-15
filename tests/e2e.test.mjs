@@ -77,12 +77,12 @@ test('the language and theme switches change the page and are remembered', async
   await close();
 });
 
-test('the map loads its layers, including the live USGS feed', async () => {
+test('the map offers exactly its six layers and loads glaciers on request', async () => {
   const { page, close } = await open('laptop', '/map/');
-  assert.equal(await page.locator('#layers input[type=checkbox]').count(), 12);
+  assert.equal(await page.locator('#layers input[type=checkbox]').count(), 6);
   await page.check('[data-id=glaciers]');
   await page.waitForTimeout(500);
-  assert.equal(await page.locator('.note.warn').count(), 0, 'USGS feed loaded');
+  assert.equal(await page.locator('.note.warn').count(), 0, 'glaciers loaded');
   await close();
 });
 

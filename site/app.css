@@ -155,6 +155,32 @@ fieldset.field { border: 0; padding: 0; margin: 0 0 var(--space-md); }
 #result .say { font-size: var(--text-lg); }
 .clock { min-height: 1.6em; margin-top: var(--space-sm); font-weight: 600; color: var(--color-ink); font-variant-numeric: tabular-nums; }
 
+/* Scenarios: steps on the left, the map held in view on the right */
+.sim-head { max-width: 72ch; }
+.sim-head h1 { font-size: var(--text-display-s); }
+.sim-head .note { margin-top: var(--space-md); }
+.sim .tabs { margin-top: var(--space-lg); max-width: 420px; }
+.sim-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gap-columns); align-items: start; }
+.sim-map { position: sticky; top: calc(var(--top) + var(--space-md)); }
+.sim-map .map { height: calc(100svh - var(--top) - var(--space-3xl)); min-height: 420px; border: var(--rule-hair) solid var(--color-ink); border-radius: var(--radius-card); overflow: hidden; }
+.step { border-top: var(--rule-hair) solid var(--color-ink); padding: var(--space-md) 0 var(--space-lg); }
+.step h2 { display: flex; align-items: baseline; gap: var(--space-sm); font-size: var(--text-xl); margin: 0 0 var(--space-md); }
+.step h2 .n { font-size: var(--text-md); font-weight: 600; color: var(--color-muted); font-variant-numeric: tabular-nums; }
+.summary { font-size: var(--text-lead); line-height: 1.45; color: var(--color-ink); max-width: 60ch; }
+.figs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: var(--rule-hair) solid var(--color-rule); margin: var(--space-lg) 0; }
+.fig { display: grid; gap: var(--space-3xs); align-content: start; padding: var(--space-sm) var(--space-md) var(--space-sm) 0; border-bottom: var(--rule-hair) solid var(--color-rule); }
+.fig span { font-size: var(--text-sm); color: var(--color-muted); }
+.fig strong { font-size: var(--text-2xl); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.fig small { font-size: var(--text-xs); }
+#result .scroll { margin-top: var(--space-lg); }
+#result .note { margin-top: var(--space-lg); }
+.chart { margin: var(--space-lg) 0 0; }
+.chart figcaption { font-size: var(--text-sm); color: var(--color-ink); font-weight: 600; margin-bottom: var(--space-xs); }
+.chart svg { width: 100%; max-width: 420px; height: auto; overflow: visible; }
+.chart .axis { fill: none; stroke: var(--color-muted); stroke-width: 1; }
+.chart .line { fill: none; stroke: var(--color-water); stroke-width: 2; stroke-linejoin: round; }
+.chart text { font-size: 11px; fill: var(--color-muted); font-variant-numeric: tabular-nums; }
+
 /* App screens: the panel is the second neutral, the map fills the rest */
 .mapwrap { display: grid; grid-template-columns: 380px minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); flex: none; height: calc(100svh - var(--top)); max-width: none; padding: 0; }
 .mapwrap .panel { color: var(--color-ink-2); overflow-y: auto; padding: var(--space-lg); background: var(--color-paper-2); border-right: var(--rule-hair) solid var(--color-ink); }
@@ -195,6 +221,10 @@ body:has(.mapwrap) .foot { display: none; }
   .stations figcaption { grid-template-columns: repeat(2, auto); }
   .reading + .reading { padding-left: 0; border-left: 0; border-top: var(--rule-hair) solid var(--color-rule); }
   .reading { padding-right: 0; }
+  .sim-layout { grid-template-columns: minmax(0, 1fr); }
+  .sim-map { position: static; order: -1; }
+  .sim-map .map { height: 50svh; min-height: 300px; }
+  .figs { grid-template-columns: minmax(0, 1fr); }
   .mapwrap { display: flex; flex-direction: column; height: auto; }
   .mapwrap .map { order: -1; height: 60svh; border-bottom: var(--rule-hair) solid var(--color-ink); }
   .mapwrap .panel { border-right: 0; padding: var(--space-lg) var(--gutter) var(--space-xl); }
