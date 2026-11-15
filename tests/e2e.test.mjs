@@ -111,3 +111,31 @@ test('earthquake scenario: Gorkha preset runs and a tap on the map moves the epi
   await page.waitForSelector('#result table');
   await close();
 });
+
+test('flood playback: the timeline scrubs, and at the end every checkpoint is reached', async () => {
+  const { page, errors, close } = await open('laptop', '/scenarios/#flood=glof-40746560');
+  await page.waitForSelector('#scrub');
+  await page.click('#play');
+  await page.locator('#scrub').fill('0');
+  assert.equal(await page.locator('#result tr.reached').count(), 0);
+  await page.locator('#scrub').fill('1000');
+  assert.equal(await page.locator('#result tr.reached').count(), await page.locator('#result tr[data-km]').count());
+  assert.match(await page.textContent('#clock'), /km/);
+  assert.deepEqual(errors, []);
+  await close();
+});
+
+test('river trace: tapping a river and tracing it draws the downstream path', async () => {
+  const { page, errors, close } = await open('laptop', '/map/');
+  const box = await page.locator('#map canvas').boundingBox();
+  // Rivers are dense across the middle of Nepal: tap along a line until a river popup offers the trace.
+  for (let x = 0.3; x < 0.9 && !(await page.locator('[data-trace]').count()); x += 0.02) { await page.mouse.click(box.x + box.width * x, box.y + box.height * 0.6); await page.waitForTimeout(150); }
+  await page.click('[data-trace]');
+  await page.waitForSelector('#clear');
+  assert.match(await page.textContent('#info'), /km/);
+  await page.waitForTimeout(500);
+  await page.click('#clear');
+  assert.equal(await page.locator('#clear').count(), 0);
+  assert.deepEqual(errors, []);
+  await close();
+});

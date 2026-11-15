@@ -32,8 +32,11 @@ let map;
 try { map = await baseMap('map', ['Rivers: HydroRIVERS / FAO', 'Lakes: Glacial Lake Observatory', 'Population: Meta & CIESIN HRSL', 'Ground motion: BSSA14']); }
 catch { failed(out, () => location.reload()); throw new Error('map unavailable'); }
 const empty = { type: 'FeatureCollection', features: [] };
-for (const id of ['origins', 'path', 'rupture', 'points']) map.addSource(id, { type: 'geojson', data: empty });
-map.addLayer({ id: 'path', type: 'line', source: 'path', paint: { 'line-color': '#ffd400', 'line-width': 5 }, layout: { 'line-cap': 'round' } });
+for (const id of ['origins', 'rupture', 'points']) map.addSource(id, { type: 'geojson', data: empty });
+// The path carries line metrics so the water can be painted along it by distance.
+map.addSource('path', { type: 'geojson', data: empty, lineMetrics: true });
+map.addLayer({ id: 'path-casing', type: 'line', source: 'path', paint: { 'line-color': '#ffffff', 'line-width': 8, 'line-opacity': 0.85 }, layout: { 'line-cap': 'round', 'line-join': 'round' } });
+map.addLayer({ id: 'path', type: 'line', source: 'path', paint: { 'line-width': 5, 'line-gradient': '#c9b26b' }, layout: { 'line-cap': 'round', 'line-join': 'round' } });
 map.addLayer({ id: 'rupture', type: 'line', source: 'rupture', paint: { 'line-color': '#18232a', 'line-width': 4 } });
 // Every verified release point, clickable: lakes in lake colour, river points in ink; the chosen one is larger.
 map.addLayer({ id: 'origins', type: 'circle', source: 'origins', paint: { 'circle-radius': ['case', ['get', 'on'], 9, 6], 'circle-color': ['case', ['get', 'lake'], color('--color-lake'), color('--color-ink')], 'circle-stroke-color': '#fff', 'circle-stroke-width': 2 } });
@@ -43,7 +46,7 @@ const point = (coordinates, fill, r = 6) => ({ type: 'Feature', geometry: { type
 const fit = (coords, maxZoom = 9) => { const b = coords.reduce((b, p) => b.extend(p), new maplibregl.LngLatBounds(coords[0], coords[0])); map.fitBounds(b, { padding: 40, maxZoom, duration: reduced ? 0 : 800 }); };
 let mode = null, seq = 0, stop = () => {};
 /** Every run starts from a clean map, so an error never leaves an older result on screen. */
-function clearMap() { stop(); stop = () => {}; ['origins', 'path', 'rupture', 'points'].forEach(id => set(id, [])); if (map.getLayer('shaking-img')) map.setLayoutProperty('shaking-img', 'visibility', 'none'); }
+function clearMap() { stop(); stop = () => {}; ['origins', 'path', 'rupture', 'points'].forEach(id => set(id, [])); map.setPaintProperty('path', 'line-gradient', '#c9b26b'); if (map.getLayer('shaking-img')) map.setLayoutProperty('shaking-img', 'visibility', 'none'); }
 
 // ---------- Flood or lake outburst ----------
 const catalogue = load('/data/atlas-flood-corridors/1.0.0/catalogue.json.gz');
@@ -77,27 +80,58 @@ async function flood(run) {
   out.innerHTML = step(3, c.results, `<p class="summary">${esc(c.floodSummary(num(last.cp.prefix_km), t(last.a.front), people))}</p>
     <div class="figs">${figure(c.frontAt(num(first.cp.prefix_km)), esc(t(first.a.front)))}${figure(c.frontAt(num(last.cp.prefix_km)), esc(t(last.a.front)))}
       ${figure(c.popCorridors, esc(people), last.x.partial ? c.partial : '')}${figure(c.assetsFull, esc(range(...last.x.assets)))}</div>
-    <p class="clock" id="clock" aria-hidden="true"></p>
+    <div class="player"><button type="button" id="play">${esc(c.pause)}</button><input type="range" id="scrub" min="0" max="1000" value="0" aria-label="${esc(c.timeAfter)}"><p class="clock" id="clock"></p></div>
+    <div class="legend"><span><i style="background:#1d5fa8"></i>${esc(c.wetMiddle)}</span><span><i style="background:#8ec5ff"></i>${esc(c.wetRange)}</span><span><i style="background:#7d8f9c"></i>${esc(c.passedPath)}</span><span><i style="background:#c9b26b"></i>${esc(c.dryPath)}</span></div>
     <div class="scroll" tabindex="0"><table><thead><tr><th class="n">${esc(c.checkpoint)}</th><th>${esc(c.arrives)}</th><th>${esc(c.peaks)}</th><th>${esc(c.ends)}</th><th class="n">${esc(c.people)}</th><th class="n">${esc(c.assets)}</th></tr></thead><tbody>
-    ${rows.map(({ cp, a, x }) => `<tr><td class="n">${num(cp.prefix_km)} km</td><td>${t(a.front)}</td><td>${t(a.peak)}</td><td>${t(a.end)}</td><td class="n">${x.population ? range(Math.round(x.population[0]), Math.round(x.population[1])) : esc(c.unknown)}${x.partial ? '*' : ''}</td><td class="n">${range(...x.assets)}</td></tr>`).join('')}</tbody></table></div>
+    ${rows.map(({ cp, a, x }) => `<tr data-km="${cp.prefix_km}"><td class="n">${num(cp.prefix_km)} km</td><td>${t(a.front)}</td><td>${t(a.peak)}</td><td>${t(a.end)}</td><td class="n">${x.population ? range(Math.round(x.population[0]), Math.round(x.population[1])) : esc(c.unknown)}${x.partial ? '*' : ''}</td><td class="n">${range(...x.assets)}</td></tr>`).join('')}</tbody></table></div>
     <p class="src">${esc(c.range)}</p>
     ${hydrographChart(hg.points, hg.peak_m3_s, c.hydroTitle(num(s.volume_m3), num(hg.peak_m3_s)))}
     <p class="note">${esc(c.floodLimits)} ${esc(c.damageNotModelled)}</p>`);
 
-  const line = o.line.coordinates, marks = o.checkpoints.map(cp => point(cp.end_coordinates, '#18232a', 5));
-  set('path', [{ type: 'Feature', geometry: o.line, properties: {} }]); set('points', marks); fit(line);
-  if (reduced) return;
-  // Play the middle-speed pulse front down the path (about 8 seconds for the whole run).
-  const seg = line.slice(1).map((p, i) => M.greatCircleKm(...line[i], ...p)), total = seg.reduce((a, b) => a + b, 0), start = performance.now(), clock = document.getElementById('clock');
-  let frame = requestAnimationFrame(function tick(now) {
-    const f = Math.min(1, (now - start) / 8000); let d = f * total, i = 0;
-    while (i < seg.length - 1 && d > seg[i]) d -= seg[i++];
-    const k = seg[i] ? d / seg[i] : 0;
-    set('points', [...marks, point([line[i][0] + (line[i + 1][0] - line[i][0]) * k, line[i][1] + (line[i + 1][1] - line[i][1]) * k], '#ffd400', 9)]);
-    clock.textContent = c.clock(duration(1000 * f * o.path_length_km / s.celerity_m_s[1]), num(f * o.path_length_km));
-    if (f < 1) frame = requestAnimationFrame(tick);
-  });
-  stop = () => cancelAnimationFrame(frame);
+  const line = o.line.coordinates;
+  set('path', [{ type: 'Feature', geometry: o.line, properties: {} }]); fit(line);
+  stop = play(o, s, line);
+}
+
+/**
+ * Flood playback. At each moment the path is painted by distance: deep blue where the middle-speed pulse is passing,
+ * light blue between the slow and fast fronts (where water could be, given the declared speeds), pale behind the pulse's tail,
+ * sand ahead of the fastest front. Checkpoints and their table rows mark when the middle front reaches them.
+ */
+function play(o, s, line) {
+  const total = o.path_length_km, [slow, mid, fast] = s.celerity_m_s, end = 1000 * total / slow + s.duration_s;
+  const seg = line.slice(1).map((p, i) => M.greatCircleKm(...line[i], ...p)), geo = seg.reduce((a, b) => a + b, 0);
+  const at = km => { let d = km / total * geo, i = 0; while (i < seg.length - 1 && d > seg[i]) d -= seg[i++]; const k = seg[i] ? Math.min(1, d / seg[i]) : 0; return [line[i][0] + (line[i + 1][0] - line[i][0]) * k, line[i][1] + (line[i + 1][1] - line[i][1]) * k]; };
+  const rowsEl = [...document.querySelectorAll('#result tr[data-km]')], btn = document.getElementById('play'), scrub = document.getElementById('scrub'), clock = document.getElementById('clock');
+  const DRY = '#c9b26b', PASSED = '#7d8f9c', PULSE = '#1d5fa8', RANGE = '#8ec5ff';
+  let t = reduced ? end : 0, playing = !reduced, last = null, frame = 0;
+  function draw() {
+    const km = c => Math.min(total, c * t / 1000), front = km(mid), tail = Math.max(0, mid * (t - s.duration_s) / 1000), lo = km(slow), hi = km(fast);
+    // Along the path: passed behind the tail, the pulse up to the middle front, possible water up to the fast front, dry beyond.
+    const expr = ['step', ['line-progress'], tail > 0 ? PASSED : PULSE]; let prev = 0;
+    for (const [d, col] of [...(tail > 0 ? [[tail, PULSE]] : []), [front, RANGE], [hi, DRY]]) {
+      const p = Math.min(1, Math.max(prev + 1e-6, d / total));   // stops must rise strictly
+      if (p > prev) { expr.push(p, col); prev = p; }
+    }
+    map.setPaintProperty('path', 'line-gradient', expr);
+    const reached = o.checkpoints.map(cp => cp.prefix_km <= front + 1e-9);
+    set('points', [point(o.lake ? [o.lake.longitude, o.lake.latitude] : o.start_coordinates, '#0f8fa6', 8),
+      ...o.checkpoints.map((cp, i) => point(cp.end_coordinates, reached[i] ? PULSE : '#18232a', reached[i] ? 7 : 5)),
+      ...(front < total && t > 0 ? [point(at(front), '#ffd400', 9)] : [])]);
+    rowsEl.forEach((r, i) => r.classList.toggle('reached', reached[i]));
+    clock.textContent = c.clockAt(duration(t), num(front), num(lo), num(hi));
+    scrub.value = Math.round(t / end * 1000);
+    btn.textContent = playing ? c.pause : t >= end ? c.replay : c.play;
+  }
+  function tick(now) {
+    if (playing) { if (last !== null) t = Math.min(end, t + (now - last) / 12000 * end); last = now; if (t >= end) playing = false; }
+    draw();
+    if (playing) frame = requestAnimationFrame(tick); else last = null;
+  }
+  btn.onclick = () => { if (t >= end) t = 0; playing = !playing; last = null; if (playing) frame = requestAnimationFrame(tick); else draw(); };
+  scrub.oninput = () => { playing = false; t = scrub.value / 1000 * end; draw(); };
+  frame = requestAnimationFrame(tick);
+  return () => { playing = false; cancelAnimationFrame(frame); };
 }
 
 // ---------- Earthquake shaking ----------

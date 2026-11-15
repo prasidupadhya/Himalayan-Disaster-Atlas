@@ -174,6 +174,11 @@ fieldset.field { border: 0; padding: 0; margin: 0 0 var(--space-md); }
 .fig small { font-size: var(--text-xs); }
 #result .scroll { margin-top: var(--space-lg); }
 #result .note { margin-top: var(--space-lg); }
+.player { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-xs) var(--space-md); align-items: center; margin-top: var(--space-lg); }
+.player .clock { grid-column: 1 / -1; margin: 0; font-weight: 600; color: var(--color-ink); font-variant-numeric: tabular-nums; min-height: 3em; }
+.player input[type=range] { min-height: 44px; padding: 0; border: 0; background: none; accent-color: var(--color-ink); }
+#result tr.reached td { background: var(--color-accent-soft); color: var(--color-accent-soft-ink); }
+@media (prefers-reduced-motion: no-preference) { #result tr td { transition: background-color var(--dur-short) var(--ease-out); } }
 .chart { margin: var(--space-lg) 0 0; }
 .chart figcaption { font-size: var(--text-sm); color: var(--color-ink); font-weight: 600; margin-bottom: var(--space-xs); }
 .chart svg { width: 100%; max-width: 420px; height: auto; overflow: visible; }
