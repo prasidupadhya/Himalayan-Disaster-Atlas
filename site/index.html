@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Himalayan Disaster Atlas</title>
+<meta name="description" content="Floods, glacial-lake outbursts and earthquakes in Nepal: today's official readings, a map and scenarios. English and Nepali.">
+<meta name="theme-color" content="#141414">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&family=Anek+Devanagari:wght@400;600;700&display=swap">
+<script>try { document.documentElement.dataset.theme = localStorage.getItem('theme') || '' } catch {}</script>
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/base.css">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<main id="main">
+<section class="today-head hero">
+<div><h1 data-t="todayTitle">Nepal today</h1><p class="lead" data-t="todayIntro">Official river, rain and earthquake readings, copied each morning.</p>
+<div class="actions"><a class="button primary" href="/map/" data-t="exploreMap">Open the map</a><a class="button" href="/scenarios/" data-t="runScenario">Run a scenario</a></div><p class="stamp" id="stamp"></p></div>
+<figure class="stations" id="stations"></figure>
+</section>
+<section class="ledger" id="ledger" aria-label="Readings"><p data-t="loading">Loading…</p></section>
+<div id="today"></div>
+</main>
+<script type="module" src="/today.js"></script>
+</body>
+</html>

@@ -5,10 +5,6 @@
   "workers_dev": true,
   "send_metrics": false,
   "preview_urls": true,
-  "build": { "command": "npm run release:check" },
-  "assets": {
-    "directory": "./apps/web/out",
-    "html_handling": "force-trailing-slash",
-    "not_found_handling": "404-page"
-  }
+  // The site is plain files; "npm run build" only checks models and data checksums before deploying.
+  "assets": { "directory": "./site", "html_handling": "force-trailing-slash", "not_found_handling": "404-page" }
 }

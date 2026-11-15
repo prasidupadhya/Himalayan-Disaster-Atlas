@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Himalayan Disaster Atlas</title>
+<meta name="description" content="Floods, glacial-lake outbursts and earthquakes in Nepal: today's official readings, a map and scenarios. English and Nepali.">
+<meta name="theme-color" content="#141414">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600;700&family=Anek+Devanagari:wght@400;600;700&display=swap">
+<script>try { document.documentElement.dataset.theme = localStorage.getItem('theme') || '' } catch {}</script>
+<link rel="stylesheet" href="/vendor/maplibre-gl/maplibre-gl.css">
+<link rel="stylesheet" href="/tokens.css">
+<link rel="stylesheet" href="/base.css">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<main id="main" class="sim">
+<header class="sim-head"><h1 data-t="scenTitle">Scenarios</h1><p class="lead" data-t="scenIntro">Hypothetical model runs, not forecasts. Change the inputs and see how the results move.</p>
+<p class="note" data-t="scenNotice">A scenario is not a forecast or a warning. For warnings, follow DHM and NDRRMA.</p></header>
+<div class="tabs" role="tablist"><button type="button" role="tab" id="tab-flood" data-t="tabFlood">Flood</button><button type="button" role="tab" id="tab-quake" data-t="tabQuake">Earthquake</button></div>
+<div class="sim-layout">
+<div class="sim-controls"><form id="form" novalidate></form><p id="status" class="sr-only" aria-live="polite"></p><div id="result"></div></div>
+<aside class="sim-map"><div id="map" class="map"></div><p class="src" id="map-note"></p></aside>
+</div>
+</main>
+<script type="module" src="/scenarios.js"></script>
+</body>
+</html>

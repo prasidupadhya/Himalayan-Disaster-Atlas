@@ -1,0 +1,1 @@
+{ "name": "Himalayan Disaster Atlas", "short_name": "Atlas", "start_url": "/", "display": "standalone", "background_color": "#eef0eb", "theme_color": "#1d5fa8", "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml" }] }

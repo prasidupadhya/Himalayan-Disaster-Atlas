@@ -1,74 +1,58 @@
 # Himalayan Disaster Atlas
 
-A public, read-only website about three hazards in Nepal: **floods, glacial-lake outbursts (GLOF) and earthquakes**. It shows today's official readings, an interactive map, and hypothetical scenarios you can run in the browser. Every page is in English and Nepali, chosen with one switch in the site header. It works on phones, needs no account, and is served as static files.
+A free, public, read-only website about **floods, glacial-lake outbursts and earthquakes in Nepal**, in English and Nepali. It works on phones and laptops, needs no account, and is plain static files.
 
-Every figure is either copied from an official source, with its date, or labelled as a hypothetical scenario. Missing values are shown as **UNKNOWN**, never as zero. This is not a warning service: warnings come from [DHM](https://www.dhm.gov.np/) and [NDRRMA/BIPAD](https://bipadportal.gov.np/).
+Every number is either copied from an official source with its date, or labelled as a hypothetical scenario. Missing values are shown as **UNKNOWN**, never as zero. It is **not a warning service**: warnings come from [DHM](https://www.dhm.gov.np/) and [NDRRMA/BIPAD](https://bipadportal.gov.np/).
 
 ## Pages
 
-| Page | What you see |
+| Page | What it shows |
 |---|---|
-| **Home** `/` | The three hazards, today's headline figures and a way into the map. |
-| **Today** `/hazards/` | The daily copy of official sources, by hazard. It opens with an at-a-glance line per hazard. Floods show river and rain stations by status, the wettest stations, DHM bulletins and alerts. Earthquakes show a map of the latest NEMRC epicentres next to a date, magnitude and epicentre table. BIPAD incidents cover the last 7 days. |
-| **Map** `/atlas/` | Glacial lakes (GLO inventory), the HydroRIVERS network with downstream tracing from any lake or reach, and terrain. Earthquakes are not drawn on the map; they are on Today, `/live/` and Scenarios. Glacier outlines, boundaries, hydropower and infrastructure load on request. |
-| **Scenarios** `/simulate/` | Flood and GLOF release pulses along 18 verified river corridors, and BSSA14 earthquake shaking, including a Gorkha 2015 replay. Every run plays back in 3D on the verified terrain (the declared pulse travelling down the river, or modelled shaking spreading behind a wave front), with a plain-language summary, ranges (not single numbers), a chart of when the pulse passes each point downstream, a shareable link and a printable report. Inundation, damage and casualties are UNKNOWN. |
-| **About** `/methodology/` | Methods, assumptions and limitations, with [sources](apps/web/app/sources/page.tsx) and licences. |
+| **Today** `/` | The daily copy of DHM, BIPAD and NEMRC: rivers above warning or danger level, the wettest rain stations, recent earthquakes, incidents, alerts and bulletins. Each section says when it was read. |
+| **Map** `/map/` | Rivers, glacial lakes, glaciers and district borders on Copernicus terrain, with an optional 3D view. Tap a river reach to trace it downstream. |
+| **Scenarios** `/scenarios/` | Two tabs in three steps: choose, set and run, read the results. Flood or lake outburst: pick one of 18 verified release points (10 glacial lakes, 8 river points) from the list or the map, set the release and wave speeds, and get arrival times, people in 250–1,000 m corridors and the release hydrograph, with the pulse played along the path. Earthquake: start from Gorkha 2015, one of the ten largest events in the region since 2000, or any point you tap; BSSA14 shaking with people per shaking band. Inputs live in the link, so a run can be shared. |
+| **About** `/about/` | Methods, limits, and every dataset with its source, licence, version and date, read from its manifest. |
 
-Supporting pages: `/official/` (every official source in full) and `/live/` (USGS earthquakes and NOAA GFS forecast feeds).
+## How it is built
 
-The interface runs on one design system: colour, type, spacing and motion tokens with a light and a dark theme (chosen in the header, or following the device), CSS cascade layers, and shared UI pieces (buttons, tabs, stat tiles, badges, notices, skeletons, a bottom sheet). All interface text sits in per-feature English/Nepali copy modules. On the map, the controls are tabs in a side panel on wide screens and a bottom sheet on phones; on a phone, Run and Trace bring the map into view before they play. See [design system](docs/redefine/design-system.md); the living reference page is `/design/`.
+```
+site/                 the website, served as-is (no build step)
+  *.html              four pages and a 404
+  app.js, copy.js     shared shell, all English and Nepali text
+  models.js           scenario science (flood pulse, BSSA14), no DOM
+  basemap.js          MapLibre map of Nepal on verified terrain
+  today.js, map.js, scenarios.js, about.js
+  sw.js               offline copy of pages and code
+  data/               versioned, checksummed releases + gov/latest.json
+  vendor/maplibre-gl  MapLibre GL JS 6.7.0 (BSD-3-Clause)
+pipelines/gov_feeds/  the daily official-source copy (Python)
+data/gov-feeds/       its daily history and raw archives
+tests/                models + data checksums, scraper tests, browser tests
+```
+
+Design: a plain-black public notice. White paper and hueless ink in light mode, re-derived for dark; Epilogue with Anek Devanagari for Nepali; hairline-ruled lists; teal only for state; DHM's red and amber only for published hazard status. Tokens are in `site/tokens.css`.
+
+No framework and no runtime dependencies besides MapLibre. About 1,000 lines of site code.
 
 ## How data gets in
 
-- **Daily official copy.** `.github/workflows/gov-feeds.yml` runs at 00:17 UTC (about 06:02 Nepal time). It reads eight DHM, BIPAD and NEMRC sources ([`pipelines/gov_feeds`](pipelines/gov_feeds)) and commits `apps/web/public/gov/latest.json`, which redeploys the site. A source that fails keeps its last copy, labelled as such. See [official sources](docs/official-sources.md).
-- **Map and scenario data.** These are versioned, immutable releases built offline by the Python pipelines in [`pipelines/`](pipelines). Each one carries its source, licence, coverage and limitations, plus a SHA-256 checksum that the browser verifies before use. See [provenance](docs/provenance.md).
-- **Live conditions.** `.github/workflows/live-feeds.yml` runs every three hours. It reads USGS earthquake summaries and one NOAA GFS rainfall field, publishes them to the data-only `live-data` branch, and pins that publication in `data/live-pin.json`, which redeploys the site. See [live feeds](docs/live-open-feeds.md).
-- **Offline.** A service worker keeps a checksum-pinned shell. Stored live data is shown as LAST KNOWN and deleted after seven days. See [offline shell](docs/offline-shell.md).
+- **Daily official copy.** `.github/workflows/gov-feeds.yml` runs at 00:17 UTC (about 06:02 Nepal time) on `main`, reads eight DHM, BIPAD and NEMRC pages, and commits `site/data/gov/latest.json`. A source that fails keeps its last copy, labelled with its date. Nepal's government hosts have refused GitHub's runners since October 2026; set the repository variable `GOV_RUNNER` to a self-hosted runner in Nepal, or the secret `GOV_PROXY`, to fix that.
+- **Map and model data** are fixed, versioned releases in `site/data/<dataset>/<version>/`, each with a manifest giving source, licence, method, coverage and limitations, and a SHA-256 for every file. Published versions are never overwritten; a new version gets a new folder.
 
-No credentials reach the browser. Acquisition jobs run in GitHub Actions or locally.
+## Run and test
 
-## Run locally
-
-Requires Node 22, npm 10+ and Python 3.12.
+Requires Node 22 (and Python 3.12 for the scraper tests).
 
 ```bash
 npm ci
-python3.12 -m venv .venv && .venv/bin/python -m pip install -r requirements.lock
-npm run dev            # http://127.0.0.1:3000
+npm run serve          # http://127.0.0.1:4173
+npm test               # BSSA14 against 1,000+ pygmm reference cases, flood pulse, population grid, every file's checksum
+python -m unittest tests.test_gov_feeds
+npx playwright install chromium && npm run e2e   # every page on phone and laptop, English and Nepali, light and dark, axe, main flows
 ```
 
-## Check and test
+CI runs all of these on every push and pull request. Cloudflare serves `site/` (see `wrangler.jsonc`); its build step runs `npm run build` (the model and checksum tests), so a failure stops the deploy.
 
-```bash
-npm run check          # data contracts, Python + Vitest tests, typecheck, lint, security checks, static build
-npm run test:e2e       # Playwright: pages, phone layouts, offline, axe on every route, layout budgets, corrupted/missing data, no-WebGL
-```
+## Licences
 
-CI runs both on every push and pull request ([CI/CD](docs/ci-cd.md)). `node scripts/ui-audit.mjs <label> <dir>` measures a build on a throttled phone (LCP, CLS, INP, bytes) and runs axe; results are in [performance](docs/performance.md). `npm run build` writes the static export to `apps/web/out`. Deployment to Cloudflare is described in [deployment](docs/deployment.md).
-
-## Layout
-
-```
-apps/web/        Next.js 16 static site (React 19, MapLibre GL)
-packages/        shared data contracts (TypeScript + JSON Schema)
-pipelines/       Python acquisition and release builders
-processing/      offline research work, e.g. the physical GLOF solver (not published)
-data/            checked-in versioned releases
-docs/            methods, sources, architecture and per-feature notes
-tests/           Python, Vitest and Playwright suites
-```
-
-Start with [architecture](docs/architecture/README.md), [Today page](docs/hazards-hub.md), [flood corridors](docs/flood-corridors.md), [earthquake shaking](docs/earthquake-shaking.md) and the [roadmap](docs/ROADMAP.md).
-
-## Rules the project keeps
-
-- Unknown is `null` in data and UNKNOWN on screen.
-- Scenarios are hypothetical models, not forecasts.
-- Published releases are never overwritten; a change gets a new version.
-- No geographic facts, hazard levels or measurements are invented. Synthetic test fixtures are marked SYNTHETIC.
-- Status is never shown by colour alone: there is always a text label or icon.
-- Nepali interface text is project-authored and needs native-speaker review before anyone relies on it operationally. Text copied from a source stays in its source language.
-
-## Licence
-
-The original code is [MIT](LICENSE). Upstream data and dependencies keep their own licences; see [licensing](docs/licensing.md) and `/licenses/` on the site.
+Site code: MIT (`LICENSE`). Each dataset keeps its own licence and attribution in its manifest; the About page lists them all.

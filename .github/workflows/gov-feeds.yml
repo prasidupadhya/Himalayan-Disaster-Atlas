@@ -15,7 +15,7 @@ concurrency:
 jobs:
   digest:
     if: github.ref == 'refs/heads/main'
-    # Nepal's government data centre has refused GitHub's runners since 22 October 2026 (see docs/official-sources.md).
+    # Nepal's government data centre has refused GitHub's runners since 22 October 2026.
     # Set the repository variable GOV_RUNNER to the label of a self-hosted runner in Nepal to run there instead.
     runs-on: ${{ vars.GOV_RUNNER || 'ubuntu-24.04' }}
     # The digest gives up on silent hosts and stops starting sources after 10 minutes, so it always
@@ -31,12 +31,12 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
-          python-version-file: .python-version
+          python-version: '3.12.14'
       - run: python -m venv .gov && .gov/bin/pip install -r pipelines/gov_feeds/requirements.txt
       - name: Install the browser for pages built by JavaScript
         run: .gov/bin/python -m playwright install --with-deps chromium
       - name: Test the digest
-        run: .gov/bin/python -m unittest tests.python.test_gov_feeds -v
+        run: .gov/bin/python -m unittest tests.test_gov_feeds -v
       - name: Fetch and organise official pages
         timeout-minutes: 18
         env:
@@ -52,7 +52,7 @@ jobs:
           GIT_COMMITTER_NAME: Prasid
           GIT_COMMITTER_EMAIL: 91832812+prasidupadhya@users.noreply.github.com
         run: |
-          git add apps/web/public/gov data/gov-feeds
+          git add site/data/gov data/gov-feeds
           if git diff --cached --quiet; then echo "No change in the official sources."; echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git commit -m "Update official-source digest for $(TZ=Asia/Kathmandu date +%F)"
           export GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=http.https://github.com/.extraheader GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"

@@ -1,11 +1,10 @@
 # Working in Himalayan Disaster Atlas
 
-Read `README.md`, `docs/architecture/README.md`, and the relevant feature specification before editing. The user-supplied master brief remains the product authority; do not copy its credential-bearing attachment into this repository.
+Read `README.md` first. The site is plain HTML, CSS and JavaScript in `site/`; keep it that way: no framework, no build step, no new runtime dependency without a clear need.
 
-- One feature branch and one AI owner per feature. Foundation: `feat/foundation`, Astra. Keep unrelated feature work separate. No automatic merge or direct push to main.
-- Keep the website static-first, public and read-only. Credentials and acquisition jobs belong outside the browser. Use the root build command and preserve its security checks.
-- Use the central schema, validators, units, CRS conventions, layer lifecycle and resource states. Version immutable artifacts; never silently overwrite a published version.
-- Unknown is null in data and UNKNOWN in presentation. Synthetic fixtures must be explicit. Never invent geographic facts, causal relationships, hazard levels or measurements.
-- Document source/version/license, processing, assumptions and limitations before publishing real data. Simulations are hypothetical modelled outputs, not forecasts.
-- Run `npm run check` and relevant `npm run test:e2e` coverage. Update architecture/data/methodology/source documentation alongside changes.
-- Final visual polish is a separate assigned feature. Do not let visual changes alter scientific meaning.
+- Static, public and read-only. No credentials in the browser; acquisition jobs run in GitHub Actions.
+- Unknown is `null` in data and UNKNOWN on screen. Never invent geographic facts, hazard levels, causes or measurements. Scenarios are hypothetical model runs, not forecasts.
+- Data releases are immutable: a change is a new version folder with its manifest and checksums. Document source, licence, method and limitations before publishing.
+- All interface text lives in `site/copy.js`, in English and Nepali. Agency text is shown as published.
+- Scenario science lives in `site/models.js` and must keep passing `tests/models.test.mjs` (BSSA14 against pygmm reference cases).
+- Before pushing: `npm test`, `python -m unittest tests.test_gov_feeds`, `npm run e2e`.

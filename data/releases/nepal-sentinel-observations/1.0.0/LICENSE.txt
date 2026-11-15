@@ -1,2 +1,0 @@
-Contains modified Copernicus Sentinel data 2026
-https://cds.climate.copernicus.eu/licences/ec-sentinel

@@ -1,7 +1,7 @@
 """Daily digest of public Nepal government weather, river, rainfall, earthquake and notice pages.
 
 Pages are fetched with Scrapling, checked against robots.txt, archived raw, and organised into
-`apps/web/public/gov/latest.json`. Text is copied verbatim; nothing is inferred or translated. A source
+`site/data/gov/latest.json`. Text is copied verbatim; nothing is inferred or translated. A source
 that cannot be fetched keeps its last successful copy, clearly marked as last known.
 """
 
@@ -19,7 +19,7 @@ from urllib.robotparser import RobotFileParser
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = Path(__file__).with_name("sources.json")
-PUBLIC = ROOT / "apps/web/public/gov/latest.json"
+PUBLIC = ROOT / "site/data/gov/latest.json"
 ARCHIVE = ROOT / "data/gov-feeds"
 FORMAT = "atlas-gov-digest@1"
 NEPAL = timezone(timedelta(hours=5, minutes=45))
@@ -218,7 +218,7 @@ def organise_river(payload, moment=None):
             "current_station_count": len(current), "current_status_counts": tally(current),
             "alert_stations": sorted((s for s in current if s["status"] in ALERTS), key=alert_order),
             "stale_alert_stations": sorted((s for s in stations if not s["current"] and s["status"] in ALERTS), key=alert_order),
-            "statuses": {s["id"]: [s["name"], s["status"]] for s in stations}}
+            "statuses": {s["id"]: [s["name"], s["status"], s["current"]] for s in stations}}
 
 
 def organise_rain(payload, moment=None):
@@ -347,7 +347,7 @@ def changes(kind, previous, current):
     # Copies before October 2026 kept full station lists; later ones keep {id: [name, status]}.
     old = {k: v[1] for k, v in previous.get("statuses", {}).items()} or {s["id"]: s["status"] for s in previous.get("stations", [])}
     return {"status_changes": [{"id": k, "name": name, "from": old[k], "to": status}
-                               for k, (name, status) in current["statuses"].items() if k in old and old[k] != status][:60]}
+                               for k, (name, status, *_) in current["statuses"].items() if k in old and old[k] != status][:60]}
 
 
 def summarise(entries):

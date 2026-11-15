@@ -1,7 +1,27 @@
 {
   "extraKnownMarketplaces": {
-    "chisle": { "source": { "source": "github", "repo": "JayPokale/Chisle" } },
-    "egm": { "source": { "source": "github", "repo": "google/elephant-goldfish-model" } }
+    "chisle": {
+      "source": {
+        "source": "github",
+        "repo": "JayPokale/Chisle"
+      }
+    },
+    "egm": {
+      "source": {
+        "source": "github",
+        "repo": "google/elephant-goldfish-model"
+      }
+    },
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
+    }
   },
-  "enabledPlugins": { "chisle@chisle": true, "egm@egm": true }
+  "enabledPlugins": {
+    "chisle@chisle": true,
+    "egm@egm": true,
+    "impeccable@impeccable": true
+  }
 }
