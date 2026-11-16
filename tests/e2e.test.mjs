@@ -139,3 +139,60 @@ test('river trace: tapping a river and tracing it draws the downstream path', as
   assert.deepEqual(errors, []);
   await close();
 });
+
+test('flood scenario names its places: districts in order, towns near the path, and the place the front is in', async () => {
+  const { page, errors, close } = await open('laptop', '/scenarios/#flood=glof-40746560');
+  await page.waitForSelector('.route-list li');
+  assert.match(await page.textContent('.route-list li:first-child'), /Manang/);
+  assert.match(await page.textContent('.route'), /Lamjung/);
+  assert.match(await page.textContent('.route'), /Besisahar/);
+  assert.match(await page.textContent('.summary'), /Manang/);
+  await page.click('#play');
+  await page.locator('#scrub').fill('300');
+  assert.match(await page.textContent('#clock'), / in [A-Z]/);
+  assert.ok(await page.locator('.map-label.on').count() > 0, 'places are labelled on the map');
+  assert.deepEqual(errors, []);
+  await close();
+});
+
+test('earthquake scenario names the epicentre district and the most shaken cities', async () => {
+  const { page, errors, close } = await open('laptop', '/scenarios/#quake');
+  await page.waitForSelector('#sweep');
+  assert.match(await page.textContent('.summary'), /Gorkha district, Gandaki/);
+  assert.equal(await page.locator('#result table').first().locator('tbody tr').count(), 10);
+  await page.waitForFunction(() => document.querySelectorAll('.map-label.on').length > 0);
+  await page.click('#sweep');
+  assert.deepEqual(errors, []);
+  await close();
+});
+
+test('river trace lists where the river goes', async () => {
+  const { page, errors, close } = await open('phone', '/map/');
+  const box = await page.locator('#map canvas').boundingBox();
+  // Nepal is a narrow band on a phone: tap across it at several heights until a river popup offers the trace.
+  const found = () => page.locator('[data-trace]').count();
+  for (const y of [0.45, 0.5, 0.55, 0.4, 0.6]) for (let x = 0.15; x < 0.9 && !(await found()); x += 0.03) {
+    await page.touchscreen.tap(box.x + box.width * x, box.y + box.height * y); await page.waitForTimeout(200);
+    if (!(await found())) await page.locator('.maplibregl-popup-close-button').click({ timeout: 300 }).catch(() => {});   // a lake popup would cover the next tap
+  }
+  await page.click('[data-trace]');
+  await page.waitForSelector('.route-list li');
+  assert.ok(await page.locator('.route-list li').count() >= 1);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.deepEqual(errors, []);
+  await close();
+});
+
+test('a river point outside Nepal is described as outside, and only real place names are shown', async () => {
+  const { page, errors, close } = await open('phone', '/scenarios/#flood=river-40679245');
+  await page.waitForSelector('.route-list li');
+  assert.match(await page.textContent('.summary'), /starting outside Nepal/);
+  assert.doesNotMatch(await page.textContent('.summary'), /in outside/);
+  assert.ok(await page.locator('.map-note.phone-only').isVisible(), 'the map note is shown on phones');
+  await page.goto(base + '/scenarios/#flood=river-40811723');
+  await page.waitForFunction(() => /Kathmandu|Bhaktapur|Lalitpur/.test(document.querySelector('.route-list')?.textContent ?? ''));
+  assert.doesNotMatch(await page.textContent('#result'), /OSM settlement/);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.deepEqual(errors, []);
+  await close();
+});

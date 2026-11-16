@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node --test tests/models.test.mjs",
-    "test": "node --test tests/models.test.mjs",
+    "build": "node --test tests/models.test.mjs tests/places.test.mjs",
+    "test": "node --test tests/models.test.mjs tests/places.test.mjs",
     "e2e": "node --test --test-concurrency=1 tests/e2e.test.mjs",
     "serve": "node tests/serve.mjs"
   },
