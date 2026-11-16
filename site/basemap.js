@@ -22,8 +22,10 @@ const dark = () => matchMedia('(prefers-color-scheme: dark)').matches && documen
 /** A map of Nepal on verified terrain with country and province borders. Resolves once the map is ready. */
 export async function baseMap(container, attribution) {
   const meta = (await load(`${TERRAIN}/manifest.json`)).metadata;
+  // East and west the view stays inside the terrain's coverage, so its edge never shows as a hard line.
+  // North and south are left looser: a tall, narrow phone map needs the room to fit the whole country.
   const map = new maplibregl.Map({
-    container, bounds: NEPAL, fitBoundsOptions: { padding: 12 }, maxBounds: [[74, 22], [94, 34]], minZoom: 4, maxPitch: 70,
+    container, bounds: NEPAL, fitBoundsOptions: { padding: 12 }, maxBounds: [[meta.spatial_coverage.bbox[0] + 0.05, 19], [meta.spatial_coverage.bbox[2] - 0.05, 35]], minZoom: 4, maxPitch: 70,
     attributionControl: { compact: true, customAttribution: [`Terrain: Copernicus DEM GLO-90`, 'Boundaries: Survey Department of Nepal / OCHA', ...attribution] },
     style: { version: 8, sources: {
       dem: { type: 'raster-dem', tiles: [`${location.origin}${TERRAIN}/{z}/{x}/{y}.png`], tileSize: 256, minzoom: 5, maxzoom: 9, encoding: 'mapbox', bounds: meta.spatial_coverage.bbox },

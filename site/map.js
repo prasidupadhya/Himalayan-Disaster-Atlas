@@ -1,5 +1,7 @@
 import { c, esc, num, load, failed } from './app.js';
 import { baseMap, popup, color, maplibregl } from './basemap.js';
+import * as P from './places.js';
+import { routeData, routeHtml, routeStage } from './route.js';
 
 const D = id => `/data/${id}/features.geojson.gz`;
 
@@ -38,6 +40,7 @@ map.addLayer({ id: 'trace-casing', type: 'line', source: 'trace', paint: { 'line
 map.addLayer({ id: 'trace', type: 'line', source: 'trace', paint: { 'line-width': 5, 'line-gradient': '#ffd400' }, layout: { 'line-cap': 'round', 'line-join': 'round' } });
 map.addLayer({ id: 'trace-flow', type: 'line', source: 'trace', paint: { 'line-color': '#18232a', 'line-width': 2, 'line-opacity': 0, 'line-dasharray': [0, 4, 3] }, layout: { 'line-join': 'round' } });
 map.addLayer({ id: 'trace-ends', type: 'circle', source: 'trace-ends', paint: { 'circle-radius': 7, 'circle-color': ['get', 'fill'], 'circle-stroke-color': '#18232a', 'circle-stroke-width': 2 } });
+const stage = routeStage(map, 'trace-casing');
 let rivers = null, stopTrace = () => {};
 const DASHES = [[0, 4, 3], [0.5, 4, 2.5], [1, 4, 2], [1.5, 4, 1.5], [2, 4, 1], [2.5, 4, 0.5], [3, 4, 0], [0, 0.5, 3, 3.5], [0, 1, 3, 3], [0, 1.5, 3, 2.5], [0, 2, 3, 2], [0, 2.5, 3, 1.5], [0, 3, 3, 1], [0, 3.5, 3, 0.5]];
 /** The reaches as one line in flow order: each reach is turned to start where the previous one ended. */
@@ -52,29 +55,42 @@ function joined(path) {
   });
   return out;
 }
-function trace(id) {
+async function trace(id) {
   stopTrace();
   const byId = new Map(rivers.features.map(f => [f.properties.source_id, f])), path = [], seen = new Set();
   for (let f = byId.get(id); f && !seen.has(f.properties.source_id); f = f.properties.downstream_in_release ? byId.get(f.properties.downstream_id) : null) { seen.add(f.properties.source_id); path.push(f); }
-  const line = joined(path);
+  const line = joined(path), totalKm = path.reduce((t, f) => t + f.properties.length_km, 0);
+  let frame = 0, timer = 0, live = true;
+  stopTrace = () => { live = false; cancelAnimationFrame(frame); clearInterval(timer); map.setPaintProperty('trace-flow', 'line-opacity', 0); };
+  const clear = () => { stopTrace(); stage.clear(); map.getSource('trace').setData(none); map.getSource('trace-ends').setData(none); info.innerHTML = ''; };
+  const show = p => ['trace', 'trace-casing'].forEach(l => map.setPaintProperty(l, 'line-gradient', ['step', ['line-progress'], l === 'trace' ? '#ffd400' : '#ffffff', Math.max(1e-6, p), 'rgba(0,0,0,0)']));
+  show(0);
   map.getSource('trace').setData({ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: line } });
   map.getSource('trace-ends').setData({ type: 'FeatureCollection', features: [[line[0], '#ffd400'], [line.at(-1), '#ffffff']].map(([p, fill]) => ({ type: 'Feature', properties: { fill }, geometry: { type: 'Point', coordinates: p } })) });
   map.fitBounds(line.reduce((b, p) => b.extend(p), new maplibregl.LngLatBounds(line[0], line[0])), { padding: 60, maxZoom: 10, duration: reduced ? 0 : 900 });
-  info.innerHTML = `<p class="note">${esc(c.traced(num(path.reduce((t, f) => t + f.properties.length_km, 0)), num(path.length)))} ${esc(c.traceExit)}</p><button type="button" id="clear">${esc(c.clearTrace)}</button>`;
-  const show = p => ['trace', 'trace-casing'].forEach(l => map.setPaintProperty(l, 'line-gradient', ['step', ['line-progress'], l === 'trace' ? '#ffd400' : '#ffffff', Math.max(1e-6, p), 'rgba(0,0,0,0)']));
-  let frame = 0, timer = 0;
-  if (reduced) show(1);
-  else {
-    const t0 = performance.now(), ms = 900 + Math.min(2600, path.length * 25);
-    frame = requestAnimationFrame(function draw(now) {
-      const k = Math.min(1, (now - t0) / ms); show(1 - (1 - k) ** 3);
-      if (k < 1) { frame = requestAnimationFrame(draw); return; }
-      map.setPaintProperty('trace-flow', 'line-opacity', 0.55); let n = 0;
-      timer = setInterval(() => map.setPaintProperty('trace-flow', 'line-dasharray', DASHES[n++ % DASHES.length]), 80);
-    });
+  const summary = `<p class="note">${esc(c.traced(num(totalKm), num(path.length)))} ${esc(c.traceExit)}</p>`, clearBtn = `<button type="button" id="clear">${esc(c.clearTrace)}</button>`;
+  info.innerHTML = `${summary}${clearBtn}`;
+  document.getElementById('clear').onclick = clear;
+  // The places along the path: districts in order, towns near it and stream names. If they cannot load, the line still draws.
+  const places = await routeData().catch(() => null);
+  if (!live) return;
+  const r = places && P.describePath(line, totalKm, places.find, places.places, places.streams);
+  if (r) {
+    stage.show(r);
+    info.innerHTML = `${summary}<p class="clock" id="now" aria-live="polite"></p>${clearBtn}<h2>${esc(c.traceRoute)}</h2>${routeHtml(r, totalKm)}`;
+    document.getElementById('clear').onclick = clear;
   }
-  stopTrace = () => { cancelAnimationFrame(frame); clearInterval(timer); map.setPaintProperty('trace-flow', 'line-opacity', 0); };
-  document.getElementById('clear').onclick = () => { stopTrace(); map.getSource('trace').setData(none); map.getSource('trace-ends').setData(none); info.innerHTML = ''; };
+  const now = document.getElementById('now');
+  const at = k => { show(k); if (r) { const place = stage.progress(k * totalKm, k < 1 ? P.pointAt(r.samples, k * totalKm) : null); const text = k < 1 ? c.tracing(place) : ''; if (now && now.textContent !== text) now.textContent = text; } };
+  // After the line is drawn, a slow dash keeps moving along it to show the direction of flow.
+  const flow = () => { map.setPaintProperty('trace-flow', 'line-opacity', 0.55); let n = 0; timer = setInterval(() => map.setPaintProperty('trace-flow', 'line-dasharray', DASHES[n++ % DASHES.length]), 80); };
+  if (reduced) { at(1); return; }
+  const t0 = performance.now() + 900, ms = Math.min(14000, Math.max(3500, totalKm * 28));   // waits for the camera, then about 28 ms per km
+  frame = requestAnimationFrame(function draw(nowMs) {
+    const k = Math.min(1, Math.max(0, (nowMs - t0) / ms));
+    at(k);
+    if (k < 1) frame = requestAnimationFrame(draw); else flow();
+  });
 }
 
 // Layers load on first use; the checkbox, not the order of loads, decides what is visible.

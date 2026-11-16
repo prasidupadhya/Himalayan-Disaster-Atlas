@@ -9,8 +9,8 @@ Every number is either copied from an official source with its date, or labelled
 | Page | What it shows |
 |---|---|
 | **Today** `/` | The daily copy of DHM, BIPAD and NEMRC: rivers above warning or danger level, the wettest rain stations, recent earthquakes, incidents, alerts and bulletins. Each section says when it was read. |
-| **Map** `/map/` | Rivers, glacial lakes, glaciers and district borders on Copernicus terrain, with an optional 3D view. Tap a river reach to trace it downstream. |
-| **Scenarios** `/scenarios/` | Two tabs in three steps: choose, set and run, read the results. Flood or lake outburst: pick one of 18 verified release points (10 glacial lakes, 8 river points) from the list or the map, set the release and wave speeds, and get arrival times, people in 250–1,000 m corridors and the release hydrograph, with the pulse played along the path. Earthquake: start from Gorkha 2015, one of the ten largest events in the region since 2000, or any point you tap; BSSA14 shaking with people per shaking band. Inputs live in the link, so a run can be shared. |
+| **Map** `/map/` | Rivers, glacial lakes, glaciers and district borders on Copernicus terrain, with an optional 3D view. Tap a river reach to trace it downstream: the path draws itself with a moving head, the districts it runs through light up and are named as it passes, towns within 5 km appear, and the route is listed in words. |
+| **Scenarios** `/scenarios/` | Two tabs in three steps: choose, set and run, read the results. **Flood or lake outburst:** pick one of 18 verified release points (10 glacial lakes, 8 river points) from the list or the map. Results give arrival times, people in 250–1,000 m corridors, the districts along the path in order with when the front reaches each, towns within 5 km, and the release hydrograph. The playback paints the path as time runs, names the place the front is in, can follow the front with the camera, and has a time slider and speed control. **Earthquake:** start from Gorkha 2015, one of the ten largest events in the region since 2000, or any point you tap. Results name the epicentre's district, the cities, towns and districts with the strongest modelled shaking, and people per shaking band; the pattern spreads outward once on the map (a way of showing it, not a timed wave). Inputs live in the link, so a run can be shared. |
 | **About** `/about/` | Methods, limits, and every dataset with its source, licence, version and date, read from its manifest. |
 
 ## How it is built
@@ -20,6 +20,8 @@ site/                 the website, served as-is (no build step)
   *.html              four pages and a 404
   app.js, copy.js     shared shell, all English and Nepali text
   models.js           scenario science (flood pulse, BSSA14), no DOM
+  places.js           district, town and stream lookups along a path, no DOM
+  route.js            a path on the map with its places (shared by Map and Scenarios)
   basemap.js          MapLibre map of Nepal on verified terrain
   today.js, map.js, scenarios.js, about.js
   sw.js               offline copy of pages and code
@@ -46,7 +48,7 @@ Requires Node 22 (and Python 3.12 for the scraper tests).
 ```bash
 npm ci
 npm run serve          # http://127.0.0.1:4173
-npm test               # BSSA14 against 1,000+ pygmm reference cases, flood pulse, population grid, every file's checksum
+npm test               # BSSA14 against 1,000+ pygmm reference cases, flood pulse, population grid, place lookups, every file's checksum
 python -m unittest tests.test_gov_feeds
 npx playwright install chromium && npm run e2e   # every page on phone and laptop, English and Nepali, light and dark, axe, main flows
 ```
