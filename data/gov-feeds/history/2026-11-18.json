@@ -1,17 +1,17 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-11-18T07:31:16Z",
+ "generated_at": "2026-11-18T15:37:03Z",
  "summary": {
-  "sources_fetched": 6,
-  "sources_last_known": 2,
+  "sources_fetched": 7,
+  "sources_last_known": 1,
   "sources_unavailable": 0,
   "rivers_above_danger": 0,
   "rivers_above_warning": 0,
-  "rivers_current": 165,
-  "rain_current": 303,
+  "rivers_current": 164,
+  "rain_current": 304,
   "rain_stations_above_warning": 0,
-  "new_links": 0,
-  "new_records": 9
+  "new_links": 5,
+  "new_records": 6
  },
  "sources": [
   {
@@ -19,28 +19,28 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "863b235f70ce0deb2bfc6abf704861978e570c91e20d3f6c819adccbff58c1d0"
+   "sha256": "1f39c14e959e5d487baeb0bbaba43ef145fd6a8616b3fb0bb09c0ebdca3d9a50"
   },
   {
    "id": "bipad-rain",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "16ab5a05f2f2d63b0730c9c5cfc361498557722780f2448312e7befcf1f46efa"
+   "sha256": "c4ccc75435ae04d60600bae66b891a1733d2d2064d6cca877e5443d6a41e5b16"
   },
   {
    "id": "dhm-flood-archive",
-   "status": "error",
-   "http_status": null,
-   "last_known": true,
-   "sha256": "d001b469bc009de8f6276ed40eb7471d75591f3cc332c1855f6dc65025d3f0de"
+   "status": "fetched",
+   "http_status": 200,
+   "last_known": null,
+   "sha256": "6b1c284e5144967662b1aa9d73983798bccc0dfc38f711599e584f28b380d6c9"
   },
   {
    "id": "dhm-forecast",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "532efa8742ecb38ef6264b7ee39518c7c83201f090b6e4080ab5ba22d12b2e28"
+   "sha256": "374231b48e3e43bdd1d38d95f58849275a2dc1267eea44bba49029b83a18d4a4"
   },
   {
    "id": "seismo-earthquakes",
@@ -54,21 +54,21 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "6091e24ec165e8828efc0ef2ace47bf64baa0e9dc10513a1c7ce1312b6a72e82"
+   "sha256": "64674c76754092019d0a2ea31dea980c57cc55a59675150802947c818455ca3e"
   },
   {
    "id": "bipad-alerts",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "3c43a6095fc8b0cc7bae62732003788483c45ff7bd3a4c13becb132270e55c88"
+   "sha256": "1880fddd71f3eb58d0fe797807f63f93aecc1cd3cd031099dba695790dc2b4e2"
   },
   {
    "id": "ndrrma-home",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "dd2c0b24409d026811dbb0d60b13b6e530abaa0a5aa60ed2962d3964890293e5"
+   "sha256": "799e2f040eea6fee9804c55b233d86df0d289ec22d0999a10f7fb8657fcee1fb"
   }
  ]
 }
