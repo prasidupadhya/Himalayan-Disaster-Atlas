@@ -23,5 +23,18 @@
     "chisle@chisle": true,
     "egm@egm": true,
     "impeccable@impeccable": true
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "WebSearch|WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/home/user/Himalayan-Disaster-Atlas/.hyperresearch/hook.js\""
+          }
+        ]
+      }
+    ]
   }
 }

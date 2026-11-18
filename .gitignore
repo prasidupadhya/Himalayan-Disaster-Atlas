@@ -7,3 +7,5 @@ test-results/
 .wrangler/
 .DS_Store
 .hallmark/
+.hyperresearch/*.db
+.hyperresearch/*.db-*
