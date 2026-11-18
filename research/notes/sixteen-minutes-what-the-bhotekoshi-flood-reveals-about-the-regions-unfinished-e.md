@@ -6,6 +6,7 @@ tags:
 - early-warning
 - nepal
 created: '2026-11-18T12:54:49.905118Z'
+updated: '2026-11-18T12:55:41.469197Z'
 source: https://www.borderlens.com/2026/08/28/sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-early-warning-problem/
 source_domain: www.borderlens.com
 fetched_at: '2026-11-18T12:54:49.903805Z'
@@ -15,6 +16,8 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'BorderLens Aug 2026: 16-minute lag from Tibet flood entry to Rasuwa DAO;
+  no binding Nepal-China data-sharing; DHM updates via Facebook ~5h later.'
 ---
 
 Sixteen Minutes: What the Bhotekoshi flood reveals about the region’s unfinished early-warning problem

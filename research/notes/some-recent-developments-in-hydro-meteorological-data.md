@@ -4,6 +4,7 @@ id: some-recent-developments-in-hydro-meteorological-data
 tags:
 - nepal-data-feeds
 created: '2026-11-18T12:54:58.392112Z'
+updated: '2026-11-18T12:55:41.315094Z'
 source: https://old.wmo.int/extranet/pages/prog/www/IMOP/publications/IOM-116_TECO-2014/Session%201/P1_21_Karki-Hydromet_Dev_in_Nepal.pdf
 source_domain: old.wmo.int
 fetched_at: '2026-11-18T12:54:58.391091Z'
@@ -13,6 +14,9 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'DHM (Karki, WMO TECO 2014): shift from postal/VHF to CDMA/GPRS real-time
+  transmission, 5-minute telemetry in monsoon, SMS-to-web for manual climate data,
+  14 synoptic stations; older context for DHM data feeds.'
 raw_file: raw/some-recent-developments-in-hydro-meteorological-data.pdf
 ---
 

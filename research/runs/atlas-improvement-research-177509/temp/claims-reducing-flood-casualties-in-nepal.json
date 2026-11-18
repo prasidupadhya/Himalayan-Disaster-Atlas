@@ -1,0 +1,22 @@
+[
+ {
+  "claim": "WMO reports Nepal flood deaths fell from 166 in 2017 to 27 in 2022 after DHM FFEWS (2016, community-based, extended via SMS, social, radio, TV, email) and South Asia Flash Flood Guidance System (2018).",
+  "quoted_support": "in just five years the number of deaths went from 166 in 2017 to to 27 in 2022 despite higher magnitude flooding in 2022.",
+  "numbers": [
+   "166 (2017)",
+   "27 (2022)"
+  ],
+  "evidence_type": "statistical",
+  "confidence": "medium",
+  "source_note_id": "reducing-flood-casualties-in-nepal",
+  "stance": "supports",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ }
+]

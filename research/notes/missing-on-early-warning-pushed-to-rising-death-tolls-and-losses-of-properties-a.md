@@ -6,6 +6,7 @@ tags:
 - early-warning
 - nepal
 created: '2026-11-18T12:54:43.496518Z'
+updated: '2026-11-18T12:55:42.575073Z'
 source: https://www.spotlightnepal.com/2024/10/07/missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properties-and-infrastructures
 source_domain: www.spotlightnepal.com
 fetched_at: '2026-11-18T12:54:43.495789Z'
@@ -15,6 +16,8 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Opinion (Karn) on Sept 2024 floods: accurate 4-day DHM alert not translated
+  to last mile; NDRRMA passive.'
 ---
 
 Missing On Early Warning – Pushed To Rising Death-Tolls And Losses Of Properties And Infrastructures | New Spotlight Magazine

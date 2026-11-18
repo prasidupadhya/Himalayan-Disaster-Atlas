@@ -4,7 +4,9 @@ title: 'Mapping for resilience: crowd-sourced mapping in crises | Humanitarian P
 id: mapping-for-resilience-crowd-sourced-mapping-in-crises-humanitarian-practice-net
 tags:
 - atlas-improvement
+- open-data
 created: '2026-11-18T12:54:51.869870Z'
+updated: '2026-11-18T12:55:28.063584Z'
 source: https://odihpn.org/magazine/mapping-for-resilience-crowd-sourced-mapping-in-crises/
 source_domain: odihpn.org
 fetched_at: '2026-11-18T12:54:51.868112Z'
@@ -14,6 +16,10 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'ODI HPN: Open Cities mapped >100,000 Kathmandu Valley buildings, ~350 health
+  facilities, ~2,300 schools on OSM pre-2015; after Gorkha, 2,200 mappers by 28 Apr
+  and 3,300 by 30 Apr; KLL printable maps used by Nepal army and relief actors; lesson:
+  pre-disaster mapping of where people live is disaster preparedness.'
 ---
 
 Mapping for resilience: crowd-sourced mapping in crises | Humanitarian Practice Network

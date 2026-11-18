@@ -1,0 +1,23 @@
+[
+ {
+  "claim": "Sept-Oct 2024 Kathmandu floods: DHM issued an accurate alert four days ahead but communication was not effective to the last mile; ~250 deaths.",
+  "quoted_support": "in-spite of a clear and categorical alert, four days in advance from the Department of Hydrology and Metrology (DHM) Nepal... the communication of alert was not very effective and result oriented.",
+  "numbers": [
+   "~250 deaths",
+   "16,000+ families",
+   "4 days lead"
+  ],
+  "evidence_type": "expert-opinion",
+  "source_note_id": "missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properties-a",
+  "stance": "supports",
+  "confidence": "medium",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ }
+]

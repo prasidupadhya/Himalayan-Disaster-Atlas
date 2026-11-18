@@ -4,6 +4,7 @@ id: early-warning-system-and
 tags:
 - nepal-data-feeds
 created: '2026-11-18T12:55:00.721487Z'
+updated: '2026-11-18T12:55:40.959298Z'
 source: https://dpnet.org.np/public/uploads/files/D-2_DHM_NCDRR%202023-07-04%2018-48-52.pdf
 source_domain: dpnet.org.np
 fetched_at: '2026-11-18T12:55:00.720619Z'
@@ -13,6 +14,10 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'DHM presentation (Nepali, NCDRR 2023): real-time monitoring network, flood
+  forecast with MIKE 11 on large rivers, Mass SMS alerts via polygon targeting based
+  on rainfall forecast and flood risk; 13 million SMS sent in 2079 BS; dissemination
+  via website, bulletin, SMS, social media.'
 raw_file: raw/early-warning-system-and.pdf
 ---
 

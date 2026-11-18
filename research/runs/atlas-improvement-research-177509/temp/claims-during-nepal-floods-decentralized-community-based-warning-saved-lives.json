@@ -1,0 +1,93 @@
+[
+ {
+  "claim": "Official DHM SMS alerts during the Aug 2026 Bhotekoshi/Trishuli flood were generic, Nepali-only and lacked location, severity and action guidance.",
+  "quoted_support": "the content was the same generic language used for routine monsoon advisories: Move to safe ground, with no street-level instruction, no sense of how much time people had, no indication of scale.",
+  "numbers": [
+   "679,295 residents alerted",
+   "9:15-9:16 a.m. DHM first alert",
+   "9:35 a.m. PM-stated first SMS batch"
+  ],
+  "confidence": "medium",
+  "source_note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+  "stance": "supports",
+  "evidence_type": "anecdotal",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ },
+ {
+  "claim": "DHM has no legal authority to order evacuation and no law links a forecast to an automatic evacuation trigger.",
+  "quoted_support": "Nothing in the law requires a flood forecast to automatically trigger such an order; the link between 'the water is rising' and 'everyone must leave now' is discretionary, not mandatory.",
+  "evidence_type": "legal",
+  "source_note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+  "stance": "supports",
+  "confidence": "medium",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ },
+ {
+  "claim": "A GSMA/ITU study estimated cell broadcast for Nepal at $1.75-3 million, reaching a zone in ~10 seconds in multiple languages, with NDRRMA as lead; not procured by the flood.",
+  "quoted_support": "The study found that the technology could reach a targeted zone in roughly 10 seconds even under network congestion, named NDRRMA as lead agency and estimated setup costs at $1.75-$3 million.",
+  "numbers": [
+   "$1.75-$3 million",
+   "~10 seconds"
+  ],
+  "confidence": "low",
+  "source_note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+  "stance": "supports",
+  "evidence_type": "anecdotal",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ },
+ {
+  "claim": "A 2026 scoping review of 38 peer-reviewed studies found DHM SMS alerts repeatedly lacked actionable guidance.",
+  "quoted_support": "A 2026 scoping review of 38 peer-reviewed studies over four decades of Nepali risk-communication research, led by Bhandari, found that DHM's SMS alerts were repeatedly found to lack actionable guidance.",
+  "numbers": [
+   "38 studies"
+  ],
+  "evidence_type": "empirical",
+  "source_note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+  "stance": "supports",
+  "confidence": "medium",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ },
+ {
+  "claim": "Warnings should contain exact locations, severity, context, actionable instructions and shelter locations (and non-Nepali language on tourist corridors).",
+  "quoted_support": "People need to know exactly how severe the risk is to their specific location and where the evacuation shelters are.",
+  "entities": [
+   "Chandani Bhandari"
+  ],
+  "evidence_type": "expert-opinion",
+  "source_note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+  "stance": "supports",
+  "confidence": "medium",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "time_period": "",
+  "region": "Nepal"
+ }
+]

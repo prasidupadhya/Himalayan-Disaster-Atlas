@@ -6,6 +6,7 @@ tags:
 - early-warning
 - nepal
 created: '2026-11-18T12:55:14.734768Z'
+updated: '2026-11-18T12:55:44.384980Z'
 source: https://www.gsma.com/solutions-and-impact/connectivity-for-good/mobile-for-development/blog/building-disaster-resilience-through-mobile-enabled-early-warning-systems-in-asia-pacific/
 source_domain: www.gsma.com
 fetched_at: '2026-11-18T12:55:14.733579Z'
@@ -15,6 +16,8 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'GSMA blog: mobile-enabled EWS in Asia Pacific, cell broadcast (Japan J-Alert);
+  Nepal work with NDRRMA/DHM; thin on Nepal specifics.'
 ---
 
 *Suggested by [[during-nepal-floods-decentralized-community-based-warning-saved-lives]] — GSMA cell broadcast Nepal*

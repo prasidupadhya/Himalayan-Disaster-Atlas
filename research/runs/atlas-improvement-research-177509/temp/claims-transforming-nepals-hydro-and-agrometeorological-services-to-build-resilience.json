@@ -1,0 +1,22 @@
+[
+ {
+  "claim": "World Bank BRCHP upgraded 88 surface-met and 70 hydrological stations and installed Nepal's first C-band weather radar plus a high-res local NWP.",
+  "quoted_support": "The project upgraded 88 surface-meteorological and 70 surface-hydrological observation networks, installed a first-of-its-kind in Nepal C-band Weather Radar",
+  "numbers": [
+   "88",
+   "70"
+  ],
+  "evidence_type": "statistical",
+  "source_note_id": "transforming-nepals-hydro-and-agrometeorological-services-to-build-resilience",
+  "stance": "supports",
+  "confidence": "medium",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ }
+]

@@ -6,6 +6,7 @@ tags:
 - early-warning
 - nepal
 created: '2026-11-18T12:55:12.652979Z'
+updated: '2026-11-18T12:55:43.742619Z'
 source: https://preventionweb.net/quick/71365
 source_domain: www.preventionweb.net
 fetched_at: '2026-11-18T12:55:12.652032Z'
@@ -15,6 +16,8 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'ISET-Nepal 2022 Bhandari & Dixit: Oct 2021 event; accurate forecast not
+  used; tailor messages, advisories.'
 ---
 
 *Suggested by [[during-nepal-floods-decentralized-community-based-warning-saved-lives]] — cited 2022 Bhandari&Dixit study*

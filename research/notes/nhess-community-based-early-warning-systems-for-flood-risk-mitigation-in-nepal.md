@@ -5,6 +5,7 @@ tags:
 - early-warning
 - nepal
 created: '2026-11-18T12:54:44.990523Z'
+updated: '2026-11-18T12:55:42.941395Z'
 source: https://doi.org/10.5194/nhess-17-423-2017
 source_domain: nhess.copernicus.org
 fetched_at: '2026-11-18T12:54:44.987723Z'
@@ -14,6 +15,8 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'Smith, Brown, Dugar 2017 NHESS: Karnali probabilistic forecasting 2-3h to
+  7-8h lead; last-mile probabilistic communication.'
 doi: 10.5194/nhess-17-423-2017
 ---
 

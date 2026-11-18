@@ -17,3 +17,9 @@ Emerging patterns from search snippets (to verify against fetched text):
 
 ## Working thesis
 The Atlas's highest-leverage improvements are (a) reliability/provenance of official feeds, (b) adding landslide context and cascade-aware GLOF framing, (c) making outputs actionable and local for Nepali phone users, while (d) scenario science upgrades come second and must be paired with communication safeguards.
+
+## Wave 1 (retry) returns — batches 3, 5, 9
+- B3: WMO 2024 "impact-based flood forecasting urgently needed — big gap"; municipalities need >=24 h lead; EW4All gaps: CAP operationalisation, urban nowcasting, coordination, high-mountain observation. Nature 2024 (Nearing): AI model >= GloFAS nowcast up to 5 d; but EGUsphere preprint: global models weak on rare floods in data-scarce regions (no Nepal data). Copernicus Nepal case study needs browser lane.
+- B5: Tsho Rolpa breach peaks 8.2–26.7k m3/s (NWS-BREACH -> HEC-RAS). Hoch 2019: kinematic -> local-inertia routing raises peak NSE 0.48 -> 0.71 — direct evidence the Atlas's kinematic pulse is the weak link. Mergili 2020: predictive GLOF runs need explicit parameter uncertainty -> supports showing ranges (Atlas already shows slow/mid/fast).
+- B9: MICS 2024/25 82% households online but Karnali 68.5%, poorest 52.9%, weak digital skills (19% verify online info). ITU IDI 48% individual use — conflict to flag. Govt website directive 2021 requires Unicode, adjustable size, NE+EN. Preeti PDFs inaccessible.
+Escalation queue: Ponce PDF, LakeScientist, Copernicus case study.

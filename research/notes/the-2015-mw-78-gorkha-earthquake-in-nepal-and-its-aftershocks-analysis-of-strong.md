@@ -4,7 +4,10 @@ title: 'The 2015 Mw 7.8 Gorkha Earthquake in Nepal and its aftershocks: analysis
 id: the-2015-mw-78-gorkha-earthquake-in-nepal-and-its-aftershocks-analysis-of-strong
 tags:
 - nepal-ground-motion
+- kathmandu-basin
+- gmpe
 created: '2026-11-18T12:55:07.080286Z'
+updated: '2026-11-18T12:55:47.251995Z'
 source: https://link.springer.com/article/10.1007/s10518-017-0084-z
 source_domain: link.springer.com
 fetched_at: '2026-11-18T12:55:07.079283Z'
@@ -14,6 +17,11 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Abstract-only (paywalled). Strong-motion analysis of Gorkha 2015: KATNP
+  spectra peaks at ~0.4 s and wide ~5 s; exceeds design codes; 475-yr uniform hazard
+  spectra overestimate demand for stiff structures (<0.5 s) and underestimate for
+  flexible; 5 s pulse is mix of basin-amplified shear waves and Love waves, not purely
+  site effect.'
 doi: 10.1007/s10518-017-0084-z
 ---
 

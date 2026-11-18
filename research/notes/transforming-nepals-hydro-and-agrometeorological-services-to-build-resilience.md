@@ -5,6 +5,7 @@ tags:
 - early-warning
 - nepal
 created: '2026-11-18T12:55:16.083049Z'
+updated: '2026-11-18T12:55:44.060415Z'
 source: https://blogs.worldbank.org/en/endpovertyinsouthasia/transforming-nepals-hydro-and-agrometeorological-services-build-resilience
 source_domain: blogs.worldbank.org
 fetched_at: '2026-11-18T12:55:16.082184Z'
@@ -14,6 +15,7 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'World Bank 2022: BRCHP station upgrades, radar, NWP.'
 ---
 
 *Suggested by [[reducing-flood-casualties-in-nepal]] — DHM modernisation context*

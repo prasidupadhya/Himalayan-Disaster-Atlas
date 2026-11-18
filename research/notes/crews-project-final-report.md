@@ -3,7 +3,9 @@ title: CREWS PROJECT FINAL REPORT
 id: crews-project-final-report
 tags:
 - atlas-improvement
+- early-warning-finance
 created: '2026-11-18T12:54:54.609891Z'
+updated: '2026-11-18T12:55:28.363289Z'
 source: https://crews-initiative.org/wp-content/uploads/2026/04/CREWS-EW4All-Accelerator-Final-Report.pdf
 source_domain: crews-initiative.org
 fetched_at: '2026-11-18T12:54:54.608868Z'
@@ -13,6 +15,11 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'CREWS/EW4All Accelerator final report: total budget $5,458,639 (UNDRR, WMO,
+  ITU, IFRC); Nepal consultations May-Aug 2025 (191 provincial participants, 200+
+  national), roadmap, GEDSI paper for Forecast-Based Pre-Action framework; national
+  CREWS Nepal proposal submitted but pending; Meghna Basin Adaptation Fund USD 12m
+  leveraged via WMO.'
 raw_file: raw/crews-project-final-report.pdf
 ---
 

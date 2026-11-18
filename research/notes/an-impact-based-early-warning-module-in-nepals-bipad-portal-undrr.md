@@ -4,6 +4,7 @@ id: an-impact-based-early-warning-module-in-nepals-bipad-portal-undrr
 tags:
 - nepal-data-feeds
 created: '2026-11-18T12:54:39.073478Z'
+updated: '2026-11-18T12:55:40.313856Z'
 source: https://www.undrr.org/resource/case-study/impact-based-early-warning-module-nepals-bipad-portal
 source_domain: www.undrr.org
 fetched_at: '2026-11-18T12:54:39.072735Z'
@@ -13,6 +14,11 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'UNDRR case study (20 Jun 2025): BIPAD impact-based forecasting module overlays
+  OSM buildings/roads/land use on flood hazard maps, Nepal Red Cross household data
+  scored via INFORM, and historical loss data to estimate impact; prototype piloted
+  at two West Nepal river stations; planned integration of DHM local short-lead forecasts
+  and flood extent maps; vulnerability matters more than hazard at short lead times.'
 ---
 
 An impact-based early warning module in Nepal’s BIPAD portal | UNDRR

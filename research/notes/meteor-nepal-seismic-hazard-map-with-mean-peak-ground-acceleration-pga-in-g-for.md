@@ -4,7 +4,10 @@ title: 'METEOR: Nepal seismic hazard map with mean Peak Ground Acceleration (PGA
 id: meteor-nepal-seismic-hazard-map-with-mean-peak-ground-acceleration-pga-in-g-for
 tags:
 - nepal-ground-motion
+- hazard-map
+- dataset
 created: '2026-11-18T12:54:47.908420Z'
+updated: '2026-11-18T12:55:47.816631Z'
 source: https://zenodo.org/records/19002227
 source_domain: zenodo.org
 fetched_at: '2026-11-18T12:54:44.793200Z'
@@ -14,6 +17,10 @@ type: note
 tier: ground_truth
 content_type: dataset
 deprecated: false
+summary: 'GEM/BGS METEOR open dataset (Zenodo 19002227, 2019): Nepal mean PGA at 10%
+  and 2% in 50 yr, 0.025 deg grid, CSV lat,long,PGA-0.1,PGA-0.02, WGS84, 1.8 MB; derived
+  from Stevens, Shrestha & Maharjan 2018 BSSA PSHA of Nepal. Directly usable as a
+  hazard layer in the static map.'
 doi: 10.5281/zenodo.19002227
 ---
 

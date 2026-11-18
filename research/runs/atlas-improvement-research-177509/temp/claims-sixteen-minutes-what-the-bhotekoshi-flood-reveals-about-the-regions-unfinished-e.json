@@ -1,0 +1,44 @@
+[
+ {
+  "claim": "No cross-border alert reached Nepal; word reached Rasuwa DAO 16 minutes after the flood entered at Rasuwagadhi, and a Nepal-China data-sharing understanding was never made binding.",
+  "quoted_support": "Sixteen minutes later, at 8:56 am, word finally reached the District Administration Office in Rasuwa",
+  "numbers": [
+   "8:40 entry",
+   "8:56 notification",
+   "~14 km to Syaphrubesi in under 10 minutes",
+   "1:35 pm DHM public Facebook update"
+  ],
+  "source_note_id": "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e",
+  "stance": "supports",
+  "evidence_type": "anecdotal",
+  "confidence": "medium",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ },
+ {
+  "claim": "DHM's public channel for the update was its Facebook page, ~5 hours after the flood entered Nepal; casualty/missing figures differ by source (469 bodies, 2,381 missing at Friday).",
+  "quoted_support": "It would take until 1:35 pm \u2014 nearly five hours after the flood entered Nepal \u2014 for the Department of Hydrology and Meteorology to post publicly on its 'Nepal Flood Information' Facebook page",
+  "numbers": [
+   "469 bodies",
+   "2,381 missing"
+  ],
+  "source_note_id": "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e",
+  "stance": "supports",
+  "evidence_type": "anecdotal",
+  "confidence": "medium",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ }
+]

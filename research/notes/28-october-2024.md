@@ -3,7 +3,10 @@ title: 28 October 2024
 id: 28-october-2024
 tags:
 - atlas-improvement
+- landslides
+- loss-damage
 created: '2026-11-18T12:54:45.486881Z'
+updated: '2026-11-18T12:55:26.927571Z'
 source: https://www.dpnet.org.np/public/uploads/files/Loss_and_Damage_Assessment_of_Flood_and_Landslide_2024_Updated_compressed%202026-01-20%2008-32-00.pdf
 source_domain: www.dpnet.org.np
 fetched_at: '2026-11-18T12:54:45.485981Z'
@@ -13,6 +16,10 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'NDRRMA/DPNet preliminary loss and damage assessment of 26-28 Sept 2024 floods
+  and landslides: total NPR 46,684,318,550; 249 deaths, 178 injured, 18 missing; 41
+  road sections NPR 27.98bn; 5,996 houses destroyed; draws on BIPAD incident reports.
+  Combined flood+landslide framing shows landslides are inseparable from flood impact.'
 raw_file: raw/28-october-2024.pdf
 ---
 

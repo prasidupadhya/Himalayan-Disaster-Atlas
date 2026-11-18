@@ -5,6 +5,7 @@ tags:
 - early-warning
 - nepal
 created: '2026-11-18T12:54:40.987821Z'
+updated: '2026-11-18T12:55:42.195059Z'
 source: https://wmo.int/site/science-action/water-resource-monitoring-and-management/reducing-flood-casualties-nepal
 source_domain: wmo.int
 fetched_at: '2026-11-18T12:54:40.987308Z'
@@ -14,6 +15,7 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'WMO: FFEWS 2016 + SAFFGS 2018; deaths 166 (2017) to 27 (2022); West Rapti.'
 ---
 
 Reducing flood casualties in Nepal

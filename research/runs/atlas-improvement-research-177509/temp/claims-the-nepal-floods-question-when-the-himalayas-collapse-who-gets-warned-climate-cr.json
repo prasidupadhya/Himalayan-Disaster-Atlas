@@ -1,0 +1,23 @@
+[
+ {
+  "claim": "Threshold/rainfall-triggered warning may be insufficient when the trigger is upstream out of sight; Kashmir study shows ice-contact lake area up 26% 1992-2024, 155 lakes mapped, 5 very high GLOF susceptibility.",
+  "quoted_support": "waiting for rainfall or a rising river may not provide enough time when the real trigger happens several kilometres upstream and above the line of sight of the communities below.",
+  "numbers": [
+   "155 lakes",
+   "26%",
+   "5 lakes"
+  ],
+  "evidence_type": "empirical",
+  "source_note_id": "the-nepal-floods-question-when-the-himalayas-collapse-who-gets-warned-climate-cr",
+  "stance": "supports",
+  "confidence": "medium",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ }
+]

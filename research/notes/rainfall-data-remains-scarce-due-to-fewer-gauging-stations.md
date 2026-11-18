@@ -4,6 +4,7 @@ id: rainfall-data-remains-scarce-due-to-fewer-gauging-stations
 tags:
 - nepal-data-feeds
 created: '2026-11-18T12:54:44.362260Z'
+updated: '2026-11-18T12:55:40.644545Z'
 source: https://kathmandupost.com/climate-environment/2023/07/25/rainfall-data-remains-scarce-due-to-fewer-gauging-stations
 source_domain: kathmandupost.com
 fetched_at: '2026-11-18T12:54:44.361471Z'
@@ -13,6 +14,10 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Kathmandu Post 25 Jul 2023: Bishnumati flash flood while DHM recorded 2.7
+  mm at Kathmandu and 38.8 mm at Budhanilkantha; no station in Balaju; officials concede
+  sparse network cannot capture spatial/temporal rainfall variability; no Melamchi
+  2021 rainfall data.'
 ---
 
 Rainfall data remains scarce due to fewer gauging stations

@@ -6,6 +6,7 @@ tags:
 - early-warning
 - nepal
 created: '2026-11-18T12:54:46.850964Z'
+updated: '2026-11-18T12:55:43.288967Z'
 source: https://gc.copernicus.org/articles/3/49/2020/
 source_domain: gc.copernicus.org
 fetched_at: '2026-11-18T12:54:46.849576Z'
@@ -15,6 +16,8 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Geosci. Commun. 2020: DHM bulletin/SMS design, colour codes, last-mile comms
+  analysis (long, ~14.5k words).'
 ---
 
 GC - Communicating complex forecasts: an analysis of the approach in Nepal's flood early warning system

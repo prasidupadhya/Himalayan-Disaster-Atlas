@@ -1,0 +1,18 @@
+[
+ {
+  "claim": "Bhandari & Dixit (ISET-Nepal) recommend extending DHM lead time from three days to a week and tailoring messages and advisories to user types.",
+  "quoted_support": "While messages are foundational, whithout appropriate advisories to help users take preventive actions, they become meaningless.",
+  "evidence_type": "expert-opinion",
+  "source_note_id": "missed-opportunities-in-utilization-of-weather-forecasts-an-analysis-of-october",
+  "stance": "supports",
+  "confidence": "medium",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ }
+]

@@ -1,0 +1,21 @@
+[
+ {
+  "claim": "Data-driven probabilistic forecasting on the Karnali increased lead time from 2-3 h to 7-8 h; communicating probabilistic forecasts to the last mile is a challenge.",
+  "quoted_support": "The successful application of the forecast methodology to the flood-prone Karnali River basin in western Nepal is outlined, increasing lead times from 2\u20133 to 7\u20138 h.",
+  "numbers": [
+   "2-3 h to 7-8 h"
+  ],
+  "evidence_type": "empirical",
+  "confidence": "high",
+  "source_note_id": "nhess-community-based-early-warning-systems-for-flood-risk-mitigation-in-nepal",
+  "stance": "supports",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ }
+]

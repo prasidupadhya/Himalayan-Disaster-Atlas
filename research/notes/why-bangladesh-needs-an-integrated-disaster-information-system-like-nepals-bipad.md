@@ -5,6 +5,7 @@ id: why-bangladesh-needs-an-integrated-disaster-information-system-like-nepals-b
 tags:
 - nepal-data-feeds
 created: '2026-11-18T12:54:42.180954Z'
+updated: '2026-11-18T12:55:41.962740Z'
 source: https://www.tbsnews.net/features/panorama/why-bangladesh-needs-integrated-disaster-information-system-nepals-bipad-portal
 source_domain: www.tbsnews.net
 fetched_at: '2026-11-18T12:54:42.179935Z'
@@ -14,6 +15,9 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'TBS 2024: BIPAD as one-portal integrated national DRM system (NDRRMA CEO
+  Anil Pokhrel); built by Youth Innovation Lab; keep datasets publicly accessible;
+  Bangladesh contrast of data poverty.'
 ---
 
 Why Bangladesh needs an integrated disaster information system like Nepal’s ‘Bipad Portal’ | The Business Standard

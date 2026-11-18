@@ -3,7 +3,9 @@ title: AI forecasting deployed to predict Nepal landslides
 id: ai-forecasting-deployed-to-predict-nepal-landslides
 tags:
 - atlas-improvement
+- landslides
 created: '2026-11-18T12:54:46.383389Z'
+updated: '2026-11-18T12:55:27.383471Z'
 source: https://www.scidev.net/global/news/ai-forecasting-deployed-to-predict-nepal-landslides/
 source_domain: www.scidev.net
 fetched_at: '2026-11-18T12:54:46.382422Z'
@@ -13,6 +15,10 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'SciDev (June 2024): University of Melbourne''s SAFE-RICCS AI/satellite landslide
+  forecasting rolled out in Nepal with Tribhuvan University Centre for Disaster Studies;
+  >80% of Nepal land is slope; team seeks partners; input data quality flagged as
+  critical to accuracy. No validation metrics given (news report, weak evidence).'
 ---
 
 AI forecasting deployed to predict Nepal landslides

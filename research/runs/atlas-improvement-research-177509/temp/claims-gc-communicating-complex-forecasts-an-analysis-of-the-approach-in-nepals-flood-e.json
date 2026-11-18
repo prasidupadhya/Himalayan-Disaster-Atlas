@@ -1,0 +1,18 @@
+[
+ {
+  "claim": "DHM SMS alerts are written manually by the Flood Forecasting Section and sent via telecom providers in Nepali, English or romanised Nepali; stakeholders favored colour-coded levels and lead times.",
+  "quoted_support": "messages can be in Nepali, English, or romanised Nepali. Each SMS (as of the 2017 monsoon) is written by the DHM Flood Forecasting Section manually",
+  "evidence_type": "empirical",
+  "confidence": "high",
+  "source_note_id": "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+  "stance": "supports",
+  "stance_target": "Warning dissemination gaps are a key improvement area",
+  "scope_conditions": "Nepal",
+  "entities": [
+   "DHM",
+   "NDRRMA"
+  ],
+  "time_period": "",
+  "region": "Nepal"
+ }
+]

@@ -5,6 +5,7 @@ tags:
 - early-warning
 - nepal
 created: '2026-11-18T12:54:39.047213Z'
+updated: '2026-11-18T12:55:41.089852Z'
 source: https://news.mongabay.com/2026/09/during-nepal-floods-decentralized-community-based-warning-saved-lives/
 source_domain: news.mongabay.com
 fetched_at: '2026-11-18T12:54:39.046174Z'
@@ -14,6 +15,9 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Mongabay Sept 2026: Aug 26 2026 Bhotekoshi/Trishuli GLOF-type flood; official
+  SMS late, generic, Nepali-only; DHM lacks evacuation authority; cell broadcast cost/time;
+  community calls worked. Death tolls inconsistent in article (987 vs 1,252).'
 ---
 
 During Nepal floods, decentralized, community-based warning saved lives

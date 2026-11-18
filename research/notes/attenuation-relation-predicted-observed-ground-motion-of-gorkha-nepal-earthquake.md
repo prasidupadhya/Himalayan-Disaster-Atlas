@@ -4,7 +4,9 @@ title: Attenuation relation predicted observed ground motion of Gorkha Nepal ear
 id: attenuation-relation-predicted-observed-ground-motion-of-gorkha-nepal-earthquake
 tags:
 - nepal-ground-motion
+- gmpe
 created: '2026-11-18T12:55:11.654925Z'
+updated: '2026-11-18T12:55:47.544488Z'
 source: https://link.springer.com/article/10.1007/s11069-015-1969-2
 source_domain: link.springer.com
 fetched_at: '2026-11-18T12:55:11.653833Z'
@@ -14,6 +16,9 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Abstract-only (paywalled). Natural Hazards 2015: Himalayan-region attenuation
+  relations predicted observed Gorkha Mw7.8 PGA etc. well; GMPEs from other regions
+  (NGA, Europe) did not. Low-medium evidence strength.'
 doi: 10.1007/s11069-015-1969-2
 ---
 

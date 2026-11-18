@@ -3,7 +3,9 @@ title: About Kathmandu Living Labs
 id: about-kathmandu-living-labs
 tags:
 - atlas-improvement
+- open-data
 created: '2026-11-18T12:54:49.583851Z'
+updated: '2026-11-18T12:55:27.746569Z'
 source: https://kathmandulivinglabs.org/about-us
 source_domain: kathmandulivinglabs.org
 fetched_at: '2026-11-18T12:54:49.582854Z'
@@ -13,6 +15,9 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'KLL self-description: civic-tech OSM org founded 2013 from 2012/13 school
+  and health facility mapping of Kathmandu Valley; 30+ projects, 40+ partners, 5000+
+  people. Potential open-data/community partner. Vendor self-description (weak evidence).'
 ---
 
 About Kathmandu Living Labs
