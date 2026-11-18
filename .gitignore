@@ -9,3 +9,4 @@ test-results/
 .hallmark/
 .hyperresearch/*.db
 .hyperresearch/*.db-*
+research/raw/

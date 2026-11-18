@@ -5,11 +5,12 @@ id: groundwater-levels-trends-and-relations-to-pumping-in-the-bureau-of-reclamat
 tags:
 - earthquake-loss
 created: '2026-11-18T12:54:58.592160Z'
+updated: '2026-11-18T12:55:05.551151Z'
 source: https://pubs.usgs.gov/publication/ofr20151145
 source_domain: pubs.usgs.gov
 fetched_at: '2026-11-18T12:54:56.792074Z'
 fetch_provider: builtin
-status: draft
+status: deprecated
 type: note
 tier: ground_truth
 content_type: policy

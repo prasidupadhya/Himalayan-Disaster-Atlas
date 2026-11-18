@@ -5,6 +5,7 @@ tags:
 - glof
 - nepal
 created: '2026-11-18T12:54:41.235019Z'
+updated: '2026-11-18T12:55:17.467390Z'
 source: https://meetingorganizer.copernicus.org/EGU25/EGU25-12752.html
 source_domain: meetingorganizer.copernicus.org
 fetched_at: '2026-11-18T12:54:41.233978Z'
@@ -14,6 +15,13 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'EGU25 abstract (Cook, Shrestha, Brun, Berthier, Charrier): 16 Aug 2024 Thame
+  GLOF came from a cascade of two small lakes not classed dangerous; likely trigger
+  wet-snow avalanche into upper lake, impulse wave overtopped it, breached lower moraine
+  dam 650 m downstream; ~4-5e5 m3 released; damage via inundation, coarse sediment,
+  paleochannel erosion; landslide damaged road bridge ~45 km downstream on Dudh Koshi.
+  Implication: dangerous-lake lists miss small-lake and cascade hazard; erosion/deposition
+  must be modelled.'
 ---
 
 Abstract EGU25-12752

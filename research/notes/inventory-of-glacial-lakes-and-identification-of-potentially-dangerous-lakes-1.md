@@ -5,6 +5,7 @@ tags:
 - glof
 - nepal
 created: '2026-11-18T12:54:39.686363Z'
+updated: '2026-11-18T12:55:17.135186Z'
 source: https://nepal.un.org/sites/default/files/2020-10/Inventory_Glacial_Lakes_2020_Full2.pdf
 source_domain: nepal.un.org
 fetched_at: '2026-11-18T12:54:39.683697Z'
@@ -14,6 +15,13 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'ICIMOD/UNDP Nepal 2020 inventory (2000 vs 2015 remote sensing, NDWI + manual
+  delineation): 3,624 glacial lakes in Koshi/Gandaki/Karnali basins (2,070 in Nepal);
+  1,410 >=0.02 km2; 47 potentially dangerous lakes (42 Koshi, 3 Gandaki, 2 Karnali;
+  21 in Nepal, 25 in TAR China, 1 India), ranked in 3 tiers by lake/dam, glacier activity,
+  surroundings; excludes seismic/climate/human triggers. Recommends inventory update
+  at least every 5 years and public info in varied languages. Exposure: ~96,767 people
+  (Imja), 141,911 (Tsho Rolpa), 165,068 (Thulagi). Long (23k words).'
 raw_file: raw/inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1.pdf
 ---
 
