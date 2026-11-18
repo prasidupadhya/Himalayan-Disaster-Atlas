@@ -209,14 +209,14 @@ class BuildTests(unittest.TestCase):
         self.assertEqual(digest["sources"][0]["status"], "fetched")
         self.assertEqual(digest["summary"]["rivers_above_danger"], 1)
 
-    def test_a_page_that_fills_in_later_is_rendered_until_its_selector_exists(self):
+    def test_a_page_that_loads_on_a_tab_is_opened_and_waited_for(self):
         seen = []
-        def renderer(url, wait_for=None):
-            seen.append(wait_for)
+        def renderer(url, wait_for=None, click=None):
+            seen.append((click, wait_for))
             return 200, json.dumps(RIVER).encode(), url, "application/json"
-        source = {**SOURCES[0], "render": True, "wait_for": "a.ready"}
+        source = {**SOURCES[0], "render": True, "click": "Open", "wait_for": "a.ready"}
         digest, _ = build([source, {**SOURCES[0], "id": "plain", "render": True}], None, fetcher_for({}), allow, MOMENT, renderer=renderer)
-        self.assertEqual(seen, ["a.ready", None])
+        self.assertEqual(seen, [("Open", "a.ready"), (None, None)])
         self.assertEqual(digest["sources"][0]["status"], "fetched")
 
     def test_rendered_sources_are_marked_in_the_registry(self):

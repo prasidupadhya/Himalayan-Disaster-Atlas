@@ -8,7 +8,7 @@
       "url": "https://bipadportal.gov.np/api/v1/rain-stations/?format=json&limit=1000", "verified": true },
     { "id": "dhm-flood-archive", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "Flood bulletins", "category": "floods", "kind": "html",
       "url": "https://dhm.gov.np/bulletins", "render": true,
-      "wait_for": "a[href*='/uploads/dhm/bulletins/']", "focus": { "documents": 8 }, "verified": false },
+      "click": "Flood Forecasting Bulletin", "wait_for": "a[href*='/uploads/dhm/bulletins/']", "focus": { "documents": 8 }, "verified": false },
     { "id": "dhm-forecast", "agency": "Department of Hydrology and Meteorology (DHM)", "title": "Weather warnings and advisories", "category": "weather", "kind": "html",
       "url": "https://dhm.gov.np/mfd/", "render": true, "focus": { "documents": 6 }, "verified": false },
     { "id": "seismo-earthquakes", "agency": "National Earthquake Monitoring and Research Center (NEMRC)", "title": "Recent earthquakes", "category": "earthquakes", "kind": "html",

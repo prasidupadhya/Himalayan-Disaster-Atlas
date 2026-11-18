@@ -92,9 +92,10 @@ def fetch(url):
     return int(getattr(response, "status", 0) or 0), body[: LIMITS["body"]], str(getattr(response, "url", url) or url), content_type
 
 
-def render(url, wait_for=None):
+def render(url, wait_for=None, click=None):
     """Like fetch, for pages built by JavaScript in the browser: loads them in headless Chromium.
-    `wait_for` is a CSS selector for a page that fills in its content after it loads: the copy waits until it exists."""
+    For a page that loads its content only when a tab is opened, `click` is the visible text of that tab, and `wait_for`
+    a CSS selector the copy waits for before it is taken."""
     from scrapling.fetchers import DynamicFetcher
 
     options = {"headless": True, "network_idle": True, "timeout": 45_000, "useragent": USER_AGENT,
@@ -103,6 +104,8 @@ def render(url, wait_for=None):
         options["executable_path"] = os.environ["GOV_BROWSER_PATH"]
     if proxy_for(url):
         options["proxy"] = proxy_for(url)
+    if click:
+        options["page_action"] = lambda page: page.get_by_text(click, exact=False).first.click()
     if wait_for:
         options.update(wait_selector=wait_for, wait_selector_state="attached")
     response = DynamicFetcher.fetch(url, **options)
@@ -425,7 +428,7 @@ def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None, r
             if not robots(source["url"], robots_once):
                 entry["status"] = "blocked-by-robots"
             else:
-                page = guard(dead, lambda url: renderer(url, wait_for=source["wait_for"])) if source.get("wait_for") else show
+                page = guard(dead, lambda url: renderer(url, wait_for=source["wait_for"], click=source.get("click"))) if source.get("wait_for") else show
                 status, body, final_url, _ = (page if source.get("render") else get)(source["url"])
                 entry["http_status"] = status
                 if status >= 400:
