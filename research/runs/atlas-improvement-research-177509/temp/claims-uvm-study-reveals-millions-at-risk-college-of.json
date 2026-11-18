@@ -1,0 +1,35 @@
+[
+ {
+  "claim": "Among US residents in FEMA-designated floodplains, 57% perceived lower risk than FEMA estimates and 29% were uncertain.",
+  "stance": "supports",
+  "stance_target": "public perception diverges from official hazard maps",
+  "evidence_type": "empirical",
+  "scope_conditions": "",
+  "quoted_support": "Among residents in FEMA-designated floodplains, 57% perceived a lower risk than FEMA estimates, and 29% expressed uncertainty.",
+  "numbers": [
+   "57%",
+   "29%",
+   "953 respondents",
+   "27% uncertain overall"
+  ],
+  "entities": [],
+  "time_period": "",
+  "region": "",
+  "confidence": "medium",
+  "source_note_id": "uvm-study-reveals-millions-at-risk-college-of"
+ },
+ {
+  "claim": "Study authors recommend interactive mapping tools and community-based education to bridge expert-public risk perception gaps.",
+  "stance": "supports",
+  "stance_target": "evidence-based map design improves hazard comprehension",
+  "evidence_type": "expert-opinion",
+  "scope_conditions": "",
+  "quoted_support": "Interactive mapping tools and community-based education are recommended to bridge the gap between expert assessments and public perceptions.",
+  "numbers": [],
+  "entities": [],
+  "time_period": "",
+  "region": "",
+  "confidence": "medium",
+  "source_note_id": "uvm-study-reveals-millions-at-risk-college-of"
+ }
+]

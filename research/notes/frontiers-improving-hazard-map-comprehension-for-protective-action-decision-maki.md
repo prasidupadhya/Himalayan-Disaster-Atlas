@@ -4,7 +4,9 @@ title: Frontiers | Improving Hazard Map Comprehension for Protective Action Deci
 id: frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki
 tags:
 - risk-communication
+- hazard-maps
 created: '2026-11-18T12:55:06.847742Z'
+updated: '2026-11-18T12:56:03.222387Z'
 source: https://www.frontiersin.org/journals/computer-science/articles/10.3389/fcomp.2020.00027/full
 source_domain: www.frontiersin.org
 fetched_at: '2026-11-18T12:55:06.846193Z'
@@ -14,6 +16,13 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Lindell 2020 (Frontiers Comp Sci) review of hazard-map comprehension research:
+  people use a proximity heuristic (risk falls with distance from source); isarithmic
+  maps convey exposure uncertainty better than binned/graded shading; colour scheme
+  and verbal vs numeric probability change judgments; clutter and poorly defined risk
+  areas cause confusion; users need base maps with labelled landmarks to orient. Argues
+  research neglected displays supporting timely protective-action decisions (who,
+  what, when) and shadow evacuation.'
 doi: 10.3389/fcomp.2020.00027
 ---
 

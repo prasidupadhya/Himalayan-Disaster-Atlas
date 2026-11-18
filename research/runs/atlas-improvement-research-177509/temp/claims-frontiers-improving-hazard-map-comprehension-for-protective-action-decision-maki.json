@@ -1,0 +1,44 @@
+[
+ {
+  "claim": "Isarithmic (contour-style) maps yield better understanding of hazard-exposure uncertainty than gradational shaded or binned maps.",
+  "stance": "supports",
+  "stance_target": "evidence-based map design improves hazard comprehension",
+  "evidence_type": "empirical",
+  "scope_conditions": "",
+  "quoted_support": "isarithmic maps produce the better understanding of uncertainty about hazard exposure than gradational shaded or binned maps (Thompson et al., 2015 ; Mulder et al., 2017 ).",
+  "numbers": [],
+  "entities": [],
+  "time_period": "",
+  "region": "",
+  "confidence": "medium",
+  "source_note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki"
+ },
+ {
+  "claim": "Hazard-map research has focused on correcting erroneous inferences but neglected displays that support timely protective-action decisions.",
+  "stance": "supports",
+  "stance_target": "evidence-based map design improves hazard comprehension",
+  "evidence_type": "expert-opinion",
+  "scope_conditions": "",
+  "quoted_support": "it has neglected the development and testing of spatial displays that can help people to make more timely and effective protective action decisions.",
+  "numbers": [],
+  "entities": [],
+  "time_period": "",
+  "region": "",
+  "confidence": "high",
+  "source_note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki"
+ },
+ {
+  "claim": "People's risk judgments follow a proximity heuristic: perceived risk decreases monotonically with distance from the hazard source.",
+  "stance": "supports",
+  "stance_target": "evidence-based map design improves hazard comprehension",
+  "evidence_type": "empirical",
+  "scope_conditions": "",
+  "quoted_support": "people's risk judgments can be characterized by a proximity heuristic (Teigen, 2005 ), which generates a perceived risk gradient that is a monotone decreasing function of distance from a hazard source",
+  "numbers": [],
+  "entities": [],
+  "time_period": "",
+  "region": "",
+  "confidence": "high",
+  "source_note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki"
+ }
+]

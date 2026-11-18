@@ -1,0 +1,16 @@
+[
+ {
+  "claim": "Six design strategies for hazard geovisualizations: key data only, audience tailoring/testing, salient cues, emotion, pattern recognition aids, limited distractions.",
+  "stance": "supports",
+  "stance_target": "evidence-based map design improves hazard comprehension",
+  "evidence_type": "theoretical",
+  "scope_conditions": "",
+  "quoted_support": "These strategies include: Displaying only key data, tailoring and testing geovisualizations with the audience, using salient cues, leveraging emotion, aiding pattern recognition, and limiting visual distractions.",
+  "numbers": [],
+  "entities": [],
+  "time_period": "",
+  "region": "",
+  "confidence": "medium",
+  "source_note_id": "using-geovisualizations-to-educate-the-public-about-environmental-health"
+ }
+]

@@ -3,7 +3,9 @@ title: Using geovisualizations to educate the public about environmental health
 id: using-geovisualizations-to-educate-the-public-about-environmental-health
 tags:
 - risk-communication
+- hazard-maps
 created: '2026-11-18T12:54:43.908561Z'
+updated: '2026-11-18T12:56:03.584159Z'
 source: https://par.nsf.gov/servlets/purl/10560604
 source_domain: par.nsf.gov
 fetched_at: '2026-11-18T12:54:43.907680Z'
@@ -13,6 +15,11 @@ type: note
 tier: ground_truth
 content_type: paper
 deprecated: false
+summary: 'Slavik, Fish, Peters narrative review: six evidence-based geovisualization
+  design strategies (show only key data, tailor/test with audience, salient cues,
+  leverage emotion, aid pattern recognition, limit distractions) drawn from cognitive
+  science and cartography; conventional hazard maps ignore how people process visuals;
+  calls for more experimental evaluation.'
 raw_file: raw/using-geovisualizations-to-educate-the-public-about-environmental-health.pdf
 ---
 

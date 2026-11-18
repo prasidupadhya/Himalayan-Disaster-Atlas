@@ -5,6 +5,7 @@ id: what-shapes-flood-risk-perceptions-comparing-public-perceptions-with-fema-fl
 tags:
 - risk-communication
 created: '2026-11-18T12:55:32.182022Z'
+updated: '2026-11-18T12:56:04.480304Z'
 source: https://repository.library.noaa.gov/view/noaa/72738
 source_domain: repository.library.noaa.gov
 fetched_at: '2026-11-18T12:55:32.181274Z'
@@ -14,6 +15,11 @@ type: note
 tier: ground_truth
 content_type: policy
 deprecated: false
+summary: 'Primary study (Khan et al., IJDRR 2026, doi 10.1016/j.ijdrr.2025.105941):
+  survey of US residents (n reported 918-953 across sources) compares perceived flood
+  risk with FEMA zones using Protection Motivation Theory; ''risk perception gap'';
+  57% in floodplains perceive lower risk, 29% uncertain. Metadata record only; full
+  text not retrieved.'
 doi: 10.1016/j.ijdrr.2025.105941
 ---
 

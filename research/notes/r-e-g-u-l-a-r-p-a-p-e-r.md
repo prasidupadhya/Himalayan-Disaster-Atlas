@@ -3,7 +3,9 @@ title: R E G U L A R P A P E R
 id: r-e-g-u-l-a-r-p-a-p-e-r
 tags:
 - risk-communication
+- hazard-maps
 created: '2026-11-18T12:54:48.597936Z'
+updated: '2026-11-18T12:56:03.890745Z'
 source: https://researchcommons.waikato.ac.nz/bitstreams/a94bb2fb-421e-41fa-9009-28fd75226bd8/download
 source_domain: researchcommons.waikato.ac.nz
 fetched_at: '2026-11-18T12:54:48.597058Z'
@@ -13,6 +15,11 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'Haughton & White 2018 (Trans Inst Br Geogr, ''Risky spaces''): interview
+  study of hazard-map production and contestation (flood, coastal, Christchurch red
+  zone). Hard lines on maps carry legal, financial and political consequences; scientific
+  uncertainty is translated into false certainty; maps adopted in statutory plans
+  are hard to revise; suggests presenting maps as provisional with local detail studies.'
 raw_file: raw/r-e-g-u-l-a-r-p-a-p-e-r.pdf
 doi: 10.1111/tran.12227
 ---

@@ -5,6 +5,7 @@ id: public-understanding-and-scientific-uncertainty-the-communication-of-risk-in
 tags:
 - risk-communication
 created: '2026-11-18T12:55:08.821919Z'
+updated: '2026-11-18T12:56:04.188873Z'
 source: https://www.aimspress.com/article/doi/10.3934/geosci.2024028
 source_domain: www.aimspress.com
 fetched_at: '2026-11-18T12:55:08.821024Z'
@@ -14,6 +15,11 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Demichelis & Ongaro 2024 (AIMS Geosciences 10(3):540-552): L''Aquila 2009
+  M6.3 earthquake; reassuring official messaging led people to stay home. Natural-frequency
+  formats improve probabilistic understanding but benefit shrinks for low-probability
+  high-consequence events where large relative increases remain small absolute risk.
+  Relevant to earthquake scenario wording.'
 doi: 10.3934/geosci.2024028
 ---
 

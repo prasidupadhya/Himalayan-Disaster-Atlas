@@ -4,11 +4,12 @@ id: text
 tags:
 - risk-communication
 created: '2026-11-18T12:54:40.634536Z'
+updated: '2026-11-18T12:56:02.940607Z'
 source: https://frontiersin.org/journals/computer-science/articles/10.3389/fcomp.2020.00027/text
 source_domain: public-pages-files-2025.frontiersin.org
 fetched_at: '2026-11-18T12:54:40.634128Z'
 fetch_provider: builtin
-status: draft
+status: deprecated
 type: note
 tier: unknown
 content_type: unknown

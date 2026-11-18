@@ -25,6 +25,8 @@ summary: 'Kayastha & Maskey 2024 (Proc. IAHS 387): Tsho Rolpa (4552 m, Nepal) GL
 doi: 10.5194/piahs-387-59-2024
 ---
 
+*Suggested by [[abstract-egu25-12752]] — Thame/GLOF primary follow-up*
+
 PIAHS - Glacial lake outburst flood (GLOF) modeling of  Tsho Rolpa glacial lake, Nepal
 Articles
 |

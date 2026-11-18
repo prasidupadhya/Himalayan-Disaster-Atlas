@@ -1,0 +1,30 @@
+[
+ {
+  "claim": "Natural-frequency formats aid probability understanding but lose benefit for low-probability high-consequence events like major earthquakes.",
+  "stance": "supports",
+  "stance_target": "evidence-based map design improves hazard comprehension",
+  "evidence_type": "theoretical",
+  "scope_conditions": "",
+  "quoted_support": "the benefits of using natural frequencies decrease when dealing with low-probability, high-consequence (LPHC) events like major earthquakes, where even significant increases in relative probability remain small in absolute terms.",
+  "numbers": [],
+  "entities": [],
+  "time_period": "",
+  "region": "",
+  "confidence": "high",
+  "source_note_id": "public-understanding-and-scientific-uncertainty-the-communication-of-risk-in-the"
+ },
+ {
+  "claim": "At L'Aquila 2009, official reassurance led many to remain indoors when the M6.3 quake struck.",
+  "stance": "supports",
+  "stance_target": "evidence-based map design improves hazard comprehension",
+  "evidence_type": "historical",
+  "scope_conditions": "",
+  "quoted_support": "These assurances given by officials led many to remain in their homes when the earthquake struck.",
+  "numbers": [],
+  "entities": [],
+  "time_period": "",
+  "region": "",
+  "confidence": "high",
+  "source_note_id": "public-understanding-and-scientific-uncertainty-the-communication-of-risk-in-the"
+ }
+]
