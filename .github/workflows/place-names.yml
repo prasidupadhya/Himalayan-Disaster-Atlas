@@ -1,0 +1,31 @@
+# Acquires the official source of the Nepali district names. Runs by hand, or when this pipeline changes.
+name: place-names
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - pipelines/place_names/**
+      - .github/workflows/place-names.yml
+permissions:
+  contents: read
+jobs:
+  acquire:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch the constitution
+        env:
+          GOV_PROXY: ${{ secrets.GOV_PROXY }}
+        run: python pipelines/place_names/acquire.py build/place-names
+      - name: Show Schedule 4 as text
+        run: |
+          sudo apt-get install -y -qq poppler-utils >/dev/null
+          pdfinfo build/place-names/constitution.pdf | head -20
+          pdftotext -layout build/place-names/constitution.pdf build/place-names/constitution.txt
+          grep -n "अनुसूची" build/place-names/constitution.txt | head -20
+          awk '/अनुसूची *[-–—]? *४/{f=1} f{print; n++} n>140{exit}' build/place-names/constitution.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: place-names-source
+          path: build/place-names/
