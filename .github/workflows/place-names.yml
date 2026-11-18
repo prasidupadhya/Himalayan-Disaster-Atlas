@@ -1,0 +1,67 @@
+# Nepali district names from Schedule 4 of the Constitution of Nepal.
+# The first run builds the release and commits it; once it exists, runs only check that the official text still gives
+# the same names (monthly, and whenever this pipeline changes), and fail loudly if it does not.
+name: place-names
+on:
+  schedule:
+    - cron: '41 3 9 * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - pipelines/place_names/**
+      - .github/workflows/place-names.yml
+permissions:
+  contents: write
+concurrency:
+  group: place-names-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  names:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install pdftotext and the font converter
+        run: |
+          sudo apt-get install -y -qq poppler-utils >/dev/null
+          pip install -q -r pipelines/place_names/requirements.txt
+      - name: Fetch both schedules
+        env:
+          # Optional: a proxy on a network Nepal's government hosts accept; used for the official URLs only.
+          GOV_PROXY: ${{ secrets.GOV_PROXY }}
+        run: python pipelines/place_names/acquire.py build/place-names
+      - name: Build the release, or check the published one
+        id: build
+        run: |
+          if [ -d site/data/nepal-district-names-ne/1.0.0 ]; then
+            python pipelines/place_names/build.py --check build/place-names
+            echo "built=false" >> "$GITHUB_OUTPUT"
+          else
+            python pipelines/place_names/build.py build/place-names
+            echo "built=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Test the build
+        run: python -m unittest tests.test_place_names -v
+      - name: Commit the new release as the repository owner
+        if: steps.build.outputs.built == 'true' && github.ref != 'refs/heads/main'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GIT_AUTHOR_NAME: Prasid
+          GIT_AUTHOR_EMAIL: 91832812+prasidupadhya@users.noreply.github.com
+          GIT_COMMITTER_NAME: Prasid
+          GIT_COMMITTER_EMAIL: 91832812+prasidupadhya@users.noreply.github.com
+        run: |
+          git add site/data/nepal-district-names-ne data/place-names
+          printf '%s\n\n%s\n%s\n' "Publish Nepali district names from Schedule 4" \
+            "Built by pipelines/place_names from the official Nepali and English texts" \
+            "of Schedule 4 of the Constitution of Nepal; the manifest lists sources and checksums." > "$RUNNER_TEMP/msg"
+          git commit -F "$RUNNER_TEMP/msg"
+          export GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=http.https://github.com/.extraheader GIT_CONFIG_VALUE_0="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)"
+          git push origin HEAD:${GITHUB_REF_NAME}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: place-names-source
+          path: build/place-names/

@@ -1,0 +1,621 @@
+{
+ "format": "atlas-district-names@1",
+ "districts": [
+  {
+   "pcode": "NP0101",
+   "name_ne": "ताप्लेजुङ",
+   "schedule_name_en": "Taplejung",
+   "district_name_en": "Taplejung",
+   "province_no": 1,
+   "schedule_position": 1
+  },
+  {
+   "pcode": "NP0102",
+   "name_ne": "पाँचथर",
+   "schedule_name_en": "Panchthar",
+   "district_name_en": "Panchthar",
+   "province_no": 1,
+   "schedule_position": 2
+  },
+  {
+   "pcode": "NP0103",
+   "name_ne": "इलाम",
+   "schedule_name_en": "Ilam",
+   "district_name_en": "Ilam",
+   "province_no": 1,
+   "schedule_position": 3
+  },
+  {
+   "pcode": "NP0104",
+   "name_ne": "झापा",
+   "schedule_name_en": "Jhapa",
+   "district_name_en": "Jhapa",
+   "province_no": 1,
+   "schedule_position": 12
+  },
+  {
+   "pcode": "NP0105",
+   "name_ne": "मोरङ",
+   "schedule_name_en": "Morang",
+   "district_name_en": "Morang",
+   "province_no": 1,
+   "schedule_position": 13
+  },
+  {
+   "pcode": "NP0106",
+   "name_ne": "सुनसरी",
+   "schedule_name_en": "Sunsari",
+   "district_name_en": "Sunsari",
+   "province_no": 1,
+   "schedule_position": 14
+  },
+  {
+   "pcode": "NP0107",
+   "name_ne": "धनकुटा",
+   "schedule_name_en": "Dhankuta",
+   "district_name_en": "Dhankuta",
+   "province_no": 1,
+   "schedule_position": 6
+  },
+  {
+   "pcode": "NP0108",
+   "name_ne": "तेह्रथुम",
+   "schedule_name_en": "Tehrathum",
+   "district_name_en": "Tehrathum",
+   "province_no": 1,
+   "schedule_position": 5
+  },
+  {
+   "pcode": "NP0109",
+   "name_ne": "संखुवासभा",
+   "schedule_name_en": "Sankhuwasabha",
+   "district_name_en": "Sankhuwasabha",
+   "province_no": 1,
+   "schedule_position": 4
+  },
+  {
+   "pcode": "NP0110",
+   "name_ne": "भोजपुर",
+   "schedule_name_en": "Bhojpur",
+   "district_name_en": "Bhojpur",
+   "province_no": 1,
+   "schedule_position": 7
+  },
+  {
+   "pcode": "NP0111",
+   "name_ne": "सोलुखुम्बु",
+   "schedule_name_en": "Solukhumbu",
+   "district_name_en": "Solukhumbu",
+   "province_no": 1,
+   "schedule_position": 9
+  },
+  {
+   "pcode": "NP0112",
+   "name_ne": "खोटाङ",
+   "schedule_name_en": "Khotang",
+   "district_name_en": "Khotang",
+   "province_no": 1,
+   "schedule_position": 8
+  },
+  {
+   "pcode": "NP0113",
+   "name_ne": "ओखलढुंगा",
+   "schedule_name_en": "Okhaldhunga",
+   "district_name_en": "Okhaldhunga",
+   "province_no": 1,
+   "schedule_position": 10
+  },
+  {
+   "pcode": "NP0114",
+   "name_ne": "उदयपुर",
+   "schedule_name_en": "Udayapur",
+   "district_name_en": "Udayapur",
+   "province_no": 1,
+   "schedule_position": 11
+  },
+  {
+   "pcode": "NP0215",
+   "name_ne": "सप्तरी",
+   "schedule_name_en": "Saptari",
+   "district_name_en": "Saptari",
+   "province_no": 2,
+   "schedule_position": 1
+  },
+  {
+   "pcode": "NP0216",
+   "name_ne": "सिराहा",
+   "schedule_name_en": "Siraha",
+   "district_name_en": "Siraha",
+   "province_no": 2,
+   "schedule_position": 2
+  },
+  {
+   "pcode": "NP0217",
+   "name_ne": "धनुषा",
+   "schedule_name_en": "Dhanusa",
+   "district_name_en": "Dhanusha",
+   "province_no": 2,
+   "schedule_position": 3
+  },
+  {
+   "pcode": "NP0218",
+   "name_ne": "महोत्तरी",
+   "schedule_name_en": "Mahottari",
+   "district_name_en": "Mahottari",
+   "province_no": 2,
+   "schedule_position": 4
+  },
+  {
+   "pcode": "NP0219",
+   "name_ne": "सर्लाही",
+   "schedule_name_en": "Sarlahi",
+   "district_name_en": "Sarlahi",
+   "province_no": 2,
+   "schedule_position": 5
+  },
+  {
+   "pcode": "NP0232",
+   "name_ne": "रौतहट",
+   "schedule_name_en": "Rautahat",
+   "district_name_en": "Rautahat",
+   "province_no": 2,
+   "schedule_position": 6
+  },
+  {
+   "pcode": "NP0233",
+   "name_ne": "बारा",
+   "schedule_name_en": "Bara",
+   "district_name_en": "Bara",
+   "province_no": 2,
+   "schedule_position": 7
+  },
+  {
+   "pcode": "NP0234",
+   "name_ne": "पर्सा",
+   "schedule_name_en": "Parsa",
+   "district_name_en": "Parsa",
+   "province_no": 2,
+   "schedule_position": 8
+  },
+  {
+   "pcode": "NP0320",
+   "name_ne": "सिन्धुली",
+   "schedule_name_en": "Sindhuli",
+   "district_name_en": "Sindhuli",
+   "province_no": 3,
+   "schedule_position": 3
+  },
+  {
+   "pcode": "NP0321",
+   "name_ne": "रामेछाप",
+   "schedule_name_en": "Ramechhap",
+   "district_name_en": "Ramechhap",
+   "province_no": 3,
+   "schedule_position": 2
+  },
+  {
+   "pcode": "NP0322",
+   "name_ne": "दोलखा",
+   "schedule_name_en": "Dolakha",
+   "district_name_en": "Dolakha",
+   "province_no": 3,
+   "schedule_position": 1
+  },
+  {
+   "pcode": "NP0323",
+   "name_ne": "सिन्धुपाल्चोक",
+   "schedule_name_en": "Sindhupalchok",
+   "district_name_en": "Sindhupalchok",
+   "province_no": 3,
+   "schedule_position": 5
+  },
+  {
+   "pcode": "NP0324",
+   "name_ne": "काभ्रेपलाञ्चोक",
+   "schedule_name_en": "Kavrepalanchok",
+   "district_name_en": "Kavrepalanchok",
+   "province_no": 3,
+   "schedule_position": 4
+  },
+  {
+   "pcode": "NP0325",
+   "name_ne": "ललितपुर",
+   "schedule_name_en": "Lalitpur",
+   "district_name_en": "Lalitpur",
+   "province_no": 3,
+   "schedule_position": 12
+  },
+  {
+   "pcode": "NP0326",
+   "name_ne": "भक्तपुर",
+   "schedule_name_en": "Bhaktapur",
+   "district_name_en": "Bhaktapur",
+   "province_no": 3,
+   "schedule_position": 11
+  },
+  {
+   "pcode": "NP0327",
+   "name_ne": "काठमाडौं",
+   "schedule_name_en": "Kathmandu",
+   "district_name_en": "Kathmandu",
+   "province_no": 3,
+   "schedule_position": 13
+  },
+  {
+   "pcode": "NP0328",
+   "name_ne": "नुवाकोट",
+   "schedule_name_en": "Nuwakot",
+   "district_name_en": "Nuwakot",
+   "province_no": 3,
+   "schedule_position": 7
+  },
+  {
+   "pcode": "NP0329",
+   "name_ne": "रसुवा",
+   "schedule_name_en": "Rasuwa",
+   "district_name_en": "Rasuwa",
+   "province_no": 3,
+   "schedule_position": 6
+  },
+  {
+   "pcode": "NP0330",
+   "name_ne": "धादिङ",
+   "schedule_name_en": "Dhading",
+   "district_name_en": "Dhading",
+   "province_no": 3,
+   "schedule_position": 8
+  },
+  {
+   "pcode": "NP0331",
+   "name_ne": "मकवानपुर",
+   "schedule_name_en": "Makawanpur",
+   "district_name_en": "Makwanpur",
+   "province_no": 3,
+   "schedule_position": 10
+  },
+  {
+   "pcode": "NP0335",
+   "name_ne": "चितवन",
+   "schedule_name_en": "Chitwan",
+   "district_name_en": "Chitwan",
+   "province_no": 3,
+   "schedule_position": 9
+  },
+  {
+   "pcode": "NP0436",
+   "name_ne": "गोरखा",
+   "schedule_name_en": "Gorkha",
+   "district_name_en": "Gorkha",
+   "province_no": 4,
+   "schedule_position": 1
+  },
+  {
+   "pcode": "NP0437",
+   "name_ne": "लमजुङ",
+   "schedule_name_en": "Lamjung",
+   "district_name_en": "Lamjung",
+   "province_no": 4,
+   "schedule_position": 2
+  },
+  {
+   "pcode": "NP0438",
+   "name_ne": "मनाङ",
+   "schedule_name_en": "Manang",
+   "district_name_en": "Manang",
+   "province_no": 4,
+   "schedule_position": 5
+  },
+  {
+   "pcode": "NP0439",
+   "name_ne": "कास्की",
+   "schedule_name_en": "Kaski",
+   "district_name_en": "Kaski",
+   "province_no": 4,
+   "schedule_position": 4
+  },
+  {
+   "pcode": "NP0440",
+   "name_ne": "तनहुँ",
+   "schedule_name_en": "Tanahun",
+   "district_name_en": "Tanahun",
+   "province_no": 4,
+   "schedule_position": 3
+  },
+  {
+   "pcode": "NP0441",
+   "name_ne": "स्याङजा",
+   "schedule_name_en": "Syangja",
+   "district_name_en": "Syangja",
+   "province_no": 4,
+   "schedule_position": 8
+  },
+  {
+   "pcode": "NP0442",
+   "name_ne": "पर्वत",
+   "schedule_name_en": "Parbat",
+   "district_name_en": "Parbat",
+   "province_no": 4,
+   "schedule_position": 7
+  },
+  {
+   "pcode": "NP0443",
+   "name_ne": "बाग्लुङ",
+   "schedule_name_en": "Baglung",
+   "district_name_en": "Baglung",
+   "province_no": 4,
+   "schedule_position": 10
+  },
+  {
+   "pcode": "NP0444",
+   "name_ne": "म्याग्दी",
+   "schedule_name_en": "Myagdi",
+   "district_name_en": "Myagdi",
+   "province_no": 4,
+   "schedule_position": 9
+  },
+  {
+   "pcode": "NP0445",
+   "name_ne": "मुस्ताङ",
+   "schedule_name_en": "Mustang",
+   "district_name_en": "Mustang",
+   "province_no": 4,
+   "schedule_position": 6
+  },
+  {
+   "pcode": "NP0447",
+   "name_ne": "नवलपरासी (बर्दघाट सुस्ता पूर्व)",
+   "schedule_name_en": "Nawalparasi (East of Bardaghat Susta)",
+   "district_name_en": "Nawalpur",
+   "province_no": 4,
+   "schedule_position": 11
+  },
+  {
+   "pcode": "NP0546",
+   "name_ne": "पाल्पा",
+   "schedule_name_en": "Palpa",
+   "district_name_en": "Palpa",
+   "province_no": 5,
+   "schedule_position": 4
+  },
+  {
+   "pcode": "NP0547",
+   "name_ne": "नवलपरासी (बर्दघाट सुस्ता पश्चिम)",
+   "schedule_name_en": "Nawalparasi (West of Bardaghat Susta)",
+   "district_name_en": "Nawalparasi (West of Bardaghat Susta)",
+   "province_no": 5,
+   "schedule_position": 1
+  },
+  {
+   "pcode": "NP0548",
+   "name_ne": "रूपन्देही",
+   "schedule_name_en": "Rupandehi",
+   "district_name_en": "Rupandehi",
+   "province_no": 5,
+   "schedule_position": 2
+  },
+  {
+   "pcode": "NP0549",
+   "name_ne": "कपिलबस्तु",
+   "schedule_name_en": "Kapilbastu",
+   "district_name_en": "Kapilvastu",
+   "province_no": 5,
+   "schedule_position": 3
+  },
+  {
+   "pcode": "NP0550",
+   "name_ne": "अर्घाखाँची",
+   "schedule_name_en": "Arghakhanchi",
+   "district_name_en": "Arghakhanchi",
+   "province_no": 5,
+   "schedule_position": 5
+  },
+  {
+   "pcode": "NP0551",
+   "name_ne": "गुल्मी",
+   "schedule_name_en": "Gulmi",
+   "district_name_en": "Gulmi",
+   "province_no": 5,
+   "schedule_position": 6
+  },
+  {
+   "pcode": "NP0552",
+   "name_ne": "रुकुम (पूर्वी भाग)",
+   "schedule_name_en": "Rukun (Eastern Part)",
+   "district_name_en": "Rukum East",
+   "province_no": 5,
+   "schedule_position": 7
+  },
+  {
+   "pcode": "NP0554",
+   "name_ne": "रोल्पा",
+   "schedule_name_en": "Rolpa",
+   "district_name_en": "Rolpa",
+   "province_no": 5,
+   "schedule_position": 8
+  },
+  {
+   "pcode": "NP0555",
+   "name_ne": "प्यूठान",
+   "schedule_name_en": "Pyuthan",
+   "district_name_en": "Pyuthan",
+   "province_no": 5,
+   "schedule_position": 9
+  },
+  {
+   "pcode": "NP0556",
+   "name_ne": "दाङ",
+   "schedule_name_en": "Daang",
+   "district_name_en": "Dang",
+   "province_no": 5,
+   "schedule_position": 10
+  },
+  {
+   "pcode": "NP0557",
+   "name_ne": "बाँके",
+   "schedule_name_en": "Banke",
+   "district_name_en": "Banke",
+   "province_no": 5,
+   "schedule_position": 11
+  },
+  {
+   "pcode": "NP0558",
+   "name_ne": "बर्दिया",
+   "schedule_name_en": "Bardiya",
+   "district_name_en": "Bardiya",
+   "province_no": 5,
+   "schedule_position": 12
+  },
+  {
+   "pcode": "NP0652",
+   "name_ne": "रुकुम (पश्चिम भाग)",
+   "schedule_name_en": "Rukum (Western Part)",
+   "district_name_en": "Rukum West",
+   "province_no": 6,
+   "schedule_position": 1
+  },
+  {
+   "pcode": "NP0653",
+   "name_ne": "सल्यान",
+   "schedule_name_en": "Salyan",
+   "district_name_en": "Salyan",
+   "province_no": 6,
+   "schedule_position": 2
+  },
+  {
+   "pcode": "NP0659",
+   "name_ne": "सुर्खेत",
+   "schedule_name_en": "Surkhet",
+   "district_name_en": "Surkhet",
+   "province_no": 6,
+   "schedule_position": 10
+  },
+  {
+   "pcode": "NP0660",
+   "name_ne": "जाजरकोट",
+   "schedule_name_en": "Jajarkot",
+   "district_name_en": "Jajarkot",
+   "province_no": 6,
+   "schedule_position": 8
+  },
+  {
+   "pcode": "NP0661",
+   "name_ne": "दैलेख",
+   "schedule_name_en": "Dailekh",
+   "district_name_en": "Dailekh",
+   "province_no": 6,
+   "schedule_position": 9
+  },
+  {
+   "pcode": "NP0662",
+   "name_ne": "डोल्पा",
+   "schedule_name_en": "Dolpa",
+   "district_name_en": "Dolpa",
+   "province_no": 6,
+   "schedule_position": 3
+  },
+  {
+   "pcode": "NP0663",
+   "name_ne": "जुम्ला",
+   "schedule_name_en": "Jumla",
+   "district_name_en": "Jumla",
+   "province_no": 6,
+   "schedule_position": 4
+  },
+  {
+   "pcode": "NP0664",
+   "name_ne": "कालिकोट",
+   "schedule_name_en": "Kalikot",
+   "district_name_en": "Kalikot",
+   "province_no": 6,
+   "schedule_position": 7
+  },
+  {
+   "pcode": "NP0665",
+   "name_ne": "मुगु",
+   "schedule_name_en": "Mugu",
+   "district_name_en": "Mugu",
+   "province_no": 6,
+   "schedule_position": 5
+  },
+  {
+   "pcode": "NP0666",
+   "name_ne": "हुम्ला",
+   "schedule_name_en": "Humla",
+   "district_name_en": "Humla",
+   "province_no": 6,
+   "schedule_position": 6
+  },
+  {
+   "pcode": "NP0767",
+   "name_ne": "बझाङ",
+   "schedule_name_en": "Bajhang",
+   "district_name_en": "Bajhang",
+   "province_no": 7,
+   "schedule_position": 2
+  },
+  {
+   "pcode": "NP0768",
+   "name_ne": "बाजुरा",
+   "schedule_name_en": "Bajura",
+   "district_name_en": "Bajura",
+   "province_no": 7,
+   "schedule_position": 1
+  },
+  {
+   "pcode": "NP0769",
+   "name_ne": "अछाम",
+   "schedule_name_en": "Achham",
+   "district_name_en": "Achham",
+   "province_no": 7,
+   "schedule_position": 4
+  },
+  {
+   "pcode": "NP0770",
+   "name_ne": "डोटी",
+   "schedule_name_en": "Doti",
+   "district_name_en": "Doti",
+   "province_no": 7,
+   "schedule_position": 3
+  },
+  {
+   "pcode": "NP0771",
+   "name_ne": "कैलाली",
+   "schedule_name_en": "Kailali",
+   "district_name_en": "Kailali",
+   "province_no": 7,
+   "schedule_position": 9
+  },
+  {
+   "pcode": "NP0772",
+   "name_ne": "कञ्चनपुर",
+   "schedule_name_en": "Kanchanpur",
+   "district_name_en": "Kanchanpur",
+   "province_no": 7,
+   "schedule_position": 8
+  },
+  {
+   "pcode": "NP0773",
+   "name_ne": "डडेल्धुरा",
+   "schedule_name_en": "Dadeldhura",
+   "district_name_en": "Dadeldhura",
+   "province_no": 7,
+   "schedule_position": 7
+  },
+  {
+   "pcode": "NP0774",
+   "name_ne": "बैतडी",
+   "schedule_name_en": "Baitadi",
+   "district_name_en": "Baitadi",
+   "province_no": 7,
+   "schedule_position": 6
+  },
+  {
+   "pcode": "NP0775",
+   "name_ne": "दार्चुला",
+   "schedule_name_en": "Darchula",
+   "district_name_en": "Darchula",
+   "province_no": 7,
+   "schedule_position": 5
+  }
+ ]
+}

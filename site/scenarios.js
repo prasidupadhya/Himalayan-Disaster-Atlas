@@ -1,35 +1,27 @@
-import { c, esc, num, duration, load, failed } from './app.js';
-import { baseMap, maplibregl, color } from './basemap.js';
+import { c, esc, num, duration, load, failed, lang } from './app.js';
+import { baseMap, maplibregl, color, popup } from './basemap.js';
+import { searchBox, placeIndex, placeHtml, flyTo } from './search.js';
+import { COPY } from './copy.js';
 import { scenarioTerrain } from './scenario-terrain.js';
 import * as M from './models.js';
 import * as P from './places.js';
 import { routeData, routeHtml, routeStage, mapLabel, placeNow, province } from './route.js';
+import { parse, floodInputs, loadQuakeData, quakeInputs, BAND_COLORS, BEYOND, bandLabel, hydrographChart, shakeGrid, pack, originLabel, presetLabel } from './scenario-common.js';
 
 const form = document.getElementById('form'), out = document.getElementById('result'), status = document.getElementById('status'), mapNotes = document.querySelectorAll('.map-note');
-const BAND_COLORS = ['', '#ffd57a', '#ffab45', '#f4743b', '#d7402b', '#8f1d21'], BEYOND = '#8a959c';
-const bandLabel = i => i === M.PGA_BANDS.length - 1 ? `≥ ${num(M.PGA_BANDS[i], 2)} g` : i === 0 ? `< ${num(M.PGA_BANDS[1], 2)} g` : `${num(M.PGA_BANDS[i], 2)}–${num(M.PGA_BANDS[i + 1], 2)} g`;
 const field = (name, label, value, attrs = '') => `<label class="field"><span>${esc(label)}</span><input aria-label="${esc(label)}" name="${name}" value="${esc(value)}" inputmode="decimal" autocomplete="off" ${attrs}></label>`;
 const select = (name, label, options, value) => `<label class="field"><span>${esc(label)}</span><select aria-label="${esc(label)}" name="${name}">${options.map(([v, t]) => `<option value="${esc(v)}"${String(v) === String(value) ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select></label>`;
 const step = (n, title, body) => `<section class="step"><h2><span class="n">${num(n)}</span>${esc(title)}</h2>${body}</section>`;
 const figure = (label, value, note = '') => `<div class="fig"><span>${esc(label)}</span><strong>${value}</strong>${note ? `<small>${esc(note)}</small>` : ''}</div>`;
 const range = (a, b, f = num) => a === b ? f(a) : `${f(a)}–${f(b)}`;
 /** Reads a typed number: Nepali digits, thousands separators and spaces are accepted; empty is not a number. */
-const parse = v => { const t = String(v ?? '').replace(/[०-९]/g, d => '०१२३४५६७८९'.indexOf(d)).replace(/[,\s]/g, ''); return t === '' ? NaN : +t; };
 const mark = (errors, fields) => { form.querySelectorAll('input').forEach(i => i.removeAttribute('aria-invalid')); errors.flatMap(e => fields[e] ?? []).forEach(n => form[n]?.setAttribute('aria-invalid', 'true')); };
-const actions = `<div class="actions"><button class="primary" aria-label="${esc(c.run)}">${esc(c.run)}</button><button type="button" id="share" aria-label="${esc(c.share)}">${esc(c.share)}</button></div>`;
+const actions = `<div class="actions"><button class="primary" aria-label="${esc(c.run)}">${esc(c.run)}</button><button type="button" id="share" aria-label="${esc(c.share)}">${esc(c.share)}</button><a class="button" id="report" href="/scenarios/report/">${esc(c.report)}</a></div>`;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const params = () => new URLSearchParams(location.hash.slice(1));
 /** Inputs live in the link (shareable); an unchanged link still re-runs. */
 const go = hash => { if (`#${hash}` === location.hash) route(); else location.hash = hash; };
 
-/** The release hydrograph at the source as a small line chart: hours across, m³/s up. */
-function hydrographChart(points, peak, title) {
-  const W = 320, H = 120, T = points.at(-1)[0], x = t => (t / T * W).toFixed(1), y = q => (H - q / peak * (H - 8)).toFixed(1);
-  return `<figure class="chart"><figcaption>${esc(title)}</figcaption><svg viewBox="-36 -6 ${W + 44} ${H + 26}" role="img" aria-label="${esc(title)}">
-    <path class="axis" d="M0 0V${H}H${W}"/><path class="line" d="M${points.map(([t, q]) => `${x(t)} ${y(q)}`).join('L')}"/>
-    <text x="-6" y="12" text-anchor="end">${num(peak)}</text><text x="-6" y="${H}" text-anchor="end">0</text>
-    <text x="0" y="${H + 18}">0 h</text><text x="${W}" y="${H + 18}" text-anchor="end">${esc(duration(T))}</text></svg></figure>`;
-}
 
 let map, flat;
 try { map = await baseMap('map', ['Rivers: HydroRIVERS / FAO', 'Lakes: Glacial Lake Observatory', 'Population: Meta & CIESIN HRSL', 'Ground motion: BSSA14']); }
@@ -75,12 +67,8 @@ const catalogue = load('/data/atlas-flood-corridors/1.0.0/catalogue.json.gz');
 async function flood(run) {
   const [cat, places] = await Promise.all([catalogue, routeData()]);
   if (run !== seq) return;
-  const q = params(), o = cat.origins.find(o => o.id === q.get('flood')) ?? cat.origins[0], speeds = (q.get('c') ?? '2,4,6').split(',');
-  const s = { origin: o.id, shape: q.get('shape') === 'rectangular' ? 'rectangular' : 'triangular', volume_m3: parse(q.get('v') ?? 1e7), duration_s: parse(q.get('h') ?? 3) * 3600,
-    peak_fraction: parse(q.get('p') ?? 25) / 100, celerity_m_s: [0, 1, 2].map(i => parse(speeds[i])) };
-  // Stream names are the nearest GeoNames point, for orientation only.
-  const near = o => o.gazetteer_hint?.name ? `, ${c.near(o.gazetteer_hint.name)}` : '';
-  const label = o => o.lake ? `${o.lake.basin}, ${num(o.lake.area_km2, 2)} km², ${num(o.lake.elevation_mean_m)} m${near(o)}` : `${c.reach(o.start_reach)}${near(o)}`;
+  const q = params(), { o, s, speeds } = floodInputs(q, cat.origins);
+  const label = originLabel;
   const group = (name, list) => `<optgroup label="${esc(name)}">${list.map(x => `<option value="${esc(x.id)}"${x.id === s.origin ? ' selected' : ''}>${esc(label(x))}</option>`).join('')}</optgroup>`;
   form.innerHTML = step(1, c.chooseFlood, `<label class="field"><span>${esc(c.origin)}</span><select name="origin" aria-label="${esc(c.origin)}">${group(c.lakeOrigins, cat.origins.filter(o => o.lake))}${group(c.riverOrigins, cat.origins.filter(o => !o.lake))}</select></label><p class="muted">${esc(flat ? c.flatNotice : c.pickOrigin)}</p>`)
     + step(2, c.setRun, `<div class="row2">${field('v', `${c.volume}, m³`, Number.isFinite(s.volume_m3) ? s.volume_m3.toLocaleString('en-US') : (q.get('v') ?? ''))}${field('h', `${c.duration}, h`, q.get('h') ?? 3)}</div>`
@@ -245,16 +233,11 @@ function play(o, s, line, r) {
 }
 
 // ---------- Earthquake shaking ----------
-const quakeData = Promise.all(['/data/atlas-gmpe-bssa14/1.0.0/model.json', '/data/nepal-hrsl-population/1.0.0/grid.json.gz', '/data/nepal-region-earthquakes/1.0.0/features.geojson.gz'].map(u => load(u)))
-  .then(([model, grid, events]) => ({ model, cells: M.populationCells(grid),
-    presets: events.features.filter(f => f.properties.magnitude >= 6 && f.properties.magnitude <= 8.5).sort((a, b) => b.properties.magnitude - a.properties.magnitude).slice(0, 10) }));
+const quakeData = loadQuakeData();
 async function quake(run) {
   const [{ model, cells, presets }, places] = await Promise.all([quakeData, routeData()]), districts = places.districts;
   if (run !== seq) return;
-  const q = params(), pick = presets.find(f => f.properties.source_id === (q.get('preset') ?? 'us20002926')) ?? presets[0];
-  const s = q.has('lon') ? { longitude: parse(q.get('lon')), latitude: parse(q.get('lat')), magnitude: parse(q.get('m')), mechanism: q.get('mech'), vs30: parse(q.get('vs30')), length_km: parse(q.get('len')), strike_deg: parse(q.get('strike')) }
-    : { longitude: pick.geometry.coordinates[0], latitude: pick.geometry.coordinates[1], magnitude: pick.properties.magnitude, mechanism: 'unspecified', vs30: 760, length_km: 0, strike_deg: 0 };
-  const presetLabel = f => `M${f.properties.magnitude}, ${f.properties.event_time.slice(0, 10)}, ${f.properties.place_name}`;
+  const q = params(), { pick, s } = quakeInputs(q, presets);
   form.innerHTML = step(1, c.chooseQuake, select('preset', c.preset, [['', c.custom], ...presets.map(f => [f.properties.source_id, presetLabel(f)])], q.has('lon') ? '' : pick.properties.source_id)
       + `<p class="muted">${esc(flat ? c.flatNotice : c.pickHint)}</p><div class="row2">${field('lon', `${c.lon}, °E`, q.get('lon') ?? s.longitude)}${field('lat', `${c.lat}, °N`, q.get('lat') ?? s.latitude)}</div>`)
     + step(2, c.setRun, `<div class="row2">${field('m', c.magnitude, q.get('m') ?? s.magnitude)}${select('vs30', c.vs30, M.VS30.map(v => [v, c.soils[v]]), s.vs30)}</div>`
@@ -289,20 +272,9 @@ async function quake(run) {
     <p class="src">${esc(c.peopleOutside)} ${esc(c.placesSource)}</p>
     <p class="note">${esc(c.quakeLimits)}</p>`);
 
-  // Shaking grid: for each pixel, the band of the middle case and its distance from the rupture, computed once.
-  // Rows are spaced evenly in map projection. Beyond the model's 400 km range is grey (UNKNOWN), never blank like weak shaking.
-  const W = shakeCanvas.width, H = shakeCanvas.height, west = 78.8, east = 90, south = 22, north = 31.9,   // the whole map area
-   y = lat => Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360));
-  const band = new Uint8Array(W * H), dist = new Float32Array(W * H); let far = 0;
-  for (let j = 0; j < H; j++) {
-    const lat = Math.atan(Math.sinh(y(north) - (j + 0.5) / H * (y(north) - y(south)))) * 180 / Math.PI;
-    for (let i = 0; i < W; i++) {
-      const lon = west + (i + 0.5) / W * (east - west), p = M.pgaAt(model, s, lon, lat), k = j * W + i;
-      band[k] = p ? M.bandOf(p[1]) : 255; dist[k] = M.rjb(s, lon, lat); far = Math.max(far, dist[k]);
-    }
-  }
-  // Colours packed as 32-bit pixels (little-endian ABGR), so a frame is one pass over the grid.
-  const pack = hex => (255 << 24 | parseInt(hex.slice(5, 7), 16) << 16 | parseInt(hex.slice(3, 5), 16) << 8 | parseInt(hex.slice(1, 3), 16)) >>> 0;
+  // Shaking grid, computed once. Beyond the model's 400 km range is grey (UNKNOWN), never blank like weak shaking.
+  const W = shakeCanvas.width, H = shakeCanvas.height, { band, dist, far, extent } = shakeGrid(model, s, W, H);
+  // Colours packed as 32-bit pixels, so a frame is one pass over the grid.
   const fills = BAND_COLORS.map(h => h ? pack(h) : 0), grey = pack(BEYOND), ink = pack('#18232a');
   const ctx = shakeCanvas.getContext('2d'), image = ctx.createImageData(W, H), px = new Uint32Array(image.data.buffer);
   /** Paint everything within `radius` km of the rupture; `ring` draws the moving edge. */
@@ -313,7 +285,6 @@ async function quake(run) {
     }
     ctx.putImageData(image, 0, 0); flat?.draw();
   };
-  const extent = [[west, north], [east, north], [east, south], [west, south]];
   if (map && !map.getSource('shaking')) {
     map.addSource('shaking', { type: 'canvas', canvas: shakeCanvas, coordinates: extent, animate: true });
     map.addLayer({ id: 'shaking', type: 'raster', source: 'shaking', paint: { 'raster-opacity': 0.6, 'raster-resampling': 'nearest', 'raster-fade-duration': 0 } }, 'path-casing');
@@ -395,6 +366,8 @@ async function route() {
   try { await (mode === 'quake' ? quake(run) : flood(run)); } catch (e) { console.error(e); if (run === seq) failed(out, route); }
   if (run !== seq) return;
   status.textContent = c.resultsReady;
+  const report = document.getElementById('report');
+  if (report) report.href = `/scenarios/report/${location.hash}`;
   document.getElementById('share')?.addEventListener('click', async ev => {
     try { await navigator.clipboard.writeText(location.href); ev.target.textContent = c.copiedLink; } catch { ev.target.textContent = c.copyFailed; }
   });
@@ -407,4 +380,17 @@ tabs.forEach((t, i) => {
   t.onkeydown = e => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { tabs[1 - i].focus(); tabs[1 - i].click(); } };
 });
 addEventListener('hashchange', route);
+
+// Search: a verified lake becomes the release point; any other place is shown on the map.
+let found = null;
+searchBox(document.getElementById('search'), { c, esc, num, lang, index: () => placeIndex(load, [COPY.en.searchLakeWord, COPY.ne.searchLakeWord]), pick: r => {
+  found?.remove(); found = null;
+  if (r.kind === 'lake') {
+    if (mode === 'flood' && form.origin) { form.origin.value = r.id; form.requestSubmit(); } else location.hash = `flood=${r.id}`;
+    return;
+  }
+  if (!map) return;
+  flyTo(map, r, reduced);
+  found = popup(map, r.p, placeHtml(r, { c, esc, num, lang }));
+} });
 route();

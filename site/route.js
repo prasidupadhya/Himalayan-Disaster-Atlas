@@ -1,13 +1,18 @@
 // A path on the map with its places: the districts it runs through light up and are named as the front reaches them,
 // towns near it appear as it passes, and a glowing head marks where the front is. Shared by Scenarios and the Map trace.
-import { c, esc, num, load } from './app.js';
+import { c, esc, num, load, lang } from './app.js';
 import { maplibregl } from './basemap.js';
 import * as P from './places.js';
 
 let cache;
+/** On Nepali pages, district names as printed in Schedule 4 of the constitution, by P-code; English stays if they cannot load. */
+const nepaliNames = () => lang !== 'ne' ? null : load('/data/nepal-district-names-ne/1.0.0/names.json')
+  .then(d => new Map(d.districts.map(r => [r.pcode, r.name_ne])), () => null);
+const named = (features, names) => !names ? features
+  : features.map(f => ({ ...f, properties: { ...f.properties, name_en: f.properties.name, name: names.get(f.properties.pcode) ?? f.properties.name } }));
 /** Districts, settlements and stream names, loaded once. */
-export const routeData = () => cache ??= Promise.all(['nepal-admin-districts/2.0.1', 'nepal-osm-settlements/1.0.0', 'nepal-river-names/1.0.0'].map(d => load(`/data/${d}/features.geojson.gz`)))
-  .then(([districts, osm, geonames]) => ({ districts: districts.features, find: P.districtFinder(districts.features), places: P.settlements(osm), streams: P.streams(geonames) }))
+export const routeData = () => cache ??= Promise.all([...['nepal-admin-districts/2.0.1', 'nepal-osm-settlements/1.0.0', 'nepal-river-names/1.0.0'].map(d => load(`/data/${d}/features.geojson.gz`)), nepaliNames()])
+  .then(([districts, osm, geonames, names]) => { const d = named(districts.features, names); return { districts: d, find: P.districtFinder(d), places: P.settlements(osm), streams: P.streams(geonames) }; })
   .catch(e => { cache = null; throw e; });   // a failed load may be retried
 
 export const province = name => c.provinces[name] ?? name;

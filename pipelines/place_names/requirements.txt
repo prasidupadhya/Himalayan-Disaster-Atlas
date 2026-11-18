@@ -1,0 +1,2 @@
+# Maps the legacy Preeti font's ASCII text layer to Unicode Devanagari. GPL-3.0; used by this pipeline only.
+npttf2utf==0.3.7

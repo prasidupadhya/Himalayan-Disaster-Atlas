@@ -1,0 +1,51 @@
+[
+ {
+  "lang": "ne",
+  "official_url": "https://supremecourt.gov.np/court/public/assets/downloads/नेपालको_संविधान_२०७२.pdf",
+  "route": "direct",
+  "fetched_from": "https://supremecourt.gov.np/court/public/assets/downloads/%E0%A4%A8%E0%A5%87%E0%A4%AA%E0%A4%BE%E0%A4%B2%E0%A4%95%E0%A5%8B_%E0%A4%B8%E0%A4%82%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BE%E0%A4%A8_%E0%A5%A8%E0%A5%A6%E0%A5%AD%E0%A5%A8.pdf",
+  "sha256": "32912851de3c214c4aa03e7b4fa57ea5be71d636dc6b7d7fc4d4ba9924dbfe18",
+  "bytes": 2618005,
+  "legacy_font": "Preeti, converted with npttf2utf 0.3.7",
+  "retrieved_at": "2026-11-18T08:18:15+00:00",
+  "failed_routes": [
+   {
+    "route": "direct",
+    "url": "http://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान.pdf",
+    "error": "HTTPError: HTTP Error 404: Not Found"
+   },
+   {
+    "route": "internet-archive",
+    "url": "http://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान.pdf",
+    "error": "no schedule found: 0 chars, 0 Devanagari; headings: []; sample: ''"
+   },
+   {
+    "route": "direct",
+    "url": "http://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान-दोस्रो-संशोधन-२०७७.pdf",
+    "error": "HTTPError: HTTP Error 404: Not Found"
+   },
+   {
+    "route": "internet-archive",
+    "url": "http://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान-दोस्रो-संशोधन-२०७७.pdf",
+    "error": "no schedule found: 789 chars, 503 Devanagari; headings: ['अनुसूची–३ मा संशोधन : नेपालको संविधानको धारा ९ को      उपधारा (२) सँग सम्बन्धित अनुसूची–३ को सट्टा यसैसाथ संलग्न भए बमोज', 'अनुसूची–३ को सट्टा यसैसाथ संलग्न भए बमोजिमको      अनुसूची–३ राखिएको छ । \\x0c                              “अनुसूची–३       ', 'अनुसूची–३ राखिएको छ । \\x0c                              “अनुसूची–३                  (धारा ९ को उपधारा (२) सँग सम्बन्धित)   ', 'अनुसूची–३                  (धारा ९ को उपधारा (२) सँग सम्बन्धित)                             नेपालको निशान छाप     द्रष्ट']; sample: ''"
+   }
+  ]
+ },
+ {
+  "lang": "en",
+  "official_url": "https://www.moljpa.gov.np/wp-content/uploads/2021/01/Constitution-of-Nepal-2nd-amd.-English.pdf",
+  "route": "internet-archive",
+  "fetched_from": "https://web.archive.org/web/20240616183854id_/https%3A//www.moljpa.gov.np/wp-content/uploads/2021/01/Constitution-of-Nepal-2nd-amd.-English.pdf",
+  "sha256": "08088fbdcd3b8d46d02440e0474cdd764983f742e7f07fdb95fd7d43e354fc89",
+  "bytes": 1308348,
+  "legacy_font": null,
+  "retrieved_at": "2026-11-18T08:18:22+00:00",
+  "failed_routes": [
+   {
+    "route": "direct",
+    "url": "https://www.moljpa.gov.np/wp-content/uploads/2021/01/Constitution-of-Nepal-2nd-amd.-English.pdf",
+    "error": "HTTPError: HTTP Error 404: Not Found"
+   }
+  ]
+ }
+]
