@@ -62,4 +62,52 @@ export async function baseMap(container, attribution) {
   return map;
 }
 
+// The explorer can turn in any direction. Keep the pitched viewport inside
+// the published DEM rectangle, including its far corners on a wide screen.
+export function explorerTerrain(map, reduced) {
+  const flatBounds = map.getMaxBounds(), flatMin = map.getMinZoom(), flatPitch = map.getMaxPitch();
+  const [w, s, e, n] = map.getStyle().sources.dem.bounds;
+  const pad = (e - w) * 0.09, pitch = 52;
+  const bounds = [[w + pad, s + pad], [e - pad, n - pad]];
+  function limitZoom() {
+    const canvas = map.getCanvas(), angle = pitch * Math.PI / 180;
+    const far = Math.hypot(canvas.clientWidth, canvas.clientHeight / Math.cos(angle)) /
+      (2 * (1 - Math.tan(map.getVerticalFieldOfView() * Math.PI / 360) * Math.tan(angle)));
+    map.setMinZoom(Math.max(flatMin, Math.log2(far / (512 * pad / 360)) + 0.25));
+  }
+  // A fly-to can arrive before its DEM tile. Once it loads, bring the
+  // target up to the rendered surface under the camera's geographic center.
+  function groundCenter() {
+    if (!map.getTerrain()) return;
+    const ground = map.queryTerrainElevation(map.getCenter());
+    if (Number.isFinite(ground) && Math.abs(map.getCenterElevation() - ground) > 1) map.setCenterElevation(ground);
+  }
+  map.on('idle', groundCenter);
+  function light(on) {
+    const night = dark();
+    map.setSky(on ? { 'sky-color': night ? '#172b42' : '#6fa6c4', 'horizon-color': night ? '#4d6275' : '#dfedf0',
+      'fog-color': night ? '#536979' : '#dbe9e9', 'fog-ground-blend': 0.45, 'horizon-fog-blend': 0.7,
+      'sky-horizon-blend': 0.7, 'atmosphere-blend': 0 } : undefined);
+    map.setLight({ anchor: on ? 'map' : 'viewport', position: on ? [1.3, 315, 45] : [1.15, 210, 30], intensity: on ? 0.4 : 0.5 });
+    map.setPaintProperty('hillshade', 'hillshade-illumination-anchor', on ? 'map' : 'viewport');
+    map.setPaintProperty('hillshade', 'hillshade-shadow-color', on ? (night ? '#142731' : '#354c58') : '#0b1a22');
+    map.setPaintProperty('hillshade', 'hillshade-exaggeration', on ? 0.46 : 0.6);
+  }
+  const theme = () => { if (map.getTerrain()) light(true); };
+  addEventListener('themechange', theme);
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', theme);
+  return on => {
+    if (on) {
+      map.setMaxBounds(bounds); map.setMaxPitch(pitch); limitZoom();
+      map.on('resize', limitZoom); map.dragRotate.enable(); map.touchZoomRotate.enableRotation();
+    } else {
+      map.off('resize', limitZoom); map.setMinZoom(flatMin); map.setMaxBounds(flatBounds); map.setMaxPitch(flatPitch);
+      map.dragRotate.disable(); map.touchZoomRotate.disableRotation();
+    }
+    map.setTerrain(on ? { source: 'dem', exaggeration: 1.4 } : null);
+    light(on);
+    map.easeTo({ pitch: on ? pitch : 0, bearing: on ? map.getBearing() : 0, duration: reduced ? 0 : 850 });
+  };
+}
+
 export const popup = (map, lngLat, html) => new maplibregl.Popup({ maxWidth: '300px', focusAfterOpen: false }).setLngLat(lngLat).setHTML(html).addTo(map);

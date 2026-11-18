@@ -1,5 +1,5 @@
-import { c, esc, num, load, failed } from './app.js';
-import { baseMap, popup, color, maplibregl } from './basemap.js';
+import { c, lang, esc, num, load, failed } from './app.js';
+import { baseMap, explorerTerrain, popup, color, maplibregl } from './basemap.js';
 import * as P from './places.js';
 import { routeData, routeHtml, routeStage } from './route.js';
 
@@ -28,8 +28,58 @@ const symbol = ([kind, fill]) => {
 };
 const info = document.getElementById('info'), list = document.getElementById('layers');
 let map;
-try { map = await baseMap('map', ['Rivers: HydroRIVERS / FAO', 'Lakes: Glacial Lake Observatory', 'Glaciers: RGI 7.0']); }
+try { map = await baseMap('map', ['Rivers: HydroRIVERS / FAO', 'Lakes: Glacial Lake Observatory', 'Glaciers: RGI 7.0', c.peaksCredit]); }
 catch { failed(info, () => location.reload()); throw new Error('map unavailable'); }
+
+// Labels are shaped by the browser. Reserve each measured box in height
+// order so a lower summit cannot cover a higher one during a pan or tilt.
+async function peakLabels() {
+  const { features } = await load(D('nepal-mountains/1.0.0'));
+  const peaks = features.map(({ properties: p, geometry }) => {
+    const name = (lang === 'ne' && p.aliases?.find(a => /[\u0900-\u097f]/u.test(a))) || p.name || c.unknown;
+    return { xy: geometry.coordinates, elevation: p.value, text: c.peakLabel(name, p.value == null ? c.unknown : c.peakMetres(num(p.value))) };
+  }).sort((a, b) => (b.elevation ?? -Infinity) - (a.elevation ?? -Infinity));
+  const pane = document.createElement('div');
+  pane.className = 'peak-labels';
+  map.getCanvas().after(pane);
+  let visible = [], dirty = true;
+  const invalidate = () => { dirty = true; };
+  const fontsChanged = () => { peaks.forEach(p => { p.size = null; }); invalidate(); map.triggerRepaint(); };
+  document.fonts.addEventListener('loadingdone', fontsChanged); document.fonts.ready.then(fontsChanged);
+  map.on('move', invalidate); map.on('resize', invalidate); map.on('terrain', invalidate);
+  map.on('sourcedata', e => { if (e.sourceId === 'dem') invalidate(); });
+  function layout() {
+    if (!dirty) return;
+    dirty = false;
+    const z = map.getZoom(), bounds = map.getBounds(), width = pane.clientWidth, height = pane.clientHeight;
+    const min = z < 6 ? 7500 : z < 8 ? 6500 : z < 10 ? 4500 : -Infinity;
+    const gap = Math.max(3, 24 - z * 2), placed = [], next = [];
+    for (const peak of peaks) {
+      if ((peak.elevation ?? -Infinity) < min) break;
+      if (!bounds.contains(peak.xy)) continue;
+      const p = map.project(peak.xy);
+      if (p.x < 0 || p.x > width || p.y < 0 || p.y > height) continue;
+      if (!peak.el) {
+        peak.el = document.createElement('span'); peak.el.className = 'peak-label';
+        peak.el.textContent = peak.text;
+      }
+      if (!peak.size) {
+        pane.append(peak.el);
+        peak.size = [peak.el.offsetWidth, peak.el.offsetHeight]; peak.el.remove();
+      }
+      const [w, h] = peak.size;
+      const left = Math.round(p.x - w / 2), top = Math.round(p.y - h - 4), right = left + w, bottom = top + h;
+      if (left < 2 || top < 2 || right > width - 2 || bottom > height - 2 || (right > width - 60 && top < 152)) continue;
+      if (placed.some(b => left < b.right + gap && right + gap > b.left && top < b.bottom + gap && bottom + gap > b.top)) continue;
+      if (!peak.el.isConnected) pane.append(peak.el);
+      peak.el.style.transform = `translate(${left}px, ${top}px)`;
+      placed.push({ left, right, top, bottom }); next.push(peak);
+    }
+    for (const peak of visible) if (!next.includes(peak)) peak.el.remove();
+    visible = next;
+  }
+  map.on('render', layout); layout();
+}
 
 // Downstream trace: follow each reach's published downstream link until it leaves the network,
 // then draw that path from the tapped reach to its end, and keep a slow dash moving along it to show the flow direction.
@@ -95,28 +145,45 @@ async function trace(id) {
 
 // Layers load on first use; the checkbox, not the order of loads, decides what is visible.
 const loading = new Map();
+const setTerrain = explorerTerrain(map, reduced);
 const checked = id => list.querySelector(`[data-id="${id}"]`)?.checked;
+function paintLayer(layer) {
+  const paint = layer.paint();
+  if (!map.getTerrain()) return paint;
+  if (layer.id === 'lakes') Object.assign(paint, { 'circle-pitch-alignment': 'map', 'circle-pitch-scale': 'map',
+    'circle-color': '#47cfda', 'circle-stroke-color': '#194a60', 'circle-stroke-width': 1.4 });
+  if (layer.id === 'glaciers') Object.assign(paint, { 'fill-color': '#c4e9f1', 'fill-opacity': 0.78, 'fill-outline-color': '#387589' });
+  return paint;
+}
+function refreshLayers() {
+  for (const layer of LAYERS) {
+    if (!map.getLayer(layer.id)) continue;
+    const paint = paintLayer(layer);
+    if (layer.id === 'lakes' && !map.getTerrain()) Object.assign(paint, { 'circle-pitch-alignment': 'viewport', 'circle-pitch-scale': 'map' });
+    for (const [key, value] of Object.entries(paint)) map.setPaintProperty(layer.id, key, value);
+  }
+}
 function show(layer) {
   if (map.getLayer(layer.id)) return map.setLayoutProperty(layer.id, 'visibility', checked(layer.id) ? 'visible' : 'none');
   if (!checked(layer.id) || loading.has(layer.id)) return loading.get(layer.id);
   const job = layer.data().then(data => {
     if (layer.id === 'rivers') rivers = data;
     map.addSource(layer.id, { type: 'geojson', data });
-    map.addLayer({ id: layer.id, type: layer.type, source: layer.id, paint: layer.paint(), layout: { visibility: checked(layer.id) ? 'visible' : 'none' } }, 'trace-casing');
+    map.addLayer({ id: layer.id, type: layer.type, source: layer.id, paint: paintLayer(layer), layout: { visibility: checked(layer.id) ? 'visible' : 'none' } }, 'trace-casing');
   }, () => { loading.delete(layer.id); info.insertAdjacentHTML('afterbegin', `<p class="note warn">${esc(c.failed)}</p>`); });
   loading.set(layer.id, job);
   return job;
 }
 const toggle = (id, key, on, sym) => `<label class="check"><input type="checkbox" data-id="${id}"${on ? ' checked' : ''}> ${esc(c[key])}${sym ? symbol(sym) : ''}</label>`;
-list.innerHTML = LAYERS.map(l => toggle(l.id, l.key, l.on, l.sym)).join('') + toggle('relief', 'relief', true) + toggle('tilt', 'tilt', false)
-  ;
+list.innerHTML = LAYERS.map(l => toggle(l.id, l.key, l.on, l.sym)).join('') + toggle('relief', 'relief', true) + toggle('tilt', 'tilt', false);
 list.onchange = e => {
   const id = e.target.dataset.id, on = e.target.checked;
   if (id === 'relief') ['relief', 'hillshade'].forEach(l => map.setLayoutProperty(l, 'visibility', on ? 'visible' : 'none'));
-  else if (id === 'tilt') { map.setTerrain(on ? { source: 'dem', exaggeration: 1.4 } : null); map.easeTo({ pitch: on ? 60 : 0 }); on ? map.dragRotate.enable() : map.dragRotate.disable(); }
+  else if (id === 'tilt') { setTerrain(on); refreshLayers(); }
   else show(LAYERS.find(l => l.id === id));
 };
-addEventListener('themechange', () => LAYERS.forEach(l => map.getLayer(l.id) && Object.entries(l.paint()).forEach(([k, v]) => map.setPaintProperty(l.id, k, v))));
+addEventListener('themechange', refreshLayers);
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change', refreshLayers);
 
 const catalogue = load('/data/atlas-flood-corridors/1.0.0/catalogue.json.gz').catch(() => ({ origins: [] }));
 const clickable = () => LAYERS.filter(l => l.info && map.getLayer(l.id) && map.getLayoutProperty(l.id, 'visibility') !== 'none').map(l => l.id).reverse();
@@ -124,12 +191,17 @@ map.on('click', async e => {
   const pad = 8, hit = map.queryRenderedFeatures([[e.point.x - pad, e.point.y - pad], [e.point.x + pad, e.point.y + pad]], { layers: clickable() })[0];
   if (!hit) return;
   const layer = LAYERS.find(l => l.id === hit.layer.id), [title, rows] = layer.info(hit.properties);
+  const target = layer.id === 'lakes' ? hit.geometry.coordinates : e.lngLat;
+  if (layer.id === 'rivers' || layer.id === 'lakes') {
+    const camera = { center: target, zoom: Math.max(map.getZoom(), 9.5), pitch: map.getPitch(), bearing: map.getBearing() };
+    if (reduced) map.jumpTo(camera); else map.flyTo({ ...camera, duration: 1000 });
+  }
   let extra = '';
   if (layer.id === 'rivers') extra = `<button type="button" class="primary" data-trace="${esc(hit.properties.source_id)}">${esc(c.trace)}</button>`;
   if (layer.id === 'lakes') { const o = (await catalogue).origins.find(o => o.lake?.glo_id === hit.properties.source_id); if (o) extra = `<a href="/scenarios/#flood=${esc(o.id)}">${esc(c.glofLink)}</a>`; }
-  const p = popup(map, e.lngLat, `<h3>${esc(title)}</h3><dl>${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v ?? c.unknown)}</dd>`).join('')}</dl>${extra}`);
+  const p = popup(map, target, `<h3>${esc(title)}</h3><dl>${rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v ?? c.unknown)}</dd>`).join('')}</dl>${extra}`);
   p.getElement().querySelector('[data-trace]')?.addEventListener('click', ev => { trace(ev.target.dataset.trace); p.remove(); });
 });
 for (const l of LAYERS) { map.on('mouseenter', l.id, () => { map.getCanvas().style.cursor = 'pointer'; }); map.on('mouseleave', l.id, () => { map.getCanvas().style.cursor = ''; }); }
-await Promise.all(LAYERS.filter(l => l.on).map(show));
+await Promise.all([...LAYERS.filter(l => l.on).map(show), peakLabels().catch(() => { info.insertAdjacentHTML('afterbegin', `<p class="note warn">${esc(c.failed)}</p>`); })]);
 document.getElementById('map').dataset.ready = 'true';
