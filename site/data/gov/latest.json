@@ -1,7 +1,7 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-11-18T15:37:03Z",
- "generated_at_nepal": "2026-11-18 21:22 NPT",
+ "generated_at": "2026-11-18T20:40:24Z",
+ "generated_at_nepal": "2026-11-19 02:25 NPT",
  "notice": "Verbatim copies of public government pages, organised for reading. The agency websites are authoritative.",
  "summary": {
   "sources_fetched": 7,
@@ -12,8 +12,8 @@
   "rivers_current": 164,
   "rain_current": 304,
   "rain_stations_above_warning": 0,
-  "new_links": 5,
-  "new_records": 6
+  "new_links": 0,
+  "new_records": 0
  },
  "sources": [
   {
@@ -23,11 +23,11 @@
    "category": "rivers",
    "kind": "bipad-river",
    "url": "https://bipadportal.gov.np/api/v1/river-stations/?format=json&limit=1000",
-   "checked_at": "2026-11-18T15:37:03Z",
+   "checked_at": "2026-11-18T20:40:24Z",
    "http_status": 200,
-   "sha256": "1f39c14e959e5d487baeb0bbaba43ef145fd6a8616b3fb0bb09c0ebdca3d9a50",
+   "sha256": "cdc9a10e61bec6131f2876aca9c3639fda2eabde81274a81988af58560c28a15",
    "status": "fetched",
-   "fetched_at": "2026-11-18T15:37:03Z",
+   "fetched_at": "2026-11-18T20:40:24Z",
    "content": {
     "station_count": 284,
     "status_counts": {
@@ -272,11 +272,6 @@
      }
     ],
     "statuses": {
-     "282": [
-      "Banara River at EW Highway",
-      "BELOW WARNING LEVEL",
-      true
-     ],
      "201": [
       "Pasaha Khola at Maheshpur",
       "BELOW WARNING LEVEL",
@@ -292,20 +287,25 @@
       "BELOW WARNING LEVEL",
       false
      ],
-     "283": [
-      "Doda River at Nandgaun",
-      "BELOW WARNING LEVEL",
-      true
-     ],
      "134": [
       "Raughat Khola at Raughat",
       "BELOW WARNING LEVEL",
       false
      ],
+     "282": [
+      "Banara River at EW Highway",
+      "BELOW WARNING LEVEL",
+      true
+     ],
      "126": [
       "Jalkundi",
       "BELOW WARNING LEVEL",
       false
+     ],
+     "283": [
+      "Doda River at Nandgaun",
+      "BELOW WARNING LEVEL",
+      true
      ],
      "131": [
       "Mari at Nayagaon",
@@ -327,13 +327,18 @@
       "BELOW WARNING LEVEL",
       true
      ],
+     "251": [
+      "Kothi river at Lavani",
+      "BELOW WARNING LEVEL",
+      true
+     ],
      "150": [
       "Babai at Ghuiyabari",
       "BELOW WARNING LEVEL",
       false
      ],
-     "251": [
-      "Kothi river at Lavani",
+     "238": [
+      "Rawa Khola at Simle Dovan DS",
       "BELOW WARNING LEVEL",
       true
      ],
@@ -351,11 +356,6 @@
       "Trishuli at Kali Khola (Rainfall)",
       "BELOW WARNING LEVEL",
       false
-     ],
-     "238": [
-      "Rawa Khola at Simle Dovan DS",
-      "BELOW WARNING LEVEL",
-      true
      ],
      "275": [
       "Banganga at Bhagwanpur",
@@ -382,23 +382,23 @@
       "BELOW WARNING LEVEL",
       false
      ],
-     "132": [
-      "Singati",
-      "BELOW WARNING LEVEL",
-      false
-     ],
      "221": [
       "Khado River at East West Highway",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "132": [
+      "Singati",
+      "BELOW WARNING LEVEL",
+      false
      ],
      "168": [
       "Kuwadi River at Rigin(209)",
       "BELOW WARNING LEVEL",
       true
      ],
-     "179": [
-      "Sakayal Gad at Dadaban",
+     "102": [
+      "Mahakali at Parigaon",
       "BELOW WARNING LEVEL",
       true
      ],
@@ -412,11 +412,6 @@
       "BELOW WARNING LEVEL",
       false
      ],
-     "102": [
-      "Mahakali at Parigaon",
-      "BELOW WARNING LEVEL",
-      true
-     ],
      "18": [
       "MaiKhola at Chisapani",
       "BELOW WARNING LEVEL",
@@ -429,6 +424,11 @@
      ],
      "54": [
       "Rangoon Khola at Kainepani",
+      "BELOW WARNING LEVEL",
+      true
+     ],
+     "179": [
+      "Sakayal Gad at Dadaban",
       "BELOW WARNING LEVEL",
       true
      ],
@@ -577,6 +577,11 @@
       "BELOW WARNING LEVEL",
       false
      ],
+     "119": [
+      "Mohana River at Malakheti",
+      "BELOW WARNING LEVEL",
+      true
+     ],
      "243": [
       "Chahaka Khola at Sagarmatha HW",
       "BELOW WARNING LEVEL",
@@ -587,38 +592,8 @@
       "BELOW WARNING LEVEL",
       false
      ],
-     "153": [
-      "Humla Karnali at Jaur (Sarkegad)",
-      "BELOW WARNING LEVEL",
-      false
-     ],
-     "2": [
-      "Aurahikhola at Godana",
-      "BELOW WARNING LEVEL",
-      false
-     ],
-     "186": [
-      "Gandi Gad HS",
-      "BELOW WARNING LEVEL",
-      false
-     ],
-     "119": [
-      "Mohana River at Malakheti",
-      "BELOW WARNING LEVEL",
-      true
-     ],
-     "79": [
-      "Phalakhu Khola at Betrawati",
-      "BELOW WARNING LEVEL",
-      false
-     ],
      "117": [
       "Nagmati River at Sundarijal",
-      "BELOW WARNING LEVEL",
-      true
-     ],
-     "94": [
-      "Nakkhu at Bungmati",
       "BELOW WARNING LEVEL",
       true
      ],
@@ -632,10 +607,35 @@
       "BELOW WARNING LEVEL",
       true
      ],
+     "94": [
+      "Nakkhu at Bungmati",
+      "BELOW WARNING LEVEL",
+      true
+     ],
+     "153": [
+      "Humla Karnali at Jaur (Sarkegad)",
+      "BELOW WARNING LEVEL",
+      false
+     ],
+     "2": [
+      "Aurahikhola at Godana",
+      "BELOW WARNING LEVEL",
+      false
+     ],
      "185": [
       "Nikash Khola HS",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "186": [
+      "Gandi Gad HS",
+      "BELOW WARNING LEVEL",
+      false
+     ],
+     "79": [
+      "Phalakhu Khola at Betrawati",
+      "BELOW WARNING LEVEL",
+      false
      ],
      "264": [
       "Pathariya River at Janakinagar",
@@ -652,6 +652,11 @@
       "BELOW WARNING LEVEL",
       true
      ],
+     "236": [
+      "Driga Khola at Tinpatan Bridge",
+      "BELOW WARNING LEVEL",
+      true
+     ],
      "84": [
       "Jhimruk at Bagdula",
       "BELOW WARNING LEVEL",
@@ -659,16 +664,6 @@
      ],
      "213": [
       "Ninda khola at East West Highway",
-      "BELOW WARNING LEVEL",
-      false
-     ],
-     "236": [
-      "Driga Khola at Tinpatan Bridge",
-      "BELOW WARNING LEVEL",
-      true
-     ],
-     "75": [
-      "Jagdulla River at Hurikot",
       "BELOW WARNING LEVEL",
       false
      ],
@@ -681,6 +676,11 @@
       "Radha river at EW High Way",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "75": [
+      "Jagdulla River at Hurikot",
+      "BELOW WARNING LEVEL",
+      false
      ],
      "252": [
       "Rangsing Khola at Tinkunne",
@@ -757,15 +757,15 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "99": [
-      "Kali Gandaki at Kalipul Beni",
-      "ABOVE WARNING LEVEL",
-      false
-     ],
      "122": [
       "Rolwaling River at Bedding",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "99": [
+      "Kali Gandaki at Kalipul Beni",
+      "ABOVE WARNING LEVEL",
+      false
      ],
      "208": [
       "Budhi Khola at East West Highway",
@@ -777,15 +777,15 @@
       "BELOW WARNING LEVEL",
       false
      ],
-     "57": [
-      "Sano Bheri at Simlighat",
-      "BELOW WARNING LEVEL",
-      true
-     ],
      "90": [
       "Bagmati River at Rai Gaon",
       "BELOW WARNING LEVEL",
       false
+     ],
+     "57": [
+      "Sano Bheri at Simlighat",
+      "BELOW WARNING LEVEL",
+      true
      ],
      "61": [
       "Tamakoshi at Busti",
@@ -802,6 +802,11 @@
       "ABOVE WARNING LEVEL",
       false
      ],
+     "88": [
+      "Arun River at Simle",
+      "BELOW WARNING LEVEL",
+      true
+     ],
      "169": [
       "Arun River at Kimathanka",
       "BELOW WARNING LEVEL",
@@ -812,16 +817,6 @@
       "BELOW WARNING LEVEL",
       false
      ],
-     "88": [
-      "Arun River at Simle",
-      "BELOW WARNING LEVEL",
-      true
-     ],
-     "33": [
-      "Tamor River at Taplejung",
-      "BELOW WARNING LEVEL",
-      true
-     ],
      "176": [
       "Indrawati at Yangri",
       "BELOW WARNING LEVEL",
@@ -831,6 +826,11 @@
       "Seti at Gha Chowk",
       "BELOW WARNING LEVEL",
       false
+     ],
+     "33": [
+      "Tamor River at Taplejung",
+      "BELOW WARNING LEVEL",
+      true
      ],
      "281": [
       "Trishuli at Galchi",
@@ -882,6 +882,11 @@
       "BELOW WARNING LEVEL",
       true
      ],
+     "43": [
+      "Bishnumati Khola at Gongabu Buspark",
+      "ABOVE DANGER LEVEL",
+      false
+     ],
      "276": [
       "Banganga at Pawara",
       "BELOW WARNING LEVEL",
@@ -892,15 +897,25 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "43": [
-      "Bishnumati Khola at Gongabu Buspark",
-      "ABOVE DANGER LEVEL",
+     "183": [
+      "Bandi Gad HS",
+      "BELOW WARNING LEVEL",
+      false
+     ],
+     "170": [
+      "Bhote Koshi at Kodari",
+      "ABOVE WARNING LEVEL",
       false
      ],
      "45": [
       "Chepe Khola at Garambesi",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "279": [
+      "Banganga at Bargadhaghat",
+      "BELOW WARNING LEVEL",
+      false
      ],
      "115": [
       "Chingar River at Simlekhet(274)",
@@ -912,23 +927,8 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "183": [
-      "Bandi Gad HS",
-      "BELOW WARNING LEVEL",
-      false
-     ],
      "262": [
       "Humla Karnali at Simikot",
-      "BELOW WARNING LEVEL",
-      false
-     ],
-     "170": [
-      "Bhote Koshi at Kodari",
-      "ABOVE WARNING LEVEL",
-      false
-     ],
-     "279": [
-      "Banganga at Bargadhaghat",
       "BELOW WARNING LEVEL",
       false
      ],
@@ -947,13 +947,13 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "188": [
-      "Dhobi Khola at Chabahil",
+     "112": [
+      "Daraudi Khola at Naya Sangu",
       "BELOW WARNING LEVEL",
       true
      ],
-     "112": [
-      "Daraudi Khola at Naya Sangu",
+     "188": [
+      "Dhobi Khola at Chabahil",
       "BELOW WARNING LEVEL",
       true
      ],
@@ -977,13 +977,13 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "235": [
-      "Doda (Machheli) River at East West Highway",
+     "239": [
+      "Dhungad River (258)",
       "BELOW WARNING LEVEL",
       true
      ],
-     "239": [
-      "Dhungad River (258)",
+     "235": [
+      "Doda (Machheli) River at East West Highway",
       "BELOW WARNING LEVEL",
       true
      ],
@@ -1047,18 +1047,13 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "198": [
-      "Hanumante Khola at Kausaltar",
-      "BELOW WARNING LEVEL",
-      true
-     ],
-     "71": [
-      "Hinwa Khola at Pipletar",
-      "BELOW WARNING LEVEL",
-      true
-     ],
      "197": [
       "Hanumante Khola at Jagati",
+      "BELOW WARNING LEVEL",
+      true
+     ],
+     "198": [
+      "Hanumante Khola at Kausaltar",
       "BELOW WARNING LEVEL",
       true
      ],
@@ -1067,8 +1062,18 @@
       "BELOW WARNING LEVEL",
       true
      ],
+     "71": [
+      "Hinwa Khola at Pipletar",
+      "BELOW WARNING LEVEL",
+      true
+     ],
      "240": [
       "Koili Nadi at Bangai",
+      "BELOW WARNING LEVEL",
+      false
+     ],
+     "80": [
+      "Kabeli Khola at Taplejung",
       "BELOW WARNING LEVEL",
       false
      ],
@@ -1077,20 +1082,15 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "80": [
-      "Kabeli Khola at Taplejung",
-      "BELOW WARNING LEVEL",
+     "47": [
+      "Kali Gandaki at Tatopani (Ratopani)",
+      "ABOVE WARNING LEVEL",
       false
      ],
      "192": [
       "Kakrighat River",
       "BELOW WARNING LEVEL",
       true
-     ],
-     "47": [
-      "Kali Gandaki at Tatopani (Ratopani)",
-      "ABOVE WARNING LEVEL",
-      false
      ],
      "193": [
       "Kalanga Gad",
@@ -1137,18 +1137,13 @@
       "BELOW WARNING LEVEL",
       false
      ],
-     "195": [
-      "Balkhu Khola at Balambu",
-      "BELOW WARNING LEVEL",
-      true
-     ],
      "219": [
       "Balan Khola Bridge",
       "BELOW WARNING LEVEL",
       false
      ],
-     "42": [
-      "Barun River at Syaksila",
+     "195": [
+      "Balkhu Khola at Balambu",
       "BELOW WARNING LEVEL",
       true
      ],
@@ -1157,15 +1152,20 @@
       "BELOW WARNING LEVEL",
       false
      ],
-     "206": [
-      "Baruwa Bridge at Gaighat",
-      "BELOW WARNING LEVEL",
-      true
-     ],
      "64": [
       "Tamor River at Mulghat",
       "BELOW WARNING LEVEL",
       false
+     ],
+     "42": [
+      "Barun River at Syaksila",
+      "BELOW WARNING LEVEL",
+      true
+     ],
+     "206": [
+      "Baruwa Bridge at Gaighat",
+      "BELOW WARNING LEVEL",
+      true
      ],
      "11": [
       "Kankai River at Mainachuli",
@@ -1182,15 +1182,15 @@
       "BELOW WARNING LEVEL",
       false
      ],
-     "191": [
-      "Karnali at Benighat",
-      "ABOVE DANGER LEVEL",
-      false
-     ],
      "249": [
       "Bauligad River",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "191": [
+      "Karnali at Benighat",
+      "ABOVE DANGER LEVEL",
+      false
      ],
      "87": [
       "Karnali at Asaraghat",
@@ -1199,6 +1199,11 @@
      ],
      "104": [
       "Karnali at Chisapani",
+      "BELOW WARNING LEVEL",
+      true
+     ],
+     "13": [
+      "Karnali at Chisapani Bridge",
       "BELOW WARNING LEVEL",
       true
      ],
@@ -1212,11 +1217,6 @@
       "BELOW WARNING LEVEL",
       false
      ],
-     "13": [
-      "Karnali at Chisapani Bridge",
-      "BELOW WARNING LEVEL",
-      true
-     ],
      "177": [
       "Kateni River at Ratanpur",
       "BELOW WARNING LEVEL",
@@ -1224,11 +1224,6 @@
      ],
      "173": [
       "Kharpu Khola HS",
-      "BELOW WARNING LEVEL",
-      true
-     ],
-     "91": [
-      "Bhote Koshi at Bahrabise",
       "BELOW WARNING LEVEL",
       true
      ],
@@ -1241,6 +1236,11 @@
       "Bhotekoshi at Rasuwagadi",
       "BELOW WARNING LEVEL",
       false
+     ],
+     "91": [
+      "Bhote Koshi at Bahrabise",
+      "BELOW WARNING LEVEL",
+      true
      ],
      "49": [
       "Langtang Khola at Shyaprubesi",
@@ -1297,11 +1297,6 @@
       "ABOVE WARNING LEVEL",
       false
      ],
-     "200": [
-      "Chandi Khola at Chapur",
-      "BELOW WARNING LEVEL",
-      true
-     ],
      "267": [
       "Likhu Khola at Pattawari",
       "BELOW WARNING LEVEL",
@@ -1311,6 +1306,11 @@
       "Chaudhar River at Daiji",
       "BELOW WARNING LEVEL",
       false
+     ],
+     "200": [
+      "Chandi Khola at Chapur",
+      "BELOW WARNING LEVEL",
+      true
      ],
      "211": [
       "Lohandra Khola at East West Highway",
@@ -1324,11 +1324,6 @@
      ],
      "130": [
       "Lohare Khola at Tallo Dungeshwor",
-      "BELOW WARNING LEVEL",
-      false
-     ],
-     "73": [
-      "Lohare Khola at Dailekh",
       "BELOW WARNING LEVEL",
       false
      ],
@@ -1346,6 +1341,11 @@
       "Madi River at Sisaghat",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "73": [
+      "Lohare Khola at Dailekh",
+      "BELOW WARNING LEVEL",
+      false
      ],
      "241": [
       "Jamadi Gad",
@@ -1367,15 +1367,15 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "172": [
-      "Mari at Nayagaun HS",
-      "ABOVE WARNING LEVEL",
-      false
-     ],
      "19": [
       "Mankhola at Belgaun",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "172": [
+      "Mari at Nayagaun HS",
+      "ABOVE WARNING LEVEL",
+      false
      ],
      "21": [
       "Manohara Khola at Balkumari",
@@ -1452,6 +1452,11 @@
       "BELOW WARNING LEVEL",
       true
      ],
+     "141": [
+      "Melamchi at Nakote",
+      "BELOW WARNING LEVEL",
+      false
+     ],
      "107": [
       "Sabhaya Khola at Tumlingtar",
       "BELOW WARNING LEVEL",
@@ -1461,11 +1466,6 @@
       "Sailigad River(259.1)",
       "BELOW WARNING LEVEL",
       true
-     ],
-     "141": [
-      "Melamchi at Nakote",
-      "BELOW WARNING LEVEL",
-      false
      ],
      "92": [
       "Seti Gandaki at Damauli",
@@ -1477,16 +1477,6 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "32": [
-      "Sunkoshi River at Dolalghat",
-      "BELOW WARNING LEVEL",
-      false
-     ],
-     "194": [
-      "Sirsagad River",
-      "BELOW WARNING LEVEL",
-      false
-     ],
      "214": [
       "Sardu Khola at Madan Bhandari Highway",
       "BELOW WARNING LEVEL",
@@ -1497,6 +1487,11 @@
       "BELOW WARNING LEVEL",
       true
      ],
+     "32": [
+      "Sunkoshi River at Dolalghat",
+      "BELOW WARNING LEVEL",
+      false
+     ],
      "60": [
       "Sunkoshi at Khurkot",
       "BELOW WARNING LEVEL",
@@ -1506,6 +1501,11 @@
       "Tadi Khola at Rautar",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "194": [
+      "Sirsagad River",
+      "BELOW WARNING LEVEL",
+      false
      ],
      "63": [
       "Tamor River at Majhitar",
@@ -1607,15 +1607,15 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "261": [
-      "Trishuli at Furke Khola(Malekhu)",
-      "ABOVE DANGER LEVEL",
-      false
-     ],
      "175": [
       "West Rapti River at Raptisonari",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "261": [
+      "Trishuli at Furke Khola(Malekhu)",
+      "ABOVE DANGER LEVEL",
+      false
      ],
      "66": [
       "West Rapti at Bagasoti",
@@ -1642,15 +1642,15 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "137": [
-      "Trishuli at Betrawati",
-      "BELOW WARNING LEVEL",
-      false
-     ],
      "67": [
       "Trishuli River at Kali Khola",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "137": [
+      "Trishuli at Betrawati",
+      "BELOW WARNING LEVEL",
+      false
      ],
      "160": [
       "Thuli Gad at Khanayatal",
@@ -1667,15 +1667,15 @@
       "BELOW WARNING LEVEL",
       true
      ],
-     "147": [
-      "Tinau at Butwal",
-      "BELOW WARNING LEVEL",
-      false
-     ],
      "34": [
       "Tila Nadi at Serighat",
       "BELOW WARNING LEVEL",
       true
+     ],
+     "147": [
+      "Tinau at Butwal",
+      "BELOW WARNING LEVEL",
+      false
      ],
      "184": [
       "Tila Nala at Raralihi Nagma",
@@ -1705,11 +1705,11 @@
    "category": "rainfall",
    "kind": "bipad-rain",
    "url": "https://bipadportal.gov.np/api/v1/rain-stations/?format=json&limit=1000",
-   "checked_at": "2026-11-18T15:37:03Z",
+   "checked_at": "2026-11-18T20:40:24Z",
    "http_status": 200,
-   "sha256": "c4ccc75435ae04d60600bae66b891a1733d2d2064d6cca877e5443d6a41e5b16",
+   "sha256": "588b6c4436cae8f81963a03a7a05ec1172dd90f25f834c44b68d7c0330f030a9",
    "status": "fetched",
-   "fetched_at": "2026-11-18T15:37:03Z",
+   "fetched_at": "2026-11-18T20:40:24Z",
    "content": {
     "station_count": 667,
     "status_counts": {
@@ -1724,23 +1724,33 @@
     "implausible_24h": 0,
     "wettest_24h": [
      {
-      "id": "414",
-      "name": "Lukla Airport",
-      "basin": "Koshi",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": null,
-      "rain_24h_mm": 0.545,
-      "observed_at": "2026-11-18T21:15:11.614358+05:45",
-      "current": true
-     },
-     {
       "id": "371",
       "name": "Aurahikhola at Godana",
       "basin": "Karnali",
       "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": null,
+      "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.4,
-      "observed_at": "2026-11-18T21:15:05.367627+05:45",
+      "observed_at": "2026-11-19T02:15:07.012469+05:45",
+      "current": true
+     },
+     {
+      "id": "100",
+      "name": "Gothikanda",
+      "basin": "Karnali",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.4,
+      "observed_at": "2026-11-19T02:15:10.762247+05:45",
+      "current": true
+     },
+     {
+      "id": "631",
+      "name": "Sankhu-DHM",
+      "basin": null,
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.4,
+      "observed_at": "2026-11-19T02:15:15.593493+05:45",
       "current": true
      },
      {
@@ -1750,7 +1760,7 @@
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.4,
-      "observed_at": "2026-11-18T21:15:05.040340+05:45",
+      "observed_at": "2026-11-19T02:15:06.686579+05:45",
       "current": true
      },
      {
@@ -1758,9 +1768,9 @@
       "name": "Chandrapur.",
       "basin": "Bagmati",
       "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.2,
+      "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:07.036712+05:45",
+      "observed_at": "2026-11-19T02:15:08.649204+05:45",
       "current": true
      },
      {
@@ -1770,7 +1780,7 @@
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:14.209322+05:45",
+      "observed_at": "2026-11-19T02:15:15.877002+05:45",
       "current": true
      },
      {
@@ -1780,87 +1790,7 @@
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:08.172302+05:45",
-      "current": true
-     },
-     {
-      "id": "100",
-      "name": "Gothikanda",
-      "basin": "Karnali",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:09.134055+05:45",
-      "current": true
-     },
-     {
-      "id": "292",
-      "name": "Jeetpur",
-      "basin": "Kankai",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:09.962533+05:45",
-      "current": true
-     },
-     {
-      "id": "60",
-      "name": "Jagatipur",
-      "basin": "Karnali",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:09.775867+05:45",
-      "current": true
-     },
-     {
-      "id": "308",
-      "name": "Kanyam Tea State",
-      "basin": "Mechi",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": null,
-      "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:10.482763+05:45",
-      "current": true
-     },
-     {
-      "id": "598",
-      "name": "Katarniya - Dhakaila",
-      "basin": null,
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:10.650780+05:45",
-      "current": true
-     },
-     {
-      "id": "372",
-      "name": "Keur Gaun",
-      "basin": "Babai",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:10.788450+05:45",
-      "current": true
-     },
-     {
-      "id": "138",
-      "name": "Khajura (Nepalganj)",
-      "basin": "West Rapti",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:10.899884+05:45",
-      "current": true
-     },
-     {
-      "id": "304",
-      "name": "Kumalgaon (rainfall)",
-      "basin": "Narayani",
-      "status": "BELOW WARNING LEVEL",
-      "rain_1h_mm": 0.0,
-      "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:11.221044+05:45",
+      "observed_at": "2026-11-19T02:15:09.805574+05:45",
       "current": true
      },
      {
@@ -1870,7 +1800,77 @@
       "status": "BELOW WARNING LEVEL",
       "rain_1h_mm": 0.0,
       "rain_24h_mm": 0.2,
-      "observed_at": "2026-11-18T21:15:15.079368+05:45",
+      "observed_at": "2026-11-19T02:15:16.773130+05:45",
+      "current": true
+     },
+     {
+      "id": "292",
+      "name": "Jeetpur",
+      "basin": "Kankai",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-11-19T02:15:11.593385+05:45",
+      "current": true
+     },
+     {
+      "id": "60",
+      "name": "Jagatipur",
+      "basin": "Karnali",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-11-19T02:15:11.407592+05:45",
+      "current": true
+     },
+     {
+      "id": "308",
+      "name": "Kanyam Tea State",
+      "basin": "Mechi",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": null,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-11-19T02:15:12.127740+05:45",
+      "current": true
+     },
+     {
+      "id": "598",
+      "name": "Katarniya - Dhakaila",
+      "basin": null,
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-11-19T02:15:12.300108+05:45",
+      "current": true
+     },
+     {
+      "id": "372",
+      "name": "Keur Gaun",
+      "basin": "Babai",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-11-19T02:15:12.442646+05:45",
+      "current": true
+     },
+     {
+      "id": "138",
+      "name": "Khajura (Nepalganj)",
+      "basin": "West Rapti",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-11-19T02:15:12.552377+05:45",
+      "current": true
+     },
+     {
+      "id": "304",
+      "name": "Kumalgaon (rainfall)",
+      "basin": "Narayani",
+      "status": "BELOW WARNING LEVEL",
+      "rain_1h_mm": 0.0,
+      "rain_24h_mm": 0.2,
+      "observed_at": "2026-11-19T02:15:12.880568+05:45",
       "current": true
      }
     ]
@@ -1884,11 +1884,11 @@
    "category": "floods",
    "kind": "html",
    "url": "https://dhm.gov.np/bulletins",
-   "checked_at": "2026-11-18T15:37:03Z",
+   "checked_at": "2026-11-18T20:40:24Z",
    "http_status": 200,
-   "sha256": "6b1c284e5144967662b1aa9d73983798bccc0dfc38f711599e584f28b380d6c9",
+   "sha256": "e22c5cd1d72c04e381a8d1c47461c714a1128a32cc49658f387e7d854ccf45ca",
    "status": "fetched",
-   "fetched_at": "2026-11-18T15:37:03Z",
+   "fetched_at": "2026-11-18T20:40:24Z",
    "content": {
     "title": "DHM",
     "headings": [],
@@ -1924,33 +1924,7 @@
     "dates_mentioned": []
    },
    "changes": {
-    "new_links": [
-     {
-      "text": "Special_Flood_Bulletin_30_Oct_2025_8AM(कार्तिक_१३)",
-      "href": "https://dhm.gov.np/uploads/dhm/bulletins/1761788817_d2c56b83e10c66ec4e5b.pdf",
-      "document": true
-     },
-     {
-      "text": "Flood_Bulletin_10_Oct_2025_8AM_(असोज २४)",
-      "href": "https://dhm.gov.np/uploads/dhm/bulletins/Flood_Bulletin_10_Oct_2025_8AM_%28%E0%A4%85%E0%A4%B8%E0%A5%8B%E0%A4%9C_%E0%A5%A8%E0%A5%AA%29.pdf",
-      "document": true
-     },
-     {
-      "text": "Flood_Bulletin_09_Oct_2025_8AM_(असोज २३)",
-      "href": "https://dhm.gov.np/uploads/dhm/bulletins/Flood_Bulletin_09_Oct_2025_8AM_%28%E0%A4%85%E0%A4%B8%E0%A5%8B%E0%A4%9C_%E0%A5%A8%E0%A5%A9%29.pdf",
-      "document": true
-     },
-     {
-      "text": "Flood_Bulletin_08_Oct_2025_8AM_(असोज २२)",
-      "href": "https://dhm.gov.np/uploads/dhm/bulletins/Flood_Bulletin_08_Oct_2025_8AM_%28%E0%A4%85%E0%A4%B8%E0%A5%8B%E0%A4%9C_%E0%A5%A8%E0%A5%A8%29.pdf",
-      "document": true
-     },
-     {
-      "text": "Flood_Bulletin_07_Oct_2025_8AM_(असोज २१)",
-      "href": "https://dhm.gov.np/uploads/dhm/bulletins/Flood_Bulletin_07_Oct_2025_8AM_%28%E0%A4%85%E0%A4%B8%E0%A5%8B%E0%A4%9C_%E0%A5%A8%E0%A5%A7%29.pdf",
-      "document": true
-     }
-    ],
+    "new_links": [],
     "new_table_rows": []
    }
   },
@@ -1961,11 +1935,11 @@
    "category": "weather",
    "kind": "html",
    "url": "https://dhm.gov.np/mfd/",
-   "checked_at": "2026-11-18T15:37:03Z",
+   "checked_at": "2026-11-18T20:40:24Z",
    "http_status": 200,
-   "sha256": "374231b48e3e43bdd1d38d95f58849275a2dc1267eea44bba49029b83a18d4a4",
+   "sha256": "824e8e09123cab9e8e095b65aed6ffb2eed0b346964e58be7226d08e04767f90",
    "status": "fetched",
-   "fetched_at": "2026-11-18T15:37:03Z",
+   "fetched_at": "2026-11-18T20:40:24Z",
    "content": {
     "title": "Meteorological Forecast Division",
     "headings": [],
@@ -1992,7 +1966,7 @@
    "category": "earthquakes",
    "kind": "html",
    "url": "https://seismonepal.gov.np/en/earthquakes",
-   "checked_at": "2026-11-18T15:37:03Z",
+   "checked_at": "2026-11-18T20:40:24Z",
    "http_status": null,
    "sha256": "8fbda0e39752b686c5c3b62b6d7283eae058715ade7c95e92f9fecad9050a883",
    "status": "error",
@@ -2132,13 +2106,13 @@
    "category": "disasters",
    "kind": "json-list",
    "url": "https://bipadportal.gov.np/api/v1/incident/?format=json&limit=200&ordering=-incident_on",
-   "checked_at": "2026-11-18T15:37:03Z",
+   "checked_at": "2026-11-18T20:40:24Z",
    "http_status": 200,
    "sha256": "64674c76754092019d0a2ea31dea980c57cc55a59675150802947c818455ca3e",
    "status": "fetched",
-   "fetched_at": "2026-11-18T15:37:03Z",
+   "fetched_at": "2026-11-18T20:40:24Z",
    "content": {
-    "record_count": 112,
+    "record_count": 93,
     "complete": true,
     "within_days": 7,
     "columns": [
@@ -2572,43 +2546,7 @@
     ]
    },
    "changes": {
-    "new_records": [
-     {
-      "id": 96525,
-      "title": "Animal Incidents at Bigu Rural Municipality-1",
-      "titleNe": "बाग्मती, दोलखा, विगु-१ मा जनावर आक्रमण",
-      "incidentOn": "2026-11-18T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 96526,
-      "title": "Animal Incidents at Lo Ghekar Damodarkunda Rural Municipality-5",
-      "titleNe": "गण्डकी, मुस्ताङ्ग, लो-घेकर दामोदरकुण्ड-५ मा जनावर आक्रमण",
-      "incidentOn": "2026-11-18T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 96523,
-      "title": "Fire at Belbari Municipality-8",
-      "titleNe": "कोशी, मोरङ्ग, बेलबारी-८ मा आगलागी",
-      "incidentOn": "2026-11-18T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 96524,
-      "title": "Animal Incidents at Bhimdatta Municipality-19",
-      "titleNe": "सुदुरपश्चिम, कन्चनपुर, भीमदत्त-१९ मा जनावर आक्रमण",
-      "incidentOn": "2026-11-18T00:00:00+05:45",
-      "verified": true
-     },
-     {
-      "id": 96462,
-      "title": "Fire at Belbari Municipality-8",
-      "titleNe": "कोशी, मोरङ्ग, बेलबारी-८ मा आगलागी",
-      "incidentOn": "2026-11-14T00:00:00+05:45",
-      "verified": true
-     }
-    ]
+    "new_records": []
    }
   },
   {
@@ -2618,11 +2556,11 @@
    "category": "disasters",
    "kind": "json-list",
    "url": "https://bipadportal.gov.np/api/v1/alert/?format=json&limit=200&ordering=-created_on",
-   "checked_at": "2026-11-18T15:37:03Z",
+   "checked_at": "2026-11-18T20:40:24Z",
    "http_status": 200,
    "sha256": "1880fddd71f3eb58d0fe797807f63f93aecc1cd3cd031099dba695790dc2b4e2",
    "status": "fetched",
-   "fetched_at": "2026-11-18T15:37:03Z",
+   "fetched_at": "2026-11-18T20:40:24Z",
    "content": {
     "record_count": 4,
     "complete": true,
@@ -2671,16 +2609,7 @@
     ]
    },
    "changes": {
-    "new_records": [
-     {
-      "id": 46480,
-      "title": "Flood warning at",
-      "titleNe": "मा बाढी",
-      "source": "dhm",
-      "createdOn": "2026-11-18T17:25:09.837972+05:45",
-      "expireOn": "2026-11-18T17:35:03.388154+05:45"
-     }
-    ]
+    "new_records": []
    }
   },
   {
@@ -2690,11 +2619,11 @@
    "category": "disasters",
    "kind": "html",
    "url": "https://ndrrma.gov.np/",
-   "checked_at": "2026-11-18T15:37:03Z",
+   "checked_at": "2026-11-18T20:40:24Z",
    "http_status": 200,
-   "sha256": "799e2f040eea6fee9804c55b233d86df0d289ec22d0999a10f7fb8657fcee1fb",
+   "sha256": "46e0f70ff39516dc727505a30d6a1bd42c6e016f4589d64e737fda2b8cd13337",
    "status": "fetched",
-   "fetched_at": "2026-11-18T15:37:03Z",
+   "fetched_at": "2026-11-18T20:40:24Z",
    "content": {
     "title": "NDRRMA",
     "headings": [],
