@@ -6,6 +6,7 @@ tags:
 - glof
 - nepal
 created: '2026-11-18T12:54:44.260296Z'
+updated: '2026-11-18T12:55:17.773282Z'
 source: https://nepaleconomicforum.org/the-thame-flood-a-window-into-the-himalayan-climate-crisis/
 source_domain: nepaleconomicforum.org
 fetched_at: '2026-11-18T12:54:44.259469Z'
@@ -15,6 +16,12 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Nepal Economic Forum explainer (26 Aug 2024; think-tank commentary, secondary):
+  Thame GLOF destroyed 20 houses, a school and clinic, ~135 displaced, no deaths (off-season,
+  timing). Notes only Tsho Rolpa (EWS 1998 ~USD 1M; 3 m lowering 2000, USD 3M) and
+  Imja (3.4 m lowered 2016) have mitigation; Nepal relies on old foreign satellite
+  imagery; calls for monitoring, AWWS/EWS and transboundary cooperation. Compares
+  India''s 189 high-risk lakes.'
 ---
 
 The Thame Flood: A Window into the Himalayan Climate Crisis - Nepal Economic Forum

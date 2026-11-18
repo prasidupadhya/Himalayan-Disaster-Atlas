@@ -6,6 +6,7 @@ tags:
 - glof
 - nepal
 created: '2026-11-18T12:54:46.958438Z'
+updated: '2026-11-18T12:55:18.101084Z'
 source: https://doi.org/10.21203/rs.3.rs-2766739/v1
 source_domain: www.researchsquare.com
 fetched_at: '2026-11-18T12:54:46.957658Z'
@@ -15,6 +16,12 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'Research Square preprint (not peer reviewed) on 15 June 2021 Melamchi flood:
+  sediment-budget from <1 m satellite imagery across 2015 Gorkha and 2021 events;
+  25 killed, MWSP headworks destroyed; 800 mm monsoon rain before event; trigger debated
+  (rain-on-snow, landslide/glacial dam). Lower basin widened 3-5x, aggraded 5-20 m;
+  >70% of flood material passed to Indrawati. Shows sediment bulking/cascade must
+  be in flood hazard models.'
 doi: 10.21203/rs.3.rs-2766739/v1
 ---
 

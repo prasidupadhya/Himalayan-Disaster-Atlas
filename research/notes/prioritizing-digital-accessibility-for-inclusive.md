@@ -4,6 +4,7 @@ id: prioritizing-digital-accessibility-for-inclusive
 tags:
 - nepal-users
 created: '2026-11-18T12:54:44.777361Z'
+updated: '2026-11-18T12:55:23.277021Z'
 source: https://prayatnanepal.org/wp-content/uploads/2022/12/Position-Paper_FINAL.pdf
 source_domain: prayatnanepal.org
 fetched_at: '2026-11-18T12:54:44.776312Z'
@@ -13,6 +14,10 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'Prayatna Nepal 2022 position paper audit of Nepali digital accessibility:
+  WCAG AA testing found missing landmarks, Preeti font and image/PDF content unreadable
+  by screen readers; Unicode mandated in government but inaccessible in PDFs. Long
+  (~14k words).'
 raw_file: raw/prioritizing-digital-accessibility-for-inclusive.pdf
 ---
 

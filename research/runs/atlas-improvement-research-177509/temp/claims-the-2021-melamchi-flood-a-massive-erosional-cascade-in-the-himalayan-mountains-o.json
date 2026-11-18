@@ -1,0 +1,42 @@
+[
+ {
+  "claim": "The 2021 Melamchi flood killed 25 and destroyed MWSP headworks; trigger still debated.",
+  "stance": "neutral",
+  "stance_target": "cascading flood validation case",
+  "evidence_type": "empirical",
+  "quoted_support": "killing 25 people, destroying hundreds of houses, and damaging critical infrastructure, including the headworks of the Melamchi Water Supply Project",
+  "numbers": [
+   "25",
+   "800 mm",
+   "June 15, 2021"
+  ],
+  "entities": [
+   "Melamchi"
+  ],
+  "time_period": "2021",
+  "region": "Nepal",
+  "scope_conditions": "preprint",
+  "confidence": "medium",
+  "source_note_id": "the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o"
+ },
+ {
+  "claim": "Over 70% of flood material passed to Indrawati; lower basin widened 3-5x, aggraded 5-20 m.",
+  "stance": "supports",
+  "stance_target": "sediment-laden floods exceed clear-water models",
+  "evidence_type": "empirical",
+  "quoted_support": "the lower basin was widened by 3-5-fold and aggraded by ~ 5\u201320 m",
+  "numbers": [
+   "70%",
+   "3-5x",
+   "5-20 m"
+  ],
+  "entities": [
+   "Indrawati"
+  ],
+  "time_period": "2021",
+  "region": "Melamchi",
+  "scope_conditions": "preprint",
+  "confidence": "medium",
+  "source_note_id": "the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o"
+ }
+]

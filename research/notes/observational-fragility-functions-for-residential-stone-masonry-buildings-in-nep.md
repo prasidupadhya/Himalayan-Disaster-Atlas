@@ -5,6 +5,7 @@ id: observational-fragility-functions-for-residential-stone-masonry-buildings-in
 tags:
 - earthquake-loss
 created: '2026-11-18T12:55:01.822132Z'
+updated: '2026-11-18T12:55:24.567157Z'
 source: https://link.springer.com/article/10.1007/s10518-018-0372-2
 source_domain: link.springer.com
 fetched_at: '2026-11-18T12:55:01.820617Z'
@@ -14,6 +15,10 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Bull Earthq Eng 2018 (abstract only, paywalled): empirical fragility curves
+  for rural stone masonry from 665,515 building damage cases in 603 villages (2015
+  Gorkha govt damage assessment), as functions of PGA and Sa(0.3s); stone masonry
+  highly vulnerable even at low-moderate shaking. Basis for scenario damage models.'
 doi: 10.1007/s10518-018-0372-2
 ---
 

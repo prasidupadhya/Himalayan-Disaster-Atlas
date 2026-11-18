@@ -3,7 +3,9 @@ title: Fatal landslides in Nepal in 2024 to date
 id: fatal-landslides-in-nepal-in-2024-to-date
 tags:
 - atlas-improvement
+- landslides
 created: '2026-11-18T12:54:39.000412Z'
+updated: '2026-11-18T12:55:26.501052Z'
 source: https://eos.org/thelandslideblog/nepal-landslides-2024
 source_domain: eos.org
 fetched_at: '2026-11-18T12:54:38.999785Z'
@@ -13,6 +15,9 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Petley (Landslide Blog): 38 fatal landslides killed 135 people in Nepal
+  to 17 July 2024; fatalities jump with monsoon from mid-June and the 12 July bus
+  landslide; clustered centre/east. Author''s own dataset, not an open feed.'
 ---
 
 Fatal landslides in Nepal in 2024 to date

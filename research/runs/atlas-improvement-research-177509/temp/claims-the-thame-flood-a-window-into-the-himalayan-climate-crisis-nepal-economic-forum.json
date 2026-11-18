@@ -1,0 +1,24 @@
+[
+ {
+  "claim": "Only Tsho Rolpa and Imja have mitigation in Nepal; Thame destroyed 20 houses, school, clinic; ~135 displaced; no deaths.",
+  "stance": "neutral",
+  "stance_target": "monitoring gap",
+  "evidence_type": "anecdotal",
+  "quoted_support": "it is concerning that these are the only two glacial lakes in Nepal that have a risk mitigation plan.",
+  "numbers": [
+   "20 houses",
+   "135",
+   "USD 1 million",
+   "3.4 m"
+  ],
+  "entities": [
+   "Tsho Rolpa",
+   "Imja"
+  ],
+  "time_period": "2024",
+  "region": "Nepal",
+  "scope_conditions": "commentary",
+  "confidence": "medium",
+  "source_note_id": "the-thame-flood-a-window-into-the-himalayan-climate-crisis-nepal-economic-forum"
+ }
+]

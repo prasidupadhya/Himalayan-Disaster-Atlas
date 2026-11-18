@@ -1,0 +1,41 @@
+[
+ {
+  "claim": "The 2024 Thame GLOF originated from a cascade of two small lakes not previously considered dangerous.",
+  "stance": "supports",
+  "stance_target": "PDGL lists miss small-lake/cascade hazards",
+  "evidence_type": "empirical",
+  "quoted_support": "The GLOF originated from a cascade of two small lakes that had not previously been considered dangerous.",
+  "numbers": [
+   "16 August 2024"
+  ],
+  "entities": [
+   "Thame",
+   "Khumbu"
+  ],
+  "time_period": "2024",
+  "region": "Khumbu",
+  "scope_conditions": "",
+  "confidence": "high",
+  "source_note_id": "abstract-egu25-12752"
+ },
+ {
+  "claim": "Release ~4-5e5 m3; damage reached a road bridge ~45 km downstream via landslide.",
+  "stance": "neutral",
+  "stance_target": "scenario modelling needs erosion/deposition",
+  "evidence_type": "empirical",
+  "quoted_support": "we estimate that ~4-5 x 10^5 m3 of water was released from the two lakes",
+  "numbers": [
+   "4-5e5 m3",
+   "650 m",
+   "45 km"
+  ],
+  "entities": [
+   "Dudh Koshi"
+  ],
+  "time_period": "2024",
+  "region": "Khumbu",
+  "scope_conditions": "",
+  "confidence": "high",
+  "source_note_id": "abstract-egu25-12752"
+ }
+]

@@ -4,6 +4,7 @@ id: nepals-82-households-have-internet-but-digital-skills-fall-short
 tags:
 - nepal-users
 created: '2026-11-18T12:54:40.223452Z'
+updated: '2026-11-18T12:55:22.752344Z'
 source: https://www.nepalitelecom.com/2026/02/nepals-82-households-have-internet-but-digital-skills-fall-short.html
 source_domain: www.nepalitelecom.com
 fetched_at: '2026-11-18T12:54:40.222036Z'
@@ -13,6 +14,11 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Reports Nepal MICS 2024/25 (12,802 households): 82% household internet,
+  85.1% smartphone, >95% any mobile; urban 86.5% vs rural 73% internet; Karnali 68.5%;
+  poorest 52.9% vs richest 99.2%; men 90.4% vs women 81.6% phone ownership; digital
+  skills weak (24.2% copy/paste files, 19.2% verify online info, 10.2% spreadsheet
+  formula).'
 ---
 
 Nepal’s 82% households have internet, but digital skills fall short

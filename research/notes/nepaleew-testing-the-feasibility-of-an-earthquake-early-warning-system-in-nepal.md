@@ -5,6 +5,7 @@ id: nepaleew-testing-the-feasibility-of-an-earthquake-early-warning-system-in-ne
 tags:
 - earthquake-loss
 created: '2026-11-18T12:54:45.184387Z'
+updated: '2026-11-18T12:55:24.018925Z'
 source: https://seg.org/news/nepaleew-testing-the-feasibility-of-an-earthquake-early-warning-system-in-nepal/
 source_domain: seg.org
 fetched_at: '2026-11-18T12:54:45.182834Z'
@@ -14,6 +15,10 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'SEG GWB news (Feb 2022): NepalEEW deployed 20 low-cost OpenEEW IoT sensors
+  in central Nepal (Tatopani/Beni to Kathmandu); recorded M3.2 Kushma and M3.6 Besisahar
+  events, characterized <10 s after origin. Feasibility pilot only, not an operational
+  public EEW.'
 utility_score: 13.0
 ---
 

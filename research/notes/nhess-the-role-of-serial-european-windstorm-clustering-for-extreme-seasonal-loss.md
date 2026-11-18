@@ -6,11 +6,12 @@ id: nhess-the-role-of-serial-european-windstorm-clustering-for-extreme-seasonal-
 tags:
 - glof-modelling
 created: '2026-11-18T12:55:05.889274Z'
+updated: '2026-11-18T12:55:21.023947Z'
 source: https://nhess.copernicus.org/articles/18/2991/2018/
 source_domain: nhess.copernicus.org
 fetched_at: '2026-11-18T12:55:05.887192Z'
 fetch_provider: builtin
-status: draft
+status: deprecated
 type: note
 tier: unknown
 content_type: unknown

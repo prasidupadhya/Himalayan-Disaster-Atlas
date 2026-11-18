@@ -4,6 +4,7 @@ id: pager-scientific-background
 tags:
 - earthquake-loss
 created: '2026-11-18T12:55:09.609927Z'
+updated: '2026-11-18T12:55:24.890174Z'
 source: https://earthquake.usgs.gov/data/pager/background.php
 source_domain: earthquake.usgs.gov
 fetched_at: '2026-11-18T12:55:09.609305Z'
@@ -13,6 +14,10 @@ type: note
 tier: ground_truth
 content_type: policy
 deprecated: false
+summary: 'USGS PAGER factsheet: ShakeMap intensity x LandScan population x country-specific
+  loss models; alerts green/yellow/orange/red with fatality thresholds 1/100/1,000
+  and loss thresholds $1M/$100M/$1B; results within ~30 min, uncertain early. Template
+  for atlas scenario alert levels and uncertainty messaging.'
 ---
 
 *Suggested by [[nepaleew-testing-the-feasibility-of-an-earthquake-early-warning-system-in-nepal]] — primary/background*

@@ -4,6 +4,7 @@ id: shakemap
 tags:
 - earthquake-loss
 created: '2026-11-18T12:55:10.466494Z'
+updated: '2026-11-18T12:55:25.618665Z'
 source: https://earthquake.usgs.gov/data/shakemap/
 source_domain: earthquake.usgs.gov
 fetched_at: '2026-11-18T12:55:10.465748Z'
@@ -13,6 +14,8 @@ type: note
 tier: ground_truth
 content_type: policy
 deprecated: false
+summary: 'USGS ShakeMap landing page: near-real-time ground motion/intensity maps
+  with real-time feeds by network.'
 ---
 
 *Suggested by [[nepaleew-testing-the-feasibility-of-an-earthquake-early-warning-system-in-nepal]] — primary/background*

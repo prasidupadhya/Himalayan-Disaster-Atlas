@@ -5,6 +5,7 @@ id: hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordil
 tags:
 - glof-modelling
 created: '2026-11-18T12:54:44.801509Z'
+updated: '2026-11-18T12:55:21.836933Z'
 source: https://hess.copernicus.org/articles/24/93/2020/
 source_domain: hess.copernicus.org
 fetched_at: '2026-11-18T12:54:44.798196Z'
@@ -14,6 +15,12 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Mergili et al. 2020 (HESS 24:93): r.avaflow two-phase back-calculation of
+  1941 Palcacocha GLOF, 4 initiation scenarios (retrogressive erosion, landslide impact
+  wave, geomechanical collapse). Travel times 36-70 min to Huaraz (23 km), peaks >10,000
+  m3/s; stresses parameter uncertainty and threshold effects, so predictive scenarios
+  need ensembles of back-calculated events. Relevant to uncertainty communication
+  in scenario tools.'
 ---
 
 HESS - Reconstruction of the 1941 GLOF process chain  at Lake Palcacocha (Cordillera Blanca, Peru)

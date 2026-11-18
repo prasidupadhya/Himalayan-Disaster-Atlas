@@ -4,6 +4,7 @@ id: digital-2025-nepal-datareportal-global-digital-insights
 tags:
 - nepal-users
 created: '2026-11-18T12:54:38.912042Z'
+updated: '2026-11-18T12:55:22.424719Z'
 source: https://datareportal.com/reports/digital-2025-nepal
 source_domain: datareportal.com
 fetched_at: '2026-11-18T12:54:38.911047Z'
@@ -13,6 +14,9 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'DataReportal Digital 2025 Nepal: 16.5M internet users (55.8% penetration)
+  Jan 2025; 39.0M cellular connections, 80.5% broadband (3G/4G/5G); 14.3M social media
+  user identities. Mobile-first audience; figures are modelled estimates.'
 ---
 
 Digital 2025: Nepal — DataReportal – Global Digital Insights

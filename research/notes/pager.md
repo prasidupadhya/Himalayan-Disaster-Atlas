@@ -4,6 +4,7 @@ id: pager
 tags:
 - earthquake-loss
 created: '2026-11-18T12:55:02.994800Z'
+updated: '2026-11-18T12:55:25.230985Z'
 source: https://earthquake.usgs.gov/data/pager/
 source_domain: earthquake.usgs.gov
 fetched_at: '2026-11-18T12:55:02.993959Z'
@@ -13,6 +14,8 @@ type: note
 tier: ground_truth
 content_type: policy
 deprecated: false
+summary: 'USGS PAGER landing page: fatality/economic loss estimates for significant
+  quakes; links to archives, one-PAGER guide.'
 ---
 
 PAGER

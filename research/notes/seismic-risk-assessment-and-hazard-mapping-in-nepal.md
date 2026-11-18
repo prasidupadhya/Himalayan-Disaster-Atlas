@@ -4,6 +4,7 @@ id: seismic-risk-assessment-and-hazard-mapping-in-nepal
 tags:
 - earthquake-loss
 created: '2026-11-18T12:54:48.068208Z'
+updated: '2026-11-18T12:55:24.297174Z'
 source: https://ideas.repec.org/a/spr/nathaz/v78y2015i1p583-602.html
 source_domain: ideas.repec.org
 fetched_at: '2026-11-18T12:54:48.066751Z'
@@ -13,6 +14,10 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Chaulagain et al. 2015 Nat Hazards 78:583-602 (abstract page): OpenQuake-based
+  national seismic risk for Nepal; hazard and mean economic-loss maps at 1/2/5/10%
+  PoE in 50 yr; building damage and loss for a recurrence of the 1934 earthquake;
+  notes the national hazard map is ~2 decades old. Abstract only.'
 doi: 10.1007/s11069-015-1734-6
 utility_score: 12.0
 ---

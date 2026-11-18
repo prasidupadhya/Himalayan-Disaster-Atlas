@@ -5,6 +5,7 @@ id: nhess-evaluating-the-impact-of-model-complexity-on-flood-wave-propagation-an
 tags:
 - glof-modelling
 created: '2026-11-18T12:54:46.747732Z'
+updated: '2026-11-18T12:55:22.272069Z'
 source: https://nhess.copernicus.org/articles/19/1723/2019/
 source_domain: nhess.copernicus.org
 fetched_at: '2026-11-18T12:54:46.746292Z'
@@ -14,6 +15,11 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Hoch et al. 2019 (NHESS 19:1723): GLOFRIM 2.0 coupling PCR-GLOBWB with CaMa-Flood
+  and LISFLOOD-FP in Amazon and Ganges. Replacing kinematic wave with local inertia
+  raised peak discharge NSE 0.48 to 0.71; LISFLOOD-FP flood extent CSI 0.46 vs 0.30
+  and 0.25 for downscaled products. Evidence that kinematic routing is materially
+  less accurate than inertial/hydraulic routing; forcing quality still dominates.'
 ---
 
 NHESS - Evaluating the impact of model complexity on flood wave propagation and inundation extent with a hydrologic–hydrodynamic model coupling framework

@@ -5,6 +5,7 @@ id: nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-
 tags:
 - nepal-users
 created: '2026-11-18T12:54:42.161696Z'
+updated: '2026-11-18T12:55:23.028588Z'
 source: https://kathmandupost.com/science-technology/2026/07/02/nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-growth
 source_domain: kathmandupost.com
 fetched_at: '2026-11-18T12:54:42.160744Z'
@@ -14,6 +15,9 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'ITU IDI 2026: Nepal 68.1, 48.4% use internet, 73.1% own mobile, 52.5% households
+  online; ~90% 3G, 81.6% 4G coverage; some indicators estimated. Note conflicts with
+  MICS 82% household figure (differing methods).'
 ---
 
 Nepal returns to global ICT Index but digital use still lags infrastructure growth

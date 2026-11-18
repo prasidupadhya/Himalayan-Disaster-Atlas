@@ -4,7 +4,9 @@ title: PIAHS - Glacial lake outburst flood (GLOF) modeling of  Tsho Rolpa glacia
 id: piahs-glacial-lake-outburst-flood-glof-modeling-of-tsho-rolpa-glacial-lake-nepal
 tags:
 - glof-modelling
+- nepal
 created: '2026-11-18T12:54:38.939319Z'
+updated: '2026-11-18T12:55:21.417840Z'
 source: https://doi.org/10.5194/piahs-387-59-2024
 source_domain: piahs.copernicus.org
 fetched_at: '2026-11-18T12:54:38.938346Z'
@@ -14,6 +16,12 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'Kayastha & Maskey 2024 (Proc. IAHS 387): Tsho Rolpa (4552 m, Nepal) GLOF
+  modelled with NWS-BREACH for 20 m and 40 m dam breaches (peak 8,198 to 26,662 m3/s;
+  8,226 to 10,662 m3/s for 20 m breach with lake-area growth over 20-40 yr), then
+  routed with HEC-RAS 1D/2D for flood heights and inundation maps at distances downstream.
+  Nepal-specific template for scenario GLOF model: breach hydrograph then hydraulic
+  routing.'
 doi: 10.5194/piahs-387-59-2024
 ---
 

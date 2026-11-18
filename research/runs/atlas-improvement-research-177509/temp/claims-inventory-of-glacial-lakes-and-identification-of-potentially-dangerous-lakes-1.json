@@ -1,0 +1,86 @@
+[
+ {
+  "claim": "The 2020 ICIMOD/UNDP inventory mapped 3,624 glacial lakes in Koshi, Gandaki and Karnali basins, 2,070 in Nepal.",
+  "stance": "neutral",
+  "stance_target": "glacial lake data baseline",
+  "evidence_type": "empirical",
+  "quoted_support": "study found 3,624 glacial lakes located in the three basins, of which 2,070 lakes are in Nepal",
+  "numbers": [
+   "3,624",
+   "2,070",
+   "1,509"
+  ],
+  "entities": [
+   "ICIMOD",
+   "UNDP"
+  ],
+  "time_period": "2000 and 2015",
+  "region": "Nepal",
+  "scope_conditions": "",
+  "confidence": "high",
+  "source_note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1"
+ },
+ {
+  "claim": "47 lakes are potentially dangerous (21 in Nepal), ranked on lake/dam, glacier and surroundings criteria only; seismic, climate and human triggers excluded.",
+  "stance": "neutral",
+  "stance_target": "PDGL list limitations",
+  "evidence_type": "empirical",
+  "quoted_support": "Other factors, such as extreme climatic conditions, seismic activity, and human interference on or around the lake and on the dam, are not considered.",
+  "numbers": [
+   "47",
+   "42 Koshi",
+   "3 Gandaki",
+   "2 Karnali",
+   "21 Nepal",
+   "25 TAR"
+  ],
+  "entities": [
+   "PDGL"
+  ],
+  "time_period": "2015",
+  "region": "Nepal/TAR/India",
+  "scope_conditions": "",
+  "confidence": "high",
+  "source_note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1"
+ },
+ {
+  "claim": "Inventory recommends updates at least every five years and public GLOF information in varied languages.",
+  "stance": "supports",
+  "stance_target": "atlas should show lake inventory, multilingual",
+  "evidence_type": "expert-opinion",
+  "quoted_support": "an updated and standardized glacial lake inventory should be conducted periodically, ideally at least every five years",
+  "numbers": [
+   "5 years"
+  ],
+  "entities": [
+   "ICIMOD"
+  ],
+  "time_period": "",
+  "region": "Nepal",
+  "scope_conditions": "",
+  "confidence": "high",
+  "source_note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1"
+ },
+ {
+  "claim": "Exposed populations: 96,767 Imja, 141,911 Tsho Rolpa, 165,068 Thulagi (ICIMOD 2011).",
+  "stance": "neutral",
+  "stance_target": "exposure",
+  "evidence_type": "statistical",
+  "quoted_support": "about 96,767 for Imja Lake, 141,911 for Tsho Rolpa Lake, and 165,068 for Thulagi Lake (ICIMOD 2011)",
+  "numbers": [
+   "96,767",
+   "141,911",
+   "165,068"
+  ],
+  "entities": [
+   "Imja",
+   "Tsho Rolpa",
+   "Thulagi"
+  ],
+  "time_period": "2011",
+  "region": "Nepal",
+  "scope_conditions": "",
+  "confidence": "medium",
+  "source_note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1"
+ }
+]

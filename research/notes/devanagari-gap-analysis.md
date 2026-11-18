@@ -4,6 +4,7 @@ id: devanagari-gap-analysis
 tags:
 - nepal-users
 created: '2026-11-18T12:54:46.175348Z'
+updated: '2026-11-18T12:55:23.638963Z'
 source: https://www.w3.org/TR/deva-gap
 source_domain: www.w3.org
 fetched_at: '2026-11-18T12:54:46.174423Z'
@@ -13,6 +14,9 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'W3C Devanagari Gap Analysis: browser/OpenType gaps for Devanagari - conjunct/grapheme
+  cluster handling, vowel signs (esp pre-base), line breaking, vertical text, fonts.
+  Relevant to Nepali rendering in map labels, print reports.'
 ---
 
 Devanagari Gap Analysis

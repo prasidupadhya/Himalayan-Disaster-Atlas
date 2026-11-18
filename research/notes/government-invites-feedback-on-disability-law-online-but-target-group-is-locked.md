@@ -5,6 +5,7 @@ id: government-invites-feedback-on-disability-law-online-but-target-group-is-loc
 tags:
 - nepal-users
 created: '2026-11-18T12:54:48.510151Z'
+updated: '2026-11-18T12:55:23.931515Z'
 source: https://kathmandupost.com/national/2026/04/30/government-invites-feedback-on-disability-law-online-but-target-group-is-locked-out
 source_domain: kathmandupost.com
 fetched_at: '2026-11-18T12:54:48.509389Z'
@@ -14,6 +15,10 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Kathmandu Post Apr 2026: govt draft disability law published as image files
+  / Preeti font unreadable to screen readers; Nagarik App inaccessible on iPhone;
+  2021 Directive on govt websites requires Unicode, adjustable fonts, responsive design,
+  Nepali+English but weakly enforced.'
 ---
 
 Government invites feedback on disability law online, but target group is locked out

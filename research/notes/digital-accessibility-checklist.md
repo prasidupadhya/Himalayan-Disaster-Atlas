@@ -4,6 +4,7 @@ id: digital-accessibility-checklist
 tags:
 - nepal-users
 created: '2026-11-18T12:54:49.750888Z'
+updated: '2026-11-18T12:55:24.322195Z'
 source: https://www.prayatnanepal.org/wp-content/uploads/2026/06/Digital-Accessibility-Checklist_Comprehensive-final.pdf
 source_domain: www.prayatnanepal.org
 fetched_at: '2026-11-18T12:54:49.749834Z'
@@ -13,6 +14,9 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'Prayatna Nepal 2026 Digital Accessibility Checklist: barriers by disability,
+  guidance on writing Nepali text (Unicode), Word/Excel/PPT/PDF/social/website checklists,
+  automated and manual testing guide.'
 raw_file: raw/digital-accessibility-checklist.pdf
 ---
 

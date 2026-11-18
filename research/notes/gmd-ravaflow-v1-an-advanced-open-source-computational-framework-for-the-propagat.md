@@ -5,6 +5,7 @@ id: gmd-ravaflow-v1-an-advanced-open-source-computational-framework-for-the-prop
 tags:
 - glof-modelling
 created: '2026-11-18T12:55:07.225116Z'
+updated: '2026-11-18T12:55:22.702445Z'
 source: https://gmd.copernicus.org/articles/10/553/2017/
 source_domain: gmd.copernicus.org
 fetched_at: '2026-11-18T12:55:07.223635Z'
@@ -14,6 +15,9 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Mergili et al. 2017 (GMD 10:553): r.avaflow v1, open-source GIS-integrated
+  two-phase mass flow and process-chain framework; the tool behind Palcacocha reconstruction
+  and GLOF process chains.'
 ---
 
 *Suggested by [[hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera]] — cited primary*
