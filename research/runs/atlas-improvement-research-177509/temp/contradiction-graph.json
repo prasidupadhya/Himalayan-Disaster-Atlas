@@ -1,0 +1,174 @@
+[
+ {
+  "cluster_id": "rock-gmpe-vs-basin",
+  "fight": "Is a generic global GMPE with a single Vs30 adequate for Nepal earthquake scenarios, or do Kathmandu basin effects and Himalaya-specific attenuation dominate?",
+  "side_a": {
+   "position": "Generic NGA-West2 style model (the Atlas uses BSSA14) with Vs30 scaling gives defensible first-order PGA bands",
+   "sources": [
+    "meteor-nepal-seismic-hazard-map-with-mean-peak-ground-acceleration-pga-in-g-for"
+   ]
+  },
+  "side_b": {
+   "position": "Gorkha records show Himalaya-specific relations fit better and Kathmandu basin long-period amplification (~0.4 s, ~5 s) far exceeds code spectra; rock-only PGA misstates demand",
+   "sources": [
+    "attenuation-relation-predicted-observed-ground-motion-of-gorkha-nepal-earthquake",
+    "site-amplification-in-the-kathmandu-valley-during-the-2015-m76-gorkha-nepal-eart",
+    "the-2015-mw-78-gorkha-earthquake-in-nepal-and-its-aftershocks-analysis-of-strong"
+   ]
+  },
+  "evidence_quality_delta": "Side B is empirical (measured Gorkha strong motion); side A is a modelling convention",
+  "scope_overlap": "Partly scoped: PGA bands may be adequate regionally but wrong in the Kathmandu basin and for long-period structures",
+  "decision_relevance": "high"
+ },
+ {
+  "cluster_id": "pdgl-list-vs-small-lakes",
+  "fight": "Should GLOF scenario origins follow the official potentially-dangerous-lake list, or does the 2024 Thame cascade show that list misses the real hazards?",
+  "side_a": {
+   "position": "ICIMOD 2020 inventory ranks 21 Nepal PDGLs on lake, dam, glacier and surroundings criteria",
+   "sources": [
+    "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1"
+   ]
+  },
+  "side_b": {
+   "position": "Thame 2024 came from two small lakes not on any danger list; triggers excluded by the PDGL criteria (seismic, cascades) matter",
+   "sources": [
+    "abstract-egu25-12752",
+    "abstract-egu25-12752-2",
+    "the-thame-flood-a-window-into-the-himalayan-climate-crisis-nepal-economic-forum",
+    "the-nepal-floods-question-when-the-himalayas-collapse-who-gets-warned-climate-cr"
+   ]
+  },
+  "evidence_quality_delta": "Side B is a single well-documented event against a systematic inventory; both empirical",
+  "scope_overlap": "Genuine: list-based origin selection under-represents cascade and small-lake hazards",
+  "decision_relevance": "high"
+ },
+ {
+  "cluster_id": "simple-routing-vs-process-chain",
+  "fight": "Can a constant-celerity hydrograph routing give useful flood/GLOF arrival times, or are sediment-laden process chains too different?",
+  "side_a": {
+   "position": "Simple kinematic or celerity-based routing is transparent and fast; Palcacocha back-calculation gives 36-70 min travel ranges usable as bounds",
+   "sources": [
+    "hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera"
+   ]
+  },
+  "side_b": {
+   "position": "Local-inertia routing raises peak NSE 0.48 to 0.71; Melamchi and Thame moved massive sediment (aggradation 5-20 m); Tsho Rolpa breach peaks span 8,198-26,662 m3/s",
+   "sources": [
+    "nhess-evaluating-the-impact-of-model-complexity-on-flood-wave-propagation-and-in",
+    "the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o",
+    "piahs-glacial-lake-outburst-flood-glof-modeling-of-tsho-rolpa-glacial-lake-nepal",
+    "abstract-egu25-12752"
+   ]
+  },
+  "evidence_quality_delta": "Side B is stronger (measured and benchmarked), but side A is defensible if framed as a wide range",
+  "scope_overlap": "Scoped: simple routing is fine as an explicitly uncertain range, not as a single arrival time",
+  "decision_relevance": "high"
+ },
+ {
+  "cluster_id": "ffews-success-vs-last-mile",
+  "fight": "Has Nepal's flood early warning succeeded, or does it still fail at the last mile?",
+  "side_a": {
+   "position": "Flood deaths fell from 166 (2017) to 27 (2022) after FFEWS and SMS; Ncell sent 4.4 million alerts in 2023; BRCHP upgraded 158 stations and radar",
+   "sources": [
+    "reducing-flood-casualties-in-nepal",
+    "ncell-sent-44-lakh-early-warning-sms-against-landslideflood",
+    "transforming-nepals-hydro-and-agrometeorological-services-to-build-resilience"
+   ]
+  },
+  "side_b": {
+   "position": "Sept 2024: accurate four-day alert yet ~250 deaths; 2026 Bhotekoshi: generic Nepali-only SMS, 16-minute cross-border gap, Facebook post 5 h later; SMS manual and congestion-prone",
+   "sources": [
+    "missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properties-a",
+    "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+    "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e",
+    "mobile-enabled-anticipatory-action-and-early-warning-systems-the-gsma-and-fcdo-v",
+    "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e"
+   ]
+  },
+  "evidence_quality_delta": "Side A uses agency/operator self-reporting; side B mixes journalism and a scoping review",
+  "scope_overlap": "Both right: riverine forecasting improved; urban flash floods, GLOFs and transboundary events still fail at dissemination",
+  "decision_relevance": "high"
+ },
+ {
+  "cluster_id": "sms-vs-cell-broadcast-cap",
+  "fight": "Is SMS enough, or should Nepal's alerts move to CAP and cell broadcast (and should the Atlas plan for that)?",
+  "side_a": {
+   "position": "SMS via NTC/Ncell is established since 2016 and reaching millions; a voice-call pilot started in 2025",
+   "sources": [
+    "ncell-sent-44-lakh-early-warning-sms-against-landslideflood",
+    "government-to-provide-voice-alerts-on-flood-weather-updates"
+   ]
+  },
+  "side_b": {
+   "position": "CAP adopted by WMO (2023) and Nepal agreed to an implementation plan (Apr 2025); cell broadcast costed at $1.75-3M but not procured",
+   "sources": [
+    "wmo-strengthens-early-warning-services-in-nepal",
+    "central-for-applied-research-and-development-card",
+    "discussion-held-on-cell-broadcasting-for-early-warning-the-himalayan-times-nepal",
+    "during-nepal-floods-decentralized-community-based-warning-saved-lives"
+   ]
+  },
+  "evidence_quality_delta": "Comparable (institutional reports both sides)",
+  "scope_overlap": "Sequential, not opposed: SMS now, CAP in planning; no public CAP feed found yet",
+  "decision_relevance": "medium"
+ },
+ {
+  "cluster_id": "connectivity-estimates",
+  "fight": "How connected are Nepali users?",
+  "side_a": {
+   "position": "MICS 2024/25: 82% of households have internet (rural 73%, Karnali 68.5%)",
+   "sources": [
+    "batch9"
+   ]
+  },
+  "side_b": {
+   "position": "ITU IDI 2026: 48.4% of individuals use the internet; DataReportal: 55.8%",
+   "sources": [
+    "batch9"
+   ]
+  },
+  "evidence_quality_delta": "All survey-based",
+  "scope_overlap": "Scoped: household access vs individual use; both imply a large offline and low-bandwidth minority",
+  "decision_relevance": "medium"
+ },
+ {
+  "cluster_id": "open-platform-sustainability",
+  "fight": "Can an open disaster-data platform become self-sustaining?",
+  "side_a": {
+   "position": "GeoNode became self-sustaining via its open-source community, ~200% ROI",
+   "sources": [
+    "open-data-for-resilience-initiative"
+   ]
+  },
+  "side_b": {
+   "position": "No OpenDRI project built a self-sustaining revenue stream; data goes stale without continuous funding",
+   "sources": [
+    "opendri-7-sustaining"
+   ]
+  },
+  "evidence_quality_delta": "Both GFDRR self-reporting; no independent evaluation",
+  "scope_overlap": "Scoped: software can sustain via a community; data currency and country platforms do not",
+  "decision_relevance": "medium"
+ },
+ {
+  "cluster_id": "probability-formats",
+  "fight": "How should uncertainty be shown to the public?",
+  "side_a": {
+   "position": "Natural-frequency formats and isarithmic maps improve comprehension",
+   "sources": [
+    "public-understanding-and-scientific-uncertainty-the-communication-of-risk-in-the",
+    "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki"
+   ]
+  },
+  "side_b": {
+   "position": "Benefit fades for low-probability high-consequence events; hard map boundaries carry legal and political weight and false reassurance can kill (L'Aquila)",
+   "sources": [
+    "public-understanding-and-scientific-uncertainty-the-communication-of-risk-in-the",
+    "r-e-g-u-l-a-r-p-a-p-e-r"
+   ]
+  },
+  "evidence_quality_delta": "Both empirical/case-based",
+  "scope_overlap": "Complementary: show ranges and gradients, avoid crisp safe/unsafe lines",
+  "decision_relevance": "medium"
+ }
+]

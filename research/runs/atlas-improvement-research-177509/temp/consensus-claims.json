@@ -1,0 +1,53 @@
+[
+ {
+  "claim": "Nepal's warning failures are in dissemination and actionability (location, severity, instructions), not mainly in forecasting",
+  "sources": [
+   "missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properties-a",
+   "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+   "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e",
+   "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+   "mobile-enabled-anticipatory-action-and-early-warning-systems-the-gsma-and-fcdo-v",
+   "missed-opportunities-in-utilization-of-weather-forecasts-an-analysis-of-october"
+  ],
+  "independence_sum": 6.0
+ },
+ {
+  "claim": "CAP is the internationally endorsed alert format and Nepal is moving toward it",
+  "sources": [
+   "wmo-strengthens-early-warning-services-in-nepal",
+   "central-for-applied-research-and-development-card",
+   "mobile-enabled-anticipatory-action-and-early-warning-systems-the-gsma-and-fcdo-v"
+  ],
+  "independence_sum": 3.0
+ },
+ {
+  "claim": "Hazard map design choices (gradients over hard lines, salient cues, audience testing) measurably change public comprehension",
+  "sources": [
+   "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+   "using-geovisualizations-to-educate-the-public-about-environmental-health",
+   "uvm-study-reveals-millions-at-risk-college-of",
+   "public-understanding-and-scientific-uncertainty-the-communication-of-risk-in-the",
+   "r-e-g-u-l-a-r-p-a-p-e-r"
+  ],
+  "independence_sum": 5.0
+ },
+ {
+  "claim": "Kathmandu basin site effects make Gorkha ground motion depart from generic rock predictions",
+  "sources": [
+   "attenuation-relation-predicted-observed-ground-motion-of-gorkha-nepal-earthquake",
+   "site-amplification-in-the-kathmandu-valley-during-the-2015-m76-gorkha-nepal-eart",
+   "the-2015-mw-78-gorkha-earthquake-in-nepal-and-its-aftershocks-analysis-of-strong"
+  ],
+  "independence_sum": 3.0
+ },
+ {
+  "claim": "Recent Himalayan floods (Melamchi 2021, Thame 2024, Bhotekoshi 2026) were cascading, sediment-laden process chains",
+  "sources": [
+   "the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o",
+   "abstract-egu25-12752",
+   "the-thame-flood-a-window-into-the-himalayan-climate-crisis-nepal-economic-forum",
+   "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e"
+  ],
+  "independence_sum": 4.0
+ }
+]
