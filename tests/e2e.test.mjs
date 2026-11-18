@@ -457,6 +457,8 @@ test('the scenario report reruns the linked scenario and lays out for A4 in both
   await page.waitForFunction(() => location.hash.includes('flood='));
   await page.waitForFunction(() => document.getElementById('report')?.getAttribute('href').endsWith(location.hash));
   const summary = await page.textContent('#result .summary');
+  // Let the map finish loading terrain first: leaving mid-download aborts the tiles, which the browser logs as errors.
+  await page.waitForLoadState('networkidle');
   await page.click('#report');
   await page.waitForSelector('#report[data-ready=true]', { timeout: 30000 });
   assert.equal(await page.textContent('#report .summary'), summary, 'same numbers as the page');
