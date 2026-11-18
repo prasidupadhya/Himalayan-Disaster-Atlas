@@ -250,6 +250,14 @@ class HtmlTests(unittest.TestCase):
         self.assertEqual(page["links"], [{"text": "Daily bulletin", "href": "https://example.test/files/bulletin.pdf", "document": True}])
         self.assertIn("2026-10-17", page["dates_mentioned"])
 
+    def test_a_generic_download_link_is_named_by_the_text_beside_it(self):
+        from pipelines.gov_feeds.digest import extract_html
+        page = b"""<html><body><ul><li><span>SYNTHETIC_Flood_Bulletin_10_Oct_2025_8AM</span> <a href="/b/1.pdf">Download PDF</a></li>
+          <li><a href="/b/2.pdf">Download PDF</a></li></ul></body></html>"""
+        links = extract_html(page, "https://example.test/bulletins")["links"]
+        self.assertEqual(links[0], {"text": "SYNTHETIC_Flood_Bulletin_10_Oct_2025_8AM", "href": "https://example.test/b/1.pdf", "document": True})
+        self.assertEqual(links[1]["text"], "Download PDF", "with nothing beside it the link keeps its own text")
+
     def test_new_links_are_reported(self):
         from pipelines.gov_feeds.digest import extract_html
         before = extract_html(self.PAGE, "https://example.test/mfd/")
