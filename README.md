@@ -38,7 +38,7 @@ No framework and no runtime dependencies besides MapLibre. About 1,000 lines of 
 
 ## How data gets in
 
-- **Daily official copy.** `.github/workflows/gov-feeds.yml` runs at 00:17 UTC (about 06:02 Nepal time) on `main`, reads eight DHM, BIPAD and NEMRC pages, and commits `site/data/gov/latest.json`. A source that fails keeps its last copy, labelled with its date. Nepal's government hosts have refused GitHub's runners since October 2026; set the repository variable `GOV_RUNNER` to a self-hosted runner in Nepal, or the secret `GOV_PROXY`, to fix that.
+- **Daily official copy.** `.github/workflows/gov-feeds.yml` runs at 00:17 UTC (about 06:02 Nepal time) on `main`, reads eight DHM, BIPAD and NEMRC pages, and commits `site/data/gov/latest.json`. A source that fails keeps its last copy, labelled with its date. Most government hosts answer GitHub's runners (checked November 2026); for one that stops, set the repository variable `GOV_RUNNER` to a self-hosted runner in Nepal, or the secret `GOV_PROXY`. DHM's flood bulletins are read from `dhm.gov.np/bulletins`, whose list loads only when its tab is opened, so the copy opens it in a browser and waits for the bulletin links.
 - **Map and model data** are fixed, versioned releases in `site/data/<dataset>/<version>/`, each with a manifest giving source, licence, method, coverage and limitations, and a SHA-256 for every file. Published versions are never overwritten; a new version gets a new folder.
 
 ## Run and test
