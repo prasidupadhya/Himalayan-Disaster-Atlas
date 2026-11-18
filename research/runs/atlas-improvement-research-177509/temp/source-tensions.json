@@ -1,0 +1,140 @@
+{
+ "tensions": [
+  {
+   "name": "Generic BSSA14 on rock vs Himalaya-specific basin-aware shaking",
+   "side_a": {
+    "position": "A standard global GMPE with a Vs30 term gives defensible first-order PGA for a public scenario tool.",
+    "evidence": "Open GEM/BGS Nepal PGA grid uses generic models; BSSA14 sigma already computed in the Atlas.",
+    "proponents": [
+     "meteor-nepal-seismic-hazard-map-with-mean-peak-ground-acceleration-pga-in-g-for",
+     "interim-report-bssa14-single-vs30-kathmandu-basin"
+    ]
+   },
+   "side_b": {
+    "position": "Gorkha records show Himalaya-specific attenuation fits better and Kathmandu basin long-period amplification far exceeds code spectra.",
+    "evidence": "KATNP spectra peaks ~0.4 s and ~5 s above code; Siddhitol >1 s exceeds NBC spectra.",
+    "proponents": [
+     "attenuation-relation-predicted-observed-ground-motion-of-gorkha-nepal-earthquake",
+     "site-amplification-in-the-kathmandu-valley-during-the-2015-m76-gorkha-nepal-eart",
+     "the-2015-mw-78-gorkha-earthquake-in-nepal-and-its-aftershocks-analysis-of-strong"
+    ]
+   },
+   "resolution": "Side A for the engine, Side B for the defaults. The defect that matters is the single 760 m/s rock default, not BSSA14 itself; a slope-based Vs30 grid plus visible sigma and a stated basin caveat fix most of the bias for PGA. Himalaya-specific GMPE claims are abstract-only, so a Gorkha ShakeMap/station test should come before any logic-tree change.",
+   "origin": "comparisons",
+   "decision_relevance": "high"
+  },
+  {
+   "name": "Constant wave speeds vs fast, growing cascade floods",
+   "side_a": {
+    "position": "A simple hydrograph moved at a few constant speeds is transparent and gives usable travel-time bounds.",
+    "evidence": "Mergili 2020 Palcacocha travel bounds 36-70 min come from models; simple routing is all a static site can run.",
+    "proponents": [
+     "hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera"
+    ]
+   },
+   "side_b": {
+    "position": "Himalayan GLOF and debris cascades move far faster near the source and gain volume downstream, so constant 2-6 m/s with a fixed peak misleads.",
+    "evidence": "Bhote Koshi 2026: ~52 m/s near source decaying to 6-7 m/s, Devghat peak 2,600 to 5,850 m3/s; Melamchi aggradation 5-20 m; Tsho Rolpa breach peaks vary 3x.",
+    "proponents": [
+     "a-multi-source-quantitative-reconstruction-of-the-26-august-2026-bhote-koshi-roc",
+     "the-bhote-koshitrishuli-flash-flood-of-26-august-2026-rasuwa-nepal-warning-laten",
+     "the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o",
+     "piahs-glacial-lake-outburst-flood-glof-modeling-of-tsho-rolpa-glacial-lake-nepal"
+    ]
+   },
+   "resolution": "Side B on physics, Side A on what to build: keep the simple engine but add a fast, distance-decaying near-field speed, report an earliest-to-latest arrival window, drop any implied attenuation, and label the model as clear-water and single-source. Evidence for the speeds is two preprints of one event, so treat numbers as provisional and hindcast Melamchi/Bhote Koshi.",
+   "origin": "comparisons",
+   "decision_relevance": "high"
+  },
+  {
+   "name": "Official dangerous-lake list vs small unlisted lakes",
+   "side_a": {
+    "position": "Scenario origins should follow ICIMOD's assessed list of 21 Nepal PDGLs (47 regionally).",
+    "evidence": "ICIMOD/UNDP 2020 ranks lakes on dam, glacier and surroundings criteria.",
+    "proponents": [
+     "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1"
+    ]
+   },
+   "side_b": {
+    "position": "Recent destructive outbursts came from small or transboundary lakes on no list, and the list itself churns.",
+    "evidence": "Thame 2024 two small lakes; Bhote Koshi from Tibet; only 13 of 21 PDGLs carried over from the 2011 list.",
+    "proponents": [
+     "abstract-egu25-12752",
+     "the-thame-flood-a-window-into-the-himalayan-climate-crisis-nepal-economic-forum",
+     "interim-report-glof-origin-selection-beyond-pdgl-list",
+     "automated-satellite-based-glacial-lake-inventory-and-change-detection-in-high-mo"
+    ]
+   },
+   "resolution": "Side B: restricting origins to the list builds in a known blind spot. But expansion must be tiered and labelled (assessed / upstream of Nepal / unassessed) using the CC BY open HMA inventory, and shipped together with the framing safeguards in the next tension.",
+   "origin": "comparisons",
+   "decision_relevance": "high"
+  },
+  {
+   "name": "Forecasting success vs last-mile failure",
+   "side_a": {
+    "position": "Nepal's flood warning works: deaths fell from 166 (2017) to 27 (2022) after FFEWS and SMS.",
+    "evidence": "WMO; Ncell 4.4 million SMS in 2023; BRCHP station and radar upgrades.",
+    "proponents": [
+     "reducing-flood-casualties-in-nepal",
+     "ncell-sent-44-lakh-early-warning-sms-against-landslideflood",
+     "transforming-nepals-hydro-and-agrometeorological-services-to-build-resilience"
+    ]
+   },
+   "side_b": {
+    "position": "Warnings still fail at the last mile: unequal access, generic wording and no action guidance.",
+    "evidence": "Sept 2024 accurate four-day alert yet ~250 deaths; 2026 Bhote Koshi generic Nepali-only SMS and 38.8 min alert after trigger; Budimir/Bhandari: barriers in access, understanding and ability to act.",
+    "proponents": [
+     "missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properties-a",
+     "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+     "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+     "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e"
+    ]
+   },
+   "resolution": "Both, scoped: riverine forecast warnings improved; flash, urban, cascade and transboundary events still fail at dissemination. A daily static site cannot fix sub-hour latency, so the Atlas should invest in preparedness (place-specific arrival windows, printable plans) and in honest data age, not try to be a warning channel.",
+   "origin": "contradiction-graph",
+   "decision_relevance": "high"
+  },
+  {
+   "name": "Plural unofficial maps: useful diversity or a source of contested authority",
+   "side_a": {
+    "position": "Diverse maps from several modellers encourage improvement through competition and fill gaps official maps leave.",
+    "evidence": "Haughton & White note the benefit of diversity; Open Cities/KLL OSM mapping produced crisis maps used by the army in 2015.",
+    "proponents": [
+     "r-e-g-u-l-a-r-p-a-p-e-r",
+     "mapping-for-resilience-crowd-sourced-mapping-in-crises-humanitarian-practice-net"
+    ]
+   },
+   "side_b": {
+    "position": "Inconsistent hazard maps let people mobilise scientific uncertainty to dispute official maps; lines carry legal and financial weight.",
+    "evidence": "Haughton & White: inconsistency in modelling created opportunity for challenge; Christchurch red-zone disputes.",
+    "proponents": [
+     "r-e-g-u-l-a-r-p-a-p-e-r"
+    ]
+   },
+   "resolution": "Side B governs the Atlas's design: an unofficial site publishing scenario maps beside official data risks being read as a competing authority. Use no zone lines with legal-sounding names, cite official products, show where the Atlas differs and why, and seek written endorsement or partnership (KLL, ICIMOD, DHM) rather than standing alone.",
+   "origin": "orphan-scan",
+   "decision_relevance": "medium"
+  },
+  {
+   "name": "Deterministic danger levels vs probabilistic forecasts",
+   "side_a": {
+    "position": "Simple threshold levels (warning, danger) are what people and officials act on.",
+    "evidence": "DHM SMS and bulletins use colour-coded levels; stakeholders favoured colour codes.",
+    "proponents": [
+     "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e"
+    ]
+   },
+   "side_b": {
+    "position": "Thresholds are hard to calibrate (false alarms vs misses); probabilistic forecasts add lead time (Karnali 2-3 h to 7-8 h) but are hard to convey.",
+    "evidence": "Budimir/Bhandari analysis; NHESS community-based EWS study.",
+    "proponents": [
+     "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+     "nhess-community-based-early-warning-systems-for-flood-risk-mitigation-in-nepal"
+    ]
+   },
+   "resolution": "For the Atlas's live river data, show DHM's own threshold levels as the primary signal (do not invent new ones) and add trend and time-to-threshold context as secondary; reserve probability for scenario ranges, phrased as ranges not percentages, consistent with the natural-frequency caveat for rare events.",
+   "origin": "orphan-scan",
+   "decision_relevance": "medium"
+  }
+ ]
+}
