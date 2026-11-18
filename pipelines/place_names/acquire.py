@@ -1,6 +1,6 @@
 """Fetch the official Constitution of Nepal (Nepali text, Nepal Law Commission) for its Schedule 4,
-which lists the districts of each province in Nepali. The file is found through the Commission's own
-WordPress media search, so a moved upload is still found.
+which lists the districts of each province in Nepali. The file is found by following the Commission's own
+links, so a moved upload is still found.
 
 The government host does not always answer cloud servers abroad, so the same file is tried by three routes,
 in order, and the route that worked is recorded:
@@ -14,8 +14,6 @@ import hashlib, json, os, re, subprocess, sys, tempfile, urllib.parse, urllib.re
 from datetime import datetime, timezone
 from pathlib import Path
 
-SITE = "https://lawcommission.gov.np/np/"
-TITLE = "नेपालको संविधान"
 UA = "himalayan-disaster-atlas/1.0 (+https://github.com/prasidupadhya/Himalayan-Disaster-Atlas)"
 
 
@@ -31,28 +29,44 @@ def get(url, proxy=None, timeout=60):
         return r.read(), r.geturl()
 
 
+# Official hosts that publish the constitution: the Law Commission first, then the ministry and offices that also carry it.
+HOSTS = ["lawcommission.gov.np", "moljpa.gov.np", "ag.gov.np", "parliament.gov.np", "supremecourt.gov.np", "mofaga.gov.np"]
+NAMED = re.compile(r"संविधान|%E0%A4%B8%E0%A4%82%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BE%E0%A4%A8|constitution", re.I)
+
+
+def links(html, base):
+    return [urllib.parse.urljoin(base, h) for h in re.findall(r'href=["\']([^"\'#]+)', html)]
+
+
 def candidates(proxy=None):
-    """PDF uploads on the official site whose title names the constitution, newest first.
-    WordPress answers its REST API at one of these addresses, depending on how the site is set up."""
-    q = urllib.parse.urlencode({"search": TITLE, "media_type": "application", "per_page": 100, "orderby": "date", "order": "desc"})
-    for base in (f"{SITE}wp-json/wp/v2/media?{q}", f"https://lawcommission.gov.np/wp-json/wp/v2/media?{q}", f"{SITE}?rest_route=/wp/v2/media&{q}"):
-        try:
-            items = json.loads(get(base, proxy)[0])
-        except Exception as e:
-            print(f"  media search {base.split('?')[0]}: {type(e).__name__}: {e}", file=sys.stderr)
+    """PDF links on the Law Commission's own pages that name the constitution, found by following named links two levels deep."""
+    seen, pdfs, queue = set(), [], [(f"https://{HOSTS[0]}{p}", 0) for p in ("/", "/np/", "/en/")]
+    while queue and len(seen) < 40:
+        url, depth = queue.pop(0)
+        if url in seen:
             continue
-        return [(i["source_url"], (i.get("title") or {}).get("rendered", "")) for i in items if str(i.get("source_url", "")).lower().endswith(".pdf")]
-    return []
+        seen.add(url)
+        try:
+            html = get(url, proxy, timeout=30)[0].decode("utf-8", "replace")
+        except Exception as e:
+            print(f"  page {url}: {type(e).__name__}: {e}", file=sys.stderr)
+            continue
+        for link in links(html, url):
+            named, local = NAMED.search(link) or NAMED.search(urllib.parse.unquote(link)), urllib.parse.urlsplit(link).hostname == HOSTS[0]
+            if link.lower().split("?")[0].endswith(".pdf") and named and link not in pdfs:
+                pdfs.append(link)
+            elif named and local and depth < 2:
+                queue.append((link, depth + 1))
+    return pdfs
 
 
-def archived():
-    """The Internet Archive's stored copies of PDFs on any gov.np site whose address names the constitution, newest first."""
-    q = urllib.parse.urlencode({"url": "gov.np", "matchType": "domain", "output": "json", "collapse": "digest", "fl": "timestamp,original,mimetype",
-                                "filter": ["statuscode:200", "original:.*(%E0%A4%B8%E0%A4%82%E0%A4%B5%E0%A4%BF%E0%A4%A7%E0%A4%BE%E0%A4%A8|संविधान|[Cc]onstitution).*"],
-                                "limit": 400}, doseq=True)
-    rows = json.loads(get(f"https://web.archive.org/cdx/search/cdx?{q}", timeout=120)[0] or b"[]")[1:]
-    hits = [r for r in rows if "pdf" in r[2].lower() or r[1].lower().endswith(".pdf")]
-    return [(f"https://web.archive.org/web/{t}id_/{o}", urllib.parse.unquote(o)) for t, o, _ in sorted(hits, reverse=True)]
+def archived(host):
+    """The Internet Archive's stored copies of PDFs on one official host whose address names the constitution, newest first."""
+    q = urllib.parse.urlencode({"url": host, "matchType": "host", "output": "json", "collapse": "digest", "fl": "timestamp,original,mimetype",
+                                "filter": ["statuscode:200", "mimetype:application/pdf"], "limit": 5000}, doseq=True)
+    rows = json.loads(get(f"https://web.archive.org/cdx/search/cdx?{q}", timeout=90)[0] or b"[]")[1:]
+    hits = [r for r in rows if NAMED.search(r[1]) or NAMED.search(urllib.parse.unquote(r[1]))]
+    return [f"https://web.archive.org/web/{t}id_/{o}" for t, o, _ in sorted(hits, reverse=True)]
 
 
 def schedule4(pdf):
@@ -73,19 +87,19 @@ def routes():
     for name, via in [("direct", None)] + ([("gov-proxy", proxy)] if proxy else []):
         found = candidates(via)
         print(f"{name}: {len(found)} candidates", file=sys.stderr)
-        for url, title in found:
-            print(f"  {title} {url}", file=sys.stderr)
+        for url in found:
+            print(f"  {urllib.parse.unquote(url)}", file=sys.stderr)
             yield name, url, via
-    try:
-        found = archived()
-    except Exception as e:
-        print(f"internet-archive: index failed: {type(e).__name__}: {e}", file=sys.stderr)
-        return
-    print(f"internet-archive: {len(found)} candidates", file=sys.stderr)
-    for url, original in found:
-        print(f"  {original}", file=sys.stderr)
-    for url, _ in found:
-        yield "internet-archive", url, None
+    for host in HOSTS:
+        try:
+            found = archived(host)
+        except Exception as e:
+            print(f"internet-archive {host}: index failed: {type(e).__name__}: {e}", file=sys.stderr)
+            continue
+        print(f"internet-archive {host}: {len(found)} candidates", file=sys.stderr)
+        for url in found[:25]:
+            print(f"  {urllib.parse.unquote(url)}", file=sys.stderr)
+            yield "internet-archive", url, None
 
 
 def acquire(out):
