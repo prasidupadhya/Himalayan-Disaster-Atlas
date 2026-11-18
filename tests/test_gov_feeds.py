@@ -211,7 +211,7 @@ class BuildTests(unittest.TestCase):
 
     def test_rendered_sources_are_marked_in_the_registry(self):
         rendered = {s["id"] for s in json.loads(REGISTRY.read_text())["sources"] if s.get("render")}
-        self.assertEqual(rendered, {"dhm-forecast", "ndrrma-home"})
+        self.assertEqual(rendered, {"dhm-flood-archive", "dhm-forecast", "ndrrma-home"})
 
     def test_registry_keeps_one_focused_source_per_hazard_question(self):
         sources = json.loads(REGISTRY.read_text())["sources"]
