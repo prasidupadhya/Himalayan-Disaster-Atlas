@@ -313,3 +313,22 @@ test('switching scenarios in 3D clears the old overlay and respects point ruptur
     assert.deepEqual(errors, []);
   } finally { await close(); }
 });
+
+test('Nepali pages name districts as Schedule 4 of the constitution prints them', async () => {
+  const { page, errors, close } = await open('phone', '/scenarios/', { lang: 'ne' });
+  await page.waitForSelector('#result .route-list li');
+  const route = await page.textContent('#result .route-list');
+  assert.match(route, /मनाङ/, 'the default release starts in Manang');
+  assert.doesNotMatch(route, /Manang|Lamjung/, 'no district in Latin script');
+  await page.evaluate(() => { location.hash = 'quake'; });
+  await page.waitForFunction(() => document.querySelectorAll('#result table').length >= 2, null, { timeout: 30000 });
+  assert.match(await page.textContent('#result'), /गोरखा/);
+  assert.doesNotMatch(await page.textContent('#result .src'), /रोमन/);
+  assert.deepEqual(errors, []);
+  await close();
+
+  const en = await open('laptop', '/scenarios/');
+  await en.page.waitForSelector('#result .route-list li');
+  assert.match(await en.page.textContent('#result .route-list'), /Manang/, 'English pages keep English names');
+  await en.close();
+});
