@@ -22,15 +22,21 @@ before(async () => {
 after(async () => { await browser?.close(); server?.close(); });
 
 /** A page with the USGS feed answered locally and every console error recorded. */
-async function open(device, path, { lang = 'en', theme = 'light' } = {}) {
-  const ctx = await browser.newContext(DEVICES[device]);
+async function open(device, path, { lang = 'en', theme = 'light', reducedMotion, viewport, noWebGL = false } = {}) {
+  const ctx = await browser.newContext({ ...DEVICES[device], reducedMotion, viewport: viewport ?? DEVICES[device].viewport });
   await ctx.route('https://earthquake.usgs.gov/**', r => r.fulfill({ json: QUAKE, headers: { 'access-control-allow-origin': '*' } }));
   await ctx.route('https://fonts.*/**', r => r.abort());
   // Only the first load is preset, so a switch made during the test survives a reload.
   await ctx.addInitScript(([l, t]) => { if (!localStorage.getItem('lang')) { localStorage.setItem('lang', l); localStorage.setItem('theme', t); } }, [lang, theme]);
+  if (noWebGL) await ctx.addInitScript(() => {
+    const get = HTMLCanvasElement.prototype.getContext;
+    HTMLCanvasElement.prototype.getContext = function (type, ...args) {
+      return type.includes('webgl') ? null : get.call(this, type, ...args);
+    };
+  });
   const page = await ctx.newPage(), errors = [];
   page.on('pageerror', e => errors.push(e.message));
-  page.on('requestfinished', async r => { const s = (await r.response())?.status(); if (s >= 400) errors.push(`HTTP ${s} ${r.url()} from ${r.headers().referer}`); });
+  page.on('response', r => { if (r.status() >= 400) errors.push(`HTTP ${r.status()} ${r.url()} from ${r.request().headers().referer}`); });
   page.on('console', m => m.type() === 'error' && !/fonts\.|ERR_FAILED/.test(m.text()) && errors.push(`${m.text()} ${m.location().url}`));
   await page.goto(base + path);
   if (path === '/map/' || path.startsWith('/scenarios/')) await page.waitForSelector('#map[data-ready=true]', { timeout: 30000 });
@@ -195,4 +201,115 @@ test('a river point outside Nepal is described as outside, and only real place n
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
   assert.deepEqual(errors, []);
   await close();
+});
+
+// Observe the actual renderer through the first terrain change; no production test hook.
+async function inspectTerrain(page) {
+  await page.evaluate(async () => {
+    const { Map } = await import('/vendor/maplibre-gl/maplibre-gl.mjs');
+    const setTerrain = Map.prototype.setTerrain;
+    Map.prototype.setTerrain = function (...args) {
+      Map.prototype.setTerrain = setTerrain;
+      window.scenarioMap = this;
+      return setTerrain.apply(this, args);
+    };
+  });
+}
+const finiteFault = '#quake&lon=84.73&lat=28.23&m=7.8&mech=unspecified&vs30=760&len=80&strike=110';
+for (const scenario of ['flood', 'quake']) {
+  test(`${scenario}: toggle terrain by keyboard, change its scale and return to flat at 360 px`, async () => {
+    const { page, errors, close } = await open('phone', '/scenarios/' + (scenario === 'quake' ? finiteFault : '#flood=glof-40746560'),
+      { reducedMotion: 'reduce', viewport: { width: 360, height: 780 } });
+    try {
+      await inspectTerrain(page);
+      const button = page.locator('#terrain-toggle'), scale = page.locator('#terrain-scale');
+      assert.equal(await button.getAttribute('aria-pressed'), 'false');
+      if (scenario === 'flood') {
+        assert.equal(await page.locator('#follow').isChecked(), false);
+        assert.equal(await page.locator('#scrub').inputValue(), '1000');
+        await page.locator('#scrub').fill('280');
+      }
+      await button.focus(); await button.press('Space');
+      assert.equal(await button.getAttribute('aria-pressed'), 'true');
+      assert.equal(await page.locator('#terrain-note').isVisible(), true);
+      assert.match(await page.locator('#terrain-note').innerText(), /Hypothetical/);
+      assert.equal(await scale.inputValue(), '1');
+      await scale.selectOption('1.5');
+      assert.equal(await page.evaluate(() => scenarioMap.getTerrain().exaggeration), 1.5);
+      await scale.selectOption('1');
+      assert.equal(await page.evaluate(() => scenarioMap.getTerrain().exaggeration), 1);
+      assert.ok(await page.evaluate(() => scenarioMap.getPitch() > 0));
+      assert.equal(await page.evaluate(() => Object.values(scenarioMap.getStyle().sources).filter(s => s.type === 'raster-dem').length), 1);
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+      if (scenario === 'flood') {
+        const heights = await page.evaluate(async () => (await scenarioMap.getSource('flood-ribbon').getData()).features.map(f => f.properties.height));
+        assert.ok(heights.length > 1 && Math.max(...heights) > Math.min(...heights));
+        const pose = () => page.evaluate(() => [scenarioMap.getPitch(), scenarioMap.getBearing()]);
+        const locked = await pose();
+        await page.locator('#follow').check(); await page.locator('#play').click();
+        await page.waitForFunction(() => Number(document.querySelector('#scrub').value) > 280);
+        assert.deepEqual(await pose(), locked);
+        await page.locator('#scrub').fill('1000');
+        assert.equal(await page.evaluate(async () => (await scenarioMap.getSource('flood-ribbon').getData()).features.length), 0);
+      } else {
+        assert.ok(await page.evaluate(() => !!scenarioMap.getLayer('rupture-casing')));
+        assert.equal(await page.evaluate(() => scenarioMap.getPaintProperty('shaking', 'raster-opacity')), 0.6);
+        assert.equal(await page.evaluate(async () => (await scenarioMap.getSource('rupture').getData()).features[0].geometry.type), 'LineString');
+      }
+      await button.press('Enter');
+      assert.equal(await button.getAttribute('aria-pressed'), 'false');
+      assert.equal(await scale.isVisible(), false);
+      assert.deepEqual(await page.evaluate(() => [scenarioMap.getTerrain(), scenarioMap.getPitch(), !!scenarioMap.getLayer('flood-ribbon'), !!scenarioMap.getSource('flood-ribbon'), !!scenarioMap.getLayer('rupture-casing')]), [null, 0, false, false, false]);
+      assert.deepEqual(errors, []);
+    } finally { await close(); }
+  });
+}
+
+test('without WebGL both scenarios draw a flat overview and accept input', async () => {
+  const { page, errors, close } = await open('phone', '/scenarios/', { noWebGL: true, reducedMotion: 'reduce' });
+  try {
+    assert.match(await page.locator('#flat-note').innerText(), /WebGL.*2D/);
+    assert.ok(await page.locator('#terrain-toggle').isDisabled());
+    const pixels = () => page.locator('.scenario-flat').evaluate(c => c.toDataURL());
+    const before = await pixels();
+    await page.locator('#scrub').fill('200');
+    assert.ok(await pixels() !== before, 'scrubbing moves the flat flood front');
+    await page.locator('#tab-quake').click();
+    await page.waitForSelector('#sweep');
+    const quake = await pixels();
+    assert.ok(quake !== before, 'the shaking grid replaces the flood path');
+    const previousSweep = await page.locator('#sweep').elementHandle();
+    await page.locator('[name=len]').fill('80');
+    await page.locator('#form button.primary').click();
+    await page.waitForFunction(() => location.hash.includes('len=80') && document.querySelector('#sweep'));
+    await page.waitForFunction(button => !button.isConnected, previousSweep);
+    await page.waitForSelector('#sweep');
+    assert.ok(await pixels() !== quake, 'a finite rupture changes the grid');
+    assert.deepEqual(errors, []);
+  } finally { await close(); }
+});
+
+test('switching scenarios in 3D clears the old overlay and respects point ruptures', async () => {
+  const { page, errors, close } = await open('laptop', '/scenarios/', { reducedMotion: 'reduce', lang: 'ne' });
+  try {
+    await inspectTerrain(page);
+    await page.locator('#terrain-toggle').click();
+    await page.locator('#terrain-scale').selectOption('1.5');
+    await page.locator('#tab-quake').click();
+    await page.waitForSelector('#sweep');
+    assert.equal(await page.evaluate(() => !!scenarioMap.getLayer('flood-ribbon')), false);
+    assert.equal(await page.evaluate(async () => (await scenarioMap.getSource('rupture').getData()).features.length), 0);
+    assert.equal(await page.evaluate(() => scenarioMap.getTerrain().exaggeration), 1.5);
+    await page.locator('[name=len]').fill('80');
+    await page.locator('[name=strike]').fill('');
+    await page.locator('#form button.primary').click();
+    await page.waitForSelector('#result [role=alert]');
+    assert.match(await page.locator('[name=strike]').getAttribute('placeholder'), /UNKNOWN/);
+    await page.locator('#tab-flood').click();
+    await page.waitForSelector('#scrub');
+    assert.ok(await page.evaluate(() => !!scenarioMap.getLayer('flood-ribbon')));
+    assert.equal(await page.evaluate(() => !!scenarioMap.getLayer('rupture-casing')), false);
+    assert.equal(await page.evaluate(() => scenarioMap.getLayoutProperty('shaking', 'visibility')), 'none');
+    assert.deepEqual(errors, []);
+  } finally { await close(); }
 });
