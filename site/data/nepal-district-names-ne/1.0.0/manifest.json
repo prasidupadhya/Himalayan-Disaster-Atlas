@@ -1,0 +1,54 @@
+{
+ "schema_version": "1.0.0",
+ "dataset_id": "nepal-district-names-ne",
+ "dataset_name": "Nepal district names in Nepali (Constitution of Nepal, Schedule 4)",
+ "dataset_version": "1.0.0",
+ "source": "Constitution of Nepal, Schedule 4 (Provinces and districts in each province): Nepali text as published by the Supreme Court of Nepal; official English version as published by the Ministry of Law, Justice and Parliamentary Affairs",
+ "source_url": "https://supremecourt.gov.np/court/public/assets/downloads/नेपालको_संविधान_२०७२.pdf",
+ "source_url_en": "https://www.moljpa.gov.np/wp-content/uploads/2021/01/Constitution-of-Nepal-2nd-amd.-English.pdf",
+ "license": "Government of Nepal legal text; the constitution is a public law document",
+ "license_url": null,
+ "attribution": "Constitution of Nepal 2015 (2072 BS), Schedule 4. Supreme Court of Nepal; Ministry of Law, Justice and Parliamentary Affairs.",
+ "observation_date": null,
+ "publication_date": "2015-09-20T00:00:00Z",
+ "retrieval_date": "2026-11-18T08:18:22+00:00",
+ "processing_date": "2026-11-18T08:18:22+00:00",
+ "processing_version": "place-names-pipeline-1.0.0",
+ "method": "Nepali source PDF SHA-256 32912851de3c214c4aa03e7b4fa57ea5be71d636dc6b7d7fc4d4ba9924dbfe18 (route: direct); its text layer is in the legacy Preeti font and was mapped to Unicode with npttf2utf 0.3.7. English source PDF SHA-256 08088fbdcd3b8d46d02440e0474cdd764983f742e7f07fdb95fd7d43e354fc89 (route: internet-archive, fetched from https://web.archive.org/web/20240616183854id_/https%3A//www.moljpa.gov.np/wp-content/uploads/2021/01/Constitution-of-Nepal-2nd-amd.-English.pdf). Both schedules were parsed from pdftotext -layout output. Each Nepali name is paired with the English name at the same province and position, and the English name is matched to a COD-AB P-code (nepal-admin-districts 2.0.1) by name or alias within the same province; five English spellings are mapped by an explicit table: {\"Makawanpur\": \"Makwanpur\", \"Nawalparasi (East of Bardaghat Susta)\": \"Nawalpur\", \"Rukun (Eastern Part)\": \"Rukum East\", \"Rukum (Western Part)\": \"Rukum West\", \"Daang\": \"Dang\"}. Nothing is transliterated.",
+ "spatial_resolution": {
+  "value": null,
+  "unit": null
+ },
+ "temporal_resolution": null,
+ "spatial_coverage": {
+  "description": "The 77 districts of Nepal",
+  "bbox": [
+   80.05,
+   26.34,
+   88.21,
+   30.45
+  ]
+ },
+ "temporal_coverage": {
+  "start": "2015-09-20T00:00:00Z",
+  "end": null
+ },
+ "crs": null,
+ "status": "VERIFIED_SOURCE",
+ "evidence_type": "observed",
+ "is_fixture": false,
+ "limitations": [
+  "Names are as printed in Schedule 4, including its qualifiers (for example for the two Nawalparasi and the two Rukum districts).",
+  "The Nepali text layer was converted from the Preeti font; the conversion is letter for letter, and every name is checked to be clean Devanagari.",
+  "Schedule 4 numbers provinces 1 to 7; province names adopted later are not part of it."
+ ],
+ "uncertainty": "None in the names themselves; a district renamed by a later amendment would need a new release.",
+ "update_frequency": "on amendment",
+ "stale_after": null,
+ "artifact": {
+  "path": "/data/nepal-district-names-ne/1.0.0/names.json",
+  "format": "JSON",
+  "sha256": "fdc25c0dc223497f267fe7819270a7362ca9f8b7539994d44e025f8e8009b0f7",
+  "byte_size": 14542
+ }
+}
