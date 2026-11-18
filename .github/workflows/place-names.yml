@@ -14,17 +14,16 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+      - name: Install pdftotext
+        run: sudo apt-get install -y -qq poppler-utils >/dev/null
       - name: Fetch the constitution
         env:
           GOV_PROXY: ${{ secrets.GOV_PROXY }}
         run: python pipelines/place_names/acquire.py build/place-names
-      - name: Show Schedule 4 as text
+      - name: Show Schedule 4
         run: |
-          sudo apt-get install -y -qq poppler-utils >/dev/null
-          pdfinfo build/place-names/constitution.pdf | head -20
-          pdftotext -layout build/place-names/constitution.pdf build/place-names/constitution.txt
-          grep -n "अनुसूची" build/place-names/constitution.txt | head -20
-          awk '/अनुसूची *[-–—]? *४/{f=1} f{print; n++} n>140{exit}' build/place-names/constitution.txt
+          pdfinfo build/place-names/constitution.pdf | grep -E "Title|Pages|Producer|CreationDate"
+          cat build/place-names/schedule-4.txt
       - uses: actions/upload-artifact@v4
         with:
           name: place-names-source
