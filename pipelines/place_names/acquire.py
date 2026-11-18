@@ -12,18 +12,19 @@ route that worked is recorded:
   3. the Internet Archive's stored copy of the same official URL (raw bytes, "id_" mode).
 A file is accepted only if its text holds the schedule; its SHA-256 is recorded. Needs pdftotext (poppler-utils).
 """
-import hashlib, json, os, re, subprocess, sys, tempfile, urllib.parse, urllib.request
+import hashlib, json, os, re, subprocess, sys, tempfile, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
 UA = "himalayan-disaster-atlas/1.0 (+https://github.com/prasidupadhya/Himalayan-Disaster-Atlas)"
+# Each source: the official URL and an Internet Archive capture of exactly that URL (timestamp from its index).
 SOURCES = {
-    "ne": ["https://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान.pdf",
-           "https://supremecourt.gov.np/court/public/assets/downloads/नेपालको_संविधान_२०७२.pdf",
-           "https://www.moljpa.gov.np/wp-content/uploads/2018/02/नेपालको-संविधान-जारी-हुँदाको-पाठ.pdf"],
-    "en": ["https://www.moljpa.gov.np/wp-content/uploads/2021/01/Constitution-of-Nepal-2nd-amd.-English.pdf",
-           "https://www.moljpa.gov.np/en/wp-content/uploads/2021/04/Constitution-of-Nepal-Revised-and-re-edited-English-version-as-amended.pdf",
-           "https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Constitution-of-Nepal.pdf"],
+    "ne": [("http://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान.pdf", "20250117083916"),
+           ("http://www.moljpa.gov.np/wp-content/uploads/2020/06/नेपालको-संविधान-दोस्रो-संशोधन-२०७७.pdf", "20211117075003"),
+           ("https://supremecourt.gov.np/court/public/assets/downloads/नेपालको_संविधान_२०७२.pdf", "20220302170403")],
+    "en": [("https://www.moljpa.gov.np/wp-content/uploads/2021/01/Constitution-of-Nepal-2nd-amd.-English.pdf", "20240616183854"),
+           ("https://www.moljpa.gov.np/en/wp-content/uploads/2021/04/Constitution-of-Nepal-Revised-and-re-edited-English-version-as-amended.pdf", "20240520152216"),
+           ("https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Constitution-of-Nepal.pdf", "20240422170544")],
 }
 # Where the schedule starts and ends in each language, and a word that must appear right after its heading.
 MARKS = {"ne": (r"अनुसूची\s*[-–—]?\s*४", r"अनुसूची\s*[-–—]?\s*५", "जिल्ला"),
@@ -39,6 +40,20 @@ def get(url, proxy=None, timeout=60):
     handlers = [urllib.request.ProxyHandler({"http": proxy, "https": proxy})] if proxy else []
     with urllib.request.build_opener(*handlers).open(urllib.request.Request(quoted(url), headers={"User-Agent": UA}), timeout=timeout) as r:
         return r.read(), r.geturl()
+
+
+def fetch(route, url, proxy):
+    """The archive refuses bursts of requests: its captures are paced and retried."""
+    if route != "internet-archive":
+        return get(url, proxy)
+    for wait in (3, 10, 30):
+        time.sleep(wait)
+        try:
+            return get(url, timeout=90)
+        except OSError as e:
+            if "refused" not in str(e) and "timed out" not in str(e):
+                raise
+    return get(url, timeout=90)
 
 
 def text_of(pdf):
@@ -60,22 +75,23 @@ def schedule(text, lang):
 def diagnose(text, lang):
     deva = sum("ऀ" <= ch <= "ॿ" for ch in text)
     heads = [text[m.start(): m.start() + 120].replace("\n", " ") for m in re.finditer(r"अनुसूची|Schedule", text)][:6]
-    return f"{len(text)} chars, {deva} Devanagari; headings: {heads}"
+    sample = re.sub(r"\s+", " ", text[2000:2200])
+    return f"{len(text)} chars, {deva} Devanagari; headings: {heads}; sample: {sample!r}"
 
 
-def routes(url):
+def routes(url, stamp):
     yield "direct", url, None
     if os.environ.get("GOV_PROXY", "").strip():
         yield "gov-proxy", url, os.environ["GOV_PROXY"].strip()
-    yield "internet-archive", f"https://web.archive.org/web/2026id_/{url}", None
+    yield "internet-archive", f"https://web.archive.org/web/{stamp}id_/{url}", None
 
 
 def acquire(lang, out):
     tried = []
-    for official in SOURCES[lang]:
-        for route, url, proxy in routes(official):
+    for official, stamp in SOURCES[lang]:
+        for route, url, proxy in routes(official, stamp):
             try:
-                body, final = get(url, proxy)
+                body, final = fetch(route, url, proxy)
             except Exception as e:
                 tried.append({"route": route, "url": official, "error": f"{type(e).__name__}: {e}"[:200]})
                 continue
