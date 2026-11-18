@@ -33,6 +33,8 @@ FRESH_HOURS = 24
 # The world-record 24-hour rainfall (Foc-Foc, La Réunion, 1966, WMO); larger totals are instrument faults.
 RAIN_24H_MAX_MM = 1825
 ALERTS = ("ABOVE DANGER LEVEL", "ABOVE WARNING LEVEL")
+# Link text that names an action, not the document; such a link is labelled by the text beside it instead.
+GENERIC_LINK = re.compile(r"^(download( pdf| file)?|view( pdf)?|read more|click here|pdf|डाउनलोड)$", re.I)
 DOCUMENT = re.compile(r"\.(pdf|docx?|xlsx?|pptx?|jpe?g|png)(\?|$)", re.I)
 DATE_PATTERNS = [
     r"\b\d{4}-\d{2}-\d{2}\b",
@@ -92,8 +94,10 @@ def fetch(url):
     return int(getattr(response, "status", 0) or 0), body[: LIMITS["body"]], str(getattr(response, "url", url) or url), content_type
 
 
-def render(url):
-    """Like fetch, for pages built by JavaScript in the browser: loads them in headless Chromium."""
+def render(url, wait_for=None, click=None):
+    """Like fetch, for pages built by JavaScript in the browser: loads them in headless Chromium.
+    For a page that loads its content only when a tab is opened, `click` is the visible text of that tab, and `wait_for`
+    a CSS selector the copy waits for before it is taken."""
     from scrapling.fetchers import DynamicFetcher
 
     options = {"headless": True, "network_idle": True, "timeout": 45_000, "useragent": USER_AGENT,
@@ -102,6 +106,10 @@ def render(url):
         options["executable_path"] = os.environ["GOV_BROWSER_PATH"]
     if proxy_for(url):
         options["proxy"] = proxy_for(url)
+    if click:
+        options["page_action"] = lambda page: page.get_by_text(click, exact=False).first.click()
+    if wait_for:
+        options.update(wait_selector=wait_for, wait_selector_state="attached")
     response = DynamicFetcher.fetch(url, **options)
     body = response.body if isinstance(response.body, bytes) else str(response.body).encode("utf-8")
     return int(getattr(response, "status", 0) or 0), body[: LIMITS["body"]], str(getattr(response, "url", url) or url), "text/html"
@@ -122,6 +130,20 @@ def robots_allows(url, fetcher=fetch):
 
 
 # ---- extraction -------------------------------------------------------------------------------
+
+def beside(anchor, generic):
+    """The verbatim text around a link whose own text is generic: its parent's text without the link's, up to two levels up,
+    and only from an element that holds no other link, so a title is never borrowed from a neighbouring item."""
+    node = anchor
+    for _ in range(2):
+        node = node.parent
+        if node is None or len(node.css("a[href]")) > 1:
+            return None
+        text = clean(node.get_all_text(separator=" ", strip=True).replace(generic, " "), 240)
+        if text:
+            return text
+    return None
+
 
 def extract_html(body, url):
     """Generic, verbatim extraction: title, headings, tables, links, paragraphs and date strings."""
@@ -156,6 +178,8 @@ def extract_html(body, url):
             continue
         absolute = page.urljoin(href)
         text = clean(anchor.get_all_text(separator=" ", strip=True), 240)
+        if GENERIC_LINK.match(text):
+            text = beside(anchor, text) or text
         if absolute in seen or not text:
             continue
         seen.add(absolute)
@@ -422,7 +446,8 @@ def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None, r
             if not robots(source["url"], robots_once):
                 entry["status"] = "blocked-by-robots"
             else:
-                status, body, final_url, _ = (show if source.get("render") else get)(source["url"])
+                page = guard(dead, lambda url: renderer(url, wait_for=source["wait_for"], click=source.get("click"))) if source.get("wait_for") else show
+                status, body, final_url, _ = (page if source.get("render") else get)(source["url"])
                 entry["http_status"] = status
                 if status >= 400:
                     entry["status"] = "unreachable"
