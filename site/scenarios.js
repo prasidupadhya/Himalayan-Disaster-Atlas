@@ -143,8 +143,10 @@ function play(o, s, line, r) {
   }
   function followFront(km, head, seek) {
     const flight = !!map.getTerrain(), now = performance.now();
-    if (flight && !reduced) flightZoom ??= Math.max(map.getZoom(), 10.7);
-    else flightZoom = undefined;
+    if (flight && !reduced && flightZoom === undefined) {
+      flightZoom = Math.max(map.getZoom(), 10.7);
+      seek = true;
+    } else if (!flight) flightZoom = undefined;
     if (seek) {
       const duration = reduced ? 0 : 900;
       hold = now + duration; lastCamera = null;
@@ -177,7 +179,7 @@ function play(o, s, line, r) {
     const moving = front < total && t > 0, head = P.pointAt(r.samples, front);
     terrain?.progress(mid * t / 1000, t >= end ? total : tail, mid * s.duration_s / 1000);
     flat?.progress(head);
-    if (playing && follow.checked && moving && performance.now() > hold) followFront(front, head, false);
+    if (playing && follow.checked && moving && performance.now() > hold && !map.isMoving()) followFront(front, head, false);
     // Keep the ribbon and camera moving independently of tile repaints,
     // marker changes and text updates. A paused seek always paints at once.
     const now = performance.now();
@@ -206,7 +208,11 @@ function play(o, s, line, r) {
   function tick(now) {
     if (!playing) return;
     if (last !== null && now - last < 32) { frame = requestAnimationFrame(tick); return; }
-    if (last !== null && now > hold) t = Math.min(end, t + (now - last) / (seconds * 1000) * end * speed);
+    if (last !== null && now > hold && !(follow.checked && map.isMoving())) {
+      // A late terrain frame must not teleport the camera across a valley.
+      const elapsed = follow.checked && map.getTerrain() && !reduced ? Math.min(now - last, 120) : now - last;
+      t = Math.min(end, t + elapsed / (seconds * 1000) * end * speed);
+    }
     last = now;
     if (t >= end) { playing = false; if (follow.checked) fit(line); }
     draw();
