@@ -10,7 +10,8 @@ route that worked is recorded:
   1. direct from the official URL;
   2. through GOV_PROXY, a proxy the owner controls on a network the host accepts (if set);
   3. the Internet Archive's stored copy of the same official URL (raw bytes, "id_" mode).
-A file is accepted only if its text holds the schedule; its SHA-256 is recorded. Needs pdftotext (poppler-utils).
+A file is accepted only if its text holds the schedule; its SHA-256 is recorded. Needs pdftotext (poppler-utils)
+and, for the Preeti-font Nepali text, npttf2utf (pipelines/place_names/requirements.txt).
 """
 import hashlib, json, os, re, subprocess, sys, tempfile, time, urllib.parse, urllib.request
 from datetime import datetime, timezone
@@ -27,8 +28,8 @@ SOURCES = {
            ("https://www.lawcommission.gov.np/en/wp-content/uploads/2021/01/Constitution-of-Nepal.pdf", "20240422170544")],
 }
 # Where the schedule starts and ends in each language, and a word that must appear right after its heading.
-MARKS = {"ne": (r"अनुसूची\s*[-–—]?\s*४", r"अनुसूची\s*[-–—]?\s*५", "जिल्ला"),
-         "en": (r"Schedule\s*[-–—]?\s*4\b", r"Schedule\s*[-–—]?\s*5\b", "istrict")}
+MARKS = {"ne": (r"अनुसूची\s*[-–—]?\s*४", r"अनुसूची\s*[-–—]?\s*५", "प्रदेश"),
+         "en": (r"Schedule\s*[-–—]?\s*4\b", r"Schedule\s*[-–—]?\s*5\b", "Province")}
 
 
 def quoted(url):
@@ -63,13 +64,25 @@ def text_of(pdf):
 
 
 def schedule(text, lang):
-    """The schedule's text, or None. Of every heading match, the one followed by the word for district is taken."""
+    """The schedule's text, or None. The schedule itself is the last heading followed closely by the word for province;
+    earlier matches are articles that mention it."""
     start, end, word = MARKS[lang]
-    for m in re.finditer(start, text):
-        if word in text[m.end(): m.end() + 800]:
+    for m in reversed(list(re.finditer(start, text))):
+        if word in text[m.end(): m.end() + 300]:
             stop = re.search(end, text[m.end():])
             return text[m.start(): m.end() + (stop.start() if stop else 8000)]
     return None
+
+
+def unicode_text(text):
+    """Text as Unicode Devanagari. Some official PDFs are set in the legacy Preeti font, whose text layer stores
+    Devanagari as ASCII; npttf2utf maps that font back to Unicode letter for letter (no transliteration)."""
+    if sum("\u0900" <= ch <= "\u097f" for ch in text) > len(text) / 20 or "g]kfn" not in text:
+        return text, None
+    from npttf2utf.base.fontmapper import FontMapper
+    import npttf2utf
+    rules = Path(npttf2utf.__file__).with_name("map.json")
+    return FontMapper(str(rules)).map_to_unicode(text, from_font="Preeti"), "Preeti, converted with npttf2utf 0.3.7"
 
 
 def diagnose(text, lang):
@@ -98,7 +111,7 @@ def acquire(lang, out):
             if not body.startswith(b"%PDF"):
                 tried.append({"route": route, "url": official, "error": f"not a PDF ({len(body)} bytes)"})
                 continue
-            text = text_of(body)
+            text, font = unicode_text(text_of(body)) if lang == "ne" else (text_of(body), None)
             part = schedule(text, lang)
             if part is None:
                 tried.append({"route": route, "url": official, "error": "no schedule found: " + diagnose(text, lang)})
@@ -107,7 +120,7 @@ def acquire(lang, out):
             (out / f"constitution-{lang}.pdf").write_bytes(body)
             (out / f"schedule-4-{lang}.txt").write_text(part, encoding="utf-8")
             return {"lang": lang, "official_url": official, "route": route, "fetched_from": final if route != "gov-proxy" else official,
-                    "sha256": hashlib.sha256(body).hexdigest(), "bytes": len(body),
+                    "sha256": hashlib.sha256(body).hexdigest(), "bytes": len(body), "legacy_font": font,
                     "retrieved_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "failed_routes": tried}
     print(json.dumps(tried, ensure_ascii=False, indent=1), file=sys.stderr)
     return None

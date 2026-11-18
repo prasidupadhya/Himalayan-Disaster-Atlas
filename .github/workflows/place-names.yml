@@ -14,8 +14,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
-      - name: Install pdftotext
-        run: sudo apt-get install -y -qq poppler-utils >/dev/null
+      - name: Install pdftotext and the font converter
+        run: |
+          sudo apt-get install -y -qq poppler-utils >/dev/null
+          pip install -q -r pipelines/place_names/requirements.txt
       - name: Fetch the constitution
         env:
           GOV_PROXY: ${{ secrets.GOV_PROXY }}
