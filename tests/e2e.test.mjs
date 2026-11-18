@@ -64,6 +64,85 @@ for (const device of Object.keys(DEVICES)) for (const [lang, theme] of [['en', '
   });
 }
 
+test('peak labels use published Devanagari names and reserve space in both map views', async () => {
+  const { page, errors, close } = await open('phone', '/map/', { lang: 'ne', reducedMotion: 'reduce', viewport: { width: 360, height: 780 } });
+  try {
+    const labels = page.locator('.peak-label');
+    await labels.first().waitFor();
+    const separate = () => labels.evaluateAll(nodes => {
+      const boxes = nodes.map(n => n.getBoundingClientRect());
+      return boxes.every((a, i) => boxes.slice(i + 1).every(b => a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top));
+    });
+    assert.ok(await separate());
+    await inspectTerrain(page);
+    await page.locator('[data-id=tilt]').check();
+    await page.waitForFunction(() => scenarioMap.getPitch() > 50);
+    const peaks = JSON.parse(gunzipSync(readFileSync(new URL('../site/data/nepal-mountains/1.0.0/features.geojson.gz', import.meta.url)))).features;
+    const named = peaks.find(f => f.properties.aliases.includes('धौलागिरी हिमाल'));
+    const locate = async xy => {
+      await page.evaluate(p => scenarioMap.jumpTo({ center: p, zoom: 12 }), xy);
+    };
+    await locate(named.geometry.coordinates);
+    await page.getByText('धौलागिरी हिमाल · ८,१६७ मि.', { exact: true }).waitFor();
+    assert.ok(await separate());
+    assert.equal(await page.evaluate(() => scenarioMap.getPaintProperty('lakes', 'circle-pitch-alignment')), 'map');
+    const day = await page.evaluate(() => scenarioMap.getSky()['sky-color']);
+    await page.locator('#theme').click();
+    assert.notEqual(await page.evaluate(() => scenarioMap.getSky()['sky-color']), day);
+    await page.locator('[data-id=glaciers]').check();
+    await page.waitForFunction(() => scenarioMap.getLayer('glaciers') && scenarioMap.getPaintProperty('glaciers', 'fill-color') === '#c4e9f1');
+    const unknown = peaks.find(f => f.properties.name === 'Lobuche' && f.properties.value === null);
+    await locate(unknown.geometry.coordinates);
+    await page.getByText(/Lobuche.*UNKNOWN/).waitFor();
+    assert.ok(await separate());
+    const coverage = await page.evaluate(() => {
+      const [w, s, e, n] = scenarioMap.getStyle().sources.dem.bounds;
+      return [0, 90, 180, -90].every(bearing => {
+        scenarioMap.jumpTo({ center: [e, n], bearing, zoom: scenarioMap.getMinZoom() });
+        const view = scenarioMap.getBounds();
+        return view.getWest() >= w && view.getEast() <= e && view.getSouth() >= s && view.getNorth() <= n;
+      });
+    });
+    assert.ok(coverage, 'the pitched view is inside the DEM even at the far corner');
+    await page.locator('[data-id=tilt]').uncheck();
+    assert.equal(await page.evaluate(() => scenarioMap.getPitch()), 0);
+    await locate(named.geometry.coordinates);
+    await page.getByText('धौलागिरी हिमाल · ८,१६७ मि.', { exact: true }).waitFor();
+    await locate(unknown.geometry.coordinates);
+    await page.getByText(/Lobuche.*UNKNOWN/).waitFor();
+    await page.evaluate(() => scenarioMap.setZoom(7));
+    await page.getByText(/Lobuche.*UNKNOWN/).waitFor({ state: 'detached' });
+    assert.ok(await separate());
+    assert.equal(await page.locator('#layers input').count(), 6);
+    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    assert.deepEqual(errors, []);
+  } finally { await close(); }
+});
+
+test('selecting a glacial lake flies to its published centroid', async () => {
+  const { page, errors, close } = await open('laptop', '/map/');
+  try {
+    await inspectTerrain(page);
+    await page.locator('[data-id=tilt]').check();
+    await page.evaluate(() => { scenarioMap.stop(); scenarioMap.jumpTo({ center: [86.92, 27.9], zoom: 9.6, pitch: 45 }); });
+    await page.waitForFunction(() => scenarioMap.areTilesLoaded() && scenarioMap.queryRenderedFeatures({ layers: ['lakes'] }).length > 0);
+    const lake = await page.evaluate(() => {
+      const canvas = scenarioMap.getCanvas(), box = canvas.getBoundingClientRect();
+      const lake = scenarioMap.queryRenderedFeatures([[60, 60], [box.width - 70, box.height - 70]], { layers: ['lakes'] })[0];
+      const xy = lake.geometry.coordinates, p = scenarioMap.project(xy);
+      window.flyDurations = [];
+      const fly = scenarioMap.flyTo;
+      scenarioMap.flyTo = function (options, data) { flyDurations.push(options.duration); return fly.call(this, options, data); };
+      return { x: box.left + p.x, y: box.top + p.y };
+    });
+    await page.mouse.click(lake.x, lake.y);
+    await page.locator('.maplibregl-popup').waitFor();
+    assert.ok(await page.evaluate(() => flyDurations.some(d => d > 0)));
+    await page.waitForFunction(() => !scenarioMap.isMoving());
+    assert.deepEqual(errors, []);
+  } finally { await close(); }
+});
+
 test('Today shows the four headline readings and the source of each section', async () => {
   const { page, close } = await open('phone', '/');
   assert.equal(await page.locator('.reading').count(), 4);
