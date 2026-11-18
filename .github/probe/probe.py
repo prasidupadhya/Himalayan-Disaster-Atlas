@@ -1,4 +1,4 @@
-# Runs the real digest code for the flood-bulletin source only, and prints what it would publish. Commits nothing.
+# Runs the real digest code for the flood-bulletin source only (opens the tab, waits for links). Commits nothing.
 import json
 from pipelines.gov_feeds.digest import build, SOURCES
 src = [s for s in json.loads(SOURCES.read_text())["sources"] if s["id"] == "dhm-flood-archive"]
