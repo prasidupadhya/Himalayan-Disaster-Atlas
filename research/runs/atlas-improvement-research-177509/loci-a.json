@@ -1,0 +1,59 @@
+{
+ "analyst_id": "a",
+ "loci": [
+  {
+   "name": "bssa14-single-vs30-kathmandu-basin",
+   "flavor": "dialectical",
+   "one_line": "Is BSSA14 with one Vs30 adequate for Nepal scenarios, or must the Atlas add Himalaya-specific GMPE choice and a Vs30/basin-amplification layer (Kathmandu valley), validated against Gorkha 2015 records?",
+   "rationale": "Contradiction cluster rock-gmpe-vs-basin. METEOR (hazard-map PGA grid) supports a generic first-order approach; EEFIT Kathmandu site-amplification note and the two Gorkha strong-motion/attenuation notes show Himalaya-specific relations fit better and basin amplification (~0.4 s, ~5 s) exceeds code spectra. Corpus is abstract-only for two of them and does not say which open Vs30 proxy (USGS slope-based, geology-based) or GMPE logic tree is practical in a static JS site.",
+   "corpus_evidence": ["meteor-nepal-seismic-hazard-map-with-mean-peak-ground-acceleration-pga-in-g-for","site-amplification-in-the-kathmandu-valley-during-the-2015-m76-gorkha-nepal-eart","attenuation-relation-predicted-observed-ground-motion-of-gorkha-nepal-earthquake","the-2015-mw-78-gorkha-earthquake-in-nepal-and-its-aftershocks-analysis-of-strong","pager-scientific-background"],
+   "opposing_positions": [
+    {"position": "Generic NGA-West2 (BSSA14) with Vs30 scaling gives defensible first-order PGA bands for a public scenario tool", "sources": ["meteor-nepal-seismic-hazard-map-with-mean-peak-ground-acceleration-pga-in-g-for"]},
+    {"position": "Gorkha records favour Himalaya-specific relations and show basin amplification that rock-only PGA misses", "sources": ["attenuation-relation-predicted-observed-ground-motion-of-gorkha-nepal-earthquake","site-amplification-in-the-kathmandu-valley-during-the-2015-m76-gorkha-nepal-eart","the-2015-mw-78-gorkha-earthquake-in-nepal-and-its-aftershocks-analysis-of-strong"]}
+   ],
+   "suggested_starting_urls": ["https://earthquake.usgs.gov/data/vs30/","https://www.globalquakemodel.org/"],
+   "suggested_searches": ["Gorkha 2015 GMPE evaluation BSSA14 residuals Nepal","Vs30 map Nepal Kathmandu valley slope proxy","Kathmandu basin amplification PGA Gorkha USGS ShakeMap comparison","ground motion model selection Himalaya subduction GMPE Nepal"]
+  },
+  {
+   "name": "constant-celerity-routing-vs-process-chain-glof",
+   "flavor": "dialectical",
+   "one_line": "How wrong is a triangular/rectangular hydrograph at three constant wave speeds against observed GLOF/debris-flow events (Palcacocha, Melamchi 2021, Thame 2024, Tsho Rolpa), and what minimal upgrade (attenuation, slope-dependent celerity, uncertainty bounds, honest labelling) is justified?",
+   "rationale": "Cluster simple-routing-vs-process-chain. Mergili 2020 back-calculation gives 36-70 min travel bounds usable by simple routing; Hoch 2019 (model complexity), the Melamchi erosional-cascade preprint, Kayastha & Maskey Tsho Rolpa NWS-BREACH peaks, and the Thame EGU abstract argue entrainment/sediment cascades make constant-celerity routing misleading. The corpus gestures at but does not quantify error vs observed arrival times.",
+   "corpus_evidence": ["hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera","nhess-evaluating-the-impact-of-model-complexity-on-flood-wave-propagation-and-in","the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o","piahs-glacial-lake-outburst-flood-glof-modeling-of-tsho-rolpa-glacial-lake-nepal","gmd-ravaflow-v1-an-advanced-open-source-computational-framework-for-the-propagat","abstract-egu25-12752"],
+   "opposing_positions": [
+    {"position": "Simple celerity/kinematic routing is transparent, fast and gives usable travel-time bounds", "sources": ["hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera"]},
+    {"position": "Sediment-laden cascades and model complexity change arrival time and peak enough that constant-speed routing misleads", "sources": ["nhess-evaluating-the-impact-of-model-complexity-on-flood-wave-propagation-and-in","the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o","piahs-glacial-lake-outburst-flood-glof-modeling-of-tsho-rolpa-glacial-lake-nepal","abstract-egu25-12752"]}
+   ],
+   "suggested_starting_urls": ["https://hess.copernicus.org/articles/24/93/2020/","https://nhess.copernicus.org/articles/19/1723/2019/"],
+   "suggested_searches": ["GLOF flood wave celerity empirical travel time Himalaya Dig Tsho Chorabari","Thame 2024 GLOF arrival time Bhote Koshi 2026 observed travel time","Melamchi 2021 flood hydrograph peak discharge travel time","HEC-RAS vs kinematic GLOF routing uncertainty public hazard map","Manning-based celerity debris flood GLOF scenario simple model validation"]
+  },
+  {
+   "name": "glof-origin-selection-beyond-pdgl-list",
+   "flavor": "dialectical",
+   "one_line": "Should the Atlas offer GLOF scenario origins beyond the 21 ICIMOD PDGLs (small lakes, cascades, Tibet-side lakes, 2024 Thame and 2026 Bhotekoshi events), and what open lake inventories and dam/volume data would support it responsibly?",
+   "rationale": "Cluster pdgl-list-vs-small-lakes. ICIMOD 2020 inventory (3,624 lakes, 21 PDGLs) versus the Cook et al. EGU25 abstract showing Thame came from two small lakes not on any danger list, plus the Al Jazeera and Nepal Economic Forum pieces. Corpus does not say what inventories (GLAKES, Kashmir/Tibet, Cook/Quincey) and volume-area scaling are open and usable, nor the responsibility risk of publishing scenarios for lakes with no assessment.",
+   "corpus_evidence": ["inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1","abstract-egu25-12752","the-thame-flood-a-window-into-the-himalayan-climate-crisis-nepal-economic-forum","the-nepal-floods-question-when-the-himalayas-collapse-who-gets-warned-climate-cr","sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e","quantifying-the-long-term-evolution-of-glacial-lakes-and-the-impact-of-the-2024"],
+   "opposing_positions": [
+    {"position": "The ICIMOD PDGL list is the authoritative, criteria-based basis for GLOF scenario origins", "sources": ["inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1"]},
+    {"position": "Thame 2024 and the 2026 transboundary event show the list misses cascade, small-lake and upstream-Tibet hazards", "sources": ["abstract-egu25-12752","the-thame-flood-a-window-into-the-himalayan-climate-crisis-nepal-economic-forum","the-nepal-floods-question-when-the-himalayas-collapse-who-gets-warned-climate-cr","sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e"]}
+   ],
+   "suggested_starting_urls": ["https://egusphere.copernicus.org/","https://www.icimod.org/"],
+   "suggested_searches":["Thame 2024 GLOF Cook Brun cascade small lakes not dangerous","GLOF susceptibility ranking Nepal Tibet lakes open dataset 2024","volume-area scaling glacial lake open inventory GLAKES Nepal","how scenario-based GLOF hazard maps communicated without site assessment ethics"]
+  },
+  {
+   "name": "scenario-uncertainty-communication-and-framing",
+   "flavor": "convergent",
+   "one_line": "What evidence-backed design (ranges vs points, probability formats, map symbology, 'hypothetical' framing, Nepali plain-language, printable report content) should the Atlas use to present scenario uncertainty to lay and official users without false precision or misread as forecasts?",
+   "rationale": "Cluster probability-formats: Demichelis & Ongaro 2024, Lindell 2020 hazard-map comprehension, Haughton & White 2018 on contestation, and the DHM bulletin analysis (gc-communicating-complex-forecasts) point at the issue and Mongabay 2026 shows generic Nepali-only messages failing; none gives tested guidance for Nepali-language scenario tools or for misreading scenarios as live warnings.",
+   "corpus_evidence": ["public-understanding-and-scientific-uncertainty-the-communication-of-risk-in-the","frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki","r-e-g-u-l-a-r-p-a-p-e-r","gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e","using-geovisualizations-to-educate-the-public-about-environmental-health","during-nepal-floods-decentralized-community-based-warning-saved-lives"],
+   "suggested_starting_urls": ["https://www.frontiersin.org/","https://gc.copernicus.org/"],
+   "suggested_searches":["hazard map comprehension experiment uncertainty ranges vs single value","scenario vs forecast confusion public risk communication disclaimer","Nepali language risk communication evaluation flood maps","USGS ShakeMap PAGER uncertainty communication evaluation"]
+  }
+ ],
+ "skip_loci": [
+  {"slug":"sms-vs-cell-broadcast-cap","reason":"Relevant but peripheral to an atlas that does not send alerts; CAP feed ingestion can be handled in synthesis from the WMO/CARD notes."},
+  {"slug":"connectivity-estimates","reason":"Corpus already has several consistent figures; scope mismatch rather than real dispute."},
+  {"slug":"open-platform-sustainability","reason":"Covered by OpenDRI notes; sibling analyst more likely to take it."},
+  {"slug":"ffews-success-vs-last-mile","reason":"Both sides largely right (scope mismatch); left to sibling analyst or synthesis."}
+ ]
+}
