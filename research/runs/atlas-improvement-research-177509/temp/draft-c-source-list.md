@@ -1,0 +1,46 @@
+# Draft C — must_read_note_ids (n=43)
+Angle: Synthesis and practitioner roadmap: organise around concrete, buildable changes with boundary conditions (when simple models suffice, when a daily copy is enough, when expansion needs safeguards). Weigh each change by evidence grade, delivery cost on low bandwidth, and maintenance burden for a small volunteer project; end with a sequenced roadmap including validation tasks.
+
+- interim-report-glof-origin-selection-beyond-pdgl-list: Recommend tiered origin layer: 21 PDGLs, 25 TAR PDGLs, open-inventory lakes >=0.02 km2 lab
+- interim-report-constant-celerity-routing-vs-process-chain-glof: Constant 2-6 m/s routing is wrong near source (Bhote Koshi 2026: 52 m/s decaying to ~7 m/s
+- interim-report-scenario-uncertainty-communication-and-framing: Ranged, soft-edged bands plus mandatory bilingual 'hypothetical, not a warning' banner; no
+- interim-report-bssa14-single-vs30-kathmandu-basin: Keep BSSA14 but replace 760 m/s default with USGS slope Vs30 grid, show sigma, caveat unmo
+- interim-report-reach-offline-lowbandwidth-bilingual: Connectivity estimates (MICS 82% hh vs ITU 48.4% individual) reconcile as different units;
+- interim-report-atlas-role-in-warning-ecosystem: Atlas should be a complementary, fail-loud, timestamped mirror and preparedness layer, not
+- inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1: ICIMOD/UNDP Nepal 2020 inventory (2000 vs 2015 remote sensing, NDWI + manual delineation):
+- gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e: Geosci. Commun. 2020: DHM bulletin/SMS design, colour codes, last-mile comms analysis (lon
+- reducing-flood-casualties-in-nepal: WMO: FFEWS 2016 + SAFFGS 2018; deaths 166 (2017) to 27 (2022); West Rapti.
+- geomorphology: Cook et al. 2018 Science (author PDF): 5 Jul 2016 Gongbatongshacuo GLOF (~1.1e5 m3 per tex
+- arxiv241005918v1-physicsgeo-ph-8-oct-2024: Likelihood/LLH ranking of 16 GMPEs (incl. BSSA14, ASK14, CB14, CY14, ZHAO06/16) vs 465 spe
+- missed-opportunities-in-utilization-of-weather-forecasts-an-analysis-of-october: ISET-Nepal 2022 Bhandari & Dixit: Oct 2021 event; accurate forecast not used; tailor messa
+- early-warnings-for-all-nepal-must-turn-commitment-into-action-the-himalayan-time: Early warnings for all: Nepal must turn commitment into action - The Himalayan Times - Nep
+- nepal-holds-national-consultation-early-warnings-for-all-and-with-all: Nepal holds national consultation – Early Warnings for All and WITH All
+- crews-project-final-report: CREWS/EW4All Accelerator final report: total budget $5,458,639 (UNDRR, WMO, ITU, IFRC); Ne
+- improved-flood-preparedness-and-community-based-early-warnings-needed-in-nepal: Improved Flood Preparedness and Community-based Early Warnings Needed in Nepal
+- nepal-flood-impact-assessment: Nepal: Flood impact assessment
+- pmtiles-concepts-protomaps-docs: Protomaps Docs
+- basemap-localization-protomaps-docs: Protomaps Docs
+- performance-comparison-of-an-offline-pmtiles-powered-map-server-running-on-a-ras: Performance Comparison of an Offline PMTiles-Powered Map Server Running on a Raspberry Pi
+- wikiproject-nepal-openstreetmap-wiki: WikiProject Nepal - OpenStreetMap Wiki
+- keynamene-openstreetmap-wiki: Key:name:ne - OpenStreetMap Wiki
+- nepalmeetings2022-12-15-openstreetmap-wiki: Nepal/Meetings/2022-12-15 - OpenStreetMap Wiki
+- digital-2026-nepal-datareportal-global-digital-insights: Kepios/DataReportal Digital 2026 Nepal headline connectivity figures (internet users, mobi
+- nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-grow: ITU IDI 2026: Nepal 68.1, 48.4% use internet, 73.1% own mobile, 52.5% households online; ~
+- nepals-82-households-have-internet-but-digital-skills-fall-short: Reports Nepal MICS 2024/25 (12,802 households): 82% household internet, 85.1% smartphone,
+- devanagari-gap-analysis: W3C Devanagari Gap Analysis: browser/OpenType gaps for Devanagari - conjunct/grapheme clus
+- digital-accessibility-checklist: Prayatna Nepal 2026 Digital Accessibility Checklist: barriers by disability, guidance on w
+- introduction-to-understanding-wcag-21-wai-w3c: W3C
+- prioritizing-digital-accessibility-for-inclusive: Prayatna Nepal 2022 position paper audit of Nepali digital accessibility: WCAG AA testing
+- using-geovisualizations-to-educate-the-public-about-environmental-health: Slavik, Fish, Peters narrative review: six evidence-based geovisualization design strategi
+- uvm-study-reveals-millions-at-risk-college-of: College of…
+- frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki: Lindell 2020 (Frontiers Comp Sci) review of hazard-map comprehension research: people use
+- assessing-perceptions-and-interpretations-of-tsunami-maps-insights-from-the-publ: Water 2024 (Vera San Martin et al.): questionnaire of 181 (24 experts, 157 general users)
+- shakemap: USGS ShakeMap landing page: near-real-time ground motion/intensity maps with real-time fee
+- vs30-models-and-data: Vs30 Models and Data
+- automated-satellite-based-glacial-lake-inventory-and-change-detection-in-high-mo: Automated satellite-based glacial lake inventory and change detection in High Mountain Asi
+- open-data-for-resilience-initiative: GFDRR/World Bank case study (Innovation Lab) on OpenDRI's institutional investment in GeoN
+- opendri-7-sustaining: OpenDRI guide draft chapter on the Sustaining phase (self-described early consultant sketc
+- about-kathmandu-living-labs: KLL self-description: civic-tech OSM org founded 2013 from 2012/13 school and health facil
+- an-impact-based-early-warning-module-in-nepals-bipad-portal-undrr: UNDRR case study (20 Jun 2025): BIPAD impact-based forecasting module overlays OSM buildin
+- wmo-strengthens-early-warning-services-in-nepal: WMO project update (7 May 2025): 24-25 Apr 2025 CAP workshop with DHM, CARD, Nepal Red Cro
+- fatal-landslides-in-nepal-in-2024-to-date: Petley (Landslide Blog): 38 fatal landslides killed 135 people in Nepal to 17 July 2024; f

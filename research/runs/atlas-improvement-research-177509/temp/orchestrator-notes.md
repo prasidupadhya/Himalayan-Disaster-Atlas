@@ -23,3 +23,11 @@ The Atlas's highest-leverage improvements are (a) reliability/provenance of offi
 - B5: Tsho Rolpa breach peaks 8.2–26.7k m3/s (NWS-BREACH -> HEC-RAS). Hoch 2019: kinematic -> local-inertia routing raises peak NSE 0.48 -> 0.71 — direct evidence the Atlas's kinematic pulse is the weak link. Mergili 2020: predictive GLOF runs need explicit parameter uncertainty -> supports showing ranges (Atlas already shows slow/mid/fast).
 - B9: MICS 2024/25 82% households online but Karnali 68.5%, poorest 52.9%, weak digital skills (19% verify online info). ITU IDI 48% individual use — conflict to flag. Govt website directive 2021 requires Unicode, adjustable size, NE+EN. Preeti PDFs inaccessible.
 Escalation queue: Ponce PDF, LakeScientist, Copernicus case study.
+
+## Synthesis planning while drafts run (step 10)
+
+- Likely thesis: the Atlas improves most by becoming an honest pre-event planning tool: realistic defaults (site-aware Vs30, small GMPE ensemble, measured 5-9 m/s GLOF band with separate mass-flow case and peak attenuation), ranges as the main display, tiered lake origins with labels, and live data shown with its age. New live features are secondary.
+- Contentious items: (1) how far to go with near-real-time (Draft B will push; official CAP feed does not exist yet, BIPAD licence unknown); (2) unassessed-lake expansion vs misreading risk; (3) ensemble GMPE resting on a preprint ranking.
+- Must-commit beats: daily copy cannot warn (official timeline 08:40 trigger, ~09:00 rise, Galchhi +9 m in 30 min); flood deaths fell where official warnings worked, so do not compete; evidence grade beside each recommendation; validation tasks (Gorkha ShakeMap, Melamchi/2016 Bhote Koshi hindcast, Nepali reader test) as first-class roadmap items.
+- Landslides: largest missing hazard by deaths in monsoon (135 deaths in 38 fatal landslides by 17 July 2024); propose a read-only layer from official/curated data, not a model.
+- Roadmap ordering: (1) honesty fixes and staleness/health signals; (2) model default fixes plus validations; (3) reach (Nepali-first, page weight, offline cache, a11y); (4) data layers loaded on demand (Vs30, lake inventory); (5) partnerships, licence, CAP-ready output.

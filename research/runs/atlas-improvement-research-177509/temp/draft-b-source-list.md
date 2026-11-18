@@ -1,0 +1,46 @@
+# Draft B — must_read_note_ids (n=43)
+Angle: Steelman contrarian: the preparedness-only consensus undersells the Atlas. Argue that official warnings in Nepal still fail at speed, specificity and language, that global open flood forecasts, CAP, BIPAD and landslide data make a near-real-time complement feasible, and that simple transparent models are good enough if their spread is shown; test where this view breaks.
+
+- interim-report-glof-origin-selection-beyond-pdgl-list: Recommend tiered origin layer: 21 PDGLs, 25 TAR PDGLs, open-inventory lakes >=0.02 km2 lab
+- interim-report-constant-celerity-routing-vs-process-chain-glof: Constant 2-6 m/s routing is wrong near source (Bhote Koshi 2026: 52 m/s decaying to ~7 m/s
+- interim-report-scenario-uncertainty-communication-and-framing: Ranged, soft-edged bands plus mandatory bilingual 'hypothetical, not a warning' banner; no
+- interim-report-bssa14-single-vs30-kathmandu-basin: Keep BSSA14 but replace 760 m/s default with USGS slope Vs30 grid, show sigma, caveat unmo
+- interim-report-reach-offline-lowbandwidth-bilingual: Connectivity estimates (MICS 82% hh vs ITU 48.4% individual) reconcile as different units;
+- interim-report-atlas-role-in-warning-ecosystem: Atlas should be a complementary, fail-loud, timestamped mirror and preparedness layer, not
+- inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1: ICIMOD/UNDP Nepal 2020 inventory (2000 vs 2015 remote sensing, NDWI + manual delineation):
+- gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e: Geosci. Commun. 2020: DHM bulletin/SMS design, colour codes, last-mile comms analysis (lon
+- reducing-flood-casualties-in-nepal: WMO: FFEWS 2016 + SAFFGS 2018; deaths 166 (2017) to 27 (2022); West Rapti.
+- geomorphology: Cook et al. 2018 Science (author PDF): 5 Jul 2016 Gongbatongshacuo GLOF (~1.1e5 m3 per tex
+- arxiv241005918v1-physicsgeo-ph-8-oct-2024: Likelihood/LLH ranking of 16 GMPEs (incl. BSSA14, ASK14, CB14, CY14, ZHAO06/16) vs 465 spe
+- a-multi-source-quantitative-reconstruction-of-the-26-august-2026-bhote-koshi-roc: A multi-source quantitative reconstruction of the 26 August 2026 Bhote Koshi rock-ice aval
+- the-bhote-koshitrishuli-flash-flood-of-26-august-2026-rasuwa-nepal-warning-laten: The Bhote Koshi–Trishuli flash flood of 26 August 2026, Rasuwa, Nepal: warning latency exc
+- meteor-nepal-seismic-hazard-map-with-mean-peak-ground-acceleration-pga-in-g-for: GEM/BGS METEOR open dataset (Zenodo 19002227, 2019): Nepal mean PGA at 10% and 2% in 50 yr
+- seismic-risk-assessment-and-hazard-mapping-in-nepal: Chaulagain et al. 2015 Nat Hazards 78:583-602 (abstract page): OpenQuake-based national se
+- nepaleew-testing-the-feasibility-of-an-earthquake-early-warning-system-in-nepal: SEG GWB news (Feb 2022): NepalEEW deployed 20 low-cost OpenEEW IoT sensors in central Nepa
+- global-prediction-of-extreme-floods-in-ungauged-watersheds-nature: Nature
+- flood-forecasting: Flood Forecasting
+- enhancing-flood-forecasting-reliability-in-data-scarce-regions-with-a-distribute: Enhancing flood forecasting reliability in data-scarce regions with a distributed
+- an-impact-based-early-warning-module-in-nepals-bipad-portal-undrr: UNDRR case study (20 Jun 2025): BIPAD impact-based forecasting module overlays OSM buildin
+- why-bangladesh-needs-an-integrated-disaster-information-system-like-nepals-bipad: TBS 2024: BIPAD as one-portal integrated national DRM system (NDRRMA CEO Anil Pokhrel); bu
+- common-alerting-protocol: OASIS CAP v1.2 spec: XML alert schema (alert/info/area, severity/urgency/certainty, polygo
+- severe-weather-information-centre-30: WMO SWIC 3.0: global map/table of CAP warnings from WMO Members (severity/urgency/certaint
+- wmo-strengthens-early-warning-services-in-nepal: WMO project update (7 May 2025): 24-25 Apr 2025 CAP workshop with DHM, CARD, Nepal Red Cro
+- central-for-applied-research-and-development-card: CARD/TU event page for 24-25 Apr 2025 CAP training: CAP endorsed at WMO Cg-19 (2023) into
+- mobile-enabled-anticipatory-action-and-early-warning-systems-the-gsma-and-fcdo-v: GSMA M4H/FCDO blog (14 Jan 2025, Dec 2024 Kathmandu visit): Nepal sends location-based SMS
+- discussion-held-on-cell-broadcasting-for-early-warning-the-himalayan-times-nepal: Himalayan Times: NDRRMA (chief Pradeep Kumar Koirala) and MoHA held a stakeholder discussi
+- government-to-provide-voice-alerts-on-flood-weather-updates: NepaliTelecom (29 Jun 2025): DHM to pilot recorded voice-call flood/weather alerts from 20
+- ncell-sent-44-lakh-early-warning-sms-against-landslideflood: NepaliTelecom (Aug 2023): Ncell sent 4.4 million flood/landslide alert SMS in two months o
+- during-nepal-floods-decentralized-community-based-warning-saved-lives: Mongabay Sept 2026: Aug 26 2026 Bhotekoshi/Trishuli GLOF-type flood; official SMS late, ge
+- the-nepal-floods-question-when-the-himalayas-collapse-who-gets-warned-climate-cr: Al Jazeera Sept 2026: upstream-trigger warning gap; Kashmir glacial lake inventory (155 la
+- nhess-community-based-early-warning-systems-for-flood-risk-mitigation-in-nepal: Smith, Brown, Dugar 2017 NHESS: Karnali probabilistic forecasting 2-3h to 7-8h lead; last-
+- nhess-evaluating-the-impact-of-model-complexity-on-flood-wave-propagation-and-in: Hoch et al. 2019 (NHESS 19:1723): GLOFRIM 2.0 coupling PCR-GLOBWB with CaMa-Flood and LISF
+- gmd-ravaflow-v1-an-advanced-open-source-computational-framework-for-the-propagat: Mergili et al. 2017 (GMD 10:553): r.avaflow v1, open-source GIS-integrated two-phase mass
+- ai-forecasting-deployed-to-predict-nepal-landslides: SciDev (June 2024): University of Melbourne's SAFE-RICCS AI/satellite landslide forecastin
+- 28-october-2024: NDRRMA/DPNet preliminary loss and damage assessment of 26-28 Sept 2024 floods and landslid
+- fatal-landslides-in-nepal-in-2024-to-date: Petley (Landslide Blog): 38 fatal landslides killed 135 people in Nepal to 17 July 2024; f
+- mapping-for-resilience-crowd-sourced-mapping-in-crises-humanitarian-practice-net: ODI HPN: Open Cities mapped >100,000 Kathmandu Valley buildings, ~350 health facilities, ~
+- about-kathmandu-living-labs: KLL self-description: civic-tech OSM org founded 2013 from 2012/13 school and health facil
+- open-data-for-resilience-initiative: GFDRR/World Bank case study (Innovation Lab) on OpenDRI's institutional investment in GeoN
+- rainfall-data-remains-scarce-due-to-fewer-gauging-stations: Kathmandu Post 25 Jul 2023: Bishnumati flash flood while DHM recorded 2.7 mm at Kathmandu
+- nepal-wants-to-power-south-asia-it-does-not-know-what-its-rivers-are-doing: Opinion (2025): DHM has ~150 hydrometric stations for 6,000+ rivers, level only, no real-t
+- transforming-nepals-hydro-and-agrometeorological-services-to-build-resilience: World Bank 2022: BRCHP station upgrades, radar, NWP.

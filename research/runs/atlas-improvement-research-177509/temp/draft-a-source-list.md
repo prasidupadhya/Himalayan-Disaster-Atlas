@@ -1,0 +1,45 @@
+# Draft A — must_read_note_ids (n=42)
+Angle: Strongest thesis: the Atlas's biggest gains are in honesty and preparedness, not new features. Fix scenario defaults that understate hazard (rock-site Vs30, single GMPE, slow constant flood speeds, list-only lakes), make ranges and 'hypothetical, not a warning' framing the main display, and position the site as a pre-event planning tool beside official warnings.
+
+- interim-report-glof-origin-selection-beyond-pdgl-list: Recommend tiered origin layer: 21 PDGLs, 25 TAR PDGLs, open-inventory lakes >=0.02 km2 lab
+- interim-report-constant-celerity-routing-vs-process-chain-glof: Constant 2-6 m/s routing is wrong near source (Bhote Koshi 2026: 52 m/s decaying to ~7 m/s
+- interim-report-scenario-uncertainty-communication-and-framing: Ranged, soft-edged bands plus mandatory bilingual 'hypothetical, not a warning' banner; no
+- interim-report-bssa14-single-vs30-kathmandu-basin: Keep BSSA14 but replace 760 m/s default with USGS slope Vs30 grid, show sigma, caveat unmo
+- interim-report-reach-offline-lowbandwidth-bilingual: Connectivity estimates (MICS 82% hh vs ITU 48.4% individual) reconcile as different units;
+- interim-report-atlas-role-in-warning-ecosystem: Atlas should be a complementary, fail-loud, timestamped mirror and preparedness layer, not
+- inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1: ICIMOD/UNDP Nepal 2020 inventory (2000 vs 2015 remote sensing, NDWI + manual delineation):
+- gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e: Geosci. Commun. 2020: DHM bulletin/SMS design, colour codes, last-mile comms analysis (lon
+- reducing-flood-casualties-in-nepal: WMO: FFEWS 2016 + SAFFGS 2018; deaths 166 (2017) to 27 (2022); West Rapti.
+- geomorphology: Cook et al. 2018 Science (author PDF): 5 Jul 2016 Gongbatongshacuo GLOF (~1.1e5 m3 per tex
+- arxiv241005918v1-physicsgeo-ph-8-oct-2024: Likelihood/LLH ranking of 16 GMPEs (incl. BSSA14, ASK14, CB14, CY14, ZHAO06/16) vs 465 spe
+- site-amplification-in-the-kathmandu-valley-during-the-2015-m76-gorkha-nepal-eart: EEFIT (Bull Earthq Eng 2016, open access): microtremor-derived Vs profiles at Kathmandu si
+- the-2015-mw-78-gorkha-earthquake-in-nepal-and-its-aftershocks-analysis-of-strong: Abstract-only (paywalled). Strong-motion analysis of Gorkha 2015: KATNP spectra peaks at ~
+- attenuation-relation-predicted-observed-ground-motion-of-gorkha-nepal-earthquake: Abstract-only (paywalled). Natural Hazards 2015: Himalayan-region attenuation relations pr
+- analysis-of-strong-ground-motions-and-site-effects-at-kantipath-kathmandu-from-2: Dhakal et al. 2016: at KATNP Kathmandu, Japanese crustal/interplate GMPEs describe PGA/PGV
+- ground-motion-prediction-equation-for-the-kathmandu-valley-nepal-based-on-strong: Single-site/Kathmandu-Valley GMPE from M5.0-7.3 Gorkha aftershock records at 8 sites; site
+- vs30-models-and-data: Vs30 Models and Data
+- shakemap: USGS ShakeMap landing page: near-real-time ground motion/intensity maps with real-time fee
+- pager-scientific-background: USGS PAGER factsheet: ShakeMap intensity x LandScan population x country-specific loss mod
+- observational-fragility-functions-for-residential-stone-masonry-buildings-in-nep: Bull Earthq Eng 2018 (abstract only, paywalled): empirical fragility curves for rural ston
+- abstract-egu25-12752: EGU25 abstract (Cook, Shrestha, Brun, Berthier, Charrier): 16 Aug 2024 Thame GLOF came fro
+- the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o: Research Square preprint (not peer reviewed) on 15 June 2021 Melamchi flood: sediment-budg
+- piahs-glacial-lake-outburst-flood-glof-modeling-of-tsho-rolpa-glacial-lake-nepal: Kayastha & Maskey 2024 (Proc. IAHS 387): Tsho Rolpa (4552 m, Nepal) GLOF modelled with NWS
+- hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera: Mergili et al. 2020 (HESS 24:93): r.avaflow two-phase back-calculation of 1941 Palcacocha
+- automated-satellite-based-glacial-lake-inventory-and-change-detection-in-high-mo: Automated satellite-based glacial lake inventory and change detection in High Mountain Asi
+- quantifying-the-long-term-evolution-of-glacial-lakes-and-the-impact-of-the-2024: Quantifying the long-term evolution of glacial lakes and the impact of the 2024 Thame, Nep
+- frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki: Lindell 2020 (Frontiers Comp Sci) review of hazard-map comprehension research: people use
+- public-understanding-and-scientific-uncertainty-the-communication-of-risk-in-the: Demichelis & Ongaro 2024 (AIMS Geosciences 10(3):540-552): L'Aquila 2009 M6.3 earthquake;
+- r-e-g-u-l-a-r-p-a-p-e-r: Haughton & White 2018 (Trans Inst Br Geogr, 'Risky spaces'): interview study of hazard-map
+- assessing-perceptions-and-interpretations-of-tsunami-maps-insights-from-the-publ: Water 2024 (Vera San Martin et al.): questionnaire of 181 (24 experts, 157 general users)
+- science-strengthening-tsunami-safety-preventionweb: Earth Sciences NZ study (IJDRR, 2026), >1,100 surveyed on tsunami evacuation map designs;
+- missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properties-a: Opinion (Karn) on Sept 2024 floods: accurate 4-day DHM alert not translated to last mile;
+- sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e: BorderLens Aug 2026: 16-minute lag from Tibet flood entry to Rasuwa DAO; no binding Nepal-
+- major-flash-flood-sweeps-through-nepals-rasuwa-district-raising-fears-of-further: ICIMOD media advisory 26 Aug 2026 (updated 27 Aug): water levels rose rapidly ~9:00 AM loc
+- ndrrma-emergency-response-operations-center: NDRRMA SitRep #6 (informal English translation hosted by ADRRN): event 08:40 AM 26 Aug 202
+- keynamene-openstreetmap-wiki: Key:name:ne - OpenStreetMap Wiki
+- nepalmeetings2022-12-15-openstreetmap-wiki: Nepal/Meetings/2022-12-15 - OpenStreetMap Wiki
+- nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-grow: ITU IDI 2026: Nepal 68.1, 48.4% use internet, 73.1% own mobile, 52.5% households online; ~
+- nepals-82-households-have-internet-but-digital-skills-fall-short: Reports Nepal MICS 2024/25 (12,802 households): 82% household internet, 85.1% smartphone,
+- prioritizing-digital-accessibility-for-inclusive: Prayatna Nepal 2022 position paper audit of Nepali digital accessibility: WCAG AA testing
+- opendri-7-sustaining: OpenDRI guide draft chapter on the Sustaining phase (self-described early consultant sketc
+- fatal-landslides-in-nepal-in-2024-to-date: Petley (Landslide Blog): 38 fatal landslides killed 135 people in Nepal to 17 July 2024; f
