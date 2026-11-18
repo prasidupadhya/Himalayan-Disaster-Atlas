@@ -1,8 +1,9 @@
-# Runs the real digest code for the flood-bulletin source only, and prints what it would publish. Commits nothing.
-import json
-from pipelines.gov_feeds.digest import build, SOURCES
-src = [s for s in json.loads(SOURCES.read_text())["sources"] if s["id"] == "dhm-flood-archive"]
-digest, raw = build(src, None)
-e = digest["sources"][0]
-print(json.dumps({k: e.get(k) for k in ("status", "http_status", "error", "url")}, ensure_ascii=False))
-print(json.dumps(e.get("content"), ensure_ascii=False, indent=1)[:4000])
+import json, urllib.request, urllib.parse
+UA = {"User-Agent": "HimalayanDisasterAtlas/1.0 (+https://github.com/prasidupadhya/Himalayan-Disaster-Atlas; probe)", "X-Requested-With": "XMLHttpRequest",
+      "Accept": "application/json, text/javascript, */*; q=0.01", "Referer": "https://dhm.gov.np/bulletins"}
+for method, data in [("GET", None), ("POST", b""), ("POST", urllib.parse.urlencode({"type": "flood"}).encode())]:
+    try:
+        r = urllib.request.urlopen(urllib.request.Request("https://dhm.gov.np/site/getBulletins", data=data, headers=UA, method=method), timeout=60)
+        b = r.read(); print(method, data, r.status, r.headers.get("content-type"), len(b)); print(b[:3000].decode("utf-8", "replace"))
+    except Exception as e:
+        print(method, data, "FAIL", type(e).__name__, e)
