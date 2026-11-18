@@ -1,0 +1,284 @@
+{
+ "format": "atlas-gov-history@1",
+ "days": [
+  {
+   "date": "2026-10-17",
+   "generated_at": "2026-10-17T18:09:03Z",
+   "rivers_above_danger": null,
+   "rivers_above_warning": null,
+   "rivers_current": null,
+   "rain_stations_above_warning": null,
+   "rain_current": null
+  },
+  {
+   "date": "2026-10-18",
+   "generated_at": "2026-10-18T04:33:32Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 181,
+   "rain_stations_above_warning": 0,
+   "rain_current": 370
+  },
+  {
+   "date": "2026-10-19",
+   "generated_at": "2026-10-19T04:40:43Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 179,
+   "rain_stations_above_warning": 0,
+   "rain_current": 367
+  },
+  {
+   "date": "2026-10-20",
+   "generated_at": "2026-10-20T04:51:04Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 180,
+   "rain_stations_above_warning": 0,
+   "rain_current": 363
+  },
+  {
+   "date": "2026-10-21",
+   "generated_at": "2026-10-21T04:46:12Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 177,
+   "rain_stations_above_warning": 0,
+   "rain_current": 364
+  },
+  {
+   "date": "2026-10-24",
+   "generated_at": "2026-10-24T14:36:07Z",
+   "rivers_above_danger": null,
+   "rivers_above_warning": null,
+   "rivers_current": null,
+   "rain_stations_above_warning": null,
+   "rain_current": null
+  },
+  {
+   "date": "2026-10-25",
+   "generated_at": "2026-10-25T04:41:04Z",
+   "rivers_above_danger": null,
+   "rivers_above_warning": null,
+   "rivers_current": null,
+   "rain_stations_above_warning": null,
+   "rain_current": null
+  },
+  {
+   "date": "2026-10-26",
+   "generated_at": "2026-10-26T04:47:08Z",
+   "rivers_above_danger": null,
+   "rivers_above_warning": null,
+   "rivers_current": null,
+   "rain_stations_above_warning": null,
+   "rain_current": null
+  },
+  {
+   "date": "2026-10-27",
+   "generated_at": "2026-10-27T05:04:26Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 0,
+   "rain_stations_above_warning": 0,
+   "rain_current": 0
+  },
+  {
+   "date": "2026-10-28",
+   "generated_at": "2026-10-28T12:51:03Z",
+   "rivers_above_danger": null,
+   "rivers_above_warning": null,
+   "rivers_current": null,
+   "rain_stations_above_warning": null,
+   "rain_current": null
+  },
+  {
+   "date": "2026-10-29",
+   "generated_at": "2026-10-29T05:47:48Z",
+   "rivers_above_danger": null,
+   "rivers_above_warning": null,
+   "rivers_current": null,
+   "rain_stations_above_warning": null,
+   "rain_current": null
+  },
+  {
+   "date": "2026-10-30",
+   "generated_at": "2026-10-30T05:48:41Z",
+   "rivers_above_danger": null,
+   "rivers_above_warning": null,
+   "rivers_current": null,
+   "rain_stations_above_warning": null,
+   "rain_current": null
+  },
+  {
+   "date": "2026-10-31",
+   "generated_at": "2026-10-31T05:40:06Z",
+   "rivers_above_danger": null,
+   "rivers_above_warning": null,
+   "rivers_current": null,
+   "rain_stations_above_warning": null,
+   "rain_current": null
+  },
+  {
+   "date": "2026-11-01",
+   "generated_at": "2026-11-01T06:03:15Z",
+   "rivers_above_danger": null,
+   "rivers_above_warning": null,
+   "rivers_current": null,
+   "rain_stations_above_warning": null,
+   "rain_current": null
+  },
+  {
+   "date": "2026-11-02",
+   "generated_at": "2026-11-02T06:00:44Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 181,
+   "rain_stations_above_warning": 0,
+   "rain_current": 304
+  },
+  {
+   "date": "2026-11-03",
+   "generated_at": "2026-11-03T06:46:35Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 182,
+   "rain_stations_above_warning": 0,
+   "rain_current": 306
+  },
+  {
+   "date": "2026-11-04",
+   "generated_at": "2026-11-04T06:21:13Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 182,
+   "rain_stations_above_warning": 0,
+   "rain_current": 307
+  },
+  {
+   "date": "2026-11-05",
+   "generated_at": "2026-11-05T06:45:24Z",
+   "rivers_above_danger": 1,
+   "rivers_above_warning": 0,
+   "rivers_current": 179,
+   "rain_stations_above_warning": 0,
+   "rain_current": 307
+  },
+  {
+   "date": "2026-11-06",
+   "generated_at": "2026-11-06T06:43:34Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 173,
+   "rain_stations_above_warning": 0,
+   "rain_current": 306
+  },
+  {
+   "date": "2026-11-07",
+   "generated_at": "2026-11-07T05:57:54Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 172,
+   "rain_stations_above_warning": 0,
+   "rain_current": 306
+  },
+  {
+   "date": "2026-11-08",
+   "generated_at": "2026-11-08T05:59:57Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 173,
+   "rain_stations_above_warning": 0,
+   "rain_current": 303
+  },
+  {
+   "date": "2026-11-09",
+   "generated_at": "2026-11-09T06:26:43Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 169,
+   "rain_stations_above_warning": 0,
+   "rain_current": 305
+  },
+  {
+   "date": "2026-11-10",
+   "generated_at": "2026-11-10T07:19:14Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 170,
+   "rain_stations_above_warning": 0,
+   "rain_current": 303
+  },
+  {
+   "date": "2026-11-11",
+   "generated_at": "2026-11-11T06:17:48Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 169,
+   "rain_stations_above_warning": 0,
+   "rain_current": 304
+  },
+  {
+   "date": "2026-11-12",
+   "generated_at": "2026-11-12T07:09:27Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 174,
+   "rain_stations_above_warning": 0,
+   "rain_current": 301
+  },
+  {
+   "date": "2026-11-13",
+   "generated_at": "2026-11-13T06:45:19Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 171,
+   "rain_stations_above_warning": 0,
+   "rain_current": 301
+  },
+  {
+   "date": "2026-11-14",
+   "generated_at": "2026-11-14T06:22:27Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 168,
+   "rain_stations_above_warning": 0,
+   "rain_current": 298
+  },
+  {
+   "date": "2026-11-15",
+   "generated_at": "2026-11-15T06:30:33Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 165,
+   "rain_stations_above_warning": 0,
+   "rain_current": 297
+  },
+  {
+   "date": "2026-11-16",
+   "generated_at": "2026-11-16T06:27:51Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 1,
+   "rivers_current": 158,
+   "rain_stations_above_warning": 0,
+   "rain_current": 298
+  },
+  {
+   "date": "2026-11-17",
+   "generated_at": "2026-11-17T07:54:15Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 1,
+   "rivers_current": 166,
+   "rain_stations_above_warning": 0,
+   "rain_current": 304
+  },
+  {
+   "date": "2026-11-18",
+   "generated_at": "2026-11-17T21:02:55Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 166,
+   "rain_stations_above_warning": 0,
+   "rain_current": 304
+  }
+ ]
+}

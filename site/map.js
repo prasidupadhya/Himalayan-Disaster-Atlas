@@ -1,4 +1,6 @@
-import { c, lang, esc, num, load, failed } from './app.js';
+import { c, esc, num, load, failed, lang } from './app.js';
+import { searchBox, placeIndex, placeHtml, flyTo } from './search.js';
+import { COPY } from './copy.js';
 import { baseMap, explorerTerrain, popup, color, maplibregl } from './basemap.js';
 import * as P from './places.js';
 import { routeData, routeHtml, routeStage } from './route.js';
@@ -203,5 +205,13 @@ map.on('click', async e => {
   p.getElement().querySelector('[data-trace]')?.addEventListener('click', ev => { trace(ev.target.dataset.trace); p.remove(); });
 });
 for (const l of LAYERS) { map.on('mouseenter', l.id, () => { map.getCanvas().style.cursor = 'pointer'; }); map.on('mouseleave', l.id, () => { map.getCanvas().style.cursor = ''; }); }
+// Search: the camera moves to the place and its details open where it is; a verified lake links to its scenario.
+let found = null;
+searchBox(document.getElementById('search'), { c, esc, num, lang, index: () => placeIndex(load, [COPY.en.searchLakeWord, COPY.ne.searchLakeWord]), pick: r => {
+  found?.remove();
+  flyTo(map, r, reduced);
+  const extra = r.kind === 'lake' ? `<a href="/scenarios/#flood=${esc(r.id)}">${esc(c.glofLink)}</a>` : '';
+  found = popup(map, r.p, placeHtml(r, { c, esc, num, lang }, extra));
+} });
 await Promise.all([...LAYERS.filter(l => l.on).map(show), peakLabels().catch(() => { info.insertAdjacentHTML('afterbegin', `<p class="note warn">${esc(c.failed)}</p>`); })]);
 document.getElementById('map').dataset.ready = 'true';

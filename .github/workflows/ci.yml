@@ -25,7 +25,7 @@ jobs:
       - name: Models and published data
         run: npm test
       - name: Official-copy scraper
-        run: python -m unittest tests.test_gov_feeds -v
+        run: python -m unittest tests.test_gov_feeds tests.test_place_names -v
       - run: npx playwright install --with-deps chromium
       - name: Pages on phone and laptop
         run: npm run e2e

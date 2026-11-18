@@ -1,7 +1,7 @@
 import { c, esc, when, load } from './app.js';
 
 // The licence table is read from each published manifest, so it always matches the files served.
-const DATASETS = ['nepal-admin-country/2.0.1', 'nepal-admin-provinces/2.0.1', 'nepal-admin-districts/2.0.1', 'nepal-terrain/1.0.0', 'nepal-mountains/1.0.0', 'nepal-rivers-primary/1.0.0',
+const DATASETS = ['nepal-admin-country/2.0.1', 'nepal-admin-provinces/2.0.1', 'nepal-admin-districts/2.0.1', 'nepal-district-names-ne/1.0.0', 'nepal-terrain/1.0.0', 'nepal-mountains/1.0.0', 'nepal-rivers-primary/1.0.0',
   'nepal-transboundary-glacial-lakes/1.0.0', 'nepal-glaciers-west/1.0.0', 'nepal-glaciers-central/1.0.0', 'nepal-glaciers-east/1.0.0', 'nepal-hydrology-stations/1.0.0', 'nepal-region-earthquakes/1.0.0', 'nepal-osm-settlements/1.0.0', 'nepal-river-names/1.0.0',
   'nepal-hrsl-population/1.0.0', 'atlas-gmpe-bssa14/1.0.0', 'atlas-flood-corridors/1.0.0'];
 const box = document.getElementById('about');

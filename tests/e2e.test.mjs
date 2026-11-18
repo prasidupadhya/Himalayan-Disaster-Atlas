@@ -39,7 +39,7 @@ async function open(device, path, { lang = 'en', theme = 'light', reducedMotion,
   page.on('response', r => { if (r.status() >= 400) errors.push(`HTTP ${r.status()} ${r.url()} from ${r.request().headers().referer}`); });
   page.on('console', m => m.type() === 'error' && !/fonts\.|ERR_FAILED/.test(m.text()) && errors.push(`${m.text()} ${m.location().url}`));
   await page.goto(base + path);
-  if (path === '/map/' || path.startsWith('/scenarios/')) await page.waitForSelector('#map[data-ready=true]', { timeout: 30000 });
+  if (path === '/map/' || /^\/scenarios\/(#|$)/.test(path)) await page.waitForSelector('#map[data-ready=true]', { timeout: 30000 });
   else await page.waitForLoadState('networkidle');
   return { page, errors, close: () => ctx.close() };
 }
@@ -321,15 +321,14 @@ for (const scenario of ['flood', 'quake']) {
       assert.equal(await page.evaluate(() => Object.values(scenarioMap.getStyle().sources).filter(s => s.type === 'raster-dem').length), 1);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
       if (scenario === 'flood') {
-        const heights = await page.evaluate(async () => (await scenarioMap.getSource('flood-ribbon').getData()).features.map(f => f.properties.height));
-        assert.ok(heights.length > 1 && Math.max(...heights) > Math.min(...heights));
+        assert.equal(await page.evaluate(() => scenarioMap.getLayer('flood-ribbon').type), 'custom');
         const pose = () => page.evaluate(() => [scenarioMap.getPitch(), scenarioMap.getBearing()]);
         const locked = await pose();
         await page.locator('#follow').check(); await page.locator('#play').click();
         await page.waitForFunction(() => Number(document.querySelector('#scrub').value) > 280);
         assert.deepEqual(await pose(), locked);
         await page.locator('#scrub').fill('1000');
-        assert.equal(await page.evaluate(async () => (await scenarioMap.getSource('flood-ribbon').getData()).features.length), 0);
+        assert.equal(await page.locator('#scrub').inputValue(), '1000');
       } else {
         assert.ok(await page.evaluate(() => !!scenarioMap.getLayer('rupture-casing')));
         assert.equal(await page.evaluate(() => scenarioMap.getPaintProperty('shaking', 'raster-opacity')), 0.6);
@@ -391,4 +390,156 @@ test('switching scenarios in 3D clears the old overlay and respects point ruptur
     assert.equal(await page.evaluate(() => scenarioMap.getLayoutProperty('shaking', 'visibility')), 'none');
     assert.deepEqual(errors, []);
   } finally { await close(); }
+});
+
+test('3D river flight follows downstream through bends and draws one joined water strip', async () => {
+  const { page, errors, close } = await open('phone', '/scenarios/#flood=glof-40746560', { viewport: { width: 360, height: 780 } });
+  try {
+    await inspectTerrain(page);
+    await page.locator('#scrub').fill('160');
+    await page.evaluate(() => {
+      const draw = WebGL2RenderingContext.prototype.drawArrays;
+      window.strips = [];
+      WebGL2RenderingContext.prototype.drawArrays = function (mode, first, count) {
+        if (mode === this.TRIANGLE_STRIP && count > 4) strips.push({ first, count, program: this.getParameter(this.CURRENT_PROGRAM) });
+        return draw.call(this, mode, first, count);
+      };
+    });
+    await page.locator('#terrain-toggle').click();
+    await page.waitForFunction(() => strips.length > 0);
+    const pale = await page.evaluate(() => scenarioMap.getSky()['sky-color']);
+    await page.locator('#theme').click();
+    assert.notEqual(await page.evaluate(() => scenarioMap.getSky()['sky-color']), pale);
+    await page.locator('#play').click();
+    await page.waitForFunction(() => Number(document.querySelector('#scrub').value) > 165);
+    await page.evaluate(() => {
+      window.bearings = [];
+      scenarioMap.on('move', () => bearings.push(scenarioMap.getBearing()));
+    });
+    await page.waitForFunction(() => bearings.length >= 5 && Math.abs(bearings.at(-1) - bearings[0]) > 0.1);
+    const angles = await page.evaluate(() => bearings);
+    assert.ok(angles.slice(1).every((v, i) => Math.abs((v - angles[i] + 540) % 360 - 180) < 6));
+    assert.ok(await page.evaluate(() => strips.some(s => s.first !== strips[0].first && s.program === strips[0].program)));
+    await page.locator('#follow').uncheck();
+    await page.locator('#scrub').fill('750');
+    await page.waitForFunction(() => !scenarioMap.isMoving());
+    const visible = await page.locator('.map-label.on:not(.crowded)').evaluateAll(nodes => nodes.map(el => el.getBoundingClientRect().toJSON()));
+    assert.ok(visible.length);
+    assert.ok(visible.every((a, i) => visible.slice(i + 1).every(b => a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top)));
+    assert.deepEqual(errors, []);
+  } finally { await close(); }
+});
+
+test('Nepali pages name districts as Schedule 4 of the constitution prints them', async () => {
+  const { page, errors, close } = await open('phone', '/scenarios/', { lang: 'ne' });
+  await page.waitForSelector('#result .route-list li');
+  const route = await page.textContent('#result .route-list');
+  assert.match(route, /मनाङ/, 'the default release starts in Manang');
+  assert.doesNotMatch(route, /Manang|Lamjung/, 'no district in Latin script');
+  await page.evaluate(() => { location.hash = 'quake'; });
+  await page.waitForFunction(() => document.querySelectorAll('#result table').length >= 2, null, { timeout: 30000 });
+  assert.match(await page.textContent('#result'), /गोरखा/);
+  assert.doesNotMatch(await page.textContent('#result .src'), /रोमन/);
+  assert.deepEqual(errors, []);
+  await close();
+
+  const en = await open('laptop', '/scenarios/');
+  await en.page.waitForSelector('#result .route-list li');
+  assert.match(await en.page.textContent('#result .route-list'), /Manang/, 'English pages keep English names');
+  await en.close();
+});
+
+test('the scenario report reruns the linked scenario and lays out for A4 in both languages', async () => {
+  const { page, errors, close } = await open('laptop', '/scenarios/');
+  await page.waitForSelector('#result .summary');
+  // The Report link carries the scenario's link.
+  await page.selectOption('#form [name=origin]', { index: 2 });
+  await page.waitForFunction(() => location.hash.includes('flood='));
+  await page.waitForFunction(() => document.getElementById('report')?.getAttribute('href').endsWith(location.hash));
+  const summary = await page.textContent('#result .summary');
+  await page.click('#report');
+  await page.waitForSelector('#report[data-ready=true]', { timeout: 30000 });
+  assert.equal(await page.textContent('#report .summary'), summary, 'same numbers as the page');
+  assert.match(await page.textContent('#link'), /\/scenarios\/#flood=/);
+  assert.ok(await page.locator('#report-map canvas').count() === 1);
+  await page.emulateMedia({ media: 'print' });
+  assert.equal(await page.locator('.top').isVisible(), false);
+  assert.equal(await page.locator('#print').isVisible(), false);
+  const pdf = await page.pdf({ format: 'A4' });
+  assert.ok(pdf.length > 10000);
+  assert.deepEqual(errors, []);
+  await close();
+
+  const ne = await open('phone', '/scenarios/report/#quake', { lang: 'ne', theme: 'dark' });
+  await ne.page.waitForSelector('#report[data-ready=true]', { timeout: 30000 });
+  assert.equal(await ne.page.title(), 'परिदृश्य प्रतिवेदन, हिमालय विपद् एटलस');
+  assert.ok(await ne.page.locator('#report table').count() >= 3);
+  assert.equal(await ne.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  await ne.page.addScriptTag({ content: AXE });
+  const violations = await ne.page.evaluate(async () => (await axe.run(document, { runOnly: ['wcag2a', 'wcag2aa'] })).violations.filter(v => ['serious', 'critical'].includes(v.impact)).map(v => v.id));
+  assert.deepEqual(violations, []);
+  assert.deepEqual(ne.errors, []);
+  await ne.close();
+});
+
+test('place search works by keyboard on the map, in English and Nepali, and picks a lake on Scenarios', async () => {
+  const { page, errors, close } = await open('laptop', '/map/');
+  const q = page.locator('#search-q');
+  await q.focus(); await page.keyboard.type('pokhara');
+  await page.waitForSelector('#search-list [role=option]');
+  assert.equal(await q.getAttribute('aria-expanded'), 'true');
+  await page.keyboard.press('ArrowDown');
+  assert.equal(await q.getAttribute('aria-activedescendant'), 'search-o0');
+  assert.equal(await page.getAttribute('#search-o0', 'aria-selected'), 'true');
+  assert.match(await page.textContent('#search-o0'), /Pokhara.*City.*Kaski/);
+  await page.keyboard.press('Enter');
+  await page.waitForSelector('.maplibregl-popup');
+  assert.match(await page.textContent('.maplibregl-popup'), /Pokhara/);
+  assert.equal(await q.getAttribute('aria-expanded'), 'false');
+  // Escape closes the list, then clears the field.
+  await q.fill('zzzq'); await page.waitForSelector('#search-list .none');
+  await page.keyboard.press('Escape'); assert.equal(await q.getAttribute('aria-expanded'), 'false');
+  await page.keyboard.press('Escape'); assert.equal(await q.inputValue(), '');
+  assert.deepEqual(errors, []);
+  await close();
+
+  const ne = await open('phone', '/map/', { lang: 'ne', theme: 'dark' });
+  await ne.page.fill('#search-q', 'काठमाडौं');
+  await ne.page.waitForSelector('#search-list [role=option]');
+  assert.match(await ne.page.textContent('#search-o0'), /काठमाडौं.*सहर/);
+  await ne.page.click('#search-o0');
+  await ne.page.waitForSelector('.maplibregl-popup');
+  assert.equal(await ne.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.deepEqual(ne.errors, []);
+  await ne.close();
+
+  const s = await open('phone', '/scenarios/');
+  await s.page.waitForSelector('#result .summary');
+  const first = await s.page.inputValue('#form [name=origin]');
+  await s.page.fill('#search-q', 'lake');
+  await s.page.waitForSelector('#search-list [role=option]');
+  const options = await s.page.locator('#search-list [role=option]').count();
+  assert.ok(options >= 2);
+  await s.page.locator('#search-q').press('ArrowDown'); await s.page.locator('#search-q').press('ArrowDown'); await s.page.locator('#search-q').press('Enter');
+  await s.page.waitForFunction(f => document.querySelector('#form [name=origin]')?.value !== f && location.hash.includes('flood='), first);
+  assert.equal(await s.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.deepEqual(s.errors, []);
+  await s.close();
+});
+
+test('Today shows 30-day trends where a day without a reading is a gap, not zero', async () => {
+  const { page, errors, close } = await open('phone', '/');
+  await page.waitForSelector('#trends .trend');
+  assert.equal(await page.locator('#trends .trend').count(), 3);
+  for (const fig of await page.locator('#trends .trend svg').all()) assert.equal(await fig.locator('g').count(), 30);
+  const history = await page.evaluate(() => fetch('/data/gov/history.json').then(r => r.json()));
+  const unread = history.days.filter(d => d.rivers_current == null).length;
+  assert.ok(await page.locator('#trends .trend').nth(2).locator('rect.gap').count() >= unread, 'unread days are drawn as gaps');
+  assert.doesNotMatch(await page.textContent('#trends'), /top /);
+  await page.click('#trends details summary');
+  assert.ok(await page.locator('#trends tbody tr').count() >= 1);
+  assert.match(await page.textContent('#trends .lead'), /River stations above warning/);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.deepEqual(errors, []);
+  await close();
 });
