@@ -1,0 +1,248 @@
+{
+  "ok": true,
+  "data": {
+    "query": "glacial lake outburst flood hazard assessment Himalaya inventory",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Glacial Lake Outburst Flood Hazard Assessment in the Upper Indus Basin, Ladakh Himalaya Using Remote Sensing and Hydrodynamic Modeling",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-2026-5906",
+        "doi": "10.5194/egusphere-2026-5906",
+        "year": 2026,
+        "authors": [
+          "Jigmet Angmo"
+        ],
+        "venue": null,
+        "abstract": "The Indian Himalayan Region (IHR), often called the “Third Pole,” contains the largest concentration of glaciers and perennial snow outside the polar regions and is highly sensitive to climate change. Rapid glacier retreat has accelerated the formation and expansion of glacial lakes, increasing the likelihood of Glacial Lake Outburst Floods (GLOFs). This study presents a multi-site GLOF hazard assessment of four glacier-fed lakes associated with the Gya, Raru, and Panikhar glaciers in the Upper Indus Basin, Ladakh. Spatio-temporal lake-area changes were mapped using Sentinel-2 imagery and geographic information system (GIS) techniques, while lake depth and volume were estimated using empirical relationships supported by digital elevation model analysis. Dam-break simulations using the Hydrologic Engineering Center’s River Analysis System (HEC-RAS) were conducted for 25 %, 50 %, 75 %, and 100 % lake-volume release scenarios for the Gya, Raru, and Panikhar lakes. Simulation outputs provided peak discharge, flow velocity, flood depth, and inundation extent. Results show that worst-case scenarios could affect downstream infrastructure such as bridges and roads, whereas the Rumbak lake poses limited hazard potential because of its low volume and natural moraine buffering. The hazard maps developed in this study support risk prioritization, early-warning planning, and climate-resilient disaster management in the Indian Himalaya.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-2026-5906",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Modeling glacial lake outburst flood process chains in Sikkim Himalaya: Hazard assessment of two potentially dangerous lakes",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu21-10838",
+        "doi": "10.5194/egusphere-egu21-10838",
+        "year": 2021,
+        "authors": [
+          "Ashim Sattar",
+          "Simon Allen",
+          "Holger Frey",
+          "Christian Huggel",
+          "Martin Mergili"
+        ],
+        "venue": null,
+        "abstract": "&lt;p&gt;The presence of large and rapidly growing glacial lakes along the Himalayan Arc makes glacial lake outburst floods (GLOFs) a serious mountain hazard. While glacial lakes are mainly located in remote and unsettled mountain valleys, far-reaching GLOFs may claim lives and damage assets tens of kilometers downstream. Evaluating GLOF hazard is therefore of high importance, considering current and potential future climate-driven changes of glaciers and glacial lakes. A major concern in the Northeastern Indian Himalayan state of Sikkim is the damage potential these flood events can cause to hydropower plants and local vulnerable communities. This is particularly true for outburst floods potentially originating from the two lakes in Sikkim that are considered hazardous: the South Lhonak Lake and the Shako Cho Lake. Both lakes have been recognized in previous studies, and by local and state authorities, as being high priority sites for further monitoring and potential risk reduction measures. Recognizing the need for related risk reduction strategies to be based on robust scientific understanding, this study aims to combine remote sensing approaches with hydrodynamic flood modeling to identify key threats to lives and livelihoods.&lt;/p&gt;&lt;p&gt;This study also provides the first implementation of recently developed national guidelines on the management of GLOFs, where a detailed risk assessment including potential GLOF triggers, conditioning factors, and downstream impacts forms the scientific core. First results of only-water flow using HEC-RAS show that a high-potential scenario (dam breach depth = 40 m) produces flow depth and flow velocity up to 25 m and 9-12 m s&lt;sup&gt;-1&lt;/sup&gt;, respectively, at Chungthang, a town located close to a major hydropower station, 62 km downstream of the lake. The fact that GLOF flow rheology is often changing as it propagates downstream, further modeling has been undertaken with r.avaflow, which can simulate the entire process chain from initial avalanche triggering, to dam erosion, and downstream flow propagation with a multi-phase modeling approach. Hence, we can evaluate the potential downstream impact in the case of a GLOF transitioning into a debris flow process. Our results provide flow hydraulics including flow velocities, flow heights, and total downstream inundation. These parameters will provide important insights for risk reduction strategies, such as early warning systems and land-use planning under current and future glacial conditions.&lt;/p&gt;&lt;p&gt;&amp;#160;&lt;/p&gt;",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu21-10838",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Glacial Lake Outburst Floods in the Nepal Himalaya: A Manageable Hazard?",
+        "source": "crossref",
+        "url": "https://doi.org/10.1007/978-94-017-0137-2_7",
+        "doi": "10.1007/978-94-017-0137-2_7",
+        "year": 2003,
+        "authors": [
+          "Richard Kattelmann"
+        ],
+        "venue": "Flood Problem and Management in South Asia",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 10,
+        "work_type": "book-chapter",
+        "identifier": "10.1007/978-94-017-0137-2_7",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Springer Netherlands"
+        }
+      },
+      {
+        "title": "Glacial Lake Area Change and Potential Outburst Flood Hazard Assessment in the Bhutan Himalaya",
+        "source": "crossref",
+        "url": "https://doi.org/10.3389/feart.2021.775195",
+        "doi": "10.3389/feart.2021.775195",
+        "year": 2021,
+        "authors": [
+          "Sonam Rinzin",
+          "Guoqing Zhang",
+          "Sonam Wangchuk"
+        ],
+        "venue": "Frontiers in Earth Science",
+        "abstract": "Against the background of climate change-induced glacier melting, numerous glacial lakes are formed across high mountain areas worldwide. Existing glacial lake inventories, chiefly created using Landsat satellite imagery, mainly relate to 1990 onwards and relatively long (decadal) temporal scales. Moreover, there is a lack of robust information on the expansion and the GLOF hazard status of glacial lakes in the Bhutan Himalaya. We mapped Bhutanese glacial lakes from the 1960s to 2020, and used these data to determine their distribution patterns, expansion behavior, and GLOF hazard status. 2,187 glacial lakes (corresponding to 130.19 ± 2.09 km 2) were mapped from high spatial resolution (1.82–7.62 m), Corona KH-4 images from the 1960s. Using the Sentinel-2 (10 m) and Sentinel-1 (20 m × 22 m), we mapped 2,553 (151.81 ± 7.76 km 2), 2,566 (152.64 ± 7.83 km 2), 2,572 (153.94 ± 7.83 km 2), 2,569 (153.97 ± 7.79 km 2) and 2,574 (156.63 ± 7.95 km 2) glacial lakes in 2016, 2017, 2018, 2019 and 2020, respectively. The glacier-fed lakes were mainly present in the Phochu (22.63%) and the Kurichu (20.66%) basins. A total of 157 glacier-fed lakes have changed into non-glacier-fed lakes over the 60 years of lake evolution. Glacier-connected lakes (which constitutes 42.25% of the total glacier-fed lake) area growth accounted for 75.4% of the total expansion, reaffirming the dominant role of glacier-melt water in expanding glacial lakes. Between 2016 and 2020, 19 (4.82 km 2) new glacial lakes were formed with an average annual expansion rate of 0.96 km 2 per year. We identified 31 lakes with a very-high and 34 with high GLOF hazard levels. These very-high to high GLOF hazard lakes were primarily located in the Phochu, Kurichu, Drangmechu, and Mochu basins. We concluded that the increasing glacier melt is the main driver of glacial lake expansion. Our results imply that extending glacial lakes studies back to the 1960s provides new insights on glacial lake evolution from glacier-fed lakes to non-glacier-fed lakes. Additionally, we reaffirmed the capacity of Sentinel-1 and Sentinel-2 data to determine annual glacial lake changes. The results from this study can be a valuable basis for future glacial lake monitoring and prioritizing limited resources for GLOF mitigation programs.",
+        "pdf_url": null,
+        "citation_count": 42,
+        "work_type": "article",
+        "identifier": "10.3389/feart.2021.775195",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Frontiers Media SA"
+        }
+      },
+      {
+        "title": "A Holistic Overview of Glacial Lake Outburst Flood (GLOF) Hazard in Himachal Pradesh, India",
+        "source": "crossref",
+        "url": "https://doi.org/10.1007/978-3-031-94905-0_16",
+        "doi": "10.1007/978-3-031-94905-0_16",
+        "year": 2025,
+        "authors": [
+          "Varun Joshi",
+          "Divya Singh"
+        ],
+        "venue": "Himalaya: Mountains of Destiny",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 1,
+        "work_type": "book-chapter",
+        "identifier": "10.1007/978-3-031-94905-0_16",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Springer Nature Switzerland"
+        }
+      },
+      {
+        "title": "Inventory, Classification, Evolution, and Potential Outburst Flood Assessment of Glacial Lakes in the Chhombo Chhu Watershed (Sikkim Himalaya, India)",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu23-17459",
+        "doi": "10.5194/egusphere-egu23-17459",
+        "year": 2023,
+        "authors": [
+          "Sunil Kumar De",
+          "Arindam Chowdhury",
+          "Milap Chand Sharma"
+        ],
+        "venue": null,
+        "abstract": "The Sikkim Himalaya, similar to other mountain regions, has lost considerable ice cover over the years owing to the changing climatic factors leading to enlargement of glacier-fed lakes, and thus posing a potential threat to downstream communities in the mountain and Tarai (foothills) region in case of breach anytime in the future. The Chhombo Chhu Watershed (CCW) of the Tista Basin in the Sikkim Himalaya, located between the Greater Himalayan Range and the Tethyan Sedimentary Sequence, is the storehouse of number of glacial lakes with large areas and volumes. In this study, we mapped the glacial lakes' changes between 1975&#8211;2018 and assessed their dynamics based on manual analysis of optical satellite images using KeyHole-9 Hexagon (&#8764;4 m), Landsat Series (&#8764;15-30 m), and Sentinel 2A-MSI (&#8764;10-20 m) imagery and verified during field surveys. The results show that the number of lakes has increased from 62 to 98, and its total area expanded significantly by 34.6 &#177; 5.4%, i.e., from 8.5 &#177; 0.2 km2 in 1975 to 11.4 &#177; 0.6 km2 by 2018, at an expansion rate of 0.8 &#177; 0.1% a&#8211;1. Lake outburst susceptibility result reveals that a total of twenty-seven potentially dangerous glacial lakes exist in the watershed; 5 have a status of &#8216;high&#8217; outburst probability, 17 &#8216;medium&#8217; and 5 &#8216;low&#8217;. The majority of the proglacial lakes in the watershed have significantly enlarged due to the faster melting and calving processes as a result of accelerating increasing long term average annual trend of temperature (+0.283&#176; Ca&#8211;1; 95% confidence level) and homogeneous or slightly declining precipitation.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu23-17459",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "A glacial lake outburst flood hazard assessment for the Phochhu River Basin, Bhutan",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/nhess-2023-125",
+        "doi": "10.5194/nhess-2023-125",
+        "year": 2023,
+        "authors": [
+          "Tandin Wangchuk",
+          "Ryota Tsubaki"
+        ],
+        "venue": null,
+        "abstract": "The melting of glaciers has led to an unprecedented increase in the number and size of glacial lakes, particularly in the Himalayan region. A Glacial Lake Outburst Flood (GLOF) is a natural hazard in which water from a glacial or glacier-fed lake is swiftly discharged. GLOFs can significantly harm life, infrastructure, and settlements located downstream, and can cause considerable ecological, economic, and social impacts. Based on a dam breach model, BREACH, and a hydrodynamic model, HEC-RAS, we examined the potential consequences of a GLOF originating from the Thorthomi glacial lake, located within the Phochhu River Basin, one of Bhutan’s largest and rapidly expanding glacial lakes. Our analysis revealed that, following a breach, the Thorthomi glacial lake will likely generate a peak flow of 16,360 m3 s−1 within four hours. Such discharge could potentially cause considerable damage, with an estimated 245 hectares of agricultural land and over 1,277 buildings at risk for inundation. Our results emphasize an urgent need for understanding and preparing for the potential consequences of a GLOF from Thorthomi Lake in order to mitigate ecological, economic, and social impacts on downstream areas. Our findings provide valuable insights for policymakers and stakeholders involved in disaster management and preparedness.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/nhess-2023-125",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Modeling the Glacial Lake Outburst Flood Process Chain in the Nepal Himalaya: Reassessing Imja Tsho's Hazard",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/hess-2017-683",
+        "doi": "10.5194/hess-2017-683",
+        "year": 2017,
+        "authors": [
+          "Jonathan M. Lala",
+          "David R. Rounce",
+          "Daene C. McKinney"
+        ],
+        "venue": null,
+        "abstract": "The Himalayas of South Asia are home to many glaciers that are retreating due to climate change and causing the formation of large glacial lakes in their absence. These lakes are held in place by naturally deposited moraine dams that are potentially unstable. Specifically, an impulse wave generated by an avalanche or landslide entering the lake can destabilize the moraine dam, thereby causing a catastrophic failure of the moraine and a glacial lake outburst flood (GLOF). Imja-Lhotse Shar glacier is amongst the glaciers experiencing the highest rate of mass loss in the Mount Everest region, which has contributed to the expansion of Imja Tsho. A GLOF from this lake may have the potential to cause catastrophic damage to downstream villages, threatening both property and human life. Therefore, it is essential to understand the processes that could trigger a flood and quantify the potential downstream impacts. The avalanche-induced GLOF process chain was modeled using the output of one component of the chain as input to the next. First, the volume and momentum of various avalanches entering the lake were calculated using RAMMS. Next, the avalanche-induced waves were simulated using BASEMENT and validated with empirical equations to ensure the proper transfer of momentum from the avalanche to the lake. With BASEMENT, the ensuing moraine erosion and downstream flooding was modeled, which was used to generate hazard maps downstream. Moraine erosion was calculated for two geomorphologic models: one site-specific using field data and another worst-case based on past literature that is applicable to lakes in the greater region. Neither case resulted in flooding outside the river channel at downstream villages. The worst-case model resulted in some moraine erosion and increased channelization of the lake outlet, which yielded greater discharge downstream but no catastrophic collapse. The site-specific model generated similar results, but with very little erosion and a smaller downstream discharge. These results indicated that Imja Tsho is unlikely to produce a catastrophic GLOF due to an avalanche in the near future, although some hazard exists within the downstream river channel, necessitating continued monitoring of the lake. Furthermore, these models were designed for ease and flexibility so that they can be adopted by a wide range of stakeholders and appropriated for other lakes in the region.",
+        "pdf_url": null,
+        "citation_count": 6,
+        "work_type": "preprint",
+        "identifier": "10.5194/hess-2017-683",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Mapping Himalayan glacial lake outburst flood hazard through time and space",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu23-15703",
+        "doi": "10.5194/egusphere-egu23-15703",
+        "year": 2023,
+        "authors": [
+          "Scott McCoy",
+          "Jonathan Jacquet",
+          "Daniel McGrath",
+          "Sajid Ghuffar"
+        ],
+        "venue": null,
+        "abstract": "When glacial dams fail catastrophically, the ensuing glacial lake outburst floods (GLOFs) can cause devastating impacts to downstream environments and infrastructure. Large-impact GLOFs imprint distinct geomorphic features in the landscape that can remain diagnostic for hundreds of years, particularly for GLOFs sourced from moraine-dammed lakes. In this work, we used multi-temporal very-high-resolution-satellite imagery to systematically map the occurrence of impactful GLOFs from moraine-dammed lakes along the Himalayan arc between the Indus and the Salween rivers. Additionally, we binned mapped events by approximate date of occurrence to quantify changes in GLOF frequency through time. This new data set adds over 200 newly mapped GLOFs from ~200 lakes to the 108 events documented in published compilations. We find notable spatial heterogeneity in GLOF hazard along the Himalayan arc. Furthermore, we find that GLOF frequency from moraine-dammed lakes in the last 20 years is markedly lower than earlier time periods from 1970-2000 or from the end of the Little Ice Age to 1970. This decrease in GLOF frequency in recent time is despite continued growth of glacial lakes, likely increases in the frequency of mass movements that commonly trigger GLOFs from moraine-dammed lakes, and mapping bias that likely underestimates GLOF occurrence from earlier time periods.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu23-15703",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Assessing the risks from a potential Glacial Lake Outburst Flood in the Alaknanda Basin, Central Himalaya",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu25-511",
+        "doi": "10.5194/egusphere-egu25-511",
+        "year": 2025,
+        "authors": [
+          "Janhavi Jadhav",
+          "Anil Kulkarni",
+          "Veena Prasad"
+        ],
+        "venue": null,
+        "abstract": "The Himalayan region is experiencing a higher rise in temperature than the global mean, leading to glacier retreat. This retreat is contributing to the rapid formation and expansion of numerous moraine-dammed lakes. Simultaneously, the Himalayan region is witnessing a surge in development activities, including road and tunnel construction, hydropower projects, rapid urbanization, and a booming tourism industry. These changes increase the region's susceptibility to glacial lake outburst floods (GLOFs) by altering the natural ecosystem. However, infrastructure development activities can require significant time, during which retreating glaciers may create new lakes, creating new challenges for risk management. Consequently, regions that appear safe today may become vulnerable in the future. In this context, our study focuses on the Alaknanda basin, an area with a high concentration of glaciers and extensive developmental activity.In this study, we have identified potential lake sites in the Alaknanda basin and assessed their impact on the infrastructure. We used the Himalayan Glacier Thickness Mapper (HIGTHIM) tool to estimate future glacial lakes. It uses the laminar flow method, which estimates ice thickness by balancing factors such as ice surface slope, glacier geometry, and basal shear stress. This method identifies potential subglacial depressions that may become exposed during glacier retreat, thus predicting the area and volume of future glacial lakes.We identified 28 potential lake sites with a total area of 471.81 ha and a potential to store 113.4 million m3 of water. A highly susceptible lake in the Vishnuganga sub-basin, with an area of 38 ha and a volume of 14.5 million m3, is assessed to understand the impact of GLOF on the downstream region. This study evaluates a possible GLOF caused by a moraine-dam failure using the hydrodynamic model HEC-RAS. This model uses SRTM DEM to understand the channel geometry and downstream topography. The simulation predicts an average flood depth of 10 m and a flood velocity of 5 ms-1 within the settlement, located 10 km from the lake. This settlement experiences flooding within 53 minutes with a peak discharge of 6200 m3s-1 in a high-risk scenario.Considering the uncertainties in future moraine formations, a sensitivity analysis was conducted by varying the moraine breaching parameters to model different risk scenarios. In addition, the study incorporates hazard, vulnerability, and risk mapping of the downstream flood-affected area to assess potential GLOF impacts comprehensively. These findings highlight the critical role of GLOF prediction in safeguarding downstream communities and guiding future planning efforts. Considering the ongoing and future development activities in this region, it is essential to integrate GLOF risk assessments into development strategies to minimize the potential impact on vulnerable communities and infrastructure.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu25-511",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:40:25.072194+00:00"
+}

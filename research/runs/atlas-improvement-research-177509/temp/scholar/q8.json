@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "data": {
+    "query": "landslide susceptibility Nepal national assessment",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 0,
+      "doab": 0
+    },
+    "raw_records": 0,
+    "merged_records": 0,
+    "returned": 0,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": []
+  },
+  "count": 0,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:41:01.135598+00:00"
+}

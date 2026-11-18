@@ -16,7 +16,7 @@ chars_per_token = 4
 snippet_len = 200
 
 [web]
-provider = "crawl4ai"
+provider = "builtin"
 profile = ""
 magic = false
 

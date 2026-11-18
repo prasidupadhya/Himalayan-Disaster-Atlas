@@ -1,0 +1,274 @@
+{
+  "ok": true,
+  "data": {
+    "query": "site amplification Kathmandu basin earthquake 2015",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Rapid Post‐Earthquake Microtremor Measurements for Site Amplification and Shear Wave Velocity Profiling in Kathmandu, Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.1193/121916eqs245m",
+        "doi": "10.1193/121916eqs245m",
+        "year": 2017,
+        "authors": [
+          "Sheri Molnar",
+          "John Onwuemeka",
+          "Sujan Raj Adhikari"
+        ],
+        "venue": "Earthquake Spectra",
+        "abstract": "This paper presents application of microtremor (ambient vibration) and surface wave field techniques for post‐earthquake geotechnical reconnaissance purposes in Kathmandu, Nepal. Horizontal‐to‐vertical spectral ratios (HVSR) are computed from microtremor recordings at 16 individual measurement locations to obtain an estimate of fundamental frequency (site period) of the subsurface soils. A combination of active‐ and passive‐source surface wave array testing was accomplished at five key sites including Kathmandu's Durbar Square and Airport. Joint inversion of each site's higher frequency dispersion and lower frequency HVSR data sets provides an estimate of subsurface material stiffness [i.e., shear wave velocity ( V S) depth profiles]. Direct comparison of our V S profiling at Kathmandu Durbar Square and that accomplished by downhole V S and/or standard penetration testing (SPT) profiling yield similar results. Classification of the five sites based on average V S, site period, and/or basin depth is presented. There is little differentiation in these site classification designations amongst the five sites, which does not capture significant differences in observed earthquake damage.",
+        "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1193/121916eqs245m",
+        "citation_count": 12,
+        "work_type": "article",
+        "identifier": "10.1193/121916eqs245m",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Wiley"
+        }
+      },
+      {
+        "title": "Southern California basin and non‐basin classification algorithm for ground‐motion site amplification model applications",
+        "source": "crossref",
+        "url": "https://doi.org/10.1177/87552930241293568",
+        "doi": "10.1177/87552930241293568",
+        "year": 2025,
+        "authors": [
+          "Chukwuebuka C Nweke",
+          "Rashid Shams"
+        ],
+        "venue": "Earthquake Spectra",
+        "abstract": "In ground‐motion modeling, the estimated level of ground shaking at any given location for an expected earthquake scenario depends on the contributions from the source component (type of fault mechanism and size of the fault slip), the path component (distance between the source and site of interest, and the geologic characteristics of that region), and the site component (the local geology at the site of interest). Each component captures some level of variability and uncertainty in the overall ground‐motion estimate. In particular, the site component represents the potential amplification (or de‐amplification) of the seismic waves that may lead to magnified and prolonged ground shaking at any given location. This feature is referred to as site effects and in current ground‐motion models (GMMs) is dependent on the time‐averaged shear wave velocity in the upper 30 m of the earth’s crust ( V s30) and the depth to a particular shear wave velocity iso‐surface (“basin depth,” z x). The latter is responsible for determining the contributions of basin effects, which is additional ground‐motion amplification due to three‐dimensional effects such as trapped seismic waves that lead to surface wave generation. However, an evaluation of the relationship between z x and basin locations reveals cases of misclassification that is a result of geologic variability (i.e. z x is not sufficient in differentiating basins from non‐basins). The study performed in this article proposes a resolution in the form of a statistical classification model that determines the probability of a location residing within or outside a basin based on simple geologic features such as ground surface texture.",
+        "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1177/87552930241293568",
+        "citation_count": 4,
+        "work_type": "article",
+        "identifier": "10.1177/87552930241293568",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Wiley"
+        }
+      },
+      {
+        "title": "Correction to: Site amplification in the Kathmandu Valley during the 2015 M7.6 Gorkha, Nepal earthquake",
+        "source": "crossref",
+        "url": "https://doi.org/10.1007/s10518-020-00930-z",
+        "doi": "10.1007/s10518-020-00930-z",
+        "year": 2020,
+        "authors": [
+          "S. Tallett-Williams",
+          "B. Gosh",
+          "S. Wilkinson",
+          "C. Fenton",
+          "P. Burton",
+          "M. Whitworth",
+          "S. Datla",
+          "G. Franco",
+          "A. Trieu",
+          "M. Dejong",
+          "Viviana Novelli",
+          "T. White",
+          "T. Lloyd"
+        ],
+        "venue": "Bulletin of Earthquake Engineering",
+        "abstract": null,
+        "pdf_url": "https://link.springer.com/content/pdf/10.1007/s10518-020-00930-z.pdf",
+        "citation_count": 2,
+        "work_type": "article",
+        "identifier": "10.1007/s10518-020-00930-z",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Springer Science and Business Media LLC"
+        }
+      },
+      {
+        "title": "Site amplification in the Kathmandu Valley during the 2015 M7.6 Gorkha, Nepal earthquake",
+        "source": "crossref",
+        "url": "https://doi.org/10.1007/s10518-016-0003-8",
+        "doi": "10.1007/s10518-016-0003-8",
+        "year": 2016,
+        "authors": [
+          "S. Tallett-Williams",
+          "B. Gosh",
+          "S. Wilkinson",
+          "C. Fenton",
+          "P. Burton",
+          "M. Whitworth",
+          "S. Datla",
+          "G. Franco",
+          "A. Trieu",
+          "M. Dejong",
+          "V. Novellis",
+          "T. White",
+          "T. Lloyd"
+        ],
+        "venue": "Bulletin of Earthquake Engineering",
+        "abstract": null,
+        "pdf_url": "http://link.springer.com/content/pdf/10.1007/s10518-016-0003-8.pdf",
+        "citation_count": 32,
+        "work_type": "article",
+        "identifier": "10.1007/s10518-016-0003-8",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Springer Science and Business Media LLC"
+        }
+      },
+      {
+        "title": "7. Effect of Site Amplification and Basin Response on Strong Motion in Las Vegas, Nevada",
+        "source": "crossref",
+        "url": "https://doi.org/10.1193/1.1586005",
+        "doi": "10.1193/1.1586005",
+        "year": 1998,
+        "authors": [
+          "Feng Su",
+          "John G. Anderson",
+          "Shean Der Ni",
+          "Yuehua Zeng"
+        ],
+        "venue": "Earthquake Spectra",
+        "abstract": "The June 29, 1992, Little Skull Mountain earthquake (M=5.6) was recorded at nine strong‐motion stations in Las Vegas, Nevada. Ground motion on alluvial sites is much greater than on rock sites, especially at low frequencies, and had a longer duration than expected. Five of the seven stations on sediment have Fourier spectral amplifications that average at least a factor of five greater than the rock reference sites from 0.5 to 2 Hz. Thus, large earthquakes at moderate distances, that would excite strong long‐period waves, are a concern. We generated synthetic seismograms, including the site amplification, for magnitude 7.4 earthquakes on the Death Valley fault system 150km from Las Vegas. The synthetics have average peak accelerations ranging from 0.058 to 0.13g at the rock and from 0.051 to 0.22g at the sediment sites. The average peak velocity and displacement is 49 cm/sec and 33 cm, respectively, on the larger component of a sediment site.",
+        "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1193/1.1586005",
+        "citation_count": 5,
+        "work_type": "article",
+        "identifier": "10.1193/1.1586005",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Wiley"
+        }
+      },
+      {
+        "title": "Observations and Simulations of Basin Effects in the Kathmandu Valley during the 2015 Gorkha, Nepal, Earthquake Sequence",
+        "source": "crossref",
+        "url": "https://doi.org/10.1193/013117eqs022m",
+        "doi": "10.1193/013117eqs022m",
+        "year": 2017,
+        "authors": [
+          "Domniki Asimaki",
+          "Kami Mohammadi",
+          "Henry B. Mason",
+          "Rachel K. Adams",
+          "Sudhir Rajaure",
+          "Diwakar Khadka"
+        ],
+        "venue": "Earthquake Spectra",
+        "abstract": "The M7.8 Gorkha, Nepal main shock ruptured a segment of the Main Himalayan Thrust (MHT) directly below Kathmandu Valley, causing strong shaking levels across the valley. Strong‐motion data reveal an initial 6 s source pulse that was amplified and reverberated within the basin. One of the striking features of the observed ground motions in the valley was the exceptionally low energy of periods less than 2 s, which likely limited the extent and severity of structural damage in Kathmandu compared with alternative rupture scenarios of the same magnitude in the region. Isolated cases of liquefaction and lateral spreading of unconsolidated sediments were also observed, but have not yet revealed a systematic damage pattern. Initial analysis of available data suggests that several different factors, including source and path as well as site effects, were responsible for the unusual ground motions characteristics. In this paper, we provide a short description of the Kathmandu Valley geology and analyze available strong‐motion records from the main shock and three strong aftershocks, with the intent to shed light on earthquake reconnaissance observations from this earthquake.",
+        "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1193/013117eqs022m",
+        "citation_count": 35,
+        "work_type": "article",
+        "identifier": "10.1193/013117eqs022m",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Wiley"
+        }
+      },
+      {
+        "title": "Combining observed linear basin amplification factors with 1D nonlinear site‐response analyses to predict site response for strong ground motions: Application to Wellington, New Zealand",
+        "source": "crossref",
+        "url": "https://doi.org/10.1177/87552930231209726",
+        "doi": "10.1177/87552930231209726",
+        "year": 2024,
+        "authors": [
+          "Christopher A de la Torre",
+          "Brendon A Bradley",
+          "Felipe Kuncar",
+          "Robin L Lee",
+          "Liam M Wotherspoon",
+          "Anna E Kaiser"
+        ],
+        "venue": "Earthquake Spectra",
+        "abstract": "This study develops a method for estimating site amplification that combines instrumentally observed site‐specific amplification factors with adjustment factors from nonlinear site‐response analyses. This approach provides estimates of site response for large‐strain motions based on observations and sophisticated nonlinear modeling. A database of weak‐to‐moderate intensity ground motions recorded in three basins of Wellington, New Zealand is used to study the observed site amplification. A subset of nine strong‐motion stations was selected to perform nonlinear site‐response analyses with scaled strong ground motions to assess the influence of nonlinearity on site amplification factors and demonstrate the approach. Different shear‐wave velocity ( V S) profiles, constitutive models, and modeling approaches (e.g. one‐dimensional (1D) site‐response analyses vs empirical ‐based approaches) are used to quantify the sensitivity and modeling uncertainty in the nonlinear site‐response analyses. It was found that for soft sites subjected to strong ground motions, there may be a decrease in spectral acceleration amplification factors for periods up to approximately 2 s, relative to the expected linear site response. For longer periods, there is little to no amplification from the effects of soil nonlinearity. However, at stiffer sites, which generally experience less basin amplification in observations, there may be moderate amplification at longer periods when nonlinearity is considered due to softening of the soil profile. Empirical ground‐motion models were found to under‐represent the observed amplification between basin sites and the nearby reference site, especially at intermediate to long periods, corresponding to resonant frequencies of these basin sites. In addition, the empirical nonlinear site amplification models (‐based) were found to deviate from nonlinear analyses at large strains, where such models are poorly constrained due to such a limited number of observations.",
+        "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1177/87552930231209726",
+        "citation_count": 12,
+        "work_type": "article",
+        "identifier": "10.1177/87552930231209726",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Wiley"
+        }
+      },
+      {
+        "title": "Site Response, Basin Amplification, and Earthquake Stress Drops in the Portland, Oregon Area",
+        "source": "crossref",
+        "url": "https://doi.org/10.1785/0120200269",
+        "doi": "10.1785/0120200269",
+        "year": 2020,
+        "authors": [
+          "Arthur Frankel",
+          "Alex Grant"
+        ],
+        "venue": "Bulletin of the Seismological Society of America",
+        "abstract": "Site response, sedimentary basin amplification, and earthquake stress drops for the Portland, Oregon area were determined using accelerometer recordings at 16 sites of 10 local earthquakes with MD 2.6–4.0. A nonlinear inversion was applied to calculate site response (0.5–10 Hz), corner frequencies, and seismic moments from the Fourier spectra of the earthquakes. Site amplifications at lower frequencies of 0.1–2.0 Hz were determined from Fourier spectra of four regional earthquakes with Mw 5.8–6.4. Amplifications were calculated relative to a stiff-soil site outside the Portland and Tualatin basins. Sites on artificial fill and Holocene alluvium show strong amplification peaks (factor of 5) around 1–2 Hz. Sites on the Portland Hills, consisting of thin soil over basalt, display spectral peaks at 4–5 Hz (factor of 4). Spectral peaks at both sites are similar to those predicted for vertically propagating S waves from VS profiles determined at these sites using a borehole and refraction microtremor analysis. The largest amplifications at 0.1–1 Hz were found at stiff-soil sites in the Tualatin basin, based on recordings of regional earthquakes. Amplifications of a factor of 10, at about 0.3 Hz, were observed for a site in the deeper portion of the Tualatin basin and a factor of 7 at 0.5–0.6 Hz for two adjacent sites closer to the border of that basin. Stiff-soil sites in the Portland basin exhibit amplifications of 2–3 at frequencies of about 0.3–0.8 Hz. The frequencies of the amplification peaks for the deep Tualatin basin site can be explained by S-wave resonance in the shallow sediments, but the observed amplification is underestimated. Earthquake stress drops determined from the inversion range from 3 to 11 MPa, with no overall dependence on seismic moment.",
+        "pdf_url": "https://pubs.geoscienceworld.org/ssa/bssa/article-pdf/111/2/671/5258992/bssa-2020269.1.pdf",
+        "citation_count": 11,
+        "work_type": "article",
+        "identifier": "10.1785/0120200269",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Seismological Society of America (SSA)"
+        }
+      },
+      {
+        "title": "Ground Motion Site Amplification Factors for Sites Located within the Mississippi Embayment with Consideration of Deep Soil Deposits",
+        "source": "crossref",
+        "url": "https://doi.org/10.1193/091712eqs291m",
+        "doi": "10.1193/091712eqs291m",
+        "year": 2015,
+        "authors": [
+          "Mojtaba Malekmohammadi",
+          "Shahram Pezeshk"
+        ],
+        "venue": "Earthquake Spectra",
+        "abstract": "In this study, site amplification factors for the deep soil deposits of the Mississippi embayment are computed using a nonlinear site response analysis program first to develop a model for nonlinear soil response for possible use by ground motion developers and second to address site amplification estimation. The effects of geology, sediment depth, and average shear wave velocity at the upper 30 m of soil ranging 180–800 m/s, as well as the effect of peak ground acceleration at the bedrock on nonlinear ground motion amplification for the upper embayment, are investigated. The site response computations cover various site conditions, sediment depth of 70–750 m, and peak acceleration of input rock motions of 0.01–0.90 g. The amplification (or de‐amplification) at various frequencies implied by the sediment depth is greater than that implied just by site classification of the top 30 m of soil.",
+        "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1193/091712EQS291M",
+        "citation_count": 23,
+        "work_type": "article",
+        "identifier": "10.1193/091712eqs291m",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Wiley"
+        }
+      },
+      {
+        "title": "Numerical Modeling of Quaternary Sediment Amplification: Basin Size, ASCE Site Class, and Fault Location",
+        "source": "crossref",
+        "url": "https://doi.org/10.4018/ijgee.303589",
+        "doi": "10.4018/ijgee.303589",
+        "year": 2022,
+        "authors": [
+          "Rajesh Parla",
+          "Surendra Nadh Somala"
+        ],
+        "venue": "International Journal of Geotechnical Earthquake Engineering",
+        "abstract": "The main objective of this study is to understand the dependency of basin amplification on-site and source parameters employing high computational numerical simulations. This study mainly addresses the effect of fault dip, size of the basin, site classification, and position of the basin on wave amplification. Two dip angles are considered, 7 and 9 degrees, in this study to estimate the factor of amplification. Amplifications observed at the basin center and basin edge station for three different sizes of the basin are analyzed. Simulation results obtained from three different models with the ASCE site class C, D, and E basin sediment specifications compared. To analyze the effect of basin relative position on amplification, the authors studied a model with two different basins embedded in bedrock, back and forth of the fault. This study observed multiple peaks at different time periods in response spectra drawn to amplification ratio versus time periods.",
+        "pdf_url": null,
+        "citation_count": 2,
+        "work_type": "article",
+        "identifier": "10.4018/ijgee.303589",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "IGI Global Scientific Publishing"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:40:38.590779+00:00"
+}

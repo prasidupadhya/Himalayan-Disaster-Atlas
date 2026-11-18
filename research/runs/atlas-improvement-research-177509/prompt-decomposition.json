@@ -1,0 +1,70 @@
+{
+  "sub_questions": [
+    "How can the Himalayan Disaster Atlas improve even more overall — which improvements matter most, and in what order?",
+    "How can the daily copy of official DHM, BIPAD and NEMRC data become more reliable, more complete and more useful (feed reliability, new official sources, history, freshness)?",
+    "How can the MapLibre map and its place search improve (layers, hazard data, search coverage, Nepali names, performance)?",
+    "How can the hypothetical flood and GLOF scenario models improve scientifically (hydraulic routing, dam-breach, inventories, validation, uncertainty)?",
+    "How can the hypothetical earthquake scenario model improve scientifically (GMPEs, site effects, rupture models, exposure, damage/loss, validation)?",
+    "How can the site better serve Nepali users — bilingual EN/NE content, Nepali names, accessibility, low bandwidth, mobile, offline, literacy, dissemination channels?",
+    "How can the printable scenario reports and the static public site be made more useful and trustworthy for decision makers (risk communication, disclaimers, provenance)?",
+    "How can the project increase its real-world impact (users, partners such as DHM/NDRRMA/ICIMOD, adoption, sustainability, open data, governance)?",
+    "Which hazards or capabilities are missing entirely (e.g. landslides, early-warning integration, multi-hazard, climate projections) and are they worth adding?"
+  ],
+  "entities": [
+    {"name": "Himalayan Disaster Atlas (the project as a whole)", "type": "project", "required_fields": ["current strengths", "gaps", "prioritised improvements"]},
+    {"name": "Static public website architecture", "type": "component", "required_fields": ["reliability", "performance", "offline/PWA", "hosting"]},
+    {"name": "Bilingual English/Nepali content", "type": "component", "required_fields": ["language quality", "localisation", "accessibility"]},
+    {"name": "Floods", "type": "hazard", "required_fields": ["data", "models", "communication"]},
+    {"name": "Glacial-lake outbursts (GLOF)", "type": "hazard", "required_fields": ["data", "models", "communication"]},
+    {"name": "Earthquakes", "type": "hazard", "required_fields": ["data", "models", "communication"]},
+    {"name": "DHM (Department of Hydrology and Meteorology) official data", "type": "data source", "required_fields": ["what is available", "reliability", "how to use better"]},
+    {"name": "BIPAD (NDRRMA disaster information portal) official data", "type": "data source", "required_fields": ["what is available", "reliability", "how to use better"]},
+    {"name": "NEMRC (National Earthquake Monitoring and Research Center) official data", "type": "data source", "required_fields": ["what is available", "reliability", "how to use better"]},
+    {"name": "Daily copy of official data", "type": "component", "required_fields": ["robustness", "history", "freshness"]},
+    {"name": "MapLibre map", "type": "component", "required_fields": ["layers", "UX", "performance"]},
+    {"name": "Place search", "type": "component", "required_fields": ["coverage", "Nepali support"]},
+    {"name": "Hypothetical flood/GLOF scenario models", "type": "component", "required_fields": ["scientific validity", "improvements"]},
+    {"name": "Hypothetical earthquake scenario models", "type": "component", "required_fields": ["scientific validity", "improvements"]},
+    {"name": "Printable scenario reports", "type": "component", "required_fields": ["usefulness", "improvements"]},
+    {"name": "Nepali district names from the constitution", "type": "component", "required_fields": ["extension to other admin levels/places"]}
+  ],
+  "required_formats": [
+    "prioritised list / roadmap of improvements (the question is 'how can this improve')"
+  ],
+  "required_sections": [
+    "A prioritised recommendation section answering 'how can this project improve even more'"
+  ],
+  "required_section_headings": [
+    "## 1. Where the Atlas Stands Today",
+    "## 2. Official Data Feeds: DHM, BIPAD and NEMRC",
+    "## 3. The Map and Place Search",
+    "## 4. Flood and Glacial-Lake Outburst Scenarios",
+    "## 5. Earthquake Scenarios",
+    "## 6. Serving Nepali Users: Language, Access and Reach",
+    "## 7. Printable Reports, Trust and Risk Communication",
+    "## 8. Missing Hazards and Capabilities",
+    "## 9. Impact, Partnerships and Sustainability",
+    "## 10. Prioritised Roadmap"
+  ],
+  "time_horizons": ["near term (next 3-6 months)", "medium term (6-24 months)"],
+  "time_periods": [],
+  "scope_conditions": [
+    "Nepal (with transboundary Himalayan context where it affects Nepal, e.g. GLOFs from Tibet)",
+    "the project must stay a static, public, read-only, free website with no credentials in the browser (current architecture constraint, evaluate trade-offs if recommending otherwise)",
+    "scenarios are hypothetical model runs, not forecasts or warnings; official agencies remain authoritative",
+    "improvements across all facets: data, science, usability, accessibility, reliability, impact"
+  ],
+  "pipeline_tier": "full",
+  "response_format": "argumentative",
+  "citation_style": "inline",
+  "levers": {
+    "register": "analyze",
+    "register_confidence": "low",
+    "domain_notes": "Sourcing: peer-reviewed hazard science (GLOF modelling, Nepal GMPEs/site response, flood routing), official Nepali agency documentation (DHM, NDRRMA/BIPAD, NEMRC, ICIMOD), and evaluations of risk-communication and early-warning platforms (UNDRR, WMO, World Bank, Practical Action, peer platforms). Strong evidence is measured validation against observed events (e.g. 2015 Gorkha, 2021 Melamchi, 2023-2024 GLOFs) and evaluated user studies; vendor or project self-description is weak. Recency: data-source and platform facts within ~24 months; science may be older if still standard.",
+    "inference_depth": "standard",
+    "rationale": {
+      "register": "query asks how a project can improve — evaluation/recommendation-shaped, but no explicit 'should we'; ambiguous between analyze and advocate, so default analyze with low confidence",
+      "inference_depth": "open literature on Nepal hazards and early warning is rich; agency API documentation may be thin — revisit at loci analysis"
+    }
+  }
+}

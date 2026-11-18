@@ -1,0 +1,243 @@
+{
+  "ok": true,
+  "data": {
+    "query": "ground motion prediction equation Nepal Himalaya 2015 Gorkha earthquake",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Ground motion prediction equation for the Kathmandu Valley, Nepal based on strong motion records during the 2015 Gorkha Nepal earthquake sequence",
+        "source": "crossref",
+        "url": "https://doi.org/10.1016/j.soildyn.2020.106208",
+        "doi": "10.1016/j.soildyn.2020.106208",
+        "year": 2020,
+        "authors": [
+          "Takuho Mori",
+          "Michiko Shigefuji",
+          "Subeg Bijukchhen",
+          "Tatsuo Kanno",
+          "Nobuo Takai"
+        ],
+        "venue": "Soil Dynamics and Earthquake Engineering",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 17,
+        "work_type": "article",
+        "identifier": "10.1016/j.soildyn.2020.106208",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "Ground motion characteristics of the 2015 central Nepal (Gorkha-Dolakha) Earthquake and 2023 SE Turkey Earthquake doublets",
+        "source": "crossref",
+        "url": "https://doi.org/10.3126/jngs.v66i01.57958",
+        "doi": "10.3126/jngs.v66i01.57958",
+        "year": 2023,
+        "authors": [
+          "Dilli Ram Thapa"
+        ],
+        "venue": "Journal of Nepal Geological Society",
+        "abstract": "The Alpine-Himalayan orogenic belt, the well-identified seismically active region in the world, has been evidenced by the occurrence of recent two devastating earthquake doublets in 2015 in central Nepal (MW 7.8 and MW 7.3) and in 2023 in southeastern Turkey(MW 7.8 and MW 7.5). In this study, seismic ground motion characteristics of two damaging earthquakes namely the 2015 central Nepal earthquake doublet that occurred in the central Himalaya and the 2023 southeastern Turkey earthquake doublet that occurred in the eastern Mediterranean has been investigated. The observed strong-motion recordings indicate that the peak ground acceleration (PGA) values are about 152.61–154.96 cm/s2 of the 2015 central Nepal earthquake doublet at KATNP station and about 451.834–842.924 cm/s2 of the 2023 southeastern Turkey earthquake doublet at station 3137. The seismic ground motion of both the 2015 central Nepal and the 2023 SE Turkey earthquakes doublet shows that the 2015 central Nepal doublet produced much lower peak ground acceleration than the 2023 southeastern Turkey earthquake doublet.",
+        "pdf_url": "https://www.nepjol.info/index.php/JNGS/article/download/57958/43320",
+        "citation_count": 0,
+        "work_type": "article",
+        "identifier": "10.3126/jngs.v66i01.57958",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Nepal Journals Online (JOL)"
+        }
+      },
+      {
+        "title": "Evolution of the 2015 Mw 7.9 Gorkha earthquake in Nepal Himalaya: Insights from local and teleseismic earthquake analysis",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu26-826",
+        "doi": "10.5194/egusphere-egu26-826",
+        "year": 2026,
+        "authors": [
+          "Mita Uthaman",
+          "Niptika Jana"
+        ],
+        "venue": null,
+        "abstract": "A portion of the central segment of the Himalayan orogen was partially ruptured across ~150 km during the 2015 Mw 7.9 Gorkha earthquake, which caused an overwhelming fatality of ~9000 lives. Study of the immediate aftershocks reported an eastward migration of the seismic front. Whereas, spatial average provided hints at fluid migration along the Main Himalayan Thrust (MHT) owing to the presence of a prominent low-velocity layer at MHT with fluctuating anisotropic directions. In this study, we employ the local and teleseismic earthquakes recorded at the year-long (2015-2016) deployment of seismic stations at the NAMASTE (Nepal Array Measuring Aftershock Seismicity Trailing Earthquake) network to investigate the temporal evolution of the aftershock sequence. The seismic front is observed to migrate eastwards immediately after the mainshock as reported, but analysis of the prolonged activity over the year reveals that the locus of seismicity migrates back from east to west towards the mainshock hypocenter. Shear wave splitting measurements extracted from local earthquakes indicate E-W realignment of the fast polarization direction of the aftershocks, as opposed to the initial NNW-SSE direction of the mainshock. A prominent low-velocity layer, discerned from receiver functions computed using teleseismic earthquakes, is observed to migrate along the rupture zone of the aftershock sequence. The changing direction of fluid migration along the low-velocity rupture zone at MHT could possibly be inciting the oscillation of anisotropic characteristic of the crust as the aftershock sequence evolves. We intend to further investigate and validate the observations through finite element modelling to constrain the variability of stress redistribution following a major earthquake, and gain insights on evolution of earthquake cycles in an orogenic setting.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu26-826",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Basin Effects in Strong Ground Motion: A Case Study from the 2015 Gorkha, Nepal, Earthquake",
+        "source": "crossref",
+        "url": "https://doi.org/10.1061/9780784481462.028",
+        "doi": "10.1061/9780784481462.028",
+        "year": 2018,
+        "authors": [
+          "Peyman Ayoubi",
+          "Domniki Asimaki",
+          "Kami Mohammdi"
+        ],
+        "venue": "Geotechnical Earthquake Engineering and Soil Dynamics V",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 12,
+        "work_type": "article",
+        "identifier": "10.1061/9780784481462.028",
+        "extra": {
+          "crossref_type": "proceedings-article",
+          "publisher": "American Society of Civil Engineers"
+        }
+      },
+      {
+        "title": "Ground motion processing and observations for the near-field accelerograms from the 2015 Gorkha, Nepal earthquake",
+        "source": "crossref",
+        "url": "https://doi.org/10.1016/j.soildyn.2018.01.032",
+        "doi": "10.1016/j.soildyn.2018.01.032",
+        "year": 2018,
+        "authors": [
+          "Reeves Whitney"
+        ],
+        "venue": "Soil Dynamics and Earthquake Engineering",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 4,
+        "work_type": "article",
+        "identifier": "10.1016/j.soildyn.2018.01.032",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "The 2015 Mw 7.8 Gorkha Earthquake in Nepal and its aftershocks: analysis of strong ground motion",
+        "source": "crossref",
+        "url": "https://doi.org/10.1007/s10518-017-0084-z",
+        "doi": "10.1007/s10518-017-0084-z",
+        "year": 2017,
+        "authors": [
+          "R. Rupakhety",
+          "S. Olafsson",
+          "B. Halldorsson"
+        ],
+        "venue": "Bulletin of Earthquake Engineering",
+        "abstract": null,
+        "pdf_url": "http://link.springer.com/content/pdf/10.1007/s10518-017-0084-z.pdf",
+        "citation_count": 38,
+        "work_type": "article",
+        "identifier": "10.1007/s10518-017-0084-z",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Springer Science and Business Media LLC"
+        }
+      },
+      {
+        "title": "Attenuation relation predicted observed ground motion of Gorkha Nepal earthquake of April 25, 2015",
+        "source": "crossref",
+        "url": "https://doi.org/10.1007/s11069-015-1969-2",
+        "doi": "10.1007/s11069-015-1969-2",
+        "year": 2015,
+        "authors": [
+          "Raed Ahmad",
+          "Ramesh P. Singh"
+        ],
+        "venue": "Natural Hazards",
+        "abstract": null,
+        "pdf_url": "http://link.springer.com/content/pdf/10.1007/s11069-015-1969-2.pdf",
+        "citation_count": 14,
+        "work_type": "article",
+        "identifier": "10.1007/s11069-015-1969-2",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Springer Science and Business Media LLC"
+        }
+      },
+      {
+        "title": "Ground deformation produced by 2015 M7.8 Gorkha earthquake in Nepal and mapped with RADARSAT-2 DInSAR",
+        "source": "crossref",
+        "url": "https://doi.org/10.4095/297443",
+        "doi": "10.4095/297443",
+        "year": 2015,
+        "authors": [
+          "S V Samsonov",
+          "M Czarnogorska"
+        ],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "report",
+        "identifier": "10.4095/297443",
+        "extra": {
+          "crossref_type": "report",
+          "publisher": "Natural Resources Canada/CMSS/Information Management"
+        }
+      },
+      {
+        "title": "The 2015 Gorkha, Nepal, Earthquake Sequence: II. Broadband Simulation of Ground Motion in Kathmandu",
+        "source": "crossref",
+        "url": "https://doi.org/10.1785/0120180174",
+        "doi": "10.1785/0120180174",
+        "year": 2019,
+        "authors": [
+          "Meng Chen",
+          "Shengji Wei"
+        ],
+        "venue": "Bulletin of the Seismological Society of America",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 14,
+        "work_type": "article",
+        "identifier": "10.1785/0120180174",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Seismological Society of America (SSA)"
+        }
+      },
+      {
+        "title": "Estimating coseismic ground displacement during the 2015 Gorkha, Nepal, earthquake from accelerometric data at KATNP station",
+        "source": "crossref",
+        "url": "https://doi.org/10.1016/j.soildyn.2018.01.031",
+        "doi": "10.1016/j.soildyn.2018.01.031",
+        "year": 2018,
+        "authors": [
+          "Reeves Whitney"
+        ],
+        "venue": "Soil Dynamics and Earthquake Engineering",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 8,
+        "work_type": "article",
+        "identifier": "10.1016/j.soildyn.2018.01.031",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Elsevier BV"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:40:32.209640+00:00"
+}

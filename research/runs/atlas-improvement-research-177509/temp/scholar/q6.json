@@ -1,0 +1,252 @@
+{
+  "ok": true,
+  "data": {
+    "query": "impact-based forecasting flood Nepal",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Nepal: Flood impact assessment",
+        "source": "crossref",
+        "url": "https://doi.org/10.4060/cd5014en",
+        "doi": "10.4060/cd5014en",
+        "year": 2025,
+        "authors": [],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book",
+        "identifier": "10.4060/cd5014en",
+        "extra": {
+          "crossref_type": "edited-book",
+          "publisher": "FAO"
+        }
+      },
+      {
+        "title": "Moving towards a fully probabilistic, end-to-end, impact-based, flood forecasting and warning system",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu2020-20183",
+        "doi": "10.5194/egusphere-egu2020-20183",
+        "year": 2020,
+        "authors": [
+          "Charlie Pilling"
+        ],
+        "venue": null,
+        "abstract": "&lt;p&gt;Set up in 2009, the UK Flood Forecasting Centre (FFC), is a successful partnership between the Environment Agency and the Met Office to provide national, operational, flood risk guidance. At the same time, we have a development programme to continuously improve flood forecasting. Operational for over a decade, the FFC has a strong portfolio and reputation amongst its users and customers. For example, the 2019 Responder Survey reported that 94% of those who have had contact with the FFC within the last 12 months are satisfied with the services provided.&amp;#160;&amp;#160;&lt;/p&gt;&lt;p&gt;High impact, low probability events have been a feature of the first 10 years of the Flood Forecasting Centre. Probabilistic forecasting and risk-based approaches provide approaches to identify, forecast and warn for such events. Indeed, whilst these are currently successfully employed by various National Meteorological Hydrological Centres, there is also recognition (for example, World Meteorological Organisation) that effective forecasting and warning systems should be:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;&amp;#8216;&lt;strong&gt;impact-based&amp;#8217;&lt;/strong&gt;;&lt;/li&gt; &lt;li&gt;driven by ensembles or realistic scenarios through an &lt;strong&gt;&amp;#8216;end-to-end&amp;#8217;&lt;/strong&gt; system (rather than precipitation ranges being simplified);&lt;/li&gt; &lt;li&gt;more &lt;strong&gt;objective&lt;/strong&gt;, so using new tools such as ensemble &amp;#8216;sub-setting&amp;#8217;, pattern recognition and machine learning to extract most value.&lt;/li&gt; &lt;/ul&gt;&lt;p&gt;The Environment Agency is implementing a new Delft-FEWS forecasting system this year, termed Incident Management Forecasting System (IMFS). This will introduce a step change in capability for probabilistic impact-based forecasting. Initially, rainfall and coastal scenarios (termed &amp;#8216;best-estimate&amp;#8217; and &amp;#8216;reasonable worst case&amp;#8217;) will be used to drive end-to-end forecasting, which includes for example impact data bases for property, infrastructure and communities. This is very much a stepping stone in the technical (systems) and adaptive (people, culture) transformation to a &lt;strong&gt;fully probabilistic, end-to-end, impact-based, flood forecasting. &lt;/strong&gt;&lt;/p&gt;&lt;p&gt;I will share some of our recent approaches to:&lt;/p&gt;&lt;ul&gt;&lt;li&gt;objective, ensemble based, forecasting, including the Natural Hazards Partnership surface water hazard impact model (driven by the Met Office MOGREPS precipitation ensembles) which goes live this year;&lt;/li&gt; &lt;li&gt;scenario generation and ensemble sub-setting to provide input to end-to-end, impact-based forecasting (IMFS);&lt;/li&gt; &lt;li&gt;next steps in moving to a fully probabilistic, end-to-end, impact-based, flood forecasting and warning system&lt;/li&gt; &lt;/ul&gt;&lt;p&gt;I will also highlight some of our current challenges that we would love to work with others to solve.&lt;/p&gt;",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu2020-20183",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Towards operational impact based flood forecasting in Norway",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu24-18395",
+        "doi": "10.5194/egusphere-egu24-18395",
+        "year": 2025,
+        "authors": [
+          "Kolbjorn Engeland",
+          "Trine Jahr Hegdahl Hegdahl",
+          "Emmanuel Jjunju",
+          "Kamilla Skåre Sandboe"
+        ],
+        "venue": null,
+        "abstract": "Impact based forecasting is identified as a major challenge for hydrometeorological services by WMO. Impact based flood forecasting aims at closing the gap from forecasting how high the streamflow might be in the coming days to forecasting what the high flows might do. The target audience for impact-based flood forecasts can be both the population at large and the authorities responsible for civil protection and emergency management at national, regional, and local levels.Since 1989 The Norwegian Water Resources and Energy Directorate (NVE) has been running the national services for forecasting floods and issuing warnings for regions and municipalities. Precipitation-runoff models for almost 160 catchments distributed all over Norway are used to forecast streamflow. Flood warnings are then mainly issued based on predefined thresholds for streamflow (mean flood, 5- and 50 years floods). The warnings mention typical impacts of the expected floods but not specific impacts.NVE aims to provide impact-based flood forecasts for Norway and has started a 4-year pilot for four selected catchments in Norway to assess the information, models and tools needed to achieve this aim. This presentation will present the approaches selected and discuss their challenges.The model chain used to assess impacts needs to represent the relevant processes. In a first step we focus on riverine floodings. A first challenge is that the hydrological models need to provide forecasts where the flood might have an impact, which signifies that the hydrological models will be applied in ungauged locations. Subsequently, hydraulic models can be used to estimate water levels and depths in susceptible areas. We evaluate an approach where the models are configured to sub-reaches of the rivers were the up- and downstream boundary conditions are well defined and forecasted streamflow at selected points is used as input. The hydrologic model can be used to establish an archive of flood levels and or depths to reduce computing time. This approach is challenging when downstream boundary conditions are dynamic, e.g., close to sea with tidal influence or inland lakes where the water level peaks later than discharge in the upstream rivers. The water levels and depths are subsequently used to estimate impacts based on the buildings and infrastructure potentially affected by the flood. Here we can use the type of building (storage, residential, school etc) type of road (municipality, regional or national road) to assess impact. An important challenge here is how to weight and aggregate potential impacts.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu24-18395",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Impact-Based Ensemble Flood Forecasting in Japan: Effects of Typhoon Intensity Modification on Flood Damage Mitigation during Typhoon Hagibis (2019)",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu26-16290",
+        "doi": "10.5194/egusphere-egu26-16290",
+        "year": 2026,
+        "authors": [
+          "Xiaoyang Li",
+          "Kei Yoshimura",
+          "Tomoe Nasuno",
+          "Yohei Yamada"
+        ],
+        "venue": null,
+        "abstract": "Typhoon Hagibis (2019), one of the most powerful storms to strike Japan in recent years, caused widespread flooding and severe damage. Impact-based forecasting play a critical role in planning effective mitigation measures and enhancing disaster preparedness and responses. In this study, we employ the Integrated Land Simulator (ILS) coupled with the Nonhydrostatic Icosahedral Atmospheric Model (NICAM) to evaluate the effects of typhoon intensity modification on flood damage mitigation associated with Typhoon Hagibis.To systematically assess uncertainties in typhoon forecasts, we conducted ensemble simulations consisting of a control run and ten ensemble members. The results show that the spatial distribution of heavy rainfall and flooding is closely linked to the typhoon track. When the typhoon track shifted westward, heavy rainfall and flooding expanded over southwestern Japan. In contrast, eastward shifts in the typhoon track led to increased heavy rainfall and flooding in central Japan, with particularly strong impacts over the densely populated Kanto region.To further investigate the effects of typhoon intensity modification on flood damage mitigation, the central pressure of the typhoon was artificially increased by 1 to 15 hPa at 1-hPa intervals on 10 and 11 October. These intensity modification experiments demonstrate that human intervention generally led to reductions in heavy rainfall and flood damage across Japan. Moreover, modifications applied on October 10 resulted in greater reductions in both heavy rainfall and flood damage than those applied on October 11.These findings highlight the critical importance of both the intensity and timing of human intervention in influencing flood risk. By simulating different modification intensities and timings and explicitly evaluating the role of weather modification, this study advances our understanding of flood hazards and provides valuable insights for improving disaster preparedness and flood mitigation strategies.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu26-16290",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Enhancing National Flood Forecasting: Leveraging Library-based Surrogate Models for Impact-based Warnings",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu24-17635",
+        "doi": "10.5194/egusphere-egu24-17635",
+        "year": 2025,
+        "authors": [
+          "Markus Mosimann",
+          "Martina Kauzlaric",
+          "Simon Schick",
+          "Olivia Martius",
+          "Andreas Paul Zischg"
+        ],
+        "venue": null,
+        "abstract": "In Switzerland, the Federal Office for the Environment issues hydrological forecasts and general flood warnings for the main river network. However, recent global flood events underscore that gaps in the communication channels from warning services to target groups inhibit effective mitigation efforts. One approach addressing this issue is impact-based warning.Aligned with Switzerland's existing flood forecasting system, we introduce a library-based surrogate flood model approach aimed at advancing current technologies towards robust impact-based warning systems. We evaluate the model based on the main river network of Northern Switzerland by comparing the impacts to buildings, persons and workplaces with hazard classification, estimated with transient simulations for nine extreme precipitation scenarios.Across 78 analyzed model regions, our surrogate approach yields a Flood Area Index between 0.74 and 0.90 for each scenario (overall 0.84) compared to the transient, computationally expensive flood modelling approach. Furthermore, the Critical Success Index, computed based on exposed persons, ranges between 0.77 and 0.93 (overall 0.89).Our prototype of a library-based flood surrogate model demonstrates the ability of accurately replicate highly resolved transient models This capability bears the potential of nationwide real-time flood impact prediction and potential integration into probabilistic forecasting. Leveraging an API, this library-based approach could enhance the existing forecasting system, offering a pathway toward impact-based flood warnings.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu24-17635",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Impact-based flood forecasting in India: evaluation of FHIM-India for fluvial flood impacts in Kerala",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu26-20831",
+        "doi": "10.5194/egusphere-egu26-20831",
+        "year": 2026,
+        "authors": [
+          "Ali Mashhadi",
+          "Steven J. Cole",
+          "Steven C. Wells",
+          "Xilin Xia",
+          "Robert J. Moore"
+        ],
+        "venue": null,
+        "abstract": "Recent advances in ensemble meteorological forecasting, hydrological modelling, and flood inundation mapping have substantially improved flood hazard prediction. However, major gaps persist in translating hazard information into understandable, trusted, and actionable warnings based on the impacts of flood events, limiting the effectiveness of early warning–early action systems. A key challenge lies in linking hydrological hazard forecasts with exposure and vulnerability information to support impact-based decision-making. Constructing and evaluating flood disaster risk forecasts remains a complex and uncertain process, particularly due to the multi-dimensional and spatially heterogeneous nature of vulnerability and exposure data. Impact-based Forecasting (IbF) of flooding seeks to address these challenges by explicitly connecting flood hazard forecasts to potential societal impacts in space and time. FHIM-India – Flood Hazard Impact Model for India – is an impact-based flood forecasting framework that integrates ensemble numerical weather predictions, distributed hydrological modelling (Grid-to-Grid), and hydrodynamic flood simulations (SynxFlow) with exposure and vulnerability datasets. Here, FHIM-India is evaluated for fluvial flood impacts in the state of Kerala, south-western India using over 30 years of recorded impacts. The FHIM-India framework is repurposed to generate daily flood impact hindcasts for multiple districts in Kerala over the period 1991–2022 using observed rainfall data as input. Modelled impact indicators related to affected population and property are evaluated against reported historical impact data. The performance of the impact-based hindcasts is assessed relative to warnings derived using fixed rainfall threshold-based approaches. Results indicate that FHIM-India improves the identification and spatial discrimination of mid- to high-severity flood events compared with warnings based on fixed rainfall thresholds. The framework demonstrates strong potential for use in operational impact-based flood forecasting to support early warning systems and risk-informed decision-making.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu26-20831",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Risk Based Flood Forecasting Improvements",
+        "source": "crossref",
+        "url": "https://doi.org/10.1680/rtffdao.45255.0011",
+        "doi": "10.1680/rtffdao.45255.0011",
+        "year": 2011,
+        "authors": [
+          "Chris Whitlow"
+        ],
+        "venue": "Real Time Flood Forecasting - Developments and Opportunities",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book-chapter",
+        "identifier": "10.1680/rtffdao.45255.0011",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Thomas Telford Publishing"
+        }
+      },
+      {
+        "title": "Runoff Forecasting and Its Application in Reservoir Operation and Flood Warnings in Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.3126/hn.v15i0.11288",
+        "doi": "10.3126/hn.v15i0.11288",
+        "year": 2014,
+        "authors": [
+          "Anup Khanal",
+          "Netra Prasad Timalsina",
+          "Knut Alfredsen"
+        ],
+        "venue": "Hydro Nepal:  Journal of Water, Energy and Environment",
+        "abstract": "Runoff forecasting is a very useful tool in hydrology to predict runoff based on a weather forecast. In developed countries, the method is also currently used for flood forecasting, and to predict runoff for hydropower reservoirs and water allocation for irrigation. But this is not the case in Nepal. The purpose of this paper is to demonstrate how to set up a system for runoff forecasting for a Nepalese catchment and illustrate how these procedures could be utilized in reservoir operation and flood warnings. This paper provides the necessary steps for implementing such a system in Nepal, including the selection of a meteorological forecast model, bias correction of the model output, HBV model set up, and runoff forecast simulation.DOI: http://dx.doi.org/10.3126/hn.v15i0.11288HYDRO Nepal JournalJournal of Water Energy and EnvironmentVolume: 15, 2014 JulyPage: 23-29",
+        "pdf_url": "https://www.nepjol.info/index.php/HN/article/download/11288/9145",
+        "citation_count": 0,
+        "work_type": "article",
+        "identifier": "10.3126/hn.v15i0.11288",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Nepal Journals Online (JOL)"
+        }
+      },
+      {
+        "title": "Impact-Based Forecasting Model for Flood Hazard Mitigation in Java, Indonesia",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu25-7271",
+        "doi": "10.5194/egusphere-egu25-7271",
+        "year": 2025,
+        "authors": [
+          "Dendi Rona Purnama",
+          "Simon F. B. Tett",
+          "Ruth Doherty",
+          "Ida Pramuwardani"
+        ],
+        "venue": null,
+        "abstract": "Flooding is the most frequent and damaging hydrometeorological disaster in Indonesia, with Java being especially vulnerable due to its dense population and rapid urbanization. This study aims to refine the Impact-Based Forecasting (IBF) model to improve flood hazard predictions and mitigation efforts. Using Global Precipitation Measurement (GPM-IMERG) rainfall data as the hazard component combined with vulnerability and capacity datasets from InaRISK, this research focuses on enhancing the precision and reliability of impact assessments.Initial analyses highlight the potential of impact-based rainfall thresholds and assessment probabilistic impacts to refine the IBF model and reduce subjectivity in impact assessments. By linking calculated impact values and disaster magnitudes for the 2014 &#8211; 2023 period, this study shows a promising skill for significant and severe flood events, although improvements are needed for minor and minimal disaster classifications.This research lays the groundwork for a more robust and scalable IBF model tailored to Java&#8217;s unique challenges. The findings aim to support BMKG&#8217;s operational needs, enabling the delivery of more actionable early warnings and targeted disaster preparedness measures. By addressing critical gaps in existing IBF systems, this study contributes to bridging the divide between hazard-impact forecasts and societal resilience, ultimately mitigating the impacts of floods in Indonesia.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu25-7271",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Real-Time Impact-Based Flood Forecasting in the Piracicaba Basin, Brazil",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu26-867",
+        "doi": "10.5194/egusphere-egu26-867",
+        "year": 2026,
+        "authors": [
+          "Rodrigo Perdigão Gomes Bezerra",
+          "Bruno Brentan",
+          "Pedro Solha",
+          "Julian Eleutério",
+          "André Rodrigues"
+        ],
+        "venue": null,
+        "abstract": "Impact-based flood forecasting remains a major challenge for early warning systems, particularly in regions subject to rapid hydrological transitions and high societal vulnerability. Conventional approaches relying on pre-computed inundation maps and fixed impact thresholds often fail to capture event-specific dynamics, anticipate cascading impacts, and support timely emergency response. This study presents a real-time impact-based forecasting system that integrates physics-enhanced LSTM streamflow prediction, two-dimensional hydrodynamic simulation, and automated GIS-based impact assessment within a unified Python framework.The workflow begins with a physics-enhanced LSTM model trained to provide short-range streamflow forecasts at key upstream stations. These forecasts drive an automatically executed HEC-RAS 2D model, producing time-evolving floodplain conditions beyond the static assumptions of threshold-based systems. By adopting dynamic simulations rather than pre-calculated inundation products, the system captures spatially and temporally explicit flood characteristics—advancing the representation of timing, extent, and hydraulic intensity during extreme or atypical events.Hydrodynamic outputs are post-processed through a Python module that derives key impact metrics, including (i) direct economic losses via depth–damage functions, (ii) exposed and affected population, (iii) disruption of transportation links, (iv) impacts on critical facilities (e.g., hospitals, schools, emergency services), and (v) flood arrival times at operationally relevant locations. The arrival-time analysis provides essential lead-time information for emergency mobilisation, substantially enhancing situational awareness.The system is demonstrated in the 8,850 km² upstream drainage area of the Piracicaba Basin (São Paulo, Brazil), a region characterised by hydrological sensitivity, rapid urbanisation, and recurrent flood emergencies. Results show that integrating machine learning, hydrodynamic modelling, and automated geospatial impact quantification improves the timeliness, accuracy, and operational relevance of flood warnings. The framework advances beyond hazard-centric forecasts by delivering transparent, event-specific impact information essential for effective early action.All components of the framework rely on free and open-source tools, and all scripts developed in this study are openly available on GitHub to support transparency, reproducibility, and operational scalability.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu26-867",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:40:51.687353+00:00"
+}

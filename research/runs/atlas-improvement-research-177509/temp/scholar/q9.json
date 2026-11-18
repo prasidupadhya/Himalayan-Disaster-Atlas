@@ -1,0 +1,243 @@
+{
+  "ok": true,
+  "data": {
+    "query": "earthquake scenario loss estimation Nepal buildings fragility",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Earthquake Loss Estimation Due to Damage to Residential Masonry Buildings During Scenario Earthquakes in Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.2139/ssrn.4929842",
+        "doi": "10.2139/ssrn.4929842",
+        "year": 2024,
+        "authors": [
+          "Sunita Ghimire",
+          "Hari  Ram Parajuli",
+          "Prem  Nath Maskey"
+        ],
+        "venue": null,
+        "abstract": "Many large earthquakes have struck Nepal since 1255 A.D. These massive earthquakes have caused significant damage and resulted in numerous fatalities. The two major earthquakes of this century were the one that struck Gorkha in 2015 and the one that struck Nepal-Bihar in 1934. This study uses data on damage to residential masonry buildings in 31 districts of Nepal affected by the 2015 Gorkha earthquake. For the first time, residential masonry buildings are classified on the basis of the number of stories. Seven different typologies were found in the 31 districts. The damage to these buildings is further classified into five grades on the basis of the EMS 98 grading criteria. Then, empirical fragility curves are developed for all seven typologies. Thus, the derived empirical fragility curves, the exposure model, the consequence model, the vulnerability model, and the fault rupture model are utilized as inputs for the loss estimation. For the purpose of the analysis, the three earthquake scenarios are taken into account in a way that makes them representative of central, eastern, and western Nepal. Among the three scenarios, two are real scenarios of 1934 Nepal, the Bihar earthquake and the 2015 Gorkha earthquake, and one is an imaginary scenario of Mw 6.5 in western Nepal. This study provides the damage distributions of residential masonry buildings of various stories and VDCwise economic losses in the study area during earthquake scenarios.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.2139/ssrn.4929842",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "Earthquake Loss Estimation Due to Damage to Residential Masonry Buildings During Scenario Earthquakes in Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.2139/ssrn.5231948",
+        "doi": "10.2139/ssrn.5231948",
+        "year": 2025,
+        "authors": [
+          "Sunita Ghimire",
+          "Hari  Ram Parajuli",
+          "Prem  Nath Maskey"
+        ],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.2139/ssrn.5231948",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "Earthquake loss estimation due to damage to residential masonry buildings during scenario earthquakes in Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.1016/j.pdisas.2025.100463",
+        "doi": "10.1016/j.pdisas.2025.100463",
+        "year": 2025,
+        "authors": [
+          "Sunita Ghimire",
+          "Hari Ram Parajuli",
+          "Prem Nath Maskey"
+        ],
+        "venue": "Progress in Disaster Science",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 5,
+        "work_type": "article",
+        "identifier": "10.1016/j.pdisas.2025.100463",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "Observational fragility functions for residential stone masonry buildings in Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.1007/s10518-018-0372-2",
+        "doi": "10.1007/s10518-018-0372-2",
+        "year": 2018,
+        "authors": [
+          "Dipendra Gautam"
+        ],
+        "venue": "Bulletin of Earthquake Engineering",
+        "abstract": null,
+        "pdf_url": "http://link.springer.com/content/pdf/10.1007/s10518-018-0372-2.pdf",
+        "citation_count": 49,
+        "work_type": "article",
+        "identifier": "10.1007/s10518-018-0372-2",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Springer Science and Business Media LLC"
+        }
+      },
+      {
+        "title": "Case Study: Scenario‐Based Seismic Loss Estimation for Concrete Buildings in Mid‐America",
+        "source": "crossref",
+        "url": "https://doi.org/10.1193/082612eqs270t",
+        "doi": "10.1193/082612eqs270t",
+        "year": 2014,
+        "authors": [
+          "Jong‐Wha Bai",
+          "Mary Beth D. Hueste",
+          "Paolo Gardoni"
+        ],
+        "venue": "Earthquake Spectra",
+        "abstract": "This paper focuses on probabilistic loss estimation of concrete buildings subject to seismic activity in the Central United States. The scenario earthquakes under consideration have three moment magnitudes, and Shelby County, Tennessee, is selected as the case study region. The buildings considered are typical reinforced concrete frame buildings and tilt‐up concrete buildings in this region. Fragility curves based on recently developed demand models are used to represent the seismic vulnerability of the buildings. The structural damage of the selected buildings is assessed with a probabilistic approach that uses empirical structural damage factors and accounts for the prevailing uncertainties. Finally, corresponding losses for the buildings are estimated using a probabilistic framework. Through this approach, critical structures that might be expected to have extensive damage are identified. Additionally, the result of the scenario‐based approach provides decision makers with information needed to prioritize mitigation options for high risk structures due to potential earthquakes.",
+        "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1193/082612EQS270T",
+        "citation_count": 9,
+        "work_type": "article",
+        "identifier": "10.1193/082612eqs270t",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Wiley"
+        }
+      },
+      {
+        "title": "Development of Fragility Curves for the Underground PVC Water Distribution Pipes in Quezon City and Damage Estimation under a Magnitude 7.2 Scenario Earthquake",
+        "source": "crossref",
+        "url": "https://doi.org/10.26226/m.61a82ed54a84e7b4701d8bb3",
+        "doi": "10.26226/m.61a82ed54a84e7b4701d8bb3",
+        "year": 2021,
+        "authors": [
+          "Conrad Matthew Soriano"
+        ],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.26226/m.61a82ed54a84e7b4701d8bb3",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Morressier"
+        }
+      },
+      {
+        "title": "Seismic vulnerability analysis of existent buildings. Loss estimation and uncertainty analysis for deterministic earthquake scenarios.",
+        "source": "crossref",
+        "url": "https://doi.org/10.70675/bc7f905dzf29cz4eecz95bdz3e67a8d20216",
+        "doi": "10.70675/bc7f905dzf29cz4eecz95bdz3e67a8d20216",
+        "year": 2026,
+        "authors": [
+          "Ismaël Riedel"
+        ],
+        "venue": null,
+        "abstract": "Analyse de la vulnérabilité du bati existant. Estimation et réduction des incertitudes dans l'estimation des dommages et des pertes pour un scénario sismique donné Parmi les risques naturels et les catastrophes majeures, les tremblements de terre sont l'un des plus meurtriers, préjudiciables et imprévisibles de tous. Avec une constante augmentation de l'impact dans les économies des pays et dans le nombre de victimes, les tremblements de terre modernes coûtent des dizaines de milliards de dollars et tuent en moyenne 35000 personnes par an dans le monde.Avec l'étendue des dommages observés après les tremblements de terre d'intensité modérée à forte de ces dernières décennies, la sensibilisation auprès des catastrophes naturelles a considérablement augmenté. Il y a donc une demande croissante d'analyses détaillées des risques sismiques pour renforcer la préparation en amont et mieux planifier la réponse après les séismes. Cette évaluation des risques nécessite non seulement l'estimation de l'aléa sismique, mais aussi la représentation de la capacité des structures à résister face au mouvement du sol: tel est l'objectif des évaluations de la vulnérabilité sismique. En raison de la complexité inhérente à l'estimation de l'aléa, des vulnérabilités et leur interaction, la quantification du risque sismique est une tâche ardue, et estimer des impacts réalistes dus aux grands tremblements de terre ne peut se faire qu'approximativement.L'estimation de la vulnérabilité sismique des bâtiments à l'échelle urbaine, étant un élément crucial dans l'évaluation des risques, est elle-même une tâche longue, coûteuse et compliquée, en particulier dans les régions où l'aléa sismique est modéré à faible et où la mobilisation des ressources pour l'évaluation sismique est réduite même si le risque est non négligeable.Nous proposons dans la première partie de cette étude un moyen d'effectuer une estimation rapide à l'aide des données fiables du bâtiment. Ces données sont plus facilement disponibles au niveau régional que l'information habituellement exigée par les méthodes traditionnelles. Avec l'utilisation d'un ensemble de données du bâtiment existant à Grenoble (France), avec une classification EMS98 de la vulnérabilité, et en employant deux techniques de fouille de données différentes - Association Rule Learning et Support Vector Machine - nous avons développé des proxies de la vulnérabilité sismique. Ceux-ci ont été appliqués à la France entière en utilisant des informations de base à partir de bases de données nationales (information de recensement) et les données issues du traitement des images satellites et des photographies aériennes pour produire une carte de la vulnérabilité à l'échelle nationale. Cette méthode macroscopique pour évaluer la vulnérabilité est facilement applicable dans le cas d'un manque d'informations concernant les caractéristiques structurelles du parc immobilier.La partie qui clôture ce travail est préconisée pour le calcul des pertes liées aux tremblements de terre et à l'analyse et la réduction des incertitudes. L'estimation complète des scénarios de tremblement de terre avec un nombre probable de bâtiments endommagés dans une ville européenne typique est présentée par la suite. Une analyse complète des incertitudes est réalisée à chaque étape, et l'incertitude combinée finale est calculée. Les principales sources de variabilité sont représentées. Dans la dernière partie, l'évolution des dommages et des risques lorsque des améliorations structurelles sont affectées aux bâtiments est examinée. Des évaluations des pertes économiques sont effectuées pour la France en utilisant des cartes de risques réglementaires pour des différentes périodes de retour. En particulier, pour cinq villes françaises, le modèle de perte proposé est utilisé pour concevoir un plan de réaménagement et de modernisation du parc immobilier en réalisant des études coûts-bénéfices pour les différents types de plans d'intervention structurelle. Des scénarios d'investissements optimaux sont calculés, qui peuvent servir d'appui aux décisions stratégiques concernant l'atténuation du risque sismique en France.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "thesis",
+        "identifier": "10.70675/bc7f905dzf29cz4eecz95bdz3e67a8d20216",
+        "extra": {
+          "crossref_type": "dissertation",
+          "publisher": "Agence Bibliographique de l'Enseignement Supérieur"
+        }
+      },
+      {
+        "title": "Hazard Disaggregation and Record Selection for Fragility Analysis and Earthquake Loss Estimation",
+        "source": "crossref",
+        "url": "https://doi.org/10.1193/062016eqs101m",
+        "doi": "10.1193/062016eqs101m",
+        "year": 2017,
+        "authors": [
+          "Luis Sousa",
+          "Mário Marques",
+          "Vitor Silva",
+          "Humberto Varum"
+        ],
+        "venue": "Earthquake Spectra",
+        "abstract": "Economic losses and collapse probability are critical measures for evaluating the earthquake risk of existing buildings. In this context, this study sheds light on several problems and limitations in current practice of hazard‐consistent ground‐motion selection and fragility analysis, focusing on the impact that (commonly assumed) approximations in disaggregation outputs have on the aforementioned risk metrics, as opposed to an exact solution. These issues are investigated for several building classes, seismicity models and ground motion prediction equations (GMPE), for a site in the city of Lisbon (Portugal). It is observed that only an exact (i.e., rupture‐by‐rupture) disaggregation can lead to satisfactory results in terms of accuracy, when limit state criteria are not structure‐specific. On the other hand, an approximate method is proposed, which still leads to statistically valid results regardless of the chosen structural class, seismicity model or GMPE.",
+        "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1193/062016EQS101M",
+        "citation_count": 10,
+        "work_type": "article",
+        "identifier": "10.1193/062016eqs101m",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Wiley"
+        }
+      },
+      {
+        "title": "Earthquake Loss Estimation Methods for Welded Steel Moment‐Frame Buildings",
+        "source": "crossref",
+        "url": "https://doi.org/10.1193/1.1572171",
+        "doi": "10.1193/1.1572171",
+        "year": 2003,
+        "authors": [
+          "Charles A. Kircher"
+        ],
+        "venue": "Earthquake Spectra",
+        "abstract": "This paper describes procedures that may be used by experienced structural engineers to develop earthquake damage and related loss functions for welded steel moment‐frame (WSMF) buildings. The damage and loss functions are based on and compatible with the loss estimation methods of HAZUS, a technology developed by Federal Emergency Management Agency (FEMA) for assessing regional impacts of earthquakes. The loss estimation procedures were developed by the SAC Steel Program as described in SAC Joint Venture Topical Report SAC/BD‐99/13. These procedures form the basis for Appendix B of FEMA‐351, Recommended Seismic Evaluation and Upgrade Criteria for Existing Welded Steel Moment‐Frame Buildings. The procedures for developing damage and loss functions for WSMF building response are general in nature and applicable to WSMF buildings designed to different seismic criteria and having different connection details. Default values of damage and loss function parameters are provided for typical 3‐story, 9‐story, and 20‐story WSMF buildings, designed for Los Angeles, Seattle, or Boston seismic criteria and having pre‐Northridge, post‐Northridge, or damaged pre‐Northridge connection conditions.",
+        "pdf_url": "https://onlinelibrary.wiley.com/doi/pdf/10.1193/1.1572171",
+        "citation_count": 10,
+        "work_type": "article",
+        "identifier": "10.1193/1.1572171",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Wiley"
+        }
+      },
+      {
+        "title": "Seismic vulnerability assessment of step-back hill buildings through experimental investigation, numerical simulation and fragility estimation",
+        "source": "crossref",
+        "url": "https://doi.org/10.1007/s10518-023-01786-9",
+        "doi": "10.1007/s10518-023-01786-9",
+        "year": 2023,
+        "authors": [
+          "Vedatrayee Acharya",
+          "Piyali Sengupta"
+        ],
+        "venue": "Bulletin of Earthquake Engineering",
+        "abstract": null,
+        "pdf_url": "https://link.springer.com/content/pdf/10.1007/s10518-023-01786-9.pdf",
+        "citation_count": 13,
+        "work_type": "article",
+        "identifier": "10.1007/s10518-023-01786-9",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Springer Science and Business Media LLC"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:41:05.550341+00:00"
+}

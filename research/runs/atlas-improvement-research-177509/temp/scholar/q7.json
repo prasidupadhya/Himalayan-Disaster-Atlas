@@ -1,0 +1,228 @@
+{
+  "ok": true,
+  "data": {
+    "query": "disaster risk communication maps public understanding uncertainty",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Promoting public involvement in disaster risk communication in Nigeria",
+        "source": "crossref",
+        "url": "https://doi.org/10.4324/9781315110042-10",
+        "doi": "10.4324/9781315110042-10",
+        "year": 2019,
+        "authors": [
+          "Oluponmile Olonilua"
+        ],
+        "venue": "Risk Communication and Community Resilience",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 1,
+        "work_type": "book-chapter",
+        "identifier": "10.4324/9781315110042-10",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Routledge"
+        }
+      },
+      {
+        "title": "Public understanding and scientific uncertainty: The communication of risk in the L'Aquila earthquake",
+        "source": "crossref",
+        "url": "https://doi.org/10.3934/geosci.2024028",
+        "doi": "10.3934/geosci.2024028",
+        "year": 2024,
+        "authors": [
+          "Alessandro Demichelis",
+          "Malvina Ongaro"
+        ],
+        "venue": "AIMS Geosciences",
+        "abstract": "<p>On April 6, 2009, a magnitude 6.3 earthquake struck L'Aquila, Italy, causing extensive damage and loss of life, and raising significant issues around the communication of scientific risk. In the preceding weeks, increased seismic activity had alarmed the population, prompting authorities to seek expert advice. Public authorities reassured the population that the chances of a dangerous shock were slim. These assurances given by officials led many to remain in their homes when the earthquake struck. The subsequent legal actions against the scientists involved ignited a global debate on the responsibilities and challenges in scientific communication. This paper explores the complexities of conveying probabilistic risk information to the public and decision-makers. It highlights how different formats for presenting probabilistic data can significantly influence understanding and decision-making. In particular, it canvasses how the use of natural frequencies to convey probabilistic information makes it cognitively easier to understand and manipulate them, given how they make more salient and transparent the so-called base rate. However, the benefits of using natural frequencies decrease when dealing with low-probability, high-consequence (LPHC) events like major earthquakes, where even significant increases in relative probability remain small in absolute terms. Moreover, the paper investigates the social dimensions of earth science, examining the multifaceted role of scientists as both technical experts and social actors. The L'Aquila case exemplifies the need for integrating scientific accuracy with an understanding of its social implications. Effective risk communication must address cognitive limitations and the presence of social context to reach appropriate public behavioral responses. In order to achieve that, communication should be handled by actors that have specific expertise in its complexity.</p>",
+        "pdf_url": null,
+        "citation_count": 4,
+        "work_type": "article",
+        "identifier": "10.3934/geosci.2024028",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "American Institute of Mathematical Sciences (AIMS)"
+        }
+      },
+      {
+        "title": "Improving Quarantine Risk Communication: Understanding Public Risk Perceptions",
+        "source": "crossref",
+        "url": "https://doi.org/10.2139/ssrn.1591104",
+        "doi": "10.2139/ssrn.1591104",
+        "year": 2010,
+        "authors": [
+          "Melissa Finucane"
+        ],
+        "venue": null,
+        "abstract": "Maintaining the health and wealth of Australia depends vitally on protecting the nation's environmental and cultural treasures while capitalizing on the opportunities presented by new technologies and products. Achieving a balance between protection and progression, however, is influenced considerably by prevailing perceptions of the risks associated with imported commodities. A persistent community view is that a \"no risk\" quarantine policy is a viable option. In contrast, import risk analysts view the expectation of a \"no risk\" policy as untenable, given that Australia is a major agricultural trading nation and has international obligations as a member of the World Trade Organization and a signatory to the Agreement on the Application of Sanitary and Phytosanitary Measures and the Agreement on Technical Barriers to Trade. Biosecurity Australia, a group within the Commonwealth Department of Agriculture, Fisheries, and Forestry Australia (AFFA), recognizes that public consultation and communication must be an essential part of the import risk analysis process if the community is to share the ownership and responsibility of effective quarantine policies. However, efforts to improve public participation so far have paid little attention to understanding what deter- mines public perceptions of import risks and what methods will effectively engage the public in meaningful dialogue about their expectations and responsibilities.",
+        "pdf_url": null,
+        "citation_count": 1,
+        "work_type": "preprint",
+        "identifier": "10.2139/ssrn.1591104",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "Public Opinion, Public Perception, and Public Understanding",
+        "source": "crossref",
+        "url": "https://doi.org/10.1201/b11200-4",
+        "doi": "10.1201/b11200-4",
+        "year": 2017,
+        "authors": [],
+        "venue": "Nanotechnology and the Public",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book-chapter",
+        "identifier": "10.1201/b11200-4",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "CRC Press"
+        }
+      },
+      {
+        "title": "Chapter 2: Developing Public Disaster Communication for Volunteer Recruitment: Understanding Volunteer Motivations",
+        "source": "crossref",
+        "url": "https://doi.org/10.3726/978-1-4539-1441-0/14",
+        "doi": "10.3726/978-1-4539-1441-0/14",
+        "year": 2016,
+        "authors": [],
+        "venue": "Volunteering and Communication – Volume 2",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book-chapter",
+        "identifier": "10.3726/978-1-4539-1441-0/14",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Peter Lang"
+        }
+      },
+      {
+        "title": "The Space Shuttle Challenger Disaster",
+        "source": "crossref",
+        "url": "https://doi.org/10.1017/9781009299794.004",
+        "doi": "10.1017/9781009299794.004",
+        "year": 2024,
+        "authors": [],
+        "venue": "Risk Revealed",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 1,
+        "work_type": "book-chapter",
+        "identifier": "10.1017/9781009299794.004",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Cambridge University Press"
+        }
+      },
+      {
+        "title": "The Re-enchantment of Narratives in Disaster Risk Communication",
+        "source": "crossref",
+        "url": "https://doi.org/10.4324/9781003375760-9",
+        "doi": "10.4324/9781003375760-9",
+        "year": 2023,
+        "authors": [
+          "Jenny Zhengye Hou"
+        ],
+        "venue": "Narratives in Public Communication",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 2,
+        "work_type": "book-chapter",
+        "identifier": "10.4324/9781003375760-9",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Routledge"
+        }
+      },
+      {
+        "title": "Pet Owners Risk Perception and Risk Communication in Disasters in Developing Countries",
+        "source": "crossref",
+        "url": "https://doi.org/10.1017/dmp.2024.83",
+        "doi": "10.1017/dmp.2024.83",
+        "year": 2024,
+        "authors": [
+          "Shandiz Moslehi",
+          "Sajjad Narimani"
+        ],
+        "venue": "Disaster Medicine and Public Health Preparedness",
+        "abstract": "Disasters can cause great physical and financial damage to pet owners in developing countries. These effects lead to severe psychological side effects on individuals and families. With the tendency of families to keep pets in these countries, many challenges have arisen regarding how to manage these pets before, during, and after disasters. Therefore, mitigation, prevention, and preparedness measures for these families should be prioritized in the disaster management cycle to minimize psychological effects such as posttraumatic stress disorder (PTSD) after losing pets.",
+        "pdf_url": null,
+        "citation_count": 2,
+        "work_type": "article",
+        "identifier": "10.1017/dmp.2024.83",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Cambridge University Press (CUP)"
+        }
+      },
+      {
+        "title": "Scientific Uncertainty in Risk Communication: An International Perspective",
+        "source": "crossref",
+        "url": "https://doi.org/10.1007/978-94-015-8619-1_1",
+        "doi": "10.1007/978-94-015-8619-1_1",
+        "year": 1996,
+        "authors": [
+          "V. H. Sublet"
+        ],
+        "venue": "Scientific Uncertainty and Its Influence on the Public Communication Process",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book-chapter",
+        "identifier": "10.1007/978-94-015-8619-1_1",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Springer Netherlands"
+        }
+      },
+      {
+        "title": "Understanding Monkeypox in Pakistan: Epidemiology, Challenges, and Prevention Short Communication",
+        "source": "crossref",
+        "url": "https://doi.org/10.1017/dmp.2024.316",
+        "doi": "10.1017/dmp.2024.316",
+        "year": 2024,
+        "authors": [
+          "Somina Shaikh",
+          "Govinda Khatri"
+        ],
+        "venue": "Disaster Medicine and Public Health Preparedness",
+        "abstract": "Monkeypox, a viral zoonotic disease, is currently spreading in Pakistan, raising serious public health concerns. Despite its rarity, the disease has the potential to spread rapidly, especially in areas with a limited health care infrastructure. This short communication overviews the current epidemiology of monkeypox in Pakistan, addressing diagnostic, surveillance, and control challenges, and aims to inform evidence-based prevention. We emphasize the need for enhanced surveillance, improved diagnostic capacity, and targeted public health interventions to prevent outbreaks and minimize the impact of the disease on public health.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "article",
+        "identifier": "10.1017/dmp.2024.316",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Cambridge University Press (CUP)"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:40:57.360292+00:00"
+}

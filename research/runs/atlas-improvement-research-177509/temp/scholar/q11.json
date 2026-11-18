@@ -1,0 +1,251 @@
+{
+  "ok": true,
+  "data": {
+    "query": "ShakeMap ground motion rapid assessment developing countries",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Rapid assessment of the spatial extent of strong ground motion in mines – ShakeMap approach",
+        "source": "crossref",
+        "url": "https://doi.org/10.36487/acg_rep/1815_41_meyer",
+        "doi": "10.36487/acg_rep/1815_41_meyer",
+        "year": 2018,
+        "authors": [
+          "Stephen Meyer",
+          "Jeremy Doolan",
+          "Chris Chester",
+          "Gys Basson"
+        ],
+        "venue": "Proceedings of the Fourth International Symposium on Block and Sublevel Caving",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 2,
+        "work_type": "article",
+        "identifier": "10.36487/acg_rep/1815_41_meyer",
+        "extra": {
+          "crossref_type": "proceedings-article",
+          "publisher": "Australian Centre for Geomechanics, Perth"
+        }
+      },
+      {
+        "title": "Evaluation of Ground-Motion Modeling Techniques for Use in Global ShakeMap - A Critique of Instrumental Ground-Motion Prediction Equations, Peak Ground Motion to Macroseismic Intensity Conversions, and Macroseismic Intensity Predictions in Different Tectonic Settings",
+        "source": "crossref",
+        "url": "https://doi.org/10.3133/ofr20091047",
+        "doi": "10.3133/ofr20091047",
+        "year": 2009,
+        "authors": [
+          "Trevor I. Allen",
+          "David J. Wald"
+        ],
+        "venue": "Open-File Report",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 20,
+        "work_type": "report",
+        "identifier": "10.3133/ofr20091047",
+        "extra": {
+          "crossref_type": "report-component",
+          "publisher": "US Geological Survey"
+        }
+      },
+      {
+        "title": "Developing a customized system for generating near real time ground motion ShakeMap of Iran’s earthquakes",
+        "source": "crossref",
+        "url": "https://doi.org/10.1080/13632469.2020.1814450",
+        "doi": "10.1080/13632469.2020.1814450",
+        "year": 2020,
+        "authors": [
+          "Erfan Firuzi",
+          "Anooshirvan Ansari",
+          "Kambod Amini Hosseini",
+          "Ehsan karkooti"
+        ],
+        "venue": "Journal of Earthquake Engineering",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 8,
+        "work_type": "article",
+        "identifier": "10.1080/13632469.2020.1814450",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Informa UK Limited"
+        }
+      },
+      {
+        "title": "8. Rapid epidemiological assessment",
+        "source": "crossref",
+        "url": "https://doi.org/10.3362/9781780444666.008",
+        "doi": "10.3362/9781780444666.008",
+        "year": 1994,
+        "authors": [
+          "Douglas Stockman"
+        ],
+        "venue": "Community Assessment",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book-chapter",
+        "identifier": "10.3362/9781780444666.008",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Practical Action Publishing"
+        }
+      },
+      {
+        "title": "INGe: Intensity-ground motion dataset for Italy",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/essd-2020-372",
+        "doi": "10.5194/essd-2020-372",
+        "year": 2020,
+        "authors": [
+          "Ilaria Oliveti",
+          "Licia Faenza",
+          "Alberto Michelini"
+        ],
+        "venue": null,
+        "abstract": "In this paper we present an updated and homogeneous earthquake data set for Italy compiled by joining the Italian Macroseismic Database DBMI15 and the Engineering Strong-Motion (ESM) accelerometric data bank. The database has been compiled through an extensive procedure of selection and revision based on two main steps: 1) the removal of several earthquakes in DBMI15 because the data source has been considered to be largely unreliable and 2) the extraction of all the localities reporting intensity data which are located within 3 km from the accelerograph stations that recorded the data. The final data set includes 323 recordings from 65 earthquakes and 227 stations in the time span 1972–2016. The events are characterized by magnitudes in the range 4.0–6.9 and depths in the range 0.3–45.0 km. Here, we illustrate the data collection and the properties of the database in terms of recording, event and station distributions as well as Mercalli-Cancani-Sieberg (MCS) macroseismic intensity points. Furthermore, we discuss the most relevant features of engineering interest showing several statistics with reference to the most significant metadata (such as moment magnitude, several distance metrics, style of faulting etc). The data set can be downloaded from data repository Zenodo at https://doi.org/10.13127/inge.1 (Oliveti et., 2020).",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/essd-2020-372",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "New reversible relationships between ground motion parameters and macroseismic intensity for Italy and their application in ShakeMap",
+        "source": "crossref",
+        "url": "https://doi.org/10.1093/gji/ggac245",
+        "doi": "10.1093/gji/ggac245",
+        "year": 2022,
+        "authors": [
+          "Ilaria Oliveti",
+          "Licia Faenza",
+          "Alberto Michelini"
+        ],
+        "venue": "Geophysical Journal International",
+        "abstract": "We derived new, reversible relationships between macroseismic intensity (I), expressed in either the European Macroseismic (EMS-98) or the Mercalli–Cancani–Sieberg (MCS) scales and peak ground acceleration (PGA), peak ground velocity (PGV) and the spectral acceleration (SA) at 0.3, 1.0 and 3.0 s [SA(0.3), SA(1.0) and SA(3.0)] for Italy. We adopted the orthogonal distance regression technique to fit a quadratic function. This research aims to improve ground motion and intensity estimates for earthquake hazard applications, and for the calculation of shakemaps in Italy. To this end, the recently published INGe data set was used (https://doi.org/10.13127/inge.2). The new relations are: $$\\begin{equation*} I = 3.01 \\pm 0.12 + 0.86 \\pm 0.04 \\log ^2 \\mathrm{ PGA},~\\sigma = 0.30,~~\\sigma _{\\mathrm{ PGA}} = 0.25,~~\\sigma _{I} = 0.16 \\end{equation*}$$$$\\begin{equation*} I = 4.31 \\pm 0.15 + 1.99 \\pm 0.18 \\log \\mathrm{ PGV} + 0.58 \\pm 0.18 \\log ^2 \\mathrm{ PGV},~\\sigma = 0.34,~~\\sigma _{\\mathrm{ PGV}} \\\\ = 0.31,~~\\sigma _{I} = 0.15 \\end{equation*}$$$$\\begin{equation*} I = 2.77 \\pm 0.15 + 0.68 \\pm 0.03 \\log ^2 \\mathrm{ SA}(0.3),~\\sigma = 0.31,~~\\sigma _{\\mathrm{ SA}(0.3)} = 0.28,~~\\sigma _{I} = 0.14 \\end{equation*}$$$$\\begin{equation*} I = 3.00 \\pm 0.28 + 0.91 \\pm 0.55 \\log \\mathrm{ SA}(1.0) + 0.51 \\pm 0.20 \\log ^2 \\mathrm{ SA}(1.0),~\\sigma = 0.40,~~\\sigma _{\\mathrm{ SA}(1.0)} \\\\ = 0.38,~~\\sigma _{I} = 0.14 \\end{equation*}$$$$\\begin{equation*} I = 4.04 \\pm 0.20 + 1.63 \\pm 0.19 \\log \\mathrm{ SA}(3.0) + 0.66 \\pm 0.20 \\log ^2 \\mathrm{ SA}(3.0),~\\sigma = 0.38,~~\\sigma _{\\mathrm{ SA}(3.0)} \\\\ = 0.35,~~\\sigma _{I} = 0.14 \\end{equation*}$$where PGA and SAs are expressed in cm s−2 and PGV is expressed in cm s−1. Tests performed to assess the robustness and the accuracy of the results demonstrate that adoption of quadratic relationships for this regression problem is a suitable choice within the range of values of the available data set. Comparison with similar published regressions for Italy evidences that the proposed relations provide statistically significant improved fits to the data. The new relations are also tested by inserting them in the ShakeMap system of the Italian configuration evidencing a significant improvement when compared to those implemented.",
+        "pdf_url": "https://academic.oup.com/gji/advance-article-pdf/doi/10.1093/gji/ggac245/44368503/ggac245.pdf",
+        "citation_count": 30,
+        "work_type": "article",
+        "identifier": "10.1093/gji/ggac245",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Oxford University Press (OUP)"
+        }
+      },
+      {
+        "title": "Regression analysis of MCS intensity and ground motion parameters in Italy and its application in ShakeMap",
+        "source": "crossref",
+        "url": "https://doi.org/10.1111/j.1365-246x.2009.04467.x",
+        "doi": "10.1111/j.1365-246x.2009.04467.x",
+        "year": 2010,
+        "authors": [
+          "Licia Faenza",
+          "Alberto Michelini"
+        ],
+        "venue": "Geophysical Journal International",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 208,
+        "work_type": "article",
+        "identifier": "10.1111/j.1365-246x.2009.04467.x",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Oxford University Press (OUP)"
+        }
+      },
+      {
+        "title": "Empirical Ground-motion Relations for ShakeMap Applications in Southeastern Canada and the Northeastern United States",
+        "source": "crossref",
+        "url": "https://doi.org/10.1785/gssrl.76.2.274",
+        "doi": "10.1785/gssrl.76.2.274",
+        "year": 2005,
+        "authors": [
+          "S. I. Kaka",
+          "G. M. Atkinson"
+        ],
+        "venue": "Seismological Research Letters",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 6,
+        "work_type": "article",
+        "identifier": "10.1785/gssrl.76.2.274",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Seismological Society of America (SSA)"
+        }
+      },
+      {
+        "title": "Evaluation of Ground Motion Models for Volcanic Areas in Italy: Advancing ShakeMap Implementation",
+        "source": "crossref",
+        "url": "https://doi.org/10.4401/ag-9286",
+        "doi": "10.4401/ag-9286",
+        "year": 2025,
+        "authors": [
+          "Ilaria Oliveti",
+          "Licia Faenza",
+          "Alberto Michelini",
+          "Valentino Lauciani"
+        ],
+        "venue": "Annals of Geophysics",
+        "abstract": "In Italy, volcanic earthquakes are crucial for assessing seismic hazard, as several volcanoes pose significant risks to densely populated areas (e.g., Catania and its surroundings, Phlegraean Fields, Vesuvius). Recently, the increase in seismic activity in the Phlegraean Fields, characterized by swarms of low-magnitude earthquakes concomitant with bradyseism, has prompted a revision of the configuration of the Ground Motion Models (GMMs) used in the U.S. Geological Survey (USGS) ShakeMap software implemented in Italy for volcanic areas. In this study, we applied a cross-validation technique to evaluate the effectiveness of various GMMs available in the literature for volcanic regions, aiming to the identification of the most appropriate configuration to update and improve the ShakeMap service provided by the Istituto Nazionale di Geofisica e Vulcanologia (INGV). We compared the performance of the currently adopted GMMs [a combination of Tusa and Langer (2016) for earthquakes down to 5 km depth and Bindi et al. (2010) for deeper earthquakes] in predicting ground shaking with those developed by Tusa et al. (2020) and Lanzano and Luzi (2020). To conduct the tests, we used 100 Italian earthquakes that occurred in volcanic areas between February 2019 and May 2024, with magnitudes in the range 3.0‑4.5 and depths ≤ 35 km. Among the tested models, the GMM proposed by Tusa et al. (2020) was found to provide the most accurate predictions and will be adopted for generating the INGV shakemaps.",
+        "pdf_url": "https://www.annalsofgeophysics.eu/index.php/annals/article/download/9286/7880",
+        "citation_count": 0,
+        "work_type": "article",
+        "identifier": "10.4401/ag-9286",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Instituto Nazionale di Geofisica e Vulcanologia, INGV"
+        }
+      },
+      {
+        "title": "Computing spatial correlation of ground motion intensities for ShakeMap",
+        "source": "crossref",
+        "url": "https://doi.org/10.1016/j.cageo.2016.11.004",
+        "doi": "10.1016/j.cageo.2016.11.004",
+        "year": 2017,
+        "authors": [
+          "Sarah A. Verros",
+          "David J. Wald",
+          "C. Bruce Worden",
+          "Mike Hearne",
+          "Mahadevan Ganesh"
+        ],
+        "venue": "Computers &amp; Geosciences",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 30,
+        "work_type": "article",
+        "identifier": "10.1016/j.cageo.2016.11.004",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Elsevier BV"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:41:16.079118+00:00"
+}

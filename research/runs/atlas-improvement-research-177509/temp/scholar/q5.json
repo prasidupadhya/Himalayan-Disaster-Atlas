@@ -1,0 +1,243 @@
+{
+  "ok": true,
+  "data": {
+    "query": "flood early warning system Nepal community effectiveness",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Proceedings of the Meeting on Outscaling Community- Based Flood Early Warning System (CBFEWS) in Pakistan 16 January 2019, ICIMOD, Kathmandu, Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.53055/icimod.916",
+        "doi": "10.53055/icimod.916",
+        "year": 2019,
+        "authors": [
+          "ICIMOD"
+        ],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "report",
+        "identifier": "10.53055/icimod.916",
+        "extra": {
+          "crossref_type": "report",
+          "publisher": "International Centre for Integrated Mountain Development (ICIMOD)"
+        }
+      },
+      {
+        "title": "Proceedings of the Third Regional Hands-on Training on Community Based Flood Early Warning System, 14-18 May 2018, Lalitpur, Nepal; ICIMOD Proceedings 2018/3",
+        "source": "crossref",
+        "url": "https://doi.org/10.53055/icimod.870",
+        "doi": "10.53055/icimod.870",
+        "year": 2018,
+        "authors": [
+          "ICIMOD"
+        ],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "report",
+        "identifier": "10.53055/icimod.870",
+        "extra": {
+          "crossref_type": "report",
+          "publisher": "International Centre for Integrated Mountain Development (ICIMOD)"
+        }
+      },
+      {
+        "title": "Community-based early warning systems for flood risk mitigation in Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/nhess-17-423-2017",
+        "doi": "10.5194/nhess-17-423-2017",
+        "year": 2017,
+        "authors": [
+          "Paul J. Smith",
+          "Sarah Brown",
+          "Sumit Dugar"
+        ],
+        "venue": "Natural Hazards and Earth System Sciences",
+        "abstract": "This paper focuses on the use of community-based early warning systems for flood resilience in Nepal. The first part of the work outlines the evolution and current status of these community-based systems, highlighting the limited lead times currently available for early warning. The second part of the paper focuses on the development of a robust operational flood forecasting methodology for use by the Nepal Department of Hydrology and Meteorology (DHM) to enhance early warning lead times. The methodology uses data-based physically interpretable time series models and data assimilation to generate probabilistic forecasts, which are presented in a simple visual tool. The approach is designed to work in situations of limited data availability with an emphasis on sustainability and appropriate technology. The successful application of the forecast methodology to the flood-prone Karnali River basin in western Nepal is outlined, increasing lead times from 2–3 to 7–8 h. The challenges faced in communicating probabilistic forecasts to the last mile of the existing community-based early warning systems across Nepal is discussed. The paper concludes with an assessment of the applicability of this approach in basins and countries beyond Karnali and Nepal and an overview of key lessons learnt from this initiative.",
+        "pdf_url": null,
+        "citation_count": 79,
+        "work_type": "article",
+        "identifier": "10.5194/nhess-17-423-2017",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Community Based Early Warning Systems for flood risk mitigation in Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/nhess-2016-122",
+        "doi": "10.5194/nhess-2016-122",
+        "year": 2016,
+        "authors": [
+          "Paul J. Smith",
+          "Sarah Brown",
+          "Sumit Dugar"
+        ],
+        "venue": null,
+        "abstract": "This paper focuses on the use of Community Based Early Warning Systems for flood risk mitigation in Nepal. The first part of the work outlines the evolution and current status of these community based systems. A significant ongoing challenge faced by Community Based Early Warning Systems in Nepal is the short lead times available for early warning. The second part of the paper therefore focuses on the development of a robust operational flood forecasting methodology for use by the Department for Hydrology and Meteorology (DHM), Government of Nepal to compliment the community based systems. The resulting methodology uses data based physically interpretable time series models and data assimilation to generate probabilistic forecasts. The paper concludes with an example application to a flood prone catchment (Karnali Basin) in western Nepal.",
+        "pdf_url": null,
+        "citation_count": 1,
+        "work_type": "preprint",
+        "identifier": "10.5194/nhess-2016-122",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "The Complexities in Risk Communication for Flood Early Warning System in Nepal and India.",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu21-9871",
+        "doi": "10.5194/egusphere-egu21-9871",
+        "year": 2021,
+        "authors": [
+          "Gaurab Sagar Dawadi"
+        ],
+        "venue": null,
+        "abstract": "&lt;p&gt;The Early Warning System (EWS)&amp;#160; is recognized as a crucial mechanism for disaster risk reduction. Despite advances in technologies, the biggest shortcoming of EWS is that risk information is still failing to reach the people at risk in developing countries like Nepal and India. This presentation is based on the qualitative analysis of 90 interviews conducted for my Ph.D. thesis, in the Kosi River basin, across the Nepal-India border. Annually the Kosi River and its tributaries cause widespread flooding and inundation in Nepal and India. Recently, significant advancements have occurred in the sector of risk communication for Flood-EWS in Nepal and India. Government institutions use mobile text messages, web-based Apps, flood bulletins, and other measures to inform people about the flood. Despite the efforts, significant challenges were observed in the information outreach, especially to the women and vulnerable people living in the study area. Challenges were also identified in understanding the received text messages by flood vulnerable people, and spatially relating the information about river depth for their evacuation decision.&amp;#160; Recommendations were made for inclusive and people-centered EWS based on Impact based forecasting as well as on awareness-raising activities through mobile applications.&lt;/p&gt;",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu21-9871",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Community-based Flood Early Warning System: The Story from Then to Now",
+        "source": "crossref",
+        "url": "https://doi.org/10.53055/icimod.862",
+        "doi": "10.53055/icimod.862",
+        "year": 2018,
+        "authors": [
+          "ICIMOD"
+        ],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "report",
+        "identifier": "10.53055/icimod.862",
+        "extra": {
+          "crossref_type": "report",
+          "publisher": "International Centre for Integrated Mountain Development (ICIMOD)"
+        }
+      },
+      {
+        "title": "Fourth Regional Hands-on Training on Community Based Flood Early Warning System; Proceedings",
+        "source": "crossref",
+        "url": "https://doi.org/10.53055/icimod.909",
+        "doi": "10.53055/icimod.909",
+        "year": 2019,
+        "authors": [
+          "ICIMOD"
+        ],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "report",
+        "identifier": "10.53055/icimod.909",
+        "extra": {
+          "crossref_type": "report",
+          "publisher": "International Centre for Integrated Mountain Development (ICIMOD)"
+        }
+      },
+      {
+        "title": "Community Assessment of Flood Risks and Early Warning System in Ratu Watershed, Koshi Basin, Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.3390/su13063577",
+        "doi": "10.3390/su13063577",
+        "year": 2021,
+        "authors": [
+          "Sagar Ratna Bajracharya",
+          "Narendra Raj Khanal",
+          "Pashupati Nepal",
+          "Sundar Kumar Rai",
+          "Pawan Kumar Ghimire",
+          "Neera Shrestha Pradhan"
+        ],
+        "venue": "Sustainability",
+        "abstract": "Nepal is highly vulnerable to flood-related disasters which cause considerable loss of lives and property. The vulnerability of communities to flood-related hazards can be reduced by proper planning, preparedness, and responses using various structural and nonstructural measures. The community-based flood early warning system is one such tool that enables local communities to enhance their resilience to flooding risks. This paper highlights the efficacy of the community assessment of flood risks and early warning systems. Using qualitative and quantitative methods, this paper evaluates the progress of a community-based flood early warning system implemented in the Ratu River—a small tributary of the Koshi River. The establishment of a community network in 2015 was instrumental in the dissemination of flood early warning information and in building local capacities to understand the risks and take timely action. The flood early warning resulted in awareness-raising, strengthened upstream–downstream linkages, and resulted in a greater willingness among communities to help each other prepare for flood disasters in the Ratu watershed.",
+        "pdf_url": null,
+        "citation_count": 48,
+        "work_type": "article",
+        "identifier": "10.3390/su13063577",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "MDPI AG"
+        }
+      },
+      {
+        "title": "Community Based Approach to Flood Early Warning in West Rapti River Basin of Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.5595/001c.11707",
+        "doi": "10.5595/001c.11707",
+        "year": 2013,
+        "authors": [
+          "Dilip Kumar Gautam",
+          "Anup Gopal Phaiju"
+        ],
+        "venue": "IDRiM Journal",
+        "abstract": "About 300 people lose their life each year due to floods and landslides in Nepal with property damage exceeding 626 million NPR on average. Compared to other disasters in Nepal, floods and landslides are the number one natural disaster regarding economic damage and number two in causing loss of lives. The West Rapti River basin is one of the most flood prone river basins in Nepal. The realtime flood early warning system together with the development of water management and flood protection schemes play a crucial role in reducing the loss of lives and properties and in overall development of the basin. This paper presents an overview of flood problems in the West Rapti River basin, causes and consequences of recent floods and the applicability and effectiveness of the community based approach to flood early warning in Nepal. A community based flood early warning system has been set up with a collaborative effort of the Department of Hydrology and Meteorology, Practical Action, local government and non-governmental organisations. Community level disaster management committees have been formed in each of the disaster prone villages. These committees have been brought into a network of District Disaster Relief Committee, local media, the Red Cross, local police, the military units and the flood monitoring and forecasting station of the Department of Hydrology and Meteorology. The disaster management committees have been equipped and trained for warning dissemination, preparedness and immediate response. This proved to be a very effective mechanism to disseminate flood warning and respond immediately during times of disaster.",
+        "pdf_url": null,
+        "citation_count": 5,
+        "work_type": "article",
+        "identifier": "10.5595/001c.11707",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Journal of Integrated Disaster Risk Management"
+        }
+      },
+      {
+        "title": "Community-based flood early warning system: Current practice and Future directions",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu25-3526",
+        "doi": "10.5194/egusphere-egu25-3526",
+        "year": 2025,
+        "authors": [
+          "Arghavan Panahi",
+          "Nafiseh Karkhaneh",
+          "Farzad Piadeh"
+        ],
+        "venue": null,
+        "abstract": "Social media applications have emerged as reliable communication channels, especially when traditional methods falter [1]. Their integration into emergency management presents significant advantages, including enhanced situational awareness during unfolding events, rapid dissemination of news and alerts to broader audiences, and improved coordination among decision-makers and stakeholders [2]. Both remote sensing and social media data offer distinct advantages in large-scale flood monitoring and near-real-time flood monitoring [3]. To better understand these advantages and challenges, a comprehensive review and analysis of the literature on the application of social media in this field was conducted.&#160; Social media facilitates participatory and collaborative structures, enabling collective knowledge-building in public information and warning systems. To realise this vision, the authors examined, 73 studies conducted from 2014 to 2024 to systematically evaluate the current literature surrounding communication on social media and the latest research in social media informatics related to disasters. This review identified key challenges within existing studies. The articles included 23 related to pluvial floods, 12 related to fluvial floods, 17 related to storm floods and 21 paper that were unspecified The majority of the studies were conducted in China, followed by the United States. Various software platforms, including Twitter, YouTube, and other social media networks, were analysed. Data extraction from these platforms was performed using Python programming. The study periods ranged from 1 to 3,650 days. These findings serve as guidance for researchers examining the relationship between social media and disaster management. They aim to develop the use of social networks during disasters, analyse patterns, and create programming to identify best practices for utilising social media in times of crisis. In the future, a mapping framework and tool can be developed to automatically extract information from social media through text and image analysis. By integrating this data with other available information sources, it will be possible to generate more accurate inundation maps in real-time. It is essential to recognise that information about floods obtained from social media may be incomplete during communication interruptions. To address this issue, future research should prioritise integrating big data from urban Internet of Things networks and improving communication infrastructure repairs. By adopting this strategy, we can collect more comprehensive disaster information to enhance flood emergency response effectiveness.References[1] Piadeh, F., Behzadian, K. and Alani, A.M. (2022). A critical review of real-time modelling of flood forecasting in urban drainage systems.&#160;Journal of Hydrology,&#160;607, p.127476.[2] Piadeh, F., Ahmadi, M., Behzadian, K. (2020). A Novel Planning Policy Framework for the Recognition of Responsible Stakeholders in the of Industrial Wastewater Reuse Projects. Journal of Water Policy, 24 (9), pp. 1541&#8211;1558.[3] Bakhtiari, V., Piadeh, F., Chen, A., Behzadian, K. (2024). Stakeholder Analysis in the Application of Cutting-Edge Digital Visualisation Technologies for Urban Flood Risk Management: A Critical Review. Expert Systems with Applications, p.121426.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu25-3526",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:40:44.415495+00:00"
+}

@@ -1,0 +1,259 @@
+{
+  "ok": true,
+  "data": {
+    "query": "glacial lake outburst flood modelling Nepal HEC-RAS dam breach",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Modelling Erosional Dam Breach &amp; Downstream Flood Exposure from Cascading Multi-Glacial Lake Outburst Processes in the Eastern Himalayas",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-egu26-13968",
+        "doi": "10.5194/egusphere-egu26-13968",
+        "year": 2026,
+        "authors": [
+          "Arindam Chowdhury",
+          "Sazeda Begam",
+          "Tomáš Kroczek",
+          "Vít Vilímek",
+          "Milap Chand Sharma",
+          "Sunil Kumar De"
+        ],
+        "venue": null,
+        "abstract": "Rapid retreat of glaciers due to global warming has led to the expansion of glacial lakes, heightening the risk of glacial lake outburst floods (GLOFs), which pose severe threats to lives and infrastructure in downstream regions. In the Sikkim Himalaya, the Gurudongmar Lake Complex (GLC) consists of four lakes holding approximately 148 × 10⁶ m³ of water, with an enlargement rate of 74 ± 3%. This study integrates a two-dimensional erosion-based moraine-dam breach model using TELEMAC 2D and SISYPHE with one-dimensional inundation modelling in HEC-RAS to assess the impacts of multi-lake GLOFs under varying scenarios. Simulations based on remote sensing and field data revealed that in the most extreme case – an 80% overtopping breach – peak flood discharges could reach up to 8882.0 m³/s, releasing a total water volume of 59.4 × 10⁶ m³. Flood heights under these scenarios could significantly exceed those observed during the South Lhonak GLOF event of October 2023, intensifying risks for downstream communities. The assessment of 19 settlement sites using a 15×15 m fishnet revealed that Thangu Valley and Chungthang town are most vulnerable, with potential inundation levels and infrastructure exposure highest in these areas. Combined breaches, such as the sequential failure of lakes GL-2 and GL-1 or GL-3 and GL-1, further amplify the flood risk, underscoring the complex dynamics of multi-lake outbursts. This research provides critical insights into moraine-dam erosion processes and downstream flood impacts, offering a robust framework for hazard mitigation in the Eastern Himalayas and similar glacierized terrains worldwide.Keywords: Glacial lake outburst floods (GLOFs); Erosion dam breach model; Hydrodynamic flood modelling; HEC-RAS; Exposure assessment; Sikkim.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-egu26-13968",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Dam Breach Analysis Using HEC-RAS: A Case Study of Naumure Dam, Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.22541/essoar.173758185.57347904/v1",
+        "doi": "10.22541/essoar.173758185.57347904/v1",
+        "year": 2025,
+        "authors": [
+          "Ram Krishna Regmi",
+          "Rupesh Baniya"
+        ],
+        "venue": null,
+        "abstract": "This study aimed to evaluate the potential dam breach scenario of the proposed Naumure Dam using the HEC-RAS model. Hydrological and meteorological data from the study area were used to calculate the probable maximum flood, serving as a hydrological input for the model. Geometric data such as reservoir area, inline structure, streamline, riverbank, and flow path were modeled using the HEC-RAS RAS-Mapper tool. Various parametric equations were employed to calculate the breach parameters, which were then input into the HEC-RAS 5.0.7 simulation model along with the input hydrograph. Subsequently, an unsteady flow analysis was conducted to direct the flood through each cross section of the river. The model yielded a maximum flow rate of 141,423.48 m3/s at the dam axis 3.8 hours after the onset of dam failure. The study area, which extended 31.6 km downstream, was analyzed and hydrographs at different cross sections were examined. The results were mapped onto topographic GIS maps to identify affected areas. Approximately 30 km downstream, the settlement area in Bhalubang was inundated with a peak discharge of 48,579.29 m3/s at this location. The research will help relevant authorities devise an emergency response strategy and implement flood mitigation measures.",
+        "pdf_url": null,
+        "citation_count": 1,
+        "work_type": "preprint",
+        "identifier": "10.22541/essoar.173758185.57347904/v1",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Wiley"
+        }
+      },
+      {
+        "title": "Moraine dam breach and glacial lake outburst flood generation by physical and numerical models",
+        "source": "crossref",
+        "url": "https://doi.org/10.1016/j.jhydrol.2018.06.038",
+        "doi": "10.1016/j.jhydrol.2018.06.038",
+        "year": 2018,
+        "authors": [
+          "Sazeda Begam",
+          "Dhrubajyoti Sen",
+          "Subhasish Dey"
+        ],
+        "venue": "Journal of Hydrology",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 73,
+        "work_type": "article",
+        "identifier": "10.1016/j.jhydrol.2018.06.038",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "Two-Dimensional Hydrodynamic Modelling of Glacial Lake Outburst Flood Scenarios from Chubda Tsho: Breach Sensitivity and Downstream Flood Dynamics in the Chamkhar Chhu Basin, Bhutan",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/egusphere-2026-2584",
+        "doi": "10.5194/egusphere-2026-2584",
+        "year": 2026,
+        "authors": [
+          "Tenzin Namgay",
+          "Kasun De Silva",
+          "Nimal Wijayaratna",
+          "Lalith Rajapakse"
+        ],
+        "venue": null,
+        "abstract": "Glacial lake outburst floods (GLOFs) are high-magnitude, short-duration hazards in glacier-fed Himalayan basins, where steep valley confinement can amplify downstream flood intensity. Despite the identification of Chubda Tsho as a potentially dangerous glacial lake in Bhutan, hydrodynamic assessments of potential outburst floods from this lake have not yet been reported. This study evaluates potential GLOF scenarios from Chubda Tsho using inflows generated by a calibrated and independently validated Hydrologic Engineering Center’s Hydrologic Modeling System (HEC-HMS), coupled with two-dimensional (2D) simulations in the Hydrologic Engineering Center's River Analysis System (HEC-RAS). The model was calibrated against the July 2007 flood (NSE = 0.90) and validated using the August 2015 event (NSE = 0.56). Hydrodynamic performance was assessed using an extreme-event hydrograph from Cyclone Aila (2009) and compared with observed inundation extent. Results show good agreement, with a Critical Success Index (CSI) of 0.67, a total area difference of 2.56%, and close correspondence between simulated (1.60 km²) and observed (1.56 km²) inundation extents within the 16.14 km² Chamkhar Valley model domain. The Chamkhar Valley contains approximately 8.41 km² of habitable area. Three breach scenarios representing 50%, 75%, and 100% lake-volume release were simulated using empirically derived breach relationships. Flood waves reach the Chamkhar Valley between approximately 1 h 50 min and 2 h 15 min after breach initiation. Peak discharge increases from 2,114 m³ s⁻¹ to 5,258 m³ s⁻¹, accompanied by nonlinear increases in peak depth (8.4–12.8 m) and velocity (5.0–7.6 m s⁻¹). While inundation extent remains constrained by valley geometry, flood depth and velocity increase disproportionately with breach magnitude. Results indicate that downstream hydraulic intensity is strongly influenced by breach magnitude, while warning time remains limited in confined Himalayan valleys. This highlights the value of validated 2D hydrodynamic modelling for GLOF hazard assessment in Himalayan catchments with limited observational data.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.5194/egusphere-2026-2584",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Modelling a Glacial Lake Outburst Flood of Sona-Sar Lake in the Jhelum Basin of Kashmir Himalayas, India, Using HEC-RAS",
+        "source": "crossref",
+        "url": "https://doi.org/10.1201/9781003364115-3",
+        "doi": "10.1201/9781003364115-3",
+        "year": 2024,
+        "authors": [
+          "Rayees Ahmed",
+          "Gowhar Farooq Wani",
+          "Abid Farooq Rather",
+          "Sumaira Javaid",
+          "Syed Towseef Ahmad",
+          "Savati Sharma",
+          "Ajay Kumar Taloor"
+        ],
+        "venue": "Polar Ice and Global Warming in Cryosphere Regions",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 5,
+        "work_type": "book-chapter",
+        "identifier": "10.1201/9781003364115-3",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "CRC Press"
+        }
+      },
+      {
+        "title": "Glacial lake outburst flood (GLOF) modeling of Tsho Rolpa glacial lake, Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.5194/piahs-387-59-2024",
+        "doi": "10.5194/piahs-387-59-2024",
+        "year": 2024,
+        "authors": [
+          "Rijan Bhakta Kayastha",
+          "Sunwi Maskey"
+        ],
+        "venue": "Proceedings of IAHS",
+        "abstract": "In recent decades, the Tsho Rolpa glacial lake has witnessed a significant increase in its surface area. Situated in the Eastern Himalayas at an elevation of 4552 m a.s.l. (meters above sea level), this lake has drawn attention due to the potential risks of glacial lake outburst floods (GLOFs). To comprehensively study and prepare for future GLOF events from Tsho Rolpa, advanced modeling techniques were employed, utilizing the National Weather Service BREACH (NWS-BREACH) and Hydrologic Engineering Center's River Analysis System (HEC-RAS) models. The assessment included the evaluation of dam breach scenarios, especially 20 and 40 m breaches, using the NWS-BREACH model to estimate breach hydrographs. This analysis revealed peak flow rates ranging from 8198 to 26 662 m 3 s −1 for the respective breaching scenarios. Additionally, considering a change in the lake area over 20 to 40 years, the peak flow ranged from 8226 to 10 662 m 3 s −1 for the 20 m breach scenario. The peak flow estimates obtained from NWS-BREACH were subsequently integrated into the HEC-RAS model to simulate peak discharge and flood heights at varying distances downstream of the lake outlet. To understand the consequences of a GLOF, the impact on downstream areas was assessed through flood inundation maps, and precautionary measures are recommended.",
+        "pdf_url": null,
+        "citation_count": 9,
+        "work_type": "article",
+        "identifier": "10.5194/piahs-387-59-2024",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Copernicus GmbH"
+        }
+      },
+      {
+        "title": "Erosional dam breach modelling for multi-glacial lake outburst process and downstream flood exposure assessment in the Eastern Himalayas",
+        "source": "crossref",
+        "url": "https://doi.org/10.1016/j.jhydrol.2024.132417",
+        "doi": "10.1016/j.jhydrol.2024.132417",
+        "year": 2025,
+        "authors": [
+          "Arindam Chowdhury",
+          "Sazeda Begam",
+          "Tomáš Kroczek",
+          "Vít Vilímek",
+          "Milap Chand Sharma",
+          "Sunil Kumar De"
+        ],
+        "venue": "Journal of Hydrology",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 10,
+        "work_type": "article",
+        "identifier": "10.1016/j.jhydrol.2024.132417",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "Glacial Lakes and Glacial Lake Outburst Floods in Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.53055/icimod.543",
+        "doi": "10.53055/icimod.543",
+        "year": 2011,
+        "authors": [
+          "ICIMOD"
+        ],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 83,
+        "work_type": "report",
+        "identifier": "10.53055/icimod.543",
+        "extra": {
+          "crossref_type": "report",
+          "publisher": "International Centre for Integrated Mountain Development (ICIMOD)"
+        }
+      },
+      {
+        "title": "Dam Breach Size Comparison for Flood Simulations. A HEC-RAS Based, GIS Approach for Drăcșani Lake, Sitna River, Romania",
+        "source": "crossref",
+        "url": "https://doi.org/10.3390/w12041090",
+        "doi": "10.3390/w12041090",
+        "year": 2020,
+        "authors": [
+          "Liviu-Marian Albu",
+          "Andrei Enea",
+          "Marina Iosub",
+          "Iuliana-Gabriela Breabăn"
+        ],
+        "venue": "Water",
+        "abstract": "Floods are the most destructive natural phenomenon, by the total number of casualties, and value of property damage, compared to any other type of natural disaster. However, some of the most destructive flash floods are related to dam breaches or complete collapses, that release the large amounts of water, affecting inhabited areas. Worldwide, numerous dams have almost reached or surpassed the estimated construction life span, and pose an increasing risk to structure stability. Considering their continuous degrading state, increasing rainfall aggressiveness, due to climatic changes, technical error, or even human error, there are numerous, potential causes, for which dams could develop breaches and completely fail. This study aims to portray a comparative perspective of flood impact, with real-life consequences, measured by quantifiable parameters, generated from computer simulations of different breach sizes. These parameters include the total flooded surface, water velocity, maximum water depth, number of affected buildings, etc. The analysis was undergone by means of HEC-RAS based 2D hydraulic modeling and GIS, depending on high-accuracy Lidar terrain data and historical hydrological data. As a case study, Drăcșani Lake with the associated Sulița earthfill embankment dam was chosen, being one of the largest and oldest artificial lakes in Romania.",
+        "pdf_url": null,
+        "citation_count": 47,
+        "work_type": "article",
+        "identifier": "10.3390/w12041090",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "MDPI AG"
+        }
+      },
+      {
+        "title": "Downstream Flood Inundation Assessment due to Dam Breach of Dudh Koshi Storage Hydroelectric Project using HEC-RAS 2D",
+        "source": "crossref",
+        "url": "https://doi.org/10.22541/essoar.170689084.46115635/v1",
+        "doi": "10.22541/essoar.170689084.46115635/v1",
+        "year": 2024,
+        "authors": [
+          "Biken Shrestha",
+          "Mukesh Raj Kafle",
+          "Santosh Bhattarai"
+        ],
+        "venue": null,
+        "abstract": "Dam breach is rare event in which dam fails releasing impounded water to downstream regions. Dam breach has low probability of occurrence but carries high risk of destruction. Dudhkoshi Storage Hydroelectric Project concrete faced rock fill dam (CFRD) was studied for dam breach under overtopping and piping failure modes. Dam breach simulation and flood propagation study is vital for identifying and minimizing the risks associated with breach flood. Two scenarios namely base-case scenario with average value of dam breach parameters and worst-case scenario with value of dam breach parameters resulting in maximum output. Local and global sensitivity analysis are performed for four dam breach parameters (dam breach width, breach formation time, weir coefficient, trigger failure elevation). Sensitivity analysis is performed for two river profile. Sensitivity on peak discharge, peak velocity, arrival time and water surface elevation were evaluated. ArcGIS, HEC-RAS and OriginPro 2022b are used for dam breach analysis. Overtopping failure was found to be critical as compared to piping mode.",
+        "pdf_url": null,
+        "citation_count": 2,
+        "work_type": "preprint",
+        "identifier": "10.22541/essoar.170689084.46115635/v1",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Wiley"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:40:19.259863+00:00"
+}

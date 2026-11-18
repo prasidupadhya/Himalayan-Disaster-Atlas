@@ -1,0 +1,234 @@
+{
+  "ok": true,
+  "data": {
+    "query": "multilingual disaster information accessibility low literacy",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Improving the Readability of Japanese Translations of Natural Disaster Risks Through Predictive Automated English Information Design",
+        "source": "crossref",
+        "url": "https://doi.org/10.1017/9781009067386.005",
+        "doi": "10.1017/9781009067386.005",
+        "year": 2025,
+        "authors": [],
+        "venue": "Multilingual Environmental Communications",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book-chapter",
+        "identifier": "10.1017/9781009067386.005",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Cambridge University Press"
+        }
+      },
+      {
+        "title": "Information Literacy and Multilingual Information Management",
+        "source": "crossref",
+        "url": "https://doi.org/10.1016/b978-1-84334-771-2.00004-4",
+        "doi": "10.1016/b978-1-84334-771-2.00004-4",
+        "year": 2015,
+        "authors": [
+          "Ximo Granell"
+        ],
+        "venue": "Multilingual Information Management",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book-chapter",
+        "identifier": "10.1016/b978-1-84334-771-2.00004-4",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Elsevier"
+        }
+      },
+      {
+        "title": "Assessing Linguistic Accessibility of Chinese Environmental and Health Information",
+        "source": "crossref",
+        "url": "https://doi.org/10.1017/9781009067386.007",
+        "doi": "10.1017/9781009067386.007",
+        "year": 2025,
+        "authors": [],
+        "venue": "Multilingual Environmental Communications",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book-chapter",
+        "identifier": "10.1017/9781009067386.007",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Cambridge University Press"
+        }
+      },
+      {
+        "title": "A multilingual information literacy resources tool",
+        "source": "crossref",
+        "url": "https://doi.org/10.11645/7.1.1806",
+        "doi": "10.11645/7.1.1806",
+        "year": 2013,
+        "authors": [
+          "Forest Woody Horton"
+        ],
+        "venue": "Journal of Information Literacy",
+        "abstract": null,
+        "pdf_url": "https://journals.cilip.org.uk/jil/article/download/247/220",
+        "citation_count": 6,
+        "work_type": "article",
+        "identifier": "10.11645/7.1.1806",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "CILIP Information Literacy Group"
+        }
+      },
+      {
+        "title": "Multilingual Speech and Language Intelligence for Low-Resource Languages, Accessibility and Endangered-Language Preservation",
+        "source": "crossref",
+        "url": "https://doi.org/10.62311/nesx/rb14ag-978-81-68314-86-3",
+        "doi": "10.62311/nesx/rb14ag-978-81-68314-86-3",
+        "year": 2026,
+        "authors": [
+          "Murali Krishna Pasupuleti"
+        ],
+        "venue": null,
+        "abstract": "This research book develops an integrated framework for multilingual speech and language intelligence in settings where linguistic data, computing capacity, institutional support and accessibility resources are unevenly distributed. It treats low-resource and endangered-language technology as a joint problem of representation, inference, infrastructure, human participation and governance rather than as a narrow model-accuracy exercise. The book connects statistical explanation, causal evaluation, multilingual foundation-model adaptation, multimodal learning, edge intelligence, scalable data engineering, trustworthiness and preservation-oriented policy into a single research architecture. Particular attention is given to sparse and heterogeneous corpora, speech variation, uncertainty calibration, community consent, assistive communication, data provenance, secure archival design and distribution shift. Methodologically, the analysis transfers only the computational and governance principles supported by the supplied reference corpus; domain-specific claims are framed as research designs and operational propositions rather than as reported empirical findings. Five chapters progress from foundations and research design through causal modelling, predictive machine learning, reproducible analytics infrastructure and applied governance. The resulting framework is intended to support research programmes and deployable systems across South Asia, Africa, Europe and the Americas, while protecting linguistic diversity, enabling accessible communication and preserving endangered-language knowledge for future generations. Keywords multilingual speech intelligence, low-resource languages, endangered languages, language preservation, accessibility, speech recognition, speech synthesis, multimodal AI, foundation models, transfer learning, causal inference, uncertainty calibration, federated learning, edge intelligence, 6G connectivity, data provenance, language archives, responsible AI, digital inclusion, community governance, MLOps, linguistic equity",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book",
+        "identifier": "10.62311/nesx/rb14ag-978-81-68314-86-3",
+        "extra": {
+          "crossref_type": "reference-book",
+          "publisher": "National Education Services"
+        }
+      },
+      {
+        "title": "Building the Multilingual Literacy Bridge",
+        "source": "crossref",
+        "url": "https://doi.org/10.2307/jj.22730501.15",
+        "doi": "10.2307/jj.22730501.15",
+        "year": 2021,
+        "authors": [
+          "Anat Stavans",
+          "Eva Lindgren"
+        ],
+        "venue": "Multilingual Literacy",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book-chapter",
+        "identifier": "10.2307/jj.22730501.15",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Channel View Publications"
+        }
+      },
+      {
+        "title": "Literacy education for low-educated second language learning adults in multilingual contexts: the case of Luxembourg",
+        "source": "crossref",
+        "url": "https://doi.org/10.1186/s13616-015-0024-7",
+        "doi": "10.1186/s13616-015-0024-7",
+        "year": 2015,
+        "authors": [
+          "Jinyoung Choi",
+          "Gudrun Ziegler"
+        ],
+        "venue": "Multilingual Education",
+        "abstract": null,
+        "pdf_url": "http://link.springer.com/content/pdf/10.1186/s13616-015-0024-7.pdf",
+        "citation_count": 16,
+        "work_type": "article",
+        "identifier": "10.1186/s13616-015-0024-7",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Springer Science and Business Media LLC"
+        }
+      },
+      {
+        "title": "Covid 19 vaccination: Accessibility or literacy? Israel as a case study",
+        "source": "crossref",
+        "url": "https://doi.org/10.1016/j.ijdrr.2022.102794",
+        "doi": "10.1016/j.ijdrr.2022.102794",
+        "year": 2022,
+        "authors": [
+          "Yuval Arbel",
+          "Yifat Arbel",
+          "Amichai Kerner",
+          "Miryam Kerner"
+        ],
+        "venue": "International Journal of Disaster Risk Reduction",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 4,
+        "work_type": "article",
+        "identifier": "10.1016/j.ijdrr.2022.102794",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "Accessibility of multilingual information in cascading crises",
+        "source": "crossref",
+        "url": "https://doi.org/10.4324/9780429341052-5",
+        "doi": "10.4324/9780429341052-5",
+        "year": 2019,
+        "authors": [
+          "Silvia Rodríguez Vázquez",
+          "Jesús Torres-del-Rey"
+        ],
+        "venue": "Translation in Cascading Crises",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 8,
+        "work_type": "book-chapter",
+        "identifier": "10.4324/9780429341052-5",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Routledge"
+        }
+      },
+      {
+        "title": "12 Building the Multilingual Literacy Bridge",
+        "source": "crossref",
+        "url": "https://doi.org/10.21832/9781800410701-013",
+        "doi": "10.21832/9781800410701-013",
+        "year": 2021,
+        "authors": [
+          "Anat Stavans",
+          "Eva Lindgren"
+        ],
+        "venue": "Multilingual Literacy",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 1,
+        "work_type": "book-chapter",
+        "identifier": "10.21832/9781800410701-013",
+        "extra": {
+          "crossref_type": "book-chapter",
+          "publisher": "Multilingual Matters"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:41:21.286204+00:00"
+}

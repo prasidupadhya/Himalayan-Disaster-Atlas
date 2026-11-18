@@ -1,0 +1,241 @@
+{
+  "ok": true,
+  "data": {
+    "query": "Melamchi flood 2021 cascade debris flow",
+    "scope": "papers",
+    "providers": [
+      "openalex",
+      "crossref",
+      "doab"
+    ],
+    "per_source": {
+      "openalex": 0,
+      "crossref": 10,
+      "doab": 0
+    },
+    "raw_records": 10,
+    "merged_records": 10,
+    "returned": 10,
+    "cached": false,
+    "failed": [],
+    "unavailable": [
+      "CORE: set CORE_API_KEY",
+      "RePEc: the RePEc API has no search function (per-identifier lookups only; see https://ideas.repec.org/api.html). Economics working papers with DOIs are still reachable through openalex and crossref."
+    ],
+    "results": [
+      {
+        "title": "Understanding Melamchi Flood 2021 of Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.2139/ssrn.3888685",
+        "doi": "10.2139/ssrn.3888685",
+        "year": 2021,
+        "authors": [
+          "Jyoti Koirala"
+        ],
+        "venue": null,
+        "abstract": "The frequency of anomalous floods has grown considerably in recent years in Nepal, inflicting severe damage to life and property. The most important concerns to be answered are: what effect does it cause to rise every year when enormous preliminary investment is made? And is there a solution for numbers to be reduced? The massive drop of the monsoon and the synchronizing of the main rivers are usually seen as the key reasons for Nepal’s floods. This study is based on the review of the current available facts pertaining to Melamchi Flood 2021. The research builds on an overview of current information and expertise relevant to the preparation, response, and recovery of information, if accessible. <br><br>Effective and effective implementation of risk management methods involves local planning as well as coordinated resource sharing initiatives between federal, provincial, and municipal parties and this seems to be lacking in Nepal.<br><br>Note: Funding Statement: The author(s) received no financial support for the research, authorship and/or publication of this articles.<br><br>Declaration of Interests: The authors declare that they have no conflict of interest.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.2139/ssrn.3888685",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "Assessment of the 2021 debris flow and flood related loss and damage in Melamchi Watershed of Central Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.3126/jnha.v1i1.78226",
+        "doi": "10.3126/jnha.v1i1.78226",
+        "year": 2024,
+        "authors": [
+          "Subash Duwadi",
+          "Danda Pani Adhikari",
+          "Megh Raj Dhital",
+          "Nuwaraj Parajuli"
+        ],
+        "venue": "Journal of Nepal Hydrogeological Association",
+        "abstract": "Nepal, characterized by its youthful mountain ranges, predominantly features mountainous terrain that is geologically fragile and at high risk for prone to geodisasters. Factors such as steep slopes, intense summer rainfall, riverbank erosion, landslide and earthquake contribute to these disasters leading to a significant loss of life and property. This study aims to elucidate the 2021 debris flow and flood-related loss and damage and its impact on local livelihoods in the Melamchi Municipality and Helambu Rural Municipality of Sindhupalchok district. Data were collected through both qualitative and quantitative techniques by using household surveys, focus group discussions, key informant interviews, and field observations were carried out. The sample size was determined by using the Arkon and Colton formula. Disruption of infrastructure, extensive sediment deposition and damage across affected areas, significant erosion, river widening, landscape transformation, temporary river blockage, changes in river morphology, formation of new river channels, and the destruction of agricultural lands were observed in satellite imagery and aerial photographs and they were verified in the field. The event heavily impacted Melamchi Bazaar, claiming over 25 lives and causing substantial damage to the Melamchi Water Supply Project and the Melamchi settlement. The survey revealed that 56% of the respondents lost their agricultural land, 28% lost non-agricultural income sources, 11% lost their employment, and a few others lost other income sources. The total estimated loss of the event was USD 436 million in Melamchi and USD 62 million in Helambu Rural Municipality, including the loss and damage of houses, land, crops, and livestock. Flood and landslides are common phenomena in the Nepal Himalaya and the 2021 Melamchi event was unprecedented in terms of the loss and damage. The result of this study can help policy makers and managers with better planning to minimize the impacts of loss and damage of the geodisaster in the future.",
+        "pdf_url": "https://www.nepjol.info/index.php/jnha/article/download/78226/59916",
+        "citation_count": 2,
+        "work_type": "article",
+        "identifier": "10.3126/jnha.v1i1.78226",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Nepal Journals Online (JOL)"
+        }
+      },
+      {
+        "title": "Using morphometrics to distinguish between debris flow, debris flood and flood (Southern Carpathians, Romania)",
+        "source": "crossref",
+        "url": "https://doi.org/10.1016/j.catena.2020.104982",
+        "doi": "10.1016/j.catena.2020.104982",
+        "year": 2021,
+        "authors": [
+          "Viorel Ilinca"
+        ],
+        "venue": "CATENA",
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 51,
+        "work_type": "article",
+        "identifier": "10.1016/j.catena.2020.104982",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Elsevier BV"
+        }
+      },
+      {
+        "title": "A multi-source quantitative reconstruction of the 26 August 2026 Bhote Koshi rock-ice avalanche-debris-flow-flood cascade, Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.31223/x5mb9v",
+        "doi": "10.31223/x5mb9v",
+        "year": 2026,
+        "authors": [
+          "Nischal Pokhrel",
+          "Tinisha Khatri"
+        ],
+        "venue": null,
+        "abstract": "On 26 August 2026, a catastrophic transboundary mass-flow and flood cascade originated in the upper Lhende Khola-Bhote Koshi headwaters and propagated through the Bhote Koshi, Trishuli, and Narayani river system in Nepal. Early public descriptions used the glacial lake outburst flood (GLOF) label, but subsequent seismic, satellite, video, field, hydrological, and damage-assessment evidence supported a more complex sequence of rock-ice avalanche, progressive entrainment and debris-flow transformation, followed by downstream flood-wave routing. This study aims to provide a reproducible, evidence-weighted quantitative reconstruction using publicly available data through 7 October 2026. Official hydrometeorological timelines, peer-reviewed source-process studies, preliminary satellite mapping, the Government of Nepal Rapid Damage and Needs Assessment, and dated human-impact snapshots were harmonized. Propagation and warning-time metrics, hydrological amplification, paired channel-width change at 22 sections, exposure and infrastructure severity ratios, and sectoral concentration of disaster effects and recovery needs were calculated. The source-to-border segment was reported at approximately 188 km/h (52.2 m/s), declining to 23-26 km/h in lower-river segments which was explained by a descriptive log-linear decay model at 80.1% of variation across six reported segment speeds. The public-warning anchor at 09:15 Nepal Standard Time occurred 38 minutes after the source seismic signal, after the flood had already passed or disabled upper-corridor stations, leaving only five minutes to the Betrawati station-failure proxy but 365 minutes to the reported Devghat flood-wave arrival. At Devghat, stage rose from 4.76 to 6.57 m, and discharge increased from approximately 2,600 to 5,850 m3/s where the reported 19.96 million m3 excess volume represented 34.8% of total flow volume during 14:10-18:00. All 22 mapped channel sections widened, from a mean of 66.1 to 266.5 m with the mean post/pre width ratio of 4.49 (bootstrap 95% CI 3.65-5.39; one-sided Wilcoxon p=1.99x10-5). The official assessment recorded USD 2.695 billion in disaster effects and USD 4.775 billion in recovery needs, with energy accounting for 54.0% of needs. The results showed that Nepalese cryospheric risk screening, early warning, and infrastructure design must expand from lake-centric hazard concepts to process-chain surveillance that connects unstable rock-ice source areas, entrainment-prone transport corridors, temporary blockages, and exposed downstream assets.",
+        "pdf_url": "https://eartharxiv.org/repository/object/15771/download/27314/",
+        "citation_count": 0,
+        "work_type": "preprint",
+        "identifier": "10.31223/x5mb9v",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "California Digital Library (CDL)"
+        }
+      },
+      {
+        "title": "The 2021 Melamchi Flood: A massive erosional cascade in the Himalayan Mountains of central Nepal",
+        "source": "crossref",
+        "url": "https://doi.org/10.21203/rs.3.rs-2766739/v1",
+        "doi": "10.21203/rs.3.rs-2766739/v1",
+        "year": 2023,
+        "authors": [
+          "Chan-Mao Chen",
+          "James Hollingsworth",
+          "Marin Clark",
+          "Dimitrios Zekkos",
+          "Deepak Chamlagain",
+          "Sujata Bista",
+          "Anuj Siwakoti",
+          "A. Joshua West"
+        ],
+        "venue": null,
+        "abstract": "Large, sediment-laden floods in mountainous terrain can have disastrous consequences and play important roles in landscape evolution. These events often unfold as a series of interconnected processes, but understanding of such “hazard cascades” has been hampered by lack of quantitative data on sediment movement. Here, we use a time series of high-resolution satellite imagery to quantify erosion and aggradation during the 2021 Melamchi Khola Floods in the Himalaya of central Nepal, providing a unique sediment budget for such an event. Our analysis reveals massive headwater erosion via remobilization of Gorkha landslides, gullying, debris-flows, and incision of glacial deposits. Unlike many other high mountain floods, the widely distributed erosion suggests this event was not primarily driven by a single source, e.g., glacial lake or landslide dam failure. High sediment supply caused aggradation in a high-elevation, low-relief glacial valley and triggered catastrophic incision into associated ancient fills. As this material was transported downstream, it caused further riverbed incision that in turn resulted in failures of surrounding hillslopes. Further downstream, as river steepness diminished, the main channel in the lower basin was widened by 3-5-fold and aggraded by ~ 5–20 m. However, deposition in the Melamchi Khola was not enough to accommodate the vast amount of flood material, and over 70% was delivered from the Melamchi Khola to the downstream Indrawati basin. Our sediment budget provides rare insight into the chain of events involved in a massive flood and helps shed light on how such floods can magnify hazard and reshape the fluvial landscape.",
+        "pdf_url": null,
+        "citation_count": 3,
+        "work_type": "preprint",
+        "identifier": "10.21203/rs.3.rs-2766739/v1",
+        "extra": {
+          "crossref_type": "posted-content",
+          "publisher": "Springer Science and Business Media LLC"
+        }
+      },
+      {
+        "title": "Debris flow, debris avalanche, and flood hazards at and downstream from Mount Rainier, Washington",
+        "source": "crossref",
+        "url": "https://doi.org/10.3133/ha729",
+        "doi": "10.3133/ha729",
+        "year": 1995,
+        "authors": [],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "report",
+        "identifier": "10.3133/ha729",
+        "extra": {
+          "crossref_type": "report",
+          "publisher": "US Geological Survey"
+        }
+      },
+      {
+        "title": "Debris-flood and debris-flow hazard from Lone Pine Canyon near Centerville, Davis County, Utah",
+        "source": "crossref",
+        "url": "https://doi.org/10.34191/ri-223",
+        "doi": "10.34191/ri-223",
+        "year": 1993,
+        "authors": [],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "book",
+        "identifier": "10.34191/ri-223",
+        "extra": {
+          "crossref_type": "book",
+          "publisher": "Utah Geological Survey"
+        }
+      },
+      {
+        "title": "Debris-Flow and Debris-Flood Susceptibility Mapping for Geohazard Risk Prioritization",
+        "source": "crossref",
+        "url": "https://doi.org/10.2113/eeg-d-20-00006",
+        "doi": "10.2113/eeg-d-20-00006",
+        "year": 2021,
+        "authors": [
+          "Matthieu Sturzenegger",
+          "Kris Holm",
+          "Carie-Ann Lau",
+          "Matthias Jakob"
+        ],
+        "venue": "Environmental and Engineering Geoscience",
+        "abstract": "Regional-scale assessments for debris-flow and debris-flood propagation and avulsion on fans can be challenging. Geomorphological mapping based on aerial or satellite imagery requires substantial field verification effort. Surface evidence of past events may be obfuscated by development or obscured by repeat erosion or debris inundation, and trenching may be required to record the sedimentary architecture and date past events. This paper evaluates a methodology for debris-flow and debris-flood susceptibility mapping at regional scale based on a combination of digital elevation model (DEM) metrics to identify potential debris source zones and flow propagation modeling using the Flow-R code that is calibrated through comparison to mapped alluvial fans. The DEM metrics enable semi-automated identification and preliminary, process-based classification of streams prone to debris flow and debris flood. Flow-R is a susceptibility mapping tool that models potential flow inundation based on a combination of spreading and runout algorithms considering DEM topography and empirical propagation parameters. The methodology is first evaluated at locations where debris-flow and debris-flood hazards have been previously assessed based on field mapping and detailed numerical modeling. It is then applied over a 125,000 km2 area in southern British Columbia, Canada. The motivation for the application of this methodology is that it represents an objective and repeatable approach to susceptibility mapping, which can be integrated in a debris-flow and debris-flood risk prioritization framework at regional scale to support risk management decisions.",
+        "pdf_url": "https://pubs.geoscienceworld.org/aeg/eeg/article-pdf/27/2/179/5298794/i1078-7275-27-2-179.pdf",
+        "citation_count": 10,
+        "work_type": "article",
+        "identifier": "10.2113/eeg-d-20-00006",
+        "extra": {
+          "crossref_type": "journal-article",
+          "publisher": "Association of Environmental and Engineering Geologists"
+        }
+      },
+      {
+        "title": "Debris Flow Susceptibility Map for Mount Rainier, Washington Based on Debris Flow Initiation Zone Characteristics from the November, 2006 Climate Event in the Cascade Mountains",
+        "source": "crossref",
+        "url": "https://doi.org/10.15760/etd.2650",
+        "doi": "10.15760/etd.2650",
+        "year": 2000,
+        "authors": [
+          "Kassandra Lindsey"
+        ],
+        "venue": null,
+        "abstract": null,
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "report",
+        "identifier": "10.15760/etd.2650",
+        "extra": {
+          "crossref_type": "report",
+          "publisher": "Portland State University Library"
+        }
+      },
+      {
+        "title": "Debris flow and flood susceptibility assessment in Phang-Nga province, southern Thailand",
+        "source": "crossref",
+        "url": "https://doi.org/10.58837/chula.the.2024.934",
+        "doi": "10.58837/chula.the.2024.934",
+        "year": 2025,
+        "authors": [
+          "Aksara Kulsilarak"
+        ],
+        "venue": null,
+        "abstract": "Phang-nga, a province in Southern Thailand, is highly susceptible to geohazards such as debris flows and flooding, both of which pose significant risks to human life and property. Two major topographic factors contribute to the potential for debris flow: i) steep mountain slopes and ii) the presence of multiple mountain-front outlets. This study presents the creation of susceptibility maps for debris flow and flood hazards in Phang-nga, using the Frequency Ratio (FR) method. The analysis classified the region into five susceptibility levels: very low, low, moderate, high, and very high, based on natural break classification. For debris flow, moderate susceptibility zones were the most widespread, particularly in low-elevation coastal areas adjacent to streamlines. In contrast, high-elevation and less rugged terrain showed low susceptibility, while very high susceptibility zones were concentrated along drainage paths. Flood susceptibility displayed a distinct spatial pattern, with very low susceptibility in the mountainous eastern areas and moderate to very high susceptibility concentrated in flat, low-lying coastal zones. Both hazard models identified slope and drainage proximity as dominant contributing factors, corroborating previous research. Model validation produced AUC values for the high and very high susceptibility classes (60.56 percent for debris flow and 50.25 percent for flood). Despite these modest values, the results are still considered suitable for preliminary susceptibility assessment.",
+        "pdf_url": null,
+        "citation_count": 0,
+        "work_type": "thesis",
+        "identifier": "10.58837/chula.the.2024.934",
+        "extra": {
+          "crossref_type": "dissertation",
+          "publisher": "Office of Academic Resources, Chulalongkorn University"
+        }
+      }
+    ]
+  },
+  "count": 10,
+  "vault": "/home/user/Himalayan-Disaster-Atlas",
+  "timestamp": "2026-11-18T12:41:10.572945+00:00"
+}
