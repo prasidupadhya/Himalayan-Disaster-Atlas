@@ -1,0 +1,14 @@
+name: probe
+on:
+  push:
+    branches: [fix/gov-feed-routes]
+    paths: [.github/probe/**, .github/workflows/probe.yml]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - run: python .github/probe/probe.py
