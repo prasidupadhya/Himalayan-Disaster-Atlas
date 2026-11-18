@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "skills": {
+    "deep-research": {
+      "source": "jordan-gibbs/hyperresearch",
+      "commit": "8f192b88bf777e2ad6da5e07e4b2ad7af40e2d7c",
+      "sourceType": "github",
+      "skillPath": "skills/deep-research/SKILL.md",
+      "computedHash": "044f426d04c768c88328ce74dd0a094c8307b499ef1f351eba56b3155cb04472"
+    }
+  }
+}
