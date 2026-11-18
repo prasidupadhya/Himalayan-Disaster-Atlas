@@ -40,6 +40,11 @@ export const COPY = {
     trace: 'Trace downstream', clearTrace: 'Clear trace', traced: (km, n) => `Downstream path: ${km} km over ${n} river reaches.`,
     traceExit: 'The path leaves the mapped river network here (border or data edge).',
     area: 'Area', elevation: 'Elevation', connectivity: 'Connection', country: 'Country', magnitude: 'Magnitude', 
+    searchLabel: 'Find a place', searchPlaceholder: 'District, town, peak, river or lake', searchNone: 'No match. Try another spelling, in English or Nepali.',
+    searchCount: n => `${n} matches. Use the up and down arrows to choose.`, searchLakeWord: 'lake',
+    placeKinds: { district: 'District', city: 'City', town: 'Town', village: 'Village', peak: 'Peak', stream: 'Stream name', lake: 'Glacial lake, verified release point' },
+    inDistrict: d => `in ${d}`, streamPoint: 'A GeoNames stream point: the name marks this spot, not the whole river.',
+    searchSource: 'Districts: Survey Department via OCHA. Towns: OpenStreetMap. Peaks and streams: GeoNames. Names as each source publishes them.',
     reach: id => `River reach ${id}`, flow: 'Average flow', order: 'Flow order', lake: 'Glacial lake', glofLink: 'Run an outburst scenario from this lake',
 
     scenTitle: 'Scenarios', scenIntro: 'Hypothetical model runs, not forecasts. Change the inputs and see how the results move.',
@@ -146,6 +151,11 @@ export const COPY = {
     trace: 'तलतिर पछ्याउनुहोस्', clearTrace: 'पछ्याइ हटाउनुहोस्', traced: (km, n) => `तलतिरको बाटो: ${n} नदी खण्ड हुँदै ${km} किमी।`,
     traceExit: 'बाटो यहाँ नक्साङ्कित नदी सञ्जालबाट बाहिर जान्छ (सीमा वा डाटाको किनारा)।',
     area: 'क्षेत्रफल', elevation: 'उचाइ', connectivity: 'हिमनदीसँगको जडान', country: 'देश', magnitude: 'म्याग्निच्युड', 
+    searchLabel: 'ठाउँ खोज्नुहोस्', searchPlaceholder: 'जिल्ला, सहर, हिमाल, नदी वा ताल', searchNone: 'मिलेन। अर्को हिज्जे, अङ्ग्रेजी वा नेपालीमा, प्रयोग गर्नुहोस्।',
+    searchCount: n => `${n} नतिजा। छान्न माथि र तलका तीर प्रयोग गर्नुहोस्।`, searchLakeWord: 'ताल',
+    placeKinds: { district: 'जिल्ला', city: 'सहर', town: 'नगर', village: 'गाउँ', peak: 'हिमशिखर', stream: 'खोलाको नाम', lake: 'हिमताल, प्रमाणित निकास बिन्दु' },
+    inDistrict: d => `${d} जिल्लामा`, streamPoint: 'GeoNames को खोला बिन्दु: नामले यही स्थान जनाउँछ, पूरै नदी होइन।',
+    searchSource: 'जिल्ला: नापी विभाग, OCHA मार्फत। बस्ती: OpenStreetMap। हिमशिखर र खोला: GeoNames। नाम हरेक स्रोतले प्रकाशित गरेजस्तै।',
     reach: id => `नदी खण्ड ${id}`, flow: 'औसत बहाव', order: 'बहाव क्रम', lake: 'हिमताल', glofLink: 'यस तालबाट विस्फोट परिदृश्य चलाउनुहोस्',
 
     scenTitle: 'परिदृश्य', scenIntro: 'काल्पनिक मोडेल, पूर्वानुमान होइन। इनपुट बदलेर नतिजा कसरी बदलिन्छ हेर्नुहोस्।',
