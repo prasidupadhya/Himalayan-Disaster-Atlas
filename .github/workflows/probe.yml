@@ -15,4 +15,4 @@ jobs:
         with:
           python-version: '3.12.14'
       - run: pip install -q -r pipelines/gov_feeds/requirements.txt && python -m playwright install --with-deps chromium >/dev/null
-      - run: python .github/probe/probe.py
+      - run: PYTHONPATH=. python .github/probe/probe.py
