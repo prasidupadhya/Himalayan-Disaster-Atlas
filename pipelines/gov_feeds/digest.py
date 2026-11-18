@@ -21,6 +21,8 @@ ROOT = Path(__file__).resolve().parents[2]
 SOURCES = Path(__file__).with_name("sources.json")
 PUBLIC = ROOT / "site/data/gov/latest.json"
 ARCHIVE = ROOT / "data/gov-feeds"
+HISTORY = ROOT / "site/data/gov/history.json"
+HISTORY_DAYS = 60
 FORMAT = "atlas-gov-digest@1"
 NEPAL = timezone(timedelta(hours=5, minutes=45))
 USER_AGENT = "HimalayanDisasterAtlas/1.0 (+https://github.com/prasidupadhya/Himalayan-Disaster-Atlas; daily public-page digest)"
@@ -444,6 +446,26 @@ def build(sources, previous, fetcher=fetch, robots=robots_allows, moment=None, r
     return digest, raw
 
 
+def history_index(folder, days=HISTORY_DAYS):
+    """The site's trend data: one row per Nepal date for the last `days` daily records, oldest first.
+
+    A count is null when its source was not read that day, so a day without a reading is never shown as zero.
+    """
+    rows = []
+    for path in sorted(folder.glob("*.json"))[-days:]:
+        record = json.loads(path.read_text(encoding="utf-8"))
+        summary = record.get("summary") or {}
+        read = {e.get("id") for e in record.get("sources", []) if e.get("status") == "fetched"}
+        river, rain = "bipad-river" in read, "bipad-rain" in read
+        rows.append({"date": path.stem, "generated_at": record.get("generated_at"),
+                     "rivers_above_danger": summary.get("rivers_above_danger") if river else None,
+                     "rivers_above_warning": summary.get("rivers_above_warning") if river else None,
+                     "rivers_current": summary.get("rivers_current") if river else None,
+                     "rain_stations_above_warning": summary.get("rain_stations_above_warning") if rain else None,
+                     "rain_current": summary.get("rain_current") if rain else None})
+    return {"format": "atlas-gov-history@1", "days": rows}
+
+
 def write(digest, raw):
     PUBLIC.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(digest, ensure_ascii=False, indent=1) + "\n"
@@ -454,6 +476,7 @@ def write(digest, raw):
               "sources": [{k: e.get(k) for k in ("id", "status", "http_status", "last_known", "sha256")} for e in digest["sources"]]}
     (ARCHIVE / "history").mkdir(parents=True, exist_ok=True)
     (ARCHIVE / "history" / f"{day}.json").write_text(json.dumps(record, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    HISTORY.write_text(json.dumps(history_index(ARCHIVE / "history"), ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     (ARCHIVE / "raw").mkdir(parents=True, exist_ok=True)
     registered = {e["id"] for e in digest["sources"]}
     for stale in (ARCHIVE / "raw").glob("*.gz"):

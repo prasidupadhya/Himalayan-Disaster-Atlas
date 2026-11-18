@@ -259,3 +259,28 @@ if __name__ == "__main__":
         outlook = focus_page(page, {"tables_matching": "today", "rows": 1, "paragraphs_matching": "koshi"})
         self.assertEqual(outlook["tables"][0]["rows"], [["Koshi", "Light rain"]])
         self.assertTrue(outlook["paragraphs"][0].startswith("SYNTHETIC: Partly cloudy"))
+
+
+class HistoryTests(unittest.TestCase):
+    def test_history_keeps_the_last_days_in_order_and_unread_counts_null(self):
+        import tempfile
+        from pathlib import Path
+        from pipelines.gov_feeds.digest import history_index
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            def day(name, river, rain, warning):
+                sources = [{"id": "bipad-river", "status": "fetched" if river else "error"}, {"id": "bipad-rain", "status": "fetched" if rain else "error"}]
+                summary = {"rivers_above_danger": 0, "rivers_above_warning": warning, "rivers_current": 160, "rain_stations_above_warning": 2, "rain_current": 300}
+                (folder / f"{name}.json").write_text(json.dumps({"generated_at": f"{name}T01:00:00Z", "summary": summary, "sources": sources}), encoding="utf-8")
+            day("2026-11-03", True, True, 4)
+            day("2026-11-01", True, False, 1)
+            day("2026-11-02", False, True, 9)
+            index = history_index(folder, days=2)
+            self.assertEqual(index["format"], "atlas-gov-history@1")
+            self.assertEqual([d["date"] for d in index["days"]], ["2026-11-02", "2026-11-03"])
+            unread = index["days"][0]
+            self.assertIsNone(unread["rivers_above_warning"])
+            self.assertIsNone(unread["rivers_current"])
+            self.assertEqual(unread["rain_stations_above_warning"], 2)
+            self.assertEqual(index["days"][1]["rivers_above_warning"], 4)
+            self.assertIsNone(history_index(folder)["days"][0]["rain_current"])
