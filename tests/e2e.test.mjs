@@ -313,3 +313,20 @@ test('switching scenarios in 3D clears the old overlay and respects point ruptur
     assert.deepEqual(errors, []);
   } finally { await close(); }
 });
+
+test('Today shows 30-day trends where a day without a reading is a gap, not zero', async () => {
+  const { page, errors, close } = await open('phone', '/');
+  await page.waitForSelector('#trends .trend');
+  assert.equal(await page.locator('#trends .trend').count(), 3);
+  for (const fig of await page.locator('#trends .trend svg').all()) assert.equal(await fig.locator('g').count(), 30);
+  const history = await page.evaluate(() => fetch('/data/gov/history.json').then(r => r.json()));
+  const unread = history.days.filter(d => d.rivers_current == null).length;
+  assert.ok(await page.locator('#trends .trend').nth(2).locator('rect.gap').count() >= unread, 'unread days are drawn as gaps');
+  assert.doesNotMatch(await page.textContent('#trends'), /top /);
+  await page.click('#trends details summary');
+  assert.ok(await page.locator('#trends tbody tr').count() >= 1);
+  assert.match(await page.textContent('#trends .lead'), /River stations above warning/);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.deepEqual(errors, []);
+  await close();
+});
