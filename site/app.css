@@ -270,3 +270,38 @@ body:has(.mapwrap) .foot { display: none; }
 .route p { margin-top: var(--space-xs); }
 .player-options { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
 .mapwrap .panel .route h3:first-child { margin-top: 0; }
+
+/* Scenario report: one column that reads on screen and prints on A4. */
+.report { max-width: 50rem; margin-inline: auto; padding: var(--space-xl) var(--gutter) var(--space-3xl); }
+.report-head { border-bottom: var(--rule-hair) solid var(--color-ink); padding-bottom: var(--space-lg); margin-bottom: var(--space-lg); }
+.report-head h1 { margin: var(--space-2xs) 0 var(--space-md); }
+.report-kind { font-weight: 600; color: var(--color-ink-2); margin: 0; }
+.report-head .muted, .report-link { font-size: var(--text-sm); max-width: 76ch; }
+.report-link a { overflow-wrap: anywhere; }
+.report section { margin-top: var(--space-xl); }
+.report section > h2 { font-size: var(--text-lg); margin-bottom: var(--space-sm); }
+.report-inputs { display: grid; grid-template-columns: minmax(10rem, max-content) 1fr; gap: var(--space-2xs) var(--space-lg); margin: 0; }
+.report-inputs dt { color: var(--color-muted); }
+.report-inputs dd { margin: 0; color: var(--color-ink); font-variant-numeric: tabular-nums; }
+.report-map { margin: 0; }
+.report-map > div { aspect-ratio: 16 / 9; border: var(--rule-hair) solid var(--color-ink); border-radius: var(--radius-card); overflow: hidden; }
+.report table { margin-top: var(--space-md); }
+.report caption { text-align: left; font-weight: 600; color: var(--color-ink); padding-bottom: var(--space-xs); }
+@media (max-width: 47.5rem) { .report-inputs { grid-template-columns: 1fr; } .report-inputs dd { margin-bottom: var(--space-xs); } }
+@media print {
+  @page { size: A4; margin: 14mm 14mm 16mm; }
+  :root { color-scheme: light; }
+  body { background: #fff; color: #000; font-size: 10.5pt; }
+  .no-print, .skip { display: none !important; }
+  .report { max-width: none; padding: 0; }
+  .report .note { border-color: #000; }
+  .report-map > div { aspect-ratio: auto; height: 95mm; break-inside: avoid; }
+  .report-map-section, .report .figs, .report tr, .report .route li, .report .chart { break-inside: avoid; }
+  .report table { font-size: 8.5pt; }
+  .report th, .report td { padding-inline: 0.4em; }
+  .report .fig strong { font-size: 15pt; }
+  .report .summary { font-size: 12pt; }
+  .report h2, .report caption { break-after: avoid; }
+  .report-map-section + section { break-before: page; }
+  .report a { color: inherit; }
+}

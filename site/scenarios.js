@@ -14,7 +14,7 @@ const figure = (label, value, note = '') => `<div class="fig"><span>${esc(label)
 const range = (a, b, f = num) => a === b ? f(a) : `${f(a)}–${f(b)}`;
 /** Reads a typed number: Nepali digits, thousands separators and spaces are accepted; empty is not a number. */
 const mark = (errors, fields) => { form.querySelectorAll('input').forEach(i => i.removeAttribute('aria-invalid')); errors.flatMap(e => fields[e] ?? []).forEach(n => form[n]?.setAttribute('aria-invalid', 'true')); };
-const actions = `<div class="actions"><button class="primary" aria-label="${esc(c.run)}">${esc(c.run)}</button><button type="button" id="share" aria-label="${esc(c.share)}">${esc(c.share)}</button></div>`;
+const actions = `<div class="actions"><button class="primary" aria-label="${esc(c.run)}">${esc(c.run)}</button><button type="button" id="share" aria-label="${esc(c.share)}">${esc(c.share)}</button><a class="button" id="report" href="/scenarios/report/">${esc(c.report)}</a></div>`;
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const params = () => new URLSearchParams(location.hash.slice(1));
 /** Inputs live in the link (shareable); an unchanged link still re-runs. */
@@ -302,6 +302,8 @@ async function route() {
   try { await (mode === 'quake' ? quake(run) : flood(run)); } catch (e) { console.error(e); if (run === seq) failed(out, route); }
   if (run !== seq) return;
   status.textContent = c.resultsReady;
+  const report = document.getElementById('report');
+  if (report) report.href = `/scenarios/report/${location.hash}`;
   document.getElementById('share')?.addEventListener('click', async ev => {
     try { await navigator.clipboard.writeText(location.href); ev.target.textContent = c.copiedLink; } catch { ev.target.textContent = c.copyFailed; }
   });

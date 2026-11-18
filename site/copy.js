@@ -40,6 +40,11 @@ export const COPY = {
     trace: 'Trace downstream', clearTrace: 'Clear trace', traced: (km, n) => `Downstream path: ${km} km over ${n} river reaches.`,
     traceExit: 'The path leaves the mapped river network here (border or data edge).',
     area: 'Area', elevation: 'Elevation', connectivity: 'Connection', country: 'Country', magnitude: 'Magnitude', 
+    report: 'Report', reportTitle: 'Scenario report', reportKinds: { glof: 'Glacial lake outburst', flood: 'River flood', quake: 'Earthquake shaking' },
+    reportMade: d => `Made ${d}, Nepal time, from the link below. Running the link again gives the same numbers while the data releases are unchanged.`,
+    reportLink: 'Interactive version', reportPrint: 'Print or save as PDF', reportBack: 'Back to the scenario', reportInputs: 'Inputs', reportMap: 'Map',
+    reportMapFlood: 'The river path on the outline of Nepal. The yellow dot is the release point.', reportMapQuake: 'Middle-case shaking bands around the epicentre, on the outline of Nepal. Grey is beyond the model range.',
+    reportMethod: 'Method and limits', reportData: 'Data releases used', reportEvent: 'Event',
     reach: id => `River reach ${id}`, flow: 'Average flow', order: 'Flow order', lake: 'Glacial lake', glofLink: 'Run an outburst scenario from this lake',
 
     scenTitle: 'Scenarios', scenIntro: 'Hypothetical model runs, not forecasts. Change the inputs and see how the results move.',
@@ -146,6 +151,11 @@ export const COPY = {
     trace: 'तलतिर पछ्याउनुहोस्', clearTrace: 'पछ्याइ हटाउनुहोस्', traced: (km, n) => `तलतिरको बाटो: ${n} नदी खण्ड हुँदै ${km} किमी।`,
     traceExit: 'बाटो यहाँ नक्साङ्कित नदी सञ्जालबाट बाहिर जान्छ (सीमा वा डाटाको किनारा)।',
     area: 'क्षेत्रफल', elevation: 'उचाइ', connectivity: 'हिमनदीसँगको जडान', country: 'देश', magnitude: 'म्याग्निच्युड', 
+    report: 'प्रतिवेदन', reportTitle: 'परिदृश्य प्रतिवेदन', reportKinds: { glof: 'हिमताल विस्फोट', flood: 'नदीको बाढी', quake: 'भूकम्पको कम्पन' },
+    reportMade: d => `नेपाली समय ${d} मा तलको लिङ्कबाट बनाइएको। डेटा संस्करण नबदलिएसम्म लिङ्क फेरि चलाउँदा उही अङ्क आउँछन्।`,
+    reportLink: 'अन्तरक्रियात्मक संस्करण', reportPrint: 'छाप्नुहोस् वा PDF बनाउनुहोस्', reportBack: 'परिदृश्यमा फर्कनुहोस्', reportInputs: 'इनपुट', reportMap: 'नक्सा',
+    reportMapFlood: 'नेपालको रूपरेखामा नदीको बाटो। पहेँलो थोप्लो पानी छोडिने स्थान हो।', reportMapQuake: 'नेपालको रूपरेखामा केन्द्रवरिपरिका मध्य अनुमानका कम्पन तह। खैरो भाग मोडेलको दायराबाहिर हो।',
+    reportMethod: 'विधि र सीमा', reportData: 'प्रयोग गरिएका डेटा संस्करण', reportEvent: 'घटना',
     reach: id => `नदी खण्ड ${id}`, flow: 'औसत बहाव', order: 'बहाव क्रम', lake: 'हिमताल', glofLink: 'यस तालबाट विस्फोट परिदृश्य चलाउनुहोस्',
 
     scenTitle: 'परिदृश्य', scenIntro: 'काल्पनिक मोडेल, पूर्वानुमान होइन। इनपुट बदलेर नतिजा कसरी बदलिन्छ हेर्नुहोस्।',

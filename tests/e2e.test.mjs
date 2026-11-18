@@ -39,7 +39,7 @@ async function open(device, path, { lang = 'en', theme = 'light', reducedMotion,
   page.on('response', r => { if (r.status() >= 400) errors.push(`HTTP ${r.status()} ${r.url()} from ${r.request().headers().referer}`); });
   page.on('console', m => m.type() === 'error' && !/fonts\.|ERR_FAILED/.test(m.text()) && errors.push(`${m.text()} ${m.location().url}`));
   await page.goto(base + path);
-  if (path === '/map/' || path.startsWith('/scenarios/')) await page.waitForSelector('#map[data-ready=true]', { timeout: 30000 });
+  if (path === '/map/' || /^\/scenarios\/(#|$)/.test(path)) await page.waitForSelector('#map[data-ready=true]', { timeout: 30000 });
   else await page.waitForLoadState('networkidle');
   return { page, errors, close: () => ctx.close() };
 }
@@ -312,4 +312,37 @@ test('switching scenarios in 3D clears the old overlay and respects point ruptur
     assert.equal(await page.evaluate(() => scenarioMap.getLayoutProperty('shaking', 'visibility')), 'none');
     assert.deepEqual(errors, []);
   } finally { await close(); }
+});
+
+test('the scenario report reruns the linked scenario and lays out for A4 in both languages', async () => {
+  const { page, errors, close } = await open('laptop', '/scenarios/');
+  await page.waitForSelector('#result .summary');
+  // The Report link carries the scenario's link.
+  await page.selectOption('#form [name=origin]', { index: 2 });
+  await page.waitForFunction(() => location.hash.includes('flood='));
+  await page.waitForFunction(() => document.getElementById('report')?.getAttribute('href').endsWith(location.hash));
+  const summary = await page.textContent('#result .summary');
+  await page.click('#report');
+  await page.waitForSelector('#report[data-ready=true]', { timeout: 30000 });
+  assert.equal(await page.textContent('#report .summary'), summary, 'same numbers as the page');
+  assert.match(await page.textContent('#link'), /\/scenarios\/#flood=/);
+  assert.ok(await page.locator('#report-map canvas').count() === 1);
+  await page.emulateMedia({ media: 'print' });
+  assert.equal(await page.locator('.top').isVisible(), false);
+  assert.equal(await page.locator('#print').isVisible(), false);
+  const pdf = await page.pdf({ format: 'A4' });
+  assert.ok(pdf.length > 10000);
+  assert.deepEqual(errors, []);
+  await close();
+
+  const ne = await open('phone', '/scenarios/report/#quake', { lang: 'ne', theme: 'dark' });
+  await ne.page.waitForSelector('#report[data-ready=true]', { timeout: 30000 });
+  assert.equal(await ne.page.title(), 'परिदृश्य प्रतिवेदन, हिमालय विपद् एटलस');
+  assert.ok(await ne.page.locator('#report table').count() >= 3);
+  assert.equal(await ne.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  await ne.page.addScriptTag({ content: AXE });
+  const violations = await ne.page.evaluate(async () => (await axe.run(document, { runOnly: ['wcag2a', 'wcag2aa'] })).violations.filter(v => ['serious', 'critical'].includes(v.impact)).map(v => v.id));
+  assert.deepEqual(violations, []);
+  assert.deepEqual(ne.errors, []);
+  await ne.close();
 });
