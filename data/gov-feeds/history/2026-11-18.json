@@ -1,17 +1,17 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-11-17T21:02:55Z",
+ "generated_at": "2026-11-18T07:31:16Z",
  "summary": {
   "sources_fetched": 6,
   "sources_last_known": 2,
   "sources_unavailable": 0,
   "rivers_above_danger": 0,
   "rivers_above_warning": 0,
-  "rivers_current": 166,
-  "rain_current": 304,
+  "rivers_current": 165,
+  "rain_current": 303,
   "rain_stations_above_warning": 0,
   "new_links": 0,
-  "new_records": 6
+  "new_records": 9
  },
  "sources": [
   {
@@ -19,14 +19,14 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "7e10bc3c775f377b68fa6fb8aecbfbaa8080e6346a7fd6832e7513ee108f83a8"
+   "sha256": "863b235f70ce0deb2bfc6abf704861978e570c91e20d3f6c819adccbff58c1d0"
   },
   {
    "id": "bipad-rain",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "a1c9b2724128cf850c329d6e20c31afe57d1c624b9f56317b364324840d2c04c"
+   "sha256": "16ab5a05f2f2d63b0730c9c5cfc361498557722780f2448312e7befcf1f46efa"
   },
   {
    "id": "dhm-flood-archive",
@@ -40,7 +40,7 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "2dae173b4a65ecbdcccf0a18b0fda8fea3ea72a3bc01ddc0d0fec74255e4e940"
+   "sha256": "532efa8742ecb38ef6264b7ee39518c7c83201f090b6e4080ab5ba22d12b2e28"
   },
   {
    "id": "seismo-earthquakes",
@@ -54,21 +54,21 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "0aaaf369c47610f35c7f885ce02a94c18530ade9bfb5c82a78344a362350c2d5"
+   "sha256": "6091e24ec165e8828efc0ef2ace47bf64baa0e9dc10513a1c7ce1312b6a72e82"
   },
   {
    "id": "bipad-alerts",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "e7a8ca6b9b000fb32677a811aa14460a2bceaae980e8a89b37bcb521caa3f1e0"
+   "sha256": "3c43a6095fc8b0cc7bae62732003788483c45ff7bd3a4c13becb132270e55c88"
   },
   {
    "id": "ndrrma-home",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "f0ff4946fcfa34284e8af679fd34fb49283ed8f9036b88a4034a698a2bf95946"
+   "sha256": "dd2c0b24409d026811dbb0d60b13b6e530abaa0a5aa60ed2962d3964890293e5"
   }
  ]
 }

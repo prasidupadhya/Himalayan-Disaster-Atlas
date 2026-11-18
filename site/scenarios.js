@@ -1,5 +1,7 @@
-import { c, esc, num, duration, load, failed } from './app.js';
-import { baseMap, maplibregl, color } from './basemap.js';
+import { c, esc, num, duration, load, failed, lang } from './app.js';
+import { baseMap, maplibregl, color, popup } from './basemap.js';
+import { searchBox, placeIndex, placeHtml, flyTo } from './search.js';
+import { COPY } from './copy.js';
 import { scenarioTerrain } from './scenario-terrain.js';
 import * as M from './models.js';
 import * as P from './places.js';
@@ -316,4 +318,17 @@ tabs.forEach((t, i) => {
   t.onkeydown = e => { if (['ArrowLeft', 'ArrowRight'].includes(e.key)) { tabs[1 - i].focus(); tabs[1 - i].click(); } };
 });
 addEventListener('hashchange', route);
+
+// Search: a verified lake becomes the release point; any other place is shown on the map.
+let found = null;
+searchBox(document.getElementById('search'), { c, esc, num, lang, index: () => placeIndex(load, [COPY.en.searchLakeWord, COPY.ne.searchLakeWord]), pick: r => {
+  found?.remove(); found = null;
+  if (r.kind === 'lake') {
+    if (mode === 'flood' && form.origin) { form.origin.value = r.id; form.requestSubmit(); } else location.hash = `flood=${r.id}`;
+    return;
+  }
+  if (!map) return;
+  flyTo(map, r, reduced);
+  found = popup(map, r.p, placeHtml(r, { c, esc, num, lang }));
+} });
 route();

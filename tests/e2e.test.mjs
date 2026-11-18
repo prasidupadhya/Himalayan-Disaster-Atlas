@@ -346,3 +346,65 @@ test('the scenario report reruns the linked scenario and lays out for A4 in both
   assert.deepEqual(ne.errors, []);
   await ne.close();
 });
+
+test('place search works by keyboard on the map, in English and Nepali, and picks a lake on Scenarios', async () => {
+  const { page, errors, close } = await open('laptop', '/map/');
+  const q = page.locator('#search-q');
+  await q.focus(); await page.keyboard.type('pokhara');
+  await page.waitForSelector('#search-list [role=option]');
+  assert.equal(await q.getAttribute('aria-expanded'), 'true');
+  await page.keyboard.press('ArrowDown');
+  assert.equal(await q.getAttribute('aria-activedescendant'), 'search-o0');
+  assert.equal(await page.getAttribute('#search-o0', 'aria-selected'), 'true');
+  assert.match(await page.textContent('#search-o0'), /Pokhara.*City.*Kaski/);
+  await page.keyboard.press('Enter');
+  await page.waitForSelector('.maplibregl-popup');
+  assert.match(await page.textContent('.maplibregl-popup'), /Pokhara/);
+  assert.equal(await q.getAttribute('aria-expanded'), 'false');
+  // Escape closes the list, then clears the field.
+  await q.fill('zzzq'); await page.waitForSelector('#search-list .none');
+  await page.keyboard.press('Escape'); assert.equal(await q.getAttribute('aria-expanded'), 'false');
+  await page.keyboard.press('Escape'); assert.equal(await q.inputValue(), '');
+  assert.deepEqual(errors, []);
+  await close();
+
+  const ne = await open('phone', '/map/', { lang: 'ne', theme: 'dark' });
+  await ne.page.fill('#search-q', 'काठमाडौं');
+  await ne.page.waitForSelector('#search-list [role=option]');
+  assert.match(await ne.page.textContent('#search-o0'), /काठमाडौं.*सहर/);
+  await ne.page.click('#search-o0');
+  await ne.page.waitForSelector('.maplibregl-popup');
+  assert.equal(await ne.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.deepEqual(ne.errors, []);
+  await ne.close();
+
+  const s = await open('phone', '/scenarios/');
+  await s.page.waitForSelector('#result .summary');
+  const first = await s.page.inputValue('#form [name=origin]');
+  await s.page.fill('#search-q', 'lake');
+  await s.page.waitForSelector('#search-list [role=option]');
+  const options = await s.page.locator('#search-list [role=option]').count();
+  assert.ok(options >= 2);
+  await s.page.locator('#search-q').press('ArrowDown'); await s.page.locator('#search-q').press('ArrowDown'); await s.page.locator('#search-q').press('Enter');
+  await s.page.waitForFunction(f => document.querySelector('#form [name=origin]')?.value !== f && location.hash.includes('flood='), first);
+  assert.equal(await s.page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.deepEqual(s.errors, []);
+  await s.close();
+});
+
+test('Today shows 30-day trends where a day without a reading is a gap, not zero', async () => {
+  const { page, errors, close } = await open('phone', '/');
+  await page.waitForSelector('#trends .trend');
+  assert.equal(await page.locator('#trends .trend').count(), 3);
+  for (const fig of await page.locator('#trends .trend svg').all()) assert.equal(await fig.locator('g').count(), 30);
+  const history = await page.evaluate(() => fetch('/data/gov/history.json').then(r => r.json()));
+  const unread = history.days.filter(d => d.rivers_current == null).length;
+  assert.ok(await page.locator('#trends .trend').nth(2).locator('rect.gap').count() >= unread, 'unread days are drawn as gaps');
+  assert.doesNotMatch(await page.textContent('#trends'), /top /);
+  await page.click('#trends details summary');
+  assert.ok(await page.locator('#trends tbody tr').count() >= 1);
+  assert.match(await page.textContent('#trends .lead'), /River stations above warning/);
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+  assert.deepEqual(errors, []);
+  await close();
+});
