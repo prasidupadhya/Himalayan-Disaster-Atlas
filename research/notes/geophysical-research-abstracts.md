@@ -5,6 +5,7 @@ tags:
 - atlas-improvement-research-177509
 - glof-celerity
 created: '2026-11-18T13:09:18.094396Z'
+updated: '2026-11-18T13:09:41.755189Z'
 source: https://meetingorganizer.copernicus.org/EGU2018/EGU2018-3952-1.pdf?pdf
 source_domain: meetingorganizer.copernicus.org
 fetched_at: '2026-11-18T13:09:18.093653Z'
@@ -14,6 +15,8 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'EGU2018 abstract Cook et al.: 2016 Bhote Koshi GLOF seismic observatory
+  data; 26 landslides, avg 11 m channel widening.'
 raw_file: raw/geophysical-research-abstracts.pdf
 ---
 

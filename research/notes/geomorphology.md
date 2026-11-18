@@ -5,6 +5,7 @@ tags:
 - atlas-improvement-research-177509
 - glof-celerity
 created: '2026-11-18T13:09:16.856274Z'
+updated: '2026-11-18T13:09:41.476413Z'
 source: https://wpg.forestry.oregonstate.edu/sites/default/files/seminars/cook_etal_2018_glacial_outburst_erosion.pdf
 source_domain: wpg.forestry.oregonstate.edu
 fetched_at: '2026-11-18T13:09:16.855352Z'
@@ -14,6 +15,12 @@ type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: 'Cook et al. 2018 Science (author PDF): 5 Jul 2016 Gongbatongshacuo GLOF
+  (~1.1e5 m3 per text; 9e7 m3? see note) passed 6 seismometers 28-35 km downstream
+  of Zhangzangbo confluence. Flood front (water wave) propagated 8.7 m/s, second pulse
+  (coarse sediment) 5 m/s; Chaku peak discharge 1500-2100 m3/s; Barabise 700-900 m3/s
+  (2016) vs 2300 m3/s (1981); peak attenuates downstream, crossover with monsoon flood;
+  ~40 km channel affected.'
 raw_file: raw/geomorphology.pdf
 ---
 
