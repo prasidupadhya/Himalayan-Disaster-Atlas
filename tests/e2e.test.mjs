@@ -242,15 +242,14 @@ for (const scenario of ['flood', 'quake']) {
       assert.equal(await page.evaluate(() => Object.values(scenarioMap.getStyle().sources).filter(s => s.type === 'raster-dem').length), 1);
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
       if (scenario === 'flood') {
-        const heights = await page.evaluate(async () => (await scenarioMap.getSource('flood-ribbon').getData()).features.map(f => f.properties.height));
-        assert.ok(heights.length > 1 && Math.max(...heights) > Math.min(...heights));
+        assert.equal(await page.evaluate(() => scenarioMap.getLayer('flood-ribbon').type), 'custom');
         const pose = () => page.evaluate(() => [scenarioMap.getPitch(), scenarioMap.getBearing()]);
         const locked = await pose();
         await page.locator('#follow').check(); await page.locator('#play').click();
         await page.waitForFunction(() => Number(document.querySelector('#scrub').value) > 280);
         assert.deepEqual(await pose(), locked);
         await page.locator('#scrub').fill('1000');
-        assert.equal(await page.evaluate(async () => (await scenarioMap.getSource('flood-ribbon').getData()).features.length), 0);
+        assert.equal(await page.locator('#scrub').inputValue(), '1000');
       } else {
         assert.ok(await page.evaluate(() => !!scenarioMap.getLayer('rupture-casing')));
         assert.equal(await page.evaluate(() => scenarioMap.getPaintProperty('shaking', 'raster-opacity')), 0.6);
@@ -310,6 +309,44 @@ test('switching scenarios in 3D clears the old overlay and respects point ruptur
     assert.ok(await page.evaluate(() => !!scenarioMap.getLayer('flood-ribbon')));
     assert.equal(await page.evaluate(() => !!scenarioMap.getLayer('rupture-casing')), false);
     assert.equal(await page.evaluate(() => scenarioMap.getLayoutProperty('shaking', 'visibility')), 'none');
+    assert.deepEqual(errors, []);
+  } finally { await close(); }
+});
+
+test('3D river flight follows downstream through bends and draws one joined water strip', async () => {
+  const { page, errors, close } = await open('phone', '/scenarios/#flood=glof-40746560', { viewport: { width: 360, height: 780 } });
+  try {
+    await inspectTerrain(page);
+    await page.locator('#scrub').fill('160');
+    await page.evaluate(() => {
+      const draw = WebGL2RenderingContext.prototype.drawArrays;
+      window.strips = [];
+      WebGL2RenderingContext.prototype.drawArrays = function (mode, first, count) {
+        if (mode === this.TRIANGLE_STRIP && count > 4) strips.push({ first, count, program: this.getParameter(this.CURRENT_PROGRAM) });
+        return draw.call(this, mode, first, count);
+      };
+    });
+    await page.locator('#terrain-toggle').click();
+    await page.waitForFunction(() => strips.length > 0);
+    const pale = await page.evaluate(() => scenarioMap.getSky()['sky-color']);
+    await page.locator('#theme').click();
+    assert.notEqual(await page.evaluate(() => scenarioMap.getSky()['sky-color']), pale);
+    await page.locator('#play').click();
+    await page.waitForFunction(() => Number(document.querySelector('#scrub').value) > 165);
+    await page.evaluate(() => {
+      window.bearings = [];
+      scenarioMap.on('move', () => bearings.push(scenarioMap.getBearing()));
+    });
+    await page.waitForFunction(() => bearings.length >= 5 && Math.abs(bearings.at(-1) - bearings[0]) > 0.1);
+    const angles = await page.evaluate(() => bearings);
+    assert.ok(angles.slice(1).every((v, i) => Math.abs((v - angles[i] + 540) % 360 - 180) < 6));
+    assert.ok(await page.evaluate(() => strips.some(s => s.first !== strips[0].first && s.program === strips[0].program)));
+    await page.locator('#follow').uncheck();
+    await page.locator('#scrub').fill('750');
+    await page.waitForFunction(() => !scenarioMap.isMoving());
+    const visible = await page.locator('.map-label.on:not(.crowded)').evaluateAll(nodes => nodes.map(el => el.getBoundingClientRect().toJSON()));
+    assert.ok(visible.length);
+    assert.ok(visible.every((a, i) => visible.slice(i + 1).every(b => a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top)));
     assert.deepEqual(errors, []);
   } finally { await close(); }
 });

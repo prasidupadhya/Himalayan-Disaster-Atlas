@@ -121,31 +121,86 @@ function play(o, s, line, r) {
   const DRY = '#c9b26b', PASSED = '#7d8f9c', PULSE = '#1d5fa8', RANGE = '#8ec5ff';
   const seconds = Math.min(40, Math.max(14, total / 10));   // a full run at 1×
   let t = reduced ? end : 0, playing = !reduced, last = null, frame = 0, speed = 1, hold = 0;
+  let lastCamera = null, lastReached = -1, lastOverlay = -Infinity;
+  let flightZoom;
+  const container = map?.getContainer();
+  function heading(km) {
+    const from = P.pointAt(r.samples, Math.max(0, km - 2.5)), to = P.pointAt(r.samples, Math.min(total, km + 2.5));
+    const east = (to[0] - from[0]) * Math.cos((from[1] + to[1]) * Math.PI / 360);
+    return Math.atan2(east, to[1] - from[1]) * 180 / Math.PI;
+  }
+  function followFront(km, head, seek) {
+    const flight = !!map.getTerrain(), now = performance.now();
+    if (flight && !reduced && flightZoom === undefined) {
+      flightZoom = Math.max(map.getZoom(), 10.7);
+      seek = true;
+    } else if (!flight) flightZoom = undefined;
+    if (seek) {
+      const duration = reduced ? 0 : 900;
+      hold = now + duration; lastCamera = null;
+      map.easeTo({ center: head, zoom: flightZoom ?? Math.max(map.getZoom(), 9.2),
+        bearing: flight && !reduced ? heading(km) : map.getBearing(), duration });
+    } else if (flight && !reduced) {
+      const dt = Math.min(0.12, Math.max(0, (now - (lastCamera ?? now)) / 1000));
+      const delta = (heading(km) - map.getBearing() + 540) % 360 - 180;
+      const turn = Math.max(-36 * dt, Math.min(36 * dt, delta * (1 - Math.exp(-dt * 3))));
+      map.jumpTo({ center: head, zoom: flightZoom, bearing: map.getBearing() + turn });
+      lastCamera = now;
+    } else map.jumpTo({ center: head });
+  }
+  // Use the browser's shaped label boxes. Districts take priority where
+  // perspective compresses several names into the same screen space.
+  function spaceLabels() {
+    if (!container?.classList.contains('river-flight')) return;
+    const boxes = Array.from(container.querySelectorAll('.map-label.on'), el => ({ el, box: el.getBoundingClientRect() }));
+    const viewport = container.getBoundingClientRect();
+    const used = [container.parentElement.querySelector('.terrain-controls'), ...container.querySelectorAll('.maplibregl-ctrl')].map(el => el.getBoundingClientRect());
+    for (const { el, box } of boxes) {
+      const crowded = box.left < viewport.left || box.right > viewport.right || box.top < viewport.top || box.bottom > viewport.bottom || used.some(b => box.left < b.right + 4 && box.right + 4 > b.left && box.top < b.bottom + 3 && box.bottom + 3 > b.top);
+      el.classList.toggle('crowded', crowded);
+      if (!crowded) used.push(box);
+    }
+  }
+  map?.on('render', spaceLabels);
   function draw() {
     const km = v => Math.min(total, v * t / 1000), front = km(mid), tail = Math.min(total, Math.max(0, mid * (t - s.duration_s) / 1000)), lo = km(slow), hi = km(fast);
+    const moving = front < total && t > 0, head = P.pointAt(r.samples, front);
+    terrain?.progress(mid * t / 1000, t >= end ? total : tail, mid * s.duration_s / 1000);
+    flat?.progress(head);
+    if (playing && follow.checked && moving && performance.now() > hold && !map.isMoving()) followFront(front, head, false);
+    // Keep the ribbon and camera moving independently of tile repaints,
+    // marker changes and text updates. A paused seek always paints at once.
+    const now = performance.now();
+    if (playing && map?.getTerrain() && now - lastOverlay < 100) return;
+    lastOverlay = now;
     const expr = ['step', ['line-progress'], tail > 0 ? PASSED : PULSE]; let prev = 0;
     for (const [d, col] of [...(tail > 0 ? [[tail, PULSE]] : []), [front, RANGE], [hi, DRY]]) {
       const p = Math.min(1, Math.max(prev + 1e-6, d / total));   // stops must rise strictly
       if (p > prev) { expr.push(p, col); prev = p; }
     }
     map?.setPaintProperty('path', 'line-gradient', expr);
-    const reached = o.checkpoints.map(cp => cp.prefix_km <= front + 1e-9), moving = front < total && t > 0, head = P.pointAt(r.samples, front);
-    set('points', [point(o.lake ? [o.lake.longitude, o.lake.latitude] : o.start_coordinates, '#0f8fa6', 8), ...o.checkpoints.map((cp, i) => point(cp.end_coordinates, reached[i] ? PULSE : '#18232a', reached[i] ? 7 : 5))]);
-    terrain?.progress(mid * t / 1000, t >= end ? total : tail, mid * s.duration_s / 1000, playing);
-    flat?.progress(head);
+    const reached = o.checkpoints.map(cp => cp.prefix_km <= front + 1e-9);
+    const count = reached.filter(Boolean).length;
+    if (lastReached !== count) {
+      set('points', [point(o.lake ? [o.lake.longitude, o.lake.latitude] : o.start_coordinates, '#0f8fa6', 8), ...o.checkpoints.map((cp, i) => point(cp.end_coordinates, reached[i] ? PULSE : '#18232a', reached[i] ? 7 : 5))]);
+      rowsEl.forEach((row, i) => row.classList.toggle('reached', reached[i]));
+      lastReached = count;
+    }
     const place = stage ? stage.progress(front, moving ? head : null) : placeNow(
       r.parts.findLast(p => p.fromKm <= front) ?? r.parts[0], r.towns.findLast(p => p.km <= front && front - p.km <= 8));
-    rowsEl.forEach((row, i) => row.classList.toggle('reached', reached[i]));
     clock.textContent = c.clockAt(duration(t), num(front), place, num(lo), num(hi));
     scrub.value = Math.round(t / end * 1000); scrub.setAttribute('aria-valuetext', clock.textContent);
     btn.textContent = playing ? c.pause : t >= end ? c.replay : c.play;
     btn.setAttribute('aria-label', btn.textContent);
-    if (playing && follow.checked && moving && performance.now() > hold) map.jumpTo({ center: head });
   }
   function tick(now) {
     if (!playing) return;
     if (last !== null && now - last < 32) { frame = requestAnimationFrame(tick); return; }
-    if (last !== null && now > hold) t = Math.min(end, t + (now - last) / (seconds * 1000) * end * speed);
+    if (last !== null && now > hold && !(follow.checked && map.isMoving())) {
+      // A late terrain frame must not teleport the camera across a valley.
+      const elapsed = follow.checked && map.getTerrain() && !reduced ? Math.min(now - last, 120) : now - last;
+      t = Math.min(end, t + elapsed / (seconds * 1000) * end * speed);
+    }
     last = now;
     if (t >= end) { playing = false; if (follow.checked) fit(line); }
     draw();
@@ -154,20 +209,27 @@ function play(o, s, line, r) {
   /** Start or resume: with Follow on, the camera first moves in on the front, then travels with it. */
   function start() {
     cancelAnimationFrame(frame); playing = true; last = null;
-    if (follow.checked) { hold = performance.now() + (reduced ? 0 : 900); map.easeTo({ center: P.pointAt(r.samples, Math.min(total, mid * t / 1000)), zoom: Math.max(map.getZoom(), 9.2), duration: reduced ? 0 : 900 }); }
+    if (follow.checked) {
+      const km = Math.min(total, mid * t / 1000);
+      followFront(km, P.pointAt(r.samples, km), true);
+    }
     frame = requestAnimationFrame(tick);
   }
   btn.onclick = () => { if (t >= end) t = 0; if (playing) { playing = false; draw(); } else start(); };
   scrub.oninput = () => { playing = false; t = scrub.value / 1000 * end; draw(); };
   speedBtn.onclick = () => { speed = speed === 4 ? 1 : speed * 2; speedBtn.textContent = `${num(speed)}×`; speedBtn.setAttribute('aria-label', `${c.speedLabel} ${num(speed)}×`); };
   // Turning Follow on moves in on the front; turning it off shows the whole path again.
-  follow.onchange = () => { if (!follow.checked) fit(line); else if (playing) start(); else map.easeTo({ center: P.pointAt(r.samples, Math.min(total, mid * t / 1000)), zoom: Math.max(map.getZoom(), 9.2), duration: reduced ? 0 : 900 }); };
+  follow.onchange = () => {
+    if (!follow.checked) { lastCamera = null; flightZoom = undefined; fit(line); return; }
+    const km = Math.min(total, mid * t / 1000);
+    followFront(km, P.pointAt(r.samples, km), true);
+  };
   // Moving the map by hand hands the camera back to the reader.
   const release = e => { if (e.originalEvent && follow.checked) follow.checked = false; };
   map?.on('dragstart', release); map?.on('zoomstart', release);
   fit(line);
   if (reduced) draw(); else start();
-  return () => { playing = false; cancelAnimationFrame(frame); map?.off('dragstart', release); map?.off('zoomstart', release); };
+  return () => { playing = false; cancelAnimationFrame(frame); map?.off('render', spaceLabels); map?.off('dragstart', release); map?.off('zoomstart', release); };
 }
 
 // ---------- Earthquake shaking ----------

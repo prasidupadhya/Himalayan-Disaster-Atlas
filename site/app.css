@@ -164,6 +164,13 @@ fieldset.field { border: 0; padding: 0; margin: 0 0 var(--space-md); }
 .sim-layout { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: var(--gap-columns); align-items: start; }
 .sim-map { position: sticky; top: calc(var(--top) + var(--space-md)); }
 .sim-map .map { height: calc(100svh - var(--top) - var(--space-3xl)); min-height: 420px; border: var(--rule-hair) solid var(--color-ink); border-radius: var(--radius-card); overflow: hidden; }
+.sim .check { min-height: 44px; }
+.sim .maplibregl-ctrl-group button, .sim .maplibregl-ctrl-attrib-button { width: 44px; height: 44px; }
+.sim .maplibregl-ctrl-attrib.maplibregl-compact { min-height: 40px; padding-right: 44px; border-radius: 22px; }
+.sim .maplibregl-ctrl-attrib-button { background-repeat: no-repeat; background-position: center; }
+.sim .maplibregl-ctrl-attrib-button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -3px; }
+.sim .river-flight .map-label.crowded { visibility: hidden; }
+.sim .river-flight .map-label span { border: 1px solid var(--color-rule); box-shadow: 0 1px 4px #15223055; }
 .scenario-frame { position: relative; }
 .terrain-controls { position: absolute; z-index: 2; top: 8px; left: 8px; max-width: calc(100% - 66px); display: flex; align-items: flex-start; gap: 4px; pointer-events: none; }
 .terrain-controls > * { pointer-events: auto; }
