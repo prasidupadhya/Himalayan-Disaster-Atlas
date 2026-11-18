@@ -5,15 +5,17 @@ tags:
 - atlas-improvement-research-177509
 - locus-glof-origin-selection-beyond-pdgl-list
 created: '2026-11-18T13:04:34.960631Z'
+updated: '2026-11-18T13:05:36.189927Z'
 source: https://doi.org/10.5194/egusphere-egu26-702
 source_domain: meetingorganizer.copernicus.org
 fetched_at: '2026-11-18T13:04:31.272588Z'
 fetch_provider: builtin
-status: draft
+status: deprecated
 type: note
 tier: institutional
 content_type: paper
 deprecated: false
+summary: Withdrawn EGU26 abstract (no-show); do not cite
 doi: 10.5194/egusphere-egu26-702
 ---
 

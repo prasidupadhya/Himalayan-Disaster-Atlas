@@ -6,11 +6,12 @@ tags:
 - atlas-improvement-research-177509
 - locus-glof-origin-selection-beyond-pdgl-list
 created: '2026-11-18T13:03:45.741721Z'
+updated: '2026-11-18T13:05:35.907004Z'
 source: https://zenodo.org/records/7959073
 source_domain: zenodo.org
 fetched_at: '2026-11-18T13:03:33.258553Z'
 fetch_provider: builtin
-status: draft
+status: deprecated
 type: note
 tier: ground_truth
 content_type: dataset
