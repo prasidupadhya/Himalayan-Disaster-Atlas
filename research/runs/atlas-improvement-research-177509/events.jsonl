@@ -23,3 +23,6 @@
 {"at": "2026-11-18T13:07:01.751670+00:00", "type": "step", "step": "8", "status": "running", "chapter": null, "force": false}
 {"at": "2026-11-18T13:10:26.944253+00:00", "type": "step", "step": "8", "status": "done", "chapter": null, "force": false}
 {"at": "2026-11-18T13:10:26.948910+00:00", "type": "spend_reconcile", "sources_fetched": 108, "notes_written": 114, "agents_spawned": 0, "estimated_usd": 0.0, "max_sources": null, "max_notes": null, "blocked_on": null}
+{"at": "2026-11-18T13:10:34.120153+00:00", "type": "step", "step": "9", "status": "running", "chapter": null, "force": false}
+{"at": "2026-11-18T13:10:55.820964+00:00", "type": "step", "step": "9", "status": "done", "chapter": null, "force": false}
+{"at": "2026-11-18T13:10:55.823553+00:00", "type": "spend_reconcile", "sources_fetched": 108, "notes_written": 114, "agents_spawned": 0, "estimated_usd": 0.0, "max_sources": null, "max_notes": null, "blocked_on": null}
