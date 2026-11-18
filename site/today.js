@@ -33,7 +33,46 @@ async function drawStations(river) {
     ${Object.values(river?.statuses ?? {}).some(v => v.length > 2) ? '' : `<p class="src">${esc(c.stationAgeMissing(num(river?.current_station_count)))}</p>`}<figcaption><span class="key ok">${esc(c.belowWarning)}</span><span class="key warn">${esc(c.aboveWarning)}</span><span class="key bad">${esc(c.aboveDanger)}</span><span class="key old">${esc(c.oldReading)}</span></figcaption>`;
 }
 
-function render(g) {
+/**
+ * The last 30 days from the daily copies: one small bar chart per count, by Nepal date.
+ * A day with no copy, or whose source was not read, is a gap marked UNKNOWN, never a zero bar.
+ */
+function trends(history) {
+  const byDate = new Map(history.days.map(d => [d.date, d])), last = history.days.at(-1)?.date;
+  if (!last) return '';
+  const dates = Array.from({ length: 30 }, (_, i) => { const t = new Date(`${last}T00:00:00Z`); t.setUTCDate(t.getUTCDate() - 29 + i); return t.toISOString().slice(0, 10); });
+  const rows = dates.map(date => byDate.get(date) ?? { date });
+  const label = date => when(`${date}T06:00:00Z`, { day: 'numeric', month: 'short' });
+  const W = 300, H = 64, bw = W / rows.length;
+  /** parts: [[key, css class]] stacked from the bottom. */
+  const chart = (title, parts) => {
+    const total = r => parts.every(([k]) => r[k] == null) ? null : parts.reduce((t, [k]) => t + (r[k] ?? 0), 0);
+    const values = rows.map(total).filter(v => v != null), highest = values.length ? Math.max(...values) : null, top = Math.max(1, highest ?? 0);
+    const bars = rows.map((r, i) => {
+      const x = (i * bw + 1).toFixed(1), w = (bw - 2).toFixed(1), v = total(r);
+      if (v == null) return `<g><title>${esc(`${label(r.date)}: ${c.unknown}`)}</title><rect class="gap" x="${x}" y="0" width="${w}" height="${H}"/></g>`;
+      let y = H;
+      const segs = parts.map(([k, cls]) => { const h = (r[k] ?? 0) / top * (H - 4); y -= h; return h ? `<rect class="${cls}" x="${x}" y="${y.toFixed(1)}" width="${w}" height="${h.toFixed(1)}"/>` : ''; }).join('');
+      return `<g><title>${esc(`${label(r.date)}: ${num(v)}`)}</title><rect class="hit" x="${x}" y="0" width="${w}" height="${H}"/>${segs}</g>`;
+    }).join('');
+    const now = total(rows.at(-1));
+    return `<figure class="trend"><figcaption><span>${esc(title)}</span><b>${now == null ? esc(c.unknown) : num(now)}</b></figcaption>
+      <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${esc(c.trendAria(title, label(dates[0]), label(last)))}">${bars}</svg>
+      <div class="axis"><span>${esc(label(dates[0]))}</span><span>${esc(highest == null ? '' : c.trendMax(num(highest)))}</span><span>${esc(label(last))}</span></div></figure>`;
+  };
+  // What changed since the previous daily copy, from these counts only.
+  const prev = history.days.at(-2), cur = history.days.at(-1), alerts = r => r?.rivers_above_warning == null ? null : (r.rivers_above_warning ?? 0) + (r.rivers_above_danger ?? 0);
+  const change = (name, a, b) => a == null || b == null ? c.changeUnknown(name) : a === b ? c.changeSame(name, num(b)) : c.changeBy(name, num(b), b > a ? c.up : c.down, num(Math.abs(b - a)), label(prev.date));
+  const sentence = prev ? `${change(c.riverAlerts, alerts(prev), alerts(cur))} ${change(c.rainAlerts, prev.rain_stations_above_warning, cur.rain_stations_above_warning)}` : '';
+  const tableRows = [...history.days].reverse().slice(0, 30).map(r => `<tr><td>${esc(label(r.date))}</td><td class="n">${num(alerts(r))}</td><td class="n">${num(r.rain_stations_above_warning)}</td><td class="n">${num(r.rivers_current)}</td><td class="n">${num(r.rain_current)}</td></tr>`).join('');
+  return section('trends', c.trendsTitle, `<p class="lead">${esc(sentence)}</p>
+    <div class="trends">${chart(c.riverAlerts, [['rivers_above_danger', 'bad'], ['rivers_above_warning', 'warn']])}${chart(c.rainAlerts, [['rain_stations_above_warning', 'warn']])}${chart(c.riversReporting, [['rivers_current', 'ink']])}</div>
+    <div class="legend"><span><i class="key-bad"></i>${esc(c.aboveDanger)}</span><span><i class="key-warn"></i>${esc(c.aboveWarning)}</span><span><i class="key-gap"></i>${esc(c.noCopyDay)}</span></div>
+    <details class="card"><summary>${esc(c.trendTable)}</summary><div class="scroll" tabindex="0"><table><thead><tr><th>${esc(c.dateCol)}</th><th class="n">${esc(c.riverAlerts)}</th><th class="n">${esc(c.rainAlerts)}</th><th class="n">${esc(c.riversReporting)}</th><th class="n">${esc(c.rainReporting)}</th></tr></thead><tbody>${tableRows}</tbody></table></div></details>
+    <p class="src">${esc(c.trendSource)}</p>`);
+}
+
+function render(g, history) {
   const src = Object.fromEntries(g.sources.map(s => [s.id, s]));
   const river = src['bipad-river']?.content, rain = src['bipad-rain']?.content, quake = src['seismo-earthquakes']?.content?.tables?.[0], inc = src['bipad-incidents']?.content;
   // Age comes from when each headline source was last read, not from when the job ran.
@@ -95,10 +134,11 @@ function render(g) {
   const rows = Object.keys(bodies).filter(id => src[id]).map(id => `<details class="source" id="src-${id}"${id === 'bipad-river' && alertRows.length ? ' open' : ''}>
     <summary><span class="name">${esc(c.sourceTitles[id] ?? src[id].title)}</span>${tag(src[id])}</summary>
     <div class="body">${bodies[id]}${from(src[id])}</div></details>`).join('');
-  box.innerHTML = (days >= 2 ? `<p class="note warn">${esc(c.oldCopy(num(days)))}</p>` : '') + section('copy', c.copyTitle, `<div class="sources">${rows}</div>`);
+  box.innerHTML = (days >= 2 ? `<p class="note warn">${esc(c.oldCopy(num(days)))}</p>` : '') + (history ? trends(history) : '') + section('copy', c.copyTitle, `<div class="sources">${rows}</div>`);
 }
 
 // A ledger link opens the row it points to.
 addEventListener('click', e => { const id = e.target.closest('a[href^="#src-"]')?.hash.slice(1); if (id) document.getElementById(id)?.setAttribute('open', ''); });
-const go = () => load('/data/gov/latest.json').then(render, () => failed(ledgerBox, go));
+// The 30-day history is optional: if it cannot load, Today still shows the morning's copy.
+const go = () => Promise.all([load('/data/gov/latest.json'), load('/data/gov/history.json').catch(() => null)]).then(([g, h]) => render(g, h), () => failed(ledgerBox, go));
 go();
