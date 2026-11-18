@@ -5,8 +5,9 @@ id: sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinish
 tags:
 - early-warning
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:49.905118Z'
-updated: '2026-11-18T12:55:41.469197Z'
+updated: '2026-11-18T12:56:51.622722Z'
 source: https://www.borderlens.com/2026/08/28/sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-early-warning-problem/
 source_domain: www.borderlens.com
 fetched_at: '2026-11-18T12:54:49.903805Z'

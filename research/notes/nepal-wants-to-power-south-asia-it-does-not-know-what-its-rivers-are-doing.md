@@ -3,8 +3,9 @@ title: 'Nepal wants to power South Asia: It does not know what its rivers are do
 id: nepal-wants-to-power-south-asia-it-does-not-know-what-its-rivers-are-doing
 tags:
 - nepal-data-feeds
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:45.419921Z'
-updated: '2026-11-18T12:55:41.660427Z'
+updated: '2026-11-18T12:56:51.341945Z'
 source: https://thehimalayantimes.com/ampArticle/1037941
 source_domain: thehimalayantimes.com
 fetched_at: '2026-11-18T12:54:45.415282Z'

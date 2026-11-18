@@ -4,8 +4,9 @@ id: abstract-egu25-12752
 tags:
 - glof
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:41.235019Z'
-updated: '2026-11-18T12:55:17.467390Z'
+updated: '2026-11-18T12:57:01.778217Z'
 source: https://meetingorganizer.copernicus.org/EGU25/EGU25-12752.html
 source_domain: meetingorganizer.copernicus.org
 fetched_at: '2026-11-18T12:54:41.233978Z'

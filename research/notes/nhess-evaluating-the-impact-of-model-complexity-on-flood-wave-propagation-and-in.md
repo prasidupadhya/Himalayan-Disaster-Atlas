@@ -4,8 +4,9 @@ title: NHESS - Evaluating the impact of model complexity on flood wave propagati
 id: nhess-evaluating-the-impact-of-model-complexity-on-flood-wave-propagation-and-in
 tags:
 - glof-modelling
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:46.747732Z'
-updated: '2026-11-18T12:55:22.272069Z'
+updated: '2026-11-18T12:56:59.989260Z'
 source: https://nhess.copernicus.org/articles/19/1723/2019/
 source_domain: nhess.copernicus.org
 fetched_at: '2026-11-18T12:54:46.746292Z'

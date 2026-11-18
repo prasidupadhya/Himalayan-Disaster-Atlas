@@ -1,0 +1,14 @@
+[
+ {
+  "claim": "DHM piloting recorded voice-call alerts from 2082 monsoon (2025) to local governments, DMCs, Red Cross, since bulk calls to everyone are hard.",
+  "stance": "supports",
+  "stance_target": "Atlas should emit/consume CAP and plan for cell broadcast",
+  "evidence_type": "expert-opinion",
+  "scope_conditions": "Nepal",
+  "quoted_support": "we are now trying to pilot whether we can take a step forward and make voice calls in the relevant areas.",
+  "numbers": "[]",
+  "entities": [],
+  "confidence": "medium",
+  "source_note_id": "government-to-provide-voice-alerts-on-flood-weather-updates"
+ }
+]

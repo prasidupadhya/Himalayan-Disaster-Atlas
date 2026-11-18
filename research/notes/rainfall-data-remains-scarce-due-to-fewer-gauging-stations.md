@@ -3,8 +3,9 @@ title: Rainfall data remains scarce due to fewer gauging stations
 id: rainfall-data-remains-scarce-due-to-fewer-gauging-stations
 tags:
 - nepal-data-feeds
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:44.362260Z'
-updated: '2026-11-18T12:55:40.644545Z'
+updated: '2026-11-18T12:56:52.792782Z'
 source: https://kathmandupost.com/climate-environment/2023/07/25/rainfall-data-remains-scarce-due-to-fewer-gauging-stations
 source_domain: kathmandupost.com
 fetched_at: '2026-11-18T12:54:44.361471Z'

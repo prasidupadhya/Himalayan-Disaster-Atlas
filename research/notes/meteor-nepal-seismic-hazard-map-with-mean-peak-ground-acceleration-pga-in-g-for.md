@@ -6,8 +6,9 @@ tags:
 - nepal-ground-motion
 - hazard-map
 - dataset
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:47.908420Z'
-updated: '2026-11-18T12:55:47.816631Z'
+updated: '2026-11-18T12:56:46.991767Z'
 source: https://zenodo.org/records/19002227
 source_domain: zenodo.org
 fetched_at: '2026-11-18T12:54:44.793200Z'
@@ -22,6 +23,9 @@ summary: 'GEM/BGS METEOR open dataset (Zenodo 19002227, 2019): Nepal mean PGA at
   from Stevens, Shrestha & Maharjan 2018 BSSA PSHA of Nepal. Directly usable as a
   hazard layer in the static map.'
 doi: 10.5281/zenodo.19002227
+citation_count: 0
+venue: Zenodo (CERN European Organization for Nuclear Research)
+is_retracted: false
 ---
 
 METEOR: Nepal seismic hazard map with mean Peak Ground Acceleration (PGA) in g for a 10% and 2% probability of exceedence in 50 years. | Zenodo

@@ -5,8 +5,9 @@ id: attenuation-relation-predicted-observed-ground-motion-of-gorkha-nepal-earthq
 tags:
 - nepal-ground-motion
 - gmpe
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:11.654925Z'
-updated: '2026-11-18T12:55:47.544488Z'
+updated: '2026-11-18T12:56:47.287342Z'
 source: https://link.springer.com/article/10.1007/s11069-015-1969-2
 source_domain: link.springer.com
 fetched_at: '2026-11-18T12:55:11.653833Z'
@@ -20,6 +21,9 @@ summary: 'Abstract-only (paywalled). Natural Hazards 2015: Himalayan-region atte
   relations predicted observed Gorkha Mw7.8 PGA etc. well; GMPEs from other regions
   (NGA, Europe) did not. Low-medium evidence strength.'
 doi: 10.1007/s11069-015-1969-2
+citation_count: 15
+venue: Natural Hazards
+is_retracted: false
 ---
 
 Attenuation relation predicted observed ground motion of Gorkha Nepal earthquake of April 25, 2015 | Natural Hazards | Springer Nature Link

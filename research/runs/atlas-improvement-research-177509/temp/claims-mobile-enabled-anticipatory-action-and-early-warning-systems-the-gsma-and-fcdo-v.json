@@ -1,0 +1,18 @@
+[
+ {
+  "claim": "Nepal DHM/NDRRMA SMS alerts via MNOs are manually intensive and prone to delay/congestion; cell broadcast proposed.",
+  "stance": "supports",
+  "stance_target": "Atlas should emit/consume CAP and plan for cell broadcast",
+  "evidence_type": "expert-opinion",
+  "scope_conditions": "Nepal",
+  "quoted_support": "While SMS is valuable, it is manually intensive and can be impacted by delays and network congestion.",
+  "numbers": "[]",
+  "entities": [
+   "GSMA",
+   "FCDO",
+   "NDRRMA"
+  ],
+  "confidence": "high",
+  "source_note_id": "mobile-enabled-anticipatory-action-and-early-warning-systems-the-gsma-and-fcdo-v"
+ }
+]

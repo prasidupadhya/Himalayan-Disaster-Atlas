@@ -22,7 +22,7 @@
   ],
   "status": "running",
   "started_at": "2026-11-18T10:06:59.212424+00:00",
-  "updated_at": "2026-11-18T10:07:53.312757+00:00",
+  "updated_at": "2026-11-18T12:59:04.302485+00:00",
   "budget_usd": null,
   "max_sources": null,
   "max_notes": null,
@@ -36,15 +36,16 @@
       "finished_at": "2026-11-18T10:07:53.014670+00:00"
     },
     "2": {
-      "status": "running",
-      "started_at": "2026-11-18T10:07:53.311766+00:00"
+      "status": "done",
+      "started_at": "2026-11-18T10:07:53.311766+00:00",
+      "finished_at": "2026-11-18T12:59:04.299051+00:00"
     }
   },
   "chapters": {},
   "spend": {
     "estimated_usd": 0.0,
-    "sources_fetched": 0,
-    "notes_written": 0,
+    "sources_fetched": 85,
+    "notes_written": 85,
     "agents_spawned": 0
   },
   "levers": {

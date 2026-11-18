@@ -3,8 +3,9 @@ title: Some recent developments in Hydro-Meteorological data
 id: some-recent-developments-in-hydro-meteorological-data
 tags:
 - nepal-data-feeds
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:58.392112Z'
-updated: '2026-11-18T12:55:41.315094Z'
+updated: '2026-11-18T12:56:51.944354Z'
 source: https://old.wmo.int/extranet/pages/prog/www/IMOP/publications/IOM-116_TECO-2014/Session%201/P1_21_Karki-Hydromet_Dev_in_Nepal.pdf
 source_domain: old.wmo.int
 fetched_at: '2026-11-18T12:54:58.391091Z'

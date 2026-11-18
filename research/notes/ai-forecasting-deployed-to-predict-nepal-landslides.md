@@ -4,8 +4,9 @@ id: ai-forecasting-deployed-to-predict-nepal-landslides
 tags:
 - atlas-improvement
 - landslides
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:46.383389Z'
-updated: '2026-11-18T12:55:27.383471Z'
+updated: '2026-11-18T12:56:54.275209Z'
 source: https://www.scidev.net/global/news/ai-forecasting-deployed-to-predict-nepal-landslides/
 source_domain: www.scidev.net
 fetched_at: '2026-11-18T12:54:46.382422Z'

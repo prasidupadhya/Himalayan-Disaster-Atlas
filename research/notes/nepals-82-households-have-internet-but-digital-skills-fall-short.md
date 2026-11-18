@@ -3,8 +3,9 @@ title: Nepal’s 82% households have internet, but digital skills fall short
 id: nepals-82-households-have-internet-but-digital-skills-fall-short
 tags:
 - nepal-users
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:40.223452Z'
-updated: '2026-11-18T12:55:22.752344Z'
+updated: '2026-11-18T12:56:58.962673Z'
 source: https://www.nepalitelecom.com/2026/02/nepals-82-households-have-internet-but-digital-skills-fall-short.html
 source_domain: www.nepalitelecom.com
 fetched_at: '2026-11-18T12:54:40.222036Z'

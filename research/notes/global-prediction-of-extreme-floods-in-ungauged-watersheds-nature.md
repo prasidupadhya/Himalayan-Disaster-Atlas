@@ -14,6 +14,9 @@ tier: institutional
 content_type: paper
 deprecated: false
 doi: 10.1038/s41586-024-07145-1
+citation_count: 656
+venue: Nature
+is_retracted: false
 ---
 
 *Suggested by [[global-prediction-of-extreme-floods-in-ungauged-watersheds]] — primary paper*

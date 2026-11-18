@@ -5,8 +5,9 @@ id: frontiers-improving-hazard-map-comprehension-for-protective-action-decision-
 tags:
 - risk-communication
 - hazard-maps
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:06.847742Z'
-updated: '2026-11-18T12:56:03.222387Z'
+updated: '2026-11-18T12:56:46.677868Z'
 source: https://www.frontiersin.org/journals/computer-science/articles/10.3389/fcomp.2020.00027/full
 source_domain: www.frontiersin.org
 fetched_at: '2026-11-18T12:55:06.846193Z'
@@ -24,6 +25,9 @@ summary: 'Lindell 2020 (Frontiers Comp Sci) review of hazard-map comprehension r
   research neglected displays supporting timely protective-action decisions (who,
   what, when) and shadow evacuation.'
 doi: 10.3389/fcomp.2020.00027
+citation_count: 62
+venue: Frontiers in Computer Science
+is_retracted: false
 ---
 
 *Suggested by [[text]]*

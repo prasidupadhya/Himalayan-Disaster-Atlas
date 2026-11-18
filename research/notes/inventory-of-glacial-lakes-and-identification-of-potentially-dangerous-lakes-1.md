@@ -4,8 +4,9 @@ id: inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes
 tags:
 - glof
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:39.686363Z'
-updated: '2026-11-18T12:55:17.135186Z'
+updated: '2026-11-18T12:57:02.097258Z'
 source: https://nepal.un.org/sites/default/files/2020-10/Inventory_Glacial_Lakes_2020_Full2.pdf
 source_domain: nepal.un.org
 fetched_at: '2026-11-18T12:54:39.683697Z'

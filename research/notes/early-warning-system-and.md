@@ -3,8 +3,9 @@ title: Early Warning System and
 id: early-warning-system-and
 tags:
 - nepal-data-feeds
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:00.721487Z'
-updated: '2026-11-18T12:55:40.959298Z'
+updated: '2026-11-18T12:56:52.524289Z'
 source: https://dpnet.org.np/public/uploads/files/D-2_DHM_NCDRR%202023-07-04%2018-48-52.pdf
 source_domain: dpnet.org.np
 fetched_at: '2026-11-18T12:55:00.720619Z'

@@ -15,6 +15,9 @@ tier: institutional
 content_type: paper
 deprecated: false
 doi: 10.5194/egusphere-egu25-12752
+citation_count: 1
+venue: EGU General Assembly Conference Abstracts
+is_retracted: false
 ---
 
 Abstract EGU25-12752

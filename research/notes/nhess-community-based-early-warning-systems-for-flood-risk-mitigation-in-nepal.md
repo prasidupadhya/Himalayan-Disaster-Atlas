@@ -4,8 +4,9 @@ id: nhess-community-based-early-warning-systems-for-flood-risk-mitigation-in-nep
 tags:
 - early-warning
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:44.990523Z'
-updated: '2026-11-18T12:55:42.941395Z'
+updated: '2026-11-18T12:56:49.642634Z'
 source: https://doi.org/10.5194/nhess-17-423-2017
 source_domain: nhess.copernicus.org
 fetched_at: '2026-11-18T12:54:44.987723Z'
@@ -18,6 +19,9 @@ deprecated: false
 summary: 'Smith, Brown, Dugar 2017 NHESS: Karnali probabilistic forecasting 2-3h to
   7-8h lead; last-mile probabilistic communication.'
 doi: 10.5194/nhess-17-423-2017
+citation_count: 120
+venue: Natural hazards and earth system sciences
+is_retracted: false
 ---
 
 NHESS - Community-based early warning systems for flood risk mitigation in Nepal

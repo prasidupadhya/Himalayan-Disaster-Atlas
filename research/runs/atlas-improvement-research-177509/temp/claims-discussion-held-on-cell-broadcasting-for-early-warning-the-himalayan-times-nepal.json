@@ -1,0 +1,16 @@
+[
+ {
+  "claim": "NDRRMA discussed cell broadcasting (all phones in a target geographic area simultaneously) as part of Nepal's integrated EWS.",
+  "stance": "supports",
+  "stance_target": "Atlas should emit/consume CAP and plan for cell broadcast",
+  "evidence_type": "expert-opinion",
+  "scope_conditions": "Nepal",
+  "quoted_support": "The technology enables disaster alerts and warning messages to be transmitted through mobile communication networks to all mobile phones located within a targeted geographical area simultaneously.",
+  "numbers": "[]",
+  "entities": [
+   "NDRRMA"
+  ],
+  "confidence": "medium",
+  "source_note_id": "discussion-held-on-cell-broadcasting-for-early-warning-the-himalayan-times-nepal"
+ }
+]

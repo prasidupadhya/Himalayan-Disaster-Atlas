@@ -4,8 +4,9 @@ id: r-e-g-u-l-a-r-p-a-p-e-r
 tags:
 - risk-communication
 - hazard-maps
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:48.597936Z'
-updated: '2026-11-18T12:56:03.890745Z'
+updated: '2026-11-18T12:56:45.991646Z'
 source: https://researchcommons.waikato.ac.nz/bitstreams/a94bb2fb-421e-41fa-9009-28fd75226bd8/download
 source_domain: researchcommons.waikato.ac.nz
 fetched_at: '2026-11-18T12:54:48.597058Z'
@@ -22,6 +23,9 @@ summary: 'Haughton & White 2018 (Trans Inst Br Geogr, ''Risky spaces''): intervi
   are hard to revise; suggests presenting maps as provisional with local detail studies.'
 raw_file: raw/r-e-g-u-l-a-r-p-a-p-e-r.pdf
 doi: 10.1111/tran.12227
+citation_count: 31
+venue: Transactions of the Institute of British Geographers
+is_retracted: false
 ---
 
 R E G U L A R P A P E R

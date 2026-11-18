@@ -1,0 +1,36 @@
+[
+ {
+  "claim": "WMO ran a CAP implementation workshop with DHM/CARD on 24-25 April 2025; a national implementation plan and SOPs for CAP messages were agreed to be developed, with IMD support.",
+  "stance": "supports",
+  "stance_target": "Atlas should emit/consume CAP and plan for cell broadcast",
+  "evidence_type": "expert-opinion",
+  "scope_conditions": "Nepal",
+  "quoted_support": "a draft national implementation plan, including Standard Operating Procedures on CAP messages and dissemination were agreed to be developed.",
+  "numbers": [
+   "35 participants",
+   "24-25 April 2025"
+  ],
+  "entities": [
+   "WMO",
+   "DHM",
+   "CARD",
+   "IMD"
+  ],
+  "confidence": "high",
+  "source_note_id": "wmo-strengthens-early-warning-services-in-nepal"
+ },
+ {
+  "claim": "WMO will support DHM sharing CAP-compliant warnings on the Severe Weather Information Centre.",
+  "stance": "supports",
+  "stance_target": "Atlas should emit/consume CAP and plan for cell broadcast",
+  "evidence_type": "expert-opinion",
+  "scope_conditions": "Nepal",
+  "quoted_support": "WMO will continue to support DHM with the operationalization of CAP for hydrometeorological hazards, sharing CAP compliant warnings on the Severe Weather Information Centre",
+  "numbers": "[]",
+  "entities": [
+   "SWIC"
+  ],
+  "confidence": "high",
+  "source_note_id": "wmo-strengthens-early-warning-services-in-nepal"
+ }
+]

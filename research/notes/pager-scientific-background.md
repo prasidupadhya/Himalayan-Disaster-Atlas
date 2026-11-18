@@ -3,8 +3,9 @@ title: PAGER Scientific Background
 id: pager-scientific-background
 tags:
 - earthquake-loss
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:09.609927Z'
-updated: '2026-11-18T12:55:24.890174Z'
+updated: '2026-11-18T12:56:55.800591Z'
 source: https://earthquake.usgs.gov/data/pager/background.php
 source_domain: earthquake.usgs.gov
 fetched_at: '2026-11-18T12:55:09.609305Z'

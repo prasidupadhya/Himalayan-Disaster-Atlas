@@ -4,8 +4,9 @@ title: Government invites feedback on disability law online, but target group is
 id: government-invites-feedback-on-disability-law-online-but-target-group-is-locked
 tags:
 - nepal-users
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:48.510151Z'
-updated: '2026-11-18T12:55:23.931515Z'
+updated: '2026-11-18T12:56:57.496665Z'
 source: https://kathmandupost.com/national/2026/04/30/government-invites-feedback-on-disability-law-online-but-target-group-is-locked-out
 source_domain: kathmandupost.com
 fetched_at: '2026-11-18T12:54:48.509389Z'

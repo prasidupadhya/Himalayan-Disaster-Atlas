@@ -5,8 +5,9 @@ id: the-thame-flood-a-window-into-the-himalayan-climate-crisis-nepal-economic-fo
 tags:
 - glof
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:44.260296Z'
-updated: '2026-11-18T12:55:17.773282Z'
+updated: '2026-11-18T12:57:01.447660Z'
 source: https://nepaleconomicforum.org/the-thame-flood-a-window-into-the-himalayan-climate-crisis/
 source_domain: nepaleconomicforum.org
 fetched_at: '2026-11-18T12:54:44.259469Z'

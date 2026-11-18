@@ -6,8 +6,9 @@ tags:
 - nepal-ground-motion
 - kathmandu-basin
 - gmpe
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:07.080286Z'
-updated: '2026-11-18T12:55:47.251995Z'
+updated: '2026-11-18T12:56:47.537135Z'
 source: https://link.springer.com/article/10.1007/s10518-017-0084-z
 source_domain: link.springer.com
 fetched_at: '2026-11-18T12:55:07.079283Z'
@@ -23,6 +24,9 @@ summary: 'Abstract-only (paywalled). Strong-motion analysis of Gorkha 2015: KATN
   flexible; 5 s pulse is mix of basin-amplified shear waves and Love waves, not purely
   site effect.'
 doi: 10.1007/s10518-017-0084-z
+citation_count: 47
+venue: Bulletin of Earthquake Engineering
+is_retracted: false
 ---
 
 The 2015 Mw 7.8 Gorkha Earthquake in Nepal and its aftershocks: analysis of strong ground motion | Bulletin of Earthquake Engineering | Springer Nature Link

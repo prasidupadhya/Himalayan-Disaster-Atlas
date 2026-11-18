@@ -5,8 +5,9 @@ id: the-nepal-floods-question-when-the-himalayas-collapse-who-gets-warned-climat
 tags:
 - early-warning
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:48.096703Z'
-updated: '2026-11-18T12:55:41.840630Z'
+updated: '2026-11-18T12:56:51.034034Z'
 source: https://www.aljazeera.com/amp/news/2026/9/19/the-nepal-floods-question-when-the-himalayas-collapse-who-gets-warned
 source_domain: www.aljazeera.com
 fetched_at: '2026-11-18T12:54:48.095448Z'

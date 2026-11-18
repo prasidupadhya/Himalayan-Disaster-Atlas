@@ -5,8 +5,9 @@ id: building-disaster-resilience-through-mobile-enabled-early-warning-systems-in
 tags:
 - early-warning
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:14.734768Z'
-updated: '2026-11-18T12:55:44.384980Z'
+updated: '2026-11-18T12:56:48.107577Z'
 source: https://www.gsma.com/solutions-and-impact/connectivity-for-good/mobile-for-development/blog/building-disaster-resilience-through-mobile-enabled-early-warning-systems-in-asia-pacific/
 source_domain: www.gsma.com
 fetched_at: '2026-11-18T12:55:14.733579Z'

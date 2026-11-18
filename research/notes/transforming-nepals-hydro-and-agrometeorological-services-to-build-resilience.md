@@ -4,8 +4,9 @@ id: transforming-nepals-hydro-and-agrometeorological-services-to-build-resilienc
 tags:
 - early-warning
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:16.083049Z'
-updated: '2026-11-18T12:55:44.060415Z'
+updated: '2026-11-18T12:56:48.422605Z'
 source: https://blogs.worldbank.org/en/endpovertyinsouthasia/transforming-nepals-hydro-and-agrometeorological-services-build-resilience
 source_domain: blogs.worldbank.org
 fetched_at: '2026-11-18T12:55:16.082184Z'

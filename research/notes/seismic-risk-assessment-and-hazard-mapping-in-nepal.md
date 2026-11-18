@@ -3,8 +3,9 @@ title: Seismic risk assessment and hazard mapping in Nepal
 id: seismic-risk-assessment-and-hazard-mapping-in-nepal
 tags:
 - earthquake-loss
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:48.068208Z'
-updated: '2026-11-18T12:55:24.297174Z'
+updated: '2026-11-18T12:56:56.747917Z'
 source: https://ideas.repec.org/a/spr/nathaz/v78y2015i1p583-602.html
 source_domain: ideas.repec.org
 fetched_at: '2026-11-18T12:54:48.066751Z'
@@ -20,6 +21,9 @@ summary: 'Chaulagain et al. 2015 Nat Hazards 78:583-602 (abstract page): OpenQua
   notes the national hazard map is ~2 decades old. Abstract only.'
 doi: 10.1007/s11069-015-1734-6
 utility_score: 12.0
+citation_count: 152
+venue: Natural Hazards
+is_retracted: false
 ---
 
 Seismic risk assessment and hazard mapping in Nepal

@@ -3,7 +3,9 @@ title: Introduction to Understanding WCAG 2.1 | WAI | W3C
 id: introduction-to-understanding-wcag-21-wai-w3c
 tags:
 - nepal-users
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:03.530891Z'
+updated: '2026-11-18T12:57:03.363173Z'
 source: https://www.w3.org/WAI/WCAG21/Understanding/intro
 source_domain: www.w3.org
 fetched_at: '2026-11-18T12:55:03.530076Z'

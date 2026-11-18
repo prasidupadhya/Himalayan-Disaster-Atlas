@@ -4,8 +4,9 @@ id: about-kathmandu-living-labs
 tags:
 - atlas-improvement
 - open-data
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:49.583851Z'
-updated: '2026-11-18T12:55:27.746569Z'
+updated: '2026-11-18T12:56:53.983418Z'
 source: https://kathmandulivinglabs.org/about-us
 source_domain: kathmandulivinglabs.org
 fetched_at: '2026-11-18T12:54:49.582854Z'

@@ -4,8 +4,9 @@ title: Nepal returns to global ICT Index but digital use still lags infrastructu
 id: nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-grow
 tags:
 - nepal-users
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:42.161696Z'
-updated: '2026-11-18T12:55:23.028588Z'
+updated: '2026-11-18T12:56:58.544078Z'
 source: https://kathmandupost.com/science-technology/2026/07/02/nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-growth
 source_domain: kathmandupost.com
 fetched_at: '2026-11-18T12:54:42.160744Z'

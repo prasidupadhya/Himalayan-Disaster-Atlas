@@ -5,8 +5,9 @@ id: piahs-glacial-lake-outburst-flood-glof-modeling-of-tsho-rolpa-glacial-lake-n
 tags:
 - glof-modelling
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:38.939319Z'
-updated: '2026-11-18T12:55:21.417840Z'
+updated: '2026-11-18T12:57:00.639420Z'
 source: https://doi.org/10.5194/piahs-387-59-2024
 source_domain: piahs.copernicus.org
 fetched_at: '2026-11-18T12:54:38.938346Z'
@@ -23,6 +24,9 @@ summary: 'Kayastha & Maskey 2024 (Proc. IAHS 387): Tsho Rolpa (4552 m, Nepal) GL
   Nepal-specific template for scenario GLOF model: breach hydrograph then hydraulic
   routing.'
 doi: 10.5194/piahs-387-59-2024
+citation_count: 8
+venue: Proceedings of the International Association of Hydrological Sciences
+is_retracted: false
 ---
 
 *Suggested by [[abstract-egu25-12752]] — Thame/GLOF primary follow-up*

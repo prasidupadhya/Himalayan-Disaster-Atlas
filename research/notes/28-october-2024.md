@@ -5,8 +5,9 @@ tags:
 - atlas-improvement
 - landslides
 - loss-damage
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:45.486881Z'
-updated: '2026-11-18T12:55:26.927571Z'
+updated: '2026-11-18T12:56:54.574557Z'
 source: https://www.dpnet.org.np/public/uploads/files/Loss_and_Damage_Assessment_of_Flood_and_Landslide_2024_Updated_compressed%202026-01-20%2008-32-00.pdf
 source_domain: www.dpnet.org.np
 fetched_at: '2026-11-18T12:54:45.485981Z'

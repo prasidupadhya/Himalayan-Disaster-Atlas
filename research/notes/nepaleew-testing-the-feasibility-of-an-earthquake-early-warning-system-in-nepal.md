@@ -4,8 +4,9 @@ title: 'NepalEEW: Testing the feasibility of an Earthquake Early Warning System 
 id: nepaleew-testing-the-feasibility-of-an-earthquake-early-warning-system-in-nepal
 tags:
 - earthquake-loss
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:45.184387Z'
-updated: '2026-11-18T12:55:24.018925Z'
+updated: '2026-11-18T12:56:57.099182Z'
 source: https://seg.org/news/nepaleew-testing-the-feasibility-of-an-earthquake-early-warning-system-in-nepal/
 source_domain: seg.org
 fetched_at: '2026-11-18T12:54:45.182834Z'

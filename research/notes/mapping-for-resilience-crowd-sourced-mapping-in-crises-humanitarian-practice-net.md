@@ -5,8 +5,9 @@ id: mapping-for-resilience-crowd-sourced-mapping-in-crises-humanitarian-practice
 tags:
 - atlas-improvement
 - open-data
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:51.869870Z'
-updated: '2026-11-18T12:55:28.063584Z'
+updated: '2026-11-18T12:56:53.712000Z'
 source: https://odihpn.org/magazine/mapping-for-resilience-crowd-sourced-mapping-in-crises/
 source_domain: odihpn.org
 fetched_at: '2026-11-18T12:54:51.868112Z'

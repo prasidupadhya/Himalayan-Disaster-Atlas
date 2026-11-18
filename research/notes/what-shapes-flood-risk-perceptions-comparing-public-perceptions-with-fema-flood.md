@@ -4,8 +4,9 @@ title: What shapes flood risk perceptions? Comparing public perceptions with FEM
 id: what-shapes-flood-risk-perceptions-comparing-public-perceptions-with-fema-flood
 tags:
 - risk-communication
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:32.182022Z'
-updated: '2026-11-18T12:56:04.480304Z'
+updated: '2026-11-18T12:56:45.298405Z'
 source: https://repository.library.noaa.gov/view/noaa/72738
 source_domain: repository.library.noaa.gov
 fetched_at: '2026-11-18T12:55:32.181274Z'
@@ -21,6 +22,9 @@ summary: 'Primary study (Khan et al., IJDRR 2026, doi 10.1016/j.ijdrr.2025.10594
   57% in floodplains perceive lower risk, 29% uncertain. Metadata record only; full
   text not retrieved.'
 doi: 10.1016/j.ijdrr.2025.105941
+citation_count: 5
+venue: International Journal of Disaster Risk Reduction
+is_retracted: false
 ---
 
 *Suggested by [[uvm-study-reveals-millions-at-risk-college-of]] — underlying study*

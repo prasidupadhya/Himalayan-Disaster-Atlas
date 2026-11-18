@@ -3,8 +3,9 @@ title: Prioritizing Digital accessibility for Inclusive
 id: prioritizing-digital-accessibility-for-inclusive
 tags:
 - nepal-users
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:44.777361Z'
-updated: '2026-11-18T12:55:23.277021Z'
+updated: '2026-11-18T12:56:58.235414Z'
 source: https://prayatnanepal.org/wp-content/uploads/2022/12/Position-Paper_FINAL.pdf
 source_domain: prayatnanepal.org
 fetched_at: '2026-11-18T12:54:44.776312Z'

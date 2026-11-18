@@ -4,8 +4,9 @@ id: reducing-flood-casualties-in-nepal
 tags:
 - early-warning
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:40.987821Z'
-updated: '2026-11-18T12:55:42.195059Z'
+updated: '2026-11-18T12:56:50.368062Z'
 source: https://wmo.int/site/science-action/water-resource-monitoring-and-management/reducing-flood-casualties-nepal
 source_domain: wmo.int
 fetched_at: '2026-11-18T12:54:40.987308Z'

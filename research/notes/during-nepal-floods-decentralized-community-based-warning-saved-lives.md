@@ -4,8 +4,9 @@ id: during-nepal-floods-decentralized-community-based-warning-saved-lives
 tags:
 - early-warning
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:39.047213Z'
-updated: '2026-11-18T12:55:41.089852Z'
+updated: '2026-11-18T12:56:52.250435Z'
 source: https://news.mongabay.com/2026/09/during-nepal-floods-decentralized-community-based-warning-saved-lives/
 source_domain: news.mongabay.com
 fetched_at: '2026-11-18T12:54:39.046174Z'

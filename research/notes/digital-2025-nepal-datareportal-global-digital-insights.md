@@ -3,8 +3,9 @@ title: 'Digital 2025: Nepal — DataReportal – Global Digital Insights'
 id: digital-2025-nepal-datareportal-global-digital-insights
 tags:
 - nepal-users
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:38.912042Z'
-updated: '2026-11-18T12:55:22.424719Z'
+updated: '2026-11-18T12:56:59.575882Z'
 source: https://datareportal.com/reports/digital-2025-nepal
 source_domain: datareportal.com
 fetched_at: '2026-11-18T12:54:38.911047Z'

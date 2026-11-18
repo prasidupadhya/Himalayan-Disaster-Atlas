@@ -14,6 +14,9 @@ tier: institutional
 content_type: paper
 deprecated: false
 doi: 10.4060/cd5014en
+citation_count: 0
+venue: FAO eBooks
+is_retracted: false
 ---
 
 Nepal: Flood impact assessment

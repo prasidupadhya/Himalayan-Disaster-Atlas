@@ -4,8 +4,9 @@ title: Why Bangladesh needs an integrated disaster information system like Nepal
 id: why-bangladesh-needs-an-integrated-disaster-information-system-like-nepals-bipad
 tags:
 - nepal-data-feeds
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:42.180954Z'
-updated: '2026-11-18T12:55:41.962740Z'
+updated: '2026-11-18T12:56:50.674170Z'
 source: https://www.tbsnews.net/features/panorama/why-bangladesh-needs-integrated-disaster-information-system-nepals-bipad-portal
 source_domain: www.tbsnews.net
 fetched_at: '2026-11-18T12:54:42.179935Z'

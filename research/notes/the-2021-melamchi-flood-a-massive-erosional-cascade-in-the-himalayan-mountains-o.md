@@ -5,8 +5,9 @@ id: the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountai
 tags:
 - glof
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:46.958438Z'
-updated: '2026-11-18T12:55:18.101084Z'
+updated: '2026-11-18T12:57:01.030492Z'
 source: https://doi.org/10.21203/rs.3.rs-2766739/v1
 source_domain: www.researchsquare.com
 fetched_at: '2026-11-18T12:54:46.957658Z'
@@ -23,6 +24,9 @@ summary: 'Research Square preprint (not peer reviewed) on 15 June 2021 Melamchi 
   >70% of flood material passed to Indrawati. Shows sediment bulking/cascade must
   be in flood hazard models.'
 doi: 10.21203/rs.3.rs-2766739/v1
+citation_count: 28
+venue: Nature Geoscience
+is_retracted: false
 ---
 
 The 2021 Melamchi Flood: A massive erosional cascade in the Himalayan Mountains of central Nepal | Research Square

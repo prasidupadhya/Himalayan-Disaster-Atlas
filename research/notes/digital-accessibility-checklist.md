@@ -3,8 +3,9 @@ title: Digital Accessibility Checklist
 id: digital-accessibility-checklist
 tags:
 - nepal-users
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:49.750888Z'
-updated: '2026-11-18T12:55:24.322195Z'
+updated: '2026-11-18T12:56:56.381207Z'
 source: https://www.prayatnanepal.org/wp-content/uploads/2026/06/Digital-Accessibility-Checklist_Comprehensive-final.pdf
 source_domain: www.prayatnanepal.org
 fetched_at: '2026-11-18T12:54:49.749834Z'

@@ -4,8 +4,9 @@ title: HESS - Reconstruction of the 1941 GLOF process chain  at Lake Palcacocha
 id: hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera
 tags:
 - glof-modelling
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:44.801509Z'
-updated: '2026-11-18T12:55:21.836933Z'
+updated: '2026-11-18T12:57:00.342675Z'
 source: https://hess.copernicus.org/articles/24/93/2020/
 source_domain: hess.copernicus.org
 fetched_at: '2026-11-18T12:54:44.798196Z'

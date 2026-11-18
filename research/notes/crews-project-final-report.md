@@ -4,8 +4,9 @@ id: crews-project-final-report
 tags:
 - atlas-improvement
 - early-warning-finance
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:54.609891Z'
-updated: '2026-11-18T12:55:28.363289Z'
+updated: '2026-11-18T12:56:53.415578Z'
 source: https://crews-initiative.org/wp-content/uploads/2026/04/CREWS-EW4All-Accelerator-Final-Report.pdf
 source_domain: crews-initiative.org
 fetched_at: '2026-11-18T12:54:54.608868Z'

@@ -3,8 +3,9 @@ title: ShakeMap
 id: shakemap
 tags:
 - earthquake-loss
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:10.466494Z'
-updated: '2026-11-18T12:55:25.618665Z'
+updated: '2026-11-18T12:56:55.162045Z'
 source: https://earthquake.usgs.gov/data/shakemap/
 source_domain: earthquake.usgs.gov
 fetched_at: '2026-11-18T12:55:10.465748Z'

@@ -4,8 +4,9 @@ title: GMD - r.avaflow v1, an advanced open-source computational framework for t
 id: gmd-ravaflow-v1-an-advanced-open-source-computational-framework-for-the-propagat
 tags:
 - glof-modelling
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:07.225116Z'
-updated: '2026-11-18T12:55:22.702445Z'
+updated: '2026-11-18T12:56:59.251669Z'
 source: https://gmd.copernicus.org/articles/10/553/2017/
 source_domain: gmd.copernicus.org
 fetched_at: '2026-11-18T12:55:07.223635Z'

@@ -5,7 +5,9 @@ id: quantifying-the-long-term-evolution-of-glacial-lakes-and-the-impact-of-the-2
 tags:
 - glof
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:56:06.164716Z'
+updated: '2026-11-18T12:56:44.969249Z'
 source: https://doi.org/10.21203/rs.3.rs-10032683/v1
 source_domain: www.researchsquare.com
 fetched_at: '2026-11-18T12:55:57.099715Z'
@@ -16,6 +18,9 @@ tier: institutional
 content_type: paper
 deprecated: false
 doi: 10.21203/rs.3.rs-10032683/v1
+citation_count: 0
+venue: Research Square
+is_retracted: false
 ---
 
 *Suggested by [[abstract-egu25-12752]] — Thame/GLOF primary follow-up*

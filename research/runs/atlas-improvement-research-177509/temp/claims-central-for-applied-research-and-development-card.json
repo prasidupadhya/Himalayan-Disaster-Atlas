@@ -1,0 +1,16 @@
+[
+ {
+  "claim": "CAP endorsed at Cg-19 (2023) as recommended practice, in WMO-No.49 Vol I; CAP messages route via WMO Register of Alerting Authorities.",
+  "stance": "supports",
+  "stance_target": "Atlas should emit/consume CAP and plan for cell broadcast",
+  "evidence_type": "expert-opinion",
+  "scope_conditions": "Nepal",
+  "quoted_support": "the Common Alerting Protocol (CAP) standard was endorsed as a recommended practice for the routine dissemination of alerts and is now included in the Technical Regulations, Volume I (WMO-No. 49).",
+  "numbers": [
+   "2023"
+  ],
+  "entities": [],
+  "confidence": "high",
+  "source_note_id": "central-for-applied-research-and-development-card"
+ }
+]

@@ -3,8 +3,9 @@ title: PAGER
 id: pager
 tags:
 - earthquake-loss
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:02.994800Z'
-updated: '2026-11-18T12:55:25.230985Z'
+updated: '2026-11-18T12:56:55.494958Z'
 source: https://earthquake.usgs.gov/data/pager/
 source_domain: earthquake.usgs.gov
 fetched_at: '2026-11-18T12:55:02.993959Z'

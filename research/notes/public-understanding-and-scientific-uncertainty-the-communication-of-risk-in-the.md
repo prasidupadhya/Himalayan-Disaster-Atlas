@@ -4,8 +4,9 @@ title: 'Public understanding and scientific uncertainty: The communication of ri
 id: public-understanding-and-scientific-uncertainty-the-communication-of-risk-in-the
 tags:
 - risk-communication
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:08.821919Z'
-updated: '2026-11-18T12:56:04.188873Z'
+updated: '2026-11-18T12:56:45.610014Z'
 source: https://www.aimspress.com/article/doi/10.3934/geosci.2024028
 source_domain: www.aimspress.com
 fetched_at: '2026-11-18T12:55:08.821024Z'
@@ -21,6 +22,9 @@ summary: 'Demichelis & Ongaro 2024 (AIMS Geosciences 10(3):540-552): L''Aquila 2
   high-consequence events where large relative increases remain small absolute risk.
   Relevant to earthquake scenario wording.'
 doi: 10.3934/geosci.2024028
+citation_count: 4
+venue: AIMS Geosciences
+is_retracted: false
 ---
 
 *Suggested by [[text]]*

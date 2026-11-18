@@ -3,8 +3,9 @@ title: Devanagari Gap Analysis
 id: devanagari-gap-analysis
 tags:
 - nepal-users
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:46.175348Z'
-updated: '2026-11-18T12:55:23.638963Z'
+updated: '2026-11-18T12:56:57.849218Z'
 source: https://www.w3.org/TR/deva-gap
 source_domain: www.w3.org
 fetched_at: '2026-11-18T12:54:46.174423Z'

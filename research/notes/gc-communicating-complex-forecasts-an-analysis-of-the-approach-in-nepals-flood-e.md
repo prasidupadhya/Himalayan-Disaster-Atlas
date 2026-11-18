@@ -5,8 +5,9 @@ id: gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flo
 tags:
 - early-warning
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:46.850964Z'
-updated: '2026-11-18T12:55:43.288967Z'
+updated: '2026-11-18T12:56:49.064237Z'
 source: https://gc.copernicus.org/articles/3/49/2020/
 source_domain: gc.copernicus.org
 fetched_at: '2026-11-18T12:54:46.849576Z'

@@ -3,7 +3,9 @@ title: The ICT Development Index (IDI)
 id: the-ict-development-index-idi
 tags:
 - nepal-users
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:05.702278Z'
+updated: '2026-11-18T12:57:03.053753Z'
 source: https://www.itu.int/en/ITU-D/Statistics/Pages/IDI/default.aspx
 source_domain: www.itu.int
 fetched_at: '2026-11-18T12:55:05.701465Z'

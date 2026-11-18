@@ -4,7 +4,9 @@ title: 'Bridging the Gap: Discrepancies Between Public Flood Risk Perceptions an
 id: bridging-the-gap-discrepancies-between-public-flood-risk-perceptions-and-fema-ma
 tags:
 - risk-communication
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:43.224734Z'
+updated: '2026-11-18T12:56:49.373604Z'
 source: https://scholarworks.uvm.edu/wri/3
 source_domain: scholarworks.uvm.edu
 fetched_at: '2026-11-18T12:55:43.223338Z'

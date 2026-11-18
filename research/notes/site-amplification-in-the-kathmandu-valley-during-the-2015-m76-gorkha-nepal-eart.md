@@ -6,8 +6,9 @@ tags:
 - nepal-ground-motion
 - kathmandu-basin
 - site-effects
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:54.329194Z'
-updated: '2026-11-18T12:55:46.977905Z'
+updated: '2026-11-18T12:56:47.781765Z'
 source: https://link.springer.com/article/10.1007/s10518-016-0003-8
 source_domain: link.springer.com
 fetched_at: '2026-11-18T12:54:54.327275Z'
@@ -23,6 +24,9 @@ summary: 'EEFIT (Bull Earthq Eng 2016, open access): microtremor-derived Vs prof
   exceed Nepal building-code spectra, short-period amplification near 0.5 s (2 Hz)
   not covered; calls for site-specific hazard analysis. Limited data, preliminary.'
 doi: 10.1007/s10518-016-0003-8
+citation_count: 39
+venue: Bulletin of Earthquake Engineering
+is_retracted: false
 ---
 
 Site amplification in the Kathmandu Valley during the 2015 M7.6 Gorkha, Nepal earthquake | Bulletin of Earthquake Engineering | Springer Nature Link

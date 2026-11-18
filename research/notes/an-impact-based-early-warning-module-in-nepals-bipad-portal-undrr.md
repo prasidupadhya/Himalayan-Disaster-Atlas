@@ -3,8 +3,9 @@ title: An impact-based early warning module in Nepal’s BIPAD portal | UNDRR
 id: an-impact-based-early-warning-module-in-nepals-bipad-portal-undrr
 tags:
 - nepal-data-feeds
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:39.073478Z'
-updated: '2026-11-18T12:55:40.313856Z'
+updated: '2026-11-18T12:56:53.085567Z'
 source: https://www.undrr.org/resource/case-study/impact-based-early-warning-module-nepals-bipad-portal
 source_domain: www.undrr.org
 fetched_at: '2026-11-18T12:54:39.072735Z'

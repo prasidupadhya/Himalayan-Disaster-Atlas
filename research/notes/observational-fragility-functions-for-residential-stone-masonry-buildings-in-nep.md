@@ -4,8 +4,9 @@ title: Observational fragility functions for residential stone masonry buildings
 id: observational-fragility-functions-for-residential-stone-masonry-buildings-in-nep
 tags:
 - earthquake-loss
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:01.822132Z'
-updated: '2026-11-18T12:55:24.567157Z'
+updated: '2026-11-18T12:56:56.044238Z'
 source: https://link.springer.com/article/10.1007/s10518-018-0372-2
 source_domain: link.springer.com
 fetched_at: '2026-11-18T12:55:01.820617Z'
@@ -20,6 +21,9 @@ summary: 'Bull Earthq Eng 2018 (abstract only, paywalled): empirical fragility c
   Gorkha govt damage assessment), as functions of PGA and Sa(0.3s); stone masonry
   highly vulnerable even at low-moderate shaking. Basis for scenario damage models.'
 doi: 10.1007/s10518-018-0372-2
+citation_count: 53
+venue: Bulletin of Earthquake Engineering
+is_retracted: false
 ---
 
 Observational fragility functions for residential stone masonry buildings in Nepal | Bulletin of Earthquake Engineering | Springer Nature Link

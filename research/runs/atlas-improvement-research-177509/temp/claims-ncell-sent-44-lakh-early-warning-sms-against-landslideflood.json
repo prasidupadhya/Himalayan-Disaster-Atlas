@@ -1,0 +1,17 @@
+[
+ {
+  "claim": "Ncell sent over 44 lakh (4.4 million) flood/landslide alert SMS in two months of 2023 monsoon; DHM-Ncell partnership since 2016, basins incl. Narayani, Babai, Rapti, Kankai, Bagmati, Koshi, Karnali.",
+  "stance": "supports",
+  "stance_target": "Atlas should emit/consume CAP and plan for cell broadcast",
+  "evidence_type": "expert-opinion",
+  "scope_conditions": "Nepal",
+  "quoted_support": "Ncell Axiata sent over 44 lakh SMS to its user to alert them against possible flood and landslide disasters.",
+  "numbers": [
+   "4,400,000 SMS",
+   "since 2016"
+  ],
+  "entities": [],
+  "confidence": "medium",
+  "source_note_id": "ncell-sent-44-lakh-early-warning-sms-against-landslideflood"
+ }
+]

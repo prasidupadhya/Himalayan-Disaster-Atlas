@@ -4,8 +4,9 @@ id: using-geovisualizations-to-educate-the-public-about-environmental-health
 tags:
 - risk-communication
 - hazard-maps
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:43.908561Z'
-updated: '2026-11-18T12:56:03.584159Z'
+updated: '2026-11-18T12:56:46.382764Z'
 source: https://par.nsf.gov/servlets/purl/10560604
 source_domain: par.nsf.gov
 fetched_at: '2026-11-18T12:54:43.907680Z'

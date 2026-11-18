@@ -4,8 +4,9 @@ id: fatal-landslides-in-nepal-in-2024-to-date
 tags:
 - atlas-improvement
 - landslides
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:39.000412Z'
-updated: '2026-11-18T12:55:26.501052Z'
+updated: '2026-11-18T12:56:54.866879Z'
 source: https://eos.org/thelandslideblog/nepal-landslides-2024
 source_domain: eos.org
 fetched_at: '2026-11-18T12:54:38.999785Z'

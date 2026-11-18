@@ -5,8 +5,9 @@ id: missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properti
 tags:
 - early-warning
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:54:43.496518Z'
-updated: '2026-11-18T12:55:42.575073Z'
+updated: '2026-11-18T12:56:50.004099Z'
 source: https://www.spotlightnepal.com/2024/10/07/missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properties-and-infrastructures
 source_domain: www.spotlightnepal.com
 fetched_at: '2026-11-18T12:54:43.495789Z'

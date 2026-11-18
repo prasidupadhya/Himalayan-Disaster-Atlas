@@ -5,8 +5,9 @@ id: missed-opportunities-in-utilization-of-weather-forecasts-an-analysis-of-octo
 tags:
 - early-warning
 - nepal
+- atlas-improvement-research-177509
 created: '2026-11-18T12:55:12.652979Z'
-updated: '2026-11-18T12:55:43.742619Z'
+updated: '2026-11-18T12:56:48.734296Z'
 source: https://preventionweb.net/quick/71365
 source_domain: www.preventionweb.net
 fetched_at: '2026-11-18T12:55:12.652032Z'

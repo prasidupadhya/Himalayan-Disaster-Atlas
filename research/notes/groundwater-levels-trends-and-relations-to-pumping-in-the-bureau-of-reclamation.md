@@ -16,6 +16,9 @@ tier: ground_truth
 content_type: policy
 deprecated: false
 doi: 10.3133/ofr20151145
+citation_count: 1
+venue: Antarctica A Keystone in a Changing World
+is_retracted: false
 ---
 
 Groundwater levels, trends, and relations to pumping in the Bureau of Reclamation Klamath Project, Oregon and California
