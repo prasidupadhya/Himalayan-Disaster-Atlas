@@ -7,6 +7,7 @@ tags:
 - atlas-improvement-research-177509
 - gmpe
 created: '2026-11-18T13:08:55.611013Z'
+updated: '2026-11-18T13:09:26.238295Z'
 source: https://eprints.lib.hokudai.ac.jp/dspace/handle/2115/78975
 source_domain: eprints.lib.hokudai.ac.jp
 fetched_at: '2026-11-18T13:08:55.610398Z'
@@ -16,6 +17,9 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: Single-site/Kathmandu-Valley GMPE from M5.0-7.3 Gorkha aftershock records
+  at 8 sites; site-term correlates with bedrock depth; Mori et al. report smaller
+  residuals than existing GMPEs.
 ---
 
 Ground motion prediction equation for the Kathmandu Valley, Nepal based on strong motion records during the 2015 Gorkha Nepal earthquake sequence | 北海道大学学術成果コレクション : HUSCAP

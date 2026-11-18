@@ -7,6 +7,7 @@ tags:
 - atlas-improvement-research-177509
 - gmpe
 created: '2026-11-18T13:08:48.519147Z'
+updated: '2026-11-18T13:09:26.843864Z'
 source: https://link.springer.com/doi/10.1007/s10950-016-9635-z
 source_domain: link.springer.com
 fetched_at: '2026-11-18T13:08:48.518227Z'
@@ -16,6 +17,8 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: SCEC BBP EXSIM validation of Gorkha at 14 CIGP stations; goodness-of-fit
+  residuals vs distance. Simulation, not GMPE test; peripheral.
 doi: 10.1007/s10950-016-9635-z
 ---
 

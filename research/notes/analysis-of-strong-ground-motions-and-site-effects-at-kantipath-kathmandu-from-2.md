@@ -7,6 +7,7 @@ tags:
 - atlas-improvement-research-177509
 - gmpe
 created: '2026-11-18T13:08:59.838724Z'
+updated: '2026-11-18T13:09:26.543273Z'
 source: https://earth-planets-space.springeropen.com/articles/10.1186/s40623-016-0432-2
 source_domain: link.springer.com
 fetched_at: '2026-11-18T13:08:59.837377Z'
@@ -16,6 +17,10 @@ type: note
 tier: unknown
 content_type: unknown
 deprecated: false
+summary: 'Dhakal et al. 2016: at KATNP Kathmandu, Japanese crustal/interplate GMPEs
+  describe PGA/PGV well except mainshock PGA; reviews GMPE choices in Nepal hazard
+  (Nath&Thingbaijam-based BSSA/NGA choice by Goda; JICA used WNA GMPE; megathrust
+  interface GMPEs argued appropriate); 3-4 s basin resonance in large aftershocks.'
 doi: 10.1186/s40623-016-0432-2
 ---
 
