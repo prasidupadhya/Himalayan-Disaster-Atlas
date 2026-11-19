@@ -392,19 +392,29 @@ test('switching scenarios in 3D clears the old overlay and respects point ruptur
   } finally { await close(); }
 });
 
-test('3D river flight follows downstream through bends and draws one joined water strip', async () => {
+test('3D river flight follows bends and reuses the indexed water mesh without label depth reads', async () => {
   const { page, errors, close } = await open('phone', '/scenarios/#flood=glof-40746560', { viewport: { width: 360, height: 780 } });
   try {
     await inspectTerrain(page);
     await page.locator('#scrub').fill('160');
     await page.evaluate(() => {
-      const draw = WebGL2RenderingContext.prototype.drawArrays;
-      window.strips = [];
-      WebGL2RenderingContext.prototype.drawArrays = function (mode, first, count) {
-        if (mode === this.TRIANGLE_STRIP && count > 4) strips.push({ first, count, program: this.getParameter(this.CURRENT_PROGRAM) });
-        return draw.call(this, mode, first, count);
+      const proto = WebGL2RenderingContext.prototype;
+      const draw = proto.drawElements, locate = proto.getUniformLocation, read = proto.readPixels;
+      const waterPrograms = new WeakSet();
+      window.strips = []; window.depthReads = 0;
+      proto.getUniformLocation = function (program, name) {
+        const location = locate.call(this, program, name);
+        if (name === 'pulse' && location) waterPrograms.add(program);
+        return location;
       };
+      proto.drawElements = function (mode, count, type, offset) {
+        const program = this.getParameter(this.CURRENT_PROGRAM);
+        if (waterPrograms.has(program) && count > 0) strips.push({ first: offset, program });
+        return draw.call(this, mode, count, type, offset);
+      };
+      proto.readPixels = function (...args) { depthReads++; return read.apply(this, args); };
     });
+    assert.equal(await page.evaluate(() => performance.getEntriesByType('resource').some(r => r.name.includes('/three/'))), false);
     await page.locator('#terrain-toggle').click();
     await page.waitForFunction(() => strips.length > 0);
     const pale = await page.evaluate(() => scenarioMap.getSky()['sky-color']);
@@ -413,11 +423,12 @@ test('3D river flight follows downstream through bends and draws one joined wate
     await page.locator('#play').click();
     await page.waitForFunction(() => Number(document.querySelector('#scrub').value) > 165);
     await page.evaluate(() => {
-      window.bearings = [];
+      window.bearings = []; window.depthReads = 0;
       scenarioMap.on('move', () => bearings.push(scenarioMap.getBearing()));
     });
     await page.waitForFunction(() => bearings.length >= 5 && Math.abs(bearings.at(-1) - bearings[0]) > 0.1);
     const angles = await page.evaluate(() => bearings);
+    assert.equal(await page.evaluate(() => depthReads), 0);
     assert.ok(angles.slice(1).every((v, i) => Math.abs((v - angles[i] + 540) % 360 - 180) < 6));
     assert.ok(await page.evaluate(() => strips.some(s => s.first !== strips[0].first && s.program === strips[0].program)));
     await page.locator('#follow').uncheck();
@@ -426,6 +437,28 @@ test('3D river flight follows downstream through bends and draws one joined wate
     const visible = await page.locator('.map-label.on:not(.crowded)').evaluateAll(nodes => nodes.map(el => el.getBoundingClientRect().toJSON()));
     assert.ok(visible.length);
     assert.ok(visible.every((a, i) => visible.slice(i + 1).every(b => a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top)));
+    assert.deepEqual(errors, []);
+  } finally { await close(); }
+});
+
+test('a failed mesh worker keeps the river usable through a rapid 3D toggle', async () => {
+  const { page, errors, close } = await open('phone', '/scenarios/', { reducedMotion: 'reduce' });
+  try {
+    await inspectTerrain(page);
+    await page.route('**/river/river-mesh.wasm', r => r.fulfill({ contentType: 'application/wasm', body: 'invalid' }));
+    await page.evaluate(() => {
+      const draw = WebGL2RenderingContext.prototype.drawArrays;
+      window.fallbackDraws = 0;
+      WebGL2RenderingContext.prototype.drawArrays = function (mode, first, count) {
+        if (mode === this.TRIANGLE_STRIP && count > 4) fallbackDraws++;
+        return draw.call(this, mode, first, count);
+      };
+    });
+    await page.locator('#scrub').fill('320');
+    await page.evaluate(() => { const toggle = document.querySelector('#terrain-toggle'); toggle.click(); toggle.click(); toggle.click(); });
+    await page.waitForFunction(() => fallbackDraws > 0);
+    await page.locator('#terrain-toggle').click();
+    assert.ok(await page.evaluate(() => !scenarioMap.getLayer('flood-ribbon')));
     assert.deepEqual(errors, []);
   } finally { await close(); }
 });
