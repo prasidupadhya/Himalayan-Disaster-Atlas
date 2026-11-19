@@ -169,6 +169,14 @@ fieldset.field { border: 0; padding: 0; margin: 0 0 var(--space-md); }
 .sim .maplibregl-ctrl-attrib.maplibregl-compact { min-height: 40px; padding-right: 44px; border-radius: 22px; }
 .sim .maplibregl-ctrl-attrib-button { background-repeat: no-repeat; background-position: center; }
 .sim .maplibregl-ctrl-attrib-button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: -3px; }
+.sim .projected-label, .sim .river-head { position: absolute; top: 0; left: 0; pointer-events: none; }
+.sim .projected-label { transform: translate(-50%, calc(-100% - 10px)); }
+.sim .river-head { width: 14px; height: 14px; border-radius: 50%; background: #ffd400; border: 2px solid #18232a;
+  transform: translate(-50%, -50%); }
+@media (prefers-reduced-motion: no-preference) {
+  .sim .river-head.moving::after { content: ''; position: absolute; inset: -5px; border: 2px solid #ffd400; border-radius: 50%; animation: river-ring 1.4s ease-out infinite; }
+  @keyframes river-ring { from { transform: scale(.7); opacity: .65; } to { transform: scale(1.8); opacity: 0; } }
+}
 .sim .river-flight .map-label.crowded { visibility: hidden; }
 .sim .river-flight .map-label span { border: 1px solid var(--color-rule); box-shadow: 0 1px 4px #15223055; }
 .scenario-frame { position: relative; }
