@@ -1,0 +1,3078 @@
+{
+  "report": "/home/user/Himalayan-Disaster-Atlas/research/notes/final_report_atlas-improvement-research-177509.md",
+  "summary": {
+    "total": 245,
+    "supported_mechanical": 4,
+    "dangling": 0,
+    "needs_llm": 241
+  },
+  "sampled_for_llm": [
+    {
+      "sentence": "The flood and glacial-lake outburst flood (GLOF) engine moves its wave at 2, 4 or 6 m/s, but the only peer-reviewed measurement of a Nepal outburst front is 8.7 m/s [1].",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "2,",
+        "4",
+        "6",
+        "8.7",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The earthquake engine puts every resident on rock and relies on a single ground-motion model, BSSA14, from a model family that a 2024 preprint ranking found \"not suitable\" for most periods in the Himalaya [2].",
+      "marker": "[2]",
+      "note_id": "arxiv241005918v1-physicsgeo-ph-8-oct-2024",
+      "numbers": [
+        "14,",
+        "2024",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Outburst origins stop at an official list that did not include the source of the 2024 Thame flood, \"a cascade of two small lakes that had not previously been considered dangerous\" [3].",
+      "marker": "[3]",
+      "note_id": "abstract-egu25-12752",
+      "numbers": [
+        "2024",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Every output is a single number or a crisp band, although readers treat hazard maps as warning messages and read their lines as certainty [4, 5].",
+      "marker": "[4]",
+      "note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+      "numbers": [
+        "4,",
+        "5"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Every output is a single number or a crisp band, although readers treat hazard maps as warning messages and read their lines as certainty [4, 5].",
+      "marker": "[5]",
+      "note_id": "assessing-perceptions-and-interpretations-of-tsunami-maps-insights-from-the-publ",
+      "numbers": [
+        "4,",
+        "5"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Nepal's official river warnings have improved: WMO credits them with cutting flood deaths from 166 in 2017 to 27 in 2022 even though the 2022 floods were larger [6], an agency comparison of two years, and about 250 people still died in September 2024 [17].",
+      "marker": "[6]",
+      "note_id": "reducing-flood-casualties-in-nepal",
+      "numbers": [
+        "166",
+        "2017",
+        "27",
+        "2022",
+        "2022",
+        "6",
+        "250",
+        "2024",
+        "17"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Nepal's official river warnings have improved: WMO credits them with cutting flood deaths from 166 in 2017 to 27 in 2022 even though the 2022 floods were larger [6], an agency comparison of two years, and about 250 people still died in September 2024 [17].",
+      "marker": "[17]",
+      "note_id": "missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properties-a",
+      "numbers": [
+        "166",
+        "2017",
+        "27",
+        "2022",
+        "2022",
+        "6",
+        "250",
+        "2024",
+        "17"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "That matters: the World Bank's Open Data for Resilience Initiative (OpenDRI) found that none of its projects built a self-sustaining revenue stream, and that \"without continuous funding\" risk data goes stale [7].",
+      "marker": "[7]",
+      "note_id": "opendri-7-sustaining",
+      "numbers": [
+        "7"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Bilingual text with constitutional district names addresses a documented weakness: DHM's SMS alerts have had \"no standardised language\", switching between Nepali, English and romanised Nepali [8].",
+      "marker": "[8]",
+      "note_id": "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+      "numbers": [
+        "8"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Printed reports reach people the website does not, in a country where only 14.7% of households report radio access [9].",
+      "marker": "[9]",
+      "note_id": "nepals-82-households-have-internet-but-digital-skills-fall-short",
+      "numbers": [
+        "14.7%",
+        "9"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| Vs30 = 760 m/s (rock) everywhere | Kathmandu valley and Terai sit on sediment; Gorkha shaking at Siddhitol exceeded building-code design levels [10] | Understates shaking on most sediment sites; in the Kathmandu basin the larger miss is long-period (5C) |",
+      "marker": "[10]",
+      "note_id": "site-amplification-in-the-kathmandu-valley-during-the-2015-m76-gorkha-nepal-eart",
+      "numbers": [
+        "30",
+        "760",
+        "10",
+        "5"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| BSSA14 as the only model | Recorded short-period shaking sat about one standard deviation above its median on Himalayan records (preprint) [2] | Understates shaking; hides model disagreement |",
+      "marker": "[2]",
+      "note_id": "arxiv241005918v1-physicsgeo-ph-8-oct-2024",
+      "numbers": [
+        "14",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| Wave speed 2/4/6 m/s | Measured front faster than the fastest default [1]; a back-calculated Andean outburst implies about 5.5–10.6 m/s [11] | First-water arrival too late near the source |",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "2",
+        "4",
+        "6",
+        "1",
+        "5.5",
+        "10.6",
+        "11"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| Wave speed 2/4/6 m/s | Measured front faster than the fastest default [1]; a back-calculated Andean outburst implies about 5.5–10.6 m/s [11] | First-water arrival too late near the source |",
+      "marker": "[11]",
+      "note_id": "hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera",
+      "numbers": [
+        "2",
+        "4",
+        "6",
+        "1",
+        "5.5",
+        "10.6",
+        "11"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| Peak held constant downstream | Clear-water peaks roughly halve over tens of kilometres [1] | Overstates far-field peak for clear water; silent on cascades that grow |",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| Origins limited to the official list | Thame came from unlisted lakes [3]; the list ignores seismic triggers [12] | Hides real sources |",
+      "marker": "[3]",
+      "note_id": "abstract-egu25-12752",
+      "numbers": [
+        "3",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| Origins limited to the official list | Thame came from unlisted lakes [3]; the list ignores seismic triggers [12] | Hides real sources |",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "3",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| Five crisp PGA bands | Stone masonry is \"highly vulnerable even in the case of low to moderate ground shaking\" [13] | The lowest band reads as safe |",
+      "marker": "[13]",
+      "note_id": "observational-fragility-functions-for-residential-stone-masonry-buildings-in-nep",
+      "numbers": [
+        "13"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "But the errors that matter most for life safety (arrival too late, shaking too low, a missing source) all err toward reassurance, and people already judge risk as falling with distance from a source [4].",
+      "marker": "[4]",
+      "note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+      "numbers": [
+        "4"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The opposite failure is real too: Nepali residents treat routine flood SMS \"as background noise\" [25], and DHM forecasters fear \"false alarms and the breakdown of trust\" [8].",
+      "marker": "[25]",
+      "note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+      "numbers": [
+        "25",
+        "8"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The opposite failure is real too: Nepali residents treat routine flood SMS \"as background noise\" [25], and DHM forecasters fear \"false alarms and the breakdown of trust\" [8].",
+      "marker": "[8]",
+      "note_id": "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+      "numbers": [
+        "25",
+        "8"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "BIPAD is the portal of the National Disaster Risk Reduction and Management Authority (NDRRMA), holding incident, loss and \"real time\" rainfall, streamflow and earthquake data [14].",
+      "marker": "[14]",
+      "note_id": "why-bangladesh-needs-an-integrated-disaster-information-system-like-nepals-bipad",
+      "numbers": [
+        "14"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "WMO credits DHM's forecasting service (2016) and the South Asian Flash Flood Guidance System (2018) for the fall in flood deaths [6].",
+      "marker": "[6]",
+      "note_id": "reducing-flood-casualties-in-nepal",
+      "numbers": [
+        "2016",
+        "2018",
+        "6"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A World Bank project upgraded 88 meteorological and 70 hydrological stations and installed Nepal's first C-band radar [15], and one mobile operator sent more than 4.4 million flood and landslide SMS alerts in two months of the 2023 monsoon [16].",
+      "marker": "[15]",
+      "note_id": "transforming-nepals-hydro-and-agrometeorological-services-to-build-resilience",
+      "numbers": [
+        "88",
+        "70",
+        "15",
+        "4.4",
+        "2023",
+        "16"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A World Bank project upgraded 88 meteorological and 70 hydrological stations and installed Nepal's first C-band radar [15], and one mobile operator sent more than 4.4 million flood and landslide SMS alerts in two months of the 2023 monsoon [16].",
+      "marker": "[16]",
+      "note_id": "ncell-sent-44-lakh-early-warning-sms-against-landslideflood",
+      "numbers": [
+        "88",
+        "70",
+        "15",
+        "4.4",
+        "2023",
+        "16"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Around 250 people died in the September 2024 floods \"in-spite of a clear and categorical alert, four days in advance\" [17].",
+      "marker": "[17]",
+      "note_id": "missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properties-a",
+      "numbers": [
+        "250",
+        "2024",
+        "17"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A national consultation listed shortcomings in \"the operationalization of the Common Alerting Protocol, nowcasting of rainfall and flooding in urban areas\" [18], and an analysis of the October 2021 disaster concluded that without advisories, messages \"become meaningless\" [19].",
+      "marker": "[18]",
+      "note_id": "nepal-holds-national-consultation-early-warnings-for-all-and-with-all",
+      "numbers": [
+        "18",
+        "2021",
+        "19"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A national consultation listed shortcomings in \"the operationalization of the Common Alerting Protocol, nowcasting of rainfall and flooding in urban areas\" [18], and an analysis of the October 2021 disaster concluded that without advisories, messages \"become meaningless\" [19].",
+      "marker": "[19]",
+      "note_id": "missed-opportunities-in-utilization-of-weather-forecasts-an-analysis-of-october",
+      "numbers": [
+        "18",
+        "2021",
+        "19"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "NDRRMA places the trigger, a landslide and avalanche about 20 km north-east of the Rasuwagadhi border point, at 08:40 [20].",
+      "marker": "[20]",
+      "note_id": "ndrrma-emergency-response-operations-center",
+      "numbers": [
+        "20",
+        "08",
+        "40",
+        "20"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "ICIMOD (the International Centre for Integrated Mountain Development) reported the Trishuli at Galchhi rising \"by as much as nine metres within 30 minutes\" [21].",
+      "marker": "[21]",
+      "note_id": "major-flash-flood-sweeps-through-nepals-rasuwa-district-raising-fears-of-further",
+      "numbers": [
+        "30",
+        "21"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Word reached the Rasuwa district office at 8:56, and DHM's public post came at 1:35 pm, \"nearly five hours after the flood entered Nepal\" [22].",
+      "marker": "[22]",
+      "note_id": "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e",
+      "numbers": [
+        "8",
+        "56,",
+        "1",
+        "35",
+        "22"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A preprint puts the front at the first gauge within 12.8 minutes of the trigger and the mass alert at 38.8 minutes, with three gauges destroyed at 27, 69 and 87% of their warning stages, \"so threshold logic never fired\" [23].",
+      "marker": "[23]",
+      "note_id": "the-bhote-koshitrishuli-flash-flood-of-26-august-2026-rasuwa-nepal-warning-laten",
+      "numbers": [
+        "12.8",
+        "38.8",
+        "27,",
+        "69",
+        "87%",
+        "23"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Its lead times at named settlements were negative at the first (−26 to −16 minutes) and only +4 to +14 minutes at the next [23].",
+      "marker": "[23]",
+      "note_id": "the-bhote-koshitrishuli-flash-flood-of-26-august-2026-rasuwa-nepal-warning-laten",
+      "numbers": [
+        "26",
+        "16",
+        "4",
+        "14",
+        "23"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A second preprint estimates that the flood took about 365 minutes after the warning anchor to reach Devghat [24].",
+      "marker": "[24]",
+      "note_id": "a-multi-source-quantitative-reconstruction-of-the-26-august-2026-bhote-koshi-roc",
+      "numbers": [
+        "365",
+        "24"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Most of the corridor had hours, and there the message failed: residents \"along the banks of the Trishuli River (up to Muglin)\" were told to stay in a safe location, with no arrival time, no scale and no place-level instruction, in Nepali only [25].",
+      "marker": "[25]",
+      "note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+      "numbers": [
+        "25"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A DHM official said the templates were \"designed for the gradual monsoon flooding\" Nepal usually sees [25].",
+      "marker": "[25]",
+      "note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+      "numbers": [
+        "25"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Nepali government sites do go offline without warning [26].",
+      "marker": "[26]",
+      "note_id": "nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-grow",
+      "numbers": [
+        "26"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "One calibration matters: local magnitudes (ML) from NEMRC's predecessor exceeded USGS moment magnitudes (Mw) by about 1.0 ± 0.7 [81].",
+      "marker": "[81]",
+      "note_id": "calibration-of-local-earthquake-magnitudes-in-nepal-journal-of-nepal-geological",
+      "numbers": [
+        "1.0",
+        "0.7",
+        "81"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A job every 15–30 minutes pulling the two verified endpoints would cost almost nothing and would catch much of the 30-minute to 6-hour lead time that Nepal's upstream-gauge thresholds give [8].",
+      "marker": "[8]",
+      "note_id": "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+      "numbers": [
+        "15",
+        "30",
+        "30",
+        "6",
+        "8"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Whatever the cadence, gauges near a source die first [23], so a quiet gauge must never read as reassurance.",
+      "marker": "[23]",
+      "note_id": "the-bhote-koshitrishuli-flash-flood-of-26-august-2026-rasuwa-nepal-warning-laten",
+      "numbers": [
+        "23"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "DHM's network is sparse and stage-based: about 150 hydrometric stations for more than 6,000 rivers report water level, not real-time discharge [86], telemetered every five minutes in the monsoon [84], with model forecasts (MIKE 11) only on large rivers [85].",
+      "marker": "[86]",
+      "note_id": "nepal-wants-to-power-south-asia-it-does-not-know-what-its-rivers-are-doing",
+      "numbers": [
+        "150",
+        "6,000",
+        "86",
+        "84",
+        "11",
+        "85"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "DHM's network is sparse and stage-based: about 150 hydrometric stations for more than 6,000 rivers report water level, not real-time discharge [86], telemetered every five minutes in the monsoon [84], with model forecasts (MIKE 11) only on large rivers [85].",
+      "marker": "[84]",
+      "note_id": "some-recent-developments-in-hydro-meteorological-data",
+      "numbers": [
+        "150",
+        "6,000",
+        "86",
+        "84",
+        "11",
+        "85"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "DHM's network is sparse and stage-based: about 150 hydrometric stations for more than 6,000 rivers report water level, not real-time discharge [86], telemetered every five minutes in the monsoon [84], with model forecasts (MIKE 11) only on large rivers [85].",
+      "marker": "[85]",
+      "note_id": "early-warning-system-and",
+      "numbers": [
+        "150",
+        "6,000",
+        "86",
+        "84",
+        "11",
+        "85"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Stakeholders asked DHM for \"consistency in terminology or colour codes\" [8]; an unofficial alarm scale would undercut that, and inconsistent hazard maps give people grounds to dispute official ones [27].",
+      "marker": "[8]",
+      "note_id": "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+      "numbers": [
+        "8",
+        "27"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Stakeholders asked DHM for \"consistency in terminology or colour codes\" [8]; an unofficial alarm scale would undercut that, and inconsistent hazard maps give people grounds to dispute official ones [27].",
+      "marker": "[27]",
+      "note_id": "r-e-g-u-l-a-r-p-a-p-e-r",
+      "numbers": [
+        "8",
+        "27"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The Common Alerting Protocol (CAP) is an XML standard for alert messages; one alert can carry a block per language and describe its area with polygons [28].",
+      "marker": "[28]",
+      "note_id": "common-alerting-protocol",
+      "numbers": [
+        "28"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "WMO made CAP a recommended practice in 2023 [29], and in April 2025 DHM agreed with WMO to develop \"a draft national implementation plan, including Standard Operating Procedures on CAP messages\" [30].",
+      "marker": "[29]",
+      "note_id": "central-for-applied-research-and-development-card",
+      "numbers": [
+        "2023",
+        "29",
+        "2025",
+        "30"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "WMO made CAP a recommended practice in 2023 [29], and in April 2025 DHM agreed with WMO to develop \"a draft national implementation plan, including Standard Operating Procedures on CAP messages\" [30].",
+      "marker": "[30]",
+      "note_id": "wmo-strengthens-early-warning-services-in-nepal",
+      "numbers": [
+        "2023",
+        "29",
+        "2025",
+        "30"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "No public DHM CAP feed was found, seven years after a 2018 pilot [8].",
+      "marker": "[8]",
+      "note_id": "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+      "numbers": [
+        "2018",
+        "8"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The Atlas should build a CAP reader now, so it can show official alerts verbatim, with their polygons, on the day a feed appears, watching WMO's Severe Weather Information Centre, which aggregates official CAP warnings and links to the Register of Alerting Authorities, for a Nepal entry [90].",
+      "marker": "[90]",
+      "note_id": "severe-weather-information-centre-30",
+      "numbers": [
+        "90"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "CAP's urgency, severity and certainty fields are meant for registered alerting authorities, aggregators could strip the label, and even DHM \"has no legal authority to order evacuations\" [25].",
+      "marker": "[25]",
+      "note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+      "numbers": [
+        "25"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "For real earthquakes, the Atlas should link to the US Geological Survey's ShakeMap (shaking maps) and PAGER (impact alerts) rather than recompute them; USGS advises users to \"always seek the most current PAGER release\" [31].",
+      "marker": "[31]",
+      "note_id": "pager-scientific-background",
+      "numbers": [
+        "31"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Loss records deserve archiving too: UNDRR notes that as lead time shortens, \"pre-existing vulnerability and historical impact data becomes more important\" [32].",
+      "marker": "[32]",
+      "note_id": "an-impact-based-early-warning-module-in-nepals-bipad-portal-undrr",
+      "numbers": [
+        "32"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "No BIPAD licence was found, and police-entered incident locations \"sometimes occur off-site\" [14].",
+      "marker": "[14]",
+      "note_id": "why-bangladesh-needs-an-integrated-disaster-information-system-like-nepals-bipad",
+      "numbers": [
+        "14"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "It resolved to follow the Survey Department's transliteration standard and to tag `name`, `name:ne`, `alt_name` and `name:en` \"so that the search function of softwares can find the features\" [33].",
+      "marker": "[33]",
+      "note_id": "nepalmeetings2022-12-15-openstreetmap-wiki",
+      "numbers": [
+        "33"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The `name:ne` key should \"reflect local pronunciation accurately\" [34].",
+      "marker": "[34]",
+      "note_id": "keynamene-openstreetmap-wiki",
+      "numbers": [
+        "34"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The buildable change is a search index generated at deploy time from an OSM Nepal extract [35], covering the 753 local levels, wards where mapped, and corridor settlements.",
+      "marker": "[35]",
+      "note_id": "wikiproject-nepal-openstreetmap-wiki",
+      "numbers": [
+        "35",
+        "753"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "English spellings the Atlas generates should follow the Survey Department standard [33], and the place panel should mark each name as constitutional, official list or community-mapped.",
+      "marker": "[33]",
+      "note_id": "nepalmeetings2022-12-15-openstreetmap-wiki",
+      "numbers": [
+        "33"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Protomaps lists Nepali among scripts that \"require paired positioned glyph font\" stacks [36]; with a standard stack, conjuncts and pre-base vowel signs may be misdrawn.",
+      "marker": "[36]",
+      "note_id": "basemap-localization-protomaps-docs",
+      "numbers": [
+        "36"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Browsers add their own faults: \"all engines have problems with vowel-signs, especially but not only pre-base vowel-signs\", and letter-spacing splits conjuncts [37].",
+      "marker": "[37]",
+      "note_id": "devanagari-gap-analysis",
+      "numbers": [
+        "37"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The fixes are cheap: a positioned-glyph stack for basemap labels, HTML overlays for Atlas-specific labels (which the browser shapes correctly), no letter-spacing on Devanagari anywhere, and Protomaps' dual-language pattern with Nepali first [36].",
+      "marker": "[36]",
+      "note_id": "basemap-localization-protomaps-docs",
+      "numbers": [
+        "36"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A World Bank review found demand for location-specific forecasts [15], and after 2026 a researcher put it plainly: \"People need to know exactly how severe the risk is to their specific location\" [25].",
+      "marker": "[15]",
+      "note_id": "transforming-nepals-hydro-and-agrometeorological-services-to-build-resilience",
+      "numbers": [
+        "15",
+        "2026",
+        "25"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A World Bank review found demand for location-specific forecasts [15], and after 2026 a researcher put it plainly: \"People need to know exactly how severe the risk is to their specific location\" [25].",
+      "marker": "[25]",
+      "note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+      "numbers": [
+        "15",
+        "2026",
+        "25"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "PMTiles, \"a single-file archive format for pyramids of tiled data\" read through HTTP range requests, lets a static host serve its own Nepal basemap and enables offline caching [38]; range requests should be tested on the actual host first. 3D terrain, the heaviest part of the page, should become opt-in.",
+      "marker": "[38]",
+      "note_id": "pmtiles-concepts-protomaps-docs",
+      "numbers": [
+        "38",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The facilities layer has a Nepali precedent: Kathmandu Living Labs (KLL) began by mapping the valley's schools and health facilities into OSM, on the principle \"work once, and put to multiple creative uses\" [39].",
+      "marker": "[39]",
+      "note_id": "about-kathmandu-living-labs",
+      "numbers": [
+        "39"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Scenario edges should be soft (feathered or hatched, no hairlines), and summaries should name wards and municipalities, because maps \"are easier to interpret if risk area borders are defined by well-recognized features\" [4].",
+      "marker": "[4]",
+      "note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+      "numbers": [
+        "4"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Google's Flood Hub publishes free daily river forecasts \"up to 7 days in advance\" [40], with ungauged-basin reliability up to five days comparable to or better than GloFAS [41].",
+      "marker": "[40]",
+      "note_id": "flood-forecasting",
+      "numbers": [
+        "7",
+        "40",
+        "41"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Google's Flood Hub publishes free daily river forecasts \"up to 7 days in advance\" [40], with ungauged-basin reliability up to five days comparable to or better than GloFAS [41].",
+      "marker": "[41]",
+      "note_id": "global-prediction-of-extreme-floods-in-ungauged-watersheds-nature",
+      "numbers": [
+        "7",
+        "40",
+        "41"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Against that, DHM staff say \"numerical weather prediction based on global data is weak\" for Nepal [8], and an independent benchmark (preprint) found both systems \"exhibit low reliability\" in data-scarce regions, \"particularly for rare flood events\" [42].",
+      "marker": "[8]",
+      "note_id": "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+      "numbers": [
+        "8",
+        "42"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Against that, DHM staff say \"numerical weather prediction based on global data is weak\" for Nepal [8], and an independent benchmark (preprint) found both systems \"exhibit low reliability\" in data-scarce regions, \"particularly for rare flood events\" [42].",
+      "marker": "[42]",
+      "note_id": "enhancing-flood-forecasting-reliability-in-data-scarce-regions-with-a-distribute",
+      "numbers": [
+        "8",
+        "42"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "During the July 2016 Gongbatongshacuo outburst, a seismic network on the Bhote Koshi recorded a front that \"propagates between stations at 8.7 m/s\", reaching maximum depth within two minutes, followed by a larger sediment-laden pulse \"slower, at 5 m/s\" [1].",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "2016",
+        "8.7",
+        "5",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The back-calculation of the 1941 Palcacocha outburst in Peru gives \"travel times between 36 and 70 min\" over about 23 km, about 5.5–10.6 m/s, though as a model bound rather than a measurement [11].",
+      "marker": "[11]",
+      "note_id": "hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera",
+      "numbers": [
+        "1941",
+        "36",
+        "70",
+        "23",
+        "5.5",
+        "10.6",
+        "11"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Cascades can be faster still: a preprint reconstruction of 2026 estimates about 52 m/s from source to border, decaying to 6.4–7.2 m/s on the lower Trishuli [24].",
+      "marker": "[24]",
+      "note_id": "a-multi-source-quantitative-reconstruction-of-the-26-august-2026-bhote-koshi-roc",
+      "numbers": [
+        "2026",
+        "52",
+        "6.4",
+        "7.2",
+        "24"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Add a labelled \"mass-flow cascade\" case: the reconstruction fitted a log-linear decay to six segment speeds (80.1% of variation explained, about a sevenfold fall) [24], so a near-field 15–30 m/s over the first 10–20 km, decaying to 6–7 m/s, is a proposal to test.",
+      "marker": "[24]",
+      "note_id": "a-multi-source-quantitative-reconstruction-of-the-26-august-2026-bhote-koshi-roc",
+      "numbers": [
+        "80.1%",
+        "24",
+        "15",
+        "30",
+        "10",
+        "20",
+        "6",
+        "7"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Moving from simplified to fuller hydraulic routing raised peak-discharge skill (Nash–Sutcliffe efficiency, a 0–1 fit score) from 0.48 to 0.71 on large rivers, yet accuracy still depends largely on the model forcing [43].",
+      "marker": "[43]",
+      "note_id": "nhess-evaluating-the-impact-of-model-complexity-on-flood-wave-propagation-and-in",
+      "numbers": [
+        "0",
+        "1",
+        "0.48",
+        "0.71",
+        "43"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Nepal's own record favours simple, transparent models: data-based forecasting in \"a simple visual tool\" raised Karnali lead times from 2–3 hours to 7–8 hours [44].",
+      "marker": "[44]",
+      "note_id": "nhess-community-based-early-warning-systems-for-flood-risk-mitigation-in-nepal",
+      "numbers": [
+        "2",
+        "3",
+        "7",
+        "8",
+        "44"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Their peaks should be anchored to DHM return-period values, such as the 30-year 490–560 m³/s at Barabise [1], and their reports should use DHM's stage terms (2C).",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "30",
+        "490",
+        "560",
+        "1",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "In 2016 the peak of 1,500–2,100 m³/s at Chaku fell to 700–900 m³/s at Barabise, still above the 30-year monsoon flood of 490–560 m³/s, and the crossover where the outburst stopped being anomalous lay about 45 km downstream (55 km for the larger 1981 flood) [1].",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "2016",
+        "1,500",
+        "2,100",
+        "700",
+        "900",
+        "30",
+        "490",
+        "560",
+        "45",
+        "55",
+        "1981",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The 2021 Melamchi flood eroded 83.24 million m³ and deposited only 23.24 million m³ in its own valley, sending \"more than 70% of sediment\" onward (preprint) [45].",
+      "marker": "[45]",
+      "note_id": "the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o",
+      "numbers": [
+        "2021",
+        "83.24",
+        "23.24",
+        "70%",
+        "45"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "At Devghat in 2026, discharge rose from about 2,600 to 5,850 m³/s and mean channel width grew from 66.1 m to 266.5 m, with an excess volume of about 19.96 million m³, 34.8% of total flow [24].",
+      "marker": "[24]",
+      "note_id": "a-multi-source-quantitative-reconstruction-of-the-26-august-2026-bhote-koshi-roc",
+      "numbers": [
+        "2026,",
+        "2,600",
+        "5,850",
+        "66.1",
+        "266.5",
+        "19.96",
+        "34.8%",
+        "24"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The 2023 South Lhonak outburst in Sikkim had effects \"hundreds of kilometers\" downstream and destroyed the Teesta III hydropower project 63 km below the lake (abstract, grade C) [80].",
+      "marker": "[80]",
+      "note_id": "abstract-egu25-768",
+      "numbers": [
+        "2023",
+        "63",
+        "80"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Thame's release of about 4–5 × 10⁵ m³ damaged a road bridge about 45 km downstream [3], and in figures reported on 28 August, 171 of the first 469 bodies recovered after the 2026 flood were in Chitwan, more than 100 river-km below the border [22].",
+      "marker": "[3]",
+      "note_id": "abstract-egu25-12752",
+      "numbers": [
+        "4",
+        "5",
+        "10",
+        "45",
+        "3",
+        "28",
+        "171",
+        "469",
+        "2026",
+        "100",
+        "22"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Thame's release of about 4–5 × 10⁵ m³ damaged a road bridge about 45 km downstream [3], and in figures reported on 28 August, 171 of the first 469 bodies recovered after the 2026 flood were in Chitwan, more than 100 river-km below the border [22].",
+      "marker": "[22]",
+      "note_id": "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e",
+      "numbers": [
+        "4",
+        "5",
+        "10",
+        "45",
+        "3",
+        "28",
+        "171",
+        "469",
+        "2026",
+        "100",
+        "22"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Outbursts also destabilise slopes: river-connected landslide area in the 2016 monsoon was about 100 times a typical year's [1].",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "2016",
+        "100",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A Tsho Rolpa study gives 8,198 to 26,662 m³/s for 20 m and 40 m breaches [46], and the Palcacocha authors insist that forward simulations need \"a larger set of back-calculated GLOF process chains, taking into account the expected parameter uncertainties\" [11].",
+      "marker": "[46]",
+      "note_id": "piahs-glacial-lake-outburst-flood-glof-modeling-of-tsho-rolpa-glacial-lake-nepal",
+      "numbers": [
+        "8,198",
+        "26,662",
+        "20",
+        "40",
+        "46",
+        "11"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A Tsho Rolpa study gives 8,198 to 26,662 m³/s for 20 m and 40 m breaches [46], and the Palcacocha authors insist that forward simulations need \"a larger set of back-calculated GLOF process chains, taking into account the expected parameter uncertainties\" [11].",
+      "marker": "[11]",
+      "note_id": "hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera",
+      "numbers": [
+        "8,198",
+        "26,662",
+        "20",
+        "40",
+        "46",
+        "11"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Listed lakes should get low and high breach cases from published studies; unlisted lakes a volume range estimated from area, labelled *uncertain by a factor of several*, because bathymetric surveys find \"substantial discrepancies\" between measured volumes and the empirical volume–area relations used for unsurveyed lakes (abstract) [79].",
+      "marker": "[79]",
+      "note_id": "abstract-egu25-14977",
+      "numbers": [
+        "79"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The 2020 ICIMOD/UNDP inventory mapped 3,624 glacial lakes in the Koshi, Gandaki and Karnali basins and named 47 potentially dangerous lakes: 21 in Nepal, 25 in Tibet draining into Nepal and one in India [12].",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "2020",
+        "3,624",
+        "47",
+        "21",
+        "25",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Extreme climatic conditions, seismic activity, and human interference are not considered, and only 13 of the 21 current Nepal lakes match the 2011 list, with eight deleted and eight added [12].",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "13",
+        "21",
+        "2011",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "At Thame, an avalanche into the upper of two small lakes sent a wave 650 m down into a moraine-dammed lake, which breached [3].",
+      "marker": "[3]",
+      "note_id": "abstract-egu25-12752",
+      "numbers": [
+        "650",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A preprint finds the upper lake grew more than twelvefold in area between 2015 and 2024 and reports 36 households destroyed [47]. \"Never failed\" is weak evidence of safety: a Himalaya-wide mapping added more than 200 past outbursts to the 108 already documented (abstract, grade C) [78].",
+      "marker": "[47]",
+      "note_id": "quantifying-the-long-term-evolution-of-glacial-lakes-and-the-impact-of-the-2024",
+      "numbers": [
+        "2015",
+        "2024",
+        "36",
+        "47",
+        "200",
+        "108",
+        "78"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A preprint finds the upper lake grew more than twelvefold in area between 2015 and 2024 and reports 36 households destroyed [47]. \"Never failed\" is weak evidence of safety: a Himalaya-wide mapping added more than 200 past outbursts to the 108 already documented (abstract, grade C) [78].",
+      "marker": "[78]",
+      "note_id": "abstract-egu23-15703",
+      "numbers": [
+        "2015",
+        "2024",
+        "36",
+        "47",
+        "200",
+        "108",
+        "78"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A 2026 inventory maps 31,698 glacial lakes across High Mountain Asia, including Nepal's Tibetan headwaters, in two epochs and under a CC BY 4.0 licence [48].",
+      "marker": "[48]",
+      "note_id": "automated-satellite-based-glacial-lake-inventory-and-change-detection-in-high-mo",
+      "numbers": [
+        "2026",
+        "31,698",
+        "4.0",
+        "48"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "It captures all lakes above 100,000 m², about 96% between 20,000 and 100,000 m², and only 25% below 5,400 m² [48].",
+      "marker": "[48]",
+      "note_id": "automated-satellite-based-glacial-lake-inventory-and-change-detection-in-high-mo",
+      "numbers": [
+        "100,000",
+        "96%",
+        "20,000",
+        "100,000",
+        "25%",
+        "5,400",
+        "48"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Thame's upper lake, about 8,000 m² in 2015 [47], sat below the well-captured size range and below the Tier 3 cutoff proposed below, so the tiered layer would not have shown it in advance; no tier can claim completeness.",
+      "marker": "[47]",
+      "note_id": "quantifying-the-long-term-evolution-of-glacial-lakes-and-the-impact-of-the-2024",
+      "numbers": [
+        "8,000",
+        "2015",
+        "47",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "- **Tier 1, official:** the 21 Nepal lakes with ICIMOD's rank and citation, linked rather than redistributed, because the inventory is licensed CC BY-NC-ND [12].",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "1,",
+        "21",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "- **Tier 3, mapped but unassessed:** open-inventory lakes of at least 0.02 km², ICIMOD's own threshold for a lake large enough to cause a GLOF (1,410 lakes in the three basins) [12], in Nepal-draining catchments, labelled *mapped lake, not assessed, not on any danger list, list not complete, scenario is hypothetical*, with volume ranges and a cascade option wherever another mapped lake of any size lies within a few hundred metres, as at Thame [3].",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "3,",
+        "0.02",
+        "1,410",
+        "12",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "- **Tier 3, mapped but unassessed:** open-inventory lakes of at least 0.02 km², ICIMOD's own threshold for a lake large enough to cause a GLOF (1,410 lakes in the three basins) [12], in Nepal-draining catchments, labelled *mapped lake, not assessed, not on any danger list, list not complete, scenario is hypothetical*, with volume ranges and a cascade option wherever another mapped lake of any size lies within a few hundred metres, as at Thame [3].",
+      "marker": "[3]",
+      "note_id": "abstract-egu25-12752",
+      "numbers": [
+        "3,",
+        "0.02",
+        "1,410",
+        "12",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Exposure justifies the effort: ICIMOD figures put about 141,911 people below Tsho Rolpa and 165,068 below Thulagi [12].",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "141,911",
+        "165,068",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Named lakes above villages, trekking hubs or hydropower sites can also draw objection, since hazard lines carry property and planning consequences [27], so Tier 3 should be previewed with ICIMOD and affected municipalities.",
+      "marker": "[27]",
+      "note_id": "r-e-g-u-l-a-r-p-a-p-e-r",
+      "numbers": [
+        "27",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Each flood report needs a \"not modelled\" box beside the numbers: entrainment and debris flow, avalanche or landslide triggers, cascades unless selected, flood-triggered valley-wall landslides, inundation depth, and channel change (Melamchi's lower basin \"widened by 3-5-fold and aggraded by ~5-20 m\" [45]).",
+      "marker": "[45]",
+      "note_id": "the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o",
+      "numbers": [
+        "3",
+        "5",
+        "5",
+        "20",
+        "45"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Heavier physics can inform the site offline: a university partner could run r.avaflow, an open mass-flow framework that \"explicitly considers both entrainment and stopping with deposition\", for a few high-exposure origins after \"thorough parameter studies\" [49].",
+      "marker": "[49]",
+      "note_id": "gmd-ravaflow-v1-an-advanced-open-source-computational-framework-for-the-propagat",
+      "numbers": [
+        "49"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The 2016 outburst is the ideal hindcast, with a known origin, measured front speed and measured peaks [1].",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "2016",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Thame's damage reach [3] and the official 2026 timeline [20, 21] are secondary checks.",
+      "marker": "[3]",
+      "note_id": "abstract-egu25-12752",
+      "numbers": [
+        "3",
+        "2026",
+        "20,",
+        "21"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Thame's damage reach [3] and the official 2026 timeline [20, 21] are secondary checks.",
+      "marker": "[20]",
+      "note_id": "ndrrma-emergency-response-operations-center",
+      "numbers": [
+        "3",
+        "2026",
+        "20,",
+        "21"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Thame's damage reach [3] and the official 2026 timeline [20, 21] are secondary checks.",
+      "marker": "[21]",
+      "note_id": "major-flash-flood-sweeps-through-nepals-rasuwa-district-raising-fears-of-further",
+      "numbers": [
+        "3",
+        "2026",
+        "20,",
+        "21"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The USGS Global Vs30 Mosaic, a slope-based grid at 30 arc-seconds ranging from 98 to 2,197 m/s, is free; the global file is 631 MB, a Nepal clip a few megabytes [50].",
+      "marker": "[50]",
+      "note_id": "vs30-models-and-data",
+      "numbers": [
+        "30",
+        "30",
+        "98",
+        "2,197",
+        "631",
+        "50"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "However, ASK14 and IDR14 show better LLH scores [2].",
+      "marker": "[2]",
+      "note_id": "arxiv241005918v1-physicsgeo-ph-8-oct-2024",
+      "numbers": [
+        "14",
+        "14",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "ASK14 is better only relative to its NGA-West2 siblings: at PGA, BSSA14's mean normalised residual is about +1.1 and ASK14's about +0.9, so recorded shaking sat roughly one standard deviation above both medians, and the authors recommend ZHAO06 and KAN06, among others, at the shortest period [2].",
+      "marker": "[2]",
+      "note_id": "arxiv241005918v1-physicsgeo-ph-8-oct-2024",
+      "numbers": [
+        "14",
+        "2",
+        "14",
+        "1.1",
+        "14",
+        "0.9",
+        "06",
+        "06,",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The ranking is a preprint drawn mostly from Indian networks, kinder to BSSA14 in the Indo-Gangetic Plains only at periods of about 0.3 s and longer; at PGA, the Atlas's only output, BSSA14 underpredicts there too (mean residual 1.05), which strengthens the case for change in the Terai [2].",
+      "marker": "[2]",
+      "note_id": "arxiv241005918v1-physicsgeo-ph-8-oct-2024",
+      "numbers": [
+        "14",
+        "0.3",
+        "14",
+        "1.05",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Its authors stress that \"no single GMPE can be considered suitable for the entire range of spectral periods\" [2].",
+      "marker": "[2]",
+      "note_id": "arxiv241005918v1-physicsgeo-ph-8-oct-2024",
+      "numbers": [
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Run a Gorkha 2015 hindcast with per-cell Vs30 against station records and the USGS ShakeMap, whose archive USGS uses for \"calibrating global earthquake loss estimation\" [52], and publish residuals by site class.",
+      "marker": "[52]",
+      "note_id": "shakemap",
+      "numbers": [
+        "2015",
+        "30",
+        "52"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The 2015 Gorkha rupture ran about 140 km eastward along the Main Himalayan Thrust [82], so distance from a single epicentre misplaces shaking for M7.5–8.5 scenarios, and the methods page should state which representation the engine uses.",
+      "marker": "[82]",
+      "note_id": "lower-edge-of-locked-main-himalayan-thrust-unzipped-by-the-2015-gorkha-earthquak",
+      "numbers": [
+        "2015",
+        "140",
+        "82",
+        "7.5",
+        "8.5"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "BSSA14 expects Joyner–Boore distance (to the surface projection of the rupture): the minimal fix is a finite-fault rectangle for large presets, and where only a point is known, published conversions from epicentral distance with inflated sigma [83].",
+      "marker": "[83]",
+      "note_id": "estimating-rupture-distances-without-a-rupture",
+      "numbers": [
+        "14",
+        "83"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "At Kantipath, \"the short-period ground motions of the mainshock were relatively weak despite the proximity of the site to the source fault\", because of strong nonlinear soil response, while motion at 4–5 s periods was large [53].",
+      "marker": "[53]",
+      "note_id": "analysis-of-strong-ground-motions-and-site-effects-at-kantipath-kathmandu-from-2",
+      "numbers": [
+        "4",
+        "5",
+        "53"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Another analysis found \"a narrower and larger peak at ~0.4 s and a smaller, but very wide, peak at ~5 s\", with design spectra underestimating demand on flexible structures [54].",
+      "marker": "[54]",
+      "note_id": "the-2015-mw-78-gorkha-earthquake-in-nepal-and-its-aftershocks-analysis-of-strong",
+      "numbers": [
+        "0.4",
+        "5",
+        "54"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A valley model from the Gorkha sequence found the long-period site term \"has a strong correlation with the bedrock depth\" [55].",
+      "marker": "[55]",
+      "note_id": "ground-motion-prediction-equation-for-the-kathmandu-valley-nepal-based-on-strong",
+      "numbers": [
+        "55"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The honest response is a fixed note that long-period basin amplification was observed in 2015 and is not modelled, and, later, a separate long-period indicator built on the bedrock-depth relation [55], in effect a Z1 proxy.",
+      "marker": "[55]",
+      "note_id": "ground-motion-prediction-equation-for-the-kathmandu-valley-nepal-based-on-strong",
+      "numbers": [
+        "2015",
+        "55",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Fragility curves from 665,515 damaged buildings in 603 villages show that \"stone masonry buildings in Nepal are highly vulnerable even in the case of low to moderate ground shaking\" [13].",
+      "marker": "[13]",
+      "note_id": "observational-fragility-functions-for-residential-stone-masonry-buildings-in-nep",
+      "numbers": [
+        "665,515",
+        "603",
+        "13"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "PAGER reports \"the range of possible fatalities and economic losses\" with uncertainty attached [31].",
+      "marker": "[31]",
+      "note_id": "pager-scientific-background",
+      "numbers": [
+        "31"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "USGS scenarios \"describe the expected ground motions and effects of specific hypothetical large earthquakes\" for preparedness and planning [52].",
+      "marker": "[52]",
+      "note_id": "shakemap",
+      "numbers": [
+        "52"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The open GEM/BGS national hazard grid (PGA at 10% and 2% probability of exceedance in 50 years, CSV) [56] can sit beside scenarios as a long-term reference, since the national hazard map was already about two decades old in 2015; an OpenQuake study with a 1934-recurrence loss scenario gives the 1934 preset a comparison (abstract) [88].",
+      "marker": "[56]",
+      "note_id": "meteor-nepal-seismic-hazard-map-with-mean-peak-ground-acceleration-pga-in-g-for",
+      "numbers": [
+        "10%",
+        "2%",
+        "50",
+        "56",
+        "2015",
+        "1934",
+        "1934",
+        "88"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The open GEM/BGS national hazard grid (PGA at 10% and 2% probability of exceedance in 50 years, CSV) [56] can sit beside scenarios as a long-term reference, since the national hazard map was already about two decades old in 2015; an OpenQuake study with a 1934-recurrence loss scenario gives the 1934 preset a comparison (abstract) [88].",
+      "marker": "[88]",
+      "note_id": "seismic-risk-assessment-and-hazard-mapping-in-nepal",
+      "numbers": [
+        "10%",
+        "2%",
+        "50",
+        "56",
+        "2015",
+        "1934",
+        "1934",
+        "88"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Earthquake early warning works in seconds on dedicated networks, as a Nepal pilot that characterised two small earthquakes \"in less than 10 seconds\" showed [57].",
+      "marker": "[57]",
+      "note_id": "nepaleew-testing-the-feasibility-of-an-earthquake-early-warning-system-in-nepal",
+      "numbers": [
+        "10",
+        "57"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The national household survey (NMICS 2024/25) found 82% of households with internet, 73% in rural areas, 68.5% in Karnali and 52.9% in the poorest group, with women's phone ownership at 81.6% against men's 90.4% [9].",
+      "marker": "[9]",
+      "note_id": "nepals-82-households-have-internet-but-digital-skills-fall-short",
+      "numbers": [
+        "2024",
+        "25",
+        "82%",
+        "73%",
+        "68.5%",
+        "52.9%",
+        "81.6%",
+        "90.4%",
+        "9"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "ITU puts *individual* use at 48.4% and household access at 52.5% [26]; DataReportal counts 44% of people offline [58].",
+      "marker": "[26]",
+      "note_id": "nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-grow",
+      "numbers": [
+        "48.4%",
+        "52.5%",
+        "26",
+        "44%",
+        "58"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "ITU puts *individual* use at 48.4% and household access at 52.5% [26]; DataReportal counts 44% of people offline [58].",
+      "marker": "[58]",
+      "note_id": "digital-2026-nepal-datareportal-global-digital-insights",
+      "numbers": [
+        "48.4%",
+        "52.5%",
+        "26",
+        "44%",
+        "58"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Network coverage is less binding: 4G reaches 81.6% of the population [26].",
+      "marker": "[26]",
+      "note_id": "nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-grow",
+      "numbers": [
+        "4",
+        "81.6%",
+        "26"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Skills are thinner still: 19.2% of respondents verified information they found online [9].",
+      "marker": "[9]",
+      "note_id": "nepals-82-households-have-internet-but-digital-skills-fall-short",
+      "numbers": [
+        "19.2%",
+        "9"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "High-usage mobile data costs 2.9% of gross national income per head [26].",
+      "marker": "[26]",
+      "note_id": "nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-grow",
+      "numbers": [
+        "2.9%",
+        "26"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A Raspberry Pi PMTiles field server reports 14 hours on a battery, but self-reported and without Nepal users [59]; field servers are a partner's option.",
+      "marker": "[59]",
+      "note_id": "performance-comparison-of-an-offline-pmtiles-powered-map-server-running-on-a-ras",
+      "numbers": [
+        "14",
+        "59"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Nepali should be the default for Nepali-language browsers, with a visible switch and page-language attributes, as Nepal's accessibility position paper recommends [60].",
+      "marker": "[60]",
+      "note_id": "prioritizing-digital-accessibility-for-inclusive",
+      "numbers": [
+        "60"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Every banner, band label and action line should be written in parallel by a Nepali author against a shared glossary, reusing DHM's stage terms, following the call to \"tailor messages in a language that different users understand\" [19].",
+      "marker": "[19]",
+      "note_id": "missed-opportunities-in-utilization-of-weather-forecasts-an-analysis-of-october",
+      "numbers": [
+        "19"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Text must be Unicode: Nepali in legacy fonts such as Preeti is \"just graphic representation of Nepali text\" to a screen reader [61].",
+      "marker": "[61]",
+      "note_id": "digital-accessibility-checklist",
+      "numbers": [
+        "61"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The Atlas should state that it meets Nepal's 2021 government-website directive (Unicode, adjustable fonts, Nepali and English) as well as WCAG; even the government's 2026 disability-law consultation went out as images and Preeti text [87].",
+      "marker": "[87]",
+      "note_id": "government-invites-feedback-on-disability-law-online-but-target-group-is-locked",
+      "numbers": [
+        "2021",
+        "2026",
+        "87"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "A WebGL map alone cannot meet the Web Content Accessibility Guidelines (WCAG), because a screen reader cannot read it [62].",
+      "marker": "[62]",
+      "note_id": "introduction-to-understanding-wcag-21-wai-w3c",
+      "numbers": [
+        "62"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Prayatna Nepal's audit, run with testers who have disabilities, found \"inappropriate landmarks, heading styles and inaccessible colour contrast\" on Nepali sites and sets 4.5:1 contrast, landmarks and keyboard operation as basics [60].",
+      "marker": "[60]",
+      "note_id": "prioritizing-digital-accessibility-for-inclusive",
+      "numbers": [
+        "4.5",
+        "1",
+        "60"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Bands and flood colours must also survive colour blindness, which affects hazard-map reading [4].",
+      "marker": "[4]",
+      "note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+      "numbers": [
+        "4"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Of the 977 people listed missing in NDRRMA's report of 27 August 2026, 517 were foreign tourists [20], and the alerts went out only in Nepali, on a corridor that includes a major tourist trekking route [25].",
+      "marker": "[20]",
+      "note_id": "ndrrma-emergency-response-operations-center",
+      "numbers": [
+        "977",
+        "27",
+        "2026,",
+        "517",
+        "20",
+        "25"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Of the 977 people listed missing in NDRRMA's report of 27 August 2026, 517 were foreign tourists [20], and the alerts went out only in Nepali, on a corridor that includes a major tourist trekking route [25].",
+      "marker": "[25]",
+      "note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+      "numbers": [
+        "977",
+        "27",
+        "2026,",
+        "517",
+        "20",
+        "25"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "In a New Zealand survey of more than 1,100 people, many \"expected an emergency mobile alert\" for a local-source tsunami that \"can arrive before an official warning can be issued\", and about one in four did not grasp the need to leave at once; agencies answered with the rule \"Long or Strong, Get Gone\" [63].",
+      "marker": "[63]",
+      "note_id": "science-strengthening-tsunami-safety-preventionweb",
+      "numbers": [
+        "1,100",
+        "63"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Near-source GLOFs and debris floods are Nepal's local-source tsunamis; in 2026 the first settlement had negative lead time [23], so no SMS could have arrived first.",
+      "marker": "[23]",
+      "note_id": "the-bhote-koshitrishuli-flash-flood-of-26-august-2026-rasuwa-nepal-warning-laten",
+      "numbers": [
+        "2026",
+        "23"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "In 2026 a phone call to a head teacher emptied a school of 900 students ten minutes before debris buried it, and Nepalis \"trust their family, friends and neighbors more than government officials\" [25].",
+      "marker": "[25]",
+      "note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+      "numbers": [
+        "2026",
+        "900",
+        "25"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "DHM's own voice-alert pilot targets the same intermediaries because \"it is difficult to send a bulk call to everyone at once\" [64].",
+      "marker": "[64]",
+      "note_id": "government-to-provide-voice-alerts-on-flood-weather-updates",
+      "numbers": [
+        "64"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The Protective Action Decision Model \"posits that a hazard map is a form of warning message\" [4].",
+      "marker": "[4]",
+      "note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+      "numbers": [
+        "4"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "In a tsunami-map study, \"at least 33% of EXs and 47% of GUs did not clearly distinguish between tsunami hazard and evacuation maps\" [5]: a third of experts and nearly half of the public.",
+      "marker": "[5]",
+      "note_id": "assessing-perceptions-and-interpretations-of-tsunami-maps-insights-from-the-publ",
+      "numbers": [
+        "33%",
+        "47%",
+        "5"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Many people read the hurricane uncertainty cone as zero risk outside it [4], and 57% of US residents inside official floodplains perceived lower risk than the official map, with 29% unsure [65].",
+      "marker": "[4]",
+      "note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+      "numbers": [
+        "4",
+        "57%",
+        "29%",
+        "65"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Many people read the hurricane uncertainty cone as zero risk outside it [4], and 57% of US residents inside official floodplains perceived lower risk than the official map, with 29% unsure [65].",
+      "marker": "[65]",
+      "note_id": "uvm-study-reveals-millions-at-risk-college-of",
+      "numbers": [
+        "4",
+        "57%",
+        "29%",
+        "65"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Reassurance can kill: before the 2009 L'Aquila earthquake, official assurances \"led many to remain in their homes when the earthquake struck\", and probability formats lose their benefit for \"low-probability, high-consequence (LPHC) events like major earthquakes\" [66].",
+      "marker": "[66]",
+      "note_id": "public-understanding-and-scientific-uncertainty-the-communication-of-risk-in-the",
+      "numbers": [
+        "2009",
+        "66"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "4. **A place table** of named wards and settlements, since recognisable features aid reading [4].",
+      "marker": "[4]",
+      "note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+      "numbers": [
+        "4.",
+        "4"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "DHM's 1155 line belongs on the card, though it is \"not advertised widely due to limited capacity\" [8].",
+      "marker": "[8]",
+      "note_id": "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+      "numbers": [
+        "1155",
+        "8"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "8. **Accessible and photocopy-proof:** a text version alongside, since Nepali PDFs are \"not accessible to screen readers even if they are written in Unicode\" [61]; conjunct-safe type without letter-spacing [37]; legible in greyscale.",
+      "marker": "[61]",
+      "note_id": "digital-accessibility-checklist",
+      "numbers": [
+        "8.",
+        "61",
+        "37"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "8. **Accessible and photocopy-proof:** a text version alongside, since Nepali PDFs are \"not accessible to screen readers even if they are written in Unicode\" [61]; conjunct-safe type without letter-spacing [37]; legible in greyscale.",
+      "marker": "[37]",
+      "note_id": "devanagari-gap-analysis",
+      "numbers": [
+        "8.",
+        "61",
+        "37"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The format has a Nepali precedent: in 2015 relief actors asked KLL for \"printable maps, for navigation on the ground in places where mobile maps were unreliable\" [67].",
+      "marker": "[67]",
+      "note_id": "mapping-for-resilience-crowd-sourced-mapping-in-crises-humanitarian-practice-net",
+      "numbers": [
+        "2015",
+        "67"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Contour-style maps \"produce the better understanding of uncertainty about hazard exposure than gradational shaded or binned maps\" [4], yet Nepali stakeholders asked for colour codes, one noting that \"people don't have an idea of uncertainty; we have to train people\" [8].",
+      "marker": "[8]",
+      "note_id": "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+      "numbers": [
+        "4",
+        "8"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Single-zone tsunami maps produced higher risk perception than multi-zone ones [63], and the public preferred simpler maps than experts did [5].",
+      "marker": "[63]",
+      "note_id": "science-strengthening-tsunami-safety-preventionweb",
+      "numbers": [
+        "63",
+        "5"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Single-zone tsunami maps produced higher risk perception than multi-zone ones [63], and the public preferred simpler maps than experts did [5].",
+      "marker": "[5]",
+      "note_id": "assessing-perceptions-and-interpretations-of-tsunami-maps-insights-from-the-publ",
+      "numbers": [
+        "63",
+        "5"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Contours also demand more map skill from an audience in which 19.2% verify what they find online [9].",
+      "marker": "[9]",
+      "note_id": "nepals-82-households-have-internet-but-digital-skills-fall-short",
+      "numbers": [
+        "19.2%",
+        "9"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The tiebreaker is to tailor and test with the audience [68]: keep five soft-edged bands by default, noting that edges are uncertain by about one band, offer a contour view, and let a reader test decide.",
+      "marker": "[68]",
+      "note_id": "using-geovisualizations-to-educate-the-public-about-environmental-health",
+      "numbers": [
+        "68"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "PAGER's one-pager, with ranges, vulnerable building types and an instruction to seek the latest release, is the model [31].",
+      "marker": "[31]",
+      "note_id": "pager-scientific-background",
+      "numbers": [
+        "31"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Provenance also guards authority: inconsistent modelling and mapping of hazards created opportunity for challenge and the selective mobilisation of scientific uncertainty to dispute the legitimacy of official maps [27].",
+      "marker": "[27]",
+      "note_id": "r-e-g-u-l-a-r-p-a-p-e-r",
+      "numbers": [
+        "27"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "By 17 July 2024, 38 fatal landslides had killed 135 people in Nepal [69], and the September 2024 floods and landslides caused 249 deaths and an estimated NPR 46.68 billion in losses [70].",
+      "marker": "[69]",
+      "note_id": "fatal-landslides-in-nepal-in-2024-to-date",
+      "numbers": [
+        "17",
+        "2024,",
+        "38",
+        "135",
+        "69",
+        "2024",
+        "249",
+        "46.68",
+        "70"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "By 17 July 2024, 38 fatal landslides had killed 135 people in Nepal [69], and the September 2024 floods and landslides caused 249 deaths and an estimated NPR 46.68 billion in losses [70].",
+      "marker": "[70]",
+      "note_id": "28-october-2024",
+      "numbers": [
+        "17",
+        "2024,",
+        "38",
+        "135",
+        "69",
+        "2024",
+        "249",
+        "46.68",
+        "70"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Prediction is out of reach for a static volunteer site: Nepal's AI forecasting tool \"is currently not available for open access distribution\", and localised short bursts of rain \"could make it challenging to predict them in real-time\" [71].",
+      "marker": "[71]",
+      "note_id": "ai-forecasting-deployed-to-predict-nepal-landslides",
+      "numbers": [
+        "71"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "For Melamchi in 2021, \"we still do not have rainfall data\" [72].",
+      "marker": "[72]",
+      "note_id": "rainfall-data-remains-scarce-due-to-fewer-gauging-stations",
+      "numbers": [
+        "2021,",
+        "72"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The 2026 reconstruction calls for \"process-chain surveillance that connects unstable rock-ice source areas, entrainment-prone transport corridors, temporary blockages, and exposed downstream assets\" [24], and ICIMOD specialists warn that \"the Himalayas do not always respect those categories\" [73].",
+      "marker": "[24]",
+      "note_id": "a-multi-source-quantitative-reconstruction-of-the-26-august-2026-bhote-koshi-roc",
+      "numbers": [
+        "2026",
+        "24",
+        "73"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "The 2026 reconstruction calls for \"process-chain surveillance that connects unstable rock-ice source areas, entrainment-prone transport corridors, temporary blockages, and exposed downstream assets\" [24], and ICIMOD specialists warn that \"the Himalayas do not always respect those categories\" [73].",
+      "marker": "[73]",
+      "note_id": "the-nepal-floods-question-when-the-himalayas-collapse-who-gets-warned-climate-cr",
+      "numbers": [
+        "2026",
+        "24",
+        "73"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "And because the official lake ranking excludes seismic triggers [12], each earthquake report can list lakes inside its stronger shaking bands as *lakes exposed to this scenario's shaking*, a multi-hazard planning aid at little cost.",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Nepal's official direction is impact-based warning, \"communicating not only what hazard is expected, but what it could mean for people, livelihoods, infrastructure, and essential services\" [74].",
+      "marker": "[74]",
+      "note_id": "early-warnings-for-all-nepal-must-turn-commitment-into-action-the-himalayan-time",
+      "numbers": [
+        "74"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Counting OSM schools, health posts, bridges and hydropower intakes inside each scenario footprint delivers that without loss modelling; after the 2026 flood about 748 MW of hydropower and more than 30 bridges were affected [89].",
+      "marker": "[89]",
+      "note_id": "irdr-addressing-the-challenges-of-natural-human-induced-environmental-hazards",
+      "numbers": [
+        "2026",
+        "748",
+        "30",
+        "89"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Rivers cross borders and information does not: a Nepal–China understanding on flood data \"was never converted into a signed, binding mechanism\" [22].",
+      "marker": "[22]",
+      "note_id": "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e",
+      "numbers": [
+        "22"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Downscaled climate projections are too uncertain for a public map; measured lake growth between the open inventory's epochs [48], refreshed at least every five years as ICIMOD recommends [12], is honest change without projection.",
+      "marker": "[48]",
+      "note_id": "automated-satellite-based-glacial-lake-inventory-and-change-detection-in-high-mo",
+      "numbers": [
+        "48",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Downscaled climate projections are too uncertain for a public map; measured lake growth between the open inventory's epochs [48], refreshed at least every five years as ICIMOD recommends [12], is honest change without projection.",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "48",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "It should be labelled as change in exposure, not rising hazard: mapped GLOF frequency from moraine-dammed lakes over the last 20 years is lower than in 1970–2000 despite lake growth (abstract, grade C) [78].",
+      "marker": "[78]",
+      "note_id": "abstract-egu23-15703",
+      "numbers": [
+        "20",
+        "1970",
+        "2000",
+        "78"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Earthquake early warning, cell broadcast, sirens and push alerts are operational systems, and SMS dissemination is manual and prone to delay and congestion [91]; cell-broadcast readiness is a government and operator procurement [75].",
+      "marker": "[91]",
+      "note_id": "mobile-enabled-anticipatory-action-and-early-warning-systems-the-gsma-and-fcdo-v",
+      "numbers": [
+        "91",
+        "75"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Earthquake early warning, cell broadcast, sirens and push alerts are operational systems, and SMS dissemination is manual and prone to delay and congestion [91]; cell-broadcast readiness is a government and operator procurement [75].",
+      "marker": "[75]",
+      "note_id": "crews-project-final-report",
+      "numbers": [
+        "91",
+        "75"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Nepal's Early Warnings for All (EW4All) roadmap, finalised at the end of 2025, is estimated to need US$360 million for 2026–2030 and calls for warnings in a language and form people understand [74].",
+      "marker": "[74]",
+      "note_id": "early-warnings-for-all-nepal-must-turn-commitment-into-action-the-himalayan-time",
+      "numbers": [
+        "4",
+        "2025,",
+        "360",
+        "2026",
+        "2030",
+        "74"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Its endorsement slipped into mid-2026 amid political turmoil, and a national proposal to the Climate Risk and Early Warning Systems (CREWS) initiative remains pending [75].",
+      "marker": "[75]",
+      "note_id": "crews-project-final-report",
+      "numbers": [
+        "2026",
+        "75"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Before 2015, Open Cities volunteers mapped \"over 100,000 buildings in the Kathmandu Valley\"; afterwards the Nepal Army's GIS chief said the maps showed \"areas like Ramkot and Balaju were heavily damaged\" when the army had been \"simply focusing on Bhaktapur\" [67].",
+      "marker": "[67]",
+      "note_id": "mapping-for-resilience-crowd-sourced-mapping-in-crises-humanitarian-practice-net",
+      "numbers": [
+        "2015,",
+        "100,000",
+        "67"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "BIPAD itself was built by a civic tech non-profit for NDRRMA [14].",
+      "marker": "[14]",
+      "note_id": "why-bangladesh-needs-an-integrated-disaster-information-system-like-nepals-bipad",
+      "numbers": [
+        "14"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "2. **ICIMOD:** a reuse statement for the no-derivatives inventory [12] and a review of the outburst wording.",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "2.",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "3. **KLL and OSM Nepal:** KLL reports 30+ projects and 40+ partner organisations [39] and anchors the community that maintains Nepali names in OSM [35].",
+      "marker": "[39]",
+      "note_id": "about-kathmandu-living-labs",
+      "numbers": [
+        "3.",
+        "30",
+        "40",
+        "39",
+        "35"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "3. **KLL and OSM Nepal:** KLL reports 30+ projects and 40+ partner organisations [39] and anchors the community that maintains Nepali names in OSM [35].",
+      "marker": "[35]",
+      "note_id": "wikiproject-nepal-openstreetmap-wiki",
+      "numbers": [
+        "3.",
+        "30",
+        "40",
+        "39",
+        "35"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "4. **Universities:** OpenDRI recommends building GIS into \"curricula\" [7]; a semester project validating one hindcast is the right size.",
+      "marker": "[7]",
+      "note_id": "opendri-7-sustaining",
+      "numbers": [
+        "4.",
+        "7"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "5. **NGOs and the Red Cross,** as users of printed reports, where WMO says vulnerable groups need education on \"how and where to receive warnings\" [76].",
+      "marker": "[76]",
+      "note_id": "improved-flood-preparedness-and-community-based-early-warnings-needed-in-nepal",
+      "numbers": [
+        "5.",
+        "76"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "OpenDRI warns that the risk is that risk data becomes stale once champions move on, and names \"immediate usefulness\" as the key to success [7].",
+      "marker": "[7]",
+      "note_id": "opendri-7-sustaining",
+      "numbers": [
+        "7"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "GeoNode shows the alternative to revenue: built to \"encourage participation by others who have similar needs\", it became self-sustaining until its sponsor was \"just another partner\", with documentation crucial to onboarding [77].",
+      "marker": "[77]",
+      "note_id": "open-data-for-resilience-initiative",
+      "numbers": [
+        "77"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N1 | Health file, schema checks, two timestamps and stale state on every panel, last-good fallback, CI issue on failure | Events unfold in minutes [22, 23] | B | <2 KB | V4 |",
+      "marker": "[22]",
+      "note_id": "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e",
+      "numbers": [
+        "1",
+        "22,",
+        "23",
+        "2",
+        "4"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N1 | Health file, schema checks, two timestamps and stale state on every panel, last-good fallback, CI issue on failure | Events unfold in minutes [22, 23] | B | <2 KB | V4 |",
+      "marker": "[23]",
+      "note_id": "the-bhote-koshitrishuli-flash-flood-of-26-august-2026-rasuwa-nepal-warning-laten",
+      "numbers": [
+        "1",
+        "22,",
+        "23",
+        "2",
+        "4"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N2 | Fixed bilingual *hypothetical, not a forecast or warning; not an evacuation map* frame with ID, version, date; place-specific ranges as the main safeguard | Maps read as warnings [4, 5]; banner effect untested | B for the problem; C–D for the banner | negligible | V3 (banner versus none) |",
+      "marker": "[4]",
+      "note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+      "numbers": [
+        "2",
+        "4,",
+        "5",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N2 | Fixed bilingual *hypothetical, not a forecast or warning; not an evacuation map* frame with ID, version, date; place-specific ranges as the main safeguard | Maps read as warnings [4, 5]; banner effect untested | B for the problem; C–D for the banner | negligible | V3 (banner versus none) |",
+      "marker": "[5]",
+      "note_id": "assessing-perceptions-and-interpretations-of-tsunami-maps-insights-from-the-publ",
+      "numbers": [
+        "2",
+        "4,",
+        "5",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N3 | 3/6/9 m/s bracket for lake origins, labelled mass-flow case, first-water and main-pulse window per place; river-reach origins keep 2/4/6 with gauge-anchored peaks | Measured front and pulse; Palcacocha bound [1, 11] | A–B | negligible | V2 |",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "3",
+        "3",
+        "6",
+        "9",
+        "2",
+        "4",
+        "6",
+        "1,",
+        "11",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N3 | 3/6/9 m/s bracket for lake origins, labelled mass-flow case, first-water and main-pulse window per place; river-reach origins keep 2/4/6 with gauge-anchored peaks | Measured front and pulse; Palcacocha bound [1, 11] | A–B | negligible | V2 |",
+      "marker": "[11]",
+      "note_id": "hess-reconstruction-of-the-1941-glof-process-chain-at-lake-palcacocha-cordillera",
+      "numbers": [
+        "3",
+        "3",
+        "6",
+        "9",
+        "2",
+        "4",
+        "6",
+        "1,",
+        "11",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N4 | Two-branch peak with crossover marker; breach range; \"not modelled\" box | Attenuation and cascade growth [1, 24, 45] | A–B | negligible | V2 |",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "4",
+        "1,",
+        "24,",
+        "45",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N4 | Two-branch peak with crossover marker; breach range; \"not modelled\" box | Attenuation and cascade growth [1, 24, 45] | A–B | negligible | V2 |",
+      "marker": "[24]",
+      "note_id": "a-multi-source-quantitative-reconstruction-of-the-26-august-2026-bhote-koshi-roc",
+      "numbers": [
+        "4",
+        "1,",
+        "24,",
+        "45",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N4 | Two-branch peak with crossover marker; breach range; \"not modelled\" box | Attenuation and cascade growth [1, 24, 45] | A–B | negligible | V2 |",
+      "marker": "[45]",
+      "note_id": "the-2021-melamchi-flood-a-massive-erosional-cascade-in-the-himalayan-mountains-o",
+      "numbers": [
+        "4",
+        "1,",
+        "24,",
+        "45",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N5 | Per-cell Vs30 in population cells; ±1 SD shown; basin caveat; masonry wording on bands | [10, 50, 13] | A–B | KB per scenario | V1 |",
+      "marker": "[10]",
+      "note_id": "site-amplification-in-the-kathmandu-valley-during-the-2015-m76-gorkha-nepal-eart",
+      "numbers": [
+        "5",
+        "30",
+        "1",
+        "10,",
+        "50,",
+        "13",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N5 | Per-cell Vs30 in population cells; ±1 SD shown; basin caveat; masonry wording on bands | [10, 50, 13] | A–B | KB per scenario | V1 |",
+      "marker": "[50]",
+      "note_id": "vs30-models-and-data",
+      "numbers": [
+        "5",
+        "30",
+        "1",
+        "10,",
+        "50,",
+        "13",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N5 | Per-cell Vs30 in population cells; ±1 SD shown; basin caveat; masonry wording on bands | [10, 50, 13] | A–B | KB per scenario | V1 |",
+      "marker": "[13]",
+      "note_id": "observational-fragility-functions-for-residential-stone-masonry-buildings-in-nep",
+      "numbers": [
+        "5",
+        "30",
+        "1",
+        "10,",
+        "50,",
+        "13",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N6 | OSM search index with Nepali/romanised normalisation; zero-result log | [33, 34] | B | ~200–400 KB on focus | V5 |",
+      "marker": "[33]",
+      "note_id": "nepalmeetings2022-12-15-openstreetmap-wiki",
+      "numbers": [
+        "6",
+        "33,",
+        "34",
+        "200",
+        "400",
+        "5"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N6 | OSM search index with Nepali/romanised normalisation; zero-result log | [33, 34] | B | ~200–400 KB on focus | V5 |",
+      "marker": "[34]",
+      "note_id": "keynamene-openstreetmap-wiki",
+      "numbers": [
+        "6",
+        "33,",
+        "34",
+        "200",
+        "400",
+        "5"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N7 | Positioned-glyph or HTML Devanagari labels; no letter-spacing | [36, 37] | B | small | 3-browser check |",
+      "marker": "[36]",
+      "note_id": "basemap-localization-protomaps-docs",
+      "numbers": [
+        "7",
+        "36,",
+        "37",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N7 | Positioned-glyph or HTML Devanagari labels; no letter-spacing | [36, 37] | B | small | 3-browser check |",
+      "marker": "[37]",
+      "note_id": "devanagari-gap-analysis",
+      "numbers": [
+        "7",
+        "36,",
+        "37",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N8 | ~1 MB budget in CI; terrain opt-in; lazy tools | Individual use 48.4% [26] | B | negative | V6 |",
+      "marker": "[26]",
+      "note_id": "nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-grow",
+      "numbers": [
+        "8",
+        "1",
+        "48.4%",
+        "26",
+        "6"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N9 | Accessible HTML as print source; text tables for every map | [61, 60] | B | negligible | V7 |",
+      "marker": "[61]",
+      "note_id": "digital-accessibility-checklist",
+      "numbers": [
+        "9",
+        "61,",
+        "60",
+        "7"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| N9 | Accessible HTML as print source; text tables for every map | [61, 60] | B | negligible | V7 |",
+      "marker": "[60]",
+      "note_id": "prioritizing-digital-accessibility-for-inclusive",
+      "numbers": [
+        "9",
+        "61,",
+        "60",
+        "7"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M1 | Tiered lake origins with border entries, volume ranges, cascade option | [3, 48, 12] | B; C for misreading risk | N2 live; V3 passes; ICIMOD statement |",
+      "marker": "[3]",
+      "note_id": "abstract-egu25-12752",
+      "numbers": [
+        "1",
+        "3,",
+        "48,",
+        "12",
+        "2",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M1 | Tiered lake origins with border entries, volume ranges, cascade option | [3, 48, 12] | B; C for misreading risk | N2 live; V3 passes; ICIMOD statement |",
+      "marker": "[48]",
+      "note_id": "automated-satellite-based-glacial-lake-inventory-and-change-detection-in-high-mo",
+      "numbers": [
+        "1",
+        "3,",
+        "48,",
+        "12",
+        "2",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M1 | Tiered lake origins with border entries, volume ranges, cascade option | [3, 48, 12] | B; C for misreading risk | N2 live; V3 passes; ICIMOD statement |",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "1",
+        "3,",
+        "48,",
+        "12",
+        "2",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M2 | Lake-change display between inventory epochs, labelled as exposure change, not rising hazard | [48, 47, 78] | B | M1 |",
+      "marker": "[48]",
+      "note_id": "automated-satellite-based-glacial-lake-inventory-and-change-detection-in-high-mo",
+      "numbers": [
+        "2",
+        "48,",
+        "47,",
+        "78",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M2 | Lake-change display between inventory epochs, labelled as exposure change, not rising hazard | [48, 47, 78] | B | M1 |",
+      "marker": "[47]",
+      "note_id": "quantifying-the-long-term-evolution-of-glacial-lakes-and-the-impact-of-the-2024",
+      "numbers": [
+        "2",
+        "48,",
+        "47,",
+        "78",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M2 | Lake-change display between inventory epochs, labelled as exposure change, not rising hazard | [48, 47, 78] | B | M1 |",
+      "marker": "[78]",
+      "note_id": "abstract-egu23-15703",
+      "numbers": [
+        "2",
+        "48,",
+        "47,",
+        "78",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M3 | BSSA14–ZHAO06–KAN06 ensemble with spread shown; finite-fault source for large presets | [2, 51, 82, 83] | C; D for geometry | V1 bias >~0.3 ln or sigma cut >20% |",
+      "marker": "[2]",
+      "note_id": "arxiv241005918v1-physicsgeo-ph-8-oct-2024",
+      "numbers": [
+        "3",
+        "14",
+        "06",
+        "06",
+        "2,",
+        "51,",
+        "82,",
+        "83",
+        "1",
+        "0.3",
+        "20%"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M3 | BSSA14–ZHAO06–KAN06 ensemble with spread shown; finite-fault source for large presets | [2, 51, 82, 83] | C; D for geometry | V1 bias >~0.3 ln or sigma cut >20% |",
+      "marker": "[51]",
+      "note_id": "attenuation-relation-predicted-observed-ground-motion-of-gorkha-nepal-earthquake",
+      "numbers": [
+        "3",
+        "14",
+        "06",
+        "06",
+        "2,",
+        "51,",
+        "82,",
+        "83",
+        "1",
+        "0.3",
+        "20%"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M3 | BSSA14–ZHAO06–KAN06 ensemble with spread shown; finite-fault source for large presets | [2, 51, 82, 83] | C; D for geometry | V1 bias >~0.3 ln or sigma cut >20% |",
+      "marker": "[82]",
+      "note_id": "lower-edge-of-locked-main-himalayan-thrust-unzipped-by-the-2015-gorkha-earthquak",
+      "numbers": [
+        "3",
+        "14",
+        "06",
+        "06",
+        "2,",
+        "51,",
+        "82,",
+        "83",
+        "1",
+        "0.3",
+        "20%"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M3 | BSSA14–ZHAO06–KAN06 ensemble with spread shown; finite-fault source for large presets | [2, 51, 82, 83] | C; D for geometry | V1 bias >~0.3 ln or sigma cut >20% |",
+      "marker": "[83]",
+      "note_id": "estimating-rupture-distances-without-a-rupture",
+      "numbers": [
+        "3",
+        "14",
+        "06",
+        "06",
+        "2,",
+        "51,",
+        "82,",
+        "83",
+        "1",
+        "0.3",
+        "20%"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M4 | Public validation page; Gorkha preset with hindcast panel | [52, 1] | A once run | V1, V2 |",
+      "marker": "[52]",
+      "note_id": "shakemap",
+      "numbers": [
+        "4",
+        "52,",
+        "1",
+        "1,",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M4 | Public validation page; Gorkha preset with hindcast panel | [52, 1] | A once run | V1, V2 |",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "4",
+        "52,",
+        "1",
+        "1,",
+        "2"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M5 | Place panels and laminated bilingual arrival cards for the Bhote Koshi–Trishuli, Sunkoshi, Dudh Koshi and Tamor corridors, with near-source cue | [25, 63] | B–C | N3, V3 |",
+      "marker": "[25]",
+      "note_id": "during-nepal-floods-decentralized-community-based-warning-saved-lives",
+      "numbers": [
+        "5",
+        "25,",
+        "63",
+        "3,",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M5 | Place panels and laminated bilingual arrival cards for the Bhote Koshi–Trishuli, Sunkoshi, Dudh Koshi and Tamor corridors, with near-source cue | [25, 63] | B–C | N3, V3 |",
+      "marker": "[63]",
+      "note_id": "science-strengthening-tsunami-safety-preventionweb",
+      "numbers": [
+        "5",
+        "25,",
+        "63",
+        "3,",
+        "3"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M6 | Self-hosted Nepal PMTiles basemap; offline pack | [38, 59] | B–C | N8 |",
+      "marker": "[38]",
+      "note_id": "pmtiles-concepts-protomaps-docs",
+      "numbers": [
+        "6",
+        "38,",
+        "59",
+        "8"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M6 | Self-hosted Nepal PMTiles basemap; offline pack | [38, 59] | B–C | N8 |",
+      "marker": "[59]",
+      "note_id": "performance-comparison-of-an-offline-pmtiles-powered-map-server-running-on-a-ras",
+      "numbers": [
+        "6",
+        "38,",
+        "59",
+        "8"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M7 | Dated archive; loss tables by district; NEMRC events linked to USGS | [32, 31] | B | data-use confirmation |",
+      "marker": "[32]",
+      "note_id": "an-impact-based-early-warning-module-in-nepals-bipad-portal-undrr",
+      "numbers": [
+        "7",
+        "32,",
+        "31"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M7 | Dated archive; loss tables by district; NEMRC events linked to USGS | [32, 31] | B | data-use confirmation |",
+      "marker": "[31]",
+      "note_id": "pager-scientific-background",
+      "numbers": [
+        "7",
+        "32,",
+        "31"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M8 | Hourly copy of the two verified BIPAD endpoints | [8] | D | N1 stable 60 days |",
+      "marker": "[8]",
+      "note_id": "gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e",
+      "numbers": [
+        "8",
+        "8",
+        "1",
+        "60"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M9 | CAP reader showing official alerts verbatim; templates offered to agencies; never emit CAP | [30, 28] | B | official feed exists |",
+      "marker": "[30]",
+      "note_id": "wmo-strengthens-early-warning-services-in-nepal",
+      "numbers": [
+        "9",
+        "30,",
+        "28"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M9 | CAP reader showing official alerts verbatim; templates offered to agencies; never emit CAP | [30, 28] | B | official feed exists |",
+      "marker": "[28]",
+      "note_id": "common-alerting-protocol",
+      "numbers": [
+        "9",
+        "30,",
+        "28"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M10 | Landslide history and ledger; quake-to-lake link; facility counts | [69, 70, 12] | B | licences |",
+      "marker": "[69]",
+      "note_id": "fatal-landslides-in-nepal-in-2024-to-date",
+      "numbers": [
+        "10",
+        "69,",
+        "70,",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M10 | Landslide history and ledger; quake-to-lake link; facility counts | [69, 70, 12] | B | licences |",
+      "marker": "[70]",
+      "note_id": "28-october-2024",
+      "numbers": [
+        "10",
+        "69,",
+        "70,",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M10 | Landslide history and ledger; quake-to-lake link; facility counts | [69, 70, 12] | B | licences |",
+      "marker": "[12]",
+      "note_id": "inventory-of-glacial-lakes-and-identification-of-potentially-dangerous-lakes-1",
+      "numbers": [
+        "10",
+        "69,",
+        "70,",
+        "12"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M11 | Kathmandu long-period indicator | [55, 54] | B | V1 |",
+      "marker": "[55]",
+      "note_id": "ground-motion-prediction-equation-for-the-kathmandu-valley-nepal-based-on-strong",
+      "numbers": [
+        "11",
+        "55,",
+        "54",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M11 | Kathmandu long-period indicator | [55, 54] | B | V1 |",
+      "marker": "[54]",
+      "note_id": "the-2015-mw-78-gorkha-earthquake-in-nepal-and-its-aftershocks-analysis-of-strong",
+      "numbers": [
+        "11",
+        "55,",
+        "54",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M12 | Data-use letters, ICIMOD review, OSM name loop, university projects, privacy-respecting metrics | [7, 77, 39] | B–C | none |",
+      "marker": "[7]",
+      "note_id": "opendri-7-sustaining",
+      "numbers": [
+        "12",
+        "7,",
+        "77,",
+        "39"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M12 | Data-use letters, ICIMOD review, OSM name loop, university projects, privacy-respecting metrics | [7, 77, 39] | B–C | none |",
+      "marker": "[77]",
+      "note_id": "open-data-for-resilience-initiative",
+      "numbers": [
+        "12",
+        "7,",
+        "77,",
+        "39"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "| M12 | Data-use letters, ICIMOD review, OSM name loop, university projects, privacy-respecting metrics | [7, 77, 39] | B–C | none |",
+      "marker": "[39]",
+      "note_id": "about-kathmandu-living-labs",
+      "numbers": [
+        "12",
+        "7,",
+        "77,",
+        "39"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "- **V1, Gorkha 2015 shaking hindcast:** per-cell Vs30 against station PGA and ShakeMap [52], bias by site class.",
+      "marker": "[52]",
+      "note_id": "shakemap",
+      "numbers": [
+        "1,",
+        "2015",
+        "30",
+        "52"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Records are few and mostly in the basin, where nonlinear soil suppressed short-period PGA [53], and ShakeMap is partly model-derived, so basin and non-basin residuals are reported separately and a basin-only result cannot alone decide M3.",
+      "marker": "[53]",
+      "note_id": "analysis-of-strong-ground-motions-and-site-effects-at-kantipath-kathmandu-from-2",
+      "numbers": [
+        "53",
+        "3."
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "- **V2, 2016 Bhote Koshi outburst hindcast:** windows against the 8.7 m/s front, peaks against Chaku and Barabise [1].",
+      "marker": "[1]",
+      "note_id": "geomorphology",
+      "numbers": [
+        "2,",
+        "2016",
+        "8.7",
+        "1"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "- **V4–V7:** a 30-day feed-health audit, including a NEMRC-to-USGS event match rate; 200 real place-name queries in Devanagari and romanisation with a published success rate; a throttled-3G test on a budget Android phone; and a screen-reader audit through a disability organisation, following Prayatna's approach [60].",
+      "marker": "[60]",
+      "note_id": "prioritizing-digital-accessibility-for-inclusive",
+      "numbers": [
+        "4",
+        "7",
+        "30",
+        "200",
+        "3",
+        "60"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Do not run a warning channel, send SMS, build sirens, push alerts or earthquake early warning, set CAP urgency or severity, or publish CAP under the Atlas's name; official chains have improved for river floods and are being extended through CAP and cell broadcast [30, 75], and building them would turn a complement into a competing authority.",
+      "marker": "[30]",
+      "note_id": "wmo-strengthens-early-warning-services-in-nepal",
+      "numbers": [
+        "30,",
+        "75"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    },
+    {
+      "sentence": "Do not run a warning channel, send SMS, build sirens, push alerts or earthquake early warning, set CAP urgency or severity, or publish CAP under the Atlas's name; official chains have improved for river floods and are being extended through CAP and cell broadcast [30, 75], and building them would turn a complement into a competing authority.",
+      "marker": "[75]",
+      "note_id": "crews-project-final-report",
+      "numbers": [
+        "30,",
+        "75"
+      ],
+      "strong": true,
+      "verdict": "needs-llm"
+    }
+  ],
+  "dangling": []
+}
