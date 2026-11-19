@@ -288,6 +288,15 @@
    "rivers_current": 164,
    "rain_stations_above_warning": 0,
    "rain_current": 301
+  },
+  {
+   "date": "2026-11-20",
+   "generated_at": "2026-11-19T20:47:05Z",
+   "rivers_above_danger": 0,
+   "rivers_above_warning": 0,
+   "rivers_current": 165,
+   "rain_stations_above_warning": 0,
+   "rain_current": 301
   }
  ]
 }
