@@ -1,0 +1,47 @@
+[
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "The USGS Global Vs30 Mosaic, a slope-based grid at 30 arc-seconds ranging from 98 to 2,197 m/s, is free; the global file is 631 MB, a Nepal clip a few megabytes [50].",
+  "cited_note_id": "vs30-models-and-data",
+  "correct_note_id": null,
+  "evidence": "USGS Vs30 page gives the 98-2197 m/s range, 30 arc-second grid and 631 MB global file, but says nothing about a Nepal clip of a few megabytes or about being free.",
+  "suggested_fix": "soften claim: drop the Nepal-clip size or mark it as the Atlas team's own estimate"
+ },
+ {
+  "verdict": "unsupported",
+  "severity": "major",
+  "sentence": "A WebGL map alone cannot meet the Web Content Accessibility Guidelines (WCAG), because a screen reader cannot read it [62].",
+  "cited_note_id": "introduction-to-understanding-wcag-21-wai-w3c",
+  "correct_note_id": null,
+  "evidence": "The W3C WCAG 2.1 intro note says nothing about WebGL maps or screen readers being unable to read them; the claim is the report's own inference.",
+  "suggested_fix": "soften claim to an inference, or cite a source on canvas/WebGL accessibility, or delete the citation"
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "4. **A place table** of named wards and settlements, since recognisable features aid reading [4].",
+  "cited_note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+  "correct_note_id": null,
+  "evidence": "Frontiers note mentions a preference for topographical contour and street maps and map-skill categories, but does not state that recognisable features such as named wards or settlements aid map reading.",
+  "suggested_fix": "soften claim to what the source supports or cite a source on place labels"
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "Nepali should be the default for Nepali-language browsers, with a visible switch and page-language attributes, as Nepal's accessibility position paper recommends [60].",
+  "cited_note_id": "prioritizing-digital-accessibility-for-inclusive",
+  "correct_note_id": null,
+  "evidence": "Prayatna position paper stresses specifying the language of page and part and Unicode use, but does not recommend Nepali as default for Nepali-language browsers or a visible language switch.",
+  "suggested_fix": "soften claim: attribute only the page-language-attribute point to the source"
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "Thame's release of about 4–5 × 10⁵ m³ damaged a road bridge about 45 km downstream [3], and in figures reported on 28 August, 171 of the first 469 bodies recovered after the 2026 flood were in Chitwan, more than 100 river-km below the border [22].",
+  "cited_note_id": "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e",
+  "correct_note_id": null,
+  "evidence": "Borderlens note gives 171 of 469 bodies in Chitwan (Nepal Police, Friday 10 am) but contains no river-km distance, so the \"more than 100 river-km below the border\" figure is not in the source.",
+  "suggested_fix": "soften claim or drop the distance figure unless sourced elsewhere"
+ }
+]

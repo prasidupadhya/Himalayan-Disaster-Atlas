@@ -1,0 +1,110 @@
+[
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "Every output is a single number or a crisp band, although readers treat hazard maps as warning messages and read their lines as certainty [4, 5].",
+  "cited_note_id": "assessing-perceptions-and-interpretations-of-tsunami-maps-insights-from-the-publ",
+  "correct_note_id": null,
+  "evidence": "Note is an abstract on how experts and the public understand tsunami maps; it says nothing about readers treating maps as warning messages or reading lines as certainty (the frontiers note covers that).",
+  "suggested_fix": "Cite only [4] for this claim, or soften to what the tsunami-map study shows (map elements and uncertainty communication are poorly understood)."
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "| Peak held constant downstream | Clear-water peaks roughly halve over tens of kilometres [1] | Overstates far-field peak for clear water; silent on cascades that grow |",
+  "cited_note_id": "geomorphology",
+  "correct_note_id": null,
+  "evidence": "Note says the GLOF peak attenuates downstream, with 1500-2100 m3/s at Chaku falling to 700-900 at Barabise; it does not say peaks \"roughly halve over tens of kilometres\" and does not use a clear-water qualifier.",
+  "suggested_fix": "Soften to \"the 2016 peak fell from 1,500-2,100 m3/s at Chaku to 700-900 m3/s at Barabise\" and drop the halving/clear-water wording."
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "BIPAD is the portal of the National Disaster Risk Reduction and Management Authority (NDRRMA), holding incident, loss and \"real time\" rainfall, streamflow and earthquake data [14].",
+  "cited_note_id": "why-bangladesh-needs-an-integrated-disaster-information-system-like-nepals-bipad",
+  "correct_note_id": null,
+  "evidence": "Note says NDRRMA built a portal for incidents such as earthquakes and rainfall, including loss and damage; no mention of streamflow, and \"real time\" appears only in a complaint that such data is hard to find.",
+  "suggested_fix": "Remove \"streamflow\" and the \"real time\" quotation, or cite BIPAD primary source."
+ },
+ {
+  "verdict": "unsupported",
+  "severity": "major",
+  "sentence": "Nepali government sites do go offline without warning [26].",
+  "cited_note_id": "nepal-returns-to-global-ict-index-but-digital-use-still-lags-infrastructure-grow",
+  "correct_note_id": null,
+  "evidence": "Note is about Nepal ICT index and internet use; only an unrelated sidebar headline mentions government websites taken offline over a PHP flaw (a deliberate takedown, not \"without warning\").",
+  "suggested_fix": "Delete the sentence or cite a source documenting unannounced outages of government sites."
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "PMTiles, \"a single-file archive format for pyramids of tiled data\" read through HTTP range requests, lets a static host serve its own Nepal basemap and enables offline caching [38]; range requests should be tested on the actual host first. 3D terrain, the heaviest part of the page, should become opt-in.",
+  "cited_note_id": "pmtiles-concepts-protomaps-docs",
+  "correct_note_id": null,
+  "evidence": "Note supports the single-file archive quote and HTTP range requests, but nothing on offline caching.",
+  "suggested_fix": "Drop \"and enables offline caching\" or attribute it as an Atlas proposal rather than to [38]."
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "The USGS Global Vs30 Mosaic, a slope-based grid at 30 arc-seconds ranging from 98 to 2,197 m/s, is free; the global file is 631 MB, a Nepal clip a few megabytes [50].",
+  "cited_note_id": "vs30-models-and-data",
+  "correct_note_id": null,
+  "evidence": "USGS Vs30 page gives the 98-2197 m/s range, 30 arc-second grid and 631 MB global file, but says nothing about a Nepal clip of a few megabytes or about being free.",
+  "suggested_fix": "soften claim: drop the Nepal-clip size or mark it as the Atlas team's own estimate"
+ },
+ {
+  "verdict": "unsupported",
+  "severity": "major",
+  "sentence": "A WebGL map alone cannot meet the Web Content Accessibility Guidelines (WCAG), because a screen reader cannot read it [62].",
+  "cited_note_id": "introduction-to-understanding-wcag-21-wai-w3c",
+  "correct_note_id": null,
+  "evidence": "The W3C WCAG 2.1 intro note says nothing about WebGL maps or screen readers being unable to read them; the claim is the report's own inference.",
+  "suggested_fix": "soften claim to an inference, or cite a source on canvas/WebGL accessibility, or delete the citation"
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "4. **A place table** of named wards and settlements, since recognisable features aid reading [4].",
+  "cited_note_id": "frontiers-improving-hazard-map-comprehension-for-protective-action-decision-maki",
+  "correct_note_id": null,
+  "evidence": "Frontiers note mentions a preference for topographical contour and street maps and map-skill categories, but does not state that recognisable features such as named wards or settlements aid map reading.",
+  "suggested_fix": "soften claim to what the source supports or cite a source on place labels"
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "Nepali should be the default for Nepali-language browsers, with a visible switch and page-language attributes, as Nepal's accessibility position paper recommends [60].",
+  "cited_note_id": "prioritizing-digital-accessibility-for-inclusive",
+  "correct_note_id": null,
+  "evidence": "Prayatna position paper stresses specifying the language of page and part and Unicode use, but does not recommend Nepali as default for Nepali-language browsers or a visible language switch.",
+  "suggested_fix": "soften claim: attribute only the page-language-attribute point to the source"
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "Thame's release of about 4\u20135 \u00d7 10\u2075 m\u00b3 damaged a road bridge about 45 km downstream [3], and in figures reported on 28 August, 171 of the first 469 bodies recovered after the 2026 flood were in Chitwan, more than 100 river-km below the border [22].",
+  "cited_note_id": "sixteen-minutes-what-the-bhotekoshi-flood-reveals-about-the-regions-unfinished-e",
+  "correct_note_id": null,
+  "evidence": "Borderlens note gives 171 of 469 bodies in Chitwan (Nepal Police, Friday 10 am) but contains no river-km distance, so the \"more than 100 river-km below the border\" figure is not in the source.",
+  "suggested_fix": "soften claim or drop the distance figure unless sourced elsewhere"
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "The 2026 reconstruction calls for \"process-chain surveillance that connects unstable rock-ice source areas, entrainment-prone transport corridors, temporary blockages, and exposed downstream assets\" [24], and ICIMOD specialists warn that \"the Himalayas do not always respect those categories\" [73].",
+  "cited_note_id": "the-nepal-floods-question-when-the-himalayas-collapse-who-gets-warned-climate-cr",
+  "correct_note_id": null,
+  "evidence": "The phrase 'the Himalayas do not always respect those categories' is the article author's own framing, not a quote from ICIMOD; ICIMOD's Sanyal is quoted only on below-normal monsoon and flood risk.",
+  "suggested_fix": "Attribute the quote to the Himalayan Times/article author rather than ICIMOD specialists, or quote Sanyal's monsoon remark instead."
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "Earthquake early warning, cell broadcast, sirens and push alerts are operational systems, and SMS dissemination is manual and prone to delay and congestion [91]; cell-broadcast readiness is a government and operator procurement [75].",
+  "cited_note_id": "crews-project-final-report",
+  "correct_note_id": null,
+  "evidence": "The CREWS final report says Nepal's cell-broadcast (CB) readiness was completed and only other countries (Mauritius, Solomon Islands, Kiribati) were in procurement; it does not state that CB readiness in Nepal is a government/operator procurement.",
+  "suggested_fix": "Soften to what the source supports (Nepal CB readiness completed per CREWS; operational rollout depends on government and operators) or drop the [75] cite from this clause."
+ }
+]
