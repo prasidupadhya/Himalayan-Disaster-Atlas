@@ -1,0 +1,17 @@
+- calibration-of-local-earthquake-magnitudes-in-nepal-journal-of-nepal-geological :: Calibration of local earthquake magnitudes in Nepal
+                                                        | Journal of Nepal Geological Society :: https://www.nepjol.info/index.php/JNGS/article/view/31455
+- lower-edge-of-locked-main-himalayan-thrust-unzipped-by-the-2015-gorkha-earthquak :: Lower edge of locked Main Himalayan Thrust unzipped by the 2015 Gorkha earthquake | Nature Geoscience :: https://doi.org/10.1038/ngeo2518
+- estimating-rupture-distances-without-a-rupture :: Estimating rupture distances without a rupture :: https://pubs.usgs.gov/publication/70194393
+- abstract-egu23-15703 :: Abstract EGU23-15703 :: https://doi.org/10.5194/egusphere-egu23-15703
+- abstract-egu25-14977 :: Abstract EGU25-14977 :: https://doi.org/10.5194/egusphere-egu25-14977
+- abstract-egu25-768 :: Abstract EGU25-768 :: https://doi.org/10.5194/egusphere-egu25-768
+- some-recent-developments-in-hydro-meteorological-data :: Some recent developments in Hydro-Meteorological data :: https://old.wmo.int/extranet/pages/prog/www/IMOP/publications/IOM-116_TECO-2014/Session%201/P1_21_Karki-Hydromet_Dev_in_Nepal.pdf
+- early-warning-system-and :: Early Warning System and :: https://dpnet.org.np/public/uploads/files/D-2_DHM_NCDRR%202023-07-04%2018-48-52.pdf
+- nepal-wants-to-power-south-asia-it-does-not-know-what-its-rivers-are-doing :: Nepal wants to power South Asia: It does not know what its rivers are doing :: https://thehimalayantimes.com/ampArticle/1037941
+- seismic-risk-assessment-and-hazard-mapping-in-nepal :: Seismic risk assessment and hazard mapping in Nepal :: https://ideas.repec.org/a/spr/nathaz/v78y2015i1p583-602.html
+- irdr-addressing-the-challenges-of-natural-human-induced-environmental-hazards :: IRDR - Addressing the challenges of natural & human-induced environmental hazards :: https://irdrinternational.org/knowledge_pool/publications/142
+- nepal-flood-impact-assessment :: Nepal: Flood impact assessment :: https://doi.org/10.4060/cd5014en
+- severe-weather-information-centre-30 :: Severe Weather Information Centre 3.0 :: https://severeweather.wmo.int/
+- mobile-enabled-anticipatory-action-and-early-warning-systems-the-gsma-and-fcdo-v :: Mobile-enabled anticipatory action and early warning systems: The GSMA and FCDO visit Kathmandu as part of digital humanitarian partnership  | Mobile for Development :: https://www.gsma.com/solutions-and-impact/connectivity-for-good/mobile-for-development/blog/mobile-enabled-anticipatory-action-and-early-warning-systems-the-gsma-and-fcdo-visit-kathmandu-as-part-of-digital-humanitarian-partnership/
+- government-invites-feedback-on-disability-law-online-but-target-group-is-locked :: Government invites feedback on disability law online, but target group is locked out :: https://kathmandupost.com/national/2026/04/30/government-invites-feedback-on-disability-law-online-but-target-group-is-locked-out
+- a-multi-source-quantitative-reconstruction-of-the-26-august-2026-bhote-koshi-roc :: A multi-source quantitative reconstruction of the 26 August 2026 Bhote Koshi rock-ice avalanche-debris-flow-flood cascade, Nepal :: https://doi.org/10.31223/x5mb9v

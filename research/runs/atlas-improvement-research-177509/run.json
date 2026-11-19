@@ -22,7 +22,7 @@
   ],
   "status": "running",
   "started_at": "2026-11-18T10:06:59.212424+00:00",
-  "updated_at": "2026-11-19T08:32:03.608220+00:00",
+  "updated_at": "2026-11-19T08:32:13.731463+00:00",
   "budget_usd": null,
   "max_sources": null,
   "max_notes": null,
@@ -94,6 +94,10 @@
       "status": "done",
       "started_at": "2026-11-19T08:29:06.161148+00:00",
       "finished_at": "2026-11-19T08:32:03.604901+00:00"
+    },
+    "14": {
+      "status": "running",
+      "started_at": "2026-11-19T08:32:13.730719+00:00"
     }
   },
   "chapters": {},
