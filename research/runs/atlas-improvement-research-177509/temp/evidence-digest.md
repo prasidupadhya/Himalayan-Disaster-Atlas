@@ -270,3 +270,9 @@ Claims grouped by required report section. Verbatim support quoted; source note 
 - Bhote Koshi 2026 reconstruction: ~52 m/s source-to-border decaying to 6.4-7.2 m/s; Devghat ~2,600 to 5,850 m3/s (preprint). [a-multi-source-quantitative-reconstruction-of-the-26-august-2026-bhote-koshi-roc]
 - USGS global slope-based Vs30 grid (Heath et al. 2020) available as open data. [vs30-models-and-data]
 - Open HMA glacial lake inventory: 31,698 lakes, data CC BY 4.0 on Zenodo. [automated-satellite-based-glacial-lake-inventory-and-change-detection-in-high-mo]
+
+### Post-critic gap fill
+
+- NSC (now NEMRC) local magnitudes ML exceed USGS Mw by about 1.0 (± 0.7), Ms by ~0.5 and mb by ~0.6. [calibration-of-local-earthquake-magnitudes-in-nepal-journal-of-nepal-geological]
+- The 2015 Gorkha rupture propagated eastwards for about 140 km, unzipping the lower edge of the locked Main Himalayan Thrust. [lower-edge-of-locked-main-himalayan-thrust-unzipped-by-the-2015-gorkha-earthquak]
+- Point-source scenarios can convert epicentral distance to Rjb/Rrup with magnitude-dependent averages and inflate GMPE sigma to reflect the added distance uncertainty. [estimating-rupture-distances-without-a-rupture, point-source-to-finite-fault-distance-conversions-us-geological-survey]

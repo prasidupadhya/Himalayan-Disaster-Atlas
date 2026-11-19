@@ -1,0 +1,8 @@
+# Post-critic gap fetch (step 13)
+
+| Gap | Searched | New notes | Status |
+|---|---|---|---|
+| NEMRC data (instruction + width critics) | seismonepal.gov.np (connection reset / expired certificate), WebSearch | calibration-of-local-earthquake-magnitudes-in-nepal-journal-of-nepal-geological (Rajaure et al. 2011: NSC ML exceeds Mw by ~1.0 ± 0.7) | PARTIAL. Catalogue format, threshold and latency unknown; patcher must state the evidence gap and recommend labelling ML vs Mw. |
+| Official Nepali local-level names | mofaga.gov.np, sthaniya.gov.np (connection reset), Wikipedia hubs (not citable) | list-of-gaunpalikas-of-nepal-wikipedia, municipalities-of-nepal-wikipedia (hubs only) | NOT FILLED. 753 local levels (6 metro, 11 sub-metro, 276 municipalities, 460 rural municipalities) from search only. Patcher must mark the recommendation "official source to be located (MoFAGA list)". |
+| Rupture representation (instruction critic) | USGS finite-fault page (JS-only), ShakeMap manual (404), scholar | lower-edge-of-locked-main-himalayan-thrust-unzipped-by-the-2015-gorkha-earthquak (Avouac 2015: ~140 km eastward rupture); estimating-rupture-distances-without-a-rupture (Thompson & Worden 2017: Repi to Rjb/Rrup conversions with added sigma); point-source-to-finite-fault-distance-conversions-us-geological-survey | PARTIAL. Scaling-law coefficients (Wells & Coppersmith, Leonard) and MHT dip not in vault; do not quote them. |
+| River-flood defaults, DHM water level vs discharge | vault search | existing notes (some-recent-developments-in-hydro-meteorological-data, early-warning-system-and, nepal-wants-to-power-south-asia...) | Vault sufficient; no fetch. |
