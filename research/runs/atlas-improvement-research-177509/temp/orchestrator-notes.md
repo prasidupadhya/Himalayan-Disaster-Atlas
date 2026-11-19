@@ -31,3 +31,9 @@ Escalation queue: Ponce PDF, LakeScientist, Copernicus case study.
 - Must-commit beats: daily copy cannot warn (official timeline 08:40 trigger, ~09:00 rise, Galchhi +9 m in 30 min); flood deaths fell where official warnings worked, so do not compete; evidence grade beside each recommendation; validation tasks (Gorkha ShakeMap, Melamchi/2016 Bhote Koshi hindcast, Nepali reader test) as first-class roadmap items.
 - Landslides: largest missing hazard by deaths in monsoon (135 deaths in 38 fatal landslides by 17 July 2024); propose a read-only layer from official/curated data, not a model.
 - Roadmap ordering: (1) honesty fixes and staleness/health signals; (2) model default fixes plus validations; (3) reach (Nepali-first, page weight, offline cache, a11y); (4) data layers loaded on demand (Vs30, lake inventory); (5) partnerships, licence, CAP-ready output.
+
+## Watch-list for step 12 critics
+- Dialectic: does the report give Draft B's near-real-time case real engagement (alert content failed, hours downstream) rather than a dismissal?
+- Depth: speed numbers (8.7 m/s, 45-55 km crossover) and GMPE residual phrasing per synthesis-conflicts.md; preprint labels on 2026 figures.
+- Width: landslides, transboundary, impact-based info, EEW out of scope, global forecasts as context.
+- Instruction: ten H2s verbatim; inline [N] grouped; Sources list; roadmap tables with grades.
