@@ -1,0 +1,20 @@
+[
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "The 2026 reconstruction calls for \"process-chain surveillance that connects unstable rock-ice source areas, entrainment-prone transport corridors, temporary blockages, and exposed downstream assets\" [24], and ICIMOD specialists warn that \"the Himalayas do not always respect those categories\" [73].",
+  "cited_note_id": "the-nepal-floods-question-when-the-himalayas-collapse-who-gets-warned-climate-cr",
+  "correct_note_id": null,
+  "evidence": "The phrase 'the Himalayas do not always respect those categories' is the article author's own framing, not a quote from ICIMOD; ICIMOD's Sanyal is quoted only on below-normal monsoon and flood risk.",
+  "suggested_fix": "Attribute the quote to the Himalayan Times/article author rather than ICIMOD specialists, or quote Sanyal's monsoon remark instead."
+ },
+ {
+  "verdict": "partially-supported",
+  "severity": "major",
+  "sentence": "Earthquake early warning, cell broadcast, sirens and push alerts are operational systems, and SMS dissemination is manual and prone to delay and congestion [91]; cell-broadcast readiness is a government and operator procurement [75].",
+  "cited_note_id": "crews-project-final-report",
+  "correct_note_id": null,
+  "evidence": "The CREWS final report says Nepal's cell-broadcast (CB) readiness was completed and only other countries (Mauritius, Solomon Islands, Kiribati) were in procurement; it does not state that CB readiness in Nepal is a government/operator procurement.",
+  "suggested_fix": "Soften to what the source supports (Nepal CB readiness completed per CREWS; operational rollout depends on government and operators) or drop the [75] cite from this clause."
+ }
+]
