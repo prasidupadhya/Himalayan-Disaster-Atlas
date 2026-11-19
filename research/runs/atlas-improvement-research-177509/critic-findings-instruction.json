@@ -1,0 +1,78 @@
+{
+  "critic_type": "instruction",
+  "summary": "Structural mirror check passes: all 10 required H2 headings are present, in order, with exact wording. Prioritised roadmap format (near term 3-6 months / medium term 6-24 months tables) is honored. Citation density is about 24 per 1000 words (217 cited references / ~8,970 body words), well above threshold. Remaining gaps are named-entity and sub-question under-coverage: NEMRC, earthquake rupture models, non-GLOF river floods, extension of constitutional Nepali names, and hosting.",
+  "findings": [
+    {
+      "severity": "major",
+      "atomic_item": "NEMRC (National Earthquake Monitoring and Research Center) official data — required_fields: what is available, reliability, how to use better",
+      "failure_mode": "under-covered",
+      "location": "## 2. Official Data Feeds: DHM, BIPAD and NEMRC — intro sentence 'The National Earthquake Monitoring and Research Center (NEMRC) locates earthquakes.'",
+      "issue": "The query names NEMRC data as one of three official sources and the Section 2 heading names it, but the draft gives NEMRC one descriptive sentence plus passing mentions (daily copy suits 'NEMRC's catalogue'; link NEMRC events to USGS); there is no account of what NEMRC publishes (event list fields, magnitude type, local vs. teleseismic events, revision practice), how reliable the scraped page is, or how the Atlas should use it better, whereas DHM and BIPAD get paragraphs.",
+      "requires_orchestrator_restructure": false,
+      "recommendation": "Add a short paragraph (or a sub-bullet in 2.B/2.D) dedicated to NEMRC: what the Atlas currently scrapes, that it is HTML-only (already stated generally), that early magnitudes are revised (already argued in 5.E — cross-reference it), and concrete uses: show NEMRC magnitude with its publication time and revision note, keep a dated event archive, display the official NEMRC event beside the matching historical preset, and link to USGS ShakeMap/PAGER. Vault searches for NEMRC catalogue documentation returned nothing, so state the reliability evidence gap explicitly rather than inventing specifics."
+    },
+    {
+      "severity": "major",
+      "atomic_item": "How can the hypothetical earthquake scenario model improve scientifically (GMPEs, site effects, rupture models, exposure, damage/loss, validation)?",
+      "failure_mode": "under-covered",
+      "location": "## 5. Earthquake Scenarios — sections A–E (GMPE, site, basin, bands, role); no rupture discussion",
+      "issue": "The decomposition sub-question explicitly names rupture models, but the draft never discusses the scenario source geometry (point source vs. finite fault on the Main Himalayan Thrust, distance metric such as Rjb vs. epicentral, rupture extent and directivity for great events like Gorkha), which strongly affects shaking distribution for M7.5+ scenarios.",
+      "requires_orchestrator_restructure": false,
+      "recommendation": "Add a brief subsection or paragraph in Section 5 (e.g. after 5.B) stating what source representation the engine uses, why a point source misplaces shaking for M7.5–8.5 Himalayan thrust events, and the minimal improvement (finite-fault rectangle on the MHT with Joyner-Boore distance, which BSSA14 already expects), tied to the Gorkha hindcast V1. If the vault lacks rupture-specific evidence, label it grade D and pair with V1."
+    },
+    {
+      "severity": "major",
+      "atomic_item": "Floods — required_fields: data, models, communication",
+      "failure_mode": "under-covered",
+      "location": "## 4. Flood and Glacial-Lake Outburst Scenarios — 4.A 'replace 2/4/6 with a 3/6/9 m/s bracket for moraine-dam scenarios'",
+      "issue": "The query lists floods and glacial-lake outbursts as distinct hazards and the engine has river-reach origins, but Section 4 is framed almost entirely around GLOFs; the draft never says what the new defaults should be for ordinary monsoon/river-reach flood scenarios (wave speed, peak behaviour, hydrograph shape), leaving the non-GLOF flood model without recommendations.",
+      "requires_orchestrator_restructure": false,
+      "recommendation": "Add a short paragraph in Section 4 (e.g. end of 4.A or 4.B) addressing the river-reach/monsoon flood origins explicitly: whether the 3/6/9 bracket applies or slower monsoon-flood celerities are appropriate, that monsoon flood peaks should be anchored to DHM gauge return-period values (the 30-year 490–560 m³/s Barabise figure is already in the draft), and that the communication frame for river floods should defer to DHM stage terms (2.C)."
+    },
+    {
+      "severity": "major",
+      "atomic_item": "Nepali district names from the constitution — required_fields: extension to other admin levels/places",
+      "failure_mode": "under-covered",
+      "location": "## 3. The Map and Place Search — 3.A '...keeps constitutional names authoritative for districts.'",
+      "issue": "The query names constitutional Nepali district names as a project feature; the draft only says to keep them authoritative for districts and to source the 753 local levels and wards from OSM, without recommending an authoritative Nepali-name source for the 7 provinces, 753 local levels and wards or explaining how official vs. community names are distinguished in the UI.",
+      "requires_orchestrator_restructure": false,
+      "recommendation": "Add 2–3 sentences in 3.A recommending that province and local-level Nepali names be taken from the official government local-level list (as the district names are from the constitution) and flagged 'official', with OSM name:ne used for settlements and flagged 'community-mapped'; tie it to N6. Vault search found no gazette source for local-level names, so mark the source as to-be-confirmed rather than citing one."
+    },
+    {
+      "severity": "minor",
+      "atomic_item": "Static public website architecture — required_fields: reliability, performance, offline/PWA, hosting",
+      "failure_mode": "under-covered",
+      "location": "## 3.C 'range requests should be tested on the actual host first' and ## 6.B page budget / service worker",
+      "issue": "Performance and offline are well covered, but hosting (where the static site and PMTiles are served, CDN presence in South Asia, behaviour if the host or scheduled CI job is unavailable) gets only an aside.",
+      "requires_orchestrator_restructure": false,
+      "recommendation": "Add one or two sentences (e.g. in 6.B or 9.C) on hosting resilience: a mirror on a second static host, cache headers for data files, and that the daily job's failure must not take the site down (links to N1)."
+    },
+    {
+      "severity": "minor",
+      "atomic_item": "How can the Himalayan Disaster Atlas improve even more overall — which improvements matter most, and in what order?",
+      "failure_mode": "under-covered",
+      "location": "## 10. Prioritised Roadmap — 10.A near-term table N1–N9",
+      "issue": "The near-term table is numbered but the draft does not say whether N1–N9 are in priority order or parallel, so the 'in what order' half of the question is answered only between horizons, not within the near term.",
+      "requires_orchestrator_restructure": false,
+      "recommendation": "Add one sentence before the 10.A table stating that rows are in priority order (or naming the top three to do first, e.g. N2 frame, N3/N4 flood defaults, N5 Vs30) and which can run in parallel."
+    },
+    {
+      "severity": "minor",
+      "atomic_item": "How can the hypothetical flood and GLOF scenario models improve scientifically (hydraulic routing, dam-breach, inventories, validation, uncertainty)?",
+      "failure_mode": "vague-recommendation",
+      "location": "## 4.C 'unlisted lakes a volume range estimated from area, labelled \"uncertain by a factor of several\"'",
+      "issue": "The draft recommends estimating unlisted-lake volume 'from area' without naming the area-volume relation, while the vault contains evidence on glacial-lake volume estimation (note abstract-egu25-14977 on empirical area-volume relations).",
+      "requires_orchestrator_restructure": false,
+      "recommendation": "Name the specific empirical area-volume approach (and its stated error) from note abstract-egu25-14977 so the volume range is reproducible, and cite it."
+    },
+    {
+      "severity": "major",
+      "atomic_item": "readability-structural: undefined technical terms (R1)",
+      "failure_mode": "missing-definitions",
+      "location": "## 5.B 'However, ASK14 and IDR14 show better LLH scores', 'NGA-West2', 'ZHAO06'; ## 10.C 'natural-log units'",
+      "issue": "Several model and metric names are used without definition for a general reader: ASK14, IDR14, ZHAO06 (named GMPEs by author/year), NGA-West2 (only partly glossed), LLH (log-likelihood ranking score), and 'bias of 0.3 natural-log units' (no plain meaning, e.g. roughly 35% under/over-prediction).",
+      "requires_orchestrator_restructure": false,
+      "recommendation": "Add brief parentheticals on first use: GMPE names are author-year model labels (Abrahamson-Silva-Kamai 2014, Idriss 2014, Zhao et al. 2006); NGA-West2 = a 2014 family of models fitted mainly to California and global shallow-crust records; LLH = log-likelihood score, lower is better fit; 0.3 ln units ≈ a factor of about 1.35."
+    }
+  ]
+}
