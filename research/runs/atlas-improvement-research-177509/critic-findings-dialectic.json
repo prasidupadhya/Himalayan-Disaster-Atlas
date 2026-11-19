@@ -1,0 +1,75 @@
+{
+  "critic_type": "dialectic",
+  "findings": [
+    {
+      "severity": "critical",
+      "location": "Section 5B, 'adopt a BSSA14–ASK14–ZHAO06 ensemble and show the spread between models as the main uncertainty display'; also roadmap row M3 and V1",
+      "issue": "The draft's own source ranks ASK14 as poorly as BSSA14 for PGA in the Western and Central Himalaya: Table 4 gives ASK14 a mean normalised residual of 0.88 at 0.01 s (rank D, LLH 2.81) against BSSA14's 1.14 (rank D, LLH 3.37). For PGA the preprint recommends ZHAO06, KAN06, BJAN19 and ZHAO16, not ASK14. An ensemble in which two of three members underpredict by about one standard deviation keeps the central estimate low and turns a shared bias into an apparently narrow 'spread'.",
+      "evidence": "arxiv241005918v1-physicsgeo-ph-8-oct-2024 (Selvan & Sinha 2024, Table 4 and §6.1: 'a combination of ZHAO06, KAN06, BJAN19 and ZHAO16 are seen to best perform at 0.01 s'; ASK14 Mean Z 0.88, rank D at PGA)",
+      "recommendation": "Revise the proposed ensemble so it matches what the cited preprint recommends for PGA in the Himalaya (e.g. ZHAO06 and KAN06 alongside BSSA14 as the incumbent), or keep ASK14 only with an explicit statement that it shares BSSA14's short-period underprediction (mean residual ~0.9 SD). Add one sentence warning that model spread understates uncertainty when the members share a bias. Make the same change to M3 and to the 'ASK14 and IDR14 show better LLH scores' framing, which describes ASK14 only relative to other NGA-West2 models."
+    },
+    {
+      "severity": "major",
+      "location": "Section 5B, 'The ranking is a preprint drawn mostly from Indian networks, kinder to BSSA14 in the Indo-Gangetic Plains'",
+      "issue": "The preprint is kinder to BSSA14 in the Indo-Gangetic Plains only at periods of about 0.3 s and longer. At PGA (0.01 s), BSSA14's mean residual there is 1.05 (median 1.07, rank D), the same underprediction as in the Himalaya. That matters because the Terai is the Indo-Gangetic part of Nepal and holds much of the exposed population.",
+      "evidence": "arxiv241005918v1-physicsgeo-ph-8-oct-2024 (Table 5: BSSA14 Mean Z 1.05/1.14/1.52 at 0.01/0.02/0.05 s, rank D; for PGA the authors suggest ZHAO06, IDR08, ZHAO16 and KAN06)",
+      "recommendation": "Qualify 'kinder to BSSA14 in the Indo-Gangetic Plains' to say this holds only at longer periods. At PGA, the Atlas's only output, BSSA14 underpredicts by about one standard deviation in both regions, which strengthens rather than softens the case for change in the Terai."
+    },
+    {
+      "severity": "major",
+      "location": "Section 4A, 'The slowest case is wrong by a factor of about four, always toward more time than people would have' and the 3/6/9 m/s fix; table row 'Wave speed 2/4/6 m/s ... Arrival too late near the source'",
+      "issue": "The draft leaves out that, in the same Cook et al. measurement, the second pulse was 'of higher magnitude but travels slower, at 5 m/s' and was interpreted as the coarse-sediment package. The existing 4–6 m/s cases therefore bracket the arrival of the larger, more destructive pulse, and only first-water arrival is clearly too late. Presenting the defaults as uniformly wrong distorts the source and hides a useful two-time message.",
+      "evidence": "geomorphology (Cook et al. 2018 Science author PDF: 'The first is the flood front, which propagates between stations at 8.7 m/s ... The second pulse is of higher magnitude but travels slower, at 5 m/s ... the second as a package of coarse sediment')",
+      "recommendation": "Add a sentence acknowledging that the 2016 sediment-laden main pulse moved at about 5 m/s, inside the current 4–6 m/s range, so the old defaults roughly captured the main pulse and missed first water. Recommend that the place window distinguish 'first water' (fast case) from 'main debris pulse' (around 5 m/s). Soften 'always toward more time' to apply to first arrival."
+    },
+    {
+      "severity": "major",
+      "location": "Section 1B, 'A preparedness tool that reassures by default works against its purpose', and Section 4D Tier 3 lakes ('Hundreds of new scenario buttons...')",
+      "issue": "The draft treats error toward reassurance as the only failure mode and never weighs the opposite cost, desensitisation and false-alarm erosion of trust, although the vault documents it for Nepal. Residents treat routine flood SMS 'as background noise' after 'repeated low-stakes alerts with no visible consequences', and DHM forecasters fear that communicating uncertainty they cannot defend leads to 'false alarms and the breakdown of trust'. Raising every default and adding hundreds of unassessed-lake scenarios could push the same way.",
+      "evidence": "during-nepal-floods-decentralized-community-based-warning-saved-lives (Mongabay 2026, 'The boy who cried wolf' section); gc-communicating-complex-forecasts-an-analysis-of-the-approach-in-nepals-flood-e (Bhandari et al. 2020: DHM forecaster 'Communicate forecast uncertainty only if you can convince; otherwise it is better not to communicate'; 'concern about false alarms and the breakdown of trust')",
+      "recommendation": "In Section 1B or 4D, insert a short counter-paragraph that acknowledges desensitisation as the opposite risk, citing the Mongabay cry-wolf evidence and the DHM forecaster view. Explain why the proposed design limits it: ranges rather than worst cases, Tier 3 not shown by default until V3, and no 'danger' language. Add a V3 question on whether expanded scenarios make readers discount them."
+    },
+    {
+      "severity": "major",
+      "location": "Section 7B item 1 'A fixed bilingual frame', and roadmap row N2 graded 'B' with evidence 'Maps read as warnings [4, 5]'",
+      "issue": "The cited evidence shows that maps are misread. It does not show that a banner or disclaimer prevents misreading. The framing investigation listed 'evidence that disclaimers/banners are ignored (banner blindness) or increase false reassurance' as a condition that would overturn the recommendation, and it found no test that a persistent disclaimer works. The draft presents the banner as the main safeguard, the gate that M1 waits on, at grade B.",
+      "evidence": "interim-report-scenario-uncertainty-communication-and-framing ('What would change this position: ... evidence that disclaimers/banners are ignored (banner blindness) or increase false reassurance'; open question 'Does a persistent disclaimer reduce misreading as a live warning?')",
+      "recommendation": "Add a qualifier that the banner's effectiveness is untested and that disclaimers are often ignored. Regrade N2's effectiveness to C/D, keeping B for the problem it addresses. State that the place-specific design (ranges, 'not an evacuation map', plain first sentence) is the substantive safeguard, with the banner only one part. V3 already tests banner against no banner; say so explicitly at N2."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 4A arithmetic, 'Ten kilometres below a source, an 8.7 m/s front arrives in about 19 minutes; the Atlas says 28, 42 or 83'",
+      "issue": "The 8.7 m/s figure was measured between seismic stations roughly 20–30 km along-stream from the 2016 source, over a short steep gorge reach. Applying it to the first 10 km and to 30 km reaches generally goes beyond what was measured. The routing interim also noted that for broad lower reaches 2–6 m/s may be adequate.",
+      "evidence": "geomorphology (Cook et al. 2018, Fig. 1C: Hindi–Chaku–Tyanthali–KK stations at ~21–29 km distance along stream); interim-report-constant-celerity-routing-vs-process-chain-glof (boundary conditions: 'for broad lower reaches (>100 km, Devghat-type) 2-6 m/s is adequate')",
+      "recommendation": "Add a clause that the 8.7 m/s value comes from one event over a short steep reach. Present the 10 km and 30 km arithmetic as illustrative rather than measured, and note that speeds on broad lower reaches may fall back into the old range. V2 is the check."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 1B table row 'Vs30 = 760 m/s (rock) everywhere ... Understates shaking where most people live'",
+      "issue": "The draft's own Section 5C reports that at Kantipath short-period mainshock motion was 'relatively weak' because of nonlinear soil response. The table's unqualified claim that a rock default understates PGA in the basin therefore conflicts with the draft's later evidence: in the Kathmandu basin the understatement is mainly at long periods.",
+      "evidence": "analysis-of-strong-ground-motions-and-site-effects-at-kantipath-kathmandu-from-2 (short-period motions relatively weak despite proximity, due to nonlinear soil response); interim-report-bssa14-single-vs30-kathmandu-basin ('a Vs30 layer improves PGA/MMI only modestly in the basin')",
+      "recommendation": "Qualify the table row, e.g. 'understates shaking on most sediment sites; in the Kathmandu basin under strong shaking the larger miss is long-period (see 5C)', so the summary table agrees with Section 5C."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 5B/10C, V1 'Gorkha 2015 shaking hindcast: per-cell Vs30 against station PGA and ShakeMap ... Bias above about 0.3 natural-log units promotes M3'",
+      "issue": "The draft treats V1 as a clean decision gate. But Nepali Gorkha strong-motion records are concentrated in the Kathmandu basin, where nonlinear soil response suppressed short-period PGA and basin effects dominate. ShakeMap is partly model-derived. A bias measured there may say more about basin nonlinearity than about BSSA14's regional fit, in either direction.",
+      "evidence": "analysis-of-strong-ground-motions-and-site-effects-at-kantipath-kathmandu-from-2; interim-report-bssa14-single-vs30-kathmandu-basin (open question: 'Published BSSA14 residuals against Gorkha strong motion (PEER/CESMD stations, KATNP)')",
+      "recommendation": "Add a caveat that V1 rests on few stations, mostly in the basin, and that ShakeMap is partly model-based. Suggest reporting basin and non-basin residuals separately, and not letting a basin-only result alone decide whether the ensemble waits."
+    },
+    {
+      "severity": "minor",
+      "location": "Executive summary and Section 2A, 'Nepal's official river warnings work: flood deaths fell from 166 in 2017 to 27 in 2022 even though the 2022 floods were larger [6]'",
+      "issue": "This causal claim is WMO's credit to its own and its partners' programmes, on a short web page, and is not an independent evaluation. Two endpoint years cannot separate the effect of warnings from year-to-year variation, as the 2024 toll of about 250 deaths, cited later in the draft, shows. The 'official chains work' premise supports the whole role argument.",
+      "evidence": "reducing-flood-casualties-in-nepal (WMO page, 'Implementation of two systems has reduced human casualties'); missing-on-early-warning-pushed-to-rising-death-tolls-and-losses-of-properties-a (~250 deaths in 2024 despite alerts)",
+      "recommendation": "Attribute the claim ('WMO credits...'), note that it compares two years and is agency-reported, and set the 2024 toll beside it so the claim reads 'river warnings have improved and are credited with...' rather than an unqualified 'work'."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 4D, Tier 3 'mapped but unassessed' lakes, 'No rankings, no \"danger\" words'",
+      "issue": "The draft frames the risk of Tier 3 only as readers mistaking scenarios for forecasts. It ignores the documented contestation risk: hazard lines have 'effects felt both sides' on property and planning. Publishing scenarios for named, unassessed lakes above particular villages, trekking hubs or hydropower sites could draw local objection or pressure on agencies, and the agencies have not assessed those lakes.",
+      "evidence": "r-e-g-u-l-a-r-p-a-p-e-r (Haughton & White 2018: hazard-map lines contested, uncertainty 'translated into false certainty', selective mobilisation of uncertainty); interim-report-scenario-uncertainty-communication-and-framing",
+      "recommendation": "Add one sentence noting that Tier 3 can draw objection from affected communities or businesses as well as misreading. Suggest previewing Tier 3 with ICIMOD and the relevant municipalities, already listed as partners, before it goes public."
+    }
+  ]
+}
