@@ -1,1 +1,52 @@
-{"total_findings": 0, "applied": [], "skipped": [], "conflicts": [], "orchestrator_escalated": []}
+{
+  "total_findings": 37,
+  "applied": [
+    {"critic": "dialectic", "severity": "critical", "location": "5B ensemble; M3", "action": "Ensemble changed to BSSA14-ZHAO06-KAN06 per preprint PGA recommendation; ASK14 residual (~+0.9) stated beside BSSA14 (~+1.1); 'ASK14 better only relative to NGA-West2 siblings'; sentence that spread understates uncertainty when members share a bias; M3 row updated."},
+    {"critic": "dialectic", "severity": "major", "location": "5B IGP qualifier", "action": "Kinder-to-BSSA14 scoped to periods >=0.3 s; PGA residual 1.05 in IGP stated, strengthening Terai case."},
+    {"critic": "dialectic", "severity": "major", "location": "4A wave speed; 1B table; N3", "action": "5 m/s main pulse placed inside 4-6 m/s range; 'factor of four' scoped to first water; place windows give both times; table row and N3 updated."},
+    {"critic": "dialectic", "severity": "major", "location": "1B", "action": "Short counter-paragraph on desensitisation (Mongabay [25], DHM forecaster [8]); design response; V3 question on discounting added."},
+    {"critic": "dialectic", "severity": "major", "location": "7B item 1; N2", "action": "Banner effectiveness stated as untested; items 2,3,5 named as substantive safeguard; N2 regraded B for problem / C-D for banner; V3 banner-vs-none referenced."},
+    {"critic": "dialectic", "severity": "minor", "location": "4A arithmetic", "action": "8.7 m/s scoped to one event over a short steep reach ~20-30 km below source; arithmetic labelled illustrative."},
+    {"critic": "dialectic", "severity": "minor", "location": "1B table Vs30 row", "action": "Row scoped: sediment sites generally; long-period miss in Kathmandu basin (5C)."},
+    {"critic": "dialectic", "severity": "minor", "location": "V1", "action": "Caveat: few, mostly basin records; ShakeMap partly model-derived; basin/non-basin residuals separate."},
+    {"critic": "dialectic", "severity": "minor", "location": "Exec summary; 10D", "action": "WMO attribution, two-year agency comparison, 2024 ~250 deaths [17]; 10D 'work' -> 'have improved'."},
+    {"critic": "dialectic", "severity": "minor", "location": "4D Tier 3", "action": "Contestation risk sentence [27]; preview with ICIMOD and municipalities."},
+    {"critic": "depth", "severity": "major", "location": "4D Thame vs Tier 3", "action": "Stated Thame upper lake (~8,000 m2 in 2015 [47]) below Tier 3 cutoff; 'list not complete' added to Tier 3 label; cascade trigger rule."},
+    {"critic": "depth", "severity": "major", "location": "4A mass-flow case", "action": "Log-linear decay (6 segments, 80.1%, ~7x) [24]; 15-30 m/s near field over 10-20 km decaying to 6-7 m/s; ~3 min for first 10 km; debris-front caveat."},
+    {"critic": "depth", "severity": "major", "location": "2A; 6F", "action": "Settlement lead times -26 to -16 / +4 to +14 min [23]; used in 6F."},
+    {"critic": "depth", "severity": "major", "location": "5B; V1; M3", "action": "BSSA14 sigma 0.7-0.8 ln (phi 0.695, tau 0.398), factor ~2 band; bias-vs-scatter explanation; >20% sigma-reduction trigger added to 5B, V1, M3."},
+    {"critic": "depth", "severity": "major", "location": "5C", "action": "Z1 omission tied to long-period correction; N5 Vs30 cannot fix 0.2-0.3 Hz resonance; M11 indicator called a Z1 proxy."},
+    {"critic": "depth", "severity": "minor", "location": "5A", "action": "Clamp to 150-1,500 m/s domain; water cells (600 m/s) take nearest land value."},
+    {"critic": "depth", "severity": "minor", "location": "4D", "action": "0.02 km2 = ICIMOD GLOF-capable threshold, 1,410 lakes [12]; 'hundreds' -> 'more than a thousand'; 8 deleted / 8 added churn; cascade trigger."},
+    {"critic": "depth", "severity": "minor", "location": "4D; 8C; M2", "action": "Under-recording (>200 new vs 108) and lower recent frequency [78], grade C; M2 labelled exposure change not rising hazard."},
+    {"critic": "depth", "severity": "minor", "location": "4B Devghat", "action": "Excess volume 19.96 million m3, 34.8% [24] added. Optional Tsho Rolpa 185 km example not added (length)."},
+    {"critic": "depth", "severity": "minor", "location": "2C CAP", "action": "Labelled-unofficial mirror option acknowledged and rejected with reasons; reversal condition (official sanction + sub-hourly refresh, or agency request)."},
+    {"critic": "depth", "severity": "minor", "location": "7C", "action": "Map-skill counterpoint added as reasoning tied to [9] (MacPherson-Krutsky source not in Sources list, so not quoted); '+/- one band' edge note added as proposal. Natural-frequency guidance not added."},
+    {"critic": "width", "severity": "major", "location": "2B NEMRC", "action": "NEMRC paragraph: unverified scrape, evidence gap stated, ML exceeds Mw by ~1.0 +/- 0.7 [81], label magnitude type and Nepal-time timestamp beside USGS value; V4 match rate."},
+    {"critic": "width", "severity": "major", "location": "3A names", "action": "Extension to 7 provinces and 753 local levels; official list marked 'to be confirmed' (not retrieved); Survey Department standard for generated spellings; name-tier marking."},
+    {"critic": "width", "severity": "major", "location": "4B/4C/4D/8C", "action": "EGU25-14977 volume-area discrepancies [79] in 4C; South Lhonak 2023 [80] in 4B; McCoy [78] in 4D and 8C. All flagged abstract/grade C."},
+    {"critic": "width", "severity": "major", "location": "2C DHM network", "action": "~150 stage-only stations [86], 5-min monsoon telemetry [84], MIKE 11 on large rivers [85]; never convert stage to/from scenario m3/s."},
+    {"critic": "width", "severity": "minor", "location": "6C", "action": "2021 government-website directive and Kathmandu Post disability-law example [87]."},
+    {"critic": "width", "severity": "minor", "location": "5E", "action": "National hazard map ~two decades old in 2015; OpenQuake 1934-recurrence scenario [88] as comparison."},
+    {"critic": "width", "severity": "minor", "location": "8C", "action": "IRDR 2026: ~748 MW hydropower, >30 bridges [89]. FAO municipality count not added (length)."},
+    {"critic": "width", "severity": "minor", "location": "2C; 8D", "action": "SWIC / Register of Alerting Authorities as CAP discovery path [90]; GSMA SMS manual/delay-prone [91] in 8D."},
+    {"critic": "width", "severity": "major", "location": "Bloat: 8D, 10E, 9A", "action": "8D reduced to a pointer with the competing-authority line moved into 10D; 10E cut by about two thirds (Betrawati passage kept); 9A friction passage condensed. Further length trims to exec summary, 1A, 2B, 3D, 4E, 6 intro, 6B, 7 intro, 8 intro, 9 intro, 9C."},
+    {"critic": "instruction", "severity": "major", "location": "2B NEMRC", "action": "Merged with width NEMRC finding (see above)."},
+    {"critic": "instruction", "severity": "major", "location": "5B rupture", "action": "New paragraph: Gorkha ~140 km rupture [82]; Joyner-Boore distance; finite-fault rectangle for large presets; point-source conversions with inflated sigma [83]; grade D, V1 check. No scaling-law coefficients or dip quoted (per gap-fill log)."},
+    {"critic": "instruction", "severity": "major", "location": "4A river-reach floods", "action": "Paragraph: no measured Nepal monsoon celerity; 2/4/6 kept for river-reach origins as grade D; peaks anchored to DHM return periods (Barabise 30-yr [1]); DHM stage terms. N3 updated."},
+    {"critic": "instruction", "severity": "major", "location": "3A names", "action": "Merged with width names finding (see above)."},
+    {"critic": "instruction", "severity": "minor", "location": "6B hosting", "action": "Second static host mirror; failed daily job leaves last good site serving (N1)."},
+    {"critic": "instruction", "severity": "minor", "location": "10A", "action": "Priority-order sentence before near-term table."},
+    {"critic": "instruction", "severity": "minor", "location": "4C", "action": "Merged with width EGU25-14977 finding; Atlas to publish which volume-area relation it uses."},
+    {"critic": "instruction", "severity": "major", "location": "5B definitions", "action": "Author-year GMPE names, NGA-West2, LLH glossed; 0.3 ln ~ factor 1.35."}
+  ],
+  "skipped": [
+    {"critic": "depth", "severity": "minor", "location": "6B/6D connectivity and disability figures", "reason": "Partially applied: 4G 81.6% [26] added in 6A and 1 MB tied to 3G. 3G ~90% figure and 2.2% census disability figure skipped because no citable source is in the Sources list or evidence digest (interim-only); TV 42.8% skipped for length."}
+  ],
+  "conflicts": [
+    {"findings": "dialectic critical (ASK14 shares bias) vs instruction major (define ASK14)", "resolution": "Both applied: ASK14 defined, then excluded from the ensemble."}
+  ],
+  "orchestrator_escalated": [],
+  "new_sources_appended": "[78]-[91]",
+  "notes": "Body length not machine-counted (no Bash). Estimated near but under 10,000 words after cuts; orchestrator should confirm with `hyperresearch run verify`."
+}

@@ -1,0 +1,1 @@
+- Removed quotation marks from 30 spans flagged by quote-integrity: proposed interface wording now italic; source paraphrases with ellipses left unquoted (polish to smooth ellipses).
