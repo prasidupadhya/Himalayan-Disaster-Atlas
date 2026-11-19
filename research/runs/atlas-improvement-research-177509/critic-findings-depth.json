@@ -1,0 +1,101 @@
+{
+  "critic_type": "depth",
+  "draft_path": "research/notes/final_report_atlas-improvement-research-177509.md",
+  "vault_tag": "atlas-improvement-research-177509",
+  "interim_notes_reviewed": [
+    "interim-report-atlas-role-in-warning-ecosystem",
+    "interim-report-bssa14-single-vs30-kathmandu-basin",
+    "interim-report-constant-celerity-routing-vs-process-chain-glof",
+    "interim-report-glof-origin-selection-beyond-pdgl-list",
+    "interim-report-reach-offline-lowbandwidth-bilingual",
+    "interim-report-scenario-uncertainty-communication-and-framing"
+  ],
+  "findings": [
+    {
+      "severity": "major",
+      "location": "Section 4D 'Origins: tier the lakes' (Tier 3 bullet and the paragraph on the open inventory's small-lake coverage); also roadmap row M1",
+      "issue": "The draft's main argument for going beyond the official list is Thame, but it never states that its own Tier 3 cutoff (>=0.02 km2) would also have excluded Thame's upper lake before the event. The interim note puts that lake at about 0.008 km2 in 2015, growing to 0.1 km2 by 2024. That is below the Tier 3 threshold and inside the open inventory's weakest size bin. The draft gives the 25%-below-5,400 m2 detection figure but never connects it. As written, a reader will conclude that the tiered layer would have shown the Thame source in advance, and it would not have.",
+      "evidence": "interim-report-glof-origin-selection-beyond-pdgl-list: 'Thame preprint ... reports GL5 growing from ~0.008 to 0.1 km2 in 2015-2024'; 'Caveat: small lakes (<0.02 km2) are the weakest bin, and Thame GL5 at 0.008-0.1 km2 sits right there'; Boundary conditions: 'Below 0.02 km2 the open inventory is least accurate and Thame-type lakes may be missed; the tier cannot claim completeness.'",
+      "recommendation": "In 4D, add one or two sentences saying plainly that the 0.02 km2 cutoff would have left out Thame's upper lake at its 2015 size (~0.008 km2). Tier 3 should therefore be labelled as not complete, and the cascade option should key on small upstream lakes that sit above a Tier 1/3 lake. Carry the 'cannot claim completeness' caveat into the Tier 3 label text."
+    },
+    {
+      "severity": "major",
+      "location": "Section 4A, paragraph 3 ('The fix: replace 2/4/6 with a 3/6/9 m/s bracket ... Add a labelled \"mass-flow cascade\" case with a fast near-field speed that decays downstream'); roadmap row N3",
+      "issue": "The draft names a decaying-celerity mass-flow case in one clause and gives none of the mechanism the interim note develops. It gives no decay form, no near-field speed, no distance over which the speed decays, and no fit quality. A developer cannot build this case from the draft, and readers cannot judge it.",
+      "evidence": "interim-report-constant-celerity-routing-vs-process-chain-glof: preprint reports '188 km/h (52.2 m/s), declining to 23-26 km/h in lower-river segments (6.4-7.2 m/s)', fitted with 'a descriptive log-linear decay model at 80.1% of variation across six reported segment speeds'; a '~7x decay along the channel'; first 10 km '~3 min at 52 m/s vs 28-83 min at 6-2 m/s'; proposed upgrade 'v = v_near for the first 10-20 km (default 15-30 m/s for steep debris-flow-type reaches, flagged as preprint-derived) decaying log-linearly to 6-7 m/s'.",
+      "recommendation": "Expand the mass-flow sentence into a short worked specification. Give the log-linear decay (about 7x from source to lower river, six segment speeds, 80.1% of variance explained), a parameterisation (near-field 15-30 m/s over the first 10-20 km, decaying log-linearly to 6-7 m/s), and the 10 km arithmetic (about 3 min against the current 28-83 min). Keep the preprint flag and the note that the 52 m/s figure may be a debris front rather than a hydraulic wave."
+    },
+    {
+      "severity": "major",
+      "location": "Section 2A, paragraph 2 (preprint timings: 12.8 min front, 38.8 min alert, gauges destroyed); echoed in Section 6F near-source cue",
+      "issue": "The draft gives the preprint's trigger-to-gauge and alert timings but leaves out its most decision-relevant number: lead times at named settlements. They were negative (-26 to -16 min) at the first settlement and only +4 to +14 min at the next. That is the direct quantitative case for the near-source cue and for 'arrival time, not magnitude, drives outcomes'. The draft states that conclusion ('minutes, not hours') without the numbers.",
+      "evidence": "interim-report-constant-celerity-routing-vs-process-chain-glof: 'lead times were -26 to -16 min at the first settlement and +4 to +14 min at the next ... Implication: in the upper reach the wave is faster than any 2-6 m/s setting, and arrival time, not magnitude, drives outcomes'; Position B: 'fatalities concentrated where lead time was negative.'",
+      "recommendation": "In 2A, after the 12.8/38.8 min figures, add the settlement lead times (-26 to -16 min at the first settlement, +4 to +14 min at the second) with the preprint caveat. Use them in 6F to justify why the near-source cue cannot wait for an SMS."
+    },
+    {
+      "severity": "major",
+      "location": "Section 5B, final paragraph ('Show the ±1 standard deviation band the code already computes ... If bias exceeds about 0.3 natural-log units'); Section 10C V1",
+      "issue": "The draft tells readers to show the ±1 SD band but never says how large it is, so the 0.3 ln bias threshold has no scale. The interim note gives BSSA14's PGA sigma from the model coefficients. That sigma means the ±1 SD band already spans roughly a factor of two either way, which changes how a reader should weigh a 0.3 ln bias against within-model scatter. The interim note also gives a second trigger for the ensemble (a Himalayan GMPE cutting residual sigma by more than 20%), which the draft drops.",
+      "evidence": "interim-report-bssa14-single-vs30-kathmandu-basin: 'MMI-type communication tolerates a factor ~1.5-2, comparable to sigma (total sigma at PGA ~0.7-0.8 ln units from the coefficients phi1 0.695, tau1 0.398)'; 'A Gorkha test showing BSSA14 + slope Vs30 median bias >0.3 ln units or a Himalayan GMPE cutting residual sigma materially (>20%) would promote the GMPE branch.'",
+      "recommendation": "In 5B, state that BSSA14's total PGA sigma is about 0.7-0.8 ln units (phi 0.695, tau 0.398), so the ±1 SD band spans about a factor of two either way. Explain that a 0.3 ln median bias matters because it is systematic, while sigma is scatter. Add the >20% sigma-reduction criterion as a second V1/M3 trigger."
+    },
+    {
+      "severity": "major",
+      "location": "Section 5C 'The Kathmandu basin: what PGA cannot show' and Section 5A last sentence ('Slope proxies are weakest in flat basins ...')",
+      "issue": "Section 5C has the observations (Kantipath, ~5 s peak) but leaves out the mechanism that links them to the Atlas's own model. BSSA14's Vs30 term is a shallow-site term. The long-period basin correction is the Z1 basin-depth term, which the Atlas's model.json explicitly omits ('Z1 UNKNOWN'). Per-cell Vs30 therefore improves basin PGA only modestly and cannot represent the 0.2-0.3 Hz basin resonance. Without this, the near-term Vs30 fix (N5) looks like it addresses Kathmandu more than it does.",
+      "evidence": "interim-report-bssa14-single-vs30-kathmandu-basin: 'Kathmandu's amplification is at long periods (0.2-0.3 Hz, ~5 s) that PGA, and therefore a Vs30 term, barely capture; the BSSA14 Vs30 term is a shallow-site term and the omitted Z1 term is exactly the long-period basin correction. So a Vs30 layer improves PGA/MMI only modestly in the basin'; repo: model.json omits 'basin depth term (Z1 UNKNOWN)'.",
+      "recommendation": "Add two sentences to 5C. Say that the model's disclosed omission of the Z1 basin-depth term is precisely the missing long-period correction, and that per-cell Vs30 (N5) will therefore not fix Kathmandu's ~5 s (0.2-0.3 Hz) amplification. Link this to the later bedrock-depth indicator (M11), which is in effect a Z1 proxy."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 5A (USGS Vs30 Mosaic '98 to 2,197 m/s ... sample Vs30 at build time onto the population cells')",
+      "issue": "The draft misses an implementation detail the interim note found in the repo: the USGS grid's range runs outside BSSA14's validity domain as coded. Grid values go down to 98 m/s, while the model domain starts at 150 m/s. Water cells in the grid are a fixed 600 m/s.",
+      "evidence": "interim-report-bssa14-single-vs30-kathmandu-basin: 'range 98-2197 m/s, 631 MB GMT zip, water = 600 m/s'; repo model.json 'Domain Vs30 150-1500, Rjb<=400 km, M 3-8.5'.",
+      "recommendation": "Add a clause saying that sampled Vs30 must be clamped to the model's 150-1500 m/s domain, and that grid water cells (fixed 600 m/s) should be handled explicitly, for example with the nearest land value for riverside population cells."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 4D, first paragraph and the 'Hundreds of new scenario buttons' sentence; Tier 3 bullet",
+      "issue": "The draft does not say why 0.02 km2 is the cutoff, or roughly how many lakes Tier 3 would add. The interim note supplies both: it is ICIMOD's own 'large enough to cause a GLOF' threshold, and 1,410 of the 3,624 inventoried lakes exceed it. The draft also says the list is unstable ('only 13 ... carried over') without giving the 8-deleted/8-added churn, and it gives no rule for when the cascade option applies.",
+      "evidence": "interim-report-glof-origin-selection-beyond-pdgl-list: inventory 'mapped lakes >=0.003 km2 (3,624 lakes; 2,070 Nepal, 1,509 TAR China, 45 India), treated >=0.02 km2 (1,410 lakes) as large enough to cause a GLOF'; 'Only 13 of the 21 Nepal PDGLs match the 2011 list (8 deleted, 8 added)'; cascade option 'for any lake with another mapped lake within a few hundred metres downstream, since Thame's second lake sat 650 m below'; Tier 1T also includes the 1 India PDGL.",
+      "recommendation": "State that 0.02 km2 is ICIMOD's GLOF-capable threshold and that about 1,410 lakes in the three basins exceed it, which puts the scale at over a thousand origins rather than 'hundreds'. Add the 8-out/8-in churn and the cascade trigger rule (a mapped lake within a few hundred metres downstream)."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 4D (justification for unlisted lakes) and Section 8C / roadmap M2 (lake-change display)",
+      "issue": "The draft leaves out the GLOF under-recording evidence, which strengthens the case for Tier 3 and also qualifies the lake-growth display. Past GLOFs are heavily under-recorded, so 'never failed' is weak evidence of safety. But GLOF frequency over the last 20 years has been lower than in 1970-2000 despite lake growth, so lake growth alone should not be presented as rising hazard.",
+      "evidence": "interim-report-glof-origin-selection-beyond-pdgl-list citing abstract-egu23-15703 (McCoy et al.): 'mapped >200 new GLOFs from ~200 moraine-dammed lakes, on top of 108 documented events; GLOF frequency in the last 20 years is lower than in 1970-2000 despite lake growth. Implication: ... \"unlisted lake never failed\" is weak evidence of safety, but also lake growth alone does not predict frequency.'",
+      "recommendation": "Add one sentence to 4D (under-recording: more than 200 newly mapped events against 108 documented) and one caveat to 8C/M2 that measured lake growth should not be labelled as increasing hazard, citing the lower recent frequency. Mark both as conference-abstract (C-grade) evidence."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 4B 'Peaks: attenuation cuts both ways', paragraph 2 (Devghat discharge and width)",
+      "issue": "The cascade-growth argument gives discharge and width but leaves out the excess-volume figure that shows volume was added downstream. It also misses the Tsho Rolpa example of exactly the error the two-branch display fixes: a source peak quoted 185 km downstream with no attenuation.",
+      "evidence": "interim-report-constant-celerity-routing-vs-process-chain-glof: Devghat 'with a 19.96x10^6 m3 excess volume \"34.8% of total flow volume\"'; Tsho Rolpa '26,662 m3/s (40 m breach), with the latter cited 185 km downstream, i.e. quoted with no attenuation'.",
+      "recommendation": "Add the 19.96 million m3 excess volume (34.8% of flow) to the Devghat sentence. Optionally, in 4B or 4C, note that the published Tsho Rolpa 40 m-breach peak has been quoted 185 km downstream unattenuated, as an illustration of the constant-peak error."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 2C, paragraph 2 (CAP: 'It should not publish its own CAP feed of mirrored alerts')",
+      "issue": "The draft states the no-emission position flatly. The role interim note committed to the opposite: a CAP-compatible static mirror of BIPAD alerts, labelled unofficial and offered to NDRRMA/DHM. It also named a boundary condition (sub-hourly refresh with official sanction) under which a more active role would be justified. The draft's reasons are good, but it hides that the investigation weighed this and came down the other way.",
+      "evidence": "interim-report-atlas-role-in-warning-ecosystem, Committed position (3): 'publish a CAP-compatible static feed only as a mirror of BIPAD alerts, labelled unofficial, and offer it to NDRRMA/DHM rather than replace them'; Boundary conditions: 'if the site moved to sub-hourly refresh with official sanction, a more active alerting role could be justified.'",
+      "recommendation": "Add a sentence acknowledging the labelled-unofficial-mirror option and why the draft rejects it (CAP fields meant for authorities; aggregators may strip labels). Name the condition that would reverse it: official sanction plus sub-hourly refresh, or a request from DHM/NDRRMA."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 7C 'Bands or gradients: settle it with a test'",
+      "issue": "The draft gives the Lindell contour finding against Nepali stakeholders' wish for colour codes, but not the map-skill evidence that explains why contours may fail this audience. It also leaves out the interim note's concrete band-softening proposal (a note that edges are ±one band) and the natural-frequency guidance.",
+      "evidence": "interim-report-scenario-uncertainty-communication-and-framing: Position B 'comprehension research stresses low map skill (MacPherson-Krutsky: advanced skills such as contour interpretation score lower than basic ones)'; Committed position (2) 'add a note that edges are ±one band'; (3) 'natural frequencies (\"about 1 in 20\") only where a rate is needed'.",
+      "recommendation": "Add the map-skill counterpoint: contour interpretation scores lower than basic map skills, which is why bands stay the default. Add the '±one band' edge note to the band specification, marked as a proposal rather than a sourced threshold."
+    },
+    {
+      "severity": "minor",
+      "location": "Section 6A/6B (connectivity and page budget) and 6D (accessibility)",
+      "issue": "The ~1 MB budget is justified by cost and the 48.4% individual-use figure, but not by the network-coverage numbers that make the target meaningful. The accessibility section gives no size for the population it serves.",
+      "evidence": "interim-report-reach-offline-lowbandwidth-bilingual: ITU '3G ~90%, 4G 81.6% population coverage'; aim 'under ~1 MB gzip, so it works on 3G for ~90% coverage'; MICS '85.1% have a smartphone ... TV 42.8%'; '2.2% of Nepal's 2021 census population has a disability (a floor, likely undercounted)'.",
+      "recommendation": "In 6B, tie the 1 MB target to 3G coverage of about 90% of the population (4G 81.6%). In 6D, add the 2.2% census disability figure as an undercounted floor. Optionally add TV 42.8% next to radio 14.7% in 2A to show that broadcast is not a fallback either."
+    }
+  ],
+  "ignored_interim_notes": [],
+  "notes": "All six interim notes are reflected in the draft. None were skipped, and the draft often goes beyond them (e.g. Cook 2018 measured 8.7 m/s front, Selvan & Sinha GMPE ranking). The main depth losses are in the GLOF celerity mechanism, the Tier 3 completeness gap relative to Thame, and the BSSA14 sigma/Z1 mechanics."
+}
