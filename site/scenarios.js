@@ -47,7 +47,7 @@ if (map) {
 }
 const set = (id, features) => map?.getSource(id).setData({ type: 'FeatureCollection', features });
 const point = (coordinates, fill, r = 6) => ({ type: 'Feature', geometry: { type: 'Point', coordinates }, properties: { fill, r } });
-const stage = map && routeStage(map, 'path-casing'), terrain = map && scenarioTerrain(map);
+const stage = map && routeStage(map, 'path-casing', { projected: true }), terrain = map && scenarioTerrain(map);
 function fit(coords, maxZoom = 9) {
   if (!map) return;
   const bounds = coords.reduce((b, p) => b.extend(p), new maplibregl.LngLatBounds(coords[0], coords[0]));
@@ -123,7 +123,6 @@ function play(o, s, line, r) {
   let t = reduced ? end : 0, playing = !reduced, last = null, frame = 0, speed = 1, hold = 0;
   let lastCamera = null, lastReached = -1, lastOverlay = -Infinity;
   let flightZoom;
-  const container = map?.getContainer();
   function heading(km) {
     const from = P.pointAt(r.samples, Math.max(0, km - 2.5)), to = P.pointAt(r.samples, Math.min(total, km + 2.5));
     const east = (to[0] - from[0]) * Math.cos((from[1] + to[1]) * Math.PI / 360);
@@ -148,25 +147,12 @@ function play(o, s, line, r) {
       lastCamera = now;
     } else map.jumpTo({ center: head });
   }
-  // Use the browser's shaped label boxes. Districts take priority where
-  // perspective compresses several names into the same screen space.
-  function spaceLabels() {
-    if (!container?.classList.contains('river-flight')) return;
-    const boxes = Array.from(container.querySelectorAll('.map-label.on'), el => ({ el, box: el.getBoundingClientRect() }));
-    const viewport = container.getBoundingClientRect();
-    const used = [container.parentElement.querySelector('.terrain-controls'), ...container.querySelectorAll('.maplibregl-ctrl')].map(el => el.getBoundingClientRect());
-    for (const { el, box } of boxes) {
-      const crowded = box.left < viewport.left || box.right > viewport.right || box.top < viewport.top || box.bottom > viewport.bottom || used.some(b => box.left < b.right + 4 && box.right + 4 > b.left && box.top < b.bottom + 3 && box.bottom + 3 > b.top);
-      el.classList.toggle('crowded', crowded);
-      if (!crowded) used.push(box);
-    }
-  }
-  map?.on('render', spaceLabels);
   function draw() {
     const km = v => Math.min(total, v * t / 1000), front = km(mid), tail = Math.min(total, Math.max(0, mid * (t - s.duration_s) / 1000)), lo = km(slow), hi = km(fast);
     const moving = front < total && t > 0, head = P.pointAt(r.samples, front);
     terrain?.progress(mid * t / 1000, t >= end ? total : tail, mid * s.duration_s / 1000);
     flat?.progress(head);
+    stage?.moveHead(moving ? head : null, playing);
     if (playing && follow.checked && moving && performance.now() > hold && !map.isMoving()) followFront(front, head, false);
     // Keep the ribbon and camera moving independently of tile repaints,
     // marker changes and text updates. A paused seek always paints at once.
@@ -195,7 +181,7 @@ function play(o, s, line, r) {
   }
   function tick(now) {
     if (!playing) return;
-    if (last !== null && now - last < 32) { frame = requestAnimationFrame(tick); return; }
+    if (last !== null && now - last < (map?.getTerrain() ? 15 : 32)) { frame = requestAnimationFrame(tick); return; }
     if (last !== null && now > hold && !(follow.checked && map.isMoving())) {
       // A late terrain frame must not teleport the camera across a valley.
       const elapsed = follow.checked && map.getTerrain() && !reduced ? Math.min(now - last, 120) : now - last;
@@ -229,7 +215,7 @@ function play(o, s, line, r) {
   map?.on('dragstart', release); map?.on('zoomstart', release);
   fit(line);
   if (reduced) draw(); else start();
-  return () => { playing = false; cancelAnimationFrame(frame); map?.off('render', spaceLabels); map?.off('dragstart', release); map?.off('zoomstart', release); };
+  return () => { playing = false; cancelAnimationFrame(frame); map?.off('dragstart', release); map?.off('zoomstart', release); };
 }
 
 // ---------- Earthquake shaking ----------

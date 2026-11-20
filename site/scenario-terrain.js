@@ -136,6 +136,57 @@ function waterLayer(map, stations, getPulse) {
   };
 }
 
+// Load the optional renderer only on entering flood 3D. An in-flight worker
+// belongs to this layer, so changing route or tab cannot install stale data.
+function riverLayer(map, line, total, getPulse) {
+  let worker, removed = false, makeScene, shape, scene, fallback, failed = false;
+  function useFallback() {
+    worker?.terminate();
+    worker = null;
+    failed = true;
+    if (!removed) map.triggerRepaint();
+  }
+  return {
+    id: ribbon, type: 'custom', renderingMode: '3d',
+    onAdd() {
+      try {
+        worker = new Worker(new URL('./river/mesh-worker.js', import.meta.url), { type: 'module' });
+        worker.onerror = useFallback;
+        worker.onmessage = ({ data }) => {
+          worker?.terminate(); worker = null;
+          if (!data) { useFallback(); return; }
+          shape = data;
+          if (!removed) map.triggerRepaint();
+        };
+        worker.postMessage({ line, total });
+        import('./river/water.js').then(module => {
+          makeScene = module.waterScene;
+          if (!removed) map.triggerRepaint();
+        }, useFallback);
+      } catch { useFallback(); }
+    },
+    render(gl, args) {
+      if (!failed && !scene && shape && makeScene) {
+        try {
+          scene = makeScene(map, gl, shape, maplibregl.MercatorCoordinate.fromLngLat(line[0]));
+          shape = null;
+        } catch { useFallback(); }
+      }
+      if (scene) scene.draw(args, getPulse());
+      else if (failed) {
+        if (!fallback) {
+          fallback = waterLayer(map, ribbonStations(line, total), getPulse);
+          fallback.onAdd(map, gl);
+        }
+        fallback.render(gl, args);
+      }
+    },
+    onRemove(_, gl) {
+      removed = true; worker?.terminate(); scene?.remove(); fallback?.onRemove(map, gl);
+    },
+  };
+}
+
 export function scenarioTerrain(map) {
   const button = document.getElementById('terrain-toggle'), settings = document.getElementById('terrain-settings');
   const scale = document.getElementById('terrain-scale'), note = document.getElementById('terrain-note');
@@ -147,7 +198,20 @@ export function scenarioTerrain(map) {
   const enabled = () => button.getAttribute('aria-pressed') === 'true';
   function removeRibbon() { if (map.getLayer(ribbon)) map.removeLayer(ribbon); }
   function addRibbon() {
-    if (line && enabled() && !map.getLayer(ribbon)) map.addLayer(waterLayer(map, ribbonStations(line, total), () => pulse));
+    if (line && enabled() && !map.getLayer(ribbon)) map.addLayer(riverLayer(map, line, total, () => pulse));
+  }
+  function setTerrain(on) {
+    map.setTerrain(on ? { source: 'dem', exaggeration: Number(scale.value) } : null);
+    if (!on) return;
+    // The pinned 6.7.0 renderer caches one grid per terrain instance.
+    // Set its drawing resolution before the first frame. Elevation queries
+    // still use the full DEM. Leave other renderer implementations alone.
+    const surface = map.terrain, tiles = map.painter?.renderToTexture;
+    if (map.version === '6.7.0' && surface?.meshSize === 128 && tiles?.rttSize) {
+      const small = map.getCanvas().clientWidth <= 600;
+      surface.meshSize = small ? 24 : 64;
+      if (small) tiles.rttSize = Math.min(tiles.rttSize, 192);
+    }
   }
   function atmosphere() {
     const fly = enabled() && mode === 'flood';
@@ -177,12 +241,12 @@ export function scenarioTerrain(map) {
     settings.hidden = !on;
     if (!on) removeRibbon();
     ruptureCasing();
-    map.setTerrain(on ? { source: 'dem', exaggeration: Number(scale.value) } : null);
+    setTerrain(on);
     atmosphere();
     map.jumpTo({ pitch: on ? (mode === 'flood' ? 60 : 48) : 0, bearing: 0 });
     if (on) addRibbon();
   };
-  scale.onchange = () => map.setTerrain({ source: 'dem', exaggeration: Number(scale.value) });
+  scale.onchange = () => setTerrain(true);
   button.disabled = false;
   return {
     clear(nextMode) {

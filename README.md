@@ -34,7 +34,14 @@ tests/                models + data checksums, scraper tests, browser tests
 
 Design: a plain-black public notice. White paper and hueless ink in light mode, re-derived for dark; Epilogue with Anek Devanagari for Nepali; hairline-ruled lists; teal only for state; DHM's red and amber only for published hazard status. Tokens are in `site/tokens.css`.
 
-No framework and no runtime dependencies besides MapLibre. About 1,000 lines of site code.
+Flood 3D loads Three.js 0.180.0 (MIT, vendored from the npm release) when first opened. A worker runs the Rust WebAssembly module to build the river mesh. Three.js draws the water into the existing map canvas. If the worker or WebAssembly is unavailable the map draws its original ribbon. The site serves the compiled module as a static asset.
+
+To rebuild the module after editing `rust/river-mesh/lib.rs`, use the pinned Rust compiler and target from the repository root:
+
+```sh
+rustup toolchain install 1.88.0 --profile minimal --target wasm32-unknown-unknown
+rustc +1.88.0 --edition=2021 --target wasm32-unknown-unknown --crate-type=cdylib -C opt-level=s -C panic=abort -C strip=symbols -C lto rust/river-mesh/lib.rs -o site/river/river-mesh.wasm
+```
 
 ## How data gets in
 
