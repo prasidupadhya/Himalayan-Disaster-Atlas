@@ -1,0 +1,74 @@
+{
+ "format": "atlas-gov-digest@1",
+ "generated_at": "2026-11-20T20:30:13Z",
+ "summary": {
+  "sources_fetched": 7,
+  "sources_last_known": 1,
+  "sources_unavailable": 0,
+  "rivers_above_danger": 0,
+  "rivers_above_warning": 0,
+  "rivers_current": 165,
+  "rain_current": 302,
+  "rain_stations_above_warning": 0,
+  "new_links": 0,
+  "new_records": 3
+ },
+ "sources": [
+  {
+   "id": "bipad-river",
+   "status": "fetched",
+   "http_status": 200,
+   "last_known": null,
+   "sha256": "2e0c999a444c10e3bacaad08296db26269cf8ef420a9924ad0a6603e4621c30b"
+  },
+  {
+   "id": "bipad-rain",
+   "status": "fetched",
+   "http_status": 200,
+   "last_known": null,
+   "sha256": "a0e06f6c94237169a023c3c5c90f63f82be113f17a0b7096f2d47d19b0ddd903"
+  },
+  {
+   "id": "dhm-flood-archive",
+   "status": "fetched",
+   "http_status": 200,
+   "last_known": null,
+   "sha256": "4d831a73e62e2e6eeff4ba7d8dd22e2e29893f323ac7895b53a86f7545b100aa"
+  },
+  {
+   "id": "dhm-forecast",
+   "status": "fetched",
+   "http_status": 200,
+   "last_known": null,
+   "sha256": "2609d7e96b1c0d2c9b17b16554ceef3f65eaf46d57c71af1c90cf96aea155f10"
+  },
+  {
+   "id": "seismo-earthquakes",
+   "status": "error",
+   "http_status": null,
+   "last_known": true,
+   "sha256": "8fbda0e39752b686c5c3b62b6d7283eae058715ade7c95e92f9fecad9050a883"
+  },
+  {
+   "id": "bipad-incidents",
+   "status": "fetched",
+   "http_status": 200,
+   "last_known": null,
+   "sha256": "ffb0fadc7de98ab0b3cbb67d427a4d256f6a729214a451d0675f6962eddc2521"
+  },
+  {
+   "id": "bipad-alerts",
+   "status": "fetched",
+   "http_status": 200,
+   "last_known": null,
+   "sha256": "1880fddd71f3eb58d0fe797807f63f93aecc1cd3cd031099dba695790dc2b4e2"
+  },
+  {
+   "id": "ndrrma-home",
+   "status": "fetched",
+   "http_status": 200,
+   "last_known": null,
+   "sha256": "92cab0b47b5cec55a03afc224c84baf403376fdeaaf9b8c308370d0f20c87bd5"
+  }
+ ]
+}
