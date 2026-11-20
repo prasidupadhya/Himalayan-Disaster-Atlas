@@ -1,6 +1,6 @@
 {
  "format": "atlas-gov-digest@1",
- "generated_at": "2026-11-19T20:47:05Z",
+ "generated_at": "2026-11-20T07:15:19Z",
  "summary": {
   "sources_fetched": 7,
   "sources_last_known": 1,
@@ -11,7 +11,7 @@
   "rain_current": 301,
   "rain_stations_above_warning": 0,
   "new_links": 0,
-  "new_records": 4
+  "new_records": 22
  },
  "sources": [
   {
@@ -19,28 +19,28 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "bd9bb3ae21925340a92894ec149da45fc92d4a1956945e2ec044c98955443f90"
+   "sha256": "c5cab0e0fde6c37fb06f2d0f8dd62f64995503719211defff4fc5353ed5f652f"
   },
   {
    "id": "bipad-rain",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "d754df4987ac405540da6b55648fa6d7f2cb7092b986da5edd308612148e1323"
+   "sha256": "9a9012eea9ba3931fc6b5fb39e45c73b6d3c89f749e1cd5918c83459ff168442"
   },
   {
    "id": "dhm-flood-archive",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "01823d63815954fcd1ddca430083af4bffd6ccd8b6a36f2604bb1d8207f50529"
+   "sha256": "f734a554f209d667ff3ef50fb04c4c961ca5a641ea6081d23f835e1c0af47fcc"
   },
   {
    "id": "dhm-forecast",
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "3251a4a8905c434855a2b550cc05c72e6b8fe4547b7ad2cff241c5311e162f10"
+   "sha256": "4e3c9b9a9208ff873d691a660049bc1942911136b16c704143850486deaf12ce"
   },
   {
    "id": "seismo-earthquakes",
@@ -54,7 +54,7 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "f96c5d06cc14e023166e26f4658afe143b8013d861408aa248a5624f8ebd64fc"
+   "sha256": "deee9f9a63bd1c99daa3c58951ece3825e0d280423be790e75154f75349d09ba"
   },
   {
    "id": "bipad-alerts",
@@ -68,7 +68,7 @@
    "status": "fetched",
    "http_status": 200,
    "last_known": null,
-   "sha256": "d0fd37611f52e5c67a3ff405551631fe45389ec365105d5e29f3f4215e6feecc"
+   "sha256": "3db6b09f7de8f2cc5c18a93f5123560130f8c3c0bbf9308a4dc0f0a0d28f71d8"
   }
  ]
 }
